@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Rubik's Cube Scrambler</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="description" content="Scramble generator for 1x1 to 5x5 cubes, pyraminx, etc." />
+
+		<meta name="theme-color" content="#4ECDC4" />
+
+		<link rel="icon" href="images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/cube" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Rubik's Cube Scrambler" />
+		<meta property="og:description" content="Scramble generator for 1x1 to 5x5 cubes, pyraminx, etc." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+
+			::-webkit-scrollbar {
+				width: 1em;
+			}
+
+			::-webkit-scrollbar-track {
+				background: #000000;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background: #fff2cc;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background: #f4cccc;
+			}
+
+			body {
+				background-color: #000000;
+				color: #cfe2f3;
+				margin: 0;
+				border: 0;
+				padding: 30px 0 30px 30px;
+				font-family: "Roboto Mono";
+				font-size: 16px;
+			}
+
+			p {
+				margin: 0 30px 0 0;
+				border: 0;
+				padding: 0;
+				text-align: justify;
+			}
+
+			select,
+			input,
+			button {
+				height: 30px;
+				margin: 0;
+				border: 0;
+				padding: 0;
+				background-color: #cfe2f3;
+				font-family: "Roboto Mono";
+				font-size: 16px;
+				outline: none;
+			}
+
+			select:hover,
+			select:focus,
+			input:hover,
+			input:focus,
+			button:hover,
+			button:focus {
+				background-color: #d9ead3;
+			}
+
+			input,
+			button {
+				padding: 0 5px 0 5px;
+			}
+
+			select,
+			button {
+				cursor: pointer;
+			}
+
+			select {
+				width: 120px;
+			}
+
+			input {
+				width: 90px;
+			}
+
+			button {
+				width: 180px;
+			}
+
+			#scramble {
+				color: #f4cccc;
+				margin-top: 80px;
+			}
+		</style>
+
+		<script>
+			moves1x1x1 = ["X", "X'", "X2", "Y", "Y'", "Y2", "Z", "Z'", "Z2"];
+			moves2x2x2 = ["L", "L'", "L2", "R", "R'", "R2", "U", "U'", "U2", "D", "D'", "D2", "F", "F'", "F2", "B", "B'", "B2"];
+			moves3x3x3 = [
+				"L",
+				"L'",
+				"L2",
+				"R",
+				"R'",
+				"R2",
+				"U",
+				"U'",
+				"U2",
+				"D",
+				"D'",
+				"D2",
+				"F",
+				"F'",
+				"F2",
+				"B",
+				"B'",
+				"B2",
+				"M",
+				"M'",
+				"M2",
+				"S",
+				"S'",
+				"S2",
+				"E",
+				"E'",
+				"E2",
+				"l",
+				"r",
+				"u",
+				"d",
+				"f",
+				"b",
+				"l'",
+				"r'",
+				"u'",
+				"d'",
+				"f'",
+				"b'",
+				"l2",
+				"r2",
+				"u2",
+				"d2",
+				"f2",
+				"b2",
+			];
+			moves4x4x4 = [
+				"L",
+				"L'",
+				"L2",
+				"R",
+				"R'",
+				"R2",
+				"U",
+				"U'",
+				"U2",
+				"D",
+				"D'",
+				"D2",
+				"F",
+				"F'",
+				"F2",
+				"B",
+				"B'",
+				"B2",
+				"l",
+				"r",
+				"u",
+				"d",
+				"f",
+				"b",
+				"l'",
+				"r'",
+				"u'",
+				"d'",
+				"f'",
+				"b'",
+				"l2",
+				"r2",
+				"u2",
+				"d2",
+				"f2",
+				"b2",
+				"2L",
+				"2R",
+				"2U",
+				"2D",
+				"2F",
+				"2B",
+				"2L'",
+				"2R'",
+				"2U'",
+				"2D'",
+				"2F'",
+				"2B'",
+				"2L2",
+				"2R2",
+				"2U2",
+				"2D2",
+				"2F2",
+				"2B2",
+			];
+			moves5x5x5 = [
+				"L",
+				"L'",
+				"L2",
+				"R",
+				"R'",
+				"R2",
+				"U",
+				"U'",
+				"U2",
+				"D",
+				"D'",
+				"D2",
+				"F",
+				"F'",
+				"F2",
+				"B",
+				"B'",
+				"B2",
+				"M",
+				"M'",
+				"M2",
+				"S",
+				"S'",
+				"S2",
+				"E",
+				"E'",
+				"E2",
+				"l",
+				"r",
+				"u",
+				"d",
+				"f",
+				"b",
+				"l'",
+				"r'",
+				"u'",
+				"d'",
+				"f'",
+				"b'",
+				"l2",
+				"r2",
+				"u2",
+				"d2",
+				"f2",
+				"b2",
+				"2L",
+				"2R",
+				"2U",
+				"2D",
+				"2F",
+				"2B",
+				"2L'",
+				"2R'",
+				"2U'",
+				"2D'",
+				"2F'",
+				"2B'",
+				"2L2",
+				"2R2",
+				"2U2",
+				"2D2",
+				"2F2",
+				"2B2",
+				"3l",
+				"3r",
+				"3u",
+				"3d",
+				"3f",
+				"3b",
+				"3l'",
+				"3r'",
+				"3u'",
+				"3d'",
+				"3f'",
+				"3b'",
+				"3l2",
+				"3r2",
+				"3u2",
+				"3d2",
+				"3f2",
+				"3b2",
+			];
+			movesPyraminx = [
+				"L",
+				"L'",
+				"L2",
+				"R",
+				"R'",
+				"R2",
+				"U",
+				"U'",
+				"U2",
+				"F",
+				"F'",
+				"F2",
+				"l",
+				"r",
+				"u",
+				"d",
+				"f",
+				"b",
+				"l'",
+				"r'",
+				"u'",
+				"d'",
+				"f'",
+				"b'",
+				"l2",
+				"r2",
+				"u2",
+				"d2",
+				"f2",
+				"b2",
+			];
+			movesEdge = ["L", "L'", "L2", "R", "R'", "R2", "F", "F'", "F2", "B", "B'", "B2"];
+
+			function scramble() {
+				length = document.sSettings.sLength.value;
+
+				if (length >= 1000000) {
+					document.getElementById("scramble").innerHTML = `ERROR: length too big`;
+
+					return;
+				}
+				if (length <= 0) {
+					document.getElementById("scramble").innerHTML = `ERROR: length too small`;
+
+					return;
+				}
+
+				generatedText = "";
+
+				if (document.getElementById("1x1x1").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + moves1x1x1[Math.floor(Math.random() * moves1x1x1.length)] + " ";
+					}
+				} else if (document.getElementById("2x2x2").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + moves2x2x2[Math.floor(Math.random() * moves2x2x2.length)] + " ";
+					}
+				} else if (document.getElementById("3x3x3").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + moves3x3x3[Math.floor(Math.random() * moves3x3x3.length)] + " ";
+					}
+				} else if (document.getElementById("4x4x4").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + moves4x4x4[Math.floor(Math.random() * moves4x4x4.length)] + " ";
+					}
+				} else if (document.getElementById("5x5x5").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + moves5x5x5[Math.floor(Math.random() * moves5x5x5.length)] + " ";
+					}
+				} else if (document.getElementById("edge").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + movesEdge[Math.floor(Math.random() * movesEdge.length)] + " ";
+					}
+				} else if (document.getElementById("pyraminx").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + movesPyraminx[Math.floor(Math.random() * movesPyraminx.length)] + " ";
+					}
+				} else if (document.getElementById("gear").selected == true) {
+					for (let i = 0; i < length; i++) {
+						generatedText = generatedText + moves2x2x2[Math.floor(Math.random() * moves2x2x2.length)] + " ";
+					}
+				}
+
+				document.getElementById("scramble").innerHTML = generatedText;
+			}
+		</script>
+	</head>
+
+	<body>
+		<form name="sSettings">
+			puzzle type:
+			<select>
+				<option id="1x1x1">1x1x1</option>
+				<option id="2x2x2">2x2x2</option>
+				<option id="3x3x3">3x3x3</option>
+				<option id="4x4x4">4x4x4</option>
+				<option id="5x5x5">5x5x5</option>
+				<option id="edge">edge</option>
+				<option id="pyraminx">pyraminx</option>
+				<option id="gear">gear cube</option>
+			</select>
+
+			<br /><br />
+
+			scramble length:
+			<input type="number" name="sLength" value="20" />
+
+			<br /><br />
+		</form>
+
+		<button onclick="scramble()">scramble!</button>
+
+		<p id="scramble"></p>
+	</body>
+</html>

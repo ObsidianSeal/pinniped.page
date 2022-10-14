@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Blog Post (2022/09/02)</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="../files/menu.js"></script>
+
+		<meta property="og:url" content="https://pinniped.page/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2022/09/02)" />
+		<meta property="og:description" content="BezierCurves" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5>Blog Post / September 2nd, 2022</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">BezierCurves</h3>
+
+			<div class="break"></div>
+
+			<p class="text">
+				BezierCurves is a fun little program I made that lets you customise a...Bézier curve! I originally made it with
+				<a class="link-2" href="https://processing.org/" target="_blank">Processing</a>
+				<a class="link-2" href="https://github.com/ObsidianSeal/BezierCurves/blob/main/bezierCurves.pde" target="_blank">(click here for code)</a>, and I
+				<a class="link-2" href="https://pde2js.herokuapp.com/" target="_blank">converted it to p5.js</a> so I could embed it on my website.
+			</p>
+
+			<div class="break"></div>
+
+			<img class="big-picture" src="../images/bezier-curves.png" alt="BezierCurves 'web edition'" />
+
+			<div class="break"></div>
+
+			<p class="text bold">INSTRUCTIONS FOR USE:</p>
+
+			<div class="break"></div>
+
+			<ol>
+				<li>Go to <a class="link-2" href="../projects/bezier-curves.html" target="_blank">this link</a></li>
+				<li>Be on desktop (it doesn't really work on mobile)</li>
+				<li>Ignore the p5.js header</li>
+				<li>Go fullscreen (f11 on Windows)</li>
+				<li>Reload the page (ctrl+r or f5 on Windows)</li>
+				<li>Click somewhere</li>
+				<li>Drag the circles to edit the curve</li>
+				<li>Press space to hide the controls</li>
+				<li>Press enter for a random curve</li>
+			</ol>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+	</body>
+</html>

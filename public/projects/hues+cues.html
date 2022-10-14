@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Hues & Cues</title>
+
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P");
+
+			body {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				font-family: "Press Start 2P", cursive;
+				background-color: black;
+				color: white;
+				text-align: center;
+			}
+
+			h1 {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				font-size: 80px;
+			}
+
+			span:hover {
+				cursor: pointer;
+			}
+
+			@media screen and (min-width: 1000px) {
+				h1 {
+					font-size: 200px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div style="height: 200px"></div>
+
+		<h1 id="colour">???</h1>
+
+		<div style="height: 100px"></div>
+
+		<span style="font-size: 80px" class="material-icons material-icons-outlined" onclick="generate()">sync</span>
+
+		<script>
+			let ready = true;
+
+			function generate() {
+				if (ready == true) {
+					letter_number = Math.floor(Math.random() * 16) + 1;
+					number = Math.floor(Math.random() * 30) + 1;
+
+					if (letter_number == 1) {
+						letter = "A";
+					} else if (letter_number == 2) {
+						letter = "B";
+					} else if (letter_number == 3) {
+						letter = "C";
+					} else if (letter_number == 4) {
+						letter = "D";
+					} else if (letter_number == 5) {
+						letter = "E";
+					} else if (letter_number == 6) {
+						letter = "F";
+					} else if (letter_number == 7) {
+						letter = "G";
+					} else if (letter_number == 8) {
+						letter = "H";
+					} else if (letter_number == 9) {
+						letter = "I";
+					} else if (letter_number == 10) {
+						letter = "J";
+					} else if (letter_number == 11) {
+						letter = "K";
+					} else if (letter_number == 12) {
+						letter = "L";
+					} else if (letter_number == 13) {
+						letter = "M";
+					} else if (letter_number == 14) {
+						letter = "N";
+					} else if (letter_number == 15) {
+						letter = "O";
+					} else if (letter_number == 16) {
+						letter = "P";
+					}
+
+					document.getElementById("colour").innerHTML = `${letter}${number}`;
+
+					ready = false;
+				} else {
+					document.getElementById("colour").innerHTML = `???`;
+
+					ready = true;
+				}
+			}
+		</script>
+	</body>
+</html>

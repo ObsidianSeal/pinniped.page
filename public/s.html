@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>???</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="images/icon.png" />
+
+		<meta name="theme-color" content="#292F36" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="https://pinniped.page/files/main.css" />
+
+		<script src="https://pinniped.page/files/menu.js"></script>
+
+		<meta property="og:url" content="https://pinniped.page/s" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="???" />
+		<meta property="og:description" content="HTTP response statuses" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="https://pinniped.page/"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="https://pinniped.page/projects"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="https://pinniped.page/blog"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="https://pinniped.page/about"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
+		</div>
+
+		<div style="height: 60px"></div>
+
+		<div class="centre more-wrap">
+			<h2 style="text-align: center" id="message"></h2>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script>
+			// THIS CODE WILL BE CHANGED (I couldn't get objects to work--but for another reason I've realised now)
+
+			let codes = [
+				// info codes [0-3]
+				"INFO 100 / Continue",
+				"INFO 101 / Switching Protocols",
+				"INFO 102 / Processing",
+				"INFO 103 / Early Hints",
+				// success codes [4-13]
+				"SUCCESS 200 / OK",
+				"SUCCESS 201 / Created",
+				"SUCCESS 202 / Accepted",
+				"SUCCESS 203 / Non-Authoritative Information",
+				"SUCCESS 204 / No Content",
+				"SUCCESS 205 / Reset Content",
+				"SUCCESS 206 / Partial Content",
+				"SUCCESS 207 / Multi-Status",
+				"SUCCESS 208 / Already Reported",
+				"SUCCESS 226 / IM Used",
+				// notice (redirect?) codes [14-22]
+				"NOTICE 300 / Multiple Choices",
+				"NOTICE 301 / Moved Permanently",
+				"NOTICE 302 / Found",
+				"NOTICE 303 / See Other",
+				"NOTICE 304 / Not Modified",
+				"NOTICE 305 / Use Proxy",
+				"NOTICE 306 / unused",
+				"NOTICE 307 / Temporary Redirect",
+				"NOTICE 308 / Permanent Redirect",
+				// error codes (client & server) [23-62]
+				"ERROR 400 / Bad Request",
+				"ERROR 401 / Unauthorized",
+				"ERROR 402 / Payment Required",
+				"ERROR 403 / Forbidden",
+				"ERROR 404 / Not Found",
+				"ERROR 405 / Method Not Allowed",
+				"ERROR 406 / Not Acceptable",
+				"ERROR 407 / Proxy Authentication Required",
+				"ERROR 408 / Request Timeout",
+				"ERROR 409 / Conflict",
+				"ERROR 410 / Gone",
+				"ERROR 411 / Length Required",
+				"ERROR 412 / Precondition Failed",
+				"ERROR 413 / Payload Too Large",
+				"ERROR 414 / URI Too Long",
+				"ERROR 415 / Unsupported Media Type",
+				"ERROR 416 / Range Not Satisfiable",
+				"ERROR 417 / Expectation Failed",
+				"ERROR 418 / I'm a teapot",
+				"ERROR 421 / Misdirected Request",
+				"ERROR 422 / Unprocessable Entity",
+				"ERROR 423 / Locked",
+				"ERROR 424 / Failed Dependency",
+				"ERROR 425 / Too Early",
+				"ERROR 426 / Upgrade Required",
+				"ERROR 428 / Precondition Required",
+				"ERROR 429 / Too Many Requests",
+				"ERROR 431 / Request Header Fields Too Large",
+				"ERROR 451 / Unavailable For Legal Reasons",
+				"ERROR 500 / Internal Server Error",
+				"ERROR 501 / Not Implemented",
+				"ERROR 502 / Bad Gateway",
+				"ERROR 503 / Service Unavailable",
+				"ERROR 504 / Gateway Timeout",
+				"ERROR 505 / HTTP Version Not Supported",
+				"ERROR 506 / Variant Also Negotiates",
+				"ERROR 507 / Insufficient Storage",
+				"ERROR 508 / Loop Detected",
+				"ERROR 510 / Not Extended",
+				"ERROR 511 / Network Authentication Required",
+			];
+
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const status = item.get("s");
+
+			if (status != null && status != "") {
+				if (status == "100") {
+					code = 0;
+				}
+				if (status == "101") {
+					code = 1;
+				}
+				if (status == "102") {
+					code = 2;
+				}
+				if (status == "103") {
+					code = 3;
+				}
+				if (status == "200") {
+					code = 4;
+				}
+				if (status == "201") {
+					code = 5;
+				}
+				if (status == "202") {
+					code = 6;
+				}
+				if (status == "203") {
+					code = 7;
+				}
+				if (status == "204") {
+					code = 8;
+				}
+				if (status == "205") {
+					code = 9;
+				}
+				if (status == "206") {
+					code = 10;
+				}
+				if (status == "207") {
+					code = 11;
+				}
+				if (status == "208") {
+					code = 12;
+				}
+				if (status == "226") {
+					code = 13;
+				}
+				if (status == "300") {
+					code = 14;
+				}
+				if (status == "301") {
+					code = 15;
+				}
+				if (status == "302") {
+					code = 16;
+				}
+				if (status == "303") {
+					code = 17;
+				}
+				if (status == "304") {
+					code = 18;
+				}
+				if (status == "305") {
+					code = 19;
+				}
+				if (status == "306") {
+					code = 20;
+				}
+				if (status == "307") {
+					code = 21;
+				}
+				if (status == "308") {
+					code = 22;
+				}
+				if (status == "400") {
+					code = 23;
+				}
+				if (status == "401") {
+					code = 24;
+				}
+				if (status == "402") {
+					code = 25;
+				}
+				if (status == "403") {
+					code = 26;
+				}
+				if (status == "404") {
+					code = 27;
+				}
+				if (status == "405") {
+					code = 28;
+				}
+				if (status == "406") {
+					code = 29;
+				}
+				if (status == "407") {
+					code = 30;
+				}
+				if (status == "408") {
+					code = 31;
+				}
+				if (status == "409") {
+					code = 32;
+				}
+				if (status == "410") {
+					code = 33;
+				}
+				if (status == "411") {
+					code = 34;
+				}
+				if (status == "412") {
+					code = 35;
+				}
+				if (status == "413") {
+					code = 36;
+				}
+				if (status == "414") {
+					code = 37;
+				}
+				if (status == "415") {
+					code = 38;
+				}
+				if (status == "416") {
+					code = 39;
+				}
+				if (status == "417") {
+					code = 40;
+				}
+				if (status == "418") {
+					code = 41;
+				}
+				if (status == "421") {
+					code = 42;
+				}
+				if (status == "422") {
+					code = 43;
+				}
+				if (status == "423") {
+					code = 44;
+				}
+				if (status == "424") {
+					code = 45;
+				}
+				if (status == "425") {
+					code = 46;
+				}
+				if (status == "426") {
+					code = 47;
+				}
+				if (status == "428") {
+					code = 48;
+				}
+				if (status == "429") {
+					code = 49;
+				}
+				if (status == "431") {
+					code = 50;
+				}
+				if (status == "451") {
+					code = 51;
+				}
+				if (status == "500") {
+					code = 52;
+				}
+				if (status == "501") {
+					code = 53;
+				}
+				if (status == "502") {
+					code = 54;
+				}
+				if (status == "503") {
+					code = 55;
+				}
+				if (status == "504") {
+					code = 56;
+				}
+				if (status == "505") {
+					code = 57;
+				}
+				if (status == "506") {
+					code = 58;
+				}
+				if (status == "507") {
+					code = 59;
+				}
+				if (status == "508") {
+					code = 60;
+				}
+				if (status == "510") {
+					code = 61;
+				}
+				if (status == "511") {
+					code = 62;
+				}
+
+				document.getElementById("message").innerHTML = `${codes[code]}`;
+			}
+		</script>
+	</body>
+</html>

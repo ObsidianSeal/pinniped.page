@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>numbers</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="images/icon.png" />
+
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/numbers" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="numbers" />
+		<meta property="og:description" content="Hexadecimal stuff, random numbers, etc." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+
+			* {
+				font-family: "Roboto Mono";
+				font-size: 14px;
+			}
+
+			body {
+				margin: 0;
+				border: 0;
+				padding: 16px;
+			}
+
+			h3 {
+				font-size: 18px;
+				margin: 0 0 16px 0;
+				padding-right: 100px;
+			}
+
+			button {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+		</style>
+
+		<script>
+			function hex() {
+				number = document.hexadecimal.decimal.value;
+				var result = "";
+
+				if (number <= 16777215 && number >= 0) {
+					while (number > 15) {
+						remainder = number % 16;
+
+						if (remainder == 10) {
+							result = "A" + result;
+						} else if (remainder == 11) {
+							result = "B" + result;
+						} else if (remainder == 12) {
+							result = "C" + result;
+						} else if (remainder == 13) {
+							result = "D" + result;
+						} else if (remainder == 14) {
+							result = "E" + result;
+						} else if (remainder == 15) {
+							result = "F" + result;
+						} else {
+							result = remainder + result;
+						}
+
+						number = Math.floor(number / 16);
+					}
+
+					if (number == 10) {
+						result = "A" + result;
+					} else if (number == 11) {
+						result = "B" + result;
+					} else if (number == 12) {
+						result = "C" + result;
+					} else if (number == 13) {
+						result = "D" + result;
+					} else if (number == 14) {
+						result = "E" + result;
+					} else if (number == 15) {
+						result = "F" + result;
+					} else {
+						result = number + result;
+					}
+
+					document.getElementById("result").innerHTML = `>>> ${result}`;
+				} else if (number < 0) {
+					document.getElementById("result").innerHTML = `>>> ERROR: number too small`;
+				} else {
+					document.getElementById("result").innerHTML = `>>> ERROR: number too large`;
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<h3>decimal to hexadecimal:</h3>
+		<form name="hexadecimal" id="hexadecimal">
+			<input type="number" name="decimal" min="0" max="16777215" required />
+			<button type="button" onclick="hex()">convert!</button>
+			<p id="result">>>></p>
+		</form>
+
+		<script>
+			document.getElementById("hexadecimal").addEventListener("submit", function (e) {
+				e.preventDefault();
+
+				hex();
+			});
+		</script>
+	</body>
+</html>

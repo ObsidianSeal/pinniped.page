@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<!--
+<html lang="en">
+	<head>
+		<title id="date1">Blog Post (????/??/??)</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="images/icon.png" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="files/main.css" />
+
+		<script src="files/menu.js"></script>
+
+		<meta property="og:url" content="https://pinniped.page/post" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (????/??/??)" />
+		<meta property="og:description" content="Unknown blog post." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5 id="date2">Blog Post / ??????? ???, ????</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2" id="title">???</h3>
+
+			<div class="break"></div>
+
+			<p class="text" id="content">????????????????????</p>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div style="display: none" id="footer">
+			<div class="footer" style="background: #ffffee"></div>
+			<div class="footer" style="background: #ff6b6b"></div>
+			<div class="footer" style="background: #ffe66d"></div>
+			<div class="footer" style="background: #4ecdc4"></div>
+		</div>
+
+		<script>
+			months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+
+			var year = item.get("y");
+			var month = parseInt(item.get("m"));
+			var day = parseInt(item.get("d"));
+			var title = item.get("title");
+			var content = item.get("content");
+			var footer = item.get("footer");
+
+			if (year != null && year != "" && month != null && month > 0 && month < 13 && day != null && day > 0 && day < 32) {
+				if (month < 10 && day < 10) {
+					document.getElementById("date1").innerHTML = `Blog Post (${year}/0${month}/0${day})`;
+				} else if (month < 10 && day >= 10) {
+					document.getElementById("date1").innerHTML = `Blog Post (${year}/0${month}/${day})`;
+				} else if (month >= 10 && day < 10) {
+					document.getElementById("date1").innerHTML = `Blog Post (${year}/${month}/0${day})`;
+				} else {
+					document.getElementById("date1").innerHTML = `Blog Post (${year}/${month}/${day})`;
+				}
+
+				if (month == "01") {
+					monthWord = months[0];
+				}
+				if (month == "02") {
+					monthWord = months[1];
+				}
+				if (month == "03") {
+					monthWord = months[2];
+				}
+				if (month == "04") {
+					monthWord = months[3];
+				}
+				if (month == "05") {
+					monthWord = months[4];
+				}
+				if (month == "06") {
+					monthWord = months[5];
+				}
+				if (month == "07") {
+					monthWord = months[6];
+				}
+				if (month == "08") {
+					monthWord = months[7];
+				}
+				if (month == "09") {
+					monthWord = months[8];
+				}
+				if (month == "10") {
+					monthWord = months[9];
+				}
+				if (month == "11") {
+					monthWord = months[10];
+				}
+				if (month == "12") {
+					monthWord = months[11];
+				}
+
+				day = parseInt(day);
+
+				if (day == 1 || day == 21 || day == 31) {
+					dayWord = "st";
+				} else if (day == 2 || day == 22) {
+					dayWord = "nd";
+				} else if (day == 3 || day == 23) {
+					dayWord = "rd";
+				} else {
+					dayWord = "th";
+				}
+
+				document.getElementById("date2").innerHTML = `Blog Post / ${monthWord} ${day}${dayWord}, ${year}`;
+			}
+
+			if (title != null && title != "") {
+				document.getElementById("title").innerHTML = `${title}`;
+			}
+
+			if (content != null && content != "") {
+				document.getElementById("content").innerHTML = `${content}`;
+			}
+
+			if (footer != null && footer != "" && footer == "true") {
+				document.getElementById("footer").style.display = "block";
+			}
+		</script>
+	</body>
+</html>
+-->

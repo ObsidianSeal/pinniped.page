@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Blog Post (2022/10/08)</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="../files/menu.js"></script>
+
+		<meta property="og:url" content="https://pinniped.page/posts/2022-10-08" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2022/10/08)" />
+		<meta property="og:description" content="Errors & Hexadecimal Numbers" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5>Blog Post / October 8th, 2022</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">Errors & Hexadecimal Numbers</h3>
+
+			<div class="break"></div>
+
+			<p class="text"><b>Error/Status Page</b></p>
+
+			<div class="break"></div>
+
+			<p class="text">I made a page that can show any error I tell it to, based on the url. Here are some to try:</p>
+
+			<div class="break"></div>
+
+			<p class="text"><a class="link-2" href="../s.html?s=308" target="_blank">pinniped.page/s?s=308</a> (code 308)</p>
+			<p class="text"><a class="link-2" href="../s.html?s=404" target="_blank">pinniped.page/s?s=404</a> (error 404)</p>
+			<p class="text"><a class="link-2" href="../s.html?s=503" target="_blank">pinniped.page/s?s=503</a> (error 503)</p>
+			<p class="text"><a class="link-2" href="../s.html?s=418" target="_blank">pinniped.page/s?s=418</a> (error 418)</p>
+
+			<div class="break"></div>
+
+			<p class="text">
+				The page is "s" for status, and after the "?" to pass arguments the "s=" accepts an error code, then gives the message associated with that code. A list of all
+				the codes can be found
+				<a class="link-2" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank">here</a>.
+			</p>
+
+			<div class="break"></div>
+
+			<p class="text"><b>Decimal to Hexadecimal Converter</b></p>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Now available at <a class="link-2" href="../projects/numbers.html">pinniped.page/projects/numbers</a>: a decimal to hexadecimal converter! I'm really happy with
+				this—the logic is somewhat baffling. Next I'll be adding a random string generator to the page.
+			</p>
+
+			<div class="break"></div>
+
+			<p class="text"><b>Link Animations?</b></p>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Should links animate like blog and project titles? In other words: <a class="link">like this</a> or <a class="title hoverable-title">something like this</a>?
+				It's a decision between simplicity and looks. (The underline in the second one would be moved down, I'm just using the same css as the titles in this demo.)
+				What do you think?
+			</p>
+
+			<div class="break"></div>
+
+			<p class="text"><b>Testing</b></p>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Thanks for reading this update. If you find anything wrong with the website, send me a message on
+				<a class="link-2" href="https://discord.gg/yswDu7kywv"></a>Discord. Speaking of Discord, some of the embeds might have incorrect information...
+			</p>
+
+			<div class="break"></div>
+
+			<img class="blog-image" src="../images/testing-oct8.png" alt="Things mention in this posts that need testing." style="max-width: 282px" />
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+	</body>
+</html>

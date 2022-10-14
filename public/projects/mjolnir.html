@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Mjölnir</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="../files/menu.js"></script>
+
+		<meta property="og:url" content="https://pinniped.page/graphs" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Mjölnir" />
+		<meta property="og:description" content="Plugin; adds Thor's mythical hammer to Minecraft." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h3 class="title">Mjölnir</h3>
+
+			<div class="break"></div>
+
+			<p class="text"><i class="fa-brands fa-youtube"></i> <a class="link" href="https://www.youtube.com/watch?v=FGxwQB9A38g" target="_blank">YouTube video</a></p>
+			<p class="text"><i class="fa-solid fa-faucet"></i> <a class="link" href="https://www.spigotmc.org/resources/mj%C3%B6lnir.89621/" target="_blank">Spigot page</a></p>
+			<p class="text"><i class="fa-brands fa-github"></i> <a class="link" href="https://github.com/ObsidianSeal/Mjolnir/" target="_blank">GitHub repository</a></p>
+			<p class="text"><i class="fa-solid fa-download"></i> <a class="link" href="../download.html?x=Mjölnir-2.1.0-1.18.2.jar" target="_blank">Latest download</a></p>
+			<p class="text"><i class="fa-brands fa-discord"></i> <a class="link" href="https://discord.gg/yswDu7kywv" target="_blank">Help (Discord)</a></p>
+
+			<div class="break"></div>
+
+			<img class="blog-image" src="../images/mjolnir.png" alt="Mjölnir plugin picture (axe + text)" style="max-width: 300px" />
+
+			<div class="break"></div>
+
+			<h4 class="title">Overview</h4>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Mjölnir is a little Minecraft plugin I made which adds Thor's hammer to the game. It has a custom crafting recipe, left- and right-click abilities, and a few
+				other things. The plugin was made with the Spigot API and therefore is officially available on spigotmc.org (link above). There's also a slightly outdated
+				YouTube video about it and a GitHub repository with the code (all linked above).
+			</p>
+
+			<div class="break"></div>
+
+			<img class="big-picture" src="../images/me+mjolnir.png" alt="Obsidian_Seal holding Mjölnir" />
+
+			<div class="break"></div>
+
+			<h4 class="title">How to Use</h4>
+
+			<div class="break"></div>
+
+			<p class="text">
+				The plugin requires the server to be running on Spigot in order to work. Once you have downloaded the file (downloads are at the bottom of this page), you can
+				move or upload it to your server's plugins folder.
+			</p>
+
+			<div class="break"></div>
+
+			<h4 class="title">Crafting</h4>
+
+			<div class="break"></div>
+
+			<img class="blog-image" src="../images/mjolnir-crafting.png" alt="Mjölnir crafting recipe" style="max-width: 352px" />
+
+			<div class="break"></div>
+
+			<p class="text">And yes, Mjölnir is a recipe in the recipe book.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title">Features</h4>
+
+			<div class="break"></div>
+
+			<img class="blog-image" src="../images/mjolnir-features.png" alt="Mjölnir tooltip" style="max-width: 340px" />
+
+			<div class="break"></div>
+
+			<p class="text">
+				Left-clicking the air while holding Mjölnir will strike all the entities in the same chunk as you are with lightning, dealing 40 damage (20 hearts).
+				Right-clicking the air while holding Mjölnir gives the player jump boost and regeneration for a short period of time. The axe itself is enchanted with
+				unbreaking III, mending, sharpness V, and fire aspect II.
+			</p>
+
+			<div class="break"></div>
+
+			<img class="big-picture" src="../images/mjolnir-lightning.png" alt="Mjölnir's left-click ability" />
+
+			<div class="break"></div>
+
+			<h4 class="title">Commands</h4>
+
+			<div class="break"></div>
+
+			<p class="text">/mjolnir [player]</p>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Gives the specified player Mjölnir, default is the player who sent the command. Requires the permission mjolnir.mjolnir in versions higher than 2.0.
+			</p>
+
+			<div class="break"></div>
+
+			<p class="text">/thunder</p>
+
+			<div class="break"></div>
+
+			<p class="text"><strong>VERSION 1.x ONLY.</strong> Does the same thing as Mjölnir's left-click ability.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title">Permissions</h4>
+
+			<div class="break"></div>
+
+			<img class="blog-image" src="../images/mjolnir-permissions.png" alt="Mjölnir plugin permissions" style="max-width: 460px" />
+
+			<div class="break"></div>
+
+			<p class="text">***mjolnir.have doesn't completely prevent Mjölnir's use (sorry, I'm a beginner plugin programmer).</p>
+
+			<div class="break"></div>
+
+			<h4 class="title">Downloads</h4>
+
+			<div class="break"></div>
+
+			<p>
+				<i class="fa-regular fa-file-code"></i> <a class="link" href="../download.html?x=Mjölnir-2.1.0-1.18.2.jar" target="_blank">Mjölnir-2.1.0-1.18.2.jar</a> — 1.18,
+				1.19
+			</p>
+			<p><i class="fa-regular fa-file-code"></i> <a class="link" href="../download.html?x=Mjölnir-1.0.1-1.16.5.jar" target="_blank">Mjölnir-1.0.1-1.16.5.jar</a> — 1.16</p>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+	</body>
+</html>
