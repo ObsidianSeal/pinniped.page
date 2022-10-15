@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-<!--
 <html lang="en">
 	<head>
 		<title id="date1">Blog Post (????/??/??)</title>
@@ -73,7 +72,7 @@
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
 
-			var year = item.get("y");
+			var year = parseInt(item.get("y"));
 			var month = parseInt(item.get("m"));
 			var day = parseInt(item.get("d"));
 			var title = item.get("title");
@@ -143,12 +142,17 @@
 				document.getElementById("date2").innerHTML = `Blog Post / ${monthWord} ${day}${dayWord}, ${year}`;
 			}
 
-			if (title != null && title != "") {
-				document.getElementById("title").innerHTML = `${title}`;
-			}
+			if (title.indexOf(">") > -1 || title.indexOf("<") > -1 || content.indexOf(">") > -1 || content.indexOf("<") > -1) {
+				document.getElementById("title").innerHTML = "!!!";
+				document.getElementById("content").innerHTML = 'Possible malicious content detected (">" or "<" found). For your safety, the page will not be updated.';
+			} else {
+				if (title != null && title != "") {
+					document.getElementById("title").innerHTML = `${title}`;
+				}
 
-			if (content != null && content != "") {
-				document.getElementById("content").innerHTML = `${content}`;
+				if (content != null && content != "") {
+					document.getElementById("content").innerHTML = `${content}`;
+				}
 			}
 
 			if (footer != null && footer != "" && footer == "true") {
@@ -157,4 +161,3 @@
 		</script>
 	</body>
 </html>
--->
