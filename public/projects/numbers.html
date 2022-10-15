@@ -6,7 +6,7 @@
 
 		<meta charset="UTF-8" />
 
-		<link rel="icon" href="images/icon.png" />
+		<link rel="icon" href="../images/icon.png" />
 
 		<meta name="theme-color" content="#4ecdc4" />
 
@@ -42,11 +42,18 @@
 				padding-left: 10px;
 				padding-right: 10px;
 			}
+
+			hr {
+				border: 0;
+				border-top: dashed 2px #00000030;
+				margin: 28px 0 20px 0;
+			}
 		</style>
 
 		<script>
+			// 1. decimal to hexadecimal
 			function hex() {
-				number = document.hexadecimal.decimal.value;
+				number = document.hexadecimal1.input1.value;
 				var result = "";
 
 				if (number <= 16777215 && number >= 0) {
@@ -88,11 +95,51 @@
 						result = number + result;
 					}
 
-					document.getElementById("result").innerHTML = `>>> ${result}`;
+					document.getElementById("result1").innerHTML = `>>> ${result}`;
 				} else if (number < 0) {
-					document.getElementById("result").innerHTML = `>>> ERROR: number too small`;
+					document.getElementById("result1").innerHTML = `>>> ERROR: number too small`;
 				} else {
-					document.getElementById("result").innerHTML = `>>> ERROR: number too large`;
+					document.getElementById("result1").innerHTML = `>>> ERROR: number too large`;
+				}
+			}
+
+			// 2. hexadecimal to decimal
+			function hexReverse() {
+				hexadecimal = document.hexadecimal2.input2.value;
+				var result = 0;
+
+				let chars = hexadecimal.split("");
+				chars.reverse();
+
+				if (chars.length > 6) {
+					document.getElementById("result2").innerHTML = `>>> ERROR: number too long`;
+				} else {
+					for (i = 0; i < chars.length; i++) {
+						if (chars[i] == "A" || chars[i] == "a") {
+							chars[i] = 10;
+						} else if (chars[i] == "B" || chars[i] == "b") {
+							chars[i] = 11;
+						} else if (chars[i] == "C" || chars[i] == "c") {
+							chars[i] = 12;
+						} else if (chars[i] == "D" || chars[i] == "d") {
+							chars[i] = 13;
+						} else if (chars[i] == "E" || chars[i] == "e") {
+							chars[i] = 14;
+						} else if (chars[i] == "F" || chars[i] == "f") {
+							chars[i] = 15;
+						} else {
+							chars[i] = parseInt(chars[i]);
+						}
+
+						chars[i] = chars[i] * Math.pow(16, i);
+						result = result + chars[i];
+					}
+
+					if (isNaN(result)) {
+						document.getElementById("result2").innerHTML = `>>> ERROR: not a hexadecimal number`;
+					} else {
+						document.getElementById("result2").innerHTML = `>>> ${result}`;
+					}
 				}
 			}
 		</script>
@@ -100,17 +147,32 @@
 
 	<body>
 		<h3>decimal to hexadecimal:</h3>
-		<form name="hexadecimal" id="hexadecimal">
-			<input type="number" name="decimal" min="0" max="16777215" required />
+		<form name="hexadecimal1" id="hexadecimal1">
+			<input type="number" name="input1" />
 			<button type="button" onclick="hex()">convert!</button>
-			<p id="result">>>></p>
+			<p id="result1">>>></p>
+		</form>
+
+		<hr />
+
+		<h3>hexadecimal to decimal:</h3>
+		<form name="hexadecimal2" id="hexadecimal2">
+			<input type="text" name="input2" />
+			<button type="button" onclick="hexReverse()">convert!</button>
+			<p id="result2">>>></p>
 		</form>
 
 		<script>
-			document.getElementById("hexadecimal").addEventListener("submit", function (e) {
+			document.getElementById("hexadecimal1").addEventListener("submit", function (e) {
 				e.preventDefault();
 
 				hex();
+			});
+
+			document.getElementById("hexadecimal2").addEventListener("submit", function (e) {
+				e.preventDefault();
+
+				hexReverse();
 			});
 		</script>
 	</body>
