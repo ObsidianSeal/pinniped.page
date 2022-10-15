@@ -53,12 +53,12 @@
 		<script>
 			// 1. decimal to hexadecimal
 			function hex() {
-				number = document.hexadecimal1.input1.value;
+				let number = document.hexadecimal1.input1.value;
 				var result = "";
 
 				if (number <= 16777215 && number >= 0) {
 					while (number > 15) {
-						remainder = number % 16;
+						let remainder = number % 16;
 
 						if (remainder == 10) {
 							result = "A" + result;
@@ -105,7 +105,7 @@
 
 			// 2. hexadecimal to decimal
 			function hexReverse() {
-				hexadecimal = document.hexadecimal2.input2.value;
+				let hexadecimal = document.hexadecimal2.input2.value;
 				var result = 0;
 
 				let chars = hexadecimal.split("");
@@ -114,7 +114,7 @@
 				if (chars.length > 6) {
 					document.getElementById("result2").innerHTML = `>>> ERROR: number too long`;
 				} else {
-					for (i = 0; i < chars.length; i++) {
+					for (let i = 0; i < chars.length; i++) {
 						if (chars[i] == "A" || chars[i] == "a") {
 							chars[i] = 10;
 						} else if (chars[i] == "B" || chars[i] == "b") {
@@ -142,6 +142,87 @@
 					}
 				}
 			}
+
+			// 3. random string
+			function randomString() {
+				let length = document.string.input3.value;
+				let result = "";
+				const chars = [
+					"0",
+					"1",
+					"2",
+					"3",
+					"4",
+					"5",
+					"6",
+					"7",
+					"8",
+					"9",
+					"A",
+					"B",
+					"C",
+					"D",
+					"E",
+					"F",
+					"G",
+					"H",
+					"I",
+					"J",
+					"K",
+					"L",
+					"M",
+					"N",
+					"O",
+					"P",
+					"Q",
+					"R",
+					"S",
+					"T",
+					"U",
+					"V",
+					"W",
+					"X",
+					"Y",
+					"Z",
+					"a",
+					"b",
+					"c",
+					"d",
+					"e",
+					"f",
+					"g",
+					"h",
+					"i",
+					"j",
+					"k",
+					"l",
+					"m",
+					"n",
+					"o",
+					"p",
+					"q",
+					"r",
+					"s",
+					"t",
+					"u",
+					"v",
+					"w",
+					"x",
+					"y",
+					"z",
+				];
+
+				if (length > 100) {
+					document.getElementById("result3").innerHTML = `>>> ERROR: length too long`;
+				} else if (length < 1) {
+					document.getElementById("result3").innerHTML = `>>> ERROR: length too short`;
+				} else {
+					for (let i = 0; i < length; i++) {
+						result = result + chars[Math.floor(Math.random() * chars.length)];
+					}
+					document.getElementById("result3").innerHTML = `>>> ${result}`;
+				}
+			}
 		</script>
 	</head>
 
@@ -162,17 +243,29 @@
 			<p id="result2">>>></p>
 		</form>
 
+		<hr />
+
+		<h3>random string:</h3>
+		<form name="string" id="string">
+			<input type="number" name="input3" />
+			<button type="button" onclick="randomString()">generate!</button>
+			<p id="result3">>>></p>
+		</form>
+
 		<script>
 			document.getElementById("hexadecimal1").addEventListener("submit", function (e) {
 				e.preventDefault();
-
 				hex();
 			});
 
 			document.getElementById("hexadecimal2").addEventListener("submit", function (e) {
 				e.preventDefault();
-
 				hexReverse();
+			});
+
+			document.getElementById("string").addEventListener("submit", function (e) {
+				e.preventDefault();
+				randomString();
 			});
 		</script>
 	</body>
