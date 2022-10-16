@@ -74,8 +74,12 @@
 			} else if (download == "") {
 				document.getElementById("download-name").innerHTML = `ERROR!`;
 			} else {
-				document.getElementById("download-name").innerHTML = `${download}`;
-				document.getElementById("download-link").href = `files/${download}`;
+				if (download.indexOf(">") > -1 || download.indexOf("<") > -1 || download.indexOf(">") > -1 || download.indexOf("<") > -1) {
+					document.getElementById("download-name").innerHTML = `ERROR!`;
+				} else {
+					document.getElementById("download-name").innerHTML = `${download}`;
+					document.getElementById("download-link").href = `files/${download}`;
+				}
 			}
 		</script>
 	</body>

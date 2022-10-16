@@ -54,52 +54,56 @@
 
 			function generate() {
 				if (ready == true) {
-					letter_number = Math.floor(Math.random() * 16) + 1;
-					number = Math.floor(Math.random() * 30) + 1;
+					letter_number = Math.floor(Math.random() * 16);
+					number = Math.floor(Math.random() * 30 + 1);
 
-					if (letter_number == 1) {
+					if (letter_number == 0) {
 						letter = "A";
-					} else if (letter_number == 2) {
+					} else if (letter_number == 1) {
 						letter = "B";
-					} else if (letter_number == 3) {
+					} else if (letter_number == 2) {
 						letter = "C";
-					} else if (letter_number == 4) {
+					} else if (letter_number == 3) {
 						letter = "D";
-					} else if (letter_number == 5) {
+					} else if (letter_number == 4) {
 						letter = "E";
-					} else if (letter_number == 6) {
+					} else if (letter_number == 5) {
 						letter = "F";
-					} else if (letter_number == 7) {
+					} else if (letter_number == 6) {
 						letter = "G";
-					} else if (letter_number == 8) {
+					} else if (letter_number == 7) {
 						letter = "H";
-					} else if (letter_number == 9) {
+					} else if (letter_number == 8) {
 						letter = "I";
-					} else if (letter_number == 10) {
+					} else if (letter_number == 9) {
 						letter = "J";
-					} else if (letter_number == 11) {
+					} else if (letter_number == 10) {
 						letter = "K";
-					} else if (letter_number == 12) {
+					} else if (letter_number == 11) {
 						letter = "L";
-					} else if (letter_number == 13) {
+					} else if (letter_number == 12) {
 						letter = "M";
-					} else if (letter_number == 14) {
+					} else if (letter_number == 13) {
 						letter = "N";
-					} else if (letter_number == 15) {
+					} else if (letter_number == 14) {
 						letter = "O";
-					} else if (letter_number == 16) {
+					} else if (letter_number == 15) {
 						letter = "P";
 					}
 
 					document.getElementById("colour").innerHTML = `${letter}${number}`;
-
 					ready = false;
 				} else {
 					document.getElementById("colour").innerHTML = `???`;
-
 					ready = true;
 				}
 			}
+
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "f") {
+					document.documentElement.requestFullscreen();
+				}
+			});
 		</script>
 	</body>
 </html>

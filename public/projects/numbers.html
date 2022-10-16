@@ -53,92 +53,100 @@
 		<script>
 			// 1. decimal to hexadecimal
 			function hex() {
-				let number = document.hexadecimal1.input1.value;
-				var result = "";
+				if (document.hexadecimal1.input1.value.length == 0) {
+					document.getElementById("result1").innerHTML = `>>> ERROR: please enter a number`;
+				} else {
+					let number = document.hexadecimal1.input1.value;
+					var result = "";
 
-				if (number <= 16777215 && number >= 0) {
-					while (number > 15) {
-						let remainder = number % 16;
+					if (number <= 16777215 && number >= 0) {
+						while (number > 15) {
+							let remainder = number % 16;
 
-						if (remainder == 10) {
-							result = "A" + result;
-						} else if (remainder == 11) {
-							result = "B" + result;
-						} else if (remainder == 12) {
-							result = "C" + result;
-						} else if (remainder == 13) {
-							result = "D" + result;
-						} else if (remainder == 14) {
-							result = "E" + result;
-						} else if (remainder == 15) {
-							result = "F" + result;
-						} else {
-							result = remainder + result;
+							if (remainder == 10) {
+								result = "A" + result;
+							} else if (remainder == 11) {
+								result = "B" + result;
+							} else if (remainder == 12) {
+								result = "C" + result;
+							} else if (remainder == 13) {
+								result = "D" + result;
+							} else if (remainder == 14) {
+								result = "E" + result;
+							} else if (remainder == 15) {
+								result = "F" + result;
+							} else {
+								result = remainder + result;
+							}
+
+							number = Math.floor(number / 16);
 						}
 
-						number = Math.floor(number / 16);
-					}
+						if (number == 10) {
+							result = "A" + result;
+						} else if (number == 11) {
+							result = "B" + result;
+						} else if (number == 12) {
+							result = "C" + result;
+						} else if (number == 13) {
+							result = "D" + result;
+						} else if (number == 14) {
+							result = "E" + result;
+						} else if (number == 15) {
+							result = "F" + result;
+						} else {
+							result = number + result;
+						}
 
-					if (number == 10) {
-						result = "A" + result;
-					} else if (number == 11) {
-						result = "B" + result;
-					} else if (number == 12) {
-						result = "C" + result;
-					} else if (number == 13) {
-						result = "D" + result;
-					} else if (number == 14) {
-						result = "E" + result;
-					} else if (number == 15) {
-						result = "F" + result;
+						document.getElementById("result1").innerHTML = `>>> ${result}`;
+					} else if (number < 0) {
+						document.getElementById("result1").innerHTML = `>>> ERROR: number too small`;
 					} else {
-						result = number + result;
+						document.getElementById("result1").innerHTML = `>>> ERROR: number too large`;
 					}
-
-					document.getElementById("result1").innerHTML = `>>> ${result}`;
-				} else if (number < 0) {
-					document.getElementById("result1").innerHTML = `>>> ERROR: number too small`;
-				} else {
-					document.getElementById("result1").innerHTML = `>>> ERROR: number too large`;
 				}
 			}
 
 			// 2. hexadecimal to decimal
 			function hexReverse() {
-				let hexadecimal = document.hexadecimal2.input2.value;
-				var result = 0;
-
-				let chars = hexadecimal.split("");
-				chars.reverse();
-
-				if (chars.length > 6) {
-					document.getElementById("result2").innerHTML = `>>> ERROR: number too long`;
+				if (document.hexadecimal2.input2.value.length == 0) {
+					document.getElementById("result2").innerHTML = `>>> ERROR: please enter a number`;
 				} else {
-					for (let i = 0; i < chars.length; i++) {
-						if (chars[i] == "A" || chars[i] == "a") {
-							chars[i] = 10;
-						} else if (chars[i] == "B" || chars[i] == "b") {
-							chars[i] = 11;
-						} else if (chars[i] == "C" || chars[i] == "c") {
-							chars[i] = 12;
-						} else if (chars[i] == "D" || chars[i] == "d") {
-							chars[i] = 13;
-						} else if (chars[i] == "E" || chars[i] == "e") {
-							chars[i] = 14;
-						} else if (chars[i] == "F" || chars[i] == "f") {
-							chars[i] = 15;
-						} else {
-							chars[i] = parseInt(chars[i]);
+					let hexadecimal = document.hexadecimal2.input2.value;
+					let result = 0;
+
+					let chars = hexadecimal.split("");
+					chars.reverse();
+
+					if (chars.length > 6) {
+						document.getElementById("result2").innerHTML = `>>> ERROR: number too long`;
+					} else {
+						for (let i = 0; i < chars.length; i++) {
+							if (chars[i] == "A" || chars[i] == "a") {
+								chars[i] = 10;
+							} else if (chars[i] == "B" || chars[i] == "b") {
+								chars[i] = 11;
+							} else if (chars[i] == "C" || chars[i] == "c") {
+								chars[i] = 12;
+							} else if (chars[i] == "D" || chars[i] == "d") {
+								chars[i] = 13;
+							} else if (chars[i] == "E" || chars[i] == "e") {
+								chars[i] = 14;
+							} else if (chars[i] == "F" || chars[i] == "f") {
+								chars[i] = 15;
+							} else {
+								chars[i] = parseInt(chars[i]);
+							}
+
+							chars[i] = chars[i] * Math.pow(16, i);
+							result = result + chars[i];
 						}
 
-						chars[i] = chars[i] * Math.pow(16, i);
-						result = result + chars[i];
-					}
-
-					if (isNaN(result)) {
-						document.getElementById("result2").innerHTML = `>>> ERROR: not a hexadecimal number`;
-					} else {
-						document.getElementById("result2").innerHTML = `>>> ${result}`;
+						if (isNaN(result)) {
+							document.getElementById("result2").innerHTML = `>>> ERROR: not a hexadecimal number`;
+						} else {
+							document.getElementById("result2").innerHTML = `>>> ${result}`;
+						}
 					}
 				}
 			}
@@ -212,15 +220,19 @@
 					"z",
 				];
 
-				if (length > 100) {
-					document.getElementById("result3").innerHTML = `>>> ERROR: length too long`;
-				} else if (length < 1) {
-					document.getElementById("result3").innerHTML = `>>> ERROR: length too short`;
+				if (document.string.input3.value.length == 0) {
+					document.getElementById("result3").innerHTML = `>>> ERROR: please enter a length`;
 				} else {
-					for (let i = 0; i < length; i++) {
-						result = result + chars[Math.floor(Math.random() * chars.length)];
+					if (length > 100) {
+						document.getElementById("result3").innerHTML = `>>> ERROR: length too long`;
+					} else if (length < 1) {
+						document.getElementById("result3").innerHTML = `>>> ERROR: length too short`;
+					} else {
+						for (let i = 0; i < length; i++) {
+							result = result + chars[Math.floor(Math.random() * chars.length)];
+						}
+						document.getElementById("result3").innerHTML = `>>> ${result}`;
 					}
-					document.getElementById("result3").innerHTML = `>>> ${result}`;
 				}
 			}
 		</script>
