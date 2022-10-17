@@ -30,6 +30,20 @@
 		<meta property="og:title" content="The Pinniped Page" />
 		<meta property="og:description" content="Obsidian_Seal's Website" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@media all and (max-width: 500px) {
+				h1 {
+					font-size: 48px;
+				}
+			}
+
+			@media all and (max-width: 400px) {
+				h1 {
+					font-size: 32px;
+				}
+			}
+		</style>
 	</head>
 
 	<body style="height: 100vh">
@@ -54,11 +68,11 @@
 
 		<div class="centre more-wrap">
 			<div style="text-align: center">
-				<h1>The Pinniped Page</h1>
+				<h1>pinniped.page</h1>
 
 				<div style="height: 50px"></div>
 
-				<h3>Obsidian_Seal's Website</h3>
+				<h3 id="subtitle">Obsidian_Seal's Website</h3>
 			</div>
 		</div>
 
@@ -66,5 +80,28 @@
 		<div class="footer" style="background: #ff6b6b"></div>
 		<div class="footer" style="background: #ffe66d"></div>
 		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script>
+			const subtitles = [
+				"Obsidian_Seal's Website",
+				"What are you doing here?",
+				"Now with 50% more .page!",
+				"1234567890",
+				"Hosted by Firebase!",
+				"Domain from Google Domains",
+				'<a href="discord.gg/yswDu7kywv">discord.gg/yswDu7kywv</a>',
+				"Yeah, it's pretty cool.",
+				"???",
+				"Woah.",
+				"You should probably look at something else.",
+				"Click on one of those links in the top left.",
+				'<a href="youtube.com/c/ObsidianSeal">youtube.com/c/ObsidianSeal</a>',
+				'<a href="github.com/ObsidianSeal">github.com/ObsidianSeal</a>',
+			];
+
+			let x = Math.floor(Math.random() * subtitles.length);
+
+			document.getElementById("subtitle").innerHTML = subtitles[x];
+		</script>
 	</body>
 </html>

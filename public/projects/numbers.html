@@ -10,6 +10,8 @@
 
 		<meta name="theme-color" content="#4ecdc4" />
 
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<meta property="og:url" content="https://pinniped.page/projects/numbers" />
@@ -51,6 +53,17 @@
 		</style>
 
 		<script>
+			// 0. reset
+			function reset() {
+				document.hexadecimal1.input1.value = "";
+				document.hexadecimal2.input2.value = "";
+				document.string.input3.value = "";
+
+				document.getElementById("result1").innerHTML = ">>> ";
+				document.getElementById("result2").innerHTML = ">>> ";
+				document.getElementById("result3").innerHTML = ">>> ";
+			}
+
 			// 1. decimal to hexadecimal
 			function hex() {
 				if (document.hexadecimal1.input1.value.length == 0) {
@@ -239,6 +252,13 @@
 	</head>
 
 	<body>
+		<button type="button" onclick="window.location.href = '../projects.html'">
+			<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>
+		</button>
+		<button type="button" onclick="reset()">reset</button>
+
+		<hr />
+
 		<h3>decimal to hexadecimal:</h3>
 		<form name="hexadecimal1" id="hexadecimal1">
 			<input type="number" name="input1" />
@@ -264,7 +284,22 @@
 			<p id="result3">>>></p>
 		</form>
 
+		<hr />
+
 		<script>
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "f") {
+					if (!document.fullscreenElement) {
+						document.documentElement.requestFullscreen();
+					} else {
+						document.exitFullscreen();
+					}
+				}
+				if (e.key === "r") {
+					reset();
+				}
+			});
+
 			document.getElementById("hexadecimal1").addEventListener("submit", function (e) {
 				e.preventDefault();
 				hex();
