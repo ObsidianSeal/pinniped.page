@@ -130,8 +130,10 @@
 			const item = new URLSearchParams(query);
 			const status = item.get("s");
 
-			if (status != null && status != "") {
+			if (status != null && status != "" && status in codes) {
 				document.getElementById("message").innerHTML = codes[status];
+			} else {
+				document.getElementById("message").innerHTML = "???";
 			}
 		</script>
 	</body>
