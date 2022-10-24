@@ -228,18 +228,20 @@
 				];
 
 				if (document.string.input3.value.length == 0) {
-					document.getElementById("result3").innerHTML = `>>> ERROR: please enter a length`;
+					length = 20;
+				}
+				if (length > 100) {
+					document.getElementById("result3").innerHTML = `>>> ERROR: length too long`;
+				} else if (length < 1) {
+					document.getElementById("result3").innerHTML = `>>> ERROR: length too short`;
 				} else {
-					if (length > 100) {
-						document.getElementById("result3").innerHTML = `>>> ERROR: length too long`;
-					} else if (length < 1) {
-						document.getElementById("result3").innerHTML = `>>> ERROR: length too short`;
-					} else {
-						for (let i = 0; i < length; i++) {
-							result = result + chars[Math.floor(Math.random() * chars.length)];
-						}
-						document.getElementById("result3").innerHTML = `>>> ${result}`;
+					if (length == 0) {
+						length = 20;
 					}
+					for (let i = 0; i < length; i++) {
+						result = result + chars[Math.floor(Math.random() * chars.length)];
+					}
+					document.getElementById("result3").innerHTML = `>>> ${result}`;
 				}
 			}
 		</script>
