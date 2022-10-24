@@ -94,7 +94,6 @@
 
 							number = Math.floor(number / 16);
 						}
-
 						if (number == 10) {
 							result = "A" + result;
 						} else if (number == 11) {
@@ -110,7 +109,6 @@
 						} else {
 							result = number + result;
 						}
-
 						document.getElementById("result1").innerHTML = `>>> ${result}`;
 					} else if (number < 0) {
 						document.getElementById("result1").innerHTML = `>>> ERROR: number too small`;
@@ -124,16 +122,16 @@
 			function hexReverse() {
 				if (document.hexadecimal2.input2.value.length == 0) {
 					document.getElementById("result2").innerHTML = `>>> ERROR: please enter a number`;
+				} else if (document.hexadecimal2.input2.value.length > 6) {
+					document.getElementById("result2").innerHTML = `>>> ERROR: number too long`;
 				} else {
 					let hexadecimal = document.hexadecimal2.input2.value;
-					let result = 0;
 
-					let chars = hexadecimal.split("");
-					chars.reverse();
+					if (/^[1234567890abcdefABCDEF]{1,6}$/.test(hexadecimal)) {
+						let result = 0;
+						let chars = hexadecimal.split("");
+						chars.reverse();
 
-					if (chars.length > 6) {
-						document.getElementById("result2").innerHTML = `>>> ERROR: number too long`;
-					} else {
 						for (let i = 0; i < chars.length; i++) {
 							if (chars[i] == "A" || chars[i] == "a") {
 								chars[i] = 10;
@@ -150,16 +148,12 @@
 							} else {
 								chars[i] = parseInt(chars[i]);
 							}
-
 							chars[i] = chars[i] * Math.pow(16, i);
 							result = result + chars[i];
 						}
-
-						if (isNaN(result)) {
-							document.getElementById("result2").innerHTML = `>>> ERROR: not a hexadecimal number`;
-						} else {
-							document.getElementById("result2").innerHTML = `>>> ${result}`;
-						}
+						document.getElementById("result2").innerHTML = `>>> ${result}`;
+					} else {
+						document.getElementById("result2").innerHTML = `>>> ERROR: not a hexadecimal number`;
 					}
 				}
 			}
@@ -261,7 +255,7 @@
 
 		<h3>decimal to hexadecimal:</h3>
 		<form name="hexadecimal1" id="hexadecimal1">
-			<input type="number" name="input1" />
+			<input type="number" name="input1" id="input1" />
 			<button type="button" onclick="hex()">convert!</button>
 			<p id="result1">>>></p>
 		</form>
@@ -270,7 +264,7 @@
 
 		<h3>hexadecimal to decimal:</h3>
 		<form name="hexadecimal2" id="hexadecimal2">
-			<input type="text" name="input2" />
+			<input type="text" name="input2" id="input2" />
 			<button type="button" onclick="hexReverse()">convert!</button>
 			<p id="result2">>>></p>
 		</form>
@@ -279,7 +273,7 @@
 
 		<h3>random string:</h3>
 		<form name="string" id="string">
-			<input type="number" name="input3" />
+			<input type="number" name="input3" id="input3" />
 			<button type="button" onclick="randomString()">generate!</button>
 			<p id="result3">>>></p>
 		</form>
@@ -287,16 +281,25 @@
 		<hr />
 
 		<script>
+			const element1 = document.getElementById("input1");
+			const element2 = document.getElementById("input2");
+			const element3 = document.getElementById("input3");
+
 			document.addEventListener("keydown", (e) => {
-				if (e.key === "f") {
+				if (!(element1 === document.activeElement || element2 === document.activeElement || element3 === document.activeElement) && e.key === "f") {
 					if (!document.fullscreenElement) {
 						document.documentElement.requestFullscreen();
 					} else {
 						document.exitFullscreen();
 					}
 				}
+
 				if (e.key === "r") {
 					reset();
+
+					setTimeout(() => {
+						element2.value = "";
+					}, 10);
 				}
 			});
 

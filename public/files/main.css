@@ -198,7 +198,7 @@ ul {
 	padding-right: 10px;
 }
 
-.box-alt div {
+.box-content {
 	padding: 5px 0 0 0;
 }
 
@@ -207,8 +207,11 @@ ul {
 }
 
 .box-thing {
-	background: #292f36;
 	padding: 15px 5px 5px 15px;
+}
+
+.box-thing-background {
+	background: #292f36;
 }
 
 .title {
@@ -332,6 +335,10 @@ ul.text {
 	margin-top: 10px;
 }
 
+span.blog-archive {
+	opacity: 50%;
+}
+
 .box-area .download-button {
 	margin-left: 40px;
 }
@@ -434,7 +441,7 @@ ul.text {
 		padding: 0;
 	}
 
-	.box-alt div {
+	.box-content {
 		padding: 0 0 0 10px;
 	}
 
