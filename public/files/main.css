@@ -198,7 +198,7 @@ ul {
 	padding-right: 10px;
 }
 
-.box-content {
+.box-alt div {
 	padding: 5px 0 0 0;
 }
 
@@ -207,11 +207,8 @@ ul {
 }
 
 .box-thing {
-	padding: 15px 5px 5px 15px;
-}
-
-.box-thing-background {
 	background: #292f36;
+	padding: 15px 5px 5px 15px;
 }
 
 .title {
@@ -441,7 +438,7 @@ span.blog-archive {
 		padding: 0;
 	}
 
-	.box-content {
+	.box-alt div {
 		padding: 0 0 0 10px;
 	}
 
