@@ -127,7 +127,7 @@
 				} else {
 					let hexadecimal = document.hexadecimal2.input2.value;
 
-					if (/^[1234567890abcdefABCDEF]{1,6}$/.test(hexadecimal)) {
+					if (/^[0-9a-fA-F]{1,6}$/.test(hexadecimal)) {
 						let result = 0;
 						let chars = hexadecimal.split("");
 						chars.reverse();

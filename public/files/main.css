@@ -108,7 +108,8 @@ h6 {
 	font-size: 16px;
 }
 
-p {
+p,
+b {
 	font-family: "Roboto Slab";
 	font-size: 24px;
 	margin-top: 0;
@@ -255,8 +256,8 @@ ul {
 	max-width: 1200px;
 }
 
-ol.text,
-ul.text {
+ol,
+ul {
 	max-width: 1160px;
 }
 
@@ -490,6 +491,7 @@ span.blog-archive {
 
 @media all and (max-width: 400px) {
 	p,
+	b,
 	ol,
 	ul {
 		font-size: 18px;

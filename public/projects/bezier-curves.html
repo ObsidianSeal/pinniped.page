@@ -44,5 +44,44 @@
 
 	<body>
 		<iframe src="https://editor.p5js.org/Obsidian_Seal/full/RP7cIIn2R"></iframe>
+
+		<p class="middle" style="margin-top: 17px">
+			<b>
+				<a class="link-2" href="../posts/2022-09-02.html" target="_blank">instructions</a> •
+				<a class="link-2" href="https://github.com/ObsidianSeal/BezierCurves" target="_blank">code</a> •
+				<a class="link-2" href="https://processing.org/" target="_blank">processing</a> •
+				<a class="link-2" href="https://p5js.org/" target="_blank">p5.js</a>
+			</b>
+		</p>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script>
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "f") {
+					// toggle fullscreen
+					if (document.fullscreenElement) {
+						document.exitFullscreen();
+					} else {
+						document.documentElement.requestFullscreen();
+					}
+
+					// remove original iframe
+					document.querySelector("iframe").remove();
+
+					// create new iframe, add it to the page
+					const frame = document.createElement("iframe");
+					const body = document.querySelector("body");
+					const p = document.querySelector("p");
+					body.insertBefore(frame, p);
+
+					// make the iframe BezierCurves
+					document.querySelector("iframe").setAttribute("src", "https://editor.p5js.org/Obsidian_Seal/full/RP7cIIn2R");
+				}
+			});
+		</script>
 	</body>
 </html>
