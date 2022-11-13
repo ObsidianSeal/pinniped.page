@@ -341,6 +341,30 @@ span.blog-archive {
 	margin-left: 40px;
 }
 
+.icon-30 {
+	margin-right: calc(50px - 30px);
+}
+
+.icon-27 {
+	margin-right: calc(50px - 27px);
+}
+
+.icon-24 {
+	margin-right: calc(50px - 24px);
+}
+
+.icon-21 {
+	margin-right: calc(50px - 21px);
+}
+
+.icon-18 {
+	margin-right: calc(50px - 18px);
+}
+
+.icon-15 {
+	margin-right: calc(50px - 15px);
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -503,6 +527,30 @@ span.blog-archive {
 
 	.download-space {
 		height: calc(100vh - 348px);
+	}
+
+	.icon-30 {
+		margin-right: calc(40px - 22.5px);
+	}
+
+	.icon-27 {
+		margin-right: calc(40px - 20.75px);
+	}
+
+	.icon-24 {
+		margin-right: calc(40px - 18px);
+	}
+
+	.icon-21 {
+		margin-right: calc(40px - 15.75px);
+	}
+
+	.icon-18 {
+		margin-right: calc(40px - 13.5px);
+	}
+
+	.icon-15 {
+		margin-right: calc(40px - 11.25px);
 	}
 }
 
