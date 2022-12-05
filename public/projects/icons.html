@@ -1548,6 +1548,7 @@
 			function randomIcon() {
 				element.classList.remove(`fa-${icons[x]}`);
 				element.classList.remove(`fa-${icon}`);
+				element.classList.remove(`fa-${iconArray[index]}`);
 				x = Math.floor(Math.random() * icons.length);
 				element.classList.add(`fa-${icons[x]}`);
 				document.getElementById("name").innerHTML = `fa-${icons[x]}`;
@@ -1654,6 +1655,8 @@
 					navigator.clipboard.writeText(`https://pinniped.page/projects/icons?x=${iconArray[index]}`);
 				}
 			});
+
+			// TODO: enter/space/generate while not at front of array overrides instead of adds, like coolors (confirm this)
 		</script>
 	</body>
 </html>
