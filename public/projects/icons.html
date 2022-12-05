@@ -2,7 +2,7 @@
 
 <html lang="en">
 	<head>
-		<title>fa-random</title>
+		<title id="title">fa-random</title>
 
 		<meta charset="UTF-8" />
 
@@ -21,13 +21,17 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+
 			body {
 				margin: 0;
 				border: 0;
 				padding: 0;
 
 				background-color: #000000;
+				color: #ffffff;
 				height: 100vh;
+				font-family: "Roboto Mono";
 
 				display: flex;
 				justify-content: center;
@@ -38,11 +42,49 @@
 				color: #ffffff;
 				font-size: 100px;
 			}
+
+			div {
+				position: fixed;
+				top: calc(50% + 100px);
+				text-align: center;
+				padding: 0 30px 0 30px;
+			}
+
+			p {
+				font-size: 20px;
+			}
+
+			.next {
+				background-color: #cfe2f3;
+				color: #000000;
+
+				margin: 35px auto 0 auto;
+				border-radius: 10px;
+				padding: 5px 0 10px 0;
+				width: 200px;
+
+				user-select: none;
+				-moz-user-select: none;
+				-khtml-user-select: none;
+				-webkit-user-select: none;
+				-o-user-select: none;
+			}
+
+			.next:hover {
+				background-color: #d9ead3;
+				cursor: pointer;
+			}
 		</style>
 	</head>
 
 	<body>
 		<i id="main-icon" class="fa-solid"></i>
+
+		<div>
+			<p id="name">fa-unknown</p>
+			<p id="size">0px</p>
+			<p class="next" onclick="randomIcon()">generate</p>
+		</div>
 
 		<script>
 			const icons = [
@@ -1438,14 +1480,97 @@
 				"z",
 			];
 
-			var element = document.getElementById("main-icon");
-			let x = Math.floor(Math.random() * icons.length);
-			element.classList.add(`fa-${icons[x]}`);
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
 
-			function randomIcon(remove) {
+			var element = document.getElementById("main-icon");
+			var title = document.getElementById("title");
+			var icon = item.get("x");
+
+			let x = Math.floor(Math.random() * icons.length);
+			let iconArray = [];
+			let index = 0;
+
+			if (icon != null && icon != "") {
+				if (icons.includes(icon)) {
+					element.classList.add(`fa-${icon}`);
+					title.innerHTML = `fa-${icon}`;
+					document.getElementById("name").innerHTML = `fa-${icon}`;
+					iconArray.push(icon);
+					setTimeout(function () {
+						let elementWidth = document.getElementById("main-icon").offsetWidth;
+						if (elementWidth == 63) {
+							elementWidth = 15;
+						} else if (elementWidth == 75) {
+							elementWidth = 18;
+						} else if (elementWidth == 88) {
+							elementWidth = 21;
+						} else if (elementWidth == 100) {
+							elementWidth = 24;
+						} else if (elementWidth == 113) {
+							elementWidth = 27;
+						} else if (elementWidth == 125) {
+							elementWidth = 30;
+						} else {
+							elementWidth = undefined;
+						}
+						document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+					}, 50);
+				} else {
+					title.innerHTML = "fa-unknown";
+				}
+			} else {
+				element.classList.add(`fa-${icons[x]}`);
+				title.innerHTML = `fa-${icons[x]}`;
+				document.getElementById("name").innerHTML = `fa-${icons[x]}`;
+				iconArray.push(icons[x]);
+				setTimeout(function () {
+					let elementWidth = document.getElementById("main-icon").offsetWidth;
+					if (elementWidth == 63) {
+						elementWidth = 15;
+					} else if (elementWidth == 75) {
+						elementWidth = 18;
+					} else if (elementWidth == 88) {
+						elementWidth = 21;
+					} else if (elementWidth == 100) {
+						elementWidth = 24;
+					} else if (elementWidth == 113) {
+						elementWidth = 27;
+					} else if (elementWidth == 125) {
+						elementWidth = 30;
+					} else {
+						elementWidth = undefined;
+					}
+					document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+				}, 50);
+			}
+
+			function randomIcon() {
 				element.classList.remove(`fa-${icons[x]}`);
+				element.classList.remove(`fa-${icon}`);
 				x = Math.floor(Math.random() * icons.length);
 				element.classList.add(`fa-${icons[x]}`);
+				document.getElementById("name").innerHTML = `fa-${icons[x]}`;
+				title.innerHTML = `fa-${icons[x]}`;
+				let elementWidth = document.getElementById("main-icon").offsetWidth;
+				if (elementWidth == 63) {
+					elementWidth = 15;
+				} else if (elementWidth == 75) {
+					elementWidth = 18;
+				} else if (elementWidth == 88) {
+					elementWidth = 21;
+				} else if (elementWidth == 100) {
+					elementWidth = 24;
+				} else if (elementWidth == 113) {
+					elementWidth = 27;
+				} else if (elementWidth == 125) {
+					elementWidth = 30;
+				} else {
+					elementWidth = undefined;
+				}
+				document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+				iconArray.push(icons[x]);
+				index++;
 			}
 
 			document.addEventListener("keydown", (e) => {
@@ -1465,6 +1590,68 @@
 					if (document.fullscreenElement) {
 						document.exitFullscreen();
 					}
+				}
+
+				if (e.key === "ArrowLeft") {
+					if (index - 1 != -1) {
+						element.classList.remove(`fa-${icons[x]}`);
+						element.classList.remove(`fa-${icon}`);
+						element.classList.remove(`fa-${iconArray[index]}`);
+						index--;
+						element.classList.add(`fa-${iconArray[index]}`);
+						document.getElementById("name").innerHTML = `fa-${iconArray[index]}`;
+						title.innerHTML = `fa-${iconArray[index]}`;
+						let elementWidth = document.getElementById("main-icon").offsetWidth;
+						if (elementWidth == 63) {
+							elementWidth = 15;
+						} else if (elementWidth == 75) {
+							elementWidth = 18;
+						} else if (elementWidth == 88) {
+							elementWidth = 21;
+						} else if (elementWidth == 100) {
+							elementWidth = 24;
+						} else if (elementWidth == 113) {
+							elementWidth = 27;
+						} else if (elementWidth == 125) {
+							elementWidth = 30;
+						} else {
+							elementWidth = undefined;
+						}
+						document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+					}
+				}
+
+				if (e.key === "ArrowRight") {
+					if (index + 1 < iconArray.length) {
+						element.classList.remove(`fa-${icons[x]}`);
+						element.classList.remove(`fa-${icon}`);
+						element.classList.remove(`fa-${iconArray[index]}`);
+						index++;
+						element.classList.add(`fa-${iconArray[index]}`);
+						document.getElementById("name").innerHTML = `fa-${iconArray[index]}`;
+						title.innerHTML = `fa-${iconArray[index]}`;
+						let elementWidth = document.getElementById("main-icon").offsetWidth;
+						if (elementWidth == 63) {
+							elementWidth = 15;
+						} else if (elementWidth == 75) {
+							elementWidth = 18;
+						} else if (elementWidth == 88) {
+							elementWidth = 21;
+						} else if (elementWidth == 100) {
+							elementWidth = 24;
+						} else if (elementWidth == 113) {
+							elementWidth = 27;
+						} else if (elementWidth == 125) {
+							elementWidth = 30;
+						} else {
+							elementWidth = undefined;
+						}
+						document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+					}
+				}
+
+				if (e.key === "c") {
+					navigator.clipboard.writeText(`https://pinniped.page/projects/icons?x=${iconArray[index]}`);
 				}
 			});
 		</script>
