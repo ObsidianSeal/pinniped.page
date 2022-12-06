@@ -14,12 +14,6 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<meta property="og:url" content="https://pinniped.page/fa-random" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="fa-random" />
-		<meta property="og:description" content="fa-random" />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
-
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
 
@@ -38,6 +32,11 @@
 				align-items: center;
 			}
 
+			::selection {
+				color: #000000;
+				background-color: #f4cccc;
+			}
+
 			i {
 				color: #ffffff;
 				font-size: 100px;
@@ -45,8 +44,11 @@
 
 			div {
 				position: fixed;
-				top: calc(50% + 100px);
 				text-align: center;
+			}
+
+			div.info {
+				top: calc(50% + 100px);
 				padding: 0 30px 0 30px;
 			}
 
@@ -74,19 +76,40 @@
 				background-color: #d9ead3;
 				cursor: pointer;
 			}
+
+			#copied {
+				top: 100px;
+
+				background-color: #d9ead3;
+				color: #000000;
+
+				border-radius: 10px;
+				padding: 5px 0 10px 0;
+				width: 200px;
+
+				user-select: none;
+				-moz-user-select: none;
+				-khtml-user-select: none;
+				-webkit-user-select: none;
+				-o-user-select: none;
+			}
 		</style>
 	</head>
 
 	<body>
 		<i id="main-icon" class="fa-solid"></i>
 
-		<div>
-			<p id="name">fa-unknown</p>
-			<p id="size">icon-undefined</p>
-			<p class="next" onclick="randomIcon()">generate</p>
+		<div class="info">
+			<p id="name" style="display: block">fa-unknown</p>
+			<p id="info" style="display: block">icon-undefined • false</p>
+			<p id="next" class="next" onclick="randomIcon()" style="display: block">generate</p>
+		</div>
+		<div style="top: 100px">
+			<p id="copied" style="display: none">copied!</p>
 		</div>
 
 		<script>
+			const keys = {};
 			const icons = [
 				"0",
 				"1",
@@ -1479,6 +1502,171 @@
 				"yin-yang",
 				"z",
 			];
+			const regularIcons = [
+				"address-book",
+				"address-card",
+				"bell",
+				"bell-slash",
+				"bookmark",
+				"building",
+				"calendar",
+				"calendar-check",
+				"calendar-days",
+				"calendar-minus",
+				"calendar-plus",
+				"calendar-xmark",
+				"chart-bar",
+				"chess-bishop",
+				"chess-king",
+				"chess-knight",
+				"chess-pawn",
+				"chess-queen",
+				"chess-rook",
+				"circle",
+				"circle-check",
+				"circle-dot",
+				"circle-down",
+				"circle-left",
+				"circle-pause",
+				"circle-play",
+				"circle-question",
+				"circle-right",
+				"circle-stop",
+				"circle-up",
+				"circle-user",
+				"circle-xmark",
+				"clipboard",
+				"clock",
+				"clone",
+				"closed-captioning",
+				"comment",
+				"comment-dots",
+				"comments",
+				"compass",
+				"copy",
+				"copyright",
+				"credit-card",
+				"envelope",
+				"envelope-open",
+				"eye",
+				"eye-slash",
+				"face-angry",
+				"face-dizzy",
+				"face-flushed",
+				"face-frown",
+				"face-frown-open",
+				"face-grimace",
+				"face-grin",
+				"face-grin-beam",
+				"face-grin-beam-sweat",
+				"face-grin-hearts",
+				"face-grin-squint",
+				"face-grin-squint-tears",
+				"face-grin-stars",
+				"face-grin-tears",
+				"face-grin-tongue",
+				"face-grin-tongue-squint",
+				"face-grin-tongue-wink",
+				"face-grin-wide",
+				"face-grin-wink",
+				"face-kiss",
+				"face-kiss-beam",
+				"face-kiss-wink-heart",
+				"face-laugh",
+				"face-laugh-beam",
+				"face-laugh-squint",
+				"face-laugh-wink",
+				"face-meh",
+				"face-meh-blank",
+				"face-rolling-eyes",
+				"face-sad-cry",
+				"face-sad-tear",
+				"face-smile",
+				"face-smile-beam",
+				"face-smile-wink",
+				"face-surprise",
+				"face-tired",
+				"file",
+				"file-audio",
+				"file-code",
+				"file-excel",
+				"file-image",
+				"file-lines",
+				"file-pdf",
+				"file-powerpoint",
+				"file-video",
+				"file-word",
+				"file-zipper",
+				"flag",
+				"floppy-disk",
+				"folder",
+				"folder-closed",
+				"folder-open",
+				"font-awesome",
+				"futbol",
+				"gem",
+				"hand",
+				"hand-back-fist",
+				"hand-lizard",
+				"hand-peace",
+				"hand-point-down",
+				"hand-pointer",
+				"hand-point-left",
+				"hand-point-right",
+				"hand-point-up",
+				"hand-scissors",
+				"handshake",
+				"hand-spock",
+				"hard-drive",
+				"heart",
+				"hospital",
+				"hourglass",
+				"hourglass-half",
+				"id-badge",
+				"id-card",
+				"image",
+				"images",
+				"keyboard",
+				"lemon",
+				"life-ring",
+				"lightbulb",
+				"map",
+				"message",
+				"money-bill-1",
+				"moon",
+				"newspaper",
+				"note-sticky",
+				"object-group",
+				"object-ungroup",
+				"paper-plane",
+				"paste",
+				"pen-to-square",
+				"rectangle-list",
+				"rectangle-xmark",
+				"registered",
+				"share-from-square",
+				"snowflake",
+				"square",
+				"square-caret-down",
+				"square-caret-left",
+				"square-caret-right",
+				"square-caret-up",
+				"square-check",
+				"square-full",
+				"square-minus",
+				"square-plus",
+				"star",
+				"star-half",
+				"star-half-stroke",
+				"sun",
+				"thumbs-down",
+				"thumbs-up",
+				"trash-can",
+				"user",
+				"window-maximize",
+				"window-minimize",
+				"window-restore",
+			];
 
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
@@ -1486,10 +1674,12 @@
 			var element = document.getElementById("main-icon");
 			var title = document.getElementById("title");
 			var icon = item.get("x");
+			var show = true;
 
 			let x = Math.floor(Math.random() * icons.length);
 			let iconArray = [];
 			let index = 0;
+			let hasRegular = false;
 
 			if (icon != null && icon != "") {
 				if (icons.includes(icon)) {
@@ -1514,8 +1704,13 @@
 						} else {
 							elementWidth = undefined;
 						}
-						document.getElementById("size").innerHTML = `icon-${elementWidth}`;
-					}, 50);
+						if (regularIcons.includes(icon)) {
+							hasRegular = true;
+						} else {
+							hasRegular = false;
+						}
+						document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
+					}, 100);
 				} else {
 					iconArray.push("unknown");
 				}
@@ -1541,8 +1736,13 @@
 					} else {
 						elementWidth = undefined;
 					}
-					document.getElementById("size").innerHTML = `icon-${elementWidth}`;
-				}, 50);
+					if (regularIcons.includes(icons[x])) {
+						hasRegular = true;
+					} else {
+						hasRegular = false;
+					}
+					document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
+				}, 100);
 			}
 
 			function randomIcon() {
@@ -1569,9 +1769,14 @@
 				} else {
 					elementWidth = undefined;
 				}
-				document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+				if (regularIcons.includes(icons[x])) {
+					hasRegular = true;
+				} else {
+					hasRegular = false;
+				}
+				document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
 				iconArray.push(icons[x]);
-				index++;
+				index = iconArray.length - 1;
 			}
 
 			document.addEventListener("keydown", (e) => {
@@ -1618,7 +1823,12 @@
 						} else {
 							elementWidth = undefined;
 						}
-						document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+						if (regularIcons.includes(iconArray[index])) {
+							hasRegular = true;
+						} else {
+							hasRegular = false;
+						}
+						document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
 					}
 				}
 
@@ -1647,16 +1857,115 @@
 						} else {
 							elementWidth = undefined;
 						}
-						document.getElementById("size").innerHTML = `icon-${elementWidth}`;
+						if (regularIcons.includes(iconArray[index])) {
+							hasRegular = true;
+						} else {
+							hasRegular = false;
+						}
+						document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
 					}
 				}
 
 				if (e.key === "c") {
 					navigator.clipboard.writeText(`https://pinniped.page/projects/icons?x=${iconArray[index]}`);
+					document.getElementById("copied").style = "display: block";
+					setTimeout(function () {
+						document.getElementById("copied").style = "display: none";
+					}, 2000);
+				}
+
+				if (e.key === "Backspace") {
+					if (icon != null && icon != "") {
+						if (icons.includes(icon)) {
+							element.classList.remove(`fa-${icons[x]}`);
+							element.classList.remove(`fa-${icon}`);
+							element.classList.remove(`fa-${iconArray[index]}`);
+
+							x = Math.floor(Math.random() * icons.length);
+							iconArray = [];
+							index = 0;
+
+							element.classList.add(`fa-${icon}`);
+							title.innerHTML = `fa-${icon}`;
+							document.getElementById("name").innerHTML = `fa-${icon}`;
+							iconArray.push(icon);
+							let elementWidth = document.getElementById("main-icon").offsetWidth;
+							if (elementWidth == 63) {
+								elementWidth = 15;
+							} else if (elementWidth == 75) {
+								elementWidth = 18;
+							} else if (elementWidth == 88) {
+								elementWidth = 21;
+							} else if (elementWidth == 100) {
+								elementWidth = 24;
+							} else if (elementWidth == 113) {
+								elementWidth = 27;
+							} else if (elementWidth == 125) {
+								elementWidth = 30;
+							} else {
+								elementWidth = undefined;
+							}
+							if (regularIcons.includes(icon)) {
+								hasRegular = true;
+							} else {
+								hasRegular = false;
+							}
+							document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
+						} else {
+							iconArray.push("unknown");
+						}
+					} else {
+						element.classList.remove(`fa-${icons[x]}`);
+						element.classList.remove(`fa-${icon}`);
+						element.classList.remove(`fa-${iconArray[index]}`);
+
+						x = Math.floor(Math.random() * icons.length);
+						iconArray = [];
+						index = 0;
+
+						element.classList.add(`fa-${icons[x]}`);
+						title.innerHTML = `fa-${icons[x]}`;
+						document.getElementById("name").innerHTML = `fa-${icons[x]}`;
+						iconArray.push(icons[x]);
+						let elementWidth = document.getElementById("main-icon").offsetWidth;
+						if (elementWidth == 63) {
+							elementWidth = 15;
+						} else if (elementWidth == 75) {
+							elementWidth = 18;
+						} else if (elementWidth == 88) {
+							elementWidth = 21;
+						} else if (elementWidth == 100) {
+							elementWidth = 24;
+						} else if (elementWidth == 113) {
+							elementWidth = 27;
+						} else if (elementWidth == 125) {
+							elementWidth = 30;
+						} else {
+							elementWidth = undefined;
+						}
+						if (regularIcons.includes(icons[x])) {
+							hasRegular = true;
+						} else {
+							hasRegular = false;
+						}
+						document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
+					}
+				}
+
+				if (e.key === "h" || e.key === "Shift") {
+					if (show) {
+						document.getElementById("name").style = "display: none";
+						document.getElementById("info").style = "display: none";
+						document.getElementById("next").style = "display: none";
+						show = false;
+					} else {
+						document.getElementById("name").style = "display: block";
+						document.getElementById("info").style = "display: block";
+						document.getElementById("next").style = "display: block";
+						show = true;
+					}
 				}
 			});
-
-			// TODO: enter/space/generate while not at front of array overrides instead of adds, like coolors (confirm this)
 		</script>
 	</body>
 </html>
