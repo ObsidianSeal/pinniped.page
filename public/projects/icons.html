@@ -1675,6 +1675,7 @@
 			var title = document.getElementById("title");
 			var icon = item.get("x");
 			var show = true;
+			var ogIcon;
 
 			let x = Math.floor(Math.random() * icons.length);
 			let iconArray = [];
@@ -1743,6 +1744,7 @@
 					}
 					document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
 				}, 100);
+				ogIcon = icons[x];
 			}
 
 			function randomIcon() {
@@ -1912,7 +1914,19 @@
 							}
 							document.getElementById("info").innerHTML = `icon-${elementWidth} • ${hasRegular}`;
 						} else {
+							element.classList.remove(`fa-${icons[x]}`);
+							element.classList.remove(`fa-${icon}`);
+							element.classList.remove(`fa-${iconArray[index]}`);
+
+							x = Math.floor(Math.random() * icons.length);
+							iconArray = [];
+							index = 0;
+
 							iconArray.push("unknown");
+
+							title.innerHTML = `fa-unknown`;
+							document.getElementById("name").innerHTML = `fa-unknown`;
+							document.getElementById("info").innerHTML = `icon-undefined • false`;
 						}
 					} else {
 						element.classList.remove(`fa-${icons[x]}`);
@@ -1923,10 +1937,10 @@
 						iconArray = [];
 						index = 0;
 
-						element.classList.add(`fa-${icons[x]}`);
-						title.innerHTML = `fa-${icons[x]}`;
-						document.getElementById("name").innerHTML = `fa-${icons[x]}`;
-						iconArray.push(icons[x]);
+						element.classList.add(`fa-${ogIcon}`);
+						title.innerHTML = `fa-${ogIcon}`;
+						document.getElementById("name").innerHTML = `fa-${ogIcon}`;
+						iconArray.push(ogIcon);
 						let elementWidth = document.getElementById("main-icon").offsetWidth;
 						if (elementWidth == 63) {
 							elementWidth = 15;
@@ -1943,7 +1957,7 @@
 						} else {
 							elementWidth = undefined;
 						}
-						if (regularIcons.includes(icons[x])) {
+						if (regularIcons.includes(ogIcon)) {
 							hasRegular = true;
 						} else {
 							hasRegular = false;
@@ -1964,6 +1978,10 @@
 						document.getElementById("next").style = "display: block";
 						show = true;
 					}
+				}
+
+				if (e.key === "i") {
+					window.open("../posts/2022-12-06.html", "_blank").focus();
 				}
 			});
 		</script>

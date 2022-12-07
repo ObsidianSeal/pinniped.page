@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Blog Post (2022/12/06)</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="../files/menu.js"></script>
+
+		<meta property="og:url" content="https://pinniped.page/posts/2022-12-06" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2022/12/06)" />
+		<meta property="og:description" content="How to use fa-random" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5>Blog Post / November 28th, 2022</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">How to use fa-random</h3>
+
+			<div class="break"></div>
+
+			<p class="text">Controls/Keyboard Shortcuts:</p>
+
+			<ul>
+				<li><b>ENTER or SPACE or the 'generate' button:</b> get a new random icon</li>
+				<li><b>F:</b> toggle fullscreen</li>
+				<li><b>ESCAPE: </b> exit fullscreen</li>
+				<li><b>LEFT and RIGHT arrows:</b> go back and forth between previously generated icons</li>
+				<li><b>C: </b> copy a link to the current icon</li>
+				<li><b>BACKSPACE: </b> reset icon (to url or first random)</li>
+				<li><b>H or SHIFT:</b> toggle showing the menu</li>
+				<li><b>I:</b> go to this help page</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<p class="text">Notes:</p>
+
+			<ul>
+				<li>The icon-?? text is useful for me, don't pay attention to it</li>
+				<li>The 'true' or 'false' after the dot shows if there's a regular icon to go with the shown solid icon</li>
+				<li>You can search for an icon by adding ?x=icon-name (no 'fa-') to the url</li>
+				<li>If the icon specified by the ?x=___ does not exist, default information and no icon will be shown</li>
+				<li>The above will also happen if you try to reset (with backspace) to an icon that does not exist</li>
+			</ul>
+
+			<div class="content-end"></div>
+		</div>
+	</body>
+</html>
