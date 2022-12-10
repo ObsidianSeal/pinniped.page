@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>text</title>
+
+		<meta charset="UTF-8" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/text" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="something" />
+		<meta property="og:description" content="this might work" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
+
+		<style>
+			body {
+				margin: 0;
+				padding: 10px;
+			}
+
+			input {
+				width: calc(100% - 30px);
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form name="textForm" id="textForm">
+			<input name="textInput" id="textInput" maxlength="120" />
+			<button type="button" id="textButton">add to database</button>
+		</form>
+
+		<p id="textSpace"></p>
+
+		<script type="module">
+			// firebase config
+			const firebaseConfig = {
+				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+				authDomain: "the-pinniped-page.firebaseapp.com",
+				databaseURL: "https://the-pinniped-page.firebaseio.com",
+				projectId: "the-pinniped-page",
+				storageBucket: "the-pinniped-page.appspot.com",
+				messagingSenderId: "636989973689",
+				appId: "1:636989973689:web:6d938d9588606d803a6768",
+			};
+
+			// initialize the app
+			firebase.initializeApp(firebaseConfig);
+			//let number = 0;
+
+			// write to the database
+			function writeText(text) {
+				if (!/[<>]/.test(text) && text != "") {
+					var textListRef = firebase.database().ref("/");
+					var newTextRef = textListRef.push();
+					newTextRef.set({
+						text: text,
+					});
+				}
+				document.getElementById("textInput").value = "";
+				document.getElementById("textSpace").innerHTML = "";
+			}
+
+			// get the other messages
+			function updateText() {
+				document.getElementById("textSpace").innerHTML = "";
+				firebase
+					.database()
+					.ref("/")
+					.on("value", function (snap) {
+						snap.forEach(function (childNodes) {
+							document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + childNodes.val().text + "<br>";
+						});
+					});
+			}
+			updateText();
+
+			// don't reload on 'enter', writeText, and updateText (for now)
+			document.getElementById("textForm").addEventListener("submit", function (e) {
+				e.preventDefault();
+				writeText(document.textForm.textInput.value);
+				updateText();
+			});
+
+			// writeText on button press, and updateText (for now)
+			document.getElementById("textButton").addEventListener("click", function (e) {
+				writeText(document.textForm.textInput.value);
+				updateText();
+			});
+
+			window.setInterval(updateText, 2000);
+		</script>
+	</body>
+</html>
