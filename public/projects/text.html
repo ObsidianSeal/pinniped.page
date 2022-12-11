@@ -140,14 +140,15 @@
 
 			// write to the database
 			function writeText(text) {
-				if (!/^[ ]+$/.test(text)) {
+				if (!/^[ ]+$/.test(text) && text != "") {
 					const date = new Date();
 					let year = date.getFullYear();
 					let month = date.getMonth() + 1;
 					let day = date.getDate();
-					let hours = date.getUTCHours() % 12;
+					let hours = date.getUTCHours();
 					let minutes = date.getMinutes();
-					console.log(`${year}/${month}/${day} ${hours}:${minutes}`);
+					if (month < 10) month = `0${month}`;
+					if (day < 10) day = `0${day}`;
 
 					var textListRef = firebase.database().ref("/text");
 					var newTextRef = textListRef.push();
@@ -166,19 +167,24 @@
 			function updateText() {
 				const date = new Date();
 				let offset = date.getTimezoneOffset();
-				console.log(offset);
 				document.getElementById("textSpace").innerHTML = "";
 				firebase
 					.database()
 					.ref("/text")
 					.on("value", function (snap) {
 						snap.forEach(function (childNodes) {
-							let newHours = childNodes.val().hours + 12 - offset / 60;
+							let newHours = childNodes.val().hours - offset / 60;
+							if (newHours < 0) newHours = newHours + 24;
+							let newMinutes = childNodes.val().minutes.toLocaleString("en", {
+								minimumIntegerDigits: 2,
+								useGrouping: false,
+							});
 							document.getElementById("textSpace").innerHTML =
-								document.getElementById("textSpace").innerHTML + `<b>${childNodes.val().date} ${newHours % 12}:${childNodes.val().minutes} </b> `;
+								document.getElementById("textSpace").innerHTML + `<b>${childNodes.val().date} ${newHours}:${newMinutes} </b> `;
 
 							var newText = document.createTextNode(childNodes.val().text);
-							document.getElementById("textSpace").appendChild(newText);
+							if (newText.length <= 120) document.getElementById("textSpace").appendChild(newText);
+							else document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "...";
 							document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<br>";
 						});
 					});
