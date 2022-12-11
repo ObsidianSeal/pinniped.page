@@ -31,7 +31,7 @@
 				color: #2b2d42;
 				margin: 0;
 				border: 0;
-				padding: 20px;
+				padding: 0;
 				font-family: "Roboto Mono";
 				font-size: 20px;
 			}
@@ -66,19 +66,25 @@
 				margin-block-end: 0;
 				word-wrap: break-word;
 				line-height: 30px;
+				padding: 30px 20px 100px 20px;
 			}
 
 			form {
+				background-color: #edf2f4;
+				box-shadow: 0 0 10px 5px #8d99ae;
 				display: flex;
 				gap: 20px;
+				width: 100%;
+				position: fixed;
+				padding: 20px 0 20px 20px;
+				z-index: 1;
 			}
 
 			input {
-				width: calc(100% - 82px);
+				width: calc(100% - 128px);
 				max-width: 500px;
 				height: 36px;
 				background-color: #edf2f4;
-				margin: 0 0 20px 0;
 				border: 3px solid #2b2d42;
 				padding: 0 10px 0 10px;
 				outline: none;
@@ -91,7 +97,7 @@
 				border-radius: 0;
 			}
 
-			div {
+			div#textButton {
 				height: 42px;
 				width: 42px;
 				min-width: 42px;
@@ -103,9 +109,13 @@
 				align-items: center;
 			}
 
-			div:hover {
+			div#textButton:hover {
 				background-color: #ef233c;
 				cursor: pointer;
+			}
+
+			div {
+				height: 82px;
 			}
 
 			i {
@@ -119,6 +129,8 @@
 			<input name="textInput" id="textInput" maxlength="120" />
 			<div id="textButton"><i class="fa-solid fa-share"></i></div>
 		</form>
+
+		<div></div>
 
 		<p id="textSpace"></p>
 
@@ -218,7 +230,19 @@
 			});
 
 			// update the text every 2 seconds (for some reason, changes to the database add all the text multiple times)
-			window.setInterval(updateText, 2000);
+			//window.setInterval(updateText, 2000);
+
+			// listen for database changes, then update when it does
+			firebase
+				.database()
+				.ref("/text")
+				.on("value", (snapshot) => {
+					//const data = snapshot.val();
+					//console.log(data);
+					setTimeout(function (params) {
+						updateText();
+					}, 50); // is 50ms okay?
+				});
 		</script>
 	</body>
 </html>
