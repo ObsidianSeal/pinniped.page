@@ -16,8 +16,8 @@
 
 		<meta property="og:url" content="https://pinniped.page/projects/text" />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="something" />
-		<meta property="og:description" content="this might work" />
+		<meta property="og:title" content="text" />
+		<meta property="og:description" content="I'm trying to learn Firebase Realtime Database" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
@@ -173,9 +173,22 @@
 					.ref("/text")
 					.on("value", function (snap) {
 						snap.forEach(function (childNodes) {
-							let newHours = childNodes.val().hours - offset / 60;
+							let newHours = childNodes.val().hours - Math.floor(offset / 60);
 							if (newHours < 0) newHours = newHours + 24;
-							let newMinutes = childNodes.val().minutes.toLocaleString("en", {
+							if (newHours > 24) newHours = newHours - 24;
+
+							let newMinutes = childNodes.val().minutes;
+							newMinutes = newMinutes - (offset % 60);
+							if (newMinutes < 0) {
+								newMinutes += 60;
+								newHours--;
+							}
+							if (newMinutes >= 60) {
+								newMinutes -= 60;
+								newHours++;
+							}
+
+							newMinutes = newMinutes.toLocaleString("en", {
 								minimumIntegerDigits: 2,
 								useGrouping: false,
 							});
