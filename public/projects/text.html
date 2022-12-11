@@ -8,6 +8,10 @@
 
 		<link rel="icon" href="../images/icon.png" />
 
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<meta property="og:url" content="https://pinniped.page/projects/text" />
@@ -20,14 +24,92 @@
 		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
 
 		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+
 			body {
+				background-color: #edf2f4;
+				color: #2b2d42;
 				margin: 0;
-				padding: 10px;
+				border: 0;
+				padding: 20px;
+				font-family: "Roboto Mono";
+				font-size: 20px;
+			}
+
+			::selection {
+				background: #8d99ae;
+				color: #edf2f4;
+			}
+
+			::-webkit-scrollbar {
+				width: 1em;
+			}
+
+			::-webkit-scrollbar-track {
+				background: #8d99ae;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background: #2b2d42;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background: #ef233c;
+			}
+
+			::-webkit-scrollbar-corner {
+				background: #2b2d42;
+			}
+
+			p {
+				margin-block-start: 0;
+				margin-block-end: 0;
+				word-wrap: break-word;
+				line-height: 30px;
+			}
+
+			form {
+				display: flex;
+				gap: 20px;
 			}
 
 			input {
-				width: calc(100% - 30px);
-				margin-bottom: 10px;
+				width: calc(100% - 82px);
+				max-width: 500px;
+				height: 36px;
+				background-color: #edf2f4;
+				margin: 0 0 20px 0;
+				border: 3px solid #2b2d42;
+				padding: 0 10px 0 10px;
+				outline: none;
+				font-family: "Roboto Mono";
+				font-size: 20px;
+			}
+
+			input:focus {
+				border-color: #ef233c;
+				border-radius: 0;
+			}
+
+			div {
+				height: 42px;
+				width: 42px;
+				min-width: 42px;
+				background-color: #2b2d42;
+				border: 0;
+				padding: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			div:hover {
+				background-color: #ef233c;
+				cursor: pointer;
+			}
+
+			i {
+				color: #edf2f4;
 			}
 		</style>
 	</head>
@@ -35,7 +117,7 @@
 	<body>
 		<form name="textForm" id="textForm">
 			<input name="textInput" id="textInput" maxlength="120" />
-			<button type="button" id="textButton">add to database</button>
+			<div id="textButton"><i class="fa-solid fa-share"></i></div>
 		</form>
 
 		<p id="textSpace"></p>
@@ -58,11 +140,22 @@
 
 			// write to the database
 			function writeText(text) {
-				if (!/[<>]/.test(text) && text != "") {
-					var textListRef = firebase.database().ref("/");
+				if (!/^[ ]+$/.test(text)) {
+					const date = new Date();
+					let year = date.getFullYear();
+					let month = date.getMonth() + 1;
+					let day = date.getDate();
+					let hours = date.getUTCHours() % 12;
+					let minutes = date.getMinutes();
+					console.log(`${year}/${month}/${day} ${hours}:${minutes}`);
+
+					var textListRef = firebase.database().ref("/text");
 					var newTextRef = textListRef.push();
 					newTextRef.set({
 						text: text,
+						date: `${year}/${month}/${day}`,
+						hours: hours,
+						minutes: minutes,
 					});
 				}
 				document.getElementById("textInput").value = "";
@@ -71,13 +164,22 @@
 
 			// get the other messages
 			function updateText() {
+				const date = new Date();
+				let offset = date.getTimezoneOffset();
+				console.log(offset);
 				document.getElementById("textSpace").innerHTML = "";
 				firebase
 					.database()
-					.ref("/")
+					.ref("/text")
 					.on("value", function (snap) {
 						snap.forEach(function (childNodes) {
-							document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + childNodes.val().text + "<br>";
+							let newHours = childNodes.val().hours + 12 - offset / 60;
+							document.getElementById("textSpace").innerHTML =
+								document.getElementById("textSpace").innerHTML + `<b>${childNodes.val().date} ${newHours % 12}:${childNodes.val().minutes} </b> `;
+
+							var newText = document.createTextNode(childNodes.val().text);
+							document.getElementById("textSpace").appendChild(newText);
+							document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<br>";
 						});
 					});
 			}
@@ -96,6 +198,7 @@
 				updateText();
 			});
 
+			// update the text every 2 seconds (for some reason, changes to the database add all the text multiple times)
 			window.setInterval(updateText, 2000);
 		</script>
 	</body>
