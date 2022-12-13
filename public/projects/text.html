@@ -121,6 +121,10 @@
 			i {
 				color: #edf2f4;
 			}
+
+			span {
+				color: #ef233c;
+			}
 		</style>
 	</head>
 
@@ -149,6 +153,7 @@
 			// initialize the app
 			firebase.initializeApp(firebaseConfig);
 			//let number = 0;
+			let pText = "";
 
 			// write to the database
 			function writeText(text) {
@@ -177,8 +182,14 @@
 
 			// get the other messages
 			function updateText() {
+				let pText = "";
+				let pTextWasBad = false;
+				let placeDots = false;
+				let count = 0;
 				const date = new Date();
 				let offset = date.getTimezoneOffset();
+				let currentHours = date.getHours();
+				let currentMinutes = date.getMinutes() + currentHours * 60;
 				document.getElementById("textSpace").innerHTML = "";
 				firebase
 					.database()
@@ -200,17 +211,46 @@
 								newHours++;
 							}
 
-							newMinutes = newMinutes.toLocaleString("en", {
-								minimumIntegerDigits: 2,
-								useGrouping: false,
-							});
-							document.getElementById("textSpace").innerHTML =
-								document.getElementById("textSpace").innerHTML + `<b>${childNodes.val().date} ${newHours}:${newMinutes} </b> `;
+							let postMinutes = newMinutes + newHours * 60;
+							//console.log(currentMinutes, postMinutes, currentMinutes - postMinutes);
+							if (currentMinutes - postMinutes < 30) {
+								newMinutes = newMinutes.toLocaleString("en", {
+									minimumIntegerDigits: 2,
+									useGrouping: false,
+								});
 
-							var newText = document.createTextNode(childNodes.val().text);
-							if (newText.length <= 120) document.getElementById("textSpace").appendChild(newText);
-							else document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "...";
-							document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<br>";
+								var newText = document.createTextNode(childNodes.val().text);
+
+								if (newText.length <= 120) {
+									if (childNodes.val().text == pText) {
+										count++;
+										pTextWasBad = true;
+										if (count > 1) placeDots = false;
+										else placeDots = true;
+									} else {
+										count = 0;
+										pTextWasBad = false;
+										placeDots = false;
+									}
+								} else {
+									placeDots = true;
+								}
+
+								if (count < 2 && childNodes.val().date != undefined && newHours != NaN && newMinutes != NaN) {
+									document.getElementById("textSpace").innerHTML =
+										document.getElementById("textSpace").innerHTML + `<b>${childNodes.val().date} ${newHours}:${newMinutes} </b> `;
+
+									if (!placeDots) {
+										document.getElementById("textSpace").appendChild(newText);
+									} else {
+										document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<span>...</span>";
+									}
+
+									document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<br>";
+								}
+
+								pText = childNodes.val().text;
+							}
 						});
 					});
 			}
@@ -239,7 +279,7 @@
 				.on("value", (snapshot) => {
 					//const data = snapshot.val();
 					//console.log(data);
-					setTimeout(function (params) {
+					setTimeout(function () {
 						updateText();
 					}, 50); // is 50ms okay?
 				});
