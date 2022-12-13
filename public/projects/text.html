@@ -90,6 +90,7 @@
 				outline: none;
 				font-family: "Roboto Mono";
 				font-size: 20px;
+				caret-color: #ef233c;
 			}
 
 			input:focus {
@@ -129,7 +130,7 @@
 	</head>
 
 	<body>
-		<form name="textForm" id="textForm">
+		<form autocomplete="off" name="textForm" id="textForm">
 			<input name="textInput" id="textInput" maxlength="120" />
 			<div id="textButton"><i class="fa-solid fa-share"></i></div>
 		</form>
@@ -205,101 +206,117 @@
 					.ref("/text")
 					.on("value", function (snap) {
 						snap.forEach(function (childNodes) {
-							// console.log("ID: " + childNodes.val().data.id);
-							// console.log("TEXT: " + childNodes.val().data.text);
-							// console.log("YEAR: " + childNodes.val().date.year);
-							// console.log("MONTH: " + childNodes.val().date.month);
-							// console.log("DAY: " + childNodes.val().date.day);
-							// console.log("HOURS: " + childNodes.val().time.hours);
-							// console.log("MINUTES: " + childNodes.val().time.minutes);
+							//console.log(childNodes.key);
+							try {
+								// console.log("ID: " + childNodes.val().data.id);
+								// console.log("TEXT: " + childNodes.val().data.text);
+								// console.log("YEAR: " + childNodes.val().date.year);
+								// console.log("MONTH: " + childNodes.val().date.month);
+								// console.log("DAY: " + childNodes.val().date.day);
+								// console.log("HOURS: " + childNodes.val().time.hours);
+								// console.log("MINUTES: " + childNodes.val().time.minutes);
 
-							let newHours = childNodes.val().time.hours - Math.floor(offset / 60);
-							if (newHours < 0) newHours = newHours + 24;
-							if (newHours > 24) newHours = newHours - 24;
+								let newHours = childNodes.val().time.hours - Math.floor(offset / 60);
+								if (newHours < 0) newHours = newHours + 24;
+								if (newHours > 24) newHours = newHours - 24;
 
-							let newMinutes = childNodes.val().time.minutes;
-							newMinutes = newMinutes - (offset % 60);
-							if (newMinutes < 0) {
-								newMinutes += 60;
-								newHours--;
-							}
-							if (newMinutes >= 60) {
-								newMinutes -= 60;
-								newHours++;
-							}
+								let newMinutes = childNodes.val().time.minutes;
+								newMinutes = newMinutes - (offset % 60);
+								if (newMinutes < 0) {
+									newMinutes += 60;
+									newHours--;
+								}
+								if (newMinutes >= 60) {
+									newMinutes -= 60;
+									newHours++;
+								}
 
-							let newMonth = parseInt(childNodes.val().date.month);
-							let newDay = parseInt(childNodes.val().date.day);
+								let newMonth = parseInt(childNodes.val().date.month);
+								let newDay = parseInt(childNodes.val().date.day);
 
-							let postMinutes = newMinutes + newHours * 60;
+								let postMinutes = newMinutes + newHours * 60;
 
-							// console.log("currentMinutes = " + currentMinutes);
-							// console.log("postMinutes = " + postMinutes);
-							// console.log(currentMinutes - postMinutes < 30);
+								// console.log("currentMinutes = " + currentMinutes);
+								// console.log("postMinutes = " + postMinutes);
+								// console.log(currentMinutes - postMinutes < 30);
 
-							// console.log("newDay = " + newDay);
-							// console.log("date.getDay(); = " + date.getDate());
-							// console.log(currentMinutes - postMinutes < 30);
+								// console.log("newDay = " + newDay);
+								// console.log("date.getDay(); = " + date.getDate());
+								// console.log(currentMinutes - postMinutes < 30);
 
-							// console.log(currentMinutes - postMinutes < 30 && newDay == date.getDate());
-							if (
-								currentMinutes - postMinutes < 30 &&
-								newDay == date.getDate() &&
-								childNodes.val().year != NaN &&
-								newMonth != NaN &&
-								newDay != NaN &&
-								newHours != NaN &&
-								newMinutes != NaN
-							) {
-								newMinutes = newMinutes.toLocaleString("en", {
-									minimumIntegerDigits: 2,
-									useGrouping: false,
-								});
-								newMonth = newMonth.toLocaleString("en", {
-									minimumIntegerDigits: 2,
-									useGrouping: false,
-								});
-								newDay = newDay.toLocaleString("en", {
-									minimumIntegerDigits: 2,
-									useGrouping: false,
-								});
+								// console.log(currentMinutes - postMinutes < 30 && newDay == date.getDate());
+								if (
+									childNodes.val().data.id != undefined &&
+									childNodes.val().data.text != undefined &&
+									childNodes.val().date.day != undefined &&
+									childNodes.val().date.month != undefined &&
+									childNodes.val().date.year != undefined &&
+									childNodes.val().time.hours != undefined &&
+									childNodes.val().time.minutes != undefined &&
+									currentMinutes - postMinutes < 30 &&
+									newDay == date.getDate() &&
+									childNodes.val().date.year != NaN &&
+									newMonth != NaN &&
+									newDay != NaN &&
+									newHours != NaN &&
+									newMinutes != NaN
+								) {
+									newMinutes = newMinutes.toLocaleString("en", {
+										minimumIntegerDigits: 2,
+										useGrouping: false,
+									});
+									newMonth = newMonth.toLocaleString("en", {
+										minimumIntegerDigits: 2,
+										useGrouping: false,
+									});
+									newDay = newDay.toLocaleString("en", {
+										minimumIntegerDigits: 2,
+										useGrouping: false,
+									});
 
-								var newText = document.createTextNode(childNodes.val().data.text);
+									var newText = document.createTextNode(childNodes.val().data.text);
 
-								if (newText.length <= 120) {
-									if (childNodes.val().data.text == pText) {
-										count++;
-										pTextWasBad = true;
-										if (count > 1) placeDots = false;
-										else placeDots = true;
+									if (newText.length <= 120) {
+										if (childNodes.val().data.text == pText) {
+											count++;
+											pTextWasBad = true;
+											if (count > 1) placeDots = false;
+											else placeDots = true;
+										} else {
+											count = 0;
+											pTextWasBad = false;
+											placeDots = false;
+										}
 									} else {
-										count = 0;
-										pTextWasBad = false;
-										placeDots = false;
+										placeDots = true;
 									}
+
+									if (count < 2) {
+										document.getElementById("textSpace").innerHTML =
+											document.getElementById("textSpace").innerHTML +
+											`<b>${childNodes.val().date.year}/${newMonth}/${newDay} ${newHours}:${newMinutes} </b> `;
+
+										if (!placeDots) {
+											document.getElementById("textSpace").appendChild(newText);
+										} else {
+											document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<span>...</span>";
+										}
+
+										document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<br>";
+									}
+
+									pText = childNodes.val().data.text;
 								} else {
-									placeDots = true;
+									firebase
+										.database()
+										.ref("/text/" + childNodes.key)
+										.remove();
 								}
-
-								if (count < 2) {
-									document.getElementById("textSpace").innerHTML =
-										document.getElementById("textSpace").innerHTML +
-										`<b>${childNodes.val().date.year}/${newMonth}/${newDay} ${newHours}:${newMinutes} </b> `;
-
-									if (!placeDots) {
-										document.getElementById("textSpace").appendChild(newText);
-									} else {
-										document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<span>...</span>";
-									}
-
-									document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<br>";
-								}
-
-								pText = childNodes.val().data.text;
-							} else {
+							} catch (error) {
+								//console.log("oh no");
 								firebase
 									.database()
-									.ref("/text/" + childNodes.val().data.id)
+									.ref("/text/" + childNodes.key)
 									.remove();
 							}
 						});
@@ -330,6 +347,7 @@
 				.on("value", (snapshot) => {
 					//const data = snapshot.val();
 					//console.log(data);
+
 					setTimeout(function () {
 						updateText();
 					}, 50); // is 50ms okay?
