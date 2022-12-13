@@ -167,13 +167,22 @@
 					if (month < 10) month = `0${month}`;
 					if (day < 10) day = `0${day}`;
 
-					var textListRef = firebase.database().ref("/text");
-					var newTextRef = textListRef.push();
-					newTextRef.set({
-						text: text,
-						date: `${year}/${month}/${day}`,
-						hours: hours,
-						minutes: minutes,
+					var textRef = firebase.database().ref("/text");
+					var autoId = textRef.push().key;
+					textRef.child(autoId).set({
+						date: {
+							year: year,
+							month: month,
+							day: day,
+						},
+						time: {
+							hours: hours,
+							minutes: minutes,
+						},
+						data: {
+							text: text,
+							id: autoId,
+						},
 					});
 				}
 				document.getElementById("textInput").value = "";
@@ -196,11 +205,19 @@
 					.ref("/text")
 					.on("value", function (snap) {
 						snap.forEach(function (childNodes) {
-							let newHours = childNodes.val().hours - Math.floor(offset / 60);
+							// console.log("ID: " + childNodes.val().data.id);
+							// console.log("TEXT: " + childNodes.val().data.text);
+							// console.log("YEAR: " + childNodes.val().date.year);
+							// console.log("MONTH: " + childNodes.val().date.month);
+							// console.log("DAY: " + childNodes.val().date.day);
+							// console.log("HOURS: " + childNodes.val().time.hours);
+							// console.log("MINUTES: " + childNodes.val().time.minutes);
+
+							let newHours = childNodes.val().time.hours - Math.floor(offset / 60);
 							if (newHours < 0) newHours = newHours + 24;
 							if (newHours > 24) newHours = newHours - 24;
 
-							let newMinutes = childNodes.val().minutes;
+							let newMinutes = childNodes.val().time.minutes;
 							newMinutes = newMinutes - (offset % 60);
 							if (newMinutes < 0) {
 								newMinutes += 60;
@@ -211,18 +228,46 @@
 								newHours++;
 							}
 
+							let newMonth = parseInt(childNodes.val().date.month);
+							let newDay = parseInt(childNodes.val().date.day);
+
 							let postMinutes = newMinutes + newHours * 60;
-							//console.log(currentMinutes, postMinutes, currentMinutes - postMinutes);
-							if (currentMinutes - postMinutes < 30) {
+
+							// console.log("currentMinutes = " + currentMinutes);
+							// console.log("postMinutes = " + postMinutes);
+							// console.log(currentMinutes - postMinutes < 30);
+
+							// console.log("newDay = " + newDay);
+							// console.log("date.getDay(); = " + date.getDate());
+							// console.log(currentMinutes - postMinutes < 30);
+
+							// console.log(currentMinutes - postMinutes < 30 && newDay == date.getDate());
+							if (
+								currentMinutes - postMinutes < 30 &&
+								newDay == date.getDate() &&
+								childNodes.val().year != NaN &&
+								newMonth != NaN &&
+								newDay != NaN &&
+								newHours != NaN &&
+								newMinutes != NaN
+							) {
 								newMinutes = newMinutes.toLocaleString("en", {
 									minimumIntegerDigits: 2,
 									useGrouping: false,
 								});
+								newMonth = newMonth.toLocaleString("en", {
+									minimumIntegerDigits: 2,
+									useGrouping: false,
+								});
+								newDay = newDay.toLocaleString("en", {
+									minimumIntegerDigits: 2,
+									useGrouping: false,
+								});
 
-								var newText = document.createTextNode(childNodes.val().text);
+								var newText = document.createTextNode(childNodes.val().data.text);
 
 								if (newText.length <= 120) {
-									if (childNodes.val().text == pText) {
+									if (childNodes.val().data.text == pText) {
 										count++;
 										pTextWasBad = true;
 										if (count > 1) placeDots = false;
@@ -236,9 +281,10 @@
 									placeDots = true;
 								}
 
-								if (count < 2 && childNodes.val().date != undefined && newHours != NaN && newMinutes != NaN) {
+								if (count < 2) {
 									document.getElementById("textSpace").innerHTML =
-										document.getElementById("textSpace").innerHTML + `<b>${childNodes.val().date} ${newHours}:${newMinutes} </b> `;
+										document.getElementById("textSpace").innerHTML +
+										`<b>${childNodes.val().date.year}/${newMonth}/${newDay} ${newHours}:${newMinutes} </b> `;
 
 									if (!placeDots) {
 										document.getElementById("textSpace").appendChild(newText);
@@ -249,7 +295,12 @@
 									document.getElementById("textSpace").innerHTML = document.getElementById("textSpace").innerHTML + "<br>";
 								}
 
-								pText = childNodes.val().text;
+								pText = childNodes.val().data.text;
+							} else {
+								firebase
+									.database()
+									.ref("/text/" + childNodes.val().data.id)
+									.remove();
 							}
 						});
 					});
