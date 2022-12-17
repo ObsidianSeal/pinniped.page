@@ -290,16 +290,16 @@
 										console.log(messageArray);
 									}
 								} else {
-									// firebase
-									// 	.database()
-									// 	.ref("/text/" + childNodes.key)
-									// 	.remove();
+									firebase
+										.database()
+										.ref("/text/" + childNodes.key)
+										.remove();
 								}
 							} catch (error) {
-								// firebase
-								// 	.database()
-								// 	.ref("/text/" + childNodes.key)
-								// 	.remove();
+								firebase
+									.database()
+									.ref("/text/" + childNodes.key)
+									.remove();
 							}
 						});
 					});

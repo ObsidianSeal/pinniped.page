@@ -23,6 +23,9 @@
 		<meta property="og:title" content="The Square" />
 		<meta property="og:description" content="Watch the YouTube video first." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
 	</head>
 
 	<body>
@@ -75,6 +78,12 @@
 			<div class="break"></div>
 
 			<h4 class="title">Part 2: The Discord Bot</h4>
+
+			<div class="break"></div>
+
+			<p id="status" class="text" style="background-color: #292f36; color: #ffffee; width: fit-content; user-select: none">
+				&nbsp;BOT STATUS: <span style="color: #ffe66d">unknown</span>&nbsp;
+			</p>
 
 			<div class="break"></div>
 
@@ -137,5 +146,34 @@
 		<div class="footer" style="background: #ff6b6b"></div>
 		<div class="footer" style="background: #ffe66d"></div>
 		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script type="module">
+			const firebaseConfig = {
+				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+				authDomain: "the-pinniped-page.firebaseapp.com",
+				databaseURL: "https://the-pinniped-page.firebaseio.com",
+				projectId: "the-pinniped-page",
+				storageBucket: "the-pinniped-page.appspot.com",
+				messagingSenderId: "636989973689",
+				appId: "1:636989973689:web:6d938d9588606d803a6768",
+			};
+
+			firebase.initializeApp(firebaseConfig);
+
+			firebase.database().ref("/omega-seal").set({
+				status: "offline",
+			});
+
+			firebase
+				.database()
+				.ref("/omega-seal")
+				.on("value", (snapshot) => {
+					if (snapshot.val().status == "online") {
+						document.getElementById("status").innerHTML = `&nbsp;BOT STATUS: <span style="color: #4ecdc4">${snapshot.val().status}</span>&nbsp;`;
+					} else {
+						document.getElementById("status").innerHTML = `&nbsp;BOT STATUS: <span style="color: #ff6b6b">${snapshot.val().status}</span>&nbsp;`;
+					}
+				});
+		</script>
 	</body>
 </html>
