@@ -248,9 +248,7 @@
 	</head>
 
 	<body>
-		<button type="button" onclick="window.location.href = '../projects.html'">
-			<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>
-		</button>
+		<button type="button" id="back-button"><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i></button>
 		<button type="button" onclick="reset()">reset</button>
 
 		<hr />
@@ -318,6 +316,18 @@
 			document.getElementById("string").addEventListener("submit", function (e) {
 				e.preventDefault();
 				randomString();
+			});
+
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			var b = item.get("b");
+			var lastPage = "../projects.html";
+
+			if (b == 0) lastPage = "../projects.html";
+			if (b == 1) lastPage = "../projects+.html";
+
+			document.getElementById("back-button").addEventListener("click", function (e) {
+				window.location.href = lastPage;
 			});
 		</script>
 	</body>

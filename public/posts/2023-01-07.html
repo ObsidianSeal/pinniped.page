@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Blog Post (2023/01/07)</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="../files/menu.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/posts/2023/01/07" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2023/01/07)" />
+		<meta property="og:description" content="Why, DaVinci Resolve, why?" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5>Blog Post / January 7th, 2023</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">Why, DaVinci Resolve, why?</h3>
+
+			<div class="break"></div>
+
+			<p class="text">
+				DaVinci Resolve allows every aspect of a clip to have a keyframe animation. The zoom, position, rotation, opacity, and more can all be animated. And they can be
+				animated smoothly. By pressing the “keyframe curve edit” icon you can change the motion from linear to something more pleasing, like bezier. All you have to do
+				is click on the first keyframe and press the “ease in” button, then click on the second keyframe and press the “ease out” button. This makes it so, for example,
+				the zoom eases in and out of its movement.
+			</p>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<img
+					class="blog-image"
+					src="../images/davinci-resolve-inspector.png"
+					alt="Some things you can animate in DaVinci Resolve."
+					title="Some things you can animate in DaVinci Resolve."
+					style="width: fit-content; max-width: 100%; max-height: 323px"
+				/>
+				<img
+					class="blog-image"
+					src="../images/davinci-resolve-keyframes.png"
+					alt="DaVinci Resolve's basic keyframe curve editor."
+					title="DaVinci Resolve's basic keyframe curve editor."
+					style="width: fit-content; max-width: 100%; max-height: 323px"
+				/>
+			</div>
+
+			<div class="break"></div>
+
+			<p class="text">
+				But, FOR SOME REASON, when you try to do this for the X and Y position of a clip, pressing those buttons does not automatically make the curve a perfect bezier
+				curve, instead you have to manually move the control lines. And this menu, shown underneath the clip is tiny, so there’s no way to really see what you’re doing.
+				So there's a fair chance for you to accidentally make your animation move slightly backwards before going forwards, which looks really bad.
+			</p>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Why is animation the position different from animating other things? Why isn’t there a better curve editor (maybe one that has snap-to-grid???)? Yes, I know
+				there’s one on the Fusion page, but you shouldn’t have to go through all the extra Fusion-related effort to animate the movement of a rectangle. It’s easier to
+				animate with precision in CSS, exclusively through code, than to use this.
+			</p>
+
+			<div class="break"></div>
+
+			<p class="text">Blackmagic Design please fix this 🙏 I love DaVinci Resolve.</p>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+	</body>
+</html>

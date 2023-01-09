@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>10/10 would recommend</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/rate" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="10/10 would recommend" />
+		<meta property="og:description" content="Rate anything out of five stars." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300");
+
+			body {
+				background-color: #a6c48a;
+
+				margin: 0;
+				border: 0;
+				padding: 50px;
+
+				user-select: none;
+			}
+
+			p {
+				font-family: "Roboto Slab";
+				font-size: 20px;
+				color: #678d58;
+
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			p:first-child:hover {
+				cursor: pointer;
+			}
+
+			span {
+				background-color: #678d58;
+				opacity: 0%;
+				animation: pulse-fade 2s infinite 0.5s ease-in-out;
+			}
+
+			i:hover {
+				cursor: pointer;
+			}
+
+			.rating-container {
+				background-color: #f6e7cb;
+
+				margin: 0 auto 25px auto;
+				padding: 10px 20px 10px 20px;
+				max-width: 600px;
+
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.buttons {
+				background-color: #f6e7cb;
+
+				border-radius: 40px;
+				padding: 15px;
+				width: fit-content;
+			}
+
+			.buttons i {
+				color: #dd9787;
+				font-size: 50px;
+			}
+
+			.buttons i:hover {
+				color: #74d3ae;
+			}
+
+			@keyframes pulse-fade {
+				0% {
+					opacity: 0%;
+				}
+				50% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			::-webkit-scrollbar {
+				width: 25px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: #dd9787;
+				border: 5px solid #f6e7cb;
+				border-radius: 50px;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: #74d3ae;
+			}
+
+			::-webkit-scrollbar-track {
+				background-color: #f6e7cb;
+			}
+
+			@media all and (max-width: 700px) {
+				.rating-container {
+					display: block;
+				}
+
+				p:first-child {
+					margin-bottom: 10px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="buttons" style="display: flex; justify-content: center">
+			<div class="buttons" style="margin-right: 50px">
+				<i id="button-plus" class="fa-solid fa-circle-plus"></i>
+			</div>
+
+			<div class="buttons">
+				<i id="button-minus" class="fa-solid fa-circle-minus"></i>
+			</div>
+		</div>
+
+		<script>
+			const body = document.querySelector("body");
+			const end = document.getElementById("buttons");
+
+			var numberOfRatings = 0;
+			var editing = -1;
+			var pEditing = -1;
+			var textArray = [];
+			var pText;
+			var justEscaped = false;
+			var specialEdit = false;
+
+			const keys = {};
+			const allowedKeys = [
+				" ",
+				"!",
+				"@",
+				"#",
+				"$",
+				"%",
+				"^",
+				"&",
+				"*",
+				"(",
+				")",
+				"-",
+				"_",
+				"=",
+				"+",
+				"[",
+				"{",
+				"]",
+				"}",
+				"\\",
+				"|",
+				";",
+				":",
+				"'",
+				'"',
+				",",
+				".",
+				"/",
+				"?",
+			];
+
+			function addRating() {
+				if (numberOfRatings < 19) {
+					const container = document.createElement("div");
+					container.setAttribute("class", "rating-container");
+					container.setAttribute("id", numberOfRatings);
+					container.innerHTML = `<p id="rating-${numberOfRatings}" onclick="editTitle(${numberOfRatings})" style="color: #dd9787">click to edit title</p><p><i onclick="setRating(${
+						numberOfRatings * 5
+					})" id="s${numberOfRatings * 5}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 1})" id="s${
+						numberOfRatings * 5 + 1
+					}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 2})" id="s${
+						numberOfRatings * 5 + 2
+					}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 3})" id="s${
+						numberOfRatings * 5 + 3
+					}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 4})" id="s${
+						numberOfRatings * 5 + 4
+					}" class="fa-regular fa-star"></i></p>`;
+					body.insertBefore(container, end);
+
+					numberOfRatings++;
+				}
+			}
+
+			addRating();
+
+			function removeRating() {
+				if (numberOfRatings >= 0 && editing != numberOfRatings) {
+					numberOfRatings--;
+
+					document.getElementById(numberOfRatings).remove();
+				}
+			}
+
+			document.getElementById("button-plus").addEventListener("click", (e) => {
+				addRating();
+			});
+
+			document.getElementById("button-minus").addEventListener("click", (e) => {
+				removeRating();
+			});
+
+			function editTitle(rating) {
+				console.log(editing);
+				pEditing = editing;
+
+				if (editing != -1) {
+					if (!justEscaped) {
+						let string = textArray.join("");
+						if (string != "") {
+							document.getElementById(`rating-${pEditing}`).innerHTML = string;
+						} else {
+							document.getElementById(`rating-${pEditing}`).innerHTML = pText;
+							if (pText == "click to edit title") {
+								document.getElementById(`rating-${pEditing}`).style = "color: #dd9787";
+							}
+						}
+					}
+
+					editing = -1;
+					textArray = [];
+					justEscaped = false;
+				}
+
+				pText = document.getElementById(`rating-${rating}`).innerHTML;
+				document.getElementById(`rating-${rating}`).style = "";
+				document.getElementById(`rating-${rating}`).innerHTML = "<span>&nbsp;</span>";
+				editing = rating;
+			}
+
+			document.addEventListener("keydown", (e) => {
+				keys[e.key] = true;
+
+				if (keys["Shift"] === true && e.key === "Enter") {
+					addRating();
+					return;
+				}
+
+				if (keys["Shift"] === true && e.key === "Backspace") {
+					removeRating();
+					return;
+				}
+
+				if (editing == -1 || justEscaped) {
+					if (e.key === "f") {
+						if (document.fullscreenElement) {
+							document.exitFullscreen();
+						} else {
+							document.documentElement.requestFullscreen();
+						}
+						return;
+					}
+
+					if (e.key === "Escape") {
+						if (document.fullscreenElement) {
+							document.exitFullscreen();
+						}
+						return;
+					}
+				}
+
+				if (editing == -1) return;
+
+				if (e.key === "Enter") {
+					let string = textArray.join("");
+					if (string != "") {
+						document.getElementById(`rating-${editing}`).innerHTML = string;
+					} else {
+						document.getElementById(`rating-${editing}`).innerHTML = "click to edit title";
+						document.getElementById(`rating-${editing}`).style = "color: #dd9787";
+					}
+
+					editing = -1;
+					textArray = [];
+				}
+
+				if (e.key === "Escape") {
+					if (pText == "click to edit title") {
+						document.getElementById(`rating-${editing}`).style = "color: #dd9787";
+					}
+					document.getElementById(`rating-${editing}`).innerHTML = pText;
+					justEscaped = true;
+				}
+
+				if (e.key === "Backspace") {
+					textArray.pop();
+					let string = textArray.join("");
+					document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+				}
+
+				if ((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 48 && e.keyCode <= 57) || allowedKeys.includes(e.key)) {
+					if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
+						textArray.push(e.key);
+						let string = textArray.join("");
+						document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+					}
+				}
+			});
+
+			document.addEventListener("keyup", (e) => {
+				delete keys[e.key];
+			});
+
+			function setRating(star) {
+				for (let i = star - (star % 5); i < star - (star % 5) + 5; i++) {
+					if (i <= star) {
+						document.getElementById(`s${i}`).classList.remove("fa-regular");
+						document.getElementById(`s${i}`).classList.add("fa-solid");
+					} else {
+						document.getElementById(`s${i}`).classList.remove("fa-solid");
+						document.getElementById(`s${i}`).classList.add("fa-regular");
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

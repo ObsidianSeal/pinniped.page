@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Chess</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="../files/menu.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/chess" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Chess" />
+		<meta property="og:description" content="It's big brain time." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			i.fa-warning {
+				color: #ff6b6b;
+			}
+
+			i.fa-2x {
+				color: #4ecdc47f;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h3 class="title">Chess</h3>
+
+			<div class="break"></div>
+
+			<p class="text"><i class="fa-solid fa-download"></i> <a class="link" href="../download.html?x=Chess.jar" target="_blank">Download</a></p>
+			<p class="text">
+				<i class="fa-solid fa-download"></i>
+				<a class="link" href="https://www.oracle.com/ca-en/java/technologies/downloads/#jdk19-windows" target="_blank">Java</a>
+			</p>
+
+			<div class="break"></div>
+
+			<img
+				class="big-picture"
+				src="../images/chess.png"
+				alt="The chess board at the start of the game."
+				title="The chess board at the start of the game."
+				style="max-width: 604px"
+			/>
+
+			<div class="break"></div>
+
+			<h4 class="title">Gameplay Notes</h4>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>Red = light pieces (goes first)</li>
+				<li>Blue = dark pieces</li>
+				<li>Click and drag to move pieces</li>
+				<li>If a move is illegal, the piece is put back</li>
+				<li>For promotion: the square is divided in four, click on the piece you want</li>
+				<li>For castling: drag the king onto the target rook</li>
+				<li>When the game is over (checkmate or draw), hold space to see the board</li>
+				<li>Then, press escape or enter to quit</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<img class="big-picture" src="../images/chess-promote.png" alt="Promotion" title="Promotion" style="max-width: 302px" />
+				<img
+					class="big-picture"
+					src="../images/chess-castle.png"
+					alt="After the red king castled queenside."
+					title="After the red king castled queenside."
+					style="max-width: 302px"
+				/>
+				<img class="big-picture" src="../images/chess-win.png" alt="Red wins!" title="Red wins!" style="max-width: 302px" />
+			</div>
+
+			<div class="break"></div>
+
+			<h4 class="title">Other Notes</h4>
+
+			<div class="break"></div>
+
+			<ul>
+				<li><i class="fa-solid fa-warning"></i> <b>You might need to update your Java to run this program, see the link at the top of the page</b></li>
+				<li>The window's title shows the turn</li>
+				<li>The title also shows the values of the pieces captured</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<h4 class="title">Attribution</h4>
+
+			<div class="break"></div>
+
+			<p>
+				<i class="fa-solid fa-chess-pawn fa-2x"></i>&nbsp; <i class="fa-solid fa-chess-rook fa-2x"></i>&nbsp; <i class="fa-solid fa-chess-knight fa-2x"></i>&nbsp;
+				<i class="fa-solid fa-chess-bishop fa-2x"></i>&nbsp; <i class="fa-solid fa-chess-queen fa-2x"></i>&nbsp; <i class="fa-solid fa-chess-king fa-2x"></i> chess
+				piece icons • <a class="link-2" href="https://fontawesome.com/" target="_blank">Font Awesome</a>
+			</p>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+	</body>
+</html>

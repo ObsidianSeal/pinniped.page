@@ -370,6 +370,12 @@ span.blog-archive {
 	margin-right: calc(50px - 15px);
 }
 
+.blog-image-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
