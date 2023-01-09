@@ -202,13 +202,14 @@
 					body.insertBefore(container, end);
 
 					numberOfRatings++;
+					console.log(numberOfRatings);
 				}
 			}
 
 			addRating();
 
 			function removeRating() {
-				if (numberOfRatings >= 0 && editing != numberOfRatings) {
+				if (numberOfRatings >= 0 && editing != numberOfRatings - 1) {
 					numberOfRatings--;
 
 					document.getElementById(numberOfRatings).remove();
@@ -224,7 +225,6 @@
 			});
 
 			function editTitle(rating) {
-				console.log(editing);
 				pEditing = editing;
 
 				if (editing != -1) {
