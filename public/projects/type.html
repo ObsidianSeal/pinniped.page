@@ -23,8 +23,12 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 	</head>
 
-	<body>
+	<body style="padding: 20px">
 		<h3 id="text"></h3>
+
+		<input style="margin: 20px 0 20px 0" />
+
+		<h3 id="keyCode"></h3>
 
 		<script>
 			let textArray;
@@ -48,6 +52,10 @@
 				"Meta",
 				"<",
 				">",
+				"Home",
+				"End",
+				"PageUp",
+				"PageDown",
 			];
 
 			document.addEventListener("keydown", (e) => {
