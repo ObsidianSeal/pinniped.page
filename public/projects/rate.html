@@ -124,10 +124,36 @@
 					margin-bottom: 10px;
 				}
 			}
+
+			form {
+				position: fixed;
+				top: 5px;
+				user-select: none;
+			}
+
+			input {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				outline: none;
+				user-select: none;
+				background-color: transparent;
+				caret-color: transparent;
+				color: transparent;
+			}
+
+			input:hover {
+				cursor: default;
+			}
 		</style>
 	</head>
 
 	<body>
+		<form name="inputForm" id="inputForm">
+			<input name="inputBox" autocomplete="off" spellcheck="false" />
+		</form>
+
 		<div id="buttons" style="display: flex; justify-content: center">
 			<div class="buttons" style="margin-right: 50px">
 				<i id="button-plus" class="fa-solid fa-circle-plus"></i>
@@ -145,45 +171,47 @@
 			var numberOfRatings = 0;
 			var editing = -1;
 			var pEditing = -1;
-			var textArray = [];
+			// var textArray = [];
 			var pText;
 			var justEscaped = false;
 			var specialEdit = false;
 
+			var string;
+
 			const keys = {};
-			const allowedKeys = [
-				" ",
-				"`",
-				"~",
-				"!",
-				"@",
-				"#",
-				"$",
-				"%",
-				"^",
-				"&",
-				"*",
-				"(",
-				")",
-				"-",
-				"_",
-				"=",
-				"+",
-				"[",
-				"{",
-				"]",
-				"}",
-				"\\",
-				"|",
-				";",
-				":",
-				"'",
-				'"',
-				",",
-				".",
-				"/",
-				"?",
-			];
+			// const allowedKeys = [
+			// 	" ",
+			// 	"`",
+			// 	"~",
+			// 	"!",
+			// 	"@",
+			// 	"#",
+			// 	"$",
+			// 	"%",
+			// 	"^",
+			// 	"&",
+			// 	"*",
+			// 	"(",
+			// 	")",
+			// 	"-",
+			// 	"_",
+			// 	"=",
+			// 	"+",
+			// 	"[",
+			// 	"{",
+			// 	"]",
+			// 	"}",
+			// 	"\\",
+			// 	"|",
+			// 	";",
+			// 	":",
+			// 	"'",
+			// 	'"',
+			// 	",",
+			// 	".",
+			// 	"/",
+			// 	"?",
+			// ];
 
 			function addRating() {
 				if (numberOfRatings < 19) {
@@ -228,9 +256,12 @@
 			function editTitle(rating) {
 				pEditing = editing;
 
+				//console.log(string, pText, editing, justEscaped);
+
 				if (editing != -1) {
 					if (!justEscaped) {
-						let string = textArray.join("");
+						//let string = textArray.join("");
+						string = document.inputForm.inputBox.value;
 						if (string != "") {
 							document.getElementById(`rating-${pEditing}`).innerHTML = string;
 						} else {
@@ -242,7 +273,7 @@
 					}
 
 					editing = -1;
-					textArray = [];
+					//textArray = [];
 					justEscaped = false;
 				}
 
@@ -250,6 +281,9 @@
 				document.getElementById(`rating-${rating}`).style = "";
 				document.getElementById(`rating-${rating}`).innerHTML = "<span>&nbsp;</span>";
 				editing = rating;
+
+				document.inputForm.inputBox.value = "";
+				document.inputForm.inputBox.focus();
 			}
 
 			document.addEventListener("keydown", (e) => {
@@ -286,7 +320,7 @@
 				if (editing == -1) return;
 
 				if (e.key === "Enter") {
-					let string = textArray.join("");
+					//let string = textArray.join("");
 					if (string != "") {
 						document.getElementById(`rating-${editing}`).innerHTML = string;
 					} else {
@@ -295,7 +329,7 @@
 					}
 
 					editing = -1;
-					textArray = [];
+					//textArray = [];
 				}
 
 				if (e.key === "Escape") {
@@ -304,20 +338,37 @@
 					}
 					document.getElementById(`rating-${editing}`).innerHTML = pText;
 					justEscaped = true;
+					document.activeElement.blur();
 				}
 
 				if (e.key === "Backspace") {
-					textArray.pop();
-					let string = textArray.join("");
+					// textArray.pop();
+					// let string = textArray.join("");
 					document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
 				}
 
-				if ((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 48 && e.keyCode <= 57) || allowedKeys.includes(e.key)) {
-					if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
-						textArray.push(e.key);
-						let string = textArray.join("");
-						document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
-					}
+				// if ((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 48 && e.keyCode <= 57) || allowedKeys.includes(e.key)) {
+				// 	if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
+				// 		textArray.push(e.key);
+				// 		let string = textArray.join("");
+				// 		document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+				// 	}
+				// }
+			});
+
+			document.getElementById("inputForm").addEventListener("submit", (e) => {
+				e.preventDefault();
+			});
+
+			document.inputForm.inputBox.addEventListener("input", (e) => {
+				//console.log("input");
+				if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
+					// textArray.push(e.key);
+					// let string = textArray.join("");
+					string = document.inputForm.inputBox.value;
+					document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+				} else {
+					document.inputForm.inputBox.value = string;
 				}
 			});
 
@@ -336,6 +387,10 @@
 					}
 				}
 			}
+
+			document.addEventListener("click", (e) => {
+				document.inputForm.inputBox.focus();
+			});
 		</script>
 	</body>
 </html>

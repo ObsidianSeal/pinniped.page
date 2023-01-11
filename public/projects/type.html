@@ -8,7 +8,7 @@
 
 		<link rel="icon" href="../images/icon.png" />
 
-		<meta name="theme-color" content="#ff6b6b" />
+		<meta name="theme-color" content="#4ecdc4" />
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
@@ -27,10 +27,18 @@
 		<h3 id="text"></h3>
 
 		<form name="input" id="input">
-			<input name="text" style="margin: 20px 0 20px 0" />
+			<input name="textBox" id="textBox" style="margin: 20px 0 20px 0" placeholder="useless input" />
 		</form>
 
 		<h3 id="keyCode"></h3>
+
+		<hr style="border: 0; border-top: 2px solid #4ecdc4" />
+
+		<form name="input2" id="input2">
+			<input name="textBox2" id="textBox2" style="margin: 20px 0 20px 0" placeholder="text is duplicated" />
+		</form>
+
+		<h4 id="text2"></h4>
 
 		<script>
 			let textArray;
@@ -60,6 +68,8 @@
 				"PageDown",
 			];
 
+			document.getElementById("textBox").focus();
+
 			document.addEventListener("keydown", (e) => {
 				keys[e.key] = true;
 				document.getElementById("keyCode").innerHTML = e.keyCode;
@@ -86,12 +96,23 @@
 
 			document.addEventListener("keyup", (e) => {
 				delete keys[e.key];
-				document.input.text.value = "";
-				document.getElementById("keyCode").innerHTML = document.getElementById("keyCode").innerHTML + "<br>" + e.keyCode;
+				document.input.textBox.value = "";
+				document.getElementById("keyCode").innerHTML = document.getElementById("keyCode").innerHTML + " " + e.keyCode;
 			});
 
 			document.getElementById("input").addEventListener("submit", (e) => {
 				e.preventDefault();
+			});
+
+			// ---
+
+			document.getElementById("input2").addEventListener("submit", (e) => {
+				e.preventDefault();
+			});
+
+			document.getElementById("textBox2").addEventListener("input", (e) => {
+				console.log(document.input2.textBox2.value);
+				document.getElementById("text2").innerHTML = document.input2.textBox2.value;
 			});
 		</script>
 	</body>
