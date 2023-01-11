@@ -26,7 +26,9 @@
 	<body style="padding: 20px">
 		<h3 id="text"></h3>
 
-		<input style="margin: 20px 0 20px 0" />
+		<form name="input" id="input">
+			<input name="text" style="margin: 20px 0 20px 0" />
+		</form>
 
 		<h3 id="keyCode"></h3>
 
@@ -60,6 +62,7 @@
 
 			document.addEventListener("keydown", (e) => {
 				keys[e.key] = true;
+				document.getElementById("keyCode").innerHTML = e.keyCode;
 
 				if (!specialKeys.includes(e.key)) {
 					text.innerHTML = text.innerHTML + e.key;
@@ -83,6 +86,12 @@
 
 			document.addEventListener("keyup", (e) => {
 				delete keys[e.key];
+				document.input.text.value = "";
+				document.getElementById("keyCode").innerHTML = document.getElementById("keyCode").innerHTML + "<br>" + e.keyCode;
+			});
+
+			document.getElementById("input").addEventListener("submit", (e) => {
+				e.preventDefault();
 			});
 		</script>
 	</body>
