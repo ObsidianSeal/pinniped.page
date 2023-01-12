@@ -138,6 +138,7 @@
 
 				outline: none;
 				user-select: none;
+
 				background-color: transparent;
 				caret-color: transparent;
 				color: transparent;
@@ -151,7 +152,7 @@
 
 	<body>
 		<form name="inputForm" id="inputForm">
-			<input name="inputBox" autocomplete="off" spellcheck="false" />
+			<input name="inputBox" id="inputBox" autocomplete="off" spellcheck="false" />
 		</form>
 
 		<div id="buttons" style="display: flex; justify-content: center">
@@ -176,7 +177,9 @@
 			var justEscaped = false;
 			var specialEdit = false;
 
-			var string;
+			var string = "";
+			var pString = "";
+			var lastGoodString;
 
 			const keys = {};
 			// const allowedKeys = [
@@ -255,7 +258,8 @@
 
 			function editTitle(rating) {
 				pEditing = editing;
-
+				//console.log(rating, pEditing);
+				if (rating == pEditing) return;
 				//console.log(string, pText, editing, justEscaped);
 
 				if (editing != -1) {
@@ -281,6 +285,9 @@
 				document.getElementById(`rating-${rating}`).style = "";
 				document.getElementById(`rating-${rating}`).innerHTML = "<span>&nbsp;</span>";
 				editing = rating;
+
+				// console.log(editing * (46 + 25) + 50);
+				// document.getElementById("inputForm").style = `top: ${editing * (46 + 25) + 50}px`;
 
 				document.inputForm.inputBox.value = "";
 				document.inputForm.inputBox.focus();
@@ -321,6 +328,9 @@
 
 				if (e.key === "Enter") {
 					//let string = textArray.join("");
+
+					string = document.inputForm.inputBox.value;
+					//console.log(string);
 					if (string != "") {
 						document.getElementById(`rating-${editing}`).innerHTML = string;
 					} else {
@@ -330,6 +340,7 @@
 
 					editing = -1;
 					//textArray = [];
+					document.activeElement.blur();
 				}
 
 				if (e.key === "Escape") {
@@ -341,11 +352,12 @@
 					document.activeElement.blur();
 				}
 
-				if (e.key === "Backspace") {
-					// textArray.pop();
-					// let string = textArray.join("");
-					document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
-				}
+				// if (e.key === "Backspace") {
+				// 	// textArray.pop();
+				// 	// let string = textArray.join("");
+				// 	//document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+				// 	//document.inputForm.inputBox.value = string;
+				// }
 
 				// if ((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 48 && e.keyCode <= 57) || allowedKeys.includes(e.key)) {
 				// 	if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
@@ -361,14 +373,29 @@
 			});
 
 			document.inputForm.inputBox.addEventListener("input", (e) => {
-				//console.log("input");
-				if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
-					// textArray.push(e.key);
-					// let string = textArray.join("");
+				if (editing != -1) {
+					//console.log("input");
 					string = document.inputForm.inputBox.value;
-					document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
-				} else {
-					document.inputForm.inputBox.value = string;
+					//console.log(pString, pString.length, string, string.length);
+
+					if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
+						// textArray.push(e.key);
+						// let string = textArray.join("");
+
+						document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+						lastGoodString = string;
+					} else {
+						console.log(pString.length > string.length);
+						if (pString.length > string.length) {
+							document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+							//console.log("less than");
+						} else {
+							document.inputForm.inputBox.value = lastGoodString;
+							//console.log("greater than");
+						}
+					}
+
+					pString = string;
 				}
 			});
 
@@ -389,8 +416,31 @@
 			}
 
 			document.addEventListener("click", (e) => {
-				document.inputForm.inputBox.focus();
+				//console.log("click event", e.target, editing, pEditing);
+				if (editing != -1 && !justEscaped) {
+					//console.log("focus allowed");
+					document.inputForm.inputBox.focus();
+				}
+				//console.log(e.y);
+				//document.getElementById("inputForm").style = `top: ${e.y - 80}px`;
 			});
+
+			// --- import and export shared ratings
+
+			function importRatings() {
+				const query = window.location.search;
+				const item = new URLSearchParams(query);
+
+				item.forEach((data) => {
+					console.log(data);
+				});
+			}
+
+			importRatings();
+
+			function shareRatings() {
+				console.log(false);
+			}
 		</script>
 	</body>
 </html>

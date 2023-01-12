@@ -27,7 +27,7 @@
 		<h3 id="text"></h3>
 
 		<form name="input" id="input">
-			<input name="textBox" id="textBox" style="margin: 20px 0 20px 0" placeholder="useless input" />
+			<input name="textBox" id="textBox" style="margin: 20px 0 20px 0" placeholder="input for mobile devices" />
 		</form>
 
 		<h3 id="keyCode"></h3>
@@ -35,7 +35,7 @@
 		<hr style="border: 0; border-top: 2px solid #4ecdc4" />
 
 		<form name="input2" id="input2">
-			<input name="textBox2" id="textBox2" style="margin: 20px 0 20px 0" placeholder="text is duplicated" />
+			<input name="textBox2" id="textBox2" style="margin: 20px 0 20px 0" placeholder="this text is duplicated" />
 		</form>
 
 		<h4 id="text2"></h4>
@@ -68,7 +68,7 @@
 				"PageDown",
 			];
 
-			document.getElementById("textBox").focus();
+			//document.getElementById("textBox").focus();
 
 			document.addEventListener("keydown", (e) => {
 				keys[e.key] = true;
