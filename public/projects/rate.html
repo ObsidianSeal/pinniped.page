@@ -169,6 +169,8 @@
 			const body = document.querySelector("body");
 			const end = document.getElementById("buttons");
 
+			var stars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 			var numberOfRatings = 0;
 			var editing = -1;
 			var pEditing = -1;
@@ -180,6 +182,8 @@
 			var string = "";
 			var pString = "";
 			var lastGoodString;
+
+			var atLeastOneRating = false;
 
 			const keys = {};
 			// const allowedKeys = [
@@ -216,12 +220,19 @@
 			// 	"?",
 			// ];
 
-			function addRating() {
+			function addRating(title) {
+				var colour = "678d58";
+
+				if (title == "" || title == undefined) {
+					title = "click to edit title";
+					colour = "dd9787";
+				}
+
 				if (numberOfRatings < 19) {
 					const container = document.createElement("div");
 					container.setAttribute("class", "rating-container");
 					container.setAttribute("id", numberOfRatings);
-					container.innerHTML = `<p id="rating-${numberOfRatings}" onclick="editTitle(${numberOfRatings})" style="color: #dd9787">click to edit title</p><p><i onclick="setRating(${
+					container.innerHTML = `<p id="rating-${numberOfRatings}" onclick="editTitle(${numberOfRatings})" style="color: #${colour}">${title}</p><p><i onclick="setRating(${
 						numberOfRatings * 5
 					})" id="s${numberOfRatings * 5}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 1})" id="s${
 						numberOfRatings * 5 + 1
@@ -237,8 +248,6 @@
 					numberOfRatings++;
 				}
 			}
-
-			addRating();
 
 			function removeRating() {
 				if (numberOfRatings >= 0 && editing != numberOfRatings - 1) {
@@ -321,6 +330,10 @@
 							document.exitFullscreen();
 						}
 						return;
+					}
+
+					if (e.key === "s") {
+						shareRatings();
 					}
 				}
 
@@ -413,6 +426,9 @@
 						document.getElementById(`s${i}`).classList.add("fa-regular");
 					}
 				}
+				//console.log(parseInt(star / 5));
+				stars[parseInt(star / 5)] = (star % 5) + 1;
+				//console.log(stars);
 			}
 
 			document.addEventListener("click", (e) => {
@@ -431,15 +447,57 @@
 				const query = window.location.search;
 				const item = new URLSearchParams(query);
 
-				item.forEach((data) => {
-					console.log(data);
-				});
+				for (let i = 0; i < 20; i++) {
+					const data = item.get(i);
+
+					if (data != null && data != "") {
+						const rating = data.substr(0, 1);
+						const title = data.substr(1);
+						//console.log(rating, i * 5 + parseInt(rating - 1), title);
+
+						if (rating >= 0 && rating <= 5) {
+							atLeastOneRating = true;
+							addRating(title);
+							if (rating != 0) {
+								setRating(i * 5 + parseInt(rating - 1));
+							}
+						}
+					}
+				}
+
+				if (!atLeastOneRating) {
+					addRating();
+				}
 			}
 
 			importRatings();
 
 			function shareRatings() {
-				console.log(false);
+				const ratings = [];
+
+				for (let i = 0; i < numberOfRatings; i++) {
+					var title = document.getElementById(`rating-${i}`).innerHTML;
+					// console.log(title);
+					// title = title.replace("?", "%3F");
+					// title = title.replace("&", "%26");
+					// title = title.replace("=", "%3");
+					// console.log(title);
+					ratings.push(`${i}=${stars[i]}${encodeURIComponent(title)}`);
+				}
+				//console.log(ratings);
+
+				var urlString = "?";
+
+				for (let i = 0; i < ratings.length; i++) {
+					urlString = urlString + ratings[i];
+					if (i != ratings.length - 1) {
+						urlString = urlString + "&";
+					}
+				}
+				//console.log(encodeURI(urlString));
+				navigator.clipboard.writeText(`https://pinniped.page/projects/rate${urlString}`);
+
+				// does not work with ratings of 0 !!!
 			}
 		</script>
 	</body>
