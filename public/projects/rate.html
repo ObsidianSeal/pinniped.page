@@ -47,6 +47,14 @@
 				cursor: pointer;
 			}
 
+			p:only-child {
+				color: #f6e7cb;
+			}
+
+			p:only-child:hover {
+				cursor: default;
+			}
+
 			span {
 				background-color: #678d58;
 				opacity: 0%;
@@ -147,6 +155,10 @@
 			input:hover {
 				cursor: default;
 			}
+
+			#copyMessage {
+				border: 3px solid #f6e7cb;
+			}
 		</style>
 	</head>
 
@@ -156,13 +168,21 @@
 		</form>
 
 		<div id="buttons" style="display: flex; justify-content: center">
-			<div class="buttons" style="margin-right: 50px">
+			<div class="buttons" style="margin-right: 30px">
 				<i id="button-plus" class="fa-solid fa-circle-plus"></i>
 			</div>
 
-			<div class="buttons">
+			<div class="buttons" style="margin-right: 30px">
 				<i id="button-minus" class="fa-solid fa-circle-minus"></i>
 			</div>
+
+			<div class="buttons">
+				<i id="button-done" class="fa-solid fa-circle-check" onclick="shareRatings()"></i>
+			</div>
+		</div>
+
+		<div id="copyMessage" style="display: none">
+			<p>link copied to clipboard</p>
 		</div>
 
 		<script>
@@ -497,7 +517,10 @@
 				//console.log(encodeURI(urlString));
 				navigator.clipboard.writeText(`https://pinniped.page/projects/rate${urlString}`);
 
-				// does not work with ratings of 0 !!!
+				document.getElementById("copyMessage").style = "position: fixed; top: 30px; background-color: #DD9787; color: #F6E7CB; padding: 5px";
+				setTimeout(function () {
+					document.getElementById("copyMessage").style = "display: none";
+				}, 2000);
 			}
 		</script>
 	</body>
