@@ -292,6 +292,7 @@
 			});
 
 			function editTitle(rating) {
+				lastGoodString = "";
 				pEditing = editing;
 				//console.log(rating, pEditing);
 				if (rating == pEditing) return;
@@ -420,11 +421,14 @@
 					if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
 						// textArray.push(e.key);
 						// let string = textArray.join("");
-
-						document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
-						lastGoodString = string;
+						if (string.indexOf("<") == -1 && string.indexOf(">") == -1) {
+							document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
+							lastGoodString = string;
+						} else {
+							document.inputForm.inputBox.value = lastGoodString;
+						}
 					} else {
-						console.log(pString.length > string.length);
+						//console.log(pString.length > string.length);
 						if (pString.length > string.length) {
 							document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
 							//console.log("less than");
