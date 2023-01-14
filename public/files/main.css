@@ -171,6 +171,18 @@ ul {
 	margin-bottom: 20px;
 }
 
+.navbar-item-mobile-2:nth-child(2) a:hover {
+	color: #4ecdc4;
+}
+
+.navbar-item-mobile-2:nth-child(3) a:hover {
+	color: #ff6b6b;
+}
+
+.navbar-item-mobile-2:nth-child(4) a:hover {
+	color: #ffe66d;
+}
+
 .footer {
 	width: 100%;
 	height: 20px;
