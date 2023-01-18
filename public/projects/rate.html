@@ -254,7 +254,7 @@
 					colour = "dd9787";
 				}
 
-				if (numberOfRatings < 19) {
+				if (numberOfRatings < 20) {
 					const container = document.createElement("div");
 					container.setAttribute("class", "rating-container");
 					container.setAttribute("id", numberOfRatings);
@@ -505,6 +505,7 @@
 			}
 
 			importRatings();
+			document.querySelector("span").remove();
 
 			function shareRatings() {
 				const ratings = [];
