@@ -33,33 +33,36 @@ a {
 }
 
 a.link {
+	transition: all 0.5s;
 	text-decoration: underline;
 	text-decoration-color: #4ecdc47f;
 }
 
 a.link:hover {
 	background-color: #4ecdc47f;
-	text-decoration: none;
+	text-decoration-color: transparent;
 }
 
 a.link-2 {
+	transition: all 0.5s;
 	text-decoration: underline;
 	text-decoration-color: #ff6b6b7f;
 }
 
 a.link-2:hover {
 	background-color: #ff6b6b7f;
-	text-decoration: none;
+	text-decoration-color: transparent;
 }
 
 a.link-3 {
+	transition: all 0.5s;
 	text-decoration: underline;
 	text-decoration-color: #ffe66d7f;
 }
 
 a.link-3:hover {
 	background-color: #ffe66d7f;
-	text-decoration: none;
+	text-decoration-color: transparent;
 }
 
 a.box-link:hover {
