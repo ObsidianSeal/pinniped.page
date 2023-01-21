@@ -10,9 +10,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const illegalCharacters = [".", "#", "$", "[", "]", "/", "\\"];
 var postName = document.querySelector("h3").innerHTML;
-illegalCharacters.forEach((character) => (postName = postName.replace(character, "_")));
+postName = postName.replace(/[.#$\[\]\/\\]+/, "_");
 var alreadyViewed = false;
 
 const postViewsRef = firebase.database().ref("/post-views/" + postName);
