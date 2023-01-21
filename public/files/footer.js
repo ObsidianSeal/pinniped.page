@@ -1,5 +1,13 @@
+const content = document.querySelector(".content");
+const contentBottom = content.getBoundingClientRect().bottom;
 const screenHeight = window.innerHeight;
-const contentHeight = document.querySelector(".content").clientHeight + 120;
 
-console.log(screenHeight, contentHeight);
-console.log(screenHeight - 80 > contentHeight);
+console.log(screenHeight, contentBottom);
+console.log(screenHeight - 80 > contentBottom);
+
+if (screenHeight - 80 > contentBottom) {
+	const space = document.createElement("div");
+	const height = screenHeight - 80 - contentBottom;
+	space.setAttribute("style", `height: ${height}px`);
+	content.appendChild(space);
+}
