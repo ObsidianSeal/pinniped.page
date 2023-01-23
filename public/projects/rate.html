@@ -211,6 +211,8 @@
 
 			var atLeastOneRating = false;
 
+			var hiddenButtons = false;
+
 			const keys = {};
 			// const allowedKeys = [
 			// 	" ",
@@ -366,6 +368,12 @@
 					if (e.key === "i" || e.key === "?") {
 						window.open("../posts/2023-01-14.html", "_blank").focus();
 					}
+
+					if (e.key === "h") {
+						if (hiddenButtons) document.getElementById("buttons").style = "display: flex";
+						else document.getElementById("buttons").style = "display: none";
+						hiddenButtons = !hiddenButtons;
+					}
 				}
 
 				if (editing == -1) return;
@@ -505,7 +513,7 @@
 			}
 
 			importRatings();
-			document.querySelector("span").remove();
+			document.querySelectorAll("span").forEach((element) => element.remove());
 
 			function shareRatings() {
 				const ratings = [];
