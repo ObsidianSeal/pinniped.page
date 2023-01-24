@@ -76,14 +76,11 @@
 			</div>
 		</div>
 
-		<!-- css will be moved to main.css -->
-		<div style="position: fixed; bottom: 80px; left: 40px; height: 50px; background-color: #292f36; padding: 0 10px 0 20px; display: flex; align-items: center">
-			<p class="invert">
-				<i class="fa-solid fa-warning" style="color: #ff6b6b; margin-right: 20px"></i>some things may not work as expected (database rule changes are being tested)<i
-					class="fa-solid fa-times"
-					style="color: #ffffee7f; margin-left: 20px; font-size: 18px; translate: 0 -12px"
-				></i>
-				<!-- is that the right colour? -->
+		<div class="notice" id="notice">
+			<p>
+				<i class="fa-solid fa-warning" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i
+				><span class="invert" id="notice-text">some things may not work as expected (database rule changes are being tested)</span
+				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i>
 			</p>
 		</div>
 
@@ -93,6 +90,8 @@
 		<div class="footer" style="background: #4ecdc4"></div>
 
 		<script>
+			// ------- random subtitle -------
+
 			const subtitles = [
 				"Obsidian_Seal's Website",
 				"What are you doing here?",
@@ -123,11 +122,38 @@
 				"You're pretty cool.",
 				"MMXX.XI.XXVIII IV:IV",
 				"transition: all 0.5s;",
+				"Blog posts count views...",
+				"uhhhh",
+				"New messages in the bottom left!",
 			];
 
 			let x = Math.floor(Math.random() * subtitles.length);
-
 			document.getElementById("subtitle").innerHTML = subtitles[x];
+
+			// ------- hide notice -------
+
+			var noticeHidden = false;
+			const screenWidth = window.innerWidth;
+
+			if (screenWidth < 1100) document.getElementById("notice-text").innerHTML = "database rule changes are being tested, expect problems";
+			if (screenWidth < 850) document.getElementById("notice-text").innerHTML = "new database rules, expect problems";
+			if (screenWidth < 650) document.getElementById("notice-text").innerHTML = "database problems?";
+			if (screenWidth < 450) document.getElementById("notice-text").innerHTML = "db problems?";
+
+			function hideNotice() {
+				if (!noticeHidden) {
+					document.getElementById("notice-text").style = "display: none";
+					document.getElementById("notice-icon").style = "color: #ff6b6b";
+					document.getElementById("notice-x").classList.remove("fa-xmark");
+					document.getElementById("notice-x").classList.add("fa-angle-right");
+				} else {
+					document.getElementById("notice-text").style = "display: inline-block";
+					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px";
+					document.getElementById("notice-x").classList.remove("fa-angle-right");
+					document.getElementById("notice-x").classList.add("fa-xmark");
+				}
+				noticeHidden = !noticeHidden;
+			}
 		</script>
 	</body>
 </html>

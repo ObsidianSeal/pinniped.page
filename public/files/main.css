@@ -416,6 +416,34 @@ ul {
 	gap: 20px;
 }
 
+.notice {
+	display: flex;
+	align-items: center;
+
+	position: fixed;
+	bottom: 80px;
+	left: 40px;
+
+	padding: 0 10px 0 20px;
+	min-height: 50px;
+	height: fit-content;
+	max-width: calc(100vw - 110px);
+	background-color: #292f36;
+}
+
+.notice-x {
+	color: #ffffee7f;
+	margin-left: 20px;
+	font-size: 18px;
+	translate: 0 -12px;
+	transition: all 0.5s;
+}
+
+.notice-x:hover {
+	color: #ffffee;
+	cursor: pointer;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -597,6 +625,10 @@ ul {
 	ol,
 	ul {
 		font-size: 18px;
+	}
+
+	.notice-x {
+		translate: 0 -10px;
 	}
 
 	.blog-archive i.fa-circle {
