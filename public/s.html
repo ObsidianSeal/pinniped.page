@@ -135,6 +135,12 @@
 			} else {
 				document.getElementById("message").innerHTML = "???";
 			}
+
+			// --- footer position ---
+
+			const screenHeight = window.innerHeight;
+			const height = screenHeight - 140;
+			document.querySelector("div.centre").style = `height: ${height}px`;
 		</script>
 	</body>
 </html>

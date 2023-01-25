@@ -46,7 +46,7 @@
 		</style>
 	</head>
 
-	<body style="height: 100vh">
+	<body>
 		<div class="navbar">
 			<a class="invert navbar-item" href="index.html"><p>Home</p></a>
 			<a class="invert navbar-item item1" href="projects.html"><p>Projects</p></a>
@@ -154,6 +154,12 @@
 				}
 				noticeHidden = !noticeHidden;
 			}
+
+			// ------- footer position -------
+
+			const screenHeight = window.innerHeight;
+			const height = screenHeight - 140;
+			document.querySelector("div.centre").style = `height: ${height}px`;
 		</script>
 	</body>
 </html>
