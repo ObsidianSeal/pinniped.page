@@ -235,11 +235,11 @@
 					i = 0;
 					document.querySelectorAll("span").forEach((element) => {
 						if (views[i] == 1) {
-							element.innerHTML = `${views[i]} view`;
+							element.innerHTML = `${views[i].toLocaleString()} view`;
 						} else if (views[i] == undefined) {
 							element.innerHTML = `0 views`;
 						} else {
-							element.innerHTML = `${views[i]} views`;
+							element.innerHTML = `${views[i].toLocaleString()} views`;
 						}
 						i++;
 					});

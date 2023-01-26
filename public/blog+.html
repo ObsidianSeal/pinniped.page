@@ -171,11 +171,11 @@
 					i = 0;
 					document.querySelectorAll("span:last-child").forEach((element) => {
 						if (views[i] == 1) {
-							element.innerHTML = `&nbsp;${views[i]} view`;
+							element.innerHTML = `&nbsp;${views[i].toLocaleString()} view`;
 						} else if (views[i] == undefined) {
 							element.innerHTML = `&nbsp;0 views`;
 						} else {
-							element.innerHTML = `&nbsp;${views[i]} views`;
+							element.innerHTML = `&nbsp;${views[i].toLocaleString()} views`;
 						}
 						i++;
 					});

@@ -79,7 +79,7 @@
 		<div class="notice" id="notice">
 			<p>
 				<i class="fa-solid fa-warning" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i
-				><span class="invert" id="notice-text">some things may not work as expected (database rule changes are being tested)</span
+				><span class="invert" id="notice-text"><!--some things may not work as expected (database rule changes are being tested)-->oops I reset the view counters</span
 				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i>
 			</p>
 		</div>
@@ -135,10 +135,13 @@
 			var noticeHidden = false;
 			const screenWidth = window.innerWidth;
 
-			if (screenWidth < 1100) document.getElementById("notice-text").innerHTML = "database rule changes are being tested, expect problems";
-			if (screenWidth < 850) document.getElementById("notice-text").innerHTML = "new database rules, expect problems";
-			if (screenWidth < 650) document.getElementById("notice-text").innerHTML = "database problems?";
-			if (screenWidth < 450) document.getElementById("notice-text").innerHTML = "db problems?";
+			// if (screenWidth < 1100) document.getElementById("notice-text").innerHTML = "database rule changes are being tested, expect problems";
+			// if (screenWidth < 850) document.getElementById("notice-text").innerHTML = "new database rules, expect problems";
+			// if (screenWidth < 650) document.getElementById("notice-text").innerHTML = "database problems?";
+			// if (screenWidth < 450) document.getElementById("notice-text").innerHTML = "db problems?";
+
+			if (screenWidth < 550) document.getElementById("notice-text").innerHTML = "oops, views reset";
+			if (screenWidth < 350) document.getElementById("notice-text").innerHTML = "views reset :(";
 
 			function hideNotice() {
 				if (!noticeHidden) {
@@ -160,6 +163,8 @@
 			const screenHeight = window.innerHeight;
 			const height = screenHeight - 140;
 			document.querySelector("div.centre").style = `height: ${height}px`;
+
+			if (screenHeight < 450) document.getElementById("subtitle").remove();
 		</script>
 	</body>
 </html>
