@@ -137,6 +137,13 @@ ul {
 	margin-bottom: 0;
 }
 
+hr {
+	margin: 20px 0 20px 0;
+	border: 0;
+	border-top: 2px solid #292f367f;
+	max-width: 1200px;
+}
+
 .invert {
 	color: #ffffee;
 }

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Chess — FEN preview</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../../images/icon.png" />
+
+		<script src="../../files/menu.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/chess/board" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Chess — FEN preview" />
+		<meta property="og:description" content="FEN preview" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			body {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				background-color: #fcfcfa;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.board {
+				width: 600px;
+				height: 600px;
+				background-color: #2d2a2e;
+				display: flex;
+				flex-wrap: wrap;
+				font-size: 56px;
+			}
+
+			.board div {
+				width: 75px;
+				height: 75px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.light {
+				background-color: #363337;
+			}
+
+			.red {
+				color: #ff6188;
+			}
+
+			.blue {
+				color: #78dce8;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="board">
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+			<div></div>
+			<div class="light"></div>
+		</div>
+
+		<script>
+			// --- perfect position on mobile too ---
+			const screenHeight = window.innerHeight;
+			document.querySelector("body").style = `height: ${screenHeight}px`;
+
+			// --- test: place random pieces ---
+			const pieces = ["pawn", "rook", "knight", "bishop", "queen", "king"];
+
+			document.querySelectorAll(".board div").forEach((element) => {
+				var piece;
+				var player;
+
+				piece = pieces[Math.floor(Math.random() * pieces.length)];
+				if (Math.random() > 0.5) player = "red";
+				else player = "blue";
+
+				const pieceIcon = document.createElement("i");
+				pieceIcon.setAttribute("class", `fa-solid fa-chess-${piece} ${player}`);
+				element.appendChild(pieceIcon);
+			});
+		</script>
+	</body>
+</html>

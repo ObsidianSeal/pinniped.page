@@ -158,13 +158,65 @@
 				noticeHidden = !noticeHidden;
 			}
 
-			// ------- footer position -------
+			// ------- footer position, subtitle visibility -------
 
 			const screenHeight = window.innerHeight;
 			const height = screenHeight - 140;
 			document.querySelector("div.centre").style = `height: ${height}px`;
 
 			if (screenHeight < 450) document.getElementById("subtitle").remove();
+
+			// ------- quick navigate to project -------
+
+			var locationSelected = false;
+			var pageLocation = "";
+			var pageName = "";
+			const specialKeys = [
+				"ArrowUp",
+				"ArrowDown",
+				"ArrowLeft",
+				"ArrowRight",
+				"Escape",
+				"Insert",
+				"Delete",
+				"Backspace",
+				"Tab",
+				"Shift",
+				"CapsLock",
+				"Enter",
+				"Control",
+				"Alt",
+				"Meta",
+				"Home",
+				"End",
+				"PageUp",
+				"PageDown",
+			];
+
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Shift" && !locationSelected) pageLocation = "projects/";
+				if (e.key === "Control" && !locationSelected) pageLocation = "posts/";
+				if (e.key === "Backspace" && !locationSelected) pageLocation = "images/";
+
+				if (e.key === "Enter" && pageName != "") {
+					if (pageLocation == "images/") {
+						window.location.href = pageLocation + pageName;
+					} else {
+						if (pageName.indexOf("?") == -1) window.location.href = pageLocation + pageName + ".html";
+						else window.location.href = pageLocation + pageName.replace("?", ".html?");
+					}
+				}
+				if (e.key === "Backspace") {
+					pageName = pageName.substring(0, pageName.length - 1);
+				}
+				if (!specialKeys.includes(e.key)) {
+					pageName = pageName + e.key;
+					locationSelected = true;
+				}
+				if (!specialKeys.includes(e.key) || e.key === "Shift" || e.key === "Control" || e.key === "Backspace") {
+					document.querySelector("#subtitle").innerHTML = "/" + pageLocation + pageName;
+				}
+			});
 		</script>
 	</body>
 </html>
