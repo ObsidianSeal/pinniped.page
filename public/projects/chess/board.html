@@ -34,8 +34,10 @@
 			}
 
 			.board {
-				width: 600px;
-				height: 600px;
+				width: 100%;
+				max-width: 600px;
+				max-height: 600px;
+				aspect-ratio: 1 / 1;
 				background-color: #2d2a2e;
 				display: flex;
 				flex-wrap: wrap;
@@ -43,8 +45,9 @@
 			}
 
 			.board div {
-				width: 75px;
-				height: 75px;
+				width: calc(100% / 8);
+				max-width: 75px;
+				max-height: 75px;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -60,6 +63,60 @@
 
 			.blue {
 				color: #78dce8;
+			}
+
+			@media all and (max-width: 600px) {
+				.board {
+					font-size: 52px;
+				}
+			}
+
+			@media all and (max-width: 550px) {
+				.board {
+					font-size: 48px;
+				}
+			}
+
+			@media all and (max-width: 500px) {
+				.board {
+					font-size: 44px;
+				}
+			}
+
+			@media all and (max-width: 450px) {
+				.board {
+					font-size: 40px;
+				}
+			}
+
+			@media all and (max-width: 400px) {
+				.board {
+					font-size: 36px;
+				}
+			}
+
+			@media all and (max-width: 350px) {
+				.board {
+					font-size: 32px;
+				}
+			}
+
+			@media all and (max-width: 300px) {
+				.board {
+					font-size: 28px;
+				}
+			}
+
+			@media all and (max-width: 250px) {
+				.board {
+					font-size: 24px;
+				}
+			}
+
+			@media all and (max-width: 200px) {
+				.board {
+					font-size: 20px;
+				}
 			}
 		</style>
 	</head>
@@ -144,21 +201,87 @@
 			const screenHeight = window.innerHeight;
 			document.querySelector("body").style = `height: ${screenHeight}px`;
 
-			// --- test: place random pieces ---
-			const pieces = ["pawn", "rook", "knight", "bishop", "queen", "king"];
-
+			// --- place empty icons ---
+			var x = 0;
 			document.querySelectorAll(".board div").forEach((element) => {
-				var piece;
-				var player;
-
-				piece = pieces[Math.floor(Math.random() * pieces.length)];
-				if (Math.random() > 0.5) player = "red";
-				else player = "blue";
-
+				x++;
 				const pieceIcon = document.createElement("i");
-				pieceIcon.setAttribute("class", `fa-solid fa-chess-${piece} ${player}`);
+				pieceIcon.setAttribute("id", x);
+				pieceIcon.setAttribute("class", `fa-solid`);
 				element.appendChild(pieceIcon);
 			});
+
+			// --- load FEN ---
+			const pieces = ["pawn", "rook", "knight", "bishop", "queen", "king"];
+			const defaultFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+
+			function loadFEN(FEN) {
+				const FENarray = FEN.split("");
+
+				var i = 0;
+				FENarray.forEach((char) => {
+					if (char >= 1 && char <= 8) {
+						i += parseInt(char);
+					} else {
+						if (char == "/") {
+							return;
+						}
+						i++;
+
+						if (char == "p") {
+							document.getElementById(i).classList.add("fa-chess-pawn");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "r") {
+							document.getElementById(i).classList.add("fa-chess-rook");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "n") {
+							document.getElementById(i).classList.add("fa-chess-knight");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "b") {
+							document.getElementById(i).classList.add("fa-chess-bishop");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "q") {
+							document.getElementById(i).classList.add("fa-chess-queen");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "k") {
+							document.getElementById(i).classList.add("fa-chess-king");
+							document.getElementById(i).classList.add("red");
+						}
+
+						if (char == "P") {
+							document.getElementById(i).classList.add("fa-chess-pawn");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "R") {
+							document.getElementById(i).classList.add("fa-chess-rook");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "N") {
+							document.getElementById(i).classList.add("fa-chess-knight");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "B") {
+							document.getElementById(i).classList.add("fa-chess-bishop");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "Q") {
+							document.getElementById(i).classList.add("fa-chess-queen");
+							document.getElementById(i).classList.add("red");
+						}
+						if (char == "K") {
+							document.getElementById(i).classList.add("fa-chess-king");
+							document.getElementById(i).classList.add("red");
+						}
+					}
+				});
+			}
+
+			loadFEN(defaultFEN);
 		</script>
 	</body>
 </html>
