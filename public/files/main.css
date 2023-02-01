@@ -384,7 +384,7 @@ ul {
 	margin-top: 10px;
 }
 
-.blog-archive span {
+.blog-archive span:not(.new, .updated, .beta) {
 	opacity: 50%;
 }
 
@@ -448,6 +448,25 @@ ul {
 .notice-x:hover {
 	color: #ffffee;
 	cursor: pointer;
+}
+
+.new,
+.updated,
+.beta {
+	background-color: #292f36;
+	border-radius: 5px;
+}
+
+.new {
+	color: #4ecdc4;
+}
+
+.updated {
+	color: #ffe66d;
+}
+
+.beta {
+	color: #ff6b6b;
 }
 
 #download-link {

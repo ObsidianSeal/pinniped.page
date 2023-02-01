@@ -23,6 +23,9 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+
 			body {
 				margin: 0;
 				border: 0;
@@ -31,6 +34,47 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				font-family: "Roboto Slab";
+				user-select: none;
+				font-size: 24px;
+			}
+
+			i:hover {
+				cursor: pointer;
+			}
+
+			i:not(.red, .blue) {
+				margin: 0 20px 0 30px;
+			}
+
+			button-container {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: min-content;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 30px;
+				background-color: #fcfcfa7f;
+				padding: 80px 40px 40px 40px;
+				border-radius: 0 0 20px 0;
+			}
+
+			button-container div {
+				width: 300px;
+				height: 40px;
+				background-color: #fcfcfa;
+				border: 2px solid #2d2a2e;
+				border-radius: 40px;
+				color: #2d2a2e;
+				display: flex;
+				align-items: center;
+				transition: background-color 0.5s;
+			}
+
+			button-container div:hover {
+				background-color: #baecf1;
+				cursor: pointer;
 			}
 
 			.board {
@@ -46,6 +90,7 @@
 
 			.board div {
 				width: calc(100% / 8);
+				aspect-ratio: 1 / 1;
 				max-width: 75px;
 				max-height: 75px;
 				display: flex;
@@ -90,6 +135,22 @@
 			}
 
 			@media all and (max-width: 400px) {
+				body {
+					font-size: 18px;
+				}
+
+				button-container {
+					position: fixed;
+					padding: 40px 40px 40px 40px;
+					gap: 20px;
+				}
+
+				div:not(.board, .board div) {
+					width: 200px;
+					height: 30px;
+					border-radius: 30px;
+				}
+
 				.board {
 					font-size: 36px;
 				}
@@ -118,11 +179,152 @@
 					font-size: 20px;
 				}
 			}
+
+			@media all and (max-height: 600px) {
+				.board {
+					height: 100%;
+					width: 100vh;
+					font-size: 52px;
+				}
+
+				.board div {
+					max-width: calc(100% / 8);
+					max-height: calc(100% / 8);
+				}
+			}
+
+			@media all and (max-height: 550px) {
+				.board {
+					font-size: 48px;
+				}
+			}
+
+			@media all and (max-height: 500px) {
+				.board {
+					font-size: 44px;
+				}
+			}
+
+			@media all and (max-height: 450px) {
+				.board {
+					font-size: 40px;
+				}
+			}
+
+			@media all and (max-height: 400px) {
+				.board {
+					font-size: 36px;
+				}
+			}
+
+			@media all and (max-height: 350px) {
+				.board {
+					font-size: 32px;
+				}
+			}
+
+			@media all and (max-height: 300px) {
+				.board {
+					font-size: 28px;
+				}
+			}
+
+			@media all and (max-height: 250px) {
+				.board {
+					font-size: 24px;
+				}
+			}
+
+			@media all and (max-height: 200px) {
+				.board {
+					font-size: 20px;
+				}
+			}
+
+			form {
+				position: fixed;
+				width: 1120px;
+				height: 90px;
+				border: 2px solid #2d2a2e;
+				background-color: #fcfcfa7f;
+				display: flex;
+				align-items: center;
+				padding: 5px;
+			}
+
+			input {
+				margin: 0 0 0 10px;
+				border: 0;
+				padding: 0;
+				height: 60px;
+				font-size: 24px;
+				font-family: "Roboto Mono";
+				width: 1060px;
+				outline: none;
+				background-color: transparent;
+				color: #2d2a2e;
+				caret-color: #2d2a2e;
+			}
+
+			input::placeholder {
+				color: #949395;
+			}
+
+			button {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				height: 60px;
+				font-size: 40px;
+				background-color: transparent;
+			}
+
+			i.fa-circle-check {
+				margin: 0px 0px 0px 0px;
+				width: 60px;
+				color: #949395;
+				transition: color 0.5s;
+			}
+
+			i.fa-circle-check:hover {
+				color: #2d2a2e;
+			}
+
+			@media all and (max-width: 1900px) {
+				form {
+					bottom: 50px;
+				}
+			}
+
+			@media all and (max-width: 1134px) {
+				form {
+					width: 100%;
+				}
+
+				input {
+					width: calc(100% - 70px);
+				}
+			}
 		</style>
 	</head>
 
 	<body>
-		<div class="board">
+		<button-container>
+			<div onclick="clickToggleMenu()"><i class="fa-solid fa-compress"></i>hide menu</div>
+			<div onclick="clickBack()"><i class="fa-solid fa-arrow-left"></i>back</div>
+			<div onclick="clickReset()"><i class="fa-solid fa-rotate-right"></i>reset board</div>
+			<div onclick="clickExport()" id="copy"><i class="fa-regular fa-clone"></i>copy FEN</div>
+			<div onclick="clickImport()" id="import"><i class="fa-solid fa-terminal"></i>import FEN</div>
+			<div onclick="clickHelp()" id="help"><i class="fa-solid fa-question"></i>help & shortcuts</div>
+		</button-container>
+
+		<form id="FENinput" style="display: none">
+			<input name="x" maxlength="71" spellcheck="false" autocomplete="off" placeholder="enter FEN here" autocapitalize="off" /><button type="submit">
+				<i class="fa-solid fa-circle-check"></i>
+			</button>
+		</form>
+
+		<div class="board" id="board">
 			<div class="light"></div>
 			<div></div>
 			<div class="light"></div>
@@ -198,24 +400,32 @@
 
 		<script>
 			// --- perfect position on mobile too ---
+			const screenWidth = window.innerWidth;
 			const screenHeight = window.innerHeight;
 			document.querySelector("body").style = `height: ${screenHeight}px`;
 
-			// --- place empty icons ---
+			// --- set ids of divs ---
 			var x = 0;
 			document.querySelectorAll(".board div").forEach((element) => {
 				x++;
-				const pieceIcon = document.createElement("i");
-				pieceIcon.setAttribute("id", x);
-				pieceIcon.setAttribute("class", `fa-solid`);
-				element.appendChild(pieceIcon);
+				element.id = "square-" + x;
 			});
 
-			// --- load FEN ---
-			const pieces = ["pawn", "rook", "knight", "bishop", "queen", "king"];
-			const defaultFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+			// --- set classes of piece icons (useful function) ---
+			function setPieceClasses(pieceNumber, pieceType, pieceColour) {
+				const pieceIcon = document.createElement("i");
+				pieceIcon.setAttribute("id", pieceNumber);
+				pieceIcon.setAttribute("class", `fa-solid ${pieceType} ${pieceColour}`);
+				pieceIcon.setAttribute("draggable", "true");
+				document.getElementById(`square-${pieceNumber}`).appendChild(pieceIcon);
+			}
+
+			// --- load FEN onto board ---
+			const validChars = ["p", "r", "n", "b", "q", "k", "P", "R", "N", "B", "Q", "K"];
 
 			function loadFEN(FEN) {
+				//document.querySelectorAll(".board div").forEach((element) => (element.innerHTML = ""));
+
 				const FENarray = FEN.split("");
 
 				var i = 0;
@@ -223,65 +433,242 @@
 					if (char >= 1 && char <= 8) {
 						i += parseInt(char);
 					} else {
-						if (char == "/") {
-							return;
-						}
-						i++;
+						if (i >= 64) return;
+						if (char == "/") return;
+						if (validChars.includes(char)) i++;
 
-						if (char == "p") {
-							document.getElementById(i).classList.add("fa-chess-pawn");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "r") {
-							document.getElementById(i).classList.add("fa-chess-rook");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "n") {
-							document.getElementById(i).classList.add("fa-chess-knight");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "b") {
-							document.getElementById(i).classList.add("fa-chess-bishop");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "q") {
-							document.getElementById(i).classList.add("fa-chess-queen");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "k") {
-							document.getElementById(i).classList.add("fa-chess-king");
-							document.getElementById(i).classList.add("red");
-						}
+						if (char == "p") setPieceClasses(i, "fa-chess-pawn", "blue");
+						if (char == "r") setPieceClasses(i, "fa-chess-rook", "blue");
+						if (char == "n") setPieceClasses(i, "fa-chess-knight", "blue");
+						if (char == "b") setPieceClasses(i, "fa-chess-bishop", "blue");
+						if (char == "q") setPieceClasses(i, "fa-chess-queen", "blue");
+						if (char == "k") setPieceClasses(i, "fa-chess-king", "blue");
 
-						if (char == "P") {
-							document.getElementById(i).classList.add("fa-chess-pawn");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "R") {
-							document.getElementById(i).classList.add("fa-chess-rook");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "N") {
-							document.getElementById(i).classList.add("fa-chess-knight");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "B") {
-							document.getElementById(i).classList.add("fa-chess-bishop");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "Q") {
-							document.getElementById(i).classList.add("fa-chess-queen");
-							document.getElementById(i).classList.add("red");
-						}
-						if (char == "K") {
-							document.getElementById(i).classList.add("fa-chess-king");
-							document.getElementById(i).classList.add("red");
-						}
+						if (char == "P") setPieceClasses(i, "fa-chess-pawn", "red");
+						if (char == "R") setPieceClasses(i, "fa-chess-rook", "red");
+						if (char == "N") setPieceClasses(i, "fa-chess-knight", "red");
+						if (char == "B") setPieceClasses(i, "fa-chess-bishop", "red");
+						if (char == "Q") setPieceClasses(i, "fa-chess-queen", "red");
+						if (char == "K") setPieceClasses(i, "fa-chess-king", "red");
 					}
 				});
 			}
 
-			loadFEN(defaultFEN);
+			// --- load FEN from URL ---
+			const defaultFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const FEN = item.get("x");
+
+			if (FEN == null || FEN == "") loadFEN(defaultFEN);
+			else loadFEN(FEN);
+
+			// --- get new FEN ---
+			function getFEN(setURL) {
+				var FENstring = "";
+
+				for (let i = 1; i <= 64; i++) {
+					let element = document.getElementById(`square-${i}`);
+
+					if (element.innerHTML != "") {
+						let classes = document.getElementById(i).classList;
+						let piece = classes[1];
+
+						if (piece == "fa-chess-knight") {
+							if (classes[2] == "blue") FENstring = FENstring + "n";
+							else FENstring = FENstring + "N";
+						} else {
+							if (classes[2] == "blue") FENstring = FENstring + piece.substring(9, 10);
+							else FENstring = FENstring + piece.substring(9, 10).toUpperCase();
+						}
+					} else {
+						if (FENstring.substring(FENstring.length - 1) > 0) {
+							FENstring = FENstring.substring(0, FENstring.length - 1) + (parseInt(FENstring.substring(FENstring.length - 1)) + 1);
+						} else {
+							FENstring = FENstring + "1";
+						}
+					}
+
+					if (i % 8 == 0 && i != 64) {
+						FENstring = FENstring + "/";
+					}
+				}
+
+				if (setURL) window.history.pushState({ FENstring: FENstring }, "", "?x=" + FENstring);
+				return FENstring;
+			}
+
+			// --- IN DEVELOPMENT: drag and drop pieces ---
+			// var ogIcon;
+			var ogSquare;
+			var newSquare;
+
+			document.querySelectorAll("i").forEach((icon) => {
+				icon.addEventListener("click", (e) => {
+					document.getElementById(e.target.id).remove();
+
+					getFEN(true);
+				});
+				icon.addEventListener("dragstart", (e) => {
+					e.dataTransfer.effectAllowed = "move";
+
+					// ogIcon = e.target;
+					ogSquare = e.target.id;
+
+					document.getElementById(ogSquare).style = "opacity: 50%";
+				});
+				icon.addEventListener("dragend", (e) => {
+					if (newSquare.length > 2) newSquare = newSquare.substring(7);
+
+					document.getElementById(ogSquare).style = "opacity: 100%";
+					document.getElementById(ogSquare).id = newSquare;
+
+					newSquare = `square-${newSquare}`;
+
+					document.getElementById(newSquare).innerHTML = "";
+					document.getElementById(newSquare).appendChild(icon);
+
+					getFEN(true);
+				});
+			});
+
+			document.querySelectorAll(".board div").forEach((icon) => {
+				icon.addEventListener("dragover", (e) => {
+					newSquare = e.target.id;
+				});
+			});
+
+			// --- reload on window resize ---
+			addEventListener("resize", (e) => {
+				if (toggleImport) {
+					setTimeout(() => {
+						window.location.reload();
+					}, 500);
+				}
+			});
+
+			// --- listen for url changes (for undo/redo) ---
+			addEventListener("popstate", (e) => {
+				window.location.reload(); // yes, I know it's annoying - but I want to work on other things before fixing the problems encountered by doing this properly
+			});
+
+			// --- button click functions ---
+			var toggleMenu = true;
+			var ogMenu = document.querySelector("button-container").innerHTML;
+
+			function clickToggleMenu() {
+				if (toggleMenu) {
+					document.querySelector("button-container").innerHTML = '<div onclick="clickToggleMenu()"><i class="fa-solid fa-expand"></i>show menu</div>';
+				} else {
+					document.querySelector("button-container").innerHTML = ogMenu;
+				}
+				toggleMenu = !toggleMenu;
+			}
+
+			function clickBack() {
+				window.location.href = "index.html";
+			}
+
+			function clickReset() {
+				window.location.href = "board.html";
+			}
+
+			function clickExport() {
+				navigator.clipboard.writeText(getFEN(false));
+				document.getElementById("copy").innerHTML = '<i class="fa-regular fa-clone"></i>copied!';
+				setTimeout(function () {
+					document.getElementById("copy").innerHTML = '<i class="fa-regular fa-clone"></i>copy FEN';
+				}, 2000);
+			}
+
+			var toggleImport = true;
+
+			function clickImport() {
+				if (toggleImport) {
+					document.getElementById("FENinput").style = "display: flex";
+					document.querySelector("input").focus();
+					document.getElementById("import").innerHTML = '<i class="fa-solid fa-terminal"></i>hide text box';
+				} else {
+					document.getElementById("FENinput").style = "display: none";
+					document.getElementById("import").innerHTML = '<i class="fa-solid fa-terminal"></i>import FEN';
+					window.location.reload();
+				}
+				toggleImport = !toggleImport;
+			}
+
+			function clickHelp() {
+				window.location.href = "../../posts/2023-02-01.html";
+			}
+
+			// --- keyboard shortcuts ---
+			var mouseX;
+			var mouseY;
+
+			document.addEventListener("keydown", (e) => {
+				if (toggleImport) {
+					if (e.key === "Escape") {
+						clickToggleMenu();
+					}
+
+					if (e.key === "Backspace") {
+						clickReset();
+					}
+
+					if (e.key === "Shift") {
+						clickImport();
+					}
+
+					if (e.key === "c") {
+						clickExport();
+					}
+
+					if (e.key === "h" || e.key === "i" || e.key === "/") {
+						clickHelp();
+					}
+
+					if ((e.key >= 0 && e.key < 7) || e.key === "q" || e.key === "w" || e.key === "e" || e.key === "r" || e.key === "t" || e.key === "y") {
+						let boardSize = document.getElementById("board").offsetWidth;
+
+						let boardX = (screenWidth - boardSize) / 2;
+						let boardY = (screenHeight - boardSize) / 2;
+
+						let x = Math.floor((mouseX - boardX) / (boardSize / 8)) + 1;
+						let y = Math.floor((mouseY - boardY) / (boardSize / 8));
+
+						let square = x + y * 8;
+
+						if (document.getElementById(`square-${square}`).innerHTML != "") {
+							document.getElementById(square).remove();
+						}
+
+						if (e.key === "1") setPieceClasses(square, "fa-chess-pawn", "red");
+						if (e.key === "2") setPieceClasses(square, "fa-chess-rook", "red");
+						if (e.key === "3") setPieceClasses(square, "fa-chess-knight", "red");
+						if (e.key === "4") setPieceClasses(square, "fa-chess-bishop", "red");
+						if (e.key === "5") setPieceClasses(square, "fa-chess-queen", "red");
+						if (e.key === "6") setPieceClasses(square, "fa-chess-king", "red");
+
+						if (e.key === "q") setPieceClasses(square, "fa-chess-pawn", "blue");
+						if (e.key === "w") setPieceClasses(square, "fa-chess-rook", "blue");
+						if (e.key === "e") setPieceClasses(square, "fa-chess-knight", "blue");
+						if (e.key === "r") setPieceClasses(square, "fa-chess-bishop", "blue");
+						if (e.key === "t") setPieceClasses(square, "fa-chess-queen", "blue");
+						if (e.key === "y") setPieceClasses(square, "fa-chess-king", "blue");
+
+						getFEN(true);
+					}
+				} else {
+					if (e.key === "Escape") {
+						clickImport();
+					}
+				}
+			});
+
+			// --- mouse X & Y ---
+			document.addEventListener("mousemove", (e) => {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+			});
 		</script>
 	</body>
 </html>

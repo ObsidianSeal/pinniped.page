@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Blog Post (2023/02/01)</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
+
+		<script src="../files/menu.js"></script>
+		<script type="module" src="../files/view.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/posts/2023-02-01" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2023/02/01)" />
+		<meta property="og:description" content="???" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5>Blog Post / February 1st, 2023</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">Major Updates + FEN viewer</h3>
+
+			<div class="break"></div>
+
+			<b>Chess — FEN preview | how to use & keyboard shortcuts</b>
+
+			<div class="break"></div>
+
+			<ul>
+				<li><b>Click and drag</b> the chess pieces</li>
+				<li><b>Click</b> on a piece to remove it</li>
+				<li>Press <b>ESCAPE</b> to show/hide the menu</li>
+				<li>Press <b>BACKSPACE</b> to reset the board</li>
+				<li>Press <b>SHIFT</b> to input FEN, then <b>ESCAPE</b> to close the input box</li>
+				<li>Press <b>C</b> to copy the current FEN</li>
+				<li>Press <b>H</b> or <b>I</b> or <b>/</b> to view this help page</li>
+				<li>Press <b>0</b> to remove the piece at your mouse</li>
+				<li>Press <b>1</b>, <b>2</b>, <b>3</b>, <b>4</b>, <b>5</b>, <b>6</b> to place red (light) pieces</li>
+				<li>Press <b>Q</b>, <b>W</b>, <b>E</b>, <b>R</b>, <b>T</b>, <b>Y</b> to place blue (dark) pieces</li>
+				<li>This project is still in beta, so please alert me of any bugs</li>
+				<li>I may also have forgotten some featues...</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<b>Quick navigation!</b>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>On the homepage (desktop only), start typing or select a folder</li>
+				<li>Press <b>SHIFT</b> to select "projects/"</li>
+				<li>Press <b>CONTROL</b> to select "posts/"</li>
+				<li>Press <b>BACKSPACE</b> to select "images/"</li>
+				<li>Press <b>ENTER</b> to go to the page you entered, or <b>ESCAPE</b> to reset</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<b>Alerts/warnings/notices/messages on the homepage</b>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>There's a little box in the bottom left of the homepage!</li>
+				<li>It can show...whatever</li>
+				<li>Click on the 'x' to minimize it, then the '>' to bring it back</li>
+				<li>On smaller devices, the text changes to be shorter (at the cost of less information)</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<b>Other (but not less important!) changes</b>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>Subtitles on the homepage are removed on very short screens</li>
+				<li>The footer is properly placed on the home, 404, and status pages</li>
+				<li>The &lt;hr&gt; (<b>h</b>orizontal <b>l</b>ine) element is now included in my stylesheet</li>
+				<li>
+					New labels on the projects+ page:&nbsp;<span class="new"> NEW </span>,&nbsp;<span class="updated"> UPDATED </span>, and&nbsp;<span class="beta">
+						BETA&nbsp;</span
+					>
+				</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<b>Omega Seal updates</b>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>/text-space &lt;text&gt;</li>
+				<li>/embed &lt;title&gt; &lt;description&gt; [colour]</li>
+				<li>At some point I'll improve/create the Omega Seal project page</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<b>TL;DR</b>
+
+			<div class="break"></div>
+
+			<img
+				class="blog-image"
+				src="../images/testing-2023feb1.png"
+				alt="Everything that needs to be tested as of February 1st, 2023."
+				title="Everything that needs to be tested as of February 1st, 2023."
+				style="max-width: 282px"
+			/>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script src="../files/footer.js"></script>
+	</body>
+</html>

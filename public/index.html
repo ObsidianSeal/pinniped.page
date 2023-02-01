@@ -78,8 +78,8 @@
 
 		<div class="notice" id="notice">
 			<p>
-				<i class="fa-solid fa-warning" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i
-				><span class="invert" id="notice-text"><!--some things may not work as expected (database rule changes are being tested)-->oops I reset the view counters</span
+				<!-- can change icon, icon colour, and text -- make sure to check .js -->
+				<i class="fa-solid fa-star" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i><span class="invert" id="notice-text">quick navigation!</span
 				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i>
 			</p>
 		</div>
@@ -135,23 +135,17 @@
 			var noticeHidden = false;
 			const screenWidth = window.innerWidth;
 
-			// if (screenWidth < 1100) document.getElementById("notice-text").innerHTML = "database rule changes are being tested, expect problems";
-			// if (screenWidth < 850) document.getElementById("notice-text").innerHTML = "new database rules, expect problems";
-			// if (screenWidth < 650) document.getElementById("notice-text").innerHTML = "database problems?";
-			// if (screenWidth < 450) document.getElementById("notice-text").innerHTML = "db problems?";
-
-			if (screenWidth < 550) document.getElementById("notice-text").innerHTML = "oops, views reset";
-			if (screenWidth < 350) document.getElementById("notice-text").innerHTML = "views reset :(";
+			if (screenWidth < 400) document.getElementById("notice-text").innerHTML = ":("; // change if change text!
 
 			function hideNotice() {
 				if (!noticeHidden) {
 					document.getElementById("notice-text").style = "display: none";
-					document.getElementById("notice-icon").style = "color: #ff6b6b";
+					document.getElementById("notice-icon").style = "color: #4ecdc4"; // change if change icon colour!
 					document.getElementById("notice-x").classList.remove("fa-xmark");
 					document.getElementById("notice-x").classList.add("fa-angle-right");
 				} else {
 					document.getElementById("notice-text").style = "display: inline-block";
-					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px";
+					document.getElementById("notice-icon").style = "color: #4ecdc4; margin-right: 20px"; // change if change icon colour!
 					document.getElementById("notice-x").classList.remove("fa-angle-right");
 					document.getElementById("notice-x").classList.add("fa-xmark");
 				}
@@ -171,6 +165,7 @@
 			var locationSelected = false;
 			var pageLocation = "";
 			var pageName = "";
+			const ogSubtitle = document.querySelector("#subtitle").innerHTML;
 			const specialKeys = [
 				"ArrowUp",
 				"ArrowDown",
@@ -213,8 +208,15 @@
 					pageName = pageName + e.key;
 					locationSelected = true;
 				}
-				if (!specialKeys.includes(e.key) || e.key === "Shift" || e.key === "Control" || e.key === "Backspace") {
+				if (!specialKeys.includes(e.key) || e.key === "Shift" || e.key === "Control" || e.key === "Backspace" || e.key === "Escape") {
 					document.querySelector("#subtitle").innerHTML = "/" + pageLocation + pageName;
+				}
+
+				if (e.key === "Escape") {
+					locationSelected = false;
+					pageLocation = "";
+					pageName = "";
+					document.querySelector("#subtitle").innerHTML = ogSubtitle;
 				}
 			});
 		</script>
