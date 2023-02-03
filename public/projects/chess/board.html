@@ -154,6 +154,10 @@
 				.board {
 					font-size: 36px;
 				}
+
+				i:not(.red, .blue) {
+					margin: 0 10px 0 20px;
+				}
 			}
 
 			@media all and (max-width: 350px) {
@@ -313,6 +317,7 @@
 			<div onclick="clickToggleMenu()"><i class="fa-solid fa-compress"></i>hide menu</div>
 			<div onclick="clickBack()"><i class="fa-solid fa-arrow-left"></i>back</div>
 			<div onclick="clickReset()"><i class="fa-solid fa-rotate-right"></i>reset board</div>
+			<div onclick="clickCopy()" id="copy2"><i class="fa-solid fa-link"></i>copy link</div>
 			<div onclick="clickExport()" id="copy"><i class="fa-regular fa-clone"></i>copy FEN</div>
 			<div onclick="clickImport()" id="import"><i class="fa-solid fa-terminal"></i>import FEN</div>
 			<div onclick="clickHelp()" id="help"><i class="fa-solid fa-question"></i>help & shortcuts</div>
@@ -404,6 +409,11 @@
 			const screenHeight = window.innerHeight;
 			document.querySelector("body").style = `height: ${screenHeight}px`;
 
+			const boardSize = document.getElementById("board").offsetWidth;
+
+			const boardX = (screenWidth - boardSize) / 2;
+			const boardY = (screenHeight - boardSize) / 2;
+
 			// --- set ids of divs ---
 			var x = 0;
 			document.querySelectorAll(".board div").forEach((element) => {
@@ -424,8 +434,6 @@
 			const validChars = ["p", "r", "n", "b", "q", "k", "P", "R", "N", "B", "Q", "K"];
 
 			function loadFEN(FEN) {
-				//document.querySelectorAll(".board div").forEach((element) => (element.innerHTML = ""));
-
 				const FENarray = FEN.split("");
 
 				var i = 0;
@@ -498,8 +506,7 @@
 				return FENstring;
 			}
 
-			// --- IN DEVELOPMENT: drag and drop pieces ---
-			// var ogIcon;
+			// --- drag and drop pieces ---
 			var ogSquare;
 			var newSquare;
 
@@ -512,7 +519,6 @@
 				icon.addEventListener("dragstart", (e) => {
 					e.dataTransfer.effectAllowed = "move";
 
-					// ogIcon = e.target;
 					ogSquare = e.target.id;
 
 					document.getElementById(ogSquare).style = "opacity: 50%";
@@ -530,11 +536,37 @@
 
 					getFEN(true);
 				});
+				icon.addEventListener("touchstart", (e) => {
+					ogSquare = e.target.id;
+
+					document.getElementById(ogSquare).style = "opacity: 50%";
+				});
+				icon.addEventListener("touchend", (e) => {
+					document.getElementById(ogSquare).style = "opacity: 100%";
+					document.getElementById(ogSquare).id = newSquare;
+					document.getElementById(newSquare).remove();
+
+					newSquare = `square-${newSquare}`;
+
+					document.getElementById(newSquare).innerHTML = "";
+					document.getElementById(newSquare).appendChild(icon);
+
+					getFEN(true);
+				});
 			});
 
 			document.querySelectorAll(".board div").forEach((icon) => {
 				icon.addEventListener("dragover", (e) => {
 					newSquare = e.target.id;
+				});
+				icon.addEventListener("touchmove", (e) => {
+					let x = e.targetTouches[0].pageX;
+					let y = e.targetTouches[0].pageY;
+
+					let squareX = Math.floor((x - boardX) / (boardSize / 8)) + 1;
+					let squareY = Math.floor((y - boardY) / (boardSize / 8));
+
+					newSquare = squareX + squareY * 8;
 				});
 			});
 
@@ -573,6 +605,14 @@
 				window.location.href = "board.html";
 			}
 
+			function clickCopy() {
+				navigator.clipboard.writeText(`https://pinniped.page/projects/chess/board?x=${getFEN(false)}`);
+				document.getElementById("copy2").innerHTML = '<i class="fa-solid fa-link"></i>copied!';
+				setTimeout(function () {
+					document.getElementById("copy2").innerHTML = '<i class="fa-solid fa-link"></i>copy link';
+				}, 2000);
+			}
+
 			function clickExport() {
 				navigator.clipboard.writeText(getFEN(false));
 				document.getElementById("copy").innerHTML = '<i class="fa-regular fa-clone"></i>copied!';
@@ -604,8 +644,12 @@
 			var mouseX;
 			var mouseY;
 
+			const keys = {};
+
 			document.addEventListener("keydown", (e) => {
-				if (toggleImport) {
+				keys[e.key] = true;
+
+				if (toggleImport && !keys["Control"]) {
 					if (e.key === "Escape") {
 						clickToggleMenu();
 					}
@@ -618,6 +662,10 @@
 						clickImport();
 					}
 
+					if (e.key === "x") {
+						clickCopy();
+					}
+
 					if (e.key === "c") {
 						clickExport();
 					}
@@ -627,11 +675,6 @@
 					}
 
 					if ((e.key >= 0 && e.key < 7) || e.key === "q" || e.key === "w" || e.key === "e" || e.key === "r" || e.key === "t" || e.key === "y") {
-						let boardSize = document.getElementById("board").offsetWidth;
-
-						let boardX = (screenWidth - boardSize) / 2;
-						let boardY = (screenHeight - boardSize) / 2;
-
 						let x = Math.floor((mouseX - boardX) / (boardSize / 8)) + 1;
 						let y = Math.floor((mouseY - boardY) / (boardSize / 8));
 
@@ -664,11 +707,18 @@
 				}
 			});
 
+			document.addEventListener("keyup", (e) => {
+				delete keys[e.key];
+			});
+
 			// --- mouse X & Y ---
 			document.addEventListener("mousemove", (e) => {
 				mouseX = e.clientX;
 				mouseY = e.clientY;
 			});
+
+			// --- aaaaaaaaaa ---
+			clickToggleMenu();
 		</script>
 	</body>
 </html>

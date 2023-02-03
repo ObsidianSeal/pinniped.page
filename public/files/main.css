@@ -469,6 +469,11 @@ ul {
 	color: #ff6b6b;
 }
 
+.youtube-video {
+	width: 640px;
+	height: 360px;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -613,12 +618,14 @@ ul {
 		display: contents;
 	}
 
-	.blog-image {
+	.blog-image,
+	.big-picture,
+	.youtube-video {
 		width: 100%;
 	}
 
-	.big-picture {
-		width: 100%;
+	.youtube-video {
+		height: calc((100vw - 60px) / 16 * 9);
 	}
 
 	#menu-open {
