@@ -649,56 +649,58 @@
 			document.addEventListener("keydown", (e) => {
 				keys[e.key] = true;
 
-				if (toggleImport && !keys["Control"]) {
-					if (e.key === "Escape") {
-						clickToggleMenu();
-					}
-
-					if (e.key === "Backspace") {
-						clickReset();
-					}
-
-					if (e.key === "Shift") {
-						clickImport();
-					}
-
-					if (e.key === "x") {
-						clickCopy();
-					}
-
-					if (e.key === "c") {
-						clickExport();
-					}
-
-					if (e.key === "h" || e.key === "i" || e.key === "/") {
-						clickHelp();
-					}
-
-					if ((e.key >= 0 && e.key < 7) || e.key === "q" || e.key === "w" || e.key === "e" || e.key === "r" || e.key === "t" || e.key === "y") {
-						let x = Math.floor((mouseX - boardX) / (boardSize / 8)) + 1;
-						let y = Math.floor((mouseY - boardY) / (boardSize / 8));
-
-						let square = x + y * 8;
-
-						if (document.getElementById(`square-${square}`).innerHTML != "") {
-							document.getElementById(square).remove();
+				if (toggleImport) {
+					if (!keys["Control"]) {
+						if (e.key === "Escape") {
+							clickToggleMenu();
 						}
 
-						if (e.key === "1") setPieceClasses(square, "fa-chess-pawn", "red");
-						if (e.key === "2") setPieceClasses(square, "fa-chess-rook", "red");
-						if (e.key === "3") setPieceClasses(square, "fa-chess-knight", "red");
-						if (e.key === "4") setPieceClasses(square, "fa-chess-bishop", "red");
-						if (e.key === "5") setPieceClasses(square, "fa-chess-queen", "red");
-						if (e.key === "6") setPieceClasses(square, "fa-chess-king", "red");
+						if (e.key === "Backspace") {
+							clickReset();
+						}
 
-						if (e.key === "q") setPieceClasses(square, "fa-chess-pawn", "blue");
-						if (e.key === "w") setPieceClasses(square, "fa-chess-rook", "blue");
-						if (e.key === "e") setPieceClasses(square, "fa-chess-knight", "blue");
-						if (e.key === "r") setPieceClasses(square, "fa-chess-bishop", "blue");
-						if (e.key === "t") setPieceClasses(square, "fa-chess-queen", "blue");
-						if (e.key === "y") setPieceClasses(square, "fa-chess-king", "blue");
+						if (e.key === "Shift") {
+							clickImport();
+						}
 
-						getFEN(true);
+						if (e.key === "x") {
+							clickCopy();
+						}
+
+						if (e.key === "c") {
+							clickExport();
+						}
+
+						if (e.key === "h" || e.key === "i" || e.key === "/") {
+							clickHelp();
+						}
+
+						if ((e.key >= 0 && e.key < 7) || e.key === "q" || e.key === "w" || e.key === "e" || e.key === "r" || e.key === "t" || e.key === "y") {
+							let x = Math.floor((mouseX - boardX) / (boardSize / 8)) + 1;
+							let y = Math.floor((mouseY - boardY) / (boardSize / 8));
+
+							let square = x + y * 8;
+
+							if (document.getElementById(`square-${square}`).innerHTML != "") {
+								document.getElementById(square).remove();
+							}
+
+							if (e.key === "1") setPieceClasses(square, "fa-chess-pawn", "red");
+							if (e.key === "2") setPieceClasses(square, "fa-chess-rook", "red");
+							if (e.key === "3") setPieceClasses(square, "fa-chess-knight", "red");
+							if (e.key === "4") setPieceClasses(square, "fa-chess-bishop", "red");
+							if (e.key === "5") setPieceClasses(square, "fa-chess-queen", "red");
+							if (e.key === "6") setPieceClasses(square, "fa-chess-king", "red");
+
+							if (e.key === "q") setPieceClasses(square, "fa-chess-pawn", "blue");
+							if (e.key === "w") setPieceClasses(square, "fa-chess-rook", "blue");
+							if (e.key === "e") setPieceClasses(square, "fa-chess-knight", "blue");
+							if (e.key === "r") setPieceClasses(square, "fa-chess-bishop", "blue");
+							if (e.key === "t") setPieceClasses(square, "fa-chess-queen", "blue");
+							if (e.key === "y") setPieceClasses(square, "fa-chess-king", "blue");
+
+							getFEN(true);
+						}
 					}
 				} else {
 					if (e.key === "Escape") {
