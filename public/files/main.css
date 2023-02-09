@@ -321,6 +321,7 @@ ul {
 }
 
 .download-button {
+	user-select: none;
 	height: 40px;
 	width: 250px;
 	background-color: #292f36;
