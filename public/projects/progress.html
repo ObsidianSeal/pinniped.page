@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Loading...</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/progress" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="progress" />
+		<meta property="og:description" content="progress" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue");
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			::selection {
+				background-color: #3b3b3b;
+				color: #ff715b;
+			}
+
+			body {
+				height: 100svh;
+				background-color: #272727;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			div.outer {
+				width: 600px;
+				height: 30px;
+				border: 3px solid #3b3b3b;
+				border-radius: 100px;
+				padding: 5px;
+			}
+
+			div.inner {
+				background-color: #00c49a;
+				border-radius: 100px;
+				height: 30px;
+			}
+
+			.fa-solid {
+				margin: 0 20px 0 20px;
+				font-size: 46px;
+				color: #3b3b3b;
+			}
+
+			.fa-solid:hover {
+				cursor: pointer;
+				color: #ff715b;
+			}
+		</style>
+	</head>
+
+	<body>
+		<i class="fa-solid fa-circle-minus" id="minus-button"></i>
+		<div class="outer"><div class="inner"></div></div>
+		<i class="fa-solid fa-circle-plus" id="plus-button"></i>
+
+		<script>
+			var numbers = [];
+			var percent;
+
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const fraction = item.get("x");
+
+			if (fraction != null && fraction != "") {
+				numbers = fraction.split("/");
+			} else {
+				numbers[0] = 2;
+				numbers[1] = 5;
+			}
+			percent = numbers[0] / numbers[1];
+
+			function setProgress(percent, setURL) {
+				document.querySelector("div.inner").style = `width: ${percent * 100}%`;
+				document.querySelector("title").innerHTML = `${Math.round(percent * 100 * 100) / 100}%`;
+				if (setURL) window.history.pushState({ numbers: [numbers[0], numbers[1]] }, "", `?x=${numbers[0]}/${numbers[1]}`);
+			}
+
+			setProgress(percent, true);
+
+			document.querySelector("#minus-button").addEventListener("click", (e) => {
+				if (percent > 0) {
+					percent = (parseInt(numbers[0]) - 1) / numbers[1];
+					numbers[0]--;
+					setProgress(percent, true);
+				}
+			});
+
+			document.querySelector("#plus-button").addEventListener("click", (e) => {
+				if (percent < 1) {
+					percent = (parseInt(numbers[0]) + 1) / numbers[1];
+					numbers[0]++;
+					setProgress(percent, true);
+				}
+			});
+
+			addEventListener("popstate", (e) => {
+				numbers[0] = e.state.numbers[0];
+				numbers[1] = e.state.numbers[1];
+				percent = numbers[0] / numbers[1];
+				setProgress(percent, false);
+			});
+
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "c") navigator.clipboard.writeText(`https://pinniped.page/projects/progress?x=${numbers[0]}/${numbers[1]}`);
+			});
+		</script>
+	</body>
+</html>
