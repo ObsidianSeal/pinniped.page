@@ -78,16 +78,23 @@
 			var numbers = [];
 			var percent;
 
+			function randomFraction() {
+				let x = Math.floor(Math.random() * 9 + 2);
+				numbers[1] = x;
+				numbers[0] = Math.floor(Math.random() * (x - 1) + 1);
+			}
+
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
 			const fraction = item.get("x");
 
 			if (fraction != null && fraction != "") {
 				numbers = fraction.split("/");
-			} else {
-				numbers[0] = 2;
-				numbers[1] = 5;
-			}
+				numbers[0] = parseInt(numbers[0]);
+				numbers[1] = parseInt(numbers[1]);
+				if (!(numbers[0] > 0 && numbers[1] > 0)) randomFraction();
+				while (numbers[0] > numbers[1]) numbers[0]--;
+			} else randomFraction();
 			percent = numbers[0] / numbers[1];
 
 			function setProgress(percent, setURL) {
@@ -100,7 +107,7 @@
 
 			document.querySelector("#minus-button").addEventListener("click", (e) => {
 				if (percent > 0) {
-					percent = (parseInt(numbers[0]) - 1) / numbers[1];
+					percent = (numbers[0] - 1) / numbers[1];
 					numbers[0]--;
 					setProgress(percent, true);
 				}
@@ -108,7 +115,7 @@
 
 			document.querySelector("#plus-button").addEventListener("click", (e) => {
 				if (percent < 1) {
-					percent = (parseInt(numbers[0]) + 1) / numbers[1];
+					percent = (numbers[0] + 1) / numbers[1];
 					numbers[0]++;
 					setProgress(percent, true);
 				}
