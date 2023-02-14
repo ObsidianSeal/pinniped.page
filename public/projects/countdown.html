@@ -68,38 +68,46 @@
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
 			const date = item.get("x");
+			var isValid;
 
 			if (date != null && date != "") {
-				const year = date.substring(0, 4);
-				const month = date.substring(5, 7);
-				const day = date.substring(8, 10);
-				const hour = date.substring(11, 13);
-				const minute = date.substring(14, 16);
-				const second = date.substring(17, 19);
+				const year = parseInt(date.substring(0, 4));
+				const month = parseInt(date.substring(5, 7));
+				const day = parseInt(date.substring(8, 10));
+				const hour = parseInt(date.substring(11, 13));
+				const minute = parseInt(date.substring(14, 16));
+				const second = parseInt(date.substring(17, 19));
 
 				var countdownDate = new Date(year, month - 1, day, hour, minute, second);
 
-				var x = setInterval(() => {
-					var countdown = countdownDate.getTime();
-					var now = new Date().getTime();
-					var distance = countdown - now;
-
-					var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-					var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-					var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-					var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-					var countdownText = `${pad(days, 2)}:${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
-					document.querySelector("h1").innerHTML = countdownText;
-					document.querySelector("title").innerHTML = countdownText;
-
-					if (distance < 0) {
-						clearInterval(x);
-						document.querySelector("h1").innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
-						document.querySelector("title").innerHTML = "✔";
-					}
-				}, 1000);
+				if (!(year >= 0 && month >= 0 && day >= 0 && hour >= 0 && minute >= 0 && second >= 0)) isValid = false;
+				else isValid = true;
+			} else {
+				isValid = false;
 			}
+
+			if (isValid) var countdown = countdownDate.getTime();
+			else var countdown = new Date().getTime() + 3602000;
+
+			var x = setInterval(() => {
+				var now = new Date().getTime();
+				var distance = countdown - now;
+
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				var countdownText = `${pad(days, 2)}:${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
+				document.querySelector("h1").innerHTML = countdownText;
+				document.querySelector("title").innerHTML = countdownText;
+
+				if (distance < 0) {
+					clearInterval(x);
+					document.querySelector("h1").innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+					document.querySelector("title").innerHTML = "✔";
+				}
+			}, 1000);
 
 			document.addEventListener("keydown", (e) => {
 				if (e.key === "c") {
