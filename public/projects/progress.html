@@ -92,13 +92,17 @@
 				numbers = fraction.split("/");
 				numbers[0] = parseInt(numbers[0]);
 				numbers[1] = parseInt(numbers[1]);
-				if (!(numbers[0] > 0 && numbers[1] > 0)) randomFraction();
+				if (!(numbers[0] > -1 && numbers[1] > 0)) randomFraction();
 				while (numbers[0] > numbers[1]) numbers[0]--;
 			} else randomFraction();
 			percent = numbers[0] / numbers[1];
 
 			function setProgress(percent, setURL) {
-				document.querySelector("div.inner").style = `width: ${percent * 100}%`;
+				if (percent == 0) {
+					document.querySelector("div.inner").style = `width: ${percent * 100}%; opacity: 0%`;
+				} else {
+					document.querySelector("div.inner").style = `width: ${percent * 100}%`;
+				}
 				document.querySelector("title").innerHTML = `${Math.round(percent * 100 * 100) / 100}%`;
 				if (setURL) window.history.pushState({ numbers: [numbers[0], numbers[1]] }, "", `?x=${numbers[0]}/${numbers[1]}`);
 			}

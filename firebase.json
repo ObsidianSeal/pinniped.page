@@ -1,14 +1,27 @@
 {
-    "hosting": {
+	"hosting": {
+		"public": "public",
 
-        "public": "public",
+		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
 
-        "ignore": [
-            "firebase.json",
-            "**/.*",
-            "**/node_modules/**"
-        ],
+		"cleanUrls": true,
 
-        "cleanUrls": true
-    }
+		"redirects": [
+			{
+				"source": "/000",
+				"destination": "/s?s=410",
+				"type": 301
+			},
+			{
+				"source": "/001",
+				"destination": "/s?s=410",
+				"type": 301
+			},
+			{
+				"source": "/002",
+				"destination": "/s?s=410",
+				"type": 301
+			}
+		]
+	}
 }

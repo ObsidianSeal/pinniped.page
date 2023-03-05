@@ -29,13 +29,13 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
-			i {
+			i:not(#menu-open, #menu-close) {
 				position: absolute;
 				opacity: 50%;
 				transition: opacity 1s;
 			}
 
-			i:hover {
+			i:not(#menu-open, #menu-close):hover {
 				opacity: 100%;
 			}
 		</style>

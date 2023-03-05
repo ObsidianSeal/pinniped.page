@@ -1782,6 +1782,8 @@
 			}
 
 			document.addEventListener("keydown", (e) => {
+				keys[e.key] = true;
+
 				if (e.key === "Enter" || e.key === " ") {
 					randomIcon();
 				}
@@ -1868,7 +1870,7 @@
 					}
 				}
 
-				if (e.key === "c") {
+				if (e.key === "c" && keys["Control"] !== true) {
 					navigator.clipboard.writeText(`https://pinniped.page/projects/icons?x=${iconArray[index]}`);
 					document.getElementById("copied").style = "display: block";
 					setTimeout(function () {
@@ -1983,6 +1985,10 @@
 				if (e.key === "i" || e.key === "?") {
 					window.open("../posts/2022-12-06.html", "_blank").focus();
 				}
+			});
+
+			document.addEventListener("keyup", (e) => {
+				delete keys[e.key];
 			});
 		</script>
 	</body>

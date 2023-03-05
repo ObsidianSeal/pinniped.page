@@ -53,8 +53,8 @@
 			</div>
 
 			<p class="blog-archive">
-				<i class="fa-solid fa-star icon-27"></i><a class="link" href="projects/rate.html" target="_blank">10/10 would recommend</a>&nbsp;<span class="new"> NEW </span
-				>&nbsp;<span class="blog-archive">— Rate anything out of five stars.</span>
+				<i class="fa-solid fa-star icon-27"></i><a class="link" href="projects/rate.html" target="_blank">10/10 would recommend</a
+				><span class="blog-archive"> — Rate anything out of five stars.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-bezier-curve icon-30"></i><a class="link" href="projects/bezier-curves.html" target="_blank">BezierCurves</a>
@@ -73,8 +73,8 @@
 				<span class="blog-archive"> — Tells the time.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-regular fa-calendar-check icon-21"></i><a class="link" href="projects/countdown.html" target="_blank">countdown</a>&nbsp;<span class="beta">
-					BETA </span
+				<i class="fa-regular fa-calendar-check icon-21"></i><a class="link" href="projects/countdown.html" target="_blank">countdown</a>&nbsp;<span class="new">
+					NEW </span
 				>&nbsp;<span class="blog-archive">— Create countdown timers.</span>
 			</p>
 			<p class="blog-archive">
@@ -114,7 +114,7 @@
 				<span class="blog-archive"> — YouTube channel.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-bars-progress icon-24"></i><a class="link" href="projects/progress.html" target="_blank">progress</a>&nbsp;<span class="beta"> BETA </span
+				<i class="fa-solid fa-bars-progress icon-24"></i><a class="link" href="projects/progress.html" target="_blank">progress</a>&nbsp;<span class="new"> NEW </span
 				>&nbsp;<span class="blog-archive">— Create progress bars.</span>
 			</p>
 			<p class="blog-archive">
@@ -138,8 +138,7 @@
 				<span class="blog-archive"> — The classic game of Xs and Os.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-keyboard icon-27"></i><a class="link" href="projects/type.html" target="_blank">Type</a>&nbsp;<span class="updated"> UPDATED </span
-				>&nbsp;<span class="blog-archive">— Type.</span>
+				<i class="fa-solid fa-keyboard icon-27"></i><a class="link" href="projects/type.html" target="_blank">Type</a><span class="blog-archive"> — Type.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-circle-question icon-24"></i><a class="link" href="projects/v.html" target="_blank">v</a>
@@ -163,4 +162,55 @@
 		<div class="footer" style="background: #ffe66d"></div>
 		<div class="footer" style="background: #4ecdc4"></div>
 	</body>
+
+	<script>
+		// get thins from URL
+		const query = window.location.search;
+		const item = new URLSearchParams(query);
+		const tag = item.get("tag");
+		const search = item.get("search");
+
+		// function to remove elements from list
+		function refine(type, whatToKeep) {
+			if (type == "tag") {
+				// by tag
+				if (whatToKeep != null) {
+					document.querySelectorAll(`p.blog-archive:not(p:has(.${whatToKeep}))`).forEach((element) => {
+						element.remove();
+					});
+				} else {
+					document.querySelectorAll(`p.blog-archive:not(p:has(.new, .updated, .beta))`).forEach((element) => {
+						element.remove();
+					});
+				}
+			} else {
+				// or by text (in title)
+				document.querySelectorAll(`p.blog-archive`).forEach((element) => {
+					if (!element.children[1].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) {
+						element.remove();
+					}
+				});
+			}
+		}
+
+		// use tag?
+		if (tag != null) {
+			if (tag != "") {
+				if (tag == "new" || tag == "updated" || tag == "beta") {
+					refine("tag", tag);
+				}
+			} else {
+				refine("tag", null);
+			}
+		}
+
+		// use search?
+		if (search != null && search != "") {
+			refine("search", search);
+		}
+
+		// then use footer.js ⬇ to place footer at the bottom
+	</script>
+
+	<script src="files/footer.js"></script>
 </html>
