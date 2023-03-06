@@ -48,14 +48,18 @@
 				padding: 0;
 
 				position: fixed;
-				top: 0;
-				left: 0;
-				width: 1000px;
+			}
+
+			i.fa-xmark {
+				font-size: 150px;
+			}
+
+			i.fa-o {
+				font-size: 120px;
 			}
 
 			#board {
 				width: 470px;
-				height: 470px;
 				display: flex;
 				flex-wrap: wrap;
 			}
@@ -63,6 +67,17 @@
 			#board div {
 				width: 150px;
 				height: 150px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				/* transition: background-color 0.5s; */
+			}
+
+			#board div:hover {
+				cursor: pointer;
+				background-color: #83c5be50;
 			}
 
 			#square1 {
@@ -116,29 +131,42 @@
 	</head>
 
 	<body>
-		<p>
-			Phasellus non sem nulla. Phasellus odio ex, imperdiet non tempus vel, sollicitudin sit amet magna. Maecenas ac urna a erat vulputate aliquet sit amet id tellus.
-			Mauris vel magna et erat vehicula accumsan. Aenean in aliquet mi. Nullam non rutrum mauris. Praesent ac ligula viverra, convallis felis et, iaculis elit. Fusce
-			fermentum efficitur laoreet. Proin turpis lacus, interdum at tincidunt quis, pretium ac erat.
-		</p>
+		<p style="top: 10px; left: 20px"><span class="material-icons" style="translate: 0 2px">navigate_before</span> Back</p>
 
 		<div id="board">
-			<div id="square1"></div>
-			<div id="square2"></div>
-			<div id="square3"></div>
+			<div id="square1" onclick="handleClick('square1')"></div>
+			<div id="square2" onclick="handleClick('square2')"></div>
+			<div id="square3" onclick="handleClick('square3')"></div>
 
-			<div id="square4"></div>
-			<div id="square5"></div>
-			<div id="square6"></div>
+			<div id="square4" onclick="handleClick('square4')"></div>
+			<div id="square5" onclick="handleClick('square5')"></div>
+			<div id="square6" onclick="handleClick('square6')"></div>
 
-			<div id="square7"></div>
-			<div id="square8"></div>
-			<div id="square9"></div>
+			<div id="square7" onclick="handleClick('square7')"></div>
+			<div id="square8" onclick="handleClick('square8')"></div>
+			<div id="square9" onclick="handleClick('square9')"></div>
 		</div>
 	</body>
 
 	<script>
+		var turn = true;
+
 		// perfect position
 		document.querySelector("body").style = `height: ${window.innerHeight}px`;
+
+		// place X or O (can this be accessed from another script?)
+		function placeXO(square, XO) {
+			if (XO == "x") document.querySelector(`#${square}`).innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+			if (XO == "o") document.querySelector(`#${square}`).innerHTML = `<i class="fa-solid fa-o"></i>`;
+		}
+
+		// listen for clicks on square
+		function handleClick(square) {
+			if (document.querySelector(`#${square}`).innerHTML == "") {
+				if (turn) placeXO(square, "x");
+				else placeXO(square, "o");
+				turn = !turn;
+			}
+		}
 	</script>
 </html>
