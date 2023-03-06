@@ -10,7 +10,6 @@
 
 		<link rel="icon" href="../images/icon.png" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
 		<meta property="og:url" content="https://pinniped.page/projects/tictactoe" />
 		<meta property="og:type" content="website" />
@@ -50,12 +49,33 @@
 				position: fixed;
 			}
 
+			img {
+				user-select: none;
+			}
+
 			i.fa-xmark {
 				font-size: 150px;
 			}
 
 			i.fa-o {
 				font-size: 120px;
+			}
+
+			.button {
+				text-decoration: underline;
+				text-decoration-color: transparent;
+				text-underline-offset: 5px;
+				transition: text-decoration-color 0.5s;
+			}
+
+			.button:hover {
+				cursor: pointer;
+				text-decoration-color: inherit;
+			}
+
+			.text-below {
+				bottom: 50px;
+				font-size: 48px;
 			}
 
 			#board {
@@ -71,13 +91,10 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-
-				/* transition: background-color 0.5s; */
 			}
 
-			#board div:hover {
+			#board div:not(div:has(img)):hover {
 				cursor: pointer;
-				background-color: #83c5be50;
 			}
 
 			#square1 {
@@ -127,46 +144,202 @@
 				border-top: 5px solid #83c5be;
 				border-left: 5px solid #83c5be;
 			}
+
+			#d1,
+			#d2,
+			#d3 {
+				opacity: 0%;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 0.5s;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 0.5s;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 0.5s;
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+		</style>
+
+		<style id="toggleStyle1">
+			#board div:not(div:has(img)):hover {
+				background-color: #83c5be50;
+			}
 		</style>
 	</head>
 
-	<body>
-		<p style="top: 10px; left: 20px"><span class="material-icons" style="translate: 0 2px">navigate_before</span> Back</p>
+	<body draggable="false">
+		<p class="button" style="top: 10px; left: 20px" onclick="exitGame()">
+			<span class="material-icons" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Back
+		</p>
 
-		<div id="board">
-			<div id="square1" onclick="handleClick('square1')"></div>
-			<div id="square2" onclick="handleClick('square2')"></div>
-			<div id="square3" onclick="handleClick('square3')"></div>
+		<div id="board" draggable="false">
+			<div id="square1" onclick="handleClick('1')"></div>
+			<div id="square2" onclick="handleClick('2')"></div>
+			<div id="square3" onclick="handleClick('3')"></div>
 
-			<div id="square4" onclick="handleClick('square4')"></div>
-			<div id="square5" onclick="handleClick('square5')"></div>
-			<div id="square6" onclick="handleClick('square6')"></div>
+			<div id="square4" onclick="handleClick('4')"></div>
+			<div id="square5" onclick="handleClick('5')"></div>
+			<div id="square6" onclick="handleClick('6')"></div>
 
-			<div id="square7" onclick="handleClick('square7')"></div>
-			<div id="square8" onclick="handleClick('square8')"></div>
-			<div id="square9" onclick="handleClick('square9')"></div>
+			<div id="square7" onclick="handleClick('7')"></div>
+			<div id="square8" onclick="handleClick('8')"></div>
+			<div id="square9" onclick="handleClick('9')"></div>
 		</div>
+
+		<p class="text-below">It's your turn!</p>
 	</body>
 
 	<script>
+		// variables
+		var keys = {};
 		var turn = true;
+		var hasWon = false;
+		var squares = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+		var textBelow = document.querySelector("p.text-below");
 
 		// perfect position
-		document.querySelector("body").style = `height: ${window.innerHeight}px`;
+		function updateBodySize() {
+			document.querySelector("body").style = `height: ${window.innerHeight}px`;
+		}
+		updateBodySize();
 
-		// place X or O (can this be accessed from another script?)
+		// update perfect position on resize
+		addEventListener("resize", (e) => {
+			setTimeout(() => {
+				updateBodySize();
+			}, 500);
+		});
+
+		// exit game (currently just to my homepage)
+		function exitGame() {
+			window.location.href = "https://pinniped.page/";
+		}
+
+		// place X or O
 		function placeXO(square, XO) {
-			if (XO == "x") document.querySelector(`#${square}`).innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-			if (XO == "o") document.querySelector(`#${square}`).innerHTML = `<i class="fa-solid fa-o"></i>`;
+			document.querySelector(`#square${square}`).innerHTML = `<img src="../images/ttt-${XO}.png" draggable="false">`;
+			squares[square - 1] = XO;
+			console.log(squares); // debug
 		}
 
 		// listen for clicks on square
 		function handleClick(square) {
-			if (document.querySelector(`#${square}`).innerHTML == "") {
-				if (turn) placeXO(square, "x");
-				else placeXO(square, "o");
+			if (document.querySelector(`#square${square}`).innerHTML == "" && !hasWon) {
+				if (turn) {
+					placeXO(square, "x");
+					textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
+				} else {
+					placeXO(square, "o");
+					textBelow.innerHTML = "It's your turn!";
+				}
 				turn = !turn;
+
+				checkForWin();
 			}
 		}
+
+		// win?
+		function checkForWin() {
+			if (squares[0] == squares[1] && squares[1] == squares[2]) handleWin(turn, 0);
+			if (squares[3] == squares[4] && squares[4] == squares[5]) handleWin(turn, 1);
+			if (squares[6] == squares[7] && squares[7] == squares[8]) handleWin(turn, 2);
+
+			if (squares[0] == squares[3] && squares[3] == squares[6]) handleWin(turn, 3);
+			if (squares[1] == squares[4] && squares[4] == squares[7]) handleWin(turn, 4);
+			if (squares[2] == squares[5] && squares[5] == squares[8]) handleWin(turn, 5);
+
+			if (squares[0] == squares[4] && squares[4] == squares[8]) handleWin(turn, 6);
+			if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(turn, 7);
+		}
+
+		function handleWin(winner, winType) {
+			if (!winner) textBelow.innerHTML = "You win!";
+			else textBelow.innerHTML = "You lose.";
+			hasWon = true;
+		}
+
+		// fullscreen (we like that)
+		function toggleFullscreen() {
+			if (document.fullscreenElement) document.exitFullscreen();
+			else document.documentElement.requestFullscreen();
+		}
+
+		// keyboard shortcuts and related functions
+		document.addEventListener("keydown", (e) => {
+			keys[e.key] = true;
+
+			if (e.keyCode > 48 && e.keyCode < 58) handleClick(e.keyCode - 48);
+			if ((keys["Shift"] && e.key === "Enter") || e.key === "f") toggleFullscreen();
+		});
+		document.addEventListener("keyup", (e) => {
+			delete keys[e.key];
+		});
 	</script>
 </html>
