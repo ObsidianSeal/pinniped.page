@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>TicTacToe | ???</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/tictactoe" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="TicTacToe" />
+		<meta property="og:description" content="The classic game of Xs and Os, but it's an online 1v1." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;400");
+
+			body {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-family: "Oswald";
+				font-size: 24px;
+				background-color: #edf6f9;
+				color: #006d77;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+			}
+
+			::selection {
+				background-color: #006d77;
+				color: #edf6f9;
+			}
+
+			p {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 1000px;
+			}
+
+			#board {
+				width: 470px;
+				height: 470px;
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			#board div {
+				width: 150px;
+				height: 150px;
+			}
+
+			#square1 {
+				border-right: 5px solid #83c5be;
+				border-bottom: 5px solid #83c5be;
+			}
+
+			#square2 {
+				border-right: 5px solid #83c5be;
+				border-bottom: 5px solid #83c5be;
+				border-left: 5px solid #83c5be;
+			}
+
+			#square3 {
+				border-bottom: 5px solid #83c5be;
+				border-left: 5px solid #83c5be;
+			}
+
+			#square4 {
+				border-top: 5px solid #83c5be;
+				border-right: 5px solid #83c5be;
+				border-bottom: 5px solid #83c5be;
+			}
+
+			#square5 {
+				border: 5px solid #83c5be;
+			}
+
+			#square6 {
+				border-top: 5px solid #83c5be;
+				border-bottom: 5px solid #83c5be;
+				border-left: 5px solid #83c5be;
+			}
+
+			#square7 {
+				border-top: 5px solid #83c5be;
+				border-right: 5px solid #83c5be;
+			}
+
+			#square8 {
+				border-top: 5px solid #83c5be;
+				border-right: 5px solid #83c5be;
+				border-left: 5px solid #83c5be;
+			}
+
+			#square9 {
+				border-top: 5px solid #83c5be;
+				border-left: 5px solid #83c5be;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>
+			Phasellus non sem nulla. Phasellus odio ex, imperdiet non tempus vel, sollicitudin sit amet magna. Maecenas ac urna a erat vulputate aliquet sit amet id tellus.
+			Mauris vel magna et erat vehicula accumsan. Aenean in aliquet mi. Nullam non rutrum mauris. Praesent ac ligula viverra, convallis felis et, iaculis elit. Fusce
+			fermentum efficitur laoreet. Proin turpis lacus, interdum at tincidunt quis, pretium ac erat.
+		</p>
+
+		<div id="board">
+			<div id="square1"></div>
+			<div id="square2"></div>
+			<div id="square3"></div>
+
+			<div id="square4"></div>
+			<div id="square5"></div>
+			<div id="square6"></div>
+
+			<div id="square7"></div>
+			<div id="square8"></div>
+			<div id="square9"></div>
+		</div>
+	</body>
+
+	<script>
+		// perfect position
+		document.querySelector("body").style = `height: ${window.innerHeight}px`;
+	</script>
+</html>
