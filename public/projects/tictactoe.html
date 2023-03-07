@@ -18,12 +18,14 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
-			@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;400");
+			@import url("https://fonts.googleapis.com/css2?family=Oswald");
 
 			body {
 				margin: 0;
 				border: 0;
 				padding: 0;
+
+				transition: height 0.5s;
 
 				font-family: "Oswald";
 				font-size: 24px;
@@ -41,11 +43,18 @@
 				color: #edf6f9;
 			}
 
+			h1,
 			p {
 				margin: 0;
 				border: 0;
 				padding: 0;
+			}
 
+			h1 {
+				font-size: 100px;
+			}
+
+			p {
 				position: fixed;
 			}
 
@@ -76,6 +85,60 @@
 			.text-below {
 				bottom: 50px;
 				font-size: 48px;
+			}
+
+			.menu {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				background-color: #edf6f9;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.main-menu p,
+			input {
+				position: sticky;
+				width: 200px;
+				height: 40px;
+				border: 3px solid #83c5be;
+				margin: auto;
+				font-size: 18px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: border-color 0.5s;
+			}
+
+			.main-menu p:hover {
+				border-color: #006d77;
+				cursor: pointer;
+			}
+
+			input {
+				margin-top: 10px;
+				padding: 0;
+				outline: none;
+				font-family: "Oswald";
+				background-color: #edf6f9;
+				text-align: center;
+				color: #006d77;
+			}
+
+			input:focus {
+				border-color: #006d77;
+			}
+
+			::placeholder {
+				text-align: center;
+				color: #83c5be;
+			}
+
+			input:hover {
+				outline: none;
 			}
 
 			#board {
@@ -264,6 +327,10 @@
 					width: 100px;
 					height: 100px;
 				}
+
+				.text-below {
+					bottom: 40px;
+				}
 			}
 
 			@media all and (max-height: 570px) {
@@ -275,6 +342,10 @@
 					width: 75px;
 					height: 75px;
 				}
+
+				.text-below {
+					bottom: 30px;
+				}
 			}
 
 			@media all and (max-height: 490px) {
@@ -285,6 +356,10 @@
 				#board div {
 					width: 50px;
 					height: 50px;
+				}
+
+				.text-below {
+					bottom: 20px;
 				}
 			}
 		</style>
@@ -317,13 +392,38 @@
 		</div>
 
 		<p class="text-below">It's your turn!</p>
+
+		<div class="menu">
+			<p class="button" style="top: 10px; left: 20px" onclick="leave()">
+				<span class="material-icons" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Exit
+			</p>
+
+			<div class="main-menu">
+				<h1>TicTacToe</h1>
+				<p onclick="createGame()">NEW GAME</p>
+				<form>
+					<input type="text" placeholder="ENTER GAME CODE" maxlength="7" autocapitalize="off" spellcheck="false" autocomplete="off" />
+				</form>
+			</div>
+		</div>
 	</body>
 
 	<script>
+		// URL stuff
+		const query = window.location.search;
+		const item = new URLSearchParams(query);
+		var origin = item.get("o");
+		var gameCode = item.get("c");
+		if (origin != 1) {
+			origin = 0;
+			window.history.pushState({}, "", `?o=${origin}`);
+		}
+
 		// variables
 		var keys = {};
 		var turn = true;
 		var hasWon = false;
+		var gameStarted = false;
 		var squares = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 		var textBelow = document.querySelector("p.text-below");
 		var ogToggleStyle1 = document.querySelector("#toggleStyle1").innerHTML;
@@ -341,16 +441,21 @@
 			}, 500);
 		});
 
-		// exit game (currently just to my homepage)
+		// exit game (go to menu)
 		function exitGame() {
-			window.location.href = "https://pinniped.page/";
+			window.location.href = "tictactoe.html?o=" + origin;
+		}
+
+		// exit 'app' (return to origin)
+		function leave() {
+			if (origin == 1) window.location.href = "../projects+.html";
+			else window.location.href = "../projects.html";
 		}
 
 		// place X or O
 		function placeXO(square, XO) {
 			document.querySelector(`#square${square}`).innerHTML = `<img src="../images/ttt-${XO}.svg" draggable="false">`;
 			squares[square - 1] = XO;
-			// console.log(squares); // debug
 		}
 
 		// listen for clicks on square
@@ -383,6 +488,7 @@
 			if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(turn, 7);
 		}
 
+		// after win
 		function handleWin(winner, winType) {
 			if (!winner) textBelow.innerHTML = "You win!";
 			else textBelow.innerHTML = "You lose.";
@@ -400,11 +506,95 @@
 		document.addEventListener("keydown", (e) => {
 			keys[e.key] = true;
 
-			if (e.keyCode > 48 && e.keyCode < 58) handleClick(e.keyCode - 48);
-			if ((keys["Shift"] && e.key === "Enter") || e.key === "f") toggleFullscreen();
+			if (e.keyCode > 48 && e.keyCode < 58 && gameStarted) handleClick(e.keyCode - 48);
+			if (keys["Shift"] && e.key === "Enter") toggleFullscreen();
 		});
 		document.addEventListener("keyup", (e) => {
 			delete keys[e.key];
 		});
+
+		// prevent default form submitting
+		document.querySelector("form").addEventListener("submit", (e) => {
+			e.preventDefault();
+		});
+
+		// generate game code
+		const chars = [
+			"a",
+			"b",
+			"c",
+			"d",
+			"e",
+			"f",
+			"g",
+			"h",
+			"i",
+			"j",
+			"k",
+			"l",
+			"m",
+			"n",
+			"o",
+			"p",
+			"q",
+			"r",
+			"s",
+			"t",
+			"u",
+			"v",
+			"w",
+			"x",
+			"y",
+			"z",
+			"A",
+			"B",
+			"C",
+			"D",
+			"E",
+			"F",
+			"G",
+			"H",
+			"I",
+			"J",
+			"K",
+			"L",
+			"M",
+			"N",
+			"O",
+			"P",
+			"Q",
+			"R",
+			"S",
+			"T",
+			"U",
+			"V",
+			"W",
+			"X",
+			"Y",
+			"Z",
+			"0",
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9",
+		];
+		function genCode(length) {
+			let code = "";
+			for (let i = 0; i < length; i++) code = code + chars[Math.floor(Math.random() * chars.length)];
+			return code;
+		}
+
+		// create a new game
+		function createGame() {
+			let code = genCode(7);
+			window.history.pushState({}, "", `?o=${origin}&c=${code}`);
+			document.querySelector("title").innerHTML = "TicTacToe | " + code;
+			document.querySelector(".menu").style = "display: none";
+		}
 	</script>
 </html>
