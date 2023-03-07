@@ -93,10 +93,6 @@
 				justify-content: center;
 			}
 
-			#board div:not(div:has(img)):hover {
-				cursor: pointer;
-			}
-
 			#square1 {
 				border-right: 5px solid #83c5be;
 				border-bottom: 5px solid #83c5be;
@@ -225,10 +221,77 @@
 					opacity: 0%;
 				}
 			}
+
+			@media all and (max-width: 700px) {
+				#board {
+					width: 320px;
+				}
+
+				#board div {
+					width: 100px;
+					height: 100px;
+				}
+			}
+
+			@media all and (max-width: 350px) {
+				#board {
+					width: 245px;
+				}
+
+				#board div {
+					width: 75px;
+					height: 75px;
+				}
+			}
+
+			@media all and (max-width: 280px) {
+				#board {
+					width: 170px;
+				}
+
+				#board div {
+					width: 50px;
+					height: 50px;
+				}
+			}
+
+			@media all and (max-height: 730px) {
+				#board {
+					width: 320px;
+				}
+
+				#board div {
+					width: 100px;
+					height: 100px;
+				}
+			}
+
+			@media all and (max-height: 570px) {
+				#board {
+					width: 245px;
+				}
+
+				#board div {
+					width: 75px;
+					height: 75px;
+				}
+			}
+
+			@media all and (max-height: 490px) {
+				#board {
+					width: 170px;
+				}
+
+				#board div {
+					width: 50px;
+					height: 50px;
+				}
+			}
 		</style>
 
 		<style id="toggleStyle1">
 			#board div:not(div:has(img)):hover {
+				cursor: pointer;
 				background-color: #83c5be50;
 			}
 		</style>
@@ -263,6 +326,7 @@
 		var hasWon = false;
 		var squares = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 		var textBelow = document.querySelector("p.text-below");
+		var ogToggleStyle1 = document.querySelector("#toggleStyle1").innerHTML;
 
 		// perfect position
 		function updateBodySize() {
@@ -284,9 +348,9 @@
 
 		// place X or O
 		function placeXO(square, XO) {
-			document.querySelector(`#square${square}`).innerHTML = `<img src="../images/ttt-${XO}.png" draggable="false">`;
+			document.querySelector(`#square${square}`).innerHTML = `<img src="../images/ttt-${XO}.svg" draggable="false">`;
 			squares[square - 1] = XO;
-			console.log(squares); // debug
+			// console.log(squares); // debug
 		}
 
 		// listen for clicks on square
@@ -323,6 +387,7 @@
 			if (!winner) textBelow.innerHTML = "You win!";
 			else textBelow.innerHTML = "You lose.";
 			hasWon = true;
+			document.querySelector("#toggleStyle1").innerHTML = "";
 		}
 
 		// fullscreen (we like that)
