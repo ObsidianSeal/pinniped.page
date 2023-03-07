@@ -20,6 +20,10 @@
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Oswald");
 
+			* {
+				outline: none;
+			}
+
 			body {
 				margin: 0;
 				border: 0;
@@ -82,6 +86,15 @@
 				text-decoration-color: inherit;
 			}
 
+			.button:focus {
+				text-decoration-color: inherit;
+			}
+
+			.button:first-child {
+				top: 10px;
+				left: 20px;
+			}
+
 			.text-below {
 				bottom: 50px;
 				font-size: 48px;
@@ -118,10 +131,13 @@
 				cursor: pointer;
 			}
 
+			.main-menu p:focus {
+				border-color: #006d77;
+			}
+
 			input {
 				margin-top: 10px;
 				padding: 0;
-				outline: none;
 				font-family: "Oswald";
 				background-color: #edf6f9;
 				text-align: center;
@@ -369,38 +385,42 @@
 				cursor: pointer;
 				background-color: #83c5be50;
 			}
+
+			#board div:not(div:has(img)):focus {
+				background-color: #83c5be50;
+			}
 		</style>
 	</head>
 
 	<body draggable="false">
-		<p class="button" style="top: 10px; left: 20px" onclick="exitGame()">
+		<p id="backButton" style="display: none" class="button" tabindex="1">
 			<span class="material-icons" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Back
 		</p>
 
-		<div id="board" draggable="false">
-			<div id="square1" onclick="handleClick('1')"></div>
-			<div id="square2" onclick="handleClick('2')"></div>
-			<div id="square3" onclick="handleClick('3')"></div>
+		<div id="board" draggable="false" style="display: none">
+			<div id="square1" onclick="handleClick('1')" tabindex="2"></div>
+			<div id="square2" onclick="handleClick('2')" tabindex="3"></div>
+			<div id="square3" onclick="handleClick('3')" tabindex="4"></div>
 
-			<div id="square4" onclick="handleClick('4')"></div>
-			<div id="square5" onclick="handleClick('5')"></div>
-			<div id="square6" onclick="handleClick('6')"></div>
+			<div id="square4" onclick="handleClick('4')" tabindex="5"></div>
+			<div id="square5" onclick="handleClick('5')" tabindex="6"></div>
+			<div id="square6" onclick="handleClick('6')" tabindex="7"></div>
 
-			<div id="square7" onclick="handleClick('7')"></div>
-			<div id="square8" onclick="handleClick('8')"></div>
-			<div id="square9" onclick="handleClick('9')"></div>
+			<div id="square7" onclick="handleClick('7')" tabindex="8"></div>
+			<div id="square8" onclick="handleClick('8')" tabindex="9"></div>
+			<div id="square9" onclick="handleClick('9')" tabindex="10"></div>
 		</div>
 
-		<p class="text-below">It's your turn!</p>
+		<p class="text-below" style="display: none">It's your turn!</p>
 
 		<div class="menu">
-			<p class="button" style="top: 10px; left: 20px" onclick="leave()">
+			<p id="exitButton" class="button" style="top: 10px; left: 20px" tabindex="0">
 				<span class="material-icons" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Exit
 			</p>
 
 			<div class="main-menu">
 				<h1>TicTacToe</h1>
-				<p onclick="createGame()">NEW GAME</p>
+				<p id="newGameButton" tabindex="0">NEW GAME</p>
 				<form>
 					<input type="text" placeholder="ENTER GAME CODE" maxlength="7" autocapitalize="off" spellcheck="false" autocomplete="off" />
 				</form>
@@ -408,7 +428,7 @@
 		</div>
 	</body>
 
-	<script>
+	<script type="module">
 		// URL stuff
 		const query = window.location.search;
 		const item = new URLSearchParams(query);
@@ -476,24 +496,31 @@
 
 		// win?
 		function checkForWin() {
-			if (squares[0] == squares[1] && squares[1] == squares[2]) handleWin(turn, 0);
-			if (squares[3] == squares[4] && squares[4] == squares[5]) handleWin(turn, 1);
-			if (squares[6] == squares[7] && squares[7] == squares[8]) handleWin(turn, 2);
-
-			if (squares[0] == squares[3] && squares[3] == squares[6]) handleWin(turn, 3);
-			if (squares[1] == squares[4] && squares[4] == squares[7]) handleWin(turn, 4);
-			if (squares[2] == squares[5] && squares[5] == squares[8]) handleWin(turn, 5);
-
-			if (squares[0] == squares[4] && squares[4] == squares[8]) handleWin(turn, 6);
-			if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(turn, 7);
+			if (squares[0] == squares[1] && squares[1] == squares[2]) handleWin(turn, 0, 1, 2);
+			else if (squares[3] == squares[4] && squares[4] == squares[5]) handleWin(turn, 3, 4, 5);
+			else if (squares[6] == squares[7] && squares[7] == squares[8]) handleWin(turn, 6, 7, 8);
+			else if (squares[0] == squares[3] && squares[3] == squares[6]) handleWin(turn, 0, 3, 6);
+			else if (squares[1] == squares[4] && squares[4] == squares[7]) handleWin(turn, 1, 4, 7);
+			else if (squares[2] == squares[5] && squares[5] == squares[8]) handleWin(turn, 2, 5, 8);
+			else if (squares[0] == squares[4] && squares[4] == squares[8]) handleWin(turn, 0, 4, 8);
+			else if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(turn, 2, 4, 6);
 		}
 
 		// after win
-		function handleWin(winner, winType) {
+		function handleWin(winner, win1, win2, win3) {
 			if (!winner) textBelow.innerHTML = "You win!";
 			else textBelow.innerHTML = "You lose.";
 			hasWon = true;
 			document.querySelector("#toggleStyle1").innerHTML = "";
+
+			for (let i = 0; i < 9; i++) {
+				if (i != win1 && i != win2 && i != win3) {
+					let squareElement = document.querySelector(`#square${i + 1}`);
+					if (squareElement.innerHTML != "") {
+						squareElement.children[0].style = "opacity: 50%";
+					}
+				}
+			}
 		}
 
 		// fullscreen (we like that)
@@ -508,6 +535,14 @@
 
 			if (e.keyCode > 48 && e.keyCode < 58 && gameStarted) handleClick(e.keyCode - 48);
 			if (keys["Shift"] && e.key === "Enter") toggleFullscreen();
+
+			if (e.key === "Enter") {
+				if (document.activeElement == document.querySelector(".menu .button")) leave();
+				if (document.activeElement == document.querySelector(".main-menu p")) createGame();
+				if (document.activeElement == document.querySelector(".button")) exitGame();
+
+				for (let i = 1; i <= 9; i++) if (document.activeElement == document.querySelector(`#square${i}`)) handleClick(i);
+			}
 		});
 		document.addEventListener("keyup", (e) => {
 			delete keys[e.key];
@@ -516,6 +551,7 @@
 		// prevent default form submitting
 		document.querySelector("form").addEventListener("submit", (e) => {
 			e.preventDefault();
+			createGame();
 		});
 
 		// generate game code
@@ -589,12 +625,71 @@
 			return code;
 		}
 
+		// show/hide board
+		function toggleBoardDisplay(showHide) {
+			if (showHide) {
+				document.querySelector(".button").style = "display: block";
+				document.querySelector("#board").style = "display: flex";
+				document.querySelector(".text-below").style = "display: block";
+			} else {
+				document.querySelector(".button").style = "display: none";
+				document.querySelector("#board").style = "display: none";
+				document.querySelector(".text-below").style = "display: none";
+			}
+		}
+
 		// create a new game
 		function createGame() {
 			let code = genCode(7);
+			initGame(code);
+
 			window.history.pushState({}, "", `?o=${origin}&c=${code}`);
 			document.querySelector("title").innerHTML = "TicTacToe | " + code;
+
 			document.querySelector(".menu").style = "display: none";
+			toggleBoardDisplay(true);
+		}
+
+		// click listeners
+		document.querySelector("#backButton").addEventListener("click", (e) => {
+			exitGame();
+		});
+		document.querySelector("#exitButton").addEventListener("click", (e) => {
+			leave();
+		});
+		document.querySelector("#newGameButton").addEventListener("click", (e) => {
+			createGame();
+		});
+
+		// --- FIREBASE ---
+
+		// fireBASED
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+		import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+		// firebase = wow!
+		const firebaseConfig = {
+			apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+			authDomain: "the-pinniped-page.firebaseapp.com",
+			databaseURL: "https://the-pinniped-page.firebaseio.com",
+			projectId: "the-pinniped-page",
+			storageBucket: "the-pinniped-page.appspot.com",
+			messagingSenderId: "636989973689",
+			appId: "1:636989973689:web:6d938d9588606d803a6768",
+		};
+		const app = initializeApp(firebaseConfig);
+
+		// create game - on Firebase Realtime Database
+		function initGame(code) {
+			const db = getDatabase();
+			let date = new Date();
+
+			set(ref(db, "tictactoe/" + code), {
+				data: {
+					date: date.toString(),
+					timestamp: date.getTime(),
+				},
+			});
 		}
 	</script>
 </html>
