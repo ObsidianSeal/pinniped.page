@@ -47,6 +47,11 @@
 				color: #edf6f9;
 			}
 
+			.brown::selection {
+				background-color: #e29578;
+				color: #edf6f9;
+			}
+
 			h1,
 			p {
 				margin: 0;
@@ -79,6 +84,7 @@
 				text-decoration-color: transparent;
 				text-underline-offset: 5px;
 				transition: text-decoration-color 0.5s;
+				user-select: none;
 			}
 
 			.button:hover {
@@ -133,6 +139,10 @@
 
 			.main-menu p:focus {
 				border-color: #006d77;
+			}
+
+			.brown {
+				color: #e29578;
 			}
 
 			input {
@@ -238,6 +248,12 @@
 				animation: d3 2.5s infinite 0.5s;
 			}
 
+			#code {
+				font-size: 48px;
+				top: 50px;
+				right: 100px;
+			}
+
 			@keyframes d1 {
 				0% {
 					opacity: 0%;
@@ -301,6 +317,13 @@
 				}
 			}
 
+			@media all and (max-width: 900px) {
+				#code {
+					top: 25px;
+					right: 50px;
+				}
+			}
+
 			@media all and (max-width: 700px) {
 				#board {
 					width: 320px;
@@ -309,6 +332,18 @@
 				#board div {
 					width: 100px;
 					height: 100px;
+				}
+			}
+
+			@media all and (max-width: 400px) {
+				.text-below {
+					font-size: 36px;
+				}
+			}
+
+			@media all and (max-width: 400px) {
+				h1 {
+					font-size: 90px;
 				}
 			}
 
@@ -321,6 +356,26 @@
 					width: 75px;
 					height: 75px;
 				}
+
+				h1 {
+					font-size: 80px;
+				}
+
+				.text-below {
+					font-size: 32px;
+				}
+			}
+
+			@media all and (max-width: 300px) {
+				.text-below {
+					font-size: 24px;
+				}
+			}
+
+			@media all and (max-width: 320px) {
+				h1 {
+					font-size: 70px;
+				}
 			}
 
 			@media all and (max-width: 280px) {
@@ -331,6 +386,10 @@
 				#board div {
 					width: 50px;
 					height: 50px;
+				}
+
+				h1 {
+					font-size: 60px;
 				}
 			}
 
@@ -376,6 +435,20 @@
 
 				.text-below {
 					bottom: 20px;
+					font-size: 36px;
+				}
+			}
+
+			@media all and (max-height: 400px) {
+				.text-below {
+					bottom: 10px;
+				}
+			}
+
+			@media all and (max-height: 360px) {
+				.text-below {
+					bottom: 5px;
+					font-size: 32px;
 				}
 			}
 		</style>
@@ -398,20 +471,22 @@
 		</p>
 
 		<div id="board" draggable="false" style="display: none">
-			<div id="square1" onclick="handleClick('1')" tabindex="2"></div>
-			<div id="square2" onclick="handleClick('2')" tabindex="3"></div>
-			<div id="square3" onclick="handleClick('3')" tabindex="4"></div>
+			<div id="square1" tabindex="2"></div>
+			<div id="square2" tabindex="3"></div>
+			<div id="square3" tabindex="4"></div>
 
-			<div id="square4" onclick="handleClick('4')" tabindex="5"></div>
-			<div id="square5" onclick="handleClick('5')" tabindex="6"></div>
-			<div id="square6" onclick="handleClick('6')" tabindex="7"></div>
+			<div id="square4" tabindex="5"></div>
+			<div id="square5" tabindex="6"></div>
+			<div id="square6" tabindex="7"></div>
 
-			<div id="square7" onclick="handleClick('7')" tabindex="8"></div>
-			<div id="square8" onclick="handleClick('8')" tabindex="9"></div>
-			<div id="square9" onclick="handleClick('9')" tabindex="10"></div>
+			<div id="square7" tabindex="8"></div>
+			<div id="square8" tabindex="9"></div>
+			<div id="square9" tabindex="10"></div>
 		</div>
 
-		<p class="text-below" style="display: none">It's your turn!</p>
+		<p class="text-below" style="display: none">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></p>
+
+		<p id="code" class="brown" style="display: none"></p>
 
 		<div class="menu">
 			<p id="exitButton" class="button" style="top: 10px; left: 20px" tabindex="0">
@@ -421,8 +496,17 @@
 			<div class="main-menu">
 				<h1>TicTacToe</h1>
 				<p id="newGameButton" tabindex="0">NEW GAME</p>
-				<form>
-					<input type="text" placeholder="ENTER GAME CODE" maxlength="7" autocapitalize="off" spellcheck="false" autocomplete="off" />
+				<form name="joinGameForm">
+					<input
+						name="joinGameInput"
+						type="text"
+						placeholder="ENTER GAME CODE"
+						maxlength="7"
+						autocapitalize="off"
+						spellcheck="false"
+						autocomplete="off"
+						pattern="^[a-zA-Z0-9]{7}$"
+					/>
 				</form>
 			</div>
 		</div>
@@ -436,12 +520,15 @@
 		var gameCode = item.get("c");
 		if (origin != 1) {
 			origin = 0;
-			window.history.pushState({}, "", `?o=${origin}`);
+			if (gameCode != null && gameCode != "") window.history.pushState({}, "", `?o=${origin}&c=${gameCode}`);
+			else window.history.pushState({}, "", `?o=${origin}`);
 		}
 
 		// variables
+		var code;
 		var keys = {};
 		var turn = true;
+		var player = true;
 		var hasWon = false;
 		var gameStarted = false;
 		var squares = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -478,9 +565,18 @@
 			squares[square - 1] = XO;
 		}
 
+		// swap turn
+		function swapTurn() {
+			turn = !turn;
+			console.log("turn=" + turn, "player=" + player);
+			if (document.querySelector("#toggleStyle1").innerHTML == "") document.querySelector("#toggleStyle1").innerHTML = ogToggleStyle1;
+			else document.querySelector("#toggleStyle1").innerHTML = "";
+		}
+
 		// listen for clicks on square
 		function handleClick(square) {
-			if (document.querySelector(`#square${square}`).innerHTML == "" && !hasWon) {
+			console.log("turn=" + turn, "player=" + player);
+			if (turn == player && document.querySelector(`#square${square}`).innerHTML == "" && !hasWon) {
 				if (turn) {
 					placeXO(square, "x");
 					textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
@@ -488,28 +584,49 @@
 					placeXO(square, "o");
 					textBelow.innerHTML = "It's your turn!";
 				}
-				turn = !turn;
 
+				let move = "";
+				if (player) move = move + "x";
+				else move = move + "o";
+				move = move + square;
+				makeMove(move);
+
+				console.log("made it here");
+				swapTurn();
 				checkForWin();
 			}
 		}
 
 		// win?
 		function checkForWin() {
-			if (squares[0] == squares[1] && squares[1] == squares[2]) handleWin(turn, 0, 1, 2);
-			else if (squares[3] == squares[4] && squares[4] == squares[5]) handleWin(turn, 3, 4, 5);
-			else if (squares[6] == squares[7] && squares[7] == squares[8]) handleWin(turn, 6, 7, 8);
-			else if (squares[0] == squares[3] && squares[3] == squares[6]) handleWin(turn, 0, 3, 6);
-			else if (squares[1] == squares[4] && squares[4] == squares[7]) handleWin(turn, 1, 4, 7);
-			else if (squares[2] == squares[5] && squares[5] == squares[8]) handleWin(turn, 2, 5, 8);
-			else if (squares[0] == squares[4] && squares[4] == squares[8]) handleWin(turn, 0, 4, 8);
-			else if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(turn, 2, 4, 6);
+			if (squares[0] == squares[1] && squares[1] == squares[2]) handleWin(!turn, 0, 1, 2);
+			else if (squares[3] == squares[4] && squares[4] == squares[5]) handleWin(!turn, 3, 4, 5);
+			else if (squares[6] == squares[7] && squares[7] == squares[8]) handleWin(!turn, 6, 7, 8);
+			else if (squares[0] == squares[3] && squares[3] == squares[6]) handleWin(!turn, 0, 3, 6);
+			else if (squares[1] == squares[4] && squares[4] == squares[7]) handleWin(!turn, 1, 4, 7);
+			else if (squares[2] == squares[5] && squares[5] == squares[8]) handleWin(!turn, 2, 5, 8);
+			else if (squares[0] == squares[4] && squares[4] == squares[8]) handleWin(!turn, 0, 4, 8);
+			else if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(!turn, 2, 4, 6);
+			else if (
+				(squares[0] == "x" || squares[0] == "o") &&
+				(squares[1] == "x" || squares[1] == "o") &&
+				(squares[2] == "x" || squares[2] == "o") &&
+				(squares[3] == "x" || squares[3] == "o") &&
+				(squares[4] == "x" || squares[4] == "o") &&
+				(squares[5] == "x" || squares[5] == "o") &&
+				(squares[6] == "x" || squares[6] == "o") &&
+				(squares[7] == "x" || squares[7] == "o") &&
+				(squares[8] == "x" || squares[8] == "o")
+			) {
+				handleWin();
+			}
 		}
 
 		// after win
 		function handleWin(winner, win1, win2, win3) {
-			if (!winner) textBelow.innerHTML = "You win!";
-			else textBelow.innerHTML = "You lose.";
+			if (winner == player) textBelow.innerHTML = "You win!";
+			else if (winner != null) textBelow.innerHTML = "You lose.";
+			else textBelow.innerHTML = "You tied.";
 			hasWon = true;
 			document.querySelector("#toggleStyle1").innerHTML = "";
 
@@ -551,7 +668,8 @@
 		// prevent default form submitting
 		document.querySelector("form").addEventListener("submit", (e) => {
 			e.preventDefault();
-			createGame();
+			code = document.joinGameForm.joinGameInput.value;
+			joinGame();
 		});
 
 		// generate game code
@@ -620,34 +738,55 @@
 			"9",
 		];
 		function genCode(length) {
-			let code = "";
-			for (let i = 0; i < length; i++) code = code + chars[Math.floor(Math.random() * chars.length)];
-			return code;
+			let codeString = "";
+			for (let i = 0; i < length; i++) codeString = codeString + chars[Math.floor(Math.random() * chars.length)];
+			code = codeString;
 		}
 
 		// show/hide board
 		function toggleBoardDisplay(showHide) {
 			if (showHide) {
+				document.querySelector(".menu").style = "display: none";
+
 				document.querySelector(".button").style = "display: block";
 				document.querySelector("#board").style = "display: flex";
 				document.querySelector(".text-below").style = "display: block";
+				document.querySelector("#code").style = "display: block";
 			} else {
+				document.querySelector(".menu").style = "display: flex";
+
 				document.querySelector(".button").style = "display: none";
 				document.querySelector("#board").style = "display: none";
 				document.querySelector(".text-below").style = "display: none";
+				document.querySelector("#code").style = "display: none";
 			}
+		}
+
+		// show the code and put it in the URL and title
+		function setCode(code) {
+			window.history.pushState({}, "", `?o=${origin}&c=${code}`);
+			document.querySelector("title").innerHTML = "TicTacToe | " + code;
+			document.querySelector("#code").innerHTML = code;
 		}
 
 		// create a new game
 		function createGame() {
-			let code = genCode(7);
+			genCode(7);
 			initGame(code);
-
-			window.history.pushState({}, "", `?o=${origin}&c=${code}`);
-			document.querySelector("title").innerHTML = "TicTacToe | " + code;
-
-			document.querySelector(".menu").style = "display: none";
+			setCode(code);
+			textBelow.innerHTML = "It's your turn!";
 			toggleBoardDisplay(true);
+
+			console.log("turn=" + turn, "player=" + player);
+		}
+
+		// join an existing game
+		function joinGame() {
+			setCode(code);
+			findGame();
+			toggleBoardDisplay(true);
+
+			console.log("turn=" + turn, "player=" + player);
 		}
 
 		// click listeners
@@ -660,12 +799,17 @@
 		document.querySelector("#newGameButton").addEventListener("click", (e) => {
 			createGame();
 		});
+		for (let i = 1; i <= 9; i++) {
+			document.querySelector(`#square${i}`).addEventListener("click", (e) => {
+				handleClick(i);
+			});
+		}
 
 		// --- FIREBASE ---
 
 		// fireBASED
 		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-		import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+		import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
 		// firebase = wow!
 		const firebaseConfig = {
@@ -689,6 +833,58 @@
 					date: date.toString(),
 					timestamp: date.getTime(),
 				},
+			});
+			getOpponentMoves();
+		}
+
+		// make move on server
+		function makeMove(move) {
+			console.log("move made");
+			const db = getDatabase();
+
+			set(ref(db, "tictactoe/" + code + "/move"), move);
+		}
+
+		// find game? !!! this kinda goes against the 'modular functions' I'm going for - or something like that
+		function findGame() {
+			const dbRef = ref(getDatabase());
+			get(child(dbRef, "tictactoe/" + code)).then((snapshot) => {
+				if (!snapshot.exists()) {
+					textBelow.innerHTML = "ERROR: game not found";
+					hasWon = true; // well, uh, technically, uh, nah
+				} else {
+					textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
+					player = false;
+					console.log("turn=" + turn, "player=" + player);
+				}
+				document.querySelector("#toggleStyle1").innerHTML = "";
+			});
+			getOpponentMoves();
+		}
+
+		// URL stuff 2.0
+		if (gameCode != null && gameCode != "") {
+			if (/^[a-zA-Z0-9]{7}$/.test(gameCode)) {
+				code = gameCode;
+				joinGame();
+			}
+		}
+
+		// get opponent moves
+		function getOpponentMoves() {
+			const db = getDatabase();
+			const moveRef = ref(db, "tictactoe/" + code + "/move");
+			onValue(moveRef, (snapshot) => {
+				const data = snapshot.val();
+
+				if (data != null) {
+					let newData = data.toString();
+					console.log(newData);
+					placeXO(newData.substring(1, 2), newData.substring(0, 1));
+					if (newData.substring(0, 1) == "x" && !player) swapTurn();
+					if (newData.substring(0, 1) == "o" && player) swapTurn();
+					checkForWin();
+				}
 			});
 		}
 	</script>
