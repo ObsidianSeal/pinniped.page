@@ -453,7 +453,8 @@ ul {
 
 .new,
 .updated,
-.beta {
+.beta,
+.tag {
 	background-color: #292f36;
 	border-radius: 5px;
 }
@@ -470,9 +471,18 @@ ul {
 	color: #ff6b6b;
 }
 
+.tag {
+	color: #ffffee;
+}
+
 .youtube-video {
 	width: 640px;
 	height: 360px;
+}
+
+.special-box {
+	border: 2px solid #292f36;
+	padding: 2px 0 5px 0;
 }
 
 #download-link {
@@ -583,7 +593,7 @@ ul {
 	}
 
 	.box-alt div {
-		padding: 0 0 0 10px;
+		padding: 0 10px 0 10px;
 	}
 
 	.box-thing {

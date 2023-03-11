@@ -134,8 +134,12 @@
 				<span class="blog-archive"> — Watch the YouTube video first.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-xmark icon-15"></i><a class="link" href="download.html?x=TicTacToe.jar">TicTacToe</a>
-				<span class="blog-archive"> — The classic game of Xs and Os.</span>
+				<i class="fa-solid fa-xmark icon-15"></i><a class="link" href="projects/tictactoe.html?o=1">TicTacToe</a>&nbsp;<span class="new"> NEW </span>&nbsp;<span
+					class="updated"
+				>
+					UPDATED
+				</span>
+				&nbsp;<span class="blog-archive">— The classic game of Xs and Os, but it's an online 1v1.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-keyboard icon-27"></i><a class="link" href="projects/type.html" target="_blank">Type</a><span class="blog-archive"> — Type.</span>
@@ -207,6 +211,13 @@
 		// use search?
 		if (search != null && search != "") {
 			refine("search", search);
+		}
+
+		// no results?
+		if (document.querySelectorAll(".blog-archive").length == 0) {
+			document.querySelector(
+				".content-end"
+			).innerHTML = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
 		}
 
 		// then use footer.js ⬇ to place footer at the bottom

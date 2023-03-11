@@ -252,6 +252,12 @@
 				font-size: 48px;
 				top: 50px;
 				right: 100px;
+				user-select: none;
+				text-underline-offset: 15px;
+			}
+
+			#subtitle {
+				user-select: none;
 			}
 
 			@keyframes d1 {
@@ -484,9 +490,9 @@
 			<div id="square9" tabindex="10"></div>
 		</div>
 
-		<p class="text-below" style="display: none">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></p>
+		<p id="subtitle" class="text-below" style="display: none">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></p>
 
-		<p id="code" class="brown" style="display: none"></p>
+		<p id="code" class="brown button" style="display: none" title="click to copy link"></p>
 
 		<div class="menu">
 			<p id="exitButton" class="button" style="top: 10px; left: 20px" tabindex="0">
@@ -799,6 +805,13 @@
 		document.querySelector("#newGameButton").addEventListener("click", (e) => {
 			createGame();
 		});
+		document.querySelector("#code").addEventListener("click", (e) => {
+			createLink();
+			document.querySelector("#code").innerHTML = "copied!";
+			setTimeout(() => {
+				document.querySelector("#code").innerHTML = code;
+			}, 3000);
+		});
 		for (let i = 1; i <= 9; i++) {
 			document.querySelector(`#square${i}`).addEventListener("click", (e) => {
 				handleClick(i);
@@ -886,6 +899,11 @@
 					checkForWin();
 				}
 			});
+		}
+
+		// copy link to game
+		function createLink() {
+			navigator.clipboard.writeText(`https://pinniped.page/ttt?c=${code}`);
 		}
 	</script>
 </html>

@@ -158,11 +158,20 @@
 
 			// ------- footer position, subtitle visibility -------
 
-			const screenHeight = window.innerHeight;
-			const height = screenHeight - 140;
-			document.querySelector("div.centre").style = `height: ${height}px`;
+			function perfectPosition() {
+				const screenHeight = window.innerHeight;
+				const height = screenHeight - 140;
+				document.querySelector("div.centre").style = `height: ${height}px`;
 
-			if (screenHeight < 450) document.getElementById("subtitle").remove();
+				if (screenHeight < 450) document.getElementById("subtitle").remove();
+			}
+			perfectPosition();
+
+			addEventListener("resize", (e) => {
+				setTimeout(() => {
+					perfectPosition();
+				}, 500);
+			});
 
 			// ------- quick navigate to project -------
 
