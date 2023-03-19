@@ -385,7 +385,7 @@ ul {
 	margin-top: 10px;
 }
 
-.blog-archive span:not(.new, .updated, .beta) {
+.blog-archive span:not(.new, .updated, .beta, .tag) {
 	opacity: 50%;
 }
 

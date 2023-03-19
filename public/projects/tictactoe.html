@@ -9,7 +9,7 @@
 		<meta name="theme-color" content="#4ecdc4" />
 
 		<link rel="icon" href="../images/icon.png" />
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 		<meta property="og:url" content="https://pinniped.page/projects/tictactoe" />
 		<meta property="og:type" content="website" />
@@ -141,8 +141,47 @@
 				border-color: #006d77;
 			}
 
+			.light-blue {
+				color: #83c5be;
+			}
+
 			.brown {
 				color: #e29578;
+			}
+
+			.big-icon .material-symbols-outlined {
+				font-size: 48px;
+				font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
+			}
+
+			.button-tray {
+				left: 20px;
+				bottom: 10px;
+				user-select: none;
+			}
+
+			.button-tray span {
+				margin-right: 5px;
+				transition: color 0.5s;
+			}
+
+			.button-tray span:hover {
+				color: #006d77;
+				cursor: pointer;
+			}
+
+			.button-tray span:not(#helpButton, #infoButton):focus {
+				color: #006d77;
+			}
+
+			#helpButton:hover {
+				color: #83c5be;
+				cursor: not-allowed;
+			}
+
+			#infoButton:hover {
+				color: #83c5be;
+				cursor: not-allowed;
 			}
 
 			input {
@@ -256,10 +295,6 @@
 				text-underline-offset: 15px;
 			}
 
-			#subtitle {
-				user-select: none;
-			}
-
 			@keyframes d1 {
 				0% {
 					opacity: 0%;
@@ -338,6 +373,12 @@
 				#board div {
 					width: 100px;
 					height: 100px;
+				}
+			}
+
+			@media all and (max-width: 550px) {
+				.button-tray {
+					left: inherit;
 				}
 			}
 
@@ -473,7 +514,7 @@
 
 	<body draggable="false">
 		<p id="backButton" style="display: none" class="button" tabindex="1">
-			<span class="material-icons" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Back
+			<span class="material-symbols-outlined" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Back
 		</p>
 
 		<div id="board" draggable="false" style="display: none">
@@ -490,31 +531,38 @@
 			<div id="square9" tabindex="10"></div>
 		</div>
 
-		<p id="subtitle" class="text-below" style="display: none">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></p>
+		<p class="text-below" style="display: none">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></p>
 
-		<p id="code" class="brown button" style="display: none" title="click to copy link"></p>
+		<p id="code" class="brown button" style="display: none" title="click to copy link" tabindex="0"></p>
 
 		<div class="menu">
 			<p id="exitButton" class="button" style="top: 10px; left: 20px" tabindex="0">
-				<span class="material-icons" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Exit
+				<span class="material-symbols-outlined" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Exit
 			</p>
 
 			<div class="main-menu">
 				<h1>TicTacToe</h1>
-				<p id="newGameButton" tabindex="0">NEW GAME</p>
-				<form name="joinGameForm">
+				<p id="newGameButton" tabindex="0" style="user-select: none">NEW GAME</p>
+				<form name="joinGameForm" style="user-select: none">
 					<input
 						name="joinGameInput"
 						type="text"
 						placeholder="ENTER GAME CODE"
-						maxlength="7"
+						maxlength="5"
 						autocapitalize="off"
 						spellcheck="false"
 						autocomplete="off"
-						pattern="^[a-zA-Z0-9]{7}$"
+						pattern="^[a-z]{5}$"
 					/>
 				</form>
 			</div>
+
+			<p class="big-icon light-blue button-tray">
+				<span class="material-symbols-outlined" tabindex="0" id="helpButton" title="how to play [COMING SOON]">help</span>
+				<span class="material-symbols-outlined" tabindex="0" id="infoButton" title="about + stats [COMING SOON]">info</span>
+				<span class="material-symbols-outlined" tabindex="0" id="feedbackButton" title="feedback/support Discord server">error</span>
+				<span class="material-symbols-outlined" tabindex="0" id="newTabButton" title="open in another tab">outbound</span>
+			</p>
 		</div>
 	</body>
 
@@ -524,6 +572,7 @@
 		const item = new URLSearchParams(query);
 		var origin = item.get("o");
 		var gameCode = item.get("c");
+		var oldGame = item.get("n");
 		if (origin != 1) {
 			origin = 0;
 			if (gameCode != null && gameCode != "") window.history.pushState({}, "", `?o=${origin}&c=${gameCode}`);
@@ -532,6 +581,8 @@
 
 		// variables
 		var code;
+		var move = "";
+		var game = "";
 		var keys = {};
 		var turn = true;
 		var player = true;
@@ -556,7 +607,8 @@
 
 		// exit game (go to menu)
 		function exitGame() {
-			window.location.href = "tictactoe.html?o=" + origin;
+			if (window.location.href.includes("projects")) window.location.href = "tictactoe.html?o=" + origin;
+			else window.location.href = "https://pinniped.page/projects/tictactoe.html?o=" + origin;
 		}
 
 		// exit 'app' (return to origin)
@@ -574,22 +626,21 @@
 		// swap turn
 		function swapTurn() {
 			turn = !turn;
-			console.log("turn=" + turn, "player=" + player);
+			toggleHoverEffect();
+		}
+
+		// toggle hover effect
+		function toggleHoverEffect() {
 			if (document.querySelector("#toggleStyle1").innerHTML == "") document.querySelector("#toggleStyle1").innerHTML = ogToggleStyle1;
 			else document.querySelector("#toggleStyle1").innerHTML = "";
 		}
 
 		// listen for clicks on square
 		function handleClick(square) {
-			console.log("turn=" + turn, "player=" + player);
+			console.log("handling click", turn, player);
 			if (turn == player && document.querySelector(`#square${square}`).innerHTML == "" && !hasWon) {
-				if (turn) {
-					placeXO(square, "x");
-					textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
-				} else {
-					placeXO(square, "o");
-					textBelow.innerHTML = "It's your turn!";
-				}
+				if (turn) placeXO(square, "x");
+				else placeXO(square, "o");
 
 				let move = "";
 				if (player) move = move + "x";
@@ -597,22 +648,21 @@
 				move = move + square;
 				makeMove(move);
 
-				console.log("made it here");
 				swapTurn();
-				checkForWin();
+				//checkForWin();
 			}
 		}
 
 		// win?
 		function checkForWin() {
-			if (squares[0] == squares[1] && squares[1] == squares[2]) handleWin(!turn, 0, 1, 2);
-			else if (squares[3] == squares[4] && squares[4] == squares[5]) handleWin(!turn, 3, 4, 5);
-			else if (squares[6] == squares[7] && squares[7] == squares[8]) handleWin(!turn, 6, 7, 8);
-			else if (squares[0] == squares[3] && squares[3] == squares[6]) handleWin(!turn, 0, 3, 6);
-			else if (squares[1] == squares[4] && squares[4] == squares[7]) handleWin(!turn, 1, 4, 7);
-			else if (squares[2] == squares[5] && squares[5] == squares[8]) handleWin(!turn, 2, 5, 8);
-			else if (squares[0] == squares[4] && squares[4] == squares[8]) handleWin(!turn, 0, 4, 8);
-			else if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(!turn, 2, 4, 6);
+			if (squares[0] == squares[1] && squares[1] == squares[2]) handleWin(turn, 0, 1, 2);
+			else if (squares[3] == squares[4] && squares[4] == squares[5]) handleWin(turn, 3, 4, 5);
+			else if (squares[6] == squares[7] && squares[7] == squares[8]) handleWin(turn, 6, 7, 8);
+			else if (squares[0] == squares[3] && squares[3] == squares[6]) handleWin(turn, 0, 3, 6);
+			else if (squares[1] == squares[4] && squares[4] == squares[7]) handleWin(turn, 1, 4, 7);
+			else if (squares[2] == squares[5] && squares[5] == squares[8]) handleWin(turn, 2, 5, 8);
+			else if (squares[0] == squares[4] && squares[4] == squares[8]) handleWin(turn, 0, 4, 8);
+			else if (squares[2] == squares[4] && squares[4] == squares[6]) handleWin(turn, 2, 4, 6);
 			else if (
 				(squares[0] == "x" || squares[0] == "o") &&
 				(squares[1] == "x" || squares[1] == "o") &&
@@ -625,16 +675,33 @@
 				(squares[8] == "x" || squares[8] == "o")
 			) {
 				handleWin();
+			} else {
+				return false;
 			}
+			return true;
 		}
 
 		// after win
 		function handleWin(winner, win1, win2, win3) {
+			endGame();
+			const db = getDatabase();
+			set(ref(db, "tictactoe/" + code + "/status"), "done");
+
+			if (winner != null) {
+				if (move.substring(0, 1) == "x") winner = true;
+				else winner = false;
+			}
+			console.log("handleWin();", winner, player);
+
 			if (winner == player) textBelow.innerHTML = "You win!";
 			else if (winner != null) textBelow.innerHTML = "You lose.";
 			else textBelow.innerHTML = "You tied.";
 			hasWon = true;
 			document.querySelector("#toggleStyle1").innerHTML = "";
+
+			document.querySelector("#code").innerHTML = 'Next<span class="material-symbols-outlined" style="translate: 0 6px; margin-left: 5px">navigate_next</span>';
+			document.querySelector("#code").classList.add("big-icon");
+			document.querySelector("#code").setAttribute("title", "click to create another game");
 
 			for (let i = 0; i < 9; i++) {
 				if (i != win1 && i != win2 && i != win3) {
@@ -656,6 +723,7 @@
 		document.addEventListener("keydown", (e) => {
 			keys[e.key] = true;
 
+			console.log(e.keyCode, e.keyCode - 48, gameStarted);
 			if (e.keyCode > 48 && e.keyCode < 58 && gameStarted) handleClick(e.keyCode - 48);
 			if (keys["Shift"] && e.key === "Enter") toggleFullscreen();
 
@@ -663,6 +731,26 @@
 				if (document.activeElement == document.querySelector(".menu .button")) leave();
 				if (document.activeElement == document.querySelector(".main-menu p")) createGame();
 				if (document.activeElement == document.querySelector(".button")) exitGame();
+
+				if (document.activeElement == document.querySelector("#helpButton")) {
+					// coming soon
+				}
+				if (document.activeElement == document.querySelector("#infoButton")) {
+					// coming soon
+				}
+				if (document.activeElement == document.querySelector("#feedbackButton")) window.open("https://discord.gg/yswDu7kywv");
+				if (document.activeElement == document.querySelector("#newTabButton")) newWindow();
+				if (document.activeElement == document.querySelector("#code")) {
+					if (!hasWon) {
+						createLink();
+						document.querySelector("#code").innerHTML = "copied!";
+						setTimeout(() => {
+							document.querySelector("#code").innerHTML = code;
+						}, 3000);
+					} else {
+						window.location.href = `https://pinniped.page/projects/tictactoe?o=${origin}&n=${code}`;
+					}
+				}
 
 				for (let i = 1; i <= 9; i++) if (document.activeElement == document.querySelector(`#square${i}`)) handleClick(i);
 			}
@@ -706,42 +794,42 @@
 			"x",
 			"y",
 			"z",
-			"A",
-			"B",
-			"C",
-			"D",
-			"E",
-			"F",
-			"G",
-			"H",
-			"I",
-			"J",
-			"K",
-			"L",
-			"M",
-			"N",
-			"O",
-			"P",
-			"Q",
-			"R",
-			"S",
-			"T",
-			"U",
-			"V",
-			"W",
-			"X",
-			"Y",
-			"Z",
-			"0",
-			"1",
-			"2",
-			"3",
-			"4",
-			"5",
-			"6",
-			"7",
-			"8",
-			"9",
+			// "A",
+			// "B",
+			// "C",
+			// "D",
+			// "E",
+			// "F",
+			// "G",
+			// "H",
+			// "I",
+			// "J",
+			// "K",
+			// "L",
+			// "M",
+			// "N",
+			// "O",
+			// "P",
+			// "Q",
+			// "R",
+			// "S",
+			// "T",
+			// "U",
+			// "V",
+			// "W",
+			// "X",
+			// "Y",
+			// "Z",
+			// "0",
+			// "1",
+			// "2",
+			// "3",
+			// "4",
+			// "5",
+			// "6",
+			// "7",
+			// "8",
+			// "9",
 		];
 		function genCode(length) {
 			let codeString = "";
@@ -777,13 +865,17 @@
 
 		// create a new game
 		function createGame() {
-			genCode(7);
+			genCode(5);
 			initGame(code);
 			setCode(code);
-			textBelow.innerHTML = "It's your turn!";
+			//textBelow.innerHTML = "It's your turn!";
 			toggleBoardDisplay(true);
+			gameStarted = true;
 
-			console.log("turn=" + turn, "player=" + player);
+			if (oldGame != null && oldGame != "") {
+				const db = getDatabase();
+				set(ref(db, "tictactoe/" + oldGame + "/next"), code);
+			}
 		}
 
 		// join an existing game
@@ -791,8 +883,12 @@
 			setCode(code);
 			findGame();
 			toggleBoardDisplay(true);
+		}
 
-			console.log("turn=" + turn, "player=" + player);
+		// open a new TicTacToe window
+		function newWindow() {
+			if (window.location.href.includes("projects")) window.open(`tictactoe.html?o=${origin}`);
+			else window.open(`https://pinniped.page/projects/tictactoe.html?o=${origin}`);
 		}
 
 		// click listeners
@@ -805,12 +901,28 @@
 		document.querySelector("#newGameButton").addEventListener("click", (e) => {
 			createGame();
 		});
+		document.querySelector("#helpButton").addEventListener("click", (e) => {
+			// coming soon!
+		});
+		document.querySelector("#infoButton").addEventListener("click", (e) => {
+			// coming soon!
+		});
+		document.querySelector("#feedbackButton").addEventListener("click", (e) => {
+			window.open("https://discord.gg/yswDu7kywv");
+		});
+		document.querySelector("#newTabButton").addEventListener("click", (e) => {
+			newWindow();
+		});
 		document.querySelector("#code").addEventListener("click", (e) => {
-			createLink();
-			document.querySelector("#code").innerHTML = "copied!";
-			setTimeout(() => {
-				document.querySelector("#code").innerHTML = code;
-			}, 3000);
+			if (!hasWon) {
+				createLink();
+				document.querySelector("#code").innerHTML = "copied!";
+				setTimeout(() => {
+					document.querySelector("#code").innerHTML = code;
+				}, 3000);
+			} else {
+				window.location.href = `https://pinniped.page/projects/tictactoe?o=${origin}&n=${code}`;
+			}
 		});
 		for (let i = 1; i <= 9; i++) {
 			document.querySelector(`#square${i}`).addEventListener("click", (e) => {
@@ -842,42 +954,72 @@
 			let date = new Date();
 
 			set(ref(db, "tictactoe/" + code), {
-				data: {
+				created: {
 					date: date.toString(),
 					timestamp: date.getTime(),
 				},
+				status: "waiting",
+				turn: "x",
+				move: "-",
+				game: "-",
 			});
 			getOpponentMoves();
 		}
 
 		// make move on server
 		function makeMove(move) {
-			console.log("move made");
 			const db = getDatabase();
 
 			set(ref(db, "tictactoe/" + code + "/move"), move);
+			if (player) set(ref(db, "tictactoe/" + code + "/turn"), "o");
+			else set(ref(db, "tictactoe/" + code + "/turn"), "x");
+
+			console.log(game, move);
+			if (game == "") game = move;
+			else game = game + " " + move;
+			set(ref(db, "tictactoe/" + code + "/game"), game);
 		}
 
 		// find game? !!! this kinda goes against the 'modular functions' I'm going for - or something like that
 		function findGame() {
+			const db = getDatabase();
 			const dbRef = ref(getDatabase());
+
 			get(child(dbRef, "tictactoe/" + code)).then((snapshot) => {
 				if (!snapshot.exists()) {
 					textBelow.innerHTML = "ERROR: game not found";
 					hasWon = true; // well, uh, technically, uh, nah
 				} else {
-					textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
-					player = false;
-					console.log("turn=" + turn, "player=" + player);
+					const data = snapshot.val();
+					let status = data.status.toString();
+					let dbTurn = data.turn.toString();
+					console.log(status, dbTurn);
+
+					if (status == "waiting") {
+						set(ref(db, "tictactoe/" + code + "/status"), "playing");
+
+						if (dbTurn == "x") {
+							//textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
+							document.querySelector("#toggleStyle1").innerHTML = "";
+						} else {
+							//textBelow.innerHTML = "It's your turn!";
+							toggleHoverEffect();
+						}
+
+						player = false;
+						getOpponentMoves();
+						gameStarted = true;
+					} else {
+						textBelow.innerHTML = "ERROR: ongoing game";
+						hasWon = true; // well, uh, technically, uh, nah
+					}
 				}
-				document.querySelector("#toggleStyle1").innerHTML = "";
 			});
-			getOpponentMoves();
 		}
 
 		// URL stuff 2.0
 		if (gameCode != null && gameCode != "") {
-			if (/^[a-zA-Z0-9]{7}$/.test(gameCode)) {
+			if (/^[a-z]{5}$/.test(gameCode)) {
 				code = gameCode;
 				joinGame();
 			}
@@ -887,16 +1029,63 @@
 		function getOpponentMoves() {
 			const db = getDatabase();
 			const moveRef = ref(db, "tictactoe/" + code + "/move");
+			const turnRef = ref(db, "tictactoe/" + code + "/turn");
+			const nextRef = ref(db, "tictactoe/" + code + "/next");
+
 			onValue(moveRef, (snapshot) => {
 				const data = snapshot.val();
 
 				if (data != null) {
 					let newData = data.toString();
-					console.log(newData);
-					placeXO(newData.substring(1, 2), newData.substring(0, 1));
-					if (newData.substring(0, 1) == "x" && !player) swapTurn();
-					if (newData.substring(0, 1) == "o" && player) swapTurn();
-					checkForWin();
+					if (newData != "-") {
+						move = newData;
+						placeXO(newData.substring(1, 2), newData.substring(0, 1));
+						if ((newData.substring(0, 1) == "x" && !player) || (newData.substring(0, 1) == "o" && player)) {
+							console.log(newData + " | " + game);
+							if (game == "") game = newData;
+							else game = game + " " + newData;
+							console.log(newData + " | " + game);
+							swapTurn();
+						}
+					}
+				}
+			});
+
+			onValue(turnRef, (snapshot) => {
+				const data = snapshot.val();
+
+				if (data != null) {
+					let newData = data.toString();
+
+					console.log("checkForWin();" + !checkForWin());
+					if (!checkForWin()) {
+						if (newData == "x") {
+							if (player) {
+								textBelow.innerHTML = "It's your turn!";
+							} else {
+								textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
+							}
+						} else {
+							if (player) {
+								textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
+							} else {
+								textBelow.innerHTML = "It's your turn!";
+							}
+						}
+					}
+				}
+			});
+
+			onValue(nextRef, (snapshot) => {
+				if (snapshot.exists()) {
+					const data = snapshot.val();
+					console.log(data);
+
+					if (data != null) {
+						let newData = data.toString();
+
+						window.location.href = `https://pinniped.page/projects/tictactoe.html?o=${origin}&c=${newData}`;
+					}
 				}
 			});
 		}
@@ -904,6 +1093,29 @@
 		// copy link to game
 		function createLink() {
 			navigator.clipboard.writeText(`https://pinniped.page/ttt?c=${code}`);
+		}
+
+		// going back should return to menu
+		addEventListener("popstate", (e) => {
+			console.log("POPSTATE");
+			if (window.location.href.includes("projects")) window.location.href = "tictactoe.html?o=" + origin;
+			else window.location.href = "https://pinniped.page/projects/tictactoe.html?o=" + origin;
+		});
+
+		// end game (add date + time to db)
+		function endGame() {
+			const db = getDatabase();
+			let date = new Date();
+
+			set(ref(db, "tictactoe/" + code + "/ended"), {
+				date: date.toString(),
+				timestamp: date.getTime(),
+			});
+		}
+
+		// auto start game
+		if (oldGame != null && oldGame != "") {
+			createGame();
 		}
 	</script>
 </html>
