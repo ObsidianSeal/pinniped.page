@@ -58,10 +58,12 @@
 				document.hexadecimal1.input1.value = "";
 				document.hexadecimal2.input2.value = "";
 				document.string.input3.value = "";
+				document.string2.input4.value = "";
 
 				document.getElementById("result1").innerHTML = ">>> ";
 				document.getElementById("result2").innerHTML = ">>> ";
 				document.getElementById("result3").innerHTML = ">>> ";
+				document.getElementById("result4").innerHTML = ">>> ";
 			}
 
 			// 1. decimal to hexadecimal
@@ -244,6 +246,24 @@
 					document.getElementById("result3").innerHTML = `>>> ${result}`;
 				}
 			}
+
+			// 4. random from provided
+			function randomFromProvided() {
+				let input = document.string2.input4.value;
+				let output = "";
+				let outputElement = document.querySelector("#result4");
+
+				if (input == "") {
+					output = "ERROR: provide at least 1 character";
+				} else {
+					let chars = input.split("");
+					for (let i = 0; i < 30; i++) {
+						output = output + chars[Math.floor(Math.random() * chars.length)];
+					}
+				}
+
+				outputElement.innerHTML = ">>> " + output;
+			}
 		</script>
 	</head>
 
@@ -255,7 +275,7 @@
 
 		<h3>decimal to hexadecimal:</h3>
 		<form name="hexadecimal1" id="hexadecimal1">
-			<input type="number" name="input1" id="input1" />
+			<input type="number" placeholder="decimal number" name="input1" id="input1" />
 			<button type="button" onclick="hex()">convert!</button>
 			<p id="result1">>>></p>
 		</form>
@@ -264,7 +284,7 @@
 
 		<h3>hexadecimal to decimal:</h3>
 		<form name="hexadecimal2" id="hexadecimal2">
-			<input type="text" name="input2" id="input2" />
+			<input type="text" placeholder="hexadecimal number" name="input2" id="input2" />
 			<button type="button" onclick="hexReverse()">convert!</button>
 			<p id="result2">>>></p>
 		</form>
@@ -273,9 +293,18 @@
 
 		<h3>random string:</h3>
 		<form name="string" id="string">
-			<input type="number" name="input3" id="input3" />
+			<input type="number" placeholder="length" name="input3" id="input3" />
 			<button type="button" onclick="randomString()">generate!</button>
 			<p id="result3">>>></p>
+		</form>
+
+		<hr />
+
+		<h3>random from provided:</h3>
+		<form name="string2" id="string2">
+			<input type="text" placeholder="characters" name="input4" id="input4" />
+			<button type="button" onclick="randomFromProvided()">generate!</button>
+			<p id="result4">>>></p>
 		</form>
 
 		<hr />
@@ -284,48 +313,45 @@
 			const element1 = document.getElementById("input1");
 			const element2 = document.getElementById("input2");
 			const element3 = document.getElementById("input3");
+			const element4 = document.getElementById("input4");
 
+			// keyboard shortcuts
 			document.addEventListener("keydown", (e) => {
-				if (!(element1 === document.activeElement || element2 === document.activeElement || element3 === document.activeElement) && e.key === "f") {
-					if (!document.fullscreenElement) {
-						document.documentElement.requestFullscreen();
-					} else {
-						document.exitFullscreen();
+				let focused = document.activeElement;
+
+				if (!(element1 === focused || element2 === focused || element3 === focused || element4 === focused)) {
+					if (e.key === "f") {
+						if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+						else document.exitFullscreen();
 					}
-				}
-
-				if (e.key === "r") {
-					reset();
-
-					setTimeout(() => {
-						element2.value = "";
-					}, 10);
+					if (e.key === "r") reset();
 				}
 			});
 
+			// function triggers
 			document.getElementById("hexadecimal1").addEventListener("submit", function (e) {
 				e.preventDefault();
 				hex();
 			});
-
 			document.getElementById("hexadecimal2").addEventListener("submit", function (e) {
 				e.preventDefault();
 				hexReverse();
 			});
-
 			document.getElementById("string").addEventListener("submit", function (e) {
 				e.preventDefault();
 				randomString();
 			});
+			document.getElementById("string2").addEventListener("submit", function (e) {
+				e.preventDefault();
+				randomFromProvided();
+			});
 
+			// back button
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
 			var b = item.get("b");
 			var lastPage = "../projects.html";
-
-			if (b == 0) lastPage = "../projects.html";
 			if (b == 1) lastPage = "../projects+.html";
-
 			document.getElementById("back-button").addEventListener("click", function (e) {
 				window.location.href = lastPage;
 			});

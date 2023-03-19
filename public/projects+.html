@@ -106,8 +106,10 @@
 				<span class="blog-archive"> — It's a maze...for the mouse!</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-hashtag icon-21"></i><a class="link" href="projects/numbers.html?b=1">numbers</a>
-				<span class="blog-archive"> — Convert from decimal to hexadecimal, etc.</span>
+				<i class="fa-solid fa-hashtag icon-21"></i><a class="link" href="projects/numbers.html?b=1">numbers</a>&nbsp;<span class="updated"> UPDATED </span> &nbsp;<span
+					class="blog-archive"
+					>— Convert from decimal to hexadecimal, etc.</span
+				>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-brands fa-youtube icon-27"></i><a class="link" href="https://youtube.com/@ObsidianSeal" target="_blank">Obsidian_Seal</a>
@@ -218,9 +220,8 @@
 
 		// no results?
 		if (document.querySelectorAll(".blog-archive").length == 0) {
-			document.querySelector(
-				".content-end"
-			).innerHTML = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
+			let string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
+			document.querySelector(".content-end").innerHTML = string;
 		}
 
 		// then use footer.js ⬇ to place footer at the bottom
