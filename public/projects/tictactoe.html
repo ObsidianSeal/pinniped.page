@@ -380,6 +380,10 @@
 				.button-tray {
 					left: inherit;
 				}
+
+				#downloadButton {
+					display: none;
+				}
 			}
 
 			@media all and (max-width: 400px) {
@@ -560,6 +564,7 @@
 			<p class="big-icon light-blue button-tray">
 				<span class="material-symbols-outlined" tabindex="0" id="helpButton" title="how to play [COMING SOON]">help</span>
 				<span class="material-symbols-outlined" tabindex="0" id="infoButton" title="about + stats [COMING SOON]">info</span>
+				<span class="material-symbols-outlined" tabindex="0" id="downloadButton" title="download Java version">download_for_offline</span>
 				<span class="material-symbols-outlined" tabindex="0" id="feedbackButton" title="feedback/support Discord server">error</span>
 				<span class="material-symbols-outlined" tabindex="0" id="newTabButton" title="open in another tab">outbound</span>
 			</p>
@@ -738,6 +743,7 @@
 				if (document.activeElement == document.querySelector("#infoButton")) {
 					// coming soon
 				}
+				if (document.activeElement == document.querySelector("#downloadButton")) window.location.href = "../download.html?x=TicTacToe.jar";
 				if (document.activeElement == document.querySelector("#feedbackButton")) window.open("https://discord.gg/yswDu7kywv");
 				if (document.activeElement == document.querySelector("#newTabButton")) newWindow();
 				if (document.activeElement == document.querySelector("#code")) {
@@ -906,6 +912,9 @@
 		});
 		document.querySelector("#infoButton").addEventListener("click", (e) => {
 			// coming soon!
+		});
+		document.querySelector("#downloadButton").addEventListener("click", (e) => {
+			window.location.href = "../download.html?x=TicTacToe.jar";
 		});
 		document.querySelector("#feedbackButton").addEventListener("click", (e) => {
 			window.open("https://discord.gg/yswDu7kywv");
