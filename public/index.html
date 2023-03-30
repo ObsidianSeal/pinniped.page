@@ -212,12 +212,12 @@
 				if (e.key === "Backspace" && !locationSelected) pageLocation = "images/";
 
 				if (e.key === "Enter" && pageName != "") {
-					if (pageLocation == "images/") {
-						window.location.href = pageLocation + pageName;
-					} else {
-						if (pageName.indexOf("?") == -1) window.location.href = pageLocation + pageName + ".html";
-						else window.location.href = pageLocation + pageName.replace("?", ".html?");
-					}
+					let ending = ".html"; // default file extension
+					if (pageName.indexOf("\\") != -1 || pageName.indexOf(".") != -1) ending = ""; // contains '\' (special - no extension) or '.' (for other extensions) -- use string as is
+					pageName = pageName.replace("\\", ""); // remove special '\' character
+
+					if (pageName.indexOf("?") == -1) window.location.href = pageLocation + pageName + ending; // no '?' -- navigate, regular
+					else window.location.href = pageLocation + pageName.replace("?", ending + "?"); // contains '?' -- navigate, place ending before '?'
 				}
 				if (e.key === "Backspace") {
 					pageName = pageName.substring(0, pageName.length - 1);
