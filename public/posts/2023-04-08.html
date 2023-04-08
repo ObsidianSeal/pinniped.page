@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Blog Post (2023/04/08)</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
+
+		<script src="../files/menu.js"></script>
+		<script type="module" src="../files/view.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/posts/2023-04-08" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2023/04/08)" />
+		<meta property="og:description" content="Updates, Updates Everywhere" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5>Blog Post / April 8th, 2023</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">Updates, Updates Everywhere</h3>
+
+			<div class="break"></div>
+
+			<img class="blog-image" src="../images/updates-everywhere.png" />
+
+			<div class="break"></div>
+
+			<p class="text">There are too many to describe individually so here's a long list:<br />Oh also nothing is in any kind of order.</p>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>Quick navigation doesn't add ".html" to the path if the path contains a "." or "\".</li>
+				<li>The "download Java version" button on TicTacToe doesn't appear on short screens (phones).</li>
+				<li>TicTacToe-Java was merged with TicTacToe: download it from the icon in the bottom left.</li>
+				<li>On the 'icons' page, it won't copy the icon link when control is pressed (so you can copy other things).</li>
+				<li>Projects+ says "no results" when there are no results.</li>
+				<li>'Numbers' can now generate a random string from provided characters.</li>
+				<li>Previously http redirects, /001, /002, and /003 are now firebase redirects to ERROR 410: Gone.</li>
+				<li>New project: 'progress'.</li>
+				<li>The YouTube embed on 'The Square' was replaced with the image that was there before, but now it links to the YouTube video. Now there are no cookies!</li>
+				<li>New project: 'countdown'.</li>
+				<li>Fixed a bug where the menu icon was faded after being pressed on the about page.</li>
+				<li>Applied footer.js to the download page.</li>
+				<li>New project: 'Minecraft & Motion'.</li>
+				<li>New project: 'TicTacToe'.</li>
+				<li>The text on buttons like the one the one at the top of the projects+ page can not longer be selected.</li>
+				<li>Something called "Padding in projects" on my Trello board... I have no idea what it is.</li>
+				<li>Fixed bug where 'progress' doesn't accept fractions with zero as the numerator (sometimes there's been 0 progress!).</li>
+				<li>You can now search projects+! Only by URL at the moment. Use ?tag="tag goes here" and &search="search goes here".</li>
+				<li>The list of featured projects has been changed quite a bit!</li>
+				<li>New project: 'WandStuff'.</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<p class="text">
+				I also don't feel like putting any links here—I'm sure you can find what I'm talking about yourself.<br />If you'd like anything here explained in more depth,
+				you could ask on my Discord server and maybe I'll make a more detailed blog post on it.<br />And if you haven't tried TicTacToe yet...WHAT ARE YOU WAITING
+				FOR???<br />Ok thanks bye.
+			</p>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script src="../files/footer.js"></script>
+	</body>
+</html>
