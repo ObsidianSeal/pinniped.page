@@ -26,19 +26,21 @@
 	<body style="padding: 20px">
 		<h3 id="text"></h3>
 
-		<form name="input" id="input">
-			<input name="textBox" id="textBox" style="margin: 20px 0 20px 0" placeholder="input for mobile devices" />
-		</form>
+		<div>
+			<form name="input" id="input">
+				<input name="textBox" id="textBox" style="margin: 20px 0 20px 0" placeholder="input for mobile devices" />
+			</form>
 
-		<h3 id="keyCode"></h3>
+			<h3 id="keyCode"></h3>
 
-		<hr style="border: 0; border-top: 2px solid #4ecdc4" />
+			<hr style="border: 0; border-top: 2px solid #4ecdc4" />
 
-		<form name="input2" id="input2">
-			<input name="textBox2" id="textBox2" style="margin: 20px 0 20px 0" placeholder="this text is duplicated" />
-		</form>
+			<form name="input2" id="input2">
+				<input name="textBox2" id="textBox2" style="margin: 20px 0 20px 0" placeholder="this text is duplicated" />
+			</form>
 
-		<h4 id="text2"></h4>
+			<h4 id="text2"></h4>
+		</div>
 
 		<script>
 			let textArray;
@@ -90,7 +92,11 @@
 					text.innerHTML = "";
 				}
 				if (keys["Shift"] === true && e.key === "Enter") {
+					document.querySelector("div").style = "display: none";
 					document.documentElement.requestFullscreen();
+				}
+				if (e.key === "Escape") {
+					document.querySelector("div").style = "display: block";
 				}
 			});
 

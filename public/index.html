@@ -32,6 +32,15 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
+			.hidden {
+				opacity: 0%;
+				transition: opacity 0.5s;
+			}
+
+			.hidden:hover {
+				opacity: 100%;
+			}
+
 			@media all and (max-width: 500px) {
 				h1 {
 					font-size: 48px;
@@ -148,11 +157,18 @@
 
 			function hideNotice() {
 				if (!noticeHidden) {
+					setTimeout(() => {
+						if (noticeHidden) {
+							document.getElementById("notice").classList.add("hidden");
+						}
+					}, 2000);
+
 					document.getElementById("notice-text").style = "display: none";
 					document.getElementById("notice-icon").style = "color: #4ecdc4"; // change if change icon colour!
 					document.getElementById("notice-x").classList.remove("fa-xmark");
 					document.getElementById("notice-x").classList.add("fa-angle-right");
 				} else {
+					document.getElementById("notice").classList.remove("hidden");
 					document.getElementById("notice-text").style = "display: inline-block";
 					document.getElementById("notice-icon").style = "color: #4ecdc4; margin-right: 20px"; // change if change icon colour!
 					document.getElementById("notice-x").classList.remove("fa-angle-right");
