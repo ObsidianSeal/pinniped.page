@@ -69,9 +69,8 @@
 				<span class="blog-archive"> — Tells the time.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-regular fa-calendar-check icon-21"></i><a class="link" href="projects/countdown.html" target="_blank">countdown</a>&nbsp;<span class="new">
-					NEW </span
-				>&nbsp;<span class="blog-archive">— Create countdown timers.</span>
+				<i class="fa-regular fa-calendar-check icon-21"></i><a class="link" href="projects/countdown.html" target="_blank">countdown</a>
+				<span class="blog-archive"> — Create countdown timers.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-table-cells icon-24"></i><a class="link" href="posts/2022-07-13.html">Crossword</a>
@@ -90,8 +89,8 @@
 				<span class="blog-archive"> — {hidden project}</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-chart-line icon-24"></i><a class="link" href="download.html?x=Motion.jar">Minecraft & Motion</a>&nbsp;<span class="new"> NEW </span
-				>&nbsp;<span class="blog-archive">— Plugin; record motion and export to desmos lists.</span>
+				<i class="fa-solid fa-chart-line icon-24"></i><a class="link" href="download.html?x=Motion.jar">Minecraft & Motion</a>
+				<span class="blog-archive"> — Plugin; record motion and export to desmos lists.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-gavel icon-24"></i><a class="link" href="projects/mjolnir.html">Mjölnir</a>
@@ -102,18 +101,16 @@
 				<span class="blog-archive"> — It's a maze...for the mouse!</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-hashtag icon-21"></i><a class="link" href="projects/numbers.html?b=1">numbers</a>&nbsp;<span class="updated"> UPDATED </span> &nbsp;<span
-					class="blog-archive"
-					>— Convert from decimal to hexadecimal, etc.</span
-				>
+				<i class="fa-solid fa-hashtag icon-21"></i><a class="link" href="projects/numbers.html?b=1">numbers</a>
+				<span class="blog-archive"> — Convert from decimal to hexadecimal, etc.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-brands fa-youtube icon-27"></i><a class="link" href="https://youtube.com/@ObsidianSeal" target="_blank">Obsidian_Seal</a>
 				<span class="blog-archive"> — YouTube channel.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-bars-progress icon-24"></i><a class="link" href="projects/progress.html" target="_blank">progress</a>&nbsp;<span class="new"> NEW </span
-				>&nbsp;<span class="blog-archive">— Create progress bars.</span>
+				<i class="fa-solid fa-bars-progress icon-24"></i><a class="link" href="projects/progress.html" target="_blank">progress</a>
+				<span class="blog-archive"> — Create progress bars.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-cubes icon-30"></i><a class="link" href="projects/cube.html" target="_blank">Rubik's Cube Scrambler</a>
@@ -132,10 +129,8 @@
 				<span class="blog-archive"> — Watch the YouTube video first.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-xmark icon-15"></i><a class="link" href="projects/tictactoe.html?o=1">TicTacToe</a>&nbsp;<span class="new"> NEW </span>&nbsp;<span
-					class="blog-archive"
-					>— The classic game of Xs and Os, but it's an online 1v1.</span
-				>
+				<i class="fa-solid fa-xmark icon-15"></i><a class="link" href="projects/tictactoe.html?o=1">TicTacToe</a>
+				<span class="blog-archive"> — The classic game of Xs and Os, but it's an online 1v1.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-keyboard icon-27"></i><a class="link" href="projects/type.html" target="_blank">Type</a><span class="blog-archive"> — Type.</span>
@@ -210,7 +205,14 @@
 
 		// no results?
 		if (document.querySelectorAll(".blog-archive").length == 0) {
-			let string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
+			let string = "";
+
+			if (tag == null || tag == "") {
+				string = `<p>Your search of <span class="special-box">&nbsp;any_tag&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
+			} else {
+				string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
+			}
+
 			document.querySelector(".content-end").innerHTML = string;
 		}
 
