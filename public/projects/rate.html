@@ -296,8 +296,8 @@
 			function editTitle(rating) {
 				lastGoodString = "";
 				pEditing = editing;
-				//console.log(rating, pEditing);
-				if (rating == pEditing) return;
+				//console.log(rating, pEditing, justEscaped);
+				if (rating == pEditing && !justEscaped) return; // 🐛 " && !justEscaped" is new and may introduce bugs (!!!)
 				//console.log(string, pText, editing, justEscaped);
 
 				if (editing != -1) {

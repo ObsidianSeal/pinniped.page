@@ -88,8 +88,7 @@
 		<div class="notice" id="notice">
 			<p>
 				<!-- can change icon, icon colour, and text -- make sure to check .js -->
-				<i class="fa-solid fa-star" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i
-				><span class="invert" id="notice-text">search projects+! use ?tag=___&search=___</span
+				<i class="fa-solid fa-star" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i><span class="invert" id="notice-text">zero cookie policy</span
 				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i>
 			</p>
 		</div>
@@ -151,9 +150,9 @@
 			const screenWidth = window.innerWidth;
 
 			// change if change text!
-			if (screenWidth < 700) document.getElementById("notice-text").innerHTML = "search projects+ by URL";
-			if (screenWidth < 500) document.getElementById("notice-text").innerHTML = "URL (?) projects+";
-			if (screenWidth < 350) document.getElementById("notice-text").innerHTML = "?";
+			if (screenWidth < 370) document.getElementById("notice-text").innerHTML = "0 cookie policy";
+			if (screenWidth < 320) document.getElementById("notice-text").innerHTML = "0 cookies";
+			if (screenWidth < 280) document.getElementById("notice-text").innerHTML = "0 🍪";
 
 			function hideNotice() {
 				if (!noticeHidden) {

@@ -42,7 +42,10 @@ a.link-3 {
 
 a.link:hover,
 a.link-2:hover,
-a.link-3:hover {
+a.link-3:hover,
+a.link:focus,
+a.link-2:focus,
+a.link-3:focus {
 	text-decoration-color: transparent;
 }
 
@@ -50,7 +53,8 @@ a.link {
 	text-decoration-color: #4ecdc47f;
 }
 
-a.link:hover {
+a.link:hover,
+a.link:focus {
 	background-color: #4ecdc47f;
 }
 
@@ -58,7 +62,8 @@ a.link-2 {
 	text-decoration-color: #ff6b6b7f;
 }
 
-a.link-2:hover {
+a.link-2:hover,
+a.link-2:focus {
 	background-color: #ff6b6b7f;
 }
 
@@ -66,11 +71,13 @@ a.link-3 {
 	text-decoration-color: #ffe66d7f;
 }
 
-a.link-3:hover {
+a.link-3:hover,
+a.link-3:focus {
 	background-color: #ffe66d7f;
 }
 
-a.box-link:hover {
+a.box-link:hover,
+a.box-link:focus {
 	color: #292f36;
 	background: none;
 }
@@ -183,7 +190,8 @@ hr {
 	font-size: 24px;
 }
 
-.navbar-item-mobile:hover {
+.navbar-item-mobile:hover,
+.navbar-item-mobile:focus {
 	cursor: pointer;
 }
 
@@ -198,15 +206,18 @@ hr {
 	transition: color 0.5s;
 }
 
-.navbar-item-mobile-2:nth-child(2) a:hover {
+.navbar-item-mobile-2:nth-child(2) a:hover,
+.navbar-item-mobile-2:nth-child(2) a:focus {
 	color: #4ecdc4;
 }
 
-.navbar-item-mobile-2:nth-child(3) a:hover {
+.navbar-item-mobile-2:nth-child(3) a:hover,
+.navbar-item-mobile-2:nth-child(3) a:focus {
 	color: #ff6b6b;
 }
 
-.navbar-item-mobile-2:nth-child(4) a:hover {
+.navbar-item-mobile-2:nth-child(4) a:hover,
+.navbar-item-mobile-2:nth-child(4) a:focus {
 	color: #ffe66d;
 }
 
@@ -362,15 +373,18 @@ ul {
 	padding-right: 30px;
 }
 
-.item1:hover {
+.item1:hover,
+.item1:focus {
 	color: #4ecdc4;
 }
 
-.item2:hover {
+.item2:hover,
+.item2:focus {
 	color: #ff6b6b;
 }
 
-.item3:hover {
+.item3:hover,
+.item3:focus {
 	color: #ffe66d;
 }
 
@@ -451,7 +465,8 @@ ul {
 	transition: color 0.5s;
 }
 
-.notice-x:hover {
+.notice-x:hover,
+.notice-x:focus {
 	color: #ffffee;
 	cursor: pointer;
 }
@@ -503,7 +518,8 @@ ul {
 	transition: text-decoration-color 0.5s;
 }
 
-#download-link:hover {
+#download-link:hover,
+#download-link:focus {
 	text-decoration-color: #ffffee;
 }
 
@@ -684,7 +700,7 @@ ul {
 		translate: 0 -5px;
 	}
 
-	.download-button {
+	.download-button:not(.download-button-long) {
 		width: 200px;
 	}
 
