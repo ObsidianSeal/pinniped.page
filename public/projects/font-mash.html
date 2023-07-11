@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>fOnT mAsHeR</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/font-mash" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="fOnT mAsHeR" />
+		<meta property="og:description" content="Each letter of the text you enter is a random font." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface");
+			@import url("https://fonts.googleapis.com/css2?family=Bad+Script");
+			@import url("https://fonts.googleapis.com/css2?family=Bangers");
+			@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue");
+			@import url("https://fonts.googleapis.com/css2?family=Comic+Neue");
+			@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great");
+			@import url("https://fonts.googleapis.com/css2?family=Fredoka");
+			@import url("https://fonts.googleapis.com/css2?family=Kablammo");
+			@import url("https://fonts.googleapis.com/css2?family=Lobster");
+			@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy");
+			@import url("https://fonts.googleapis.com/css2?family=Oswald");
+			@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab");
+			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk");
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			body {
+				padding: 20px;
+			}
+
+			#text {
+				font-size: 36px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>open during construction?</p>
+		<br /><br />
+
+		<p>background colour</p>
+		<input id="backgroundPicker" type="color" />
+		<br /><br />
+
+		<p>text colour</p>
+		<input id="textPicker" type="color" />
+		<br /><br /><br /><br />
+
+		<p id="text">as of right now you can only set the text by adding ?text=your+text+here to the url</p>
+
+		<script>
+			// elements
+			const body = document.querySelector("body");
+			const backgroundPicker = document.getElementById("backgroundPicker");
+			const textPicker = document.getElementById("textPicker");
+			const textElement = document.getElementById("text");
+			var text = textElement.innerHTML;
+
+			// set text to mash
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const URLtext = item.get("text");
+			if (URLtext != null && URLtext != "") text = URLtext;
+
+			// generate random #______
+			function generateHexColour() {
+				const r = Math.floor(Math.random() * 256).toString(16);
+				const g = Math.floor(Math.random() * 256).toString(16);
+				const b = Math.floor(Math.random() * 256).toString(16);
+
+				return `#${r}${g}${b}`;
+			}
+
+			// set background colour, listen for changes
+			const backgroundColor = generateHexColour();
+			body.style.backgroundColor = backgroundColor;
+			backgroundPicker.value = backgroundColor;
+			backgroundPicker.addEventListener("input", (e) => {
+				let colour = e.target.value;
+				body.style.backgroundColor = colour;
+			});
+
+			// set text colour, listen for changes
+			const textColor = generateHexColour();
+			body.style.color = textColor;
+			textPicker.value = textColor;
+			textPicker.addEventListener("input", (e) => {
+				let colour = e.target.value;
+				body.style.color = colour;
+			});
+
+			// font list
+			const fonts = [
+				"Arial",
+				"Abril Fatface",
+				"Bad Script",
+				"Bangers",
+				"Bebas Neue",
+				"Comic Neue",
+				"Fredericka the Great",
+				"Fredoka",
+				"Kablammo",
+				"Lobster",
+				"Luckiest Guy",
+				"Oswald",
+				"Press Start 2P",
+				"Roboto",
+				"Roboto Mono",
+				"Roboto Serif",
+				"Roboto Slab",
+				"Space Grotesk",
+				"Times New Roman",
+			];
+
+			// MASH!!!
+			var newTextNode = "";
+			for (let i = 0; i < text.length; i++) {
+				let randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+				newTextNode = newTextNode + `<span style="font-family: ${randomFont}">${text.charAt(i)}</span>`;
+			}
+			textElement.innerHTML = newTextNode;
+		</script>
+	</body>
+</html>

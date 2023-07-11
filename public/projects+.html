@@ -85,6 +85,10 @@
 				<span class="blog-archive"> — Random icon generator.</span>
 			</p>
 			<p class="blog-archive">
+				<i class="fa-solid fa-font icon-21"></i><a class="link" href="projects/font-mash.html" target="_blank">fOnT mAsHeR</a>&nbsp;<span class="beta"> BETA </span
+				>&nbsp;<span class="blog-archive">— Each letter of the text you enter is a random font.</span>
+			</p>
+			<p class="blog-archive">
 				<i class="fa-solid fa-palette icon-24"></i><a class="link" href="projects/hues+cues.html" target="_blank">Hues+Cues</a>
 				<span class="blog-archive"> — {hidden project}</span>
 			</p>
@@ -158,7 +162,7 @@
 	</body>
 
 	<script>
-		// get thins from URL
+		// get things from URL
 		const query = window.location.search;
 		const item = new URLSearchParams(query);
 		const tag = item.get("tag");
@@ -190,9 +194,17 @@
 		// use tag?
 		if (tag != null) {
 			if (tag != "") {
-				if (tag == "new" || tag == "updated" || tag == "beta" || tag == "tag") {
+				if (isNaN(tag)) {
 					refine("tag", tag);
+				} else {
+					refine("tag", "null");
 				}
+				// ⬆️ this should allow for 'no results' if the tag is invalid or the selector is a number
+				// if (tag == "new" || tag == "updated" || tag == "beta" || tag == "tag") {
+				// 	refine("tag", tag);
+				// } else {
+				// 	console.log("tag is a string, but not a known tag");
+				// }
 			} else {
 				refine("tag", null);
 			}
@@ -208,9 +220,9 @@
 			let string = "";
 
 			if (tag == null || tag == "") {
-				string = `<p>Your search of <span class="special-box">&nbsp;any_tag&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
+				string = `<p>Your search of <span class="special-box">&nbsp;any_tag&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <a class="link" href="projects+.html">Click here to clear the search.</a></p>`;
 			} else {
-				string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results.</p>`;
+				string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <a class="link" href="projects+.html">Click here to clear the search.</a></p>`;
 			}
 
 			document.querySelector(".content-end").innerHTML = string;
