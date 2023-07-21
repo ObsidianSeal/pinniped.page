@@ -236,10 +236,11 @@
 					document.querySelectorAll("span").forEach((element) => {
 						if (views[i] == 1) {
 							element.innerHTML = `${views[i].toLocaleString()} view`;
-						} else if (views[i] == undefined) {
-							element.innerHTML = `0 views`;
-						} else {
+						} else if (views[i] > 1) {
 							element.innerHTML = `${views[i].toLocaleString()} views`;
+						} else if (views[i] != undefined) {
+							firebase.database().ref(`/post-views/${titles[i]}`).remove();
+							element.innerHTML = `0 views`;
 						}
 						i++;
 					});
