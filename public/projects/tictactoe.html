@@ -39,7 +39,26 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				overflow: hidden;
+			}
+
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: #83c5be;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: #006d77;
+			}
+
+			::-webkit-scrollbar-track {
+				background-color: #edf6f9;
+			}
+
+			::-webkit-scrollbar-corner {
+				background-color: #edf6f9;
 			}
 
 			::selection {
@@ -47,7 +66,9 @@
 				color: #edf6f9;
 			}
 
-			.brown::selection {
+			h2::selection,
+			.brown::selection,
+			.data-area d::selection {
 				background-color: #e29578;
 				color: #edf6f9;
 			}
@@ -63,8 +84,21 @@
 				font-size: 100px;
 			}
 
+			h2 {
+				margin: 0;
+				color: #e29578;
+
+				font-size: 50px;
+				font-weight: normal;
+			}
+
 			p {
 				position: fixed;
+			}
+
+			.data-area p {
+				position: initial;
+				margin-top: 20px;
 			}
 
 			img {
@@ -170,18 +204,19 @@
 				cursor: pointer;
 			}
 
-			.button-tray span:not(#helpButton, #infoButton):focus {
+			.button-tray span:focus {
 				color: #006d77;
 			}
 
-			#helpButton:hover {
-				color: #83c5be;
-				cursor: not-allowed;
+			.data-page {
+				margin-right: auto;
+				margin-bottom: auto;
 			}
 
-			#infoButton:hover {
-				color: #83c5be;
-				cursor: not-allowed;
+			.data-area {
+				margin-left: 50px;
+				margin-top: 100px;
+				padding-bottom: 100px;
 			}
 
 			input {
@@ -295,6 +330,17 @@
 				text-underline-offset: 15px;
 			}
 
+			#backButton2 {
+				top: 0;
+				left: 0px;
+
+				width: 100%;
+				padding: 10px 0 10px 20px;
+				background-color: #edf6f9;
+
+				box-shadow: 0 0 10px 5px #edf6f9;
+			}
+
 			@keyframes d1 {
 				0% {
 					opacity: 0%;
@@ -386,15 +432,19 @@
 				}
 			}
 
-			@media all and (max-width: 400px) {
-				.text-below {
-					font-size: 36px;
+			@media all and (max-width: 460px) {
+				.data-area h1 {
+					font-size: 60px;
 				}
 			}
 
 			@media all and (max-width: 400px) {
 				h1 {
 					font-size: 90px;
+				}
+
+				.text-below {
+					font-size: 36px;
 				}
 			}
 
@@ -566,12 +616,47 @@
 			</div>
 
 			<p class="big-icon light-blue button-tray">
-				<span class="material-symbols-outlined" tabindex="0" id="helpButton" title="how to play [COMING SOON]">help</span>
-				<span class="material-symbols-outlined" tabindex="0" id="infoButton" title="about + stats [COMING SOON]">info</span>
+				<span class="material-symbols-outlined" tabindex="0" id="helpButton" title="how to play">help</span>
+				<span class="material-symbols-outlined" tabindex="0" id="infoButton" title="data [COMING SOON]">info</span>
 				<span class="material-symbols-outlined" tabindex="0" id="downloadButton" title="download Java version">download_for_offline</span>
 				<span class="material-symbols-outlined" tabindex="0" id="feedbackButton" title="feedback/support Discord server">error</span>
 				<span class="material-symbols-outlined" tabindex="0" id="newTabButton" title="open in another tab">outbound</span>
 			</p>
+		</div>
+
+		<div class="data-page" style="display: none">
+			<p id="backButton2" class="button" tabindex="1"><span class="material-symbols-outlined" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Back</p>
+
+			<div class="data-area">
+				<h1 style="font-weight: normal">TicTacToe data</h1>
+
+				<p>games created</p>
+				<h2 id="data-gameStatus-waiting">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>games started</p>
+				<h2 id="data-gameStatus-playing">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>games completed</p>
+				<h2 id="data-gameStatus-done">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>games won by X</p>
+				<h2 id="data-winType-x">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>games won by O</p>
+				<h2 id="data-winType-o">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>games tied</p>
+				<h2 id="data-winType-null">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>average number of moves</p>
+				<h2 id="data-averageMoveNumber">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>average game length</p>
+				<h2 id="data-averageGameTime">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>games continued</p>
+				<h2 id="data-timesNextPressed">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+			</div>
 		</div>
 	</body>
 
@@ -732,7 +817,6 @@
 		document.addEventListener("keydown", (e) => {
 			keys[e.key] = true;
 
-			console.log(e.keyCode, e.keyCode - 48, gameStarted);
 			if (e.keyCode > 48 && e.keyCode < 58 && gameStarted) handleClick(e.keyCode - 48);
 			if (keys["Shift"] && e.key === "Enter") toggleFullscreen();
 
@@ -741,11 +825,17 @@
 				if (document.activeElement == document.querySelector(".main-menu p")) createGame();
 				if (document.activeElement == document.querySelector(".button")) exitGame();
 
-				if (document.activeElement == document.querySelector("#helpButton")) {
-					// coming soon
-				}
+				if (document.activeElement == document.querySelector("#helpButton")) window.open("../files/tictactoe.pdf");
 				if (document.activeElement == document.querySelector("#infoButton")) {
-					// coming soon
+					document.querySelector(".menu").style = "display: none";
+					document.querySelector(".data-page").style = "display: block";
+					document.querySelector("title").innerHTML = "TicTacToe data";
+					crunchNumbers();
+				}
+				if (document.activeElement == document.querySelector("#backButton2")) {
+					document.querySelector(".menu").style = "display: flex";
+					document.querySelector(".data-page").style = "display: none";
+					document.querySelector("title").innerHTML = "TicTacToe | ???";
 				}
 				if (document.activeElement == document.querySelector("#downloadButton")) window.location.href = "../download.html?x=TicTacToe.jar";
 				if (document.activeElement == document.querySelector("#feedbackButton")) window.open("https://discord.gg/yswDu7kywv");
@@ -912,10 +1002,20 @@
 			createGame();
 		});
 		document.querySelector("#helpButton").addEventListener("click", (e) => {
-			// coming soon!
+			window.open("../files/tictactoe.pdf");
 		});
 		document.querySelector("#infoButton").addEventListener("click", (e) => {
-			// coming soon!
+			document.querySelector(".menu").style = "display: none";
+			document.querySelector(".data-page").style = "display: block";
+
+			document.querySelector("title").innerHTML = "TicTacToe data";
+			crunchNumbers();
+		});
+		document.querySelector("#backButton2").addEventListener("click", (e) => {
+			document.querySelector(".menu").style = "display: flex";
+			document.querySelector(".data-page").style = "display: none";
+
+			document.querySelector("title").innerHTML = "TicTacToe | ???";
 		});
 		document.querySelector("#downloadButton").addEventListener("click", (e) => {
 			window.location.href = "../download.html?x=TicTacToe.jar";
@@ -1129,6 +1229,71 @@
 		// auto start game
 		if (oldGame != null && oldGame != "") {
 			createGame();
+		}
+
+		// data a.k.a. BIG BOI NUMBER CRUNCHING
+		async function crunchNumbers() {
+			const db = getDatabase();
+			var bigData;
+
+			await get(ref(db, "tictactoe")).then((snapshot) => {
+				bigData = snapshot.val();
+			});
+
+			//console.log(bigData);
+
+			// 1. data.gameStatus.waiting
+			let totalGames = 0;
+			for (const game in bigData) totalGames++;
+			document.querySelector("#data-gameStatus-waiting").innerHTML = totalGames;
+
+			// 2. data.gameStatus.playing
+			let stillWaiting = 0;
+			for (const game in bigData) {
+				if (bigData[game].status == "waiting") stillWaiting++;
+			}
+			let gamesStarted = totalGames - stillWaiting;
+			document.querySelector("#data-gameStatus-playing").innerHTML = `${gamesStarted} (${Math.round((gamesStarted / totalGames) * 10000) / 100}%)`;
+
+			// 3. data.gameStatus.done
+			let stillPlaying = 0;
+			for (const game in bigData) {
+				if (bigData[game].status == "playing") stillPlaying++;
+			}
+			let gamesCompleted = totalGames - stillWaiting - stillPlaying;
+			document.querySelector("#data-gameStatus-done").innerHTML = `${gamesCompleted} (${Math.round((gamesCompleted / totalGames) * 10000) / 100}%)`;
+
+			// 4. data.winType.x
+			document.querySelector("#data-winType-x").innerHTML = "-";
+
+			// 5. data.winType.o
+			document.querySelector("#data-winType-o").innerHTML = "-";
+
+			// 6. data.winType.null
+			document.querySelector("#data-winType-null").innerHTML = "-";
+
+			// 7. data.averageMoveNumber
+			let totalMovesInDoneGames = 0;
+			for (const game in bigData) {
+				if (bigData[game].status == "done") totalMovesInDoneGames += (bigData[game].game.length + 1) / 3;
+			}
+			let averageMoves = Math.round((totalMovesInDoneGames / gamesCompleted) * 100) / 100;
+			document.querySelector("#data-averageMoveNumber").innerHTML = averageMoves;
+
+			// 8. data.averageGameTime
+			let totalTime = 0;
+			for (const game in bigData) {
+				if (bigData[game].status == "done") totalTime += (bigData[game].ended.timestamp - bigData[game].created.timestamp) / 1000;
+			}
+			let averageTime = Math.round((totalTime / gamesCompleted) * 100) / 100;
+			document.querySelector("#data-averageGameTime").innerHTML = `${averageTime} seconds`;
+
+			// 9. data.timesNextPressed
+			let nextPresses = 0;
+			for (const game in bigData) {
+				if (bigData[game].next != undefined) nextPresses++;
+			}
+			document.querySelector("#data-timesNextPressed").innerHTML = `${nextPresses} (${Math.round((nextPresses / gamesCompleted) * 10000) / 100}%)`;
 		}
 	</script>
 </html>
