@@ -219,6 +219,10 @@
 				padding-bottom: 100px;
 			}
 
+			.data-area span {
+				color: #83c5be;
+			}
+
 			input {
 				margin-top: 10px;
 				padding: 0;
@@ -656,6 +660,12 @@
 
 				<p>games continued</p>
 				<h2 id="data-timesNextPressed">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>most common first move</p>
+				<h2 id="data-move-first">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+
+				<p>most common last move</p>
+				<h2 id="data-move-last">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 			</div>
 		</div>
 	</body>
@@ -1240,8 +1250,6 @@
 				bigData = snapshot.val();
 			});
 
-			//console.log(bigData);
-
 			// 1. data.gameStatus.waiting
 			let totalGames = 0;
 			for (const game in bigData) totalGames++;
@@ -1253,7 +1261,7 @@
 				if (bigData[game].status == "waiting") stillWaiting++;
 			}
 			let gamesStarted = totalGames - stillWaiting;
-			document.querySelector("#data-gameStatus-playing").innerHTML = `${gamesStarted} (${Math.round((gamesStarted / totalGames) * 10000) / 100}%)`;
+			document.querySelector("#data-gameStatus-playing").innerHTML = `${gamesStarted} <span>(${Math.round((gamesStarted / totalGames) * 10000) / 100}%)</span>`;
 
 			// 3. data.gameStatus.done
 			let stillPlaying = 0;
@@ -1261,16 +1269,61 @@
 				if (bigData[game].status == "playing") stillPlaying++;
 			}
 			let gamesCompleted = totalGames - stillWaiting - stillPlaying;
-			document.querySelector("#data-gameStatus-done").innerHTML = `${gamesCompleted} (${Math.round((gamesCompleted / totalGames) * 10000) / 100}%)`;
+			document.querySelector("#data-gameStatus-done").innerHTML = `${gamesCompleted} <span>(${Math.round((gamesCompleted / totalGames) * 10000) / 100}%)</span>`;
 
 			// 4. data.winType.x
-			document.querySelector("#data-winType-x").innerHTML = "-";
+			let xWins = 0;
+			for (const game in bigData) {
+				if (bigData[game].status == "done") {
+					let board = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9"];
+					let movesMade = bigData[game].game.split(" ");
+
+					for (let i = 0; i < movesMade.length; i++) {
+						board[movesMade[i].substring(1, 2) - 1] = movesMade[i].substring(0, 1);
+					}
+
+					if (bigData[game].turn == "o") {
+						if (board[0] == board[1] && board[1] == board[2]) xWins++;
+						if (board[3] == board[4] && board[4] == board[5]) xWins++;
+						if (board[6] == board[7] && board[7] == board[8]) xWins++;
+						if (board[0] == board[3] && board[3] == board[6]) xWins++;
+						if (board[1] == board[4] && board[4] == board[7]) xWins++;
+						if (board[2] == board[5] && board[5] == board[8]) xWins++;
+						if (board[0] == board[4] && board[4] == board[8]) xWins++;
+						if (board[2] == board[4] && board[4] == board[6]) xWins++;
+					}
+				}
+			}
+			document.querySelector("#data-winType-x").innerHTML = `${xWins} <span>(${Math.round((xWins / gamesCompleted) * 10000) / 100}%)</span>`;
 
 			// 5. data.winType.o
-			document.querySelector("#data-winType-o").innerHTML = "-";
+			let oWins = 0;
+			for (const game in bigData) {
+				if (bigData[game].status == "done") {
+					let board = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9"];
+					let movesMade = bigData[game].game.split(" ");
+
+					for (let i = 0; i < movesMade.length; i++) {
+						board[movesMade[i].substring(1, 2) - 1] = movesMade[i].substring(0, 1);
+					}
+
+					if (bigData[game].turn == "x") {
+						if (board[0] == board[1] && board[1] == board[2]) oWins++;
+						if (board[3] == board[4] && board[4] == board[5]) oWins++;
+						if (board[6] == board[7] && board[7] == board[8]) oWins++;
+						if (board[0] == board[3] && board[3] == board[6]) oWins++;
+						if (board[1] == board[4] && board[4] == board[7]) oWins++;
+						if (board[2] == board[5] && board[5] == board[8]) oWins++;
+						if (board[0] == board[4] && board[4] == board[8]) oWins++;
+						if (board[2] == board[4] && board[4] == board[6]) oWins++;
+					}
+				}
+			}
+			document.querySelector("#data-winType-o").innerHTML = `${oWins} <span>(${Math.round((oWins / gamesCompleted) * 10000) / 100}%)</span>`;
 
 			// 6. data.winType.null
-			document.querySelector("#data-winType-null").innerHTML = "-";
+			let ties = gamesCompleted - xWins - oWins;
+			document.querySelector("#data-winType-null").innerHTML = `${ties} <span>(${Math.round((ties / gamesCompleted) * 10000) / 100}%)</span>`;
 
 			// 7. data.averageMoveNumber
 			let totalMovesInDoneGames = 0;
@@ -1293,7 +1346,24 @@
 			for (const game in bigData) {
 				if (bigData[game].next != undefined) nextPresses++;
 			}
-			document.querySelector("#data-timesNextPressed").innerHTML = `${nextPresses} (${Math.round((nextPresses / gamesCompleted) * 10000) / 100}%)`;
+			document.querySelector("#data-timesNextPressed").innerHTML = `${nextPresses} <span>(${Math.round((nextPresses / gamesCompleted) * 10000) / 100}%)</span>`;
+
+			// 10. data.move.first
+			const moveNames = ["top left", "top middle", "top right", "middle left", "centre", "middle right", "bottom left", "bottom middle", "bottom right"];
+			var firstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+			for (const game in bigData) {
+				let number = parseInt(bigData[game].game.substring(1, 2));
+				if (number > 0) firstMoves[number - 1]++;
+			}
+			document.querySelector("#data-move-first").innerHTML = moveNames[firstMoves.indexOf(Math.max(...firstMoves))];
+
+			// 11. data.move.last
+			var lastMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+			for (const game in bigData) {
+				let number = parseInt(bigData[game].game.substring(bigData[game].game.length - 1, bigData[game].game.length));
+				if (number > 0 && bigData[game].status == "done") lastMoves[number - 1]++;
+			}
+			document.querySelector("#data-move-last").innerHTML = moveNames[lastMoves.indexOf(Math.max(...lastMoves))];
 		}
 	</script>
 </html>
