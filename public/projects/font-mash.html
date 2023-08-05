@@ -50,22 +50,35 @@
 			#text {
 				font-size: 36px;
 			}
+
+			@media all and (max-width: 500px) {
+				#text {
+					font-size: 24px;
+				}
+			}
+
+			@media all and (max-width: 300px) {
+				#text {
+					font-size: 18px;
+				}
+			}
 		</style>
 	</head>
 
 	<body>
-		<p>open during construction?</p>
-		<br /><br />
-
 		<p>background colour</p>
 		<input id="backgroundPicker" type="color" />
 		<br /><br />
 
 		<p>text colour</p>
 		<input id="textPicker" type="color" />
+		<br /><br />
+
+		<input id="textInput" style="width: 100%" placeholder="Enter the text you want to MASH!!!" />
+		<button onclick="setText()">MASH!!! (caution: resets colours)</button>
 		<br /><br /><br /><br />
 
-		<p id="text">as of right now you can only set the text by adding ?text=your+text+here to the url</p>
+		<p id="text">Text will appear here. Reload for random colours!</p>
 
 		<script>
 			// elements
@@ -83,9 +96,13 @@
 
 			// generate random #______
 			function generateHexColour() {
-				const r = Math.floor(Math.random() * 256).toString(16);
-				const g = Math.floor(Math.random() * 256).toString(16);
-				const b = Math.floor(Math.random() * 256).toString(16);
+				var r = Math.floor(Math.random() * 256).toString(16);
+				var g = Math.floor(Math.random() * 256).toString(16);
+				var b = Math.floor(Math.random() * 256).toString(16);
+
+				if (r.length == 1) r = `0${r}`;
+				if (g.length == 1) g = `0${g}`;
+				if (b.length == 1) b = `0${b}`;
 
 				return `#${r}${g}${b}`;
 			}
@@ -132,12 +149,20 @@
 			];
 
 			// MASH!!!
-			var newTextNode = "";
-			for (let i = 0; i < text.length; i++) {
-				let randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-				newTextNode = newTextNode + `<span style="font-family: ${randomFont}">${text.charAt(i)}</span>`;
+			function mash() {
+				var newTextNode = "";
+				for (let i = 0; i < text.length; i++) {
+					let randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+					newTextNode = newTextNode + `<span style="font-family: ${randomFont}">${text.charAt(i)}</span>`;
+				}
+				textElement.innerHTML = newTextNode;
 			}
-			textElement.innerHTML = newTextNode;
+			mash();
+
+			// go to URL of set text
+			function setText() {
+				window.location.href = `https://pinniped.page/projects/font-mash?text=${document.getElementById("textInput").value}`;
+			}
 		</script>
 	</body>
 </html>
