@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Bus Ride Bingo</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/brb" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="BUS RIDE BINGO" />
+		<meta property="og:description" content="BUS RIDE BINGO" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto");
+
+			:root {
+				--background: #f4f1de;
+				--foreground: #3d405b;
+				--accent1: #e07a5f;
+				--accent2: #f2cc8f;
+				--accent3: #81b29a;
+			}
+
+			::selection {
+				background-color: var(--foreground);
+				color: var(--background);
+			}
+
+			* {
+				font-family: "Roboto";
+				font-size: 20px;
+			}
+
+			body {
+				height: calc(100vh - 40px);
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				background-color: var(--background);
+				color: var(--foreground);
+
+				margin: 0;
+				border: 0;
+				padding: 20px;
+			}
+
+			#board {
+				width: 100%;
+				max-width: 670px;
+				max-height: 670px;
+
+				aspect-ratio: 1 / 1;
+
+				display: flex;
+				flex-wrap: wrap;
+
+				border: 2px solid var(--foreground);
+			}
+
+			div div {
+				width: calc(100% / 5 - 14px);
+				max-width: 120px;
+				max-height: 120px;
+
+				aspect-ratio: 1 / 1;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				border: 2px solid var(--foreground);
+				padding: 5px;
+
+				text-align: center;
+			}
+
+			div div:hover {
+				cursor: pointer;
+			}
+
+			.filled {
+				background-color: var(--accent3);
+			}
+
+			.filled::selection {
+				background-color: var(--foreground);
+				color: var(--accent3);
+			}
+
+			@media all and (max-width: 600px) {
+				* {
+					font-size: 12px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="board">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+
+		<script>
+			let i = 0;
+			document.querySelectorAll("div div").forEach((square) => {
+				square.setAttribute("id", i);
+				i++;
+
+				square.addEventListener("click", (e) => {
+					if (square.classList.contains("filled")) square.classList.remove("filled");
+					else square.classList.add("filled");
+				});
+
+				square.innerHTML = `BINGO square #${i}`;
+			});
+
+			// font that fits the square depending on the amount of text
+			// what's going on on mobile?
+
+			// ---
+			// gotta make my own array mix algorithm
+			// const squares = ["", "", "", "", "5", "", "", "", "", "5", "", "", "", "", "5", "", "", "", "", "5", "", "", "", "", "5"];
+
+			// // CTRL+C CTRL+V from StackOverflow
+
+			// function shuffle(array) {
+			// 	let currentIndex = array.length,
+			// 		randomIndex;
+
+			// 	// While there remain elements to shuffle.
+			// 	while (currentIndex != 0) {
+			// 		// Pick a remaining element.
+			// 		randomIndex = Math.floor(Math.random() * currentIndex);
+			// 		currentIndex--;
+
+			// 		// And swap it with the current element.
+			// 		[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+			// 	}
+
+			// 	return array;
+			// }
+
+			// // Used like so
+			// var arr = [2, 11, 37, 42];
+			// shuffle(arr);
+			// console.log(arr);
+		</script>
+	</body>
+</html>

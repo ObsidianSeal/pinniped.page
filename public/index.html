@@ -88,7 +88,8 @@
 		<div class="notice" id="notice">
 			<p>
 				<!-- can change icon, icon colour, and text -- make sure to check .js -->
-				<i class="fa-solid fa-star" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i><span class="invert" id="notice-text">zero cookie policy</span
+				<i class="fa-solid fa-warning" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i
+				><span class="invert" id="notice-text">Google + Squarespace are being meanies, expect the worst!</span
 				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i>
 			</p>
 		</div>
@@ -150,9 +151,10 @@
 			const screenWidth = window.innerWidth;
 
 			// change if change text!
-			if (screenWidth < 370) document.getElementById("notice-text").innerHTML = "0 cookie policy";
-			if (screenWidth < 320) document.getElementById("notice-text").innerHTML = "0 cookies";
-			if (screenWidth < 280) document.getElementById("notice-text").innerHTML = "0 🍪";
+			if (screenWidth < 900) document.getElementById("notice-text").innerHTML = "***, expect the worst!";
+			if (screenWidth < 450) document.getElementById("notice-text").innerHTML = "expect the worst!";
+			if (screenWidth < 350) document.getElementById("notice-text").innerHTML = "big sad";
+			if (screenWidth < 250) document.getElementById("notice-text").innerHTML = ":(";
 
 			function hideNotice() {
 				if (!noticeHidden) {
@@ -163,13 +165,13 @@
 					}, 2000);
 
 					document.getElementById("notice-text").style = "display: none";
-					document.getElementById("notice-icon").style = "color: #4ecdc4"; // change if change icon colour!
+					document.getElementById("notice-icon").style = "color: #ff6b6b"; // change if change icon colour!
 					document.getElementById("notice-x").classList.remove("fa-xmark");
 					document.getElementById("notice-x").classList.add("fa-angle-right");
 				} else {
 					document.getElementById("notice").classList.remove("hidden");
 					document.getElementById("notice-text").style = "display: inline-block";
-					document.getElementById("notice-icon").style = "color: #4ecdc4; margin-right: 20px"; // change if change icon colour!
+					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px"; // change if change icon colour!
 					document.getElementById("notice-x").classList.remove("fa-angle-right");
 					document.getElementById("notice-x").classList.add("fa-xmark");
 				}
