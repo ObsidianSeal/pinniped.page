@@ -34,7 +34,7 @@
 
 			* {
 				font-family: "Roboto";
-				font-size: 20px;
+				font-size: 20px; /* remove when made auto */
 			}
 
 			body {
@@ -50,37 +50,33 @@
 				padding: 20px;
 			}
 
-			#board {
+			table {
 				width: 100%;
 				max-width: 670px;
 				max-height: 670px;
 
 				aspect-ratio: 1 / 1;
 
-				display: flex;
-				flex-wrap: wrap;
-
-				border: 2px solid var(--foreground);
+				margin: 0;
+				border: 3px solid var(--foreground);
+				border-collapse: collapse;
+				padding: 0;
 			}
 
-			div div {
-				width: calc(100% / 5 - 14px);
-				max-width: 120px;
-				max-height: 120px;
+			td {
+				width: 20%;
+				height: 20%;
 
 				aspect-ratio: 1 / 1;
 
-				display: flex;
-				justify-content: center;
-				align-items: center;
-
-				border: 2px solid var(--foreground);
+				margin: 0;
+				border: 3px solid var(--foreground);
 				padding: 5px;
 
 				text-align: center;
 			}
 
-			div div:hover {
+			td:hover {
 				cursor: pointer;
 			}
 
@@ -98,10 +94,9 @@
 					padding: 10px;
 				}
 
-				/* div div {
-					width: calc(100% / 5 - 8px);
+				td {
 					padding: 2px;
-				} */
+				}
 			}
 
 			@media all and (max-width: 800px) {
@@ -143,33 +138,43 @@
 	</head>
 
 	<body>
-		<div id="board">
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
+		<table>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
 
 		<script>
 			// "perfect position on mobile too", from https://pinniped.page/projects/chess/board
@@ -225,7 +230,7 @@
 
 			// set each square's id, add a click listener (invert square state)
 			let i = 0;
-			document.querySelectorAll("div div").forEach((square) => {
+			document.querySelectorAll("td").forEach((square) => {
 				square.setAttribute("id", i);
 
 				if (i < 12) square.innerHTML = squares[i];
@@ -242,7 +247,7 @@
 
 			// TODO:
 			// font that fits the square depending on the amount of text
-			// what's going on on mobile? :
+			// what's going on on mobile? : *(fix with table>?)
 		</script>
 	</body>
 </html>
