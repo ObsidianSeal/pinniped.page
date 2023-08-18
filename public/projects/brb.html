@@ -38,8 +38,6 @@
 			}
 
 			body {
-				height: calc(100vh - 40px);
-
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -95,9 +93,50 @@
 				color: var(--accent3);
 			}
 
+			@media all and (max-width: 500px) {
+				body {
+					padding: 10px;
+				}
+
+				/* div div {
+					width: calc(100% / 5 - 8px);
+					padding: 2px;
+				} */
+			}
+
+			@media all and (max-width: 800px) {
+				* {
+					font-size: 16px;
+				}
+			}
+
+			@media all and (max-width: 700px) {
+				* {
+					font-size: 14px;
+				}
+			}
+
 			@media all and (max-width: 600px) {
 				* {
 					font-size: 12px;
+				}
+			}
+
+			@media all and (max-width: 500px) {
+				* {
+					font-size: 10px;
+				}
+			}
+
+			@media all and (max-width: 430px) {
+				* {
+					font-size: 8px;
+				}
+			}
+
+			@media all and (max-width: 340px) {
+				* {
+					font-size: 6px;
 				}
 			}
 		</style>
@@ -133,49 +172,77 @@
 		</div>
 
 		<script>
+			// "perfect position on mobile too", from https://pinniped.page/projects/chess/board
+			const screenWidth = window.innerWidth;
+			const screenHeight = window.innerHeight;
+			document.querySelector("body").style = `height: ${screenHeight - 40}px`;
+
+			// what goes in the squares
+			const squares = [
+				"detour",
+				"see an articulated bus",
+				"pass a bus on the same route and direction",
+				"driver speaks (not about fare or directions)",
+				`driver gives directions / "does this bus go to ___?"`,
+				"wheelchair (driver gets up from seat)",
+				"driver gets up from seat (not for a wheelchair)",
+				"bus honk!",
+				"someone's stop is missed",
+				"cord/button doesn't work",
+				"arrive at your stop (last chance for bingo!)",
+				"people are standing",
+				"go under a bridge",
+				"go on a bridge",
+				"stroller",
+				"bus stops, but not at a stop",
+				"bus goes up onto the curb",
+				"something falls on the floor",
+				"sitting at a stop...",
+				"someone is running for the bus! (waiting)",
+				"railroad crossing",
+				"bus only lane!",
+				"pass a stop with a shelter",
+				"someone speaks in a language other than English",
+			];
+
+			// mix array for random bingo card; from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+			function shuffle(array) {
+				let currentIndex = array.length,
+					randomIndex;
+
+				while (currentIndex != 0) {
+					randomIndex = Math.floor(Math.random() * currentIndex);
+					currentIndex--;
+
+					[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+				}
+
+				return array;
+			}
+
+			// do the mix!
+			shuffle(squares);
+
+			// set each square's id, add a click listener (invert square state)
 			let i = 0;
 			document.querySelectorAll("div div").forEach((square) => {
 				square.setAttribute("id", i);
+
+				if (i < 12) square.innerHTML = squares[i];
+				if (i == 12) square.innerHTML = "bus moves (free space?)";
+				if (i > 12) square.innerHTML = squares[i - 1];
+
 				i++;
 
 				square.addEventListener("click", (e) => {
 					if (square.classList.contains("filled")) square.classList.remove("filled");
 					else square.classList.add("filled");
 				});
-
-				square.innerHTML = `BINGO square #${i}`;
 			});
 
+			// TODO:
 			// font that fits the square depending on the amount of text
-			// what's going on on mobile?
-
-			// ---
-			// gotta make my own array mix algorithm
-			// const squares = ["", "", "", "", "5", "", "", "", "", "5", "", "", "", "", "5", "", "", "", "", "5", "", "", "", "", "5"];
-
-			// // CTRL+C CTRL+V from StackOverflow
-
-			// function shuffle(array) {
-			// 	let currentIndex = array.length,
-			// 		randomIndex;
-
-			// 	// While there remain elements to shuffle.
-			// 	while (currentIndex != 0) {
-			// 		// Pick a remaining element.
-			// 		randomIndex = Math.floor(Math.random() * currentIndex);
-			// 		currentIndex--;
-
-			// 		// And swap it with the current element.
-			// 		[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-			// 	}
-
-			// 	return array;
-			// }
-
-			// // Used like so
-			// var arr = [2, 11, 37, 42];
-			// shuffle(arr);
-			// console.log(arr);
+			// what's going on on mobile? :
 		</script>
 	</body>
 </html>
