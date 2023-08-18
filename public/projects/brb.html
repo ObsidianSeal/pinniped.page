@@ -180,16 +180,30 @@
 
 		<script>
 			// "perfect position on mobile too", and sizing on smaller screens! from https://pinniped.page/projects/chess/board
-			const screenWidth = window.innerWidth;
-			const screenHeight = window.innerHeight;
-			if (screenWidth > 500 && screenHeight > 500) {
-				document.querySelector("body").style = `height: ${screenHeight - 40}px`;
-			} else {
-				document.querySelector("body").style = `height: ${screenHeight - 20}px`;
+			function autoStyle() {
+				const screenWidth = window.innerWidth;
+				const screenHeight = window.innerHeight;
+
+				if (screenWidth > 500 && screenHeight > 500) {
+					document.querySelector("body").style = `height: ${screenHeight - 40}px`;
+				} else {
+					document.querySelector("body").style = `height: ${screenHeight - 20}px`;
+				}
+
+				if (screenHeight < 720) {
+					document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: ${screenHeight - 40}px; max-height: ${screenHeight - 40}px; }`;
+				} else {
+					document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: 670px; max-height: 670px; }`;
+				}
 			}
-			if (screenHeight < 720) {
-				document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: ${screenHeight - 40}px; max-height: ${screenHeight - 40}px; }`;
-			}
+			autoStyle();
+
+			// do it when resize
+			addEventListener("resize", (e) => {
+				setTimeout(() => {
+					autoStyle();
+				}, 500);
+			});
 
 			// what goes in the squares
 			const squares = [
