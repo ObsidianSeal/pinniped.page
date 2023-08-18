@@ -34,7 +34,7 @@
 
 			* {
 				font-family: "Roboto";
-				font-size: 20px; /* remove when made auto */
+				font-size: 20px;
 			}
 
 			body {
@@ -217,6 +217,22 @@
 				"bus only lane!",
 				"pass a stop with a shelter",
 				"someone speaks in a language other than English",
+				"skip a stop",
+				"stop...but no one gets off",
+				"door doesn't open",
+				"door can't close",
+				"5+ people board",
+				"5+ people get off",
+				"people at a stop are waiting for a different bus",
+				"driver waves at other bus driver",
+				"another bus is in the next lane (same direction)",
+				"someone sits next to you",
+				"see an express bus",
+				"travel on a road with 4+ lanes",
+				"travel on a one-way road",
+				"music?",
+				"someone's on the phone",
+				"see a taxi",
 			];
 
 			// mix array for random bingo card; from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -236,6 +252,7 @@
 
 			// do the mix!
 			shuffle(squares);
+			console.log(squares);
 
 			// set each square's id, add a click listener (invert square state)
 			let i = 0;
@@ -253,10 +270,6 @@
 					else square.classList.add("filled");
 				});
 			});
-
-			// TODO:
-			// font that fits the square depending on the amount of text
-			// what's going on on mobile? : *(fix with table>?)
 		</script>
 	</body>
 </html>
