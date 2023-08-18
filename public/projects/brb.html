@@ -51,10 +51,6 @@
 			}
 
 			table {
-				width: 100%;
-				max-width: 670px;
-				max-height: 670px;
-
 				aspect-ratio: 1 / 1;
 
 				margin: 0;
@@ -89,7 +85,29 @@
 				color: var(--accent3);
 			}
 
-			@media all and (max-width: 500px) {
+			@media all and (max-width: 800px), (max-height: 800px) {
+				* {
+					font-size: 16px;
+				}
+			}
+
+			@media all and (max-width: 700px), (max-height: 700px) {
+				* {
+					font-size: 14px;
+				}
+			}
+
+			@media all and (max-width: 600px), (max-height: 600px) {
+				* {
+					font-size: 12px;
+				}
+			}
+
+			@media all and (max-width: 500px), (max-height: 500px) {
+				* {
+					font-size: 10px;
+				}
+
 				body {
 					padding: 10px;
 				}
@@ -99,40 +117,24 @@
 				}
 			}
 
-			@media all and (max-width: 800px) {
-				* {
-					font-size: 16px;
-				}
-			}
-
-			@media all and (max-width: 700px) {
-				* {
-					font-size: 14px;
-				}
-			}
-
-			@media all and (max-width: 600px) {
-				* {
-					font-size: 12px;
-				}
-			}
-
-			@media all and (max-width: 500px) {
-				* {
-					font-size: 10px;
-				}
-			}
-
-			@media all and (max-width: 430px) {
+			@media all and (max-width: 430px), (max-height: 430px) {
 				* {
 					font-size: 8px;
 				}
 			}
 
-			@media all and (max-width: 340px) {
+			@media all and (max-width: 340px), (max-height: 340px) {
 				* {
 					font-size: 6px;
 				}
+			}
+		</style>
+
+		<style id="autoStyles">
+			table {
+				width: 100%;
+				max-width: 670px;
+				max-height: 670px;
 			}
 		</style>
 	</head>
@@ -177,10 +179,17 @@
 		</table>
 
 		<script>
-			// "perfect position on mobile too", from https://pinniped.page/projects/chess/board
+			// "perfect position on mobile too", and sizing on smaller screens! from https://pinniped.page/projects/chess/board
 			const screenWidth = window.innerWidth;
 			const screenHeight = window.innerHeight;
-			document.querySelector("body").style = `height: ${screenHeight - 40}px`;
+			if (screenWidth > 500 && screenHeight > 500) {
+				document.querySelector("body").style = `height: ${screenHeight - 40}px`;
+			} else {
+				document.querySelector("body").style = `height: ${screenHeight - 20}px`;
+			}
+			if (screenHeight < 720) {
+				document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: ${screenHeight - 40}px; max-height: ${screenHeight - 40}px; }`;
+			}
 
 			// what goes in the squares
 			const squares = [
@@ -235,7 +244,7 @@
 
 				if (i < 12) square.innerHTML = squares[i];
 				if (i == 12) square.innerHTML = "bus moves (free space?)";
-				if (i > 12) square.innerHTML = squares[i - 1];
+				if (i > 12 && i < 25) square.innerHTML = squares[i - 1];
 
 				i++;
 
