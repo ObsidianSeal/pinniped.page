@@ -16,6 +16,9 @@
 		<meta property="og:description" content="BUS RIDE BINGO" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Roboto");
 
@@ -73,6 +76,11 @@
 			}
 
 			td:hover {
+				cursor: pointer;
+			}
+
+			i:hover {
+				color: var(--accent1);
 				cursor: pointer;
 			}
 
@@ -137,6 +145,8 @@
 				max-height: 670px;
 			}
 		</style>
+
+		<style id="autoStyles2"></style>
 	</head>
 
 	<body>
@@ -178,7 +188,39 @@
 			</tr>
 		</table>
 
+		<i class="fa-solid fa-maximize" style="font-size: 30px; position: fixed; right: 30px; bottom: 30px" id="demo"></i>
+
 		<script>
+			// the board && bingo var
+			var bingo = false;
+			const board = [
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+			];
+
 			// "perfect position on mobile too", and sizing on smaller screens! from https://pinniped.page/projects/chess/board
 			function autoStyle() {
 				const screenWidth = window.innerWidth;
@@ -197,6 +239,20 @@
 				}
 			}
 			autoStyle();
+
+			// fill screen button
+			const button = document.querySelector("i");
+			button.addEventListener("click", (e) => {
+				if (button.classList.contains("fa-maximize")) {
+					document.querySelector("#autoStyles2").innerHTML = `body { display: block; } table { width: 100%; height: 100%; max-width: 100%; max-height: 100%; }`;
+					button.classList.remove("fa-maximize");
+					button.classList.add("fa-minimize");
+				} else {
+					document.querySelector("#autoStyles2").innerHTML = ``;
+					button.classList.remove("fa-minimize");
+					button.classList.add("fa-maximize");
+				}
+			});
 
 			// do it when resize
 			addEventListener("resize", (e) => {
@@ -247,6 +303,16 @@
 				"music?",
 				"someone's on the phone",
 				"see a taxi",
+				"someone uses the bike rack",
+				"bus makes an unusual noise",
+				"bus kneels",
+				"another bus driver/transit staff is on the bus",
+				"someone goes out the front door",
+				"see/pass a school",
+				"dirty seat",
+				"see a non-transit bus",
+				"see a not in service bus or other non-running bus",
+				"see an emergency vehicle",
 			];
 
 			// mix array for random bingo card; from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -266,10 +332,34 @@
 
 			// do the mix!
 			shuffle(squares);
-			console.log(squares);
+			console.log(squares); // send it so I can see how many elements there are
 
-			// set each square's id, add a click listener (invert square state)
+			// detect bingo function
+			function checkForBingo() {
+				// horizontal
+				if (board[0] && board[1] && board[2] && board[3] && board[4]) return true;
+				if (board[5] && board[6] && board[7] && board[8] && board[9]) return true;
+				if (board[10] && board[11] && board[12] && board[13] && board[14]) return true;
+				if (board[15] && board[16] && board[17] && board[18] && board[19]) return true;
+				if (board[20] && board[21] && board[22] && board[23] && board[24]) return true;
+
+				// vertical
+				if (board[0] && board[5] && board[10] && board[15] && board[20]) return true;
+				if (board[1] && board[6] && board[11] && board[16] && board[21]) return true;
+				if (board[2] && board[7] && board[12] && board[17] && board[22]) return true;
+				if (board[3] && board[8] && board[13] && board[18] && board[23]) return true;
+				if (board[4] && board[9] && board[14] && board[19] && board[24]) return true;
+
+				// diagonal
+				if (board[0] && board[6] && board[12] && board[18] && board[24]) return true;
+				if (board[4] && board[8] && board[12] && board[16] && board[20]) return true;
+
+				return false;
+			}
+
+			// set each square's id, add a click listener (invert square state) + handle bingo
 			let i = 0;
+			var started = false;
 			document.querySelectorAll("td").forEach((square) => {
 				square.setAttribute("id", i);
 
@@ -280,8 +370,55 @@
 				i++;
 
 				square.addEventListener("click", (e) => {
+					// prevent accidentally generating a new board, triggered by first square press, from https://stackoverflow.com/questions/1119289/how-to-show-the-are-you-sure-you-want-to-navigate-away-from-this-page-when-ch
+					window.onbeforeunload = function () {
+						return true;
+					};
+
 					if (square.classList.contains("filled")) square.classList.remove("filled");
 					else square.classList.add("filled");
+
+					board[square.id] = !board[square.id]; // set the square to true or false
+					if (checkForBingo() && !bingo) {
+						bingo = true; // prevent more than one bingo (too much confetti)
+						window.onbeforeunload = null; // now you can leave or reload
+						// if there's a bingo, CONFETTI!!! thanks to https://confetti.js.org/
+						// ----- CTRL+C CTRL+V confetti BEGINS: -----
+
+						const duration = 15 * 1000,
+							animationEnd = Date.now() + duration,
+							defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+						function randomInRange(min, max) {
+							return Math.random() * (max - min) + min;
+						}
+
+						const interval = setInterval(function () {
+							const timeLeft = animationEnd - Date.now();
+
+							if (timeLeft <= 0) {
+								return clearInterval(interval);
+							}
+
+							const particleCount = 50 * (timeLeft / duration);
+
+							// since particles fall down, start a bit higher than random
+							confetti(
+								Object.assign({}, defaults, {
+									particleCount,
+									origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+								})
+							);
+							confetti(
+								Object.assign({}, defaults, {
+									particleCount,
+									origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+								})
+							);
+						}, 250);
+
+						// ----- CTRL+C CTRL+V confetti ENDS: -----
+					}
 				});
 			});
 		</script>

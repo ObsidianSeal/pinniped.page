@@ -8,18 +8,8 @@
 
 		"redirects": [
 			{
-				"source": "/000",
-				"destination": "/s?s=410",
-				"type": 301
-			},
-			{
-				"source": "/001",
-				"destination": "/s?s=410",
-				"type": 301
-			},
-			{
-				"source": "/002",
-				"destination": "/s?s=410",
+				"source": "/discord",
+				"destination": "https://discord.gg/yswDu7kywv",
 				"type": 301
 			}
 		],
