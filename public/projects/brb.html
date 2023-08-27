@@ -371,9 +371,11 @@
 
 				square.addEventListener("click", (e) => {
 					// prevent accidentally generating a new board, triggered by first square press, from https://stackoverflow.com/questions/1119289/how-to-show-the-are-you-sure-you-want-to-navigate-away-from-this-page-when-ch
-					window.onbeforeunload = function () {
-						return true;
-					};
+					if (!bingo) {
+						window.onbeforeunload = function () {
+							return true;
+						};
+					}
 
 					if (square.classList.contains("filled")) square.classList.remove("filled");
 					else square.classList.add("filled");
