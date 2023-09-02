@@ -76,12 +76,6 @@ a.link-3:focus {
 	background-color: #ffe66d7f;
 }
 
-a.box-link:hover,
-a.box-link:focus {
-	color: #292f36;
-	background: none;
-}
-
 a#download-link {
 	font-family: "Roboto Slab";
 	font-size: 16px;
@@ -92,7 +86,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.box a {
 	font-family: "Abril Fatface";
 	font-weight: normal;
 	margin-top: 0;
@@ -107,7 +102,8 @@ h2 {
 	font-size: 64px;
 }
 
-h3 {
+h3,
+.box a {
 	font-size: 48px;
 }
 
@@ -290,7 +286,8 @@ hr {
 	transition: background-position 1s;
 }
 
-.hoverable-title:hover {
+.hoverable-title:hover,
+.hoverable-title:focus {
 	background-position: 0 0em;
 }
 
@@ -554,7 +551,8 @@ ul {
 		font-size: 48px;
 	}
 
-	h3 {
+	h3,
+	.box a {
 		font-size: 32px;
 	}
 
