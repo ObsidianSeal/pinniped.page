@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Blog Post (2023/09/04)</title>
+
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+
+		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
+
+		<script src="../files/menu.js"></script>
+		<script type="module" src="../files/view.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/posts/2023-09-04" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2023/09/04)" />
+		<meta property="og:description" content="changelog: Summer 2023" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><p>Home</p></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5>Blog Post / September 4th, 2023</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">changelog: Summer 2023</h3>
+
+			<div class="break"></div>
+
+			<p class="text">Here's everything that has been changed or added since <a href="2023-04-08.html" class="link-2">the last update</a>:</p>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>The little notice in the bottom left of the homepage fades out after a few seconds of being minimised. It's still there if you hover over the spot.</li>
+				<li>Pressing shift+enter to go into fullscreen on Type clears the screen of everything but the text, for a clean typing experience.</li>
+				<li>The buttons between Projects and Projects+, as well as Blog to Blog+ now say what the page they link to shows.</li>
+				<li>Various changes to the main CSS file, including transition fixes.</li>
+				<li>If you somehow had a cursor on a phone (hey, it's possible), it would change when you hover over the mobile-only main navigation links.</li>
+				<li>Hover effects now activate if you tab onto the elements, so everything still looks awesome if you're without a mouse.</li>
+				<li>Fixed a bug on 10/10 would recommend in which after pressing escape you couldn't edit that box again (until you edited another box, I think).</li>
+				<li>Fixed something about an invalid tag search on Projects+.</li>
+				<li>Also on Projects+ search, fixed tags that begin with numbers.</li>
+				<li>Added crossword2.</li>
+				<li>Non-number view detection and deletion for blog posts.</li>
+				<li>TicTacToe got a how to play page.</li>
+				<li>TicTacToe also got a super cool data page. This and the aforementioned instructions can be accessed from the icons at the bottom of the TicTacToe page.</li>
+				<li>New project: fOnT mAsHeR.</li>
+				<li>New projects: Bus Ride Bingo.</li>
+				<li>New subtitles for the homepage.</li>
+				<li>
+					Major Bus Ride Bingo update! A dozen more possible squares, a fullscreen button for people with devices that don't feel like rendering CSS properly,
+					confetti on bingo, and reload confirmation!
+				</li>
+				<li>This was extra work: the titles on the Projects and Blog pages still do their cool hover effect when you tab onto them.</li>
+				<li>Spacing, rearranging, and other tiny changes.</li>
+				<li>Other small CSS changes.</li>
+			</ul>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script src="../files/footer.js"></script>
+	</body>
+</html>
