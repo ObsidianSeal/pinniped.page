@@ -267,9 +267,9 @@
 				"see or be on an articulated bus 🚍",
 				"pass a bus on the same route and direction 🚎",
 				"driver speaks (not about fare or directions) 👨‍🦰",
-				`directions given / "does this bus go to ___?" 🤷‍♂️`,
+				"driver speaks (about fare or direction) 🤷‍♂️",
 				"wheelchair or similar is on the bus 👨‍🦼",
-				"driver gets up from seat (not for a wheelchair) 🦶",
+				"driver gets up (not for a wheelchair) 🦶",
 				"bus honk! 🚘",
 				"someone's stop is missed 🛑",
 				"arrive at your stop (last chance for bingo!) 🚏",
@@ -330,7 +330,7 @@
 
 			// do the mix!
 			shuffle(squares);
-			console.log(`BRB v1.${9}\n\nShuffled list of all ${squares.length} possible squares:`); // so I can see how many elements there are | UPDATE VERSION EVERY COMMIT
+			console.log(`BRB v1.${10}\n\nShuffled list of all ${squares.length} possible squares:`); // so I can see how many elements there are | UPDATE VERSION EVERY COMMIT
 			console.log(squares);
 
 			// detect bingo function
@@ -363,7 +363,7 @@
 				square.setAttribute("id", i);
 
 				if (i < 12) square.innerHTML = squares[i];
-				if (i == 12) square.innerHTML = "bus moves (free space?)";
+				if (i == 12) square.innerHTML = "bus moves (free space?) 👀";
 				if (i > 12 && i < 25) square.innerHTML = squares[i - 1];
 
 				i++;
