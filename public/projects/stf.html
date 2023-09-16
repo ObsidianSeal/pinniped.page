@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Shrink to Fit</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/stf" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Shrink to Fit" />
+		<meta property="og:description" content="For Bus Ride Bingo: optimized font size to fit phrase in box." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+		<style>
+			/* FONTS */
+
+			@import url("https://fonts.googleapis.com/css2?family=Roboto");
+
+			/* DOCUMENT STYLES */
+
+			:root {
+				--c1: #0081a7;
+				--c2: #00afb9;
+				--c3: #fdfcdc;
+				--c4: #fed9b7;
+				--c5: #f07167;
+			}
+
+			::-webkit-scrollbar {
+				width: 0;
+			}
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-family: "Roboto";
+				font-size: 24px;
+			}
+
+			/* BODY */
+
+			body {
+				margin: 20px;
+				border: 2px solid var(--c2);
+
+				background-color: var(--c3);
+				color: var(--c1);
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+				gap: 50px;
+
+				transition: height 0.5s;
+			}
+
+			/* TEXTAREA & DIV */
+
+			textarea,
+			div#output_container {
+				width: 150px;
+				height: 150px;
+
+				border: 4px solid;
+				padding: 20px;
+
+				text-align: center;
+			}
+
+			textarea {
+				background-color: var(--c3);
+				border-color: var(--c1);
+				color: var(--c1);
+
+				resize: none;
+			}
+
+			div#output_container {
+				border-color: var(--c5);
+				color: var(--c5);
+			}
+
+			div#output {
+				width: 100%;
+				height: 100%;
+
+				font-size: 100px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			textarea:focus {
+				outline: none;
+			}
+
+			textarea::placeholder {
+				color: var(--c2);
+			}
+
+			/* SELECTION */
+
+			textarea::selection,
+			div::selection {
+				color: var(--c3);
+			}
+
+			textarea::selection {
+				background-color: var(--c1);
+			}
+
+			div::selection {
+				background-color: var(--c5);
+			}
+		</style>
+	</head>
+
+	<body>
+		<textarea id="input" placeholder="type here" autofocus></textarea>
+		<div id="output_container"><div id="output">!?</div></div>
+
+		<script>
+			// version
+			console.log(`Shrink to Fit  |  v${1}.${0}.${0}\n\n`);
+
+			// global variables
+			const input = document.querySelector("#input");
+			const output = document.querySelector("#output");
+			const output_container = document.querySelector("#output_container");
+			const margin = 20;
+
+			// ensure the body element is the right height
+			function setBodySize() {
+				let screenHeight = window.innerHeight;
+
+				document.querySelector("body").style = `height: ${screenHeight - 44}px`;
+			}
+			setBodySize();
+
+			// set hight on resize
+			addEventListener("resize", (e) => {
+				setTimeout(() => {
+					setBodySize();
+				}, 500);
+			});
+
+			// "the name of the game"
+			function shrinkToFit() {
+				var fontSize = 100;
+
+				do {
+					output.style = `font-size: ${fontSize}px`;
+					fontSize -= 2;
+				} while (output.clientWidth != output.scrollWidth || output.clientHeight != output.scrollHeight);
+			}
+
+			// copy text from input to output, shrinkToFit();
+			input.addEventListener("input", (e) => {
+				if (input.value != "") output.innerHTML = input.value;
+				else output.innerHTML = "!?";
+
+				shrinkToFit();
+			});
+		</script>
+	</body>
+</html>
