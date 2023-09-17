@@ -37,7 +37,6 @@
 
 			* {
 				font-family: "Roboto";
-				font-size: 20px;
 			}
 
 			body {
@@ -70,13 +69,20 @@
 
 				margin: 0;
 				border: 3px solid var(--foreground);
-				padding: 5px;
+				padding: 10px;
 
 				text-align: center;
 			}
 
 			td:hover {
 				cursor: pointer;
+			}
+
+			i {
+				position: fixed;
+				bottom: 30px;
+
+				font-size: 30px;
 			}
 
 			i:hover {
@@ -93,47 +99,13 @@
 				color: var(--accent3);
 			}
 
-			@media all and (max-width: 800px), (max-height: 800px) {
-				* {
-					font-size: 16px;
-				}
-			}
-
-			@media all and (max-width: 700px), (max-height: 700px) {
-				* {
-					font-size: 14px;
-				}
-			}
-
-			@media all and (max-width: 600px), (max-height: 600px) {
-				* {
-					font-size: 12px;
-				}
-			}
-
 			@media all and (max-width: 500px), (max-height: 500px) {
-				* {
-					font-size: 10px;
-				}
-
 				body {
 					padding: 10px;
 				}
 
 				td {
-					padding: 2px;
-				}
-			}
-
-			@media all and (max-width: 430px), (max-height: 430px) {
-				* {
-					font-size: 8px;
-				}
-			}
-
-			@media all and (max-width: 340px), (max-height: 340px) {
-				* {
-					font-size: 6px;
+					padding: 5px;
 				}
 			}
 		</style>
@@ -152,47 +124,49 @@
 	<body>
 		<table>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
+				<td><div></div></td>
 			</tr>
 		</table>
 
-		<i class="fa-solid fa-maximize" style="font-size: 30px; position: fixed; right: 30px; bottom: 30px" id="demo"></i>
+		<i class="fa-solid fa-eye" style="right: 80px" id="confetti_toggle"></i>
+		<i class="fa-solid fa-maximize" style="right: 30px" id="expand_toggle"></i>
 
 		<script>
-			// the board && bingo var
+			// the board && bingo, confetti var
 			var bingo = false;
+			var confettiWin = true;
 			const board = [
 				false,
 				false,
@@ -222,42 +196,106 @@
 			];
 
 			// "perfect position on mobile too", and sizing on smaller screens! from https://pinniped.page/projects/chess/board
+			var pScreenWidth;
+			var pScreenHeight;
 			function autoStyle() {
 				const screenWidth = window.innerWidth;
 				const screenHeight = window.innerHeight;
 
-				if (screenWidth > 500 && screenHeight > 500) {
-					document.querySelector("body").style = `height: ${screenHeight - 40}px`;
-				} else {
-					document.querySelector("body").style = `height: ${screenHeight - 20}px`;
+				if (screenWidth != pScreenWidth || screenHeight != pScreenHeight) {
+					if (screenWidth > 500 && screenHeight > 500) {
+						document.querySelector("body").style = `height: ${screenHeight - 40}px`;
+					} else {
+						document.querySelector("body").style = `height: ${screenHeight - 20}px`;
+					}
+
+					if (screenHeight < 720) {
+						document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: ${screenHeight - 40}px; max-height: ${screenHeight - 40}px; }`;
+					} else {
+						document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: 670px; max-height: 670px; }`;
+					}
+
+					//console.log(`autoStyle(); --> ${screenWidth}x${screenHeight}`);
 				}
 
-				if (screenHeight < 720) {
-					document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: ${screenHeight - 40}px; max-height: ${screenHeight - 40}px; }`;
-				} else {
-					document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: 670px; max-height: 670px; }`;
-				}
+				pScreenWidth = screenWidth;
+				pScreenHeight = screenHeight;
 			}
 			autoStyle();
 
 			// fill screen button
-			const button = document.querySelector("i");
-			button.addEventListener("click", (e) => {
-				if (button.classList.contains("fa-maximize")) {
+			const button1 = document.querySelector("#expand_toggle");
+			button1.addEventListener("click", (e) => {
+				if (button1.classList.contains("fa-maximize")) {
 					document.querySelector("#autoStyles2").innerHTML = `body { display: block; } table { width: 100%; height: 100%; max-width: 100%; max-height: 100%; }`;
-					button.classList.remove("fa-maximize");
-					button.classList.add("fa-minimize");
+					if (confettiWin) window.history.pushState({}, "", "?x=10"); // yes expanded, yes confetti
+					else window.history.pushState({}, "", "?x=11"); // yes expanded, no confetti
+
+					button1.classList.remove("fa-maximize");
+					button1.classList.add("fa-minimize");
 				} else {
 					document.querySelector("#autoStyles2").innerHTML = ``;
-					button.classList.remove("fa-minimize");
-					button.classList.add("fa-maximize");
+					if (confettiWin) window.history.pushState({}, "", "?x=00"); // no expanded, yes confetti
+					else window.history.pushState({}, "", "?x=01"); // no expanded, no confetti
+
+					button1.classList.remove("fa-minimize");
+					button1.classList.add("fa-maximize");
 				}
 			});
+
+			// toggle confetti button
+			const button2 = document.querySelector("#confetti_toggle");
+			button2.addEventListener("click", (e) => {
+				if (button2.classList.contains("fa-eye")) {
+					confettiWin = false;
+					if (document.querySelector("#autoStyles2").innerHTML == "") window.history.pushState({}, "", "?x=01"); // no expanded, no confetti
+					else window.history.pushState({}, "", "?x=11"); // yes expanded, no confetti
+
+					button2.style = "right: 78px";
+					button2.classList.remove("fa-eye");
+					button2.classList.add("fa-eye-slash");
+				} else {
+					confettiWin = true;
+					if (document.querySelector("#autoStyles2").innerHTML == "") window.history.pushState({}, "", "?x=00"); // no expanded, yes confetti
+					else window.history.pushState({}, "", "?x=10"); // yes expanded, yes confetti
+
+					button2.style = "right: 80px";
+					button2.classList.remove("fa-eye-slash");
+					button2.classList.add("fa-eye");
+				}
+			});
+
+			// get URL data
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const settings = item.get("x");
+
+			// set settings from URL
+			if (/^[01]{2}$/.test(settings)) {
+				const setting1 = settings.charAt(0);
+				const setting2 = settings.charAt(1);
+
+				if (setting1 == 1) {
+					document.querySelector("#autoStyles2").innerHTML = `body { display: block; } table { width: 100%; height: 100%; max-width: 100%; max-height: 100%; }`;
+
+					button1.classList.remove("fa-maximize");
+					button1.classList.add("fa-minimize");
+				} else document.querySelector("#autoStyles2").innerHTML = ``;
+
+				if (setting2 == 1) {
+					confettiWin = false;
+
+					button2.style = "right: 78px";
+					button2.classList.remove("fa-eye");
+					button2.classList.add("fa-eye-slash");
+				} else confettiWin = true;
+			}
 
 			// do it when resize
 			addEventListener("resize", (e) => {
 				setTimeout(() => {
 					autoStyle();
+					setSquares();
 				}, 500);
 			});
 
@@ -330,7 +368,7 @@
 
 			// do the mix!
 			shuffle(squares);
-			console.log(`BRB v1.${10}\n\nShuffled list of all ${squares.length} possible squares:`); // so I can see how many elements there are | UPDATE VERSION EVERY COMMIT
+			console.log(`BRB v${1}.${11}.${2}\n\nShuffled list of all ${squares.length} possible squares:`); // so I can see how many elements there are | UPDATE VERSION EVERY COMMIT
 			console.log(squares);
 
 			// detect bingo function
@@ -356,18 +394,40 @@
 				return false;
 			}
 
+			// shrinkToFit();
+			var boxSize;
+			function shrinkToFit(element) {
+				var fontSize = 36;
+
+				do {
+					element.style = `font-size: ${fontSize}px`;
+					fontSize -= 2;
+				} while (element.clientWidth > boxSize || element.clientHeight > boxSize);
+
+				//console.log(`shrinkToFit();`);
+			}
+
 			// set each square's id, add a click listener (invert square state) + handle bingo
-			let i = 0;
-			var started = false;
+			function setSquares() {
+				let i = 0;
+
+				document.querySelectorAll("div").forEach((square) => {
+					square.setAttribute("id", i);
+					square.innerHTML = "";
+
+					boxSize = square.clientWidth;
+
+					if (i < 12) square.innerHTML = squares[i];
+					if (i == 12) square.innerHTML = "bus moves (free space?) 👀";
+					if (i > 12 && i < 25) square.innerHTML = squares[i - 1];
+
+					shrinkToFit(square);
+					i++;
+				});
+			}
+			setSquares();
+
 			document.querySelectorAll("td").forEach((square) => {
-				square.setAttribute("id", i);
-
-				if (i < 12) square.innerHTML = squares[i];
-				if (i == 12) square.innerHTML = "bus moves (free space?) 👀";
-				if (i > 12 && i < 25) square.innerHTML = squares[i - 1];
-
-				i++;
-
 				square.addEventListener("click", (e) => {
 					// prevent accidentally generating a new board, triggered by first square press, from https://stackoverflow.com/questions/1119289/how-to-show-the-are-you-sure-you-want-to-navigate-away-from-this-page-when-ch
 					if (!bingo) {
@@ -379,46 +439,49 @@
 					if (square.classList.contains("filled")) square.classList.remove("filled");
 					else square.classList.add("filled");
 
-					board[square.id] = !board[square.id]; // set the square to true or false
+					board[square.children[0].id] = !board[square.children[0].id]; // set the square to true or false
 					if (checkForBingo() && !bingo) {
 						bingo = true; // prevent more than one bingo (too much confetti)
 						window.onbeforeunload = null; // now you can leave or reload
-						// if there's a bingo, CONFETTI!!! thanks to https://confetti.js.org/
-						// ----- CTRL+C CTRL+V confetti BEGINS: -----
 
-						const duration = 15 * 1000,
-							animationEnd = Date.now() + duration,
-							defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+						// if there's a bingo, CONFETTI!!! thanks to https://confetti.js.org/ && confetti setting
+						if (confettiWin) {
+							// ----- CTRL+C CTRL+V confetti BEGINS: -----
 
-						function randomInRange(min, max) {
-							return Math.random() * (max - min) + min;
-						}
+							const duration = 10 * 1000, // 10 seconds?
+								animationEnd = Date.now() + duration,
+								defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-						const interval = setInterval(function () {
-							const timeLeft = animationEnd - Date.now();
-
-							if (timeLeft <= 0) {
-								return clearInterval(interval);
+							function randomInRange(min, max) {
+								return Math.random() * (max - min) + min;
 							}
 
-							const particleCount = 50 * (timeLeft / duration);
+							const interval = setInterval(function () {
+								const timeLeft = animationEnd - Date.now();
 
-							// since particles fall down, start a bit higher than random
-							confetti(
-								Object.assign({}, defaults, {
-									particleCount,
-									origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-								})
-							);
-							confetti(
-								Object.assign({}, defaults, {
-									particleCount,
-									origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-								})
-							);
-						}, 250);
+								if (timeLeft <= 0) {
+									return clearInterval(interval);
+								}
 
-						// ----- CTRL+C CTRL+V confetti ENDS: -----
+								const particleCount = 50 * (timeLeft / duration);
+
+								// since particles fall down, start a bit higher than random
+								confetti(
+									Object.assign({}, defaults, {
+										particleCount,
+										origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+									})
+								);
+								confetti(
+									Object.assign({}, defaults, {
+										particleCount,
+										origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+									})
+								);
+							}, 250);
+
+							// ----- CTRL+C CTRL+V confetti ENDS: -----
+						}
 					}
 				});
 			});

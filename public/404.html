@@ -60,6 +60,38 @@
 			const screenHeight = window.innerHeight;
 			const height = screenHeight - 140;
 			document.querySelector("div.centre").style = `height: ${height}px`;
+
+			const url = window.location.href;
+			const ending = url.substring(url.lastIndexOf("/") + 1);
+
+			const projects = [
+				"bezier-curves",
+				"brb",
+				"chess",
+				"chess/board",
+				"countdown",
+				"cube",
+				"deathrun",
+				"font-mash",
+				"graphs",
+				"hues+cues",
+				"icons",
+				"mjolnir",
+				"mouse-maze",
+				"numbers",
+				"progress",
+				"rate",
+				"stf",
+				"text",
+				"the-square",
+				"tictactoe",
+				"type",
+				"v",
+			];
+
+			projects.forEach((project) => {
+				if (ending == project) window.location.href = "https://pinniped.page/projects/" + project;
+			});
 		</script>
 	</body>
 </html>
