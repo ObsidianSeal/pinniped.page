@@ -62,7 +62,7 @@
 			document.querySelector("div.centre").style = `height: ${height}px`;
 
 			const url = window.location.href;
-			const ending = url.substring(url.lastIndexOf("/") + 1);
+			const ending = url.substring(url.lastIndexOf("page/") + 5);
 
 			const projects = [
 				"bezier-curves",
