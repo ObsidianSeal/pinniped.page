@@ -2,429 +2,1125 @@
 
 <html lang="en">
 	<head>
+		<title>v</title>
+
 		<meta charset="UTF-8" />
-
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
 
-		<title>:D</title>
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/v" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="v" />
+		<meta property="og:description" content="VALORANT Points calculator: spend as little as possible." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
 		<style>
-			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+			/* FONTS */
 
-			* {
-				font-family: "Roboto Mono";
-				font-size: 14px;
+			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700");
+
+			/* DOCUMENT STYLES */
+
+			:root {
+				--c1: #ff595e;
+				--c2: #ffca3a;
+				--c3: #8ac926;
+				--c4: #1982c4;
+				--c5: #6a4c93;
+
+				--c1h: #ff595e64;
+				--c2h: #ffca3a64;
+				--c3h: #8ac92664;
+				--c4h: #1982c464;
+				--c5h: #6a4c9364;
 			}
 
-			body {
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--c1h);
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--c1);
+			}
+
+			::-webkit-scrollbar-track {
+				background-color: white;
+			}
+
+			::-webkit-scrollbar-corner {
+				background-color: white;
+			}
+
+			* {
 				margin: 0;
 				border: 0;
-				padding: 0 0 0 15px;
+				padding: 0;
+
+				font-family: "Space Grotesk";
+				font-size: 20px;
+			}
+
+			/* SELECTION */
+
+			::selection {
+				background-color: black;
+				color: white;
+			}
+
+			.c1::selection,
+			.total-vp::selection,
+			#calc-vp::selection,
+			#calc-alert::selection {
+				background-color: var(--c1);
+			}
+
+			.c2::selection {
+				background-color: var(--c2);
+			}
+
+			.c3::selection {
+				background-color: var(--c3);
+			}
+
+			.c4::selection {
+				background-color: var(--c4);
+			}
+
+			.c5::selection {
+				background-color: var(--c5);
+			}
+
+			[style="color: #00000064"]::selection {
+				background-color: #00000064;
+			}
+
+			/* BODY */
+
+			body {
+				margin: 50px;
+
+				background-color: white;
+				color: black;
+			}
+
+			/* TEXT */
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				font-weight: 600;
+
+				background-image: linear-gradient(90deg, #00000080, #00000080);
+				background-position: 0 0.9em;
+				background-repeat: repeat-x;
+				display: inline;
+			}
+
+			h1 {
+				font-size: 32px;
+			}
+
+			h2 {
+				font-size: 28px;
 			}
 
 			h3 {
-				font-size: 18px;
-				margin-top: 12px;
-				padding-right: 100px;
+				font-size: 24px;
 			}
 
-			button {
-				padding-left: 10px;
-				padding-right: 10px;
+			h4 {
+				font-size: 20px;
 			}
 
-			.manual {
-				width: 500px;
+			h5 {
+				font-size: 16px;
 			}
 
-			.m {
-				margin-bottom: 5px;
+			h6 {
+				font-size: 12px;
 			}
 
-			#addedResult,
-			#addedResult2,
-			#addedResult3,
-			#addedResult4 {
-				margin-bottom: 0;
+			/* LINKS */
+
+			a {
+				border-bottom: 2px solid black;
+				color: inherit;
+				text-decoration: none;
+				transition: border-color 0.25s;
 			}
 
-			@media all and (max-width: 700px) {
-				div.manual {
-					display: none;
-				}
+			a.u1 {
+				border-color: var(--c1h);
+			}
 
-				div.manual:first-child {
-					display: block;
+			a.u2 {
+				border-color: var(--c2h);
+			}
+
+			a.u3 {
+				border-color: var(--c3h);
+			}
+
+			a.u4 {
+				border-color: var(--c4h);
+			}
+
+			a.u5 {
+				border-color: var(--c5h);
+			}
+
+			a.u1:hover,
+			a.u1:focus {
+				border-color: var(--c1);
+			}
+
+			a.u2:hover,
+			a.u2:focus {
+				border-color: var(--c2);
+			}
+
+			a.u3:hover,
+			a.u3:focus {
+				border-color: var(--c3);
+			}
+
+			a.u4:hover,
+			a.u4:focus {
+				border-color: var(--c4);
+			}
+
+			a.u5:hover,
+			a.u5:focus {
+				border-color: var(--c5);
+			}
+
+			/* COLOUR CLASSES */
+
+			.c1 {
+				background-image: linear-gradient(90deg, var(--c1h), var(--c1h));
+			}
+
+			.c2 {
+				background-image: linear-gradient(90deg, var(--c2h), var(--c2h));
+			}
+
+			.c3 {
+				background-image: linear-gradient(90deg, var(--c3h), var(--c3h));
+			}
+
+			.c4 {
+				background-image: linear-gradient(90deg, var(--c4h), var(--c4h));
+			}
+
+			.c5 {
+				background-image: linear-gradient(90deg, var(--c5h), var(--c5h));
+			}
+
+			/* BUTTONS */
+
+			.button-container span:not(.currency) {
+				margin: 0 20px 20px 0;
+				border: 2px solid black;
+				border-radius: 20px;
+				padding: 5px 30px 5px 30px;
+
+				background-color: white;
+
+				display: inline-block;
+
+				user-select: none;
+				transition: background-color 0.25s;
+			}
+
+			.button-container span:not(.currency):nth-child(1) {
+				width: 270px;
+			}
+
+			.button-container span:not(.currency):nth-child(2) {
+				width: 200px;
+			}
+
+			.button-container span:not(.currency):nth-child(3) {
+				width: 130px;
+			}
+
+			.button-container span:not(.currency):hover,
+			.button-container span:not(.currency):focus {
+				background-color: var(--c5h);
+				cursor: pointer;
+			}
+
+			.button-container span:not(.currency) i,
+			#region-select-menu div i {
+				margin-right: 10px;
+			}
+
+			/* #REGION-SELECT-MENU */
+
+			#region-select-menu {
+				width: 330px;
+
+				display: none;
+
+				position: absolute;
+
+				border: 2px solid black;
+				border-radius: 20px;
+
+				background-color: white;
+
+				user-select: none;
+
+				z-index: 1;
+			}
+
+			#region-select-menu div {
+				padding: 3px 30px 5px 30px;
+				transition: background-color 0.25s;
+				border-bottom: 2px solid black;
+			}
+
+			#region-select-menu div:first-child {
+				padding: 5px 30px 5px 30px;
+				border-top-left-radius: 18px;
+				border-top-right-radius: 18px;
+			}
+
+			#region-select-menu div:last-child {
+				border-bottom-left-radius: 18px;
+				border-bottom-right-radius: 18px;
+				border: 0;
+			}
+
+			#region-select-menu div:hover,
+			#region-select-menu div:focus {
+				background-color: var(--c5h);
+				cursor: pointer;
+				outline: none;
+			}
+
+			#region-select-menu div:first-child:hover,
+			#region-select-menu div:first-child:hover {
+				background-color: white;
+				cursor: default;
+			}
+
+			.currency {
+				color: var(--c5);
+			}
+
+			/* .COMPARE & .CALCULATE */
+
+			.compare-container {
+				display: flex;
+				gap: 50px 100px;
+				flex-wrap: wrap;
+			}
+
+			.compare {
+				width: 190px;
+				border: 2px solid #00000064;
+			}
+
+			.compare p:not(.compare p:last-child, .compare p:first-child) {
+				padding: 0 10px 0 10px;
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.compare p:first-child {
+				margin-bottom: 10px;
+				border-bottom: 2px solid #00000064;
+				padding: 10px 10px 5px 10px;
+
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.compare p:last-child {
+				margin-top: 10px;
+				border-top: 2px solid #00000064;
+				padding: 5px 10px 10px 10px;
+			}
+
+			.compare i,
+			.calculate i {
+				color: #00000064;
+				transition: color 0.25s;
+			}
+
+			.compare i:hover,
+			.compare i:focus,
+			.calculate i:hover,
+			.calculate i:focus {
+				color: black;
+				cursor: pointer;
+			}
+
+			.amount {
+				margin: 0 8px 0 8px;
+				user-select: none;
+			}
+
+			.total-vp,
+			#calc-vp {
+				color: var(--c1);
+			}
+
+			.calculate p:last-child {
+				margin-top: 10px;
+			}
+
+			input {
+				width: 250px;
+
+				margin-bottom: 10px;
+				border: 2px solid #00000064;
+				padding: 5px 10px 5px 10px;
+
+				transition: border-color 0.25s;
+			}
+
+			input:focus {
+				border-color: black;
+				outline: none;
+			}
+
+			input::placeholder {
+				color: #00000064;
+				user-select: none;
+			}
+
+			#calc-check {
+				translate: -62px 0;
+			}
+
+			#calc-xmark {
+				translate: -52px 0;
+			}
+
+			#calc-alert {
+				color: var(--c1);
+			}
+
+			/* OTHER */
+
+			.h50 {
+				height: 50px;
+			}
+
+			.m5 {
+				margin-top: 5px;
+			}
+
+			br {
+				user-select: none;
+			}
+
+			/* MEDIA QUERIES */
+
+			@media all and (max-width: 600px) {
+				body {
+					margin: 20px;
 				}
 			}
 		</style>
-
-		<script>
-			function calculate() {
-				points = document.calculator.points.value;
-
-				(n1 = 0), (n2 = 0), (n3 = 0), (n4 = 0), (n5 = 0), (n6 = 0);
-
-				var cost = 0;
-
-				while (points / 11000 >= 1) {
-					n1++;
-					cost += 140;
-					points = points - 11000;
-				}
-
-				while (points / 5350 >= 1) {
-					n2++;
-					cost += 70;
-					points = points - 5350;
-				}
-
-				while (points / 3650 >= 1) {
-					n3++;
-					cost += 48;
-					points = points - 3650;
-				}
-
-				while (points / 2050 >= 1) {
-					n4++;
-					cost += 28;
-					points = points - 2050;
-				}
-
-				while (points / 1000 >= 1) {
-					n5++;
-					cost += 14;
-					points = points - 1000;
-				}
-
-				while (points > 0) {
-					n6++;
-					cost += 7;
-					points = points - 475;
-				}
-
-				p1 = n1 * 11000;
-				p2 = n2 * 5350;
-				p3 = n3 * 3650;
-				p4 = n4 * 2050;
-				p5 = n5 * 1000;
-				p6 = n6 * 475;
-
-				document.getElementById("result").innerHTML = `${n6} x 475<br />${n5} x 1000<br />${n4} x 2050<br />${n3} x 3650<br />${n2} x 5350<br />${n1} x 11000<br />`;
-
-				document.getElementById("result2").innerHTML = `= ${p1 + p2 + p3 + p4 + p5 + p6} points ($${cost}) ***`;
-			}
-
-			function addPoints() {
-				var a1 = document.manualCalculator.manual1.value;
-				var a2 = document.manualCalculator.manual2.value;
-				var a3 = document.manualCalculator.manual3.value;
-				var a4 = document.manualCalculator.manual4.value;
-				var a5 = document.manualCalculator.manual5.value;
-				var a6 = document.manualCalculator.manual6.value;
-
-				var x1 = a1 * 475;
-				var x2 = a2 * 1000;
-				var x3 = a3 * 2050;
-				var x4 = a4 * 3650;
-				var x5 = a5 * 5350;
-				var x6 = a6 * 11000;
-
-				var y1 = a1 * 7;
-				var y2 = a2 * 14;
-				var y3 = a3 * 28;
-				var y4 = a4 * 48;
-				var y5 = a5 * 70;
-				var y6 = a6 * 140;
-
-				var totalPoints = x1 + x2 + x3 + x4 + x5 + x6;
-				var totalCost = y1 + y2 + y3 + y4 + y5 + y6;
-
-				var totalBox = document.getElementById("addedResult");
-
-				if (totalBox.innerHTML != `= ${totalPoints} points ($${totalCost})`) {
-					totalBox.innerHTML = `= ${totalPoints} points ($${totalCost})`;
-				}
-
-				setTimeout(addPoints, 1000);
-			}
-
-			function addPoints2() {
-				var a1 = document.manualCalculator2.manual1.value;
-				var a2 = document.manualCalculator2.manual2.value;
-				var a3 = document.manualCalculator2.manual3.value;
-				var a4 = document.manualCalculator2.manual4.value;
-				var a5 = document.manualCalculator2.manual5.value;
-				var a6 = document.manualCalculator2.manual6.value;
-
-				var x1 = a1 * 475;
-				var x2 = a2 * 1000;
-				var x3 = a3 * 2050;
-				var x4 = a4 * 3650;
-				var x5 = a5 * 5350;
-				var x6 = a6 * 11000;
-
-				var y1 = a1 * 7;
-				var y2 = a2 * 14;
-				var y3 = a3 * 28;
-				var y4 = a4 * 48;
-				var y5 = a5 * 70;
-				var y6 = a6 * 140;
-
-				var totalPoints = x1 + x2 + x3 + x4 + x5 + x6;
-				var totalCost = y1 + y2 + y3 + y4 + y5 + y6;
-
-				var totalBox = document.getElementById("addedResult2");
-
-				if (totalBox.innerHTML != `= ${totalPoints} points ($${totalCost})`) {
-					totalBox.innerHTML = `= ${totalPoints} points ($${totalCost})`;
-				}
-
-				setTimeout(addPoints2, 1000);
-			}
-
-			function addPoints3() {
-				var a1 = document.manualCalculator3.manual1.value;
-				var a2 = document.manualCalculator3.manual2.value;
-				var a3 = document.manualCalculator3.manual3.value;
-				var a4 = document.manualCalculator3.manual4.value;
-				var a5 = document.manualCalculator3.manual5.value;
-				var a6 = document.manualCalculator3.manual6.value;
-
-				var x1 = a1 * 475;
-				var x2 = a2 * 1000;
-				var x3 = a3 * 2050;
-				var x4 = a4 * 3650;
-				var x5 = a5 * 5350;
-				var x6 = a6 * 11000;
-
-				var y1 = a1 * 7;
-				var y2 = a2 * 14;
-				var y3 = a3 * 28;
-				var y4 = a4 * 48;
-				var y5 = a5 * 70;
-				var y6 = a6 * 140;
-
-				var totalPoints = x1 + x2 + x3 + x4 + x5 + x6;
-				var totalCost = y1 + y2 + y3 + y4 + y5 + y6;
-
-				var totalBox = document.getElementById("addedResult3");
-
-				if (totalBox.innerHTML != `= ${totalPoints} points ($${totalCost})`) {
-					totalBox.innerHTML = `= ${totalPoints} points ($${totalCost})`;
-				}
-
-				setTimeout(addPoints3, 1000);
-			}
-
-			function addPoints4() {
-				var a1 = document.manualCalculator4.manual1.value;
-				var a2 = document.manualCalculator4.manual2.value;
-				var a3 = document.manualCalculator4.manual3.value;
-				var a4 = document.manualCalculator4.manual4.value;
-				var a5 = document.manualCalculator4.manual5.value;
-				var a6 = document.manualCalculator4.manual6.value;
-
-				var x1 = a1 * 475;
-				var x2 = a2 * 1000;
-				var x3 = a3 * 2050;
-				var x4 = a4 * 3650;
-				var x5 = a5 * 5350;
-				var x6 = a6 * 11000;
-
-				var y1 = a1 * 7;
-				var y2 = a2 * 14;
-				var y3 = a3 * 28;
-				var y4 = a4 * 48;
-				var y5 = a5 * 70;
-				var y6 = a6 * 140;
-
-				var totalPoints = x1 + x2 + x3 + x4 + x5 + x6;
-				var totalCost = y1 + y2 + y3 + y4 + y5 + y6;
-
-				var totalBox = document.getElementById("addedResult4");
-
-				if (totalBox.innerHTML != `= ${totalPoints} points ($${totalCost})`) {
-					totalBox.innerHTML = `= ${totalPoints} points ($${totalCost})`;
-				}
-
-				setTimeout(addPoints4, 1000);
-			}
-
-			function addPoints5() {
-				var a1 = document.manualCalculator5.manual1.value;
-				var a2 = document.manualCalculator5.manual2.value;
-				var a3 = document.manualCalculator5.manual3.value;
-				var a4 = document.manualCalculator5.manual4.value;
-				var a5 = document.manualCalculator5.manual5.value;
-				var a6 = document.manualCalculator5.manual6.value;
-
-				var x1 = a1 * 475;
-				var x2 = a2 * 1000;
-				var x3 = a3 * 2050;
-				var x4 = a4 * 3650;
-				var x5 = a5 * 5350;
-				var x6 = a6 * 11000;
-
-				var y1 = a1 * 7;
-				var y2 = a2 * 14;
-				var y3 = a3 * 28;
-				var y4 = a4 * 48;
-				var y5 = a5 * 70;
-				var y6 = a6 * 140;
-
-				var totalPoints = x1 + x2 + x3 + x4 + x5 + x6;
-				var totalCost = y1 + y2 + y3 + y4 + y5 + y6;
-
-				var totalBox = document.getElementById("addedResult5");
-
-				if (totalBox.innerHTML != `= ${totalPoints} points ($${totalCost})`) {
-					totalBox.innerHTML = `= ${totalPoints} points ($${totalCost})`;
-				}
-
-				setTimeout(addPoints5, 1000);
-			}
-
-			function reset() {
-				document.calculator.points.value = 0;
-
-				document.getElementById("result").innerHTML = `0 x 475<br />0 x 1000<br />0 x 2050<br />0 x 3650<br />0 x 5350<br />0 x 11000<br />`;
-				document.getElementById("result2").innerHTML = `= ???`;
-
-				document.manualCalculator.manual1.value = 0;
-				document.manualCalculator.manual2.value = 0;
-				document.manualCalculator.manual3.value = 0;
-				document.manualCalculator.manual4.value = 0;
-				document.manualCalculator.manual5.value = 0;
-				document.manualCalculator.manual6.value = 0;
-
-				document.manualCalculator2.manual1.value = 0;
-				document.manualCalculator2.manual2.value = 0;
-				document.manualCalculator2.manual3.value = 0;
-				document.manualCalculator2.manual4.value = 0;
-				document.manualCalculator2.manual5.value = 0;
-				document.manualCalculator2.manual6.value = 0;
-
-				document.manualCalculator3.manual1.value = 0;
-				document.manualCalculator3.manual2.value = 0;
-				document.manualCalculator3.manual3.value = 0;
-				document.manualCalculator3.manual4.value = 0;
-				document.manualCalculator3.manual5.value = 0;
-				document.manualCalculator3.manual6.value = 0;
-
-				document.manualCalculator4.manual1.value = 0;
-				document.manualCalculator4.manual2.value = 0;
-				document.manualCalculator4.manual3.value = 0;
-				document.manualCalculator4.manual4.value = 0;
-				document.manualCalculator4.manual5.value = 0;
-				document.manualCalculator4.manual6.value = 0;
-
-				document.manualCalculator5.manual1.value = 0;
-				document.manualCalculator5.manual2.value = 0;
-				document.manualCalculator5.manual3.value = 0;
-				document.manualCalculator5.manual4.value = 0;
-				document.manualCalculator5.manual5.value = 0;
-				document.manualCalculator5.manual6.value = 0;
-			}
-		</script>
 	</head>
 
 	<body>
-		<h3>points to price converter:</h3>
+		<h1 class="c1">VALORANT Points calculator</h1>
+		<p class="m5">a project by <a href="../about.html" class="u1" target="_blank" title="about Obsidian_Seal">Obsidian_Seal</a> •</p>
 
-		<form name="calculator" id="calculator">points: <input type="number" name="points" style="width: 80px" value="0" min="0" max="1000000" /></form>
+		<div class="h50"></div>
 
-		<br />
+		<div class="button-container">
+			<span tabindex="0" id="region-select-button"><i class="fa-solid fa-earth-americas"></i>select country/region</span
+			><span tabindex="0" id="legacy-button"><i class="fa-solid fa-bolt"></i>legacy version</span
+			><span tabindex="0" id="reset-all-button"><i class="fa-solid fa-rotate"></i>reset all</span>
+		</div>
 
-		<button onclick="calculate()">calculate</button> <button onclick="reset()">reset</button>
+		<div id="region-select-menu">
+			<div><i class="fa-solid fa-earth-americas"></i>select country/region</div>
+			<div tabindex="0" id="region1">🇦🇷 Argentina <span class="currency">(ARS)</span></div>
+			<div tabindex="0" id="region2">🇦🇺 Australia <span class="currency">(A$)</span></div>
+			<div tabindex="0" id="region3">🇧🇷 Brazil <span class="currency">(R$)</span></div>
+			<div tabindex="0" id="region4">🇨🇦 Canada <span class="currency">(CA$)</span></div>
+			<div tabindex="0" id="region5">🇪🇺 Eurozone <span class="currency">(€)</span></div>
+			<div tabindex="0" id="region6">🇭🇺 Hungary <span class="currency">(HUF)</span></div>
+			<div tabindex="0" id="region7">🇲🇽 Mexico <span class="currency">(MX$)</span></div>
+			<div tabindex="0" id="region8">🇳🇿 New Zealand <span class="currency">(NZ$)</span></div>
+			<div tabindex="0" id="region9">🇷🇺 Russia <span class="currency">(RUB)</span></div>
+			<div tabindex="0" id="region10">🇹🇷 Türkiye <span class="currency">(TRY)</span></div>
+			<div tabindex="0" id="region11">🇺🇦 Ukraine <span class="currency">(UAH)</span></div>
+			<div tabindex="0" id="region12">🇬🇧 United Kingdom <span class="currency">(£)</span></div>
+			<div tabindex="0" id="region13">🇺🇸 United States <span class="currency">($)</span></div>
+		</div>
 
-		<br />
+		<div style="height: 30px"></div>
 
-		<p id="result">0 x 475<br />0 x 1000<br />0 x 2050<br />0 x 3650<br />0 x 5350<br />0 x 11000<br /></p>
+		<h3 class="c4">#1 — points to price</h3>
+		<p class="m5">
+			enter the number of
+			<a href="https://valorant.fandom.com/wiki/VALORANT_Points" class="u4" target="_blank" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
+			<a href="https://valorant.fandom.com/wiki/Store" class="u4" target="_blank" title="some things that can be purchased with VALORANT Points">something</a> costs to
+			calculate how to get it for the lowest price
+		</p>
 
-		<p id="result2">= ???</p>
+		<div class="h50"></div>
 
-		<h3>calculate points and compare prices:</h3>
+		<div class="calculate">
+			<input id="calc-input" pattern="^\d+$" placeholder="VALORANT Points" maxlength="7" /><i class="fa-solid fa-circle-check" id="calc-check" tabindex="0"></i
+			><i class="fa-solid fa-circle-xmark" id="calc-xmark" tabindex="0"></i><span id="calc-alert"></span>
 
-		<div style="display: flex">
-			<div class="manual">
-				<form name="manualCalculator">
-					475 <input type="number" name="manual1" class="m" style="width: 80px" value="0" min="0" max="1000" /><br />
-					1000 <input type="number" name="manual2" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					2050 <input type="number" name="manual3" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					3650 <input type="number" name="manual4" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					5350 <input type="number" name="manual5" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					11000 <input type="number" name="manual6" class="m" style="width: 63px" value="0" min="0" max="1000" /><br />
-				</form>
+			<p><span class="calc-points">please </span><span class="calc-amount"></span> <span class="price-per"></span></p>
+			<p><span class="calc-points">select </span><span class="calc-amount"></span> <span class="price-per"></span></p>
+			<p><span class="calc-points">a </span><span class="calc-amount"></span> <span class="price-per"></span></p>
+			<p><span class="calc-points">country </span><span class="calc-amount"></span> <span class="price-per"></span></p>
+			<p><span class="calc-points">or </span><span class="calc-amount"></span> <span class="price-per"></span></p>
+			<p><span class="calc-points">region </span><span class="calc-amount"></span> <span class="price-per"></span></p>
 
-				<p id="addedResult">= 0 points ($0)</p>
+			<p>= <span id="calc-vp">? VP</span> <span id="calc-price">(?)</span></p>
+		</div>
+
+		<div class="h50"></div>
+
+		<h3 class="c4">#2 — compare points & prices</h3>
+		<p class="m5">
+			compare the prices and total points received from different combinations of
+			<a href="https://valorant.fandom.com/wiki/VALORANT_Points" class="u4" target="_blank" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
+		</p>
+
+		<div class="h50"></div>
+
+		<div class="compare-container">
+			<div class="compare" id="compare1">
+				<p>
+					<span>#1</span><span><i class="fa-solid fa-circle-xmark" id="xmark1" tabindex="0"></i></span>
+				</p>
+				<p>
+					<span class="points">please</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus11" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus11" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">select</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus12" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus12" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">a</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus13" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus13" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">country</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus14" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus14" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">or</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus15" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus15" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">region</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus16" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus16" tabindex="0"></i
+					></span>
+				</p>
+				<p>= <span class="total-vp">? VP</span><br /><span class="total-price">(?)</span></p>
 			</div>
 
-			<div class="manual">
-				<form name="manualCalculator2">
-					475 <input type="number" name="manual1" class="m" style="width: 80px" value="0" min="0" max="1000" /><br />
-					1000 <input type="number" name="manual2" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					2050 <input type="number" name="manual3" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					3650 <input type="number" name="manual4" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					5350 <input type="number" name="manual5" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					11000 <input type="number" name="manual6" class="m" style="width: 63px" value="0" min="0" max="1000" /><br />
-				</form>
-
-				<p id="addedResult2">= 0 points ($0)</p>
+			<div class="compare" id="compare2">
+				<p>
+					<span>#2</span><span><i class="fa-solid fa-circle-xmark" id="xmark2" tabindex="0"></i></span>
+				</p>
+				<p>
+					<span class="points">please</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus21" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus21" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">select</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus22" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus22" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">a</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus23" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus23" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">country</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus24" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus24" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">or</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus25" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus25" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">region</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus26" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus26" tabindex="0"></i
+					></span>
+				</p>
+				<p>= <span class="total-vp">? VP</span><br /><span class="total-price">(?)</span></p>
 			</div>
 
-			<div class="manual">
-				<form name="manualCalculator3">
-					475 <input type="number" name="manual1" class="m" style="width: 80px" value="0" min="0" max="1000" /><br />
-					1000 <input type="number" name="manual2" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					2050 <input type="number" name="manual3" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					3650 <input type="number" name="manual4" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					5350 <input type="number" name="manual5" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					11000 <input type="number" name="manual6" class="m" style="width: 63px" value="0" min="0" max="1000" /><br />
-				</form>
-
-				<p id="addedResult3">= 0 points ($0)</p>
-			</div>
-
-			<div class="manual">
-				<form name="manualCalculator4">
-					475 <input type="number" name="manual1" class="m" style="width: 80px" value="0" min="0" max="1000" /><br />
-					1000 <input type="number" name="manual2" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					2050 <input type="number" name="manual3" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					3650 <input type="number" name="manual4" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					5350 <input type="number" name="manual5" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					11000 <input type="number" name="manual6" class="m" style="width: 63px" value="0" min="0" max="1000" /><br />
-				</form>
-
-				<p id="addedResult4">= 0 points ($0)</p>
-			</div>
-
-			<div class="manual">
-				<form name="manualCalculator5">
-					475 <input type="number" name="manual1" class="m" style="width: 80px" value="0" min="0" max="1000" /><br />
-					1000 <input type="number" name="manual2" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					2050 <input type="number" name="manual3" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					3650 <input type="number" name="manual4" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					5350 <input type="number" name="manual5" class="m" style="width: 72px" value="0" min="0" max="1000" /><br />
-					11000 <input type="number" name="manual6" class="m" style="width: 63px" value="0" min="0" max="1000" /><br />
-				</form>
-
-				<p id="addedResult5">= 0 points ($0)</p>
+			<div class="compare" id="compare3">
+				<p>
+					<span>#3</span><span><i class="fa-solid fa-circle-xmark" id="xmark3" tabindex="0"></i></span>
+				</p>
+				<p>
+					<span class="points">please</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus31" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus31" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">select</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus32" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus32" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">a</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus33" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus33" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">country</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus34" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus34" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">or</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus35" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus35" tabindex="0"></i
+					></span>
+				</p>
+				<p>
+					<span class="points">region</span
+					><span
+						><i class="fa-solid fa-circle-minus" id="minus36" tabindex="0"></i><span class="amount">!</span
+						><i class="fa-solid fa-circle-plus" id="plus36" tabindex="0"></i
+					></span>
+				</p>
+				<p>= <span class="total-vp">? VP</span><br /><span class="total-price">(?)</span></p>
 			</div>
 		</div>
 
+		<div class="h50"></div>
+
+		<p style="color: #00000064">please note: taxes and/or fees may apply</p>
+
 		<script>
-			addPoints();
-			addPoints2();
-			addPoints3();
-			addPoints4();
-			addPoints5();
+			// version
+			const version = ` v${2}.${0}.${0}\n\n`;
+			console.log("v  | " + version);
+			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
-			document.getElementById("calculator").addEventListener("submit", function (e) {
-				e.preventDefault();
+			// global variables
+			const regionSelectButton = document.querySelector("#region-select-button");
+			const regionSelectMenu = document.querySelector("#region-select-menu");
 
-				calculate();
+			var regionNumber = "";
+			var points = [0, 0, 0, 0, 0, 0];
+			var prices = [0, 0, 0, 0, 0, 0];
+			var amounts = [
+				[0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0],
+			];
+			var currency = "";
+
+			// VALORANT Points object - currency codes from https://www.techonthenet.com/js/currency_codes.php
+			const pointsData = {
+				// Argentina
+				region1: {
+					prices: [
+						[250, 3.99],
+						[525, 7.99],
+						[1090, 15.99],
+						[2775, 39.99],
+						[5750, 79.99],
+						[7625, 100],
+					],
+					currency: "ARS",
+				},
+				// Australia
+				region2: {
+					prices: [
+						[525, 7.99],
+						[1025, 14.99],
+						[2175, 30.99],
+						[3975, 55.99],
+						[5800, 79.99],
+						[9750, 129.99],
+					],
+					currency: "AUD",
+				},
+				// Brazil
+				region3: {
+					prices: [
+						[475, 16.9],
+						[1200, 39.9],
+						[2300, 74.9],
+						[4400, 139.9],
+						[5500, 169.9],
+						[11500, 349.9],
+					],
+					currency: "BRL",
+				},
+				// Canada
+				region4: {
+					prices: [
+						[475, 6.99],
+						[1000, 13.99],
+						[2050, 27.99],
+						[3650, 47.99],
+						[5350, 69.99],
+						[11000, 139.99],
+					],
+					currency: "CAD",
+				},
+				// Eurozone
+				region5: {
+					prices: [
+						[475, 5],
+						[1000, 10],
+						[2050, 20],
+						[3650, 35],
+						[5350, 50],
+						[11000, 100],
+					],
+					currency: "EUR",
+				},
+				// Hungary
+				region6: {
+					prices: [
+						[500, 1790],
+						[1000, 3490],
+						[2050, 6990],
+						[3800, 12790],
+						[5350, 17790],
+						[11000, 34990],
+					],
+					currency: "HUF",
+				},
+				// Mexico
+				region7: {
+					prices: [
+						[550, 99],
+						[1150, 199],
+						[2400, 399],
+						[4250, 699],
+						[6300, 1029],
+						[12400, 1999],
+					],
+					currency: "MXN",
+				},
+				// New Zealand
+				region8: {
+					prices: [
+						[599, 8.99],
+						[1025, 16.99],
+						[2175, 34.99],
+						[3975, 62.99],
+						[5800, 89.99],
+						[9750, 144.99],
+					],
+					currency: "NZD",
+				},
+				// Russia
+				region9: {
+					prices: [
+						[575, 379],
+						[1050, 649],
+						[2200, 1290],
+						[3650, 2090],
+						[5500, 3090],
+						[11000, 5990],
+					],
+					currency: "RUB",
+				},
+				// Türkiye
+				region10: {
+					prices: [
+						[115, 17],
+						[485, 70],
+						[925, 130],
+						[1850, 250],
+						[3400, 450],
+						[5550, 700],
+					],
+					currency: "TRY",
+				},
+				// Ukraine
+				region11: {
+					prices: [
+						[420, 80],
+						[880, 160],
+						[1825, 320],
+						[3225, 560],
+						[4650, 800],
+						[9650, 1600],
+					],
+					currency: "UAH",
+				},
+				// United Kingdom
+				region12: {
+					prices: [
+						[500, 4.5],
+						[1050, 9],
+						[2150, 18],
+						[3650, 30],
+						[5500, 45],
+						[11500, 90],
+					],
+					currency: "GBP",
+				},
+				// United States
+				region13: {
+					prices: [
+						[475, 4.99],
+						[1000, 9.99],
+						[2050, 19.99],
+						[3650, 34.99],
+						[5350, 49.99],
+						[11000, 99.99],
+					],
+					currency: "USD",
+				},
+			};
+
+			// set total (compare)
+			function setCompareTotalPoints(element, total) {
+				element.innerHTML = total + " VP";
+			}
+			function setCompareTotalPrice(element, total) {
+				element.innerHTML = `(${total.toLocaleString("en", {
+					style: "currency",
+					currency: pointsData[regionNumber].currency,
+				})})`;
+			}
+
+			// update compare
+			function updateCompare(compareNumber) {
+				if (regionNumber == "") return;
+
+				let totalPoints = 0;
+				let totalPrice = 0;
+
+				for (let i = 0; i < 6; i++) {
+					document.querySelectorAll(`#compare${compareNumber + 1} p:nth-child(${i + 2}) .amount`).forEach((element) => {
+						element.innerHTML = amounts[compareNumber][i];
+
+						totalPoints += points[i] * amounts[compareNumber][i];
+						totalPrice += prices[i] * amounts[compareNumber][i];
+					});
+				}
+
+				setCompareTotalPoints(document.querySelector(`.compare:nth-child(${compareNumber + 1}) .total-vp`), totalPoints);
+				setCompareTotalPrice(document.querySelector(`.compare:nth-child(${compareNumber + 1}) .total-price`), totalPrice);
+			}
+
+			// button functions
+			function openRegionSelectMenu() {
+				regionSelectButton.style = "opacity: 0%";
+				regionSelectMenu.style = `display: block; top: ${regionSelectButton.getBoundingClientRect().top - (document.body.getBoundingClientRect().top - 50)}px; left: ${
+					regionSelectButton.getBoundingClientRect().left
+				}px`;
+
+				regionSelectButton.innerHTML = "null";
+			}
+			function legacyButton() {
+				window.location.href = "v-old.html";
+			}
+			function resetAllButton() {
+				window.location.reload();
+			}
+			function setRegion(regionID) {
+				regionNumber = regionID;
+
+				regionSelectButton.style = "padding: 3px 30px 5px 30px";
+				regionSelectMenu.style = `display: none; top: ${regionSelectButton.getBoundingClientRect().top}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
+
+				regionSelectButton.innerHTML = '<i class="fa-solid fa-earth-americas"></i>' + document.querySelector(`#${regionNumber}`).innerHTML;
+				window.history.pushState({}, "", `?x=${regionNumber}`);
+
+				for (let i = 0; i < 6; i++) {
+					points[i] = pointsData[regionNumber].prices[i][0];
+
+					document.querySelectorAll(`p:nth-child(${i + 2}) .points`).forEach((element) => {
+						element.innerHTML = points[i];
+					});
+
+					document.querySelector(`p:nth-child(${i + 5}) .calc-points`).innerHTML = points[i];
+					document.querySelector(`p:nth-child(${i + 5}) .calc-amount`).innerHTML = "×0";
+				}
+
+				document.querySelectorAll(".amount").forEach((amount) => {
+					amount.innerHTML = 0;
+				});
+
+				document.querySelectorAll(".total-vp").forEach((totalVP) => {
+					setCompareTotalPoints(totalVP, 0);
+				});
+				setCompareTotalPoints(document.querySelector("#calc-vp"), 0);
+
+				document.querySelectorAll(".total-price").forEach((totalPrice) => {
+					setCompareTotalPrice(totalPrice, 0);
+				});
+				setCompareTotalPrice(document.querySelector("#calc-price"), 0);
+
+				for (let i = 0; i < 6; i++) {
+					prices[i] = pointsData[regionNumber].prices[i][1];
+				}
+
+				for (let i = 0; i < 3; i++) {
+					for (let j = 0; j < 6; j++) {
+						amounts[i][j] = 0;
+					}
+				}
+
+				document.querySelector("input").value = "";
+			}
+
+			// x, -, + functions
+			function xmarkClick(element) {
+				let compareNumber = element.id.substring(5, 6) - 1;
+
+				for (let i = 0; i < 6; i++) {
+					amounts[compareNumber][i] = 0;
+				}
+
+				updateCompare(compareNumber);
+			}
+			function minusClick(element) {
+				let compareNumber = element.id.substring(5, 6) - 1;
+				let amountNumber = element.id.substring(6) - 1;
+
+				if (amounts[compareNumber][amountNumber] > 0) {
+					amounts[compareNumber][amountNumber]--;
+				}
+
+				updateCompare(compareNumber);
+			}
+			function plusClick(element) {
+				let compareNumber = element.id.substring(4, 5) - 1;
+				let amountNumber = element.id.substring(5) - 1;
+
+				if (amounts[compareNumber][amountNumber] < 10) {
+					amounts[compareNumber][amountNumber]++;
+				}
+
+				updateCompare(compareNumber);
+			}
+
+			// calc check and xmark handlers
+			function handleCalcCheck() {
+				if (regionNumber == "") return;
+
+				let inputPoints = document.querySelector("input").value;
+				if (/^\d+$/.test(inputPoints)) {
+					inputPoints = parseInt(inputPoints);
+
+					document.querySelector("#calc-alert").innerHTML = "";
+
+					let calculatedAmounts = [];
+
+					for (let i = 0; i < 6; i++) {
+						calculatedAmounts[5 - i] = Math.floor(inputPoints / pointsData[regionNumber].prices[5 - i][0]);
+						inputPoints = inputPoints % pointsData[regionNumber].prices[5 - i][0];
+					}
+					if (inputPoints > 0) calculatedAmounts[0]++;
+
+					let calculatedPoints = 0;
+					let calculatedPrice = 0;
+
+					for (let i = 0; i < 6; i++) {
+						document.querySelector(`p:nth-child(${10 - i}) .calc-amount`).innerHTML = `×${calculatedAmounts[5 - i]}`;
+
+						calculatedPoints += pointsData[regionNumber].prices[5 - i][0] * calculatedAmounts[5 - i];
+						calculatedPrice += pointsData[regionNumber].prices[5 - i][1] * calculatedAmounts[5 - i];
+					}
+
+					// console.table(calculatedAmounts);
+					// console.log(inputPoints);
+
+					setCompareTotalPoints(document.querySelector("#calc-vp"), calculatedPoints);
+					setCompareTotalPrice(document.querySelector("#calc-price"), calculatedPrice);
+				} else {
+					document.querySelector("#calc-alert").innerHTML = "ERROR: invalid number";
+
+					setCompareTotalPoints(document.querySelector("#calc-vp"), 0);
+					setCompareTotalPrice(document.querySelector("#calc-price"), 0);
+
+					for (let i = 0; i < 6; i++) {
+						document.querySelector(`p:nth-child(${i + 5}) .calc-points`).innerHTML = points[i];
+						document.querySelector(`p:nth-child(${i + 5}) .calc-amount`).innerHTML = "×0";
+					}
+				}
+			}
+			function handleCalcXmark() {
+				document.querySelector("input").value = "";
+
+				if (regionNumber == "") return;
+
+				setCompareTotalPoints(document.querySelector("#calc-vp"), 0);
+				setCompareTotalPrice(document.querySelector("#calc-price"), 0);
+
+				for (let i = 0; i < 6; i++) {
+					document.querySelector(`p:nth-child(${i + 5}) .calc-amount`).innerHTML = "×0";
+				}
+			}
+
+			// buttons (click or tap)
+			document.querySelector("#region-select-button").addEventListener("click", (e) => {
+				openRegionSelectMenu();
 			});
+			document.querySelector("#legacy-button").addEventListener("click", (e) => {
+				legacyButton();
+			});
+			document.querySelector("#reset-all-button").addEventListener("click", (e) => {
+				resetAllButton();
+			});
+
+			// regions (click or tap)
+			document.querySelectorAll("#region-select-menu div:not(#region-select-menu div:has(i))").forEach((element) => {
+				element.addEventListener("click", (e) => {
+					setRegion(element.id);
+				});
+			});
+
+			// x, -, + (click or tap)
+			document.querySelectorAll('.compare i[class="fa-solid fa-circle-xmark"]').forEach((element) => {
+				element.addEventListener("click", (e) => {
+					xmarkClick(element);
+				});
+			});
+			document.querySelectorAll('.compare i[class="fa-solid fa-circle-minus"]').forEach((element) => {
+				element.addEventListener("click", (e) => {
+					minusClick(element);
+				});
+			});
+			document.querySelectorAll('.compare i[class="fa-solid fa-circle-plus"]').forEach((element) => {
+				element.addEventListener("click", (e) => {
+					plusClick(element);
+				});
+			});
+
+			// calc check and xmark events
+			document.querySelector("#calc-check").addEventListener("click", (e) => {
+				handleCalcCheck();
+			});
+			document.querySelector("#calc-xmark").addEventListener("click", (e) => {
+				handleCalcXmark();
+			});
+
+			// buttons & regions (enter)
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					if (document.activeElement == document.querySelector("#region-select-button")) {
+						openRegionSelectMenu();
+					}
+					if (document.activeElement == document.querySelector("#legacy-button")) {
+						legacyButton();
+					}
+					if (document.activeElement == document.querySelector("#reset-all-button")) {
+						resetAllButton();
+					}
+
+					document.querySelectorAll("#region-select-menu div:not(#region-select-menu div:has(i))").forEach((element) => {
+						if (element == document.activeElement) {
+							setRegion(document.activeElement.id);
+						}
+					});
+
+					document.querySelectorAll('.compare i[class="fa-solid fa-circle-xmark"]').forEach((element) => {
+						if (element == document.activeElement) {
+							xmarkClick(element);
+						}
+					});
+					document.querySelectorAll('.compare i[class="fa-solid fa-circle-minus"]').forEach((element) => {
+						if (element == document.activeElement) {
+							minusClick(element);
+						}
+					});
+					document.querySelectorAll('.compare i[class="fa-solid fa-circle-plus"]').forEach((element) => {
+						if (element == document.activeElement) {
+							plusClick(element);
+						}
+					});
+
+					if (document.activeElement == document.querySelector("#calc-check") || document.activeElement == document.querySelector("input")) {
+						handleCalcCheck();
+					}
+					if (document.activeElement == document.querySelector("#calc-xmark")) {
+						handleCalcXmark();
+					}
+				}
+			});
+
+			// get URL data
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const region = item.get("x");
+
+			if (/^region[123456789][123]{0,1}$/.test(region)) {
+				// must be updated if more regions are added
+				setRegion(region);
+			}
+
+			/*
+			 * TODO:
+			 * - middle click buttons?
+			 * - tab from button #1 to dropdown
+			 * - localized number formatting
+			 */
 		</script>
 	</body>
 </html>
