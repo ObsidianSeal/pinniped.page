@@ -456,7 +456,7 @@
 			<div tabindex="0" id="region2">🇦🇺 Australia <span class="currency">(A$)</span></div>
 			<div tabindex="0" id="region3">🇧🇷 Brazil <span class="currency">(R$)</span></div>
 			<div tabindex="0" id="region4">🇨🇦 Canada <span class="currency">(CA$)</span></div>
-			<div tabindex="0" id="region5">🇪🇺 Eurozone <span class="currency">(€)</span></div>
+			<div tabindex="0" id="region5">🇪🇺 European Union <span class="currency">(€)</span></div>
 			<div tabindex="0" id="region6">🇭🇺 Hungary <span class="currency">(HUF)</span></div>
 			<div tabindex="0" id="region7">🇲🇽 Mexico <span class="currency">(MX$)</span></div>
 			<div tabindex="0" id="region8">🇳🇿 New Zealand <span class="currency">(NZ$)</span></div>
@@ -658,13 +658,14 @@
 
 		<script>
 			// version
-			const version = ` v${2}.${0}.${0}\n\n`;
+			const version = ` v${2}.${1}.${0}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
 			// global variables
 			const regionSelectButton = document.querySelector("#region-select-button");
 			const regionSelectMenu = document.querySelector("#region-select-menu");
+			const inputElement = document.querySelector("input");
 
 			var regionNumber = "";
 			var points = [0, 0, 0, 0, 0, 0];
@@ -675,6 +676,10 @@
 				[0, 0, 0, 0, 0, 0],
 			];
 			var currency = "";
+
+			// get body padding
+			var bodyPadding = 50;
+			if (window.innerWidth <= 600) bodyPadding = 20;
 
 			// VALORANT Points object - currency codes from https://www.techonthenet.com/js/currency_codes.php
 			const pointsData = {
@@ -726,7 +731,7 @@
 					],
 					currency: "CAD",
 				},
-				// Eurozone
+				// European Union
 				region5: {
 					prices: [
 						[475, 5],
@@ -870,9 +875,9 @@
 			// button functions
 			function openRegionSelectMenu() {
 				regionSelectButton.style = "opacity: 0%";
-				regionSelectMenu.style = `display: block; top: ${regionSelectButton.getBoundingClientRect().top - (document.body.getBoundingClientRect().top - 50)}px; left: ${
-					regionSelectButton.getBoundingClientRect().left
-				}px`;
+				regionSelectMenu.style = `display: block; top: ${
+					regionSelectButton.getBoundingClientRect().top - (document.body.getBoundingClientRect().top - bodyPadding)
+				}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
 
 				regionSelectButton.innerHTML = "null";
 			}
@@ -926,7 +931,7 @@
 					}
 				}
 
-				document.querySelector("input").value = "";
+				inputElement.value = "";
 			}
 
 			// x, -, + functions
@@ -964,49 +969,37 @@
 			function handleCalcCheck() {
 				if (regionNumber == "") return;
 
-				let inputPoints = document.querySelector("input").value;
-				if (/^\d+$/.test(inputPoints)) {
-					inputPoints = parseInt(inputPoints);
+				let inputPoints = inputElement.value;
+				if (!/^\d+$/.test(inputPoints)) return;
 
-					document.querySelector("#calc-alert").innerHTML = "";
+				inputPoints = parseInt(inputPoints);
 
-					let calculatedAmounts = [];
+				document.querySelector("#calc-alert").innerHTML = "";
 
-					for (let i = 0; i < 6; i++) {
-						calculatedAmounts[5 - i] = Math.floor(inputPoints / pointsData[regionNumber].prices[5 - i][0]);
-						inputPoints = inputPoints % pointsData[regionNumber].prices[5 - i][0];
-					}
-					if (inputPoints > 0) calculatedAmounts[0]++;
+				let calculatedAmounts = [];
 
-					let calculatedPoints = 0;
-					let calculatedPrice = 0;
-
-					for (let i = 0; i < 6; i++) {
-						document.querySelector(`p:nth-child(${10 - i}) .calc-amount`).innerHTML = `×${calculatedAmounts[5 - i]}`;
-
-						calculatedPoints += pointsData[regionNumber].prices[5 - i][0] * calculatedAmounts[5 - i];
-						calculatedPrice += pointsData[regionNumber].prices[5 - i][1] * calculatedAmounts[5 - i];
-					}
-
-					// console.table(calculatedAmounts);
-					// console.log(inputPoints);
-
-					setCompareTotalPoints(document.querySelector("#calc-vp"), calculatedPoints);
-					setCompareTotalPrice(document.querySelector("#calc-price"), calculatedPrice);
-				} else {
-					document.querySelector("#calc-alert").innerHTML = "ERROR: invalid number";
-
-					setCompareTotalPoints(document.querySelector("#calc-vp"), 0);
-					setCompareTotalPrice(document.querySelector("#calc-price"), 0);
-
-					for (let i = 0; i < 6; i++) {
-						document.querySelector(`p:nth-child(${i + 5}) .calc-points`).innerHTML = points[i];
-						document.querySelector(`p:nth-child(${i + 5}) .calc-amount`).innerHTML = "×0";
-					}
+				for (let i = 0; i < 6; i++) {
+					calculatedAmounts[5 - i] = Math.floor(inputPoints / pointsData[regionNumber].prices[5 - i][0]);
+					inputPoints = inputPoints % pointsData[regionNumber].prices[5 - i][0];
 				}
+				if (inputPoints > 0) calculatedAmounts[0]++;
+
+				let calculatedPoints = 0;
+				let calculatedPrice = 0;
+
+				for (let i = 0; i < 6; i++) {
+					document.querySelector(`p:nth-child(${10 - i}) .calc-amount`).innerHTML = `×${calculatedAmounts[5 - i]}`;
+
+					calculatedPoints += pointsData[regionNumber].prices[5 - i][0] * calculatedAmounts[5 - i];
+					calculatedPrice += pointsData[regionNumber].prices[5 - i][1] * calculatedAmounts[5 - i];
+				}
+
+				setCompareTotalPoints(document.querySelector("#calc-vp"), calculatedPoints);
+				setCompareTotalPrice(document.querySelector("#calc-price"), calculatedPrice);
 			}
 			function handleCalcXmark() {
-				document.querySelector("input").value = "";
+				inputElement.value = "";
+				document.querySelector("#calc-alert").innerHTML = "";
 
 				if (regionNumber == "") return;
 
@@ -1017,6 +1010,12 @@
 					document.querySelector(`p:nth-child(${i + 5}) .calc-amount`).innerHTML = "×0";
 				}
 			}
+
+			// detect empty input (remove error)
+			inputElement.addEventListener("input", (e) => {
+				if (!/^\d+$/.test(inputElement.value) && inputElement.value != "") document.querySelector("#calc-alert").innerHTML = "ERROR: invalid number";
+				else document.querySelector("#calc-alert").innerHTML = "";
+			});
 
 			// buttons (click or tap)
 			document.querySelector("#region-select-button").addEventListener("click", (e) => {
@@ -1096,7 +1095,7 @@
 						}
 					});
 
-					if (document.activeElement == document.querySelector("#calc-check") || document.activeElement == document.querySelector("input")) {
+					if (document.activeElement == document.querySelector("#calc-check") || document.activeElement == inputElement) {
 						handleCalcCheck();
 					}
 					if (document.activeElement == document.querySelector("#calc-xmark")) {
@@ -1114,13 +1113,6 @@
 				// must be updated if more regions are added
 				setRegion(region);
 			}
-
-			/*
-			 * TODO:
-			 * - middle click buttons?
-			 * - tab from button #1 to dropdown
-			 * - localized number formatting
-			 */
 		</script>
 	</body>
 </html>
