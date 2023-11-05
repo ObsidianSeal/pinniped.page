@@ -20,6 +20,7 @@
 
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700");
 
 			* {
 				margin: 0;
@@ -38,18 +39,41 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+
+				color: #00c49a;
 			}
 
 			h1 {
 				font-family: "Bebas Neue";
 				font-size: 100px;
 				letter-spacing: 2px;
-				color: #00c49a;
+			}
+
+			h2 {
+				font-family: "Roboto Slab";
+				font-size: 60px;
+				font-weight: 700;
+
+				position: fixed;
+				top: 50px;
+				left: 50px;
+
+				padding-right: 50px;
+			}
+
+			@media all and (max-width: 800px) {
+				h2 {
+					font-size: 40px;
+				}
 			}
 
 			@media all and (max-width: 500px) {
 				h1 {
 					font-size: 60px;
+				}
+
+				h2 {
+					font-size: 30px;
 				}
 			}
 		</style>
@@ -57,8 +81,13 @@
 
 	<body>
 		<h1><i class="fa-solid fa-spinner fa-spin-pulse"></i></h1>
+		<h2></h2>
 
 		<script>
+			var text1 = document.querySelector("h1");
+			var text2 = document.querySelector("h2");
+			var pageTitle = document.querySelector("title");
+
 			function pad(number, size) {
 				number = number.toString();
 				while (number.length < size) number = "0" + number;
@@ -67,8 +96,11 @@
 
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
-			const date = item.get("x");
+			const date = item.get("date");
+			var title = item.get("title");
 			var isValid;
+
+			if (/[<>]/.test(title)) title = '<span style="color: #ff715b">no HTML in the title please!</span>';
 
 			if (date != null && date != "") {
 				const year = parseInt(date.substring(0, 4));
@@ -99,25 +131,29 @@
 				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 				var countdownText = `${pad(days, 2)}:${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
-				document.querySelector("h1").innerHTML = countdownText;
-				document.querySelector("title").innerHTML = countdownText;
+				text1.innerHTML = countdownText;
+				pageTitle.innerHTML = `${countdownText} — ${title}`;
 
 				if (distance < 0) {
 					clearInterval(x);
-					document.querySelector("h1").innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
-					document.querySelector("title").innerHTML = "✔";
+					text1.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+					pageTitle.innerHTML = "✔";
 				}
 			}, 1000);
 
 			document.addEventListener("keydown", (e) => {
 				if (e.key === "c") {
-					if (document.querySelector("title").innerHTML != "Loading..." && document.querySelector("title").innerHTML != "✔") {
-						navigator.clipboard.writeText(`${document.querySelector("h1").innerHTML}`);
+					if (pageTitle.innerHTML != "Loading..." && pageTitle.innerHTML != "✔") {
+						navigator.clipboard.writeText(`${text1.innerHTML}`);
 					} else {
 						navigator.clipboard.writeText(`00:00:00:00`);
 					}
 				}
 			});
+
+			if (title != null && title != "") {
+				text2.innerHTML = title;
+			}
 		</script>
 	</body>
 </html>

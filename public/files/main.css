@@ -141,6 +141,10 @@ ul {
 	margin-bottom: 0;
 }
 
+li::marker {
+	font-weight: bold;
+}
+
 hr {
 	margin: 20px 0 20px 0;
 	border: 0;
@@ -500,6 +504,10 @@ ul {
 .special-box {
 	border: 2px solid #292f36;
 	padding: 2px 0 5px 0;
+}
+
+.half-opacity {
+	opacity: 50%;
 }
 
 #download-link {
