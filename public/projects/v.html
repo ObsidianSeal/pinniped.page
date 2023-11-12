@@ -286,7 +286,7 @@
 			}
 
 			#region-select-menu div {
-				padding: 3px 30px 5px 30px;
+				padding: 5px 30px 5px 30px;
 				transition: background-color 0.25s;
 				border-bottom: 2px solid black;
 			}
@@ -308,12 +308,6 @@
 				background-color: var(--c5h);
 				cursor: pointer;
 				outline: none;
-			}
-
-			#region-select-menu div:first-child:hover,
-			#region-select-menu div:first-child:hover {
-				background-color: white;
-				cursor: default;
 			}
 
 			.currency {
@@ -451,20 +445,20 @@
 		</div>
 
 		<div id="region-select-menu">
-			<div><i class="fa-solid fa-earth-americas"></i>select country/region</div>
-			<div tabindex="0" id="region1">🇦🇷 Argentina <span class="currency">(ARS)</span></div>
-			<div tabindex="0" id="region2">🇦🇺 Australia <span class="currency">(A$)</span></div>
-			<div tabindex="0" id="region3">🇧🇷 Brazil <span class="currency">(R$)</span></div>
-			<div tabindex="0" id="region4">🇨🇦 Canada <span class="currency">(CA$)</span></div>
-			<div tabindex="0" id="region5">🇪🇺 European Union <span class="currency">(€)</span></div>
-			<div tabindex="0" id="region6">🇭🇺 Hungary <span class="currency">(HUF)</span></div>
-			<div tabindex="0" id="region7">🇲🇽 Mexico <span class="currency">(MX$)</span></div>
-			<div tabindex="0" id="region8">🇳🇿 New Zealand <span class="currency">(NZ$)</span></div>
-			<div tabindex="0" id="region9">🇷🇺 Russia <span class="currency">(RUB)</span></div>
-			<div tabindex="0" id="region10">🇹🇷 Türkiye <span class="currency">(TRY)</span></div>
-			<div tabindex="0" id="region11">🇺🇦 Ukraine <span class="currency">(UAH)</span></div>
-			<div tabindex="0" id="region12">🇬🇧 United Kingdom <span class="currency">(£)</span></div>
-			<div tabindex="0" id="region13">🇺🇸 United States <span class="currency">($)</span></div>
+			<div tabindex="0" id="region-select-menu-default"><i class="fa-solid fa-earth-americas"></i>select country/region</div>
+			<div tabindex="0" id="region1">Argentina <span class="currency">(ARS)</span></div>
+			<div tabindex="0" id="region2">Australia <span class="currency">(A$)</span></div>
+			<div tabindex="0" id="region3">Brazil <span class="currency">(R$)</span></div>
+			<div tabindex="0" id="region4">Canada <span class="currency">(CA$)</span></div>
+			<div tabindex="0" id="region5">European Union <span class="currency">(€)</span></div>
+			<div tabindex="0" id="region6">Hungary <span class="currency">(HUF)</span></div>
+			<div tabindex="0" id="region7">Mexico <span class="currency">(MX$)</span></div>
+			<div tabindex="0" id="region8">New Zealand <span class="currency">(NZ$)</span></div>
+			<div tabindex="0" id="region9">Russia <span class="currency">(RUB)</span></div>
+			<div tabindex="0" id="region10">Türkiye <span class="currency">(TRY)</span></div>
+			<div tabindex="0" id="region11">Ukraine <span class="currency">(UAH)</span></div>
+			<div tabindex="0" id="region12">United Kingdom <span class="currency">(£)</span></div>
+			<div tabindex="0" id="region13">United States <span class="currency">($)</span></div>
 		</div>
 
 		<div style="height: 30px"></div>
@@ -658,7 +652,7 @@
 
 		<script>
 			// version
-			const version = ` v${2}.${1}.${0}\n\n`;
+			const version = ` v${2}.${2}.${0}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
@@ -890,7 +884,7 @@
 			function setRegion(regionID) {
 				regionNumber = regionID;
 
-				regionSelectButton.style = "padding: 3px 30px 5px 30px";
+				regionSelectButton.style = "opacity: 100%";
 				regionSelectMenu.style = `display: none; top: ${regionSelectButton.getBoundingClientRect().top}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
 
 				regionSelectButton.innerHTML = '<i class="fa-solid fa-earth-americas"></i>' + document.querySelector(`#${regionNumber}`).innerHTML;
@@ -1032,6 +1026,7 @@
 			document.querySelectorAll("#region-select-menu div:not(#region-select-menu div:has(i))").forEach((element) => {
 				element.addEventListener("click", (e) => {
 					setRegion(element.id);
+					document.querySelector("#calc-input").focus();
 				});
 			});
 
@@ -1065,6 +1060,7 @@
 				if (e.key === "Enter") {
 					if (document.activeElement == document.querySelector("#region-select-button")) {
 						openRegionSelectMenu();
+						document.querySelector("#region-select-menu-default").focus();
 					}
 					if (document.activeElement == document.querySelector("#legacy-button")) {
 						legacyButton();
@@ -1076,6 +1072,7 @@
 					document.querySelectorAll("#region-select-menu div:not(#region-select-menu div:has(i))").forEach((element) => {
 						if (element == document.activeElement) {
 							setRegion(document.activeElement.id);
+							document.querySelector("#calc-input").focus();
 						}
 					});
 
@@ -1109,7 +1106,7 @@
 			const item = new URLSearchParams(query);
 			const region = item.get("x");
 
-			if (/^region[123456789][123]{0,1}$/.test(region)) {
+			if (/^region([123456789]|1[0123])$/.test(region)) {
 				// must be updated if more regions are added
 				setRegion(region);
 			}

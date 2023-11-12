@@ -90,7 +90,8 @@
 				<!-- can change icon, icon colour, and text -- make sure to check .js -->
 				<i class="fa-solid fa-warning" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i
 				><span class="invert" id="notice-text">Google + Squarespace are being meanies, expect the worst!</span
-				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i>
+				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i
+				><i class="fa-solid fa-angle-right notice-x" id="notice-arrow" style="display: none" onclick="hideNotice()"></i>
 			</p>
 		</div>
 
@@ -141,6 +142,7 @@
 				"Hi",
 				"o/",
 				"Je n'aime pas Squarespace",
+				"Hello! / Bonjour! / Hola!",
 			];
 
 			let x = Math.floor(Math.random() * subtitles.length);
@@ -165,16 +167,18 @@
 						}
 					}, 2000);
 
-					document.getElementById("notice-text").style = "display: none";
-					document.getElementById("notice-icon").style = "color: #ff6b6b"; // change if change icon colour!
-					document.getElementById("notice-x").classList.remove("fa-xmark");
-					document.getElementById("notice-x").classList.add("fa-angle-right");
+					// HIDE NOTICE
+					document.getElementById("notice-text").style = "display: none"; // remove text
+					document.getElementById("notice-icon").style = "color: #ff6b6b"; // remove icon margin, change if change icon colour!
+					document.getElementById("notice-x").style = "display: none"; // remove 'x'
+					document.getElementById("notice-arrow").style = "display: inline-block"; // show '>'
 				} else {
-					document.getElementById("notice").classList.remove("hidden");
-					document.getElementById("notice-text").style = "display: inline-block";
-					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px"; // change if change icon colour!
-					document.getElementById("notice-x").classList.remove("fa-angle-right");
-					document.getElementById("notice-x").classList.add("fa-xmark");
+					// SHOW NOTICE
+					document.getElementById("notice").classList.remove("hidden"); // keep notice on screen
+					document.getElementById("notice-text").style = "display: inline-block"; // show text
+					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px"; // add margin to icon, change if change icon colour!
+					document.getElementById("notice-x").style = "display: inline-block"; // show 'x'
+					document.getElementById("notice-arrow").style = "display: none"; // remove '>'
 				}
 				noticeHidden = !noticeHidden;
 			}
