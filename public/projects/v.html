@@ -418,6 +418,10 @@
 				margin-top: 5px;
 			}
 
+			.m10 {
+				margin-top: 10px;
+			}
+
 			br {
 				user-select: none;
 			}
@@ -468,7 +472,7 @@
 			enter the number of
 			<a href="https://valorant.fandom.com/wiki/VALORANT_Points" class="u4" target="_blank" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
 			<a href="https://valorant.fandom.com/wiki/Store" class="u4" target="_blank" title="some things that can be purchased with VALORANT Points">something</a> costs to
-			calculate how to get it for the lowest price
+			calculate how to get it for the lowest price*
 		</p>
 
 		<div class="h50"></div>
@@ -484,7 +488,7 @@
 			<p><span class="calc-points">or </span><span class="calc-amount"></span> <span class="price-per"></span></p>
 			<p><span class="calc-points">region </span><span class="calc-amount"></span> <span class="price-per"></span></p>
 
-			<p>= <span id="calc-vp">? VP</span> <span id="calc-price">(?)</span></p>
+			<p>= <span id="calc-vp">? VP</span> <span id="calc-price">(?)</span> **</p>
 		</div>
 
 		<div class="h50"></div>
@@ -649,10 +653,12 @@
 		<div class="h50"></div>
 
 		<p style="color: #00000064">please note: taxes and/or fees may apply</p>
+		<p style="color: #00000064" class="m10">*the LOWEST price is not always the BEST price</p>
+		<p style="color: #00000064" class="m10">**the calculated price is not always the lowest price</p>
 
 		<script>
 			// version
-			const version = ` v${2}.${2}.${0}\n\n`;
+			const version = ` v${2}.${3}.${0}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
@@ -669,7 +675,6 @@
 				[0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0],
 			];
-			var currency = "";
 
 			// get body padding
 			var bodyPadding = 50;
@@ -866,14 +871,18 @@
 				setCompareTotalPrice(document.querySelector(`.compare:nth-child(${compareNumber + 1}) .total-price`), totalPrice);
 			}
 
+			// close menu without setting region
+			function closeMenu() {
+				regionSelectButton.style = "opacity: 100%";
+				regionSelectMenu.style = `display: none; top: ${regionSelectButton.getBoundingClientRect().top}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
+			}
+
 			// button functions
 			function openRegionSelectMenu() {
 				regionSelectButton.style = "opacity: 0%";
 				regionSelectMenu.style = `display: block; top: ${
 					regionSelectButton.getBoundingClientRect().top - (document.body.getBoundingClientRect().top - bodyPadding)
 				}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
-
-				regionSelectButton.innerHTML = "null";
 			}
 			function legacyButton() {
 				window.location.href = "v-old.html";
@@ -883,9 +892,7 @@
 			}
 			function setRegion(regionID) {
 				regionNumber = regionID;
-
-				regionSelectButton.style = "opacity: 100%";
-				regionSelectMenu.style = `display: none; top: ${regionSelectButton.getBoundingClientRect().top}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
+				closeMenu();
 
 				regionSelectButton.innerHTML = '<i class="fa-solid fa-earth-americas"></i>' + document.querySelector(`#${regionNumber}`).innerHTML;
 				window.history.pushState({}, "", `?x=${regionNumber}`);
@@ -1055,13 +1062,27 @@
 				handleCalcXmark();
 			});
 
-			// buttons & regions (enter)
+			// leave menu - menu default (click or tap)
+			document.querySelector("#region-select-menu-default").addEventListener("click", (e) => {
+				closeMenu();
+			});
+			document.addEventListener("click", (e) => {
+				console.log(e.target);
+				if (e.target != regionSelectMenu && e.target != regionSelectButton) closeMenu();
+			});
+
+			// key listener
 			document.addEventListener("keydown", (e) => {
+				// buttons & regions (enter)
 				if (e.key === "Enter") {
-					if (document.activeElement == document.querySelector("#region-select-button")) {
+					if (document.activeElement == document.querySelector("#region-select-menu-default")) {
+						closeMenu();
+						document.querySelector("#region-select-button").focus();
+					} else if (document.activeElement == document.querySelector("#region-select-button")) {
 						openRegionSelectMenu();
 						document.querySelector("#region-select-menu-default").focus();
 					}
+
 					if (document.activeElement == document.querySelector("#legacy-button")) {
 						legacyButton();
 					}
@@ -1098,6 +1119,12 @@
 					if (document.activeElement == document.querySelector("#calc-xmark")) {
 						handleCalcXmark();
 					}
+				}
+
+				// escape! from menu
+				if (e.key === "Escape") {
+					closeMenu();
+					regionSelectButton.focus();
 				}
 			});
 
