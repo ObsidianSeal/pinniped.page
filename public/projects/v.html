@@ -472,7 +472,7 @@
 			enter the number of
 			<a href="https://valorant.fandom.com/wiki/VALORANT_Points" class="u4" target="_blank" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
 			<a href="https://valorant.fandom.com/wiki/Store" class="u4" target="_blank" title="some things that can be purchased with VALORANT Points">something</a> costs to
-			calculate how to get it for the lowest price*
+			calculate how to get it for the lowest price
 		</p>
 
 		<div class="h50"></div>
@@ -488,7 +488,7 @@
 			<p><span class="calc-points">or </span><span class="calc-amount"></span> <span class="price-per"></span></p>
 			<p><span class="calc-points">region </span><span class="calc-amount"></span> <span class="price-per"></span></p>
 
-			<p>= <span id="calc-vp">? VP</span> <span id="calc-price">(?)</span> **</p>
+			<p>= <span id="calc-vp">? VP</span> <span id="calc-price">(?)</span></p>
 		</div>
 
 		<div class="h50"></div>
@@ -653,12 +653,10 @@
 		<div class="h50"></div>
 
 		<p style="color: #00000064">please note: taxes and/or fees may apply</p>
-		<p style="color: #00000064" class="m10">*the LOWEST price is not always the BEST price</p>
-		<p style="color: #00000064" class="m10">**the calculated price is not always the lowest price</p>
 
 		<script>
 			// version
-			const version = ` v${2}.${3}.${0}\n\n`;
+			const version = ` v${2}.${4}.${0}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
@@ -968,35 +966,72 @@
 
 			// calc check and xmark handlers
 			function handleCalcCheck() {
-				if (regionNumber == "") return;
+				if (regionNumber == "") return; // cancel if no region selected
 
-				let inputPoints = inputElement.value;
-				if (!/^\d+$/.test(inputPoints)) return;
+				let inputPoints = inputElement.value; // get the input points from the text box
+				if (!/^\d+$/.test(inputPoints)) return; // cancel if invalid integer
 
-				inputPoints = parseInt(inputPoints);
+				document.querySelector("#calc-alert").innerHTML = ""; // remove alert if present
 
-				document.querySelector("#calc-alert").innerHTML = "";
+				inputPoints = parseInt(inputPoints); // cast to int (essentially)
 
-				let calculatedAmounts = [];
+				let timesPointsReduced = Math.floor(inputPoints / pointsData[regionNumber].prices[5][0]);
+				let reducedPoints = inputPoints % pointsData[regionNumber].prices[5][0];
 
-				for (let i = 0; i < 6; i++) {
-					calculatedAmounts[5 - i] = Math.floor(inputPoints / pointsData[regionNumber].prices[5 - i][0]);
-					inputPoints = inputPoints % pointsData[regionNumber].prices[5 - i][0];
+				//console.log("inputPoints:", inputPoints, "timesPointsReduced:", timesPointsReduced, "reducedPoints:", reducedPoints);
+
+				var bestAmounts = [0, 0, 0, 0, 0, 0];
+				var bestPoints = 0;
+				var bestPrice = Infinity;
+
+				for (let a = 0; a <= 3; a++) {
+					for (let b = 0; b <= 3; b++) {
+						for (let c = 0; c <= 3; c++) {
+							for (let d = 0; d <= 3; d++) {
+								for (let e = 0; e <= 3; e++) {
+									for (let f = 0; f <= 3; f++) {
+										let aPoints = a * pointsData[regionNumber].prices[0][0];
+										let bPoints = b * pointsData[regionNumber].prices[1][0];
+										let cPoints = c * pointsData[regionNumber].prices[2][0];
+										let dPoints = d * pointsData[regionNumber].prices[3][0];
+										let ePoints = e * pointsData[regionNumber].prices[4][0];
+										let fPoints = f * pointsData[regionNumber].prices[5][0];
+
+										let allPoints = aPoints + bPoints + cPoints + dPoints + ePoints + fPoints;
+
+										if (allPoints >= reducedPoints) {
+											let aPrice = a * pointsData[regionNumber].prices[0][1];
+											let bPrice = b * pointsData[regionNumber].prices[1][1];
+											let cPrice = c * pointsData[regionNumber].prices[2][1];
+											let dPrice = d * pointsData[regionNumber].prices[3][1];
+											let ePrice = e * pointsData[regionNumber].prices[4][1];
+											let fPrice = f * pointsData[regionNumber].prices[5][1];
+
+											let allPrice = aPrice + bPrice + cPrice + dPrice + ePrice + fPrice;
+
+											if (allPrice < bestPrice) {
+												bestAmounts = [a, b, c, d, e, f];
+												bestPoints = allPoints;
+												bestPrice = allPrice;
+
+												//console.log("bestAmounts:", bestAmounts, "bestPoints:", bestPoints, "bestPrice:", bestPrice);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
-				if (inputPoints > 0) calculatedAmounts[0]++;
 
-				let calculatedPoints = 0;
-				let calculatedPrice = 0;
+				bestAmounts[5] += timesPointsReduced;
+				bestPoints += timesPointsReduced * pointsData[regionNumber].prices[5][0];
+				bestPrice += timesPointsReduced * pointsData[regionNumber].prices[5][1];
 
-				for (let i = 0; i < 6; i++) {
-					document.querySelector(`p:nth-child(${10 - i}) .calc-amount`).innerHTML = `×${calculatedAmounts[5 - i]}`;
+				for (let i = 0; i < 6; i++) document.querySelector(`p:nth-child(${5 + i}) .calc-amount`).innerHTML = `×${bestAmounts[i]}`;
 
-					calculatedPoints += pointsData[regionNumber].prices[5 - i][0] * calculatedAmounts[5 - i];
-					calculatedPrice += pointsData[regionNumber].prices[5 - i][1] * calculatedAmounts[5 - i];
-				}
-
-				setCompareTotalPoints(document.querySelector("#calc-vp"), calculatedPoints);
-				setCompareTotalPrice(document.querySelector("#calc-price"), calculatedPrice);
+				setCompareTotalPoints(document.querySelector("#calc-vp"), bestPoints);
+				setCompareTotalPrice(document.querySelector("#calc-price"), bestPrice);
 			}
 			function handleCalcXmark() {
 				inputElement.value = "";
@@ -1067,7 +1102,6 @@
 				closeMenu();
 			});
 			document.addEventListener("click", (e) => {
-				console.log(e.target);
 				if (e.target != regionSelectMenu && e.target != regionSelectButton) closeMenu();
 			});
 
