@@ -361,6 +361,8 @@
 
 				background-color: #006d77;
 				color: #edf6f9;
+
+				user-select: none;
 			}
 
 			@keyframes d1 {
@@ -1413,25 +1415,28 @@
 
 		// list
 		const tooltips = [
-			"games created",
-			"games started",
-			"games completed",
-			"games won by X",
-			"games won by O",
-			"games tied",
-			"average number of moves",
-			"average game length",
-			"games continued",
-			"most common first move",
-			"most common last move",
+			"number of games initialized<br><ul><li>list item</li></ul>", // ???
+			"number of games joined by a second player (of the total created games)",
+			"number of games won or tied (of the total created games)",
+			"number of games won by player one (of the total completed games)",
+			"number of games won by player two (of the total completed games)",
+			"number of games with no winner (of the total completed games)",
+			"average number of moves per game (of the total completed games)",
+			"average time between a game's creation and completion (of the total completed games)",
+			'number of games continued for another round by way of the "next" button (of the total completed games)',
+			"most common starting square (of the total created games)", // provide the number!
+			"most common final square (of the total completed games)", // provide the number!
 		];
 
-		// get & show
+		// get & show & hide
 		document.querySelectorAll(".tooltip-zone").forEach((tooltipZone) => {
 			tooltipZone.addEventListener("mousemove", (e) => {
 				let tooltipNumber = parseInt(tooltipZone.id.substring(tooltipZone.id.length - 2)) - 1;
 				tooltip.innerHTML = tooltips[tooltipNumber];
 				tooltip.style = `top: ${e.clientY + 10}px; left: ${e.clientX + 20}px`;
+			});
+			tooltipZone.addEventListener("mouseout", (e) => {
+				tooltip.style = "display: none";
 			});
 		});
 	</script>
