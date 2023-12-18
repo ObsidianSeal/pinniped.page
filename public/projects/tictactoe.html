@@ -2,7 +2,7 @@
 
 <html lang="en">
 	<head>
-		<title>TicTacToe | ???</title>
+		<title>TicTacToe</title>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -228,6 +228,10 @@
 				color: #83c5be;
 			}
 
+			.tooltip-zone {
+				width: fit-content;
+			}
+
 			input {
 				margin-top: 10px;
 				padding: 0;
@@ -237,10 +241,6 @@
 				color: #006d77;
 			}
 
-			input:focus {
-				border-color: #006d77;
-			}
-
 			::placeholder {
 				text-align: center;
 				color: #83c5be;
@@ -248,6 +248,10 @@
 
 			input:hover {
 				outline: none;
+			}
+
+			input:focus {
+				border-color: #006d77;
 			}
 
 			#board {
@@ -348,6 +352,15 @@
 				background-color: #edf6f9;
 
 				box-shadow: 0 0 10px 5px #edf6f9;
+			}
+
+			#tooltip {
+				position: fixed;
+
+				padding: 0 10px 5px 10px;
+
+				background-color: #006d77;
+				color: #edf6f9;
 			}
 
 			@keyframes d1 {
@@ -626,7 +639,7 @@
 
 			<p class="big-icon light-blue button-tray">
 				<span class="material-symbols-outlined" tabindex="0" id="helpButton" title="how to play">help</span>
-				<span class="material-symbols-outlined" tabindex="0" id="infoButton" title="data [COMING SOON]">info</span>
+				<span class="material-symbols-outlined" tabindex="0" id="infoButton" title="data">info</span>
 				<span class="material-symbols-outlined" tabindex="0" id="downloadButton" title="download Java version">download_for_offline</span>
 				<span class="material-symbols-outlined" tabindex="0" id="feedbackButton" title="feedback/support Discord server">error</span>
 				<span class="material-symbols-outlined" tabindex="0" id="newTabButton" title="open in another tab">outbound</span>
@@ -639,38 +652,62 @@
 			<div class="data-area">
 				<h1 style="font-weight: normal">TicTacToe data</h1>
 
-				<p>games created</p>
-				<h2 id="data-gameStatus-waiting">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-01">
+					<p>games created</p>
+					<h2 id="data-gameStatus-waiting">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>games started</p>
-				<h2 id="data-gameStatus-playing">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-02">
+					<p>games started</p>
+					<h2 id="data-gameStatus-playing">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>games completed</p>
-				<h2 id="data-gameStatus-done">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-03">
+					<p>games completed</p>
+					<h2 id="data-gameStatus-done">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>games won by X</p>
-				<h2 id="data-winType-x">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-04">
+					<p>games won by X</p>
+					<h2 id="data-winType-x">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>games won by O</p>
-				<h2 id="data-winType-o">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-05">
+					<p>games won by O</p>
+					<h2 id="data-winType-o">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>games tied</p>
-				<h2 id="data-winType-null">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-06">
+					<p>games tied</p>
+					<h2 id="data-winType-null">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>average number of moves</p>
-				<h2 id="data-averageMoveNumber">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-07">
+					<p>average number of moves</p>
+					<h2 id="data-averageMoveNumber">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>average game length</p>
-				<h2 id="data-averageGameTime">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-08">
+					<p>average game length</p>
+					<h2 id="data-averageGameTime">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>games continued</p>
-				<h2 id="data-timesNextPressed">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-09">
+					<p>games continued</p>
+					<h2 id="data-timesNextPressed">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>most common first move</p>
-				<h2 id="data-move-first">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-10">
+					<p>most common first move</p>
+					<h2 id="data-move-first">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
 
-				<p>most common last move</p>
-				<h2 id="data-move-last">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				<div class="tooltip-zone" id="tooltip-zone-11">
+					<p>most common last move</p>
+					<h2 id="data-move-last">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
+				</div>
+
+				<div id="tooltip">hello</div>
 			</div>
 		</div>
 	</body>
@@ -850,7 +887,7 @@
 				if (document.activeElement == document.querySelector("#backButton2")) {
 					document.querySelector(".menu").style = "display: flex";
 					document.querySelector(".data-page").style = "display: none";
-					document.querySelector("title").innerHTML = "TicTacToe | ???";
+					document.querySelector("title").innerHTML = "TicTacToe";
 				}
 				if (document.activeElement == document.querySelector("#downloadButton")) window.location.href = "../download.html?x=TicTacToe.jar";
 				if (document.activeElement == document.querySelector("#feedbackButton")) window.open("https://discord.gg/yswDu7kywv");
@@ -1030,7 +1067,7 @@
 			document.querySelector(".menu").style = "display: flex";
 			document.querySelector(".data-page").style = "display: none";
 
-			document.querySelector("title").innerHTML = "TicTacToe | ???";
+			document.querySelector("title").innerHTML = "TicTacToe";
 		});
 		document.querySelector("#downloadButton").addEventListener("click", (e) => {
 			window.location.href = "../download.html?x=TicTacToe.jar";
@@ -1370,5 +1407,32 @@
 			}
 			document.querySelector("#data-move-last").innerHTML = moveNames[lastMoves.indexOf(Math.max(...lastMoves))];
 		}
+
+		// --- TOOLTIPS ---
+		var tooltip = document.querySelector("#tooltip");
+
+		// list
+		const tooltips = [
+			"games created",
+			"games started",
+			"games completed",
+			"games won by X",
+			"games won by O",
+			"games tied",
+			"average number of moves",
+			"average game length",
+			"games continued",
+			"most common first move",
+			"most common last move",
+		];
+
+		// get & show
+		document.querySelectorAll(".tooltip-zone").forEach((tooltipZone) => {
+			tooltipZone.addEventListener("mousemove", (e) => {
+				let tooltipNumber = parseInt(tooltipZone.id.substring(tooltipZone.id.length - 2)) - 1;
+				tooltip.innerHTML = tooltips[tooltipNumber];
+				tooltip.style = `top: ${e.clientY + 10}px; left: ${e.clientX + 20}px`;
+			});
+		});
 	</script>
 </html>
