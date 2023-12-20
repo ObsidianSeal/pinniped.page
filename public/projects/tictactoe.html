@@ -193,6 +193,12 @@
 				font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
 			}
 
+			.small-icon {
+				font-variation-settings: "FILL" 1, "wght" 600, "GRAD" 0, "opsz" 24;
+				translate: 0 3px;
+				user-select: none;
+			}
+
 			.button-tray {
 				left: 20px;
 				bottom: 10px;
@@ -219,8 +225,7 @@
 			}
 
 			.data-area {
-				margin-left: 50px;
-				margin-top: 100px;
+				margin: 100px 50px 0 50px;
 				padding-bottom: 100px;
 			}
 
@@ -352,6 +357,8 @@
 				background-color: #edf6f9;
 
 				box-shadow: 0 0 10px 5px #edf6f9;
+
+				z-index: 2;
 			}
 
 			#tooltip {
@@ -363,6 +370,18 @@
 				color: #edf6f9;
 
 				user-select: none;
+			}
+
+			#data-refresh {
+				font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 24;
+				font-size: 48px;
+				user-select: none;
+				transition: color 0.5s;
+			}
+
+			#data-refresh:hover {
+				cursor: pointer;
+				color: #006d77;
 			}
 
 			@keyframes d1 {
@@ -652,105 +671,105 @@
 			<p id="backButton2" class="button" tabindex="1"><span class="material-symbols-outlined" style="translate: 0 2px; margin-right: 5px">navigate_before</span>Back</p>
 
 			<div class="data-area">
-				<h1 style="font-weight: normal">TicTacToe data</h1>
+				<h1 style="font-weight: normal">TicTacToe data <span class="material-symbols-outlined" id="data-refresh" title="refresh">refresh</span></h1>
 
 				<div class="tooltip-zone" id="tooltip-zone-01">
-					<p>games created</p>
+					<p>games created <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-gameStatus-waiting">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-02">
-					<p>games started</p>
+					<p>games started <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-gameStatus-started">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-03">
-					<p>games joined</p>
+					<p>games joined <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-gameStatus-playing">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-04">
-					<p>games completed</p>
+					<p>games completed <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-gameStatus-done">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-05">
-					<p>games won by X</p>
+					<p>games won by X <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-winType-x">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-06">
-					<p>games won by O</p>
+					<p>games won by O <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-winType-o">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-07">
-					<p>games tied</p>
+					<p>games tied <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-winType-null">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-08">
-					<p>average number of moves</p>
+					<p>average number of moves <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-averageMoveNumber">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-09">
-					<p>average game length</p>
+					<p>average game length <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-averageGameTime">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-10">
-					<p>shortest recorded game</p>
+					<p>shortest recorded game <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-shortestGameTime">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-11">
-					<p>longest recorded game</p>
+					<p>longest recorded game <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-longestGameTime">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-12">
-					<p>games continued</p>
+					<p>games continued <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-timesNextPressed">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-13">
-					<p>most common first move</p>
+					<p>most common first move <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-first-all">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-14">
-					<p>most common last move</p>
+					<p>most common last move <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-last-all">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-15">
-					<p>most common first move in games won by X</p>
+					<p>most common first move in games won by X <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-first-x">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-16">
-					<p>most common last move in games won by X</p>
+					<p>most common last move in games won by X <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-last-x">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-17">
-					<p>most common first move in games won by O</p>
+					<p>most common first move in games won by O <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-first-o">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-18">
-					<p>most common last move in games won by O</p>
+					<p>most common last move in games won by O <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-last-o">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-19">
-					<p>most common first move in tied games</p>
+					<p>most common first move in tied games <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-first-null">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
 				<div class="tooltip-zone" id="tooltip-zone-20">
-					<p>most common last move in tied games</p>
+					<p>most common last move in tied games <span class="small-icon material-symbols-outlined">info</span></p>
 					<h2 id="data-move-last-null">coming soon<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h2>
 				</div>
 
@@ -1517,6 +1536,11 @@
 			tooltipZone.addEventListener("mouseout", (e) => {
 				tooltip.style = "opacity: 0";
 			});
+		});
+
+		// refresh button
+		document.querySelector("#data-refresh").addEventListener("click", (e) => {
+			crunchNumbers();
 		});
 	</script>
 </html>
