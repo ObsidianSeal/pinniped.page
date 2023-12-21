@@ -50,19 +50,52 @@
 			}
 
 			h1,
+			h2,
 			p {
 				width: fit-content;
-
 				margin-bottom: 20px;
+			}
+
+			h1,
+			h2 {
+				font-weight: 700;
+
+				background-clip: text;
+				color: transparent;
 			}
 
 			h1 {
 				font-size: 56px;
-				font-weight: 700;
-
 				background-image: linear-gradient(to right, var(--c5), var(--c3));
-				background-clip: text;
-				color: transparent;
+			}
+
+			h2 {
+				font-size: 40px;
+				background-image: linear-gradient(to right, var(--c2), var(--c1));
+			}
+
+			input {
+				width: 100px;
+
+				border-bottom: 2px solid white;
+
+				background-color: black;
+				color: white;
+
+				transition: border 0.5s, color 0.5s;
+				caret-color: var(--c2);
+				text-align: right;
+			}
+
+			input:focus {
+				border-bottom: 2px solid var(--c2);
+				outline: none;
+
+				color: var(--c2);
+			}
+
+			span {
+				color: var(--c5);
 			}
 		</style>
 	</head>
@@ -70,8 +103,49 @@
 	<body>
 		<h1>calc</h1>
 
-		<p>Δx:</p>
-		<p>Δy:</p>
-		<p>angle:</p>
+		<p>Δx: <input id="x-input" />m</p>
+		<p>Δy: <input id="y-input" />m</p>
+		<p>angle: <input id="angle-input" />°</p>
+
+		<h2>output:</h2>
+
+		<p id="output">-</p>
+
+		<script>
+			var x = 0;
+			var y = 0;
+			var angle = 0;
+
+			function calculate() {
+				let radians = angle * (Math.PI / 180);
+				let answer = Math.sqrt(
+					(-9.8 * 0.014 * x * x) / (2 * Math.cos(radians) * Math.cos(radians) * (y - 0.3 * Math.sin(radians) - Math.tan(radians) * x) * 29.13) +
+						(2 * 0.014 * 9.8 * (y - 0.3 * Math.sin(radians))) / 29.13
+				);
+
+				return Math.round(answer * 10000) / 100;
+			}
+
+			document.querySelectorAll("input").forEach((input) => {
+				input.addEventListener("input", (e) => {
+					let value = parseFloat(input.value);
+
+					if (input.id == "x-input") x = value;
+					if (input.id == "y-input") y = value;
+					if (input.id == "angle-input") angle = value;
+
+					let output = calculate();
+					//console.log(`x=${x} y=${y} angle=${angle} output=${output}`);
+					//console.log(isNaN(output));
+
+					if (!isNaN(x) && !isNaN(y) && !isNaN(angle)) {
+						if (isNaN(output)) document.querySelector("#output").innerHTML = "<span>error</span>";
+						else document.querySelector("#output").innerHTML = output + "cm";
+					} else {
+						document.querySelector("#output").innerHTML = "-";
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
