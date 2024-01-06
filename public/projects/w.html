@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>wordlelele</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/w" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="wordlelele" />
+		<meta property="og:description" content="Weird Wordle: longer words, choose the next word." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@import url(https://use.typekit.net/rzo4wst.css);
+
+			:root {
+				--c1: #22162b;
+				--c2: #451f55;
+				--c3: #724e91;
+				--c4: #e54f6d;
+				--c5: #f8c630;
+			}
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				font-family: "miller-text";
+				font-size: 24px;
+				font-weight: 400;
+				user-select: none;
+			}
+
+			body {
+				background-color: var(--c1);
+				color: white;
+				padding: 120px 0 250px 0;
+			}
+
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--c2);
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--c3);
+			}
+
+			.header {
+				background-color: var(--c1);
+				width: 100%;
+				height: 50px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-bottom: 1px solid var(--c2);
+				position: fixed;
+				top: 0;
+			}
+
+			.header p {
+				position: fixed;
+				text-decoration: underline;
+				text-decoration-color: transparent;
+				transition: text-decoration-color 0.5s;
+			}
+
+			.header p:hover {
+				cursor: pointer;
+				text-decoration-color: var(--c3);
+			}
+
+			.guesses div {
+				display: flex;
+				justify-content: center;
+				margin-top: 10px;
+			}
+
+			.guesses div div {
+				width: 50px;
+				height: 50px;
+				margin: 0 10px 0 0;
+				background-color: transparent;
+				border: 2px solid var(--c2);
+				font-size: 36px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.guesses div div:last-child {
+				margin: 0;
+			}
+
+			.letters {
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+				padding: 20px 0 30px 0;
+				background-color: var(--c1);
+				border-top: 1px solid var(--c2);
+			}
+
+			.letters div {
+				display: flex;
+				justify-content: center;
+				margin-top: 10px;
+			}
+
+			.letters div div {
+				width: 35px;
+				height: 45px;
+				margin: 0 10px 0 0;
+				background-color: var(--c3);
+				border-radius: 3px;
+				font-size: 18px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.letters div div:hover {
+				cursor: pointer;
+			}
+
+			.letters div:last-child div:first-child,
+			.letters div:last-child div:last-child {
+				width: 58px;
+			}
+
+			.letters div div:last-child {
+				margin: 0;
+			}
+
+			.settings,
+			.done {
+				position: fixed;
+				display: none;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: var(--c2);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<h1>wordle<span style="color: var(--c5)">le</span><span style="color: var(--c4)">le</span></h1>
+			<p id="headerBackButton" style="left: 50px"><span>←</span> back</p>
+			<p id="headerHelpButton" style="right: 200px">help</p>
+			<p id="headerSettingsButton" style="right: 50px">settings</p>
+		</div>
+
+		<div class="guesses"></div>
+
+		<div class="letters">
+			<div>
+				<div>Q</div>
+				<div>W</div>
+				<div>E</div>
+				<div>R</div>
+				<div>T</div>
+				<div>Y</div>
+				<div>U</div>
+				<div>I</div>
+				<div>O</div>
+				<div>P</div>
+			</div>
+			<div>
+				<div>A</div>
+				<div>S</div>
+				<div>D</div>
+				<div>F</div>
+				<div>G</div>
+				<div>H</div>
+				<div>J</div>
+				<div>K</div>
+				<div>L</div>
+			</div>
+			<div>
+				<div>enter</div>
+				<div>Z</div>
+				<div>X</div>
+				<div>C</div>
+				<div>V</div>
+				<div>B</div>
+				<div>N</div>
+				<div>M</div>
+				<div>←</div>
+			</div>
+		</div>
+
+		<div class="settings">settings</div>
+
+		<div class="done">done</div>
+
+		<script>
+			// 1: header
+			document.querySelector("#headerBackButton").addEventListener("click", (e) => {
+				history.back(); // could I determine if this is not my website, and default to projects+?
+			});
+			document.querySelector("#headerHelpButton").addEventListener("click", (e) => {
+				alert("no");
+			});
+			document.querySelector("#headerSettingsButton").addEventListener("click", (e) => {
+				alert("no");
+			});
+
+			// 2: guesses
+			const word = "QUALITY"; // get from database!
+
+			for (let i = 0; i < word.length + 1; i++) {
+				let row = document.createElement("div");
+				row.setAttribute("id", `row${i}`);
+
+				for (let j = 0; j < word.length; j++) {
+					let square = document.createElement("div");
+					square.setAttribute("id", `row${i}square${j}`);
+					row.appendChild(square);
+				}
+
+				document.querySelector(".guesses").appendChild(row);
+			}
+
+			// 3: letters
+			var positionRow = 0;
+			var positionSquare = 0;
+			var done = false;
+			var win = false;
+
+			function letterInput(value) {
+				if (!done) {
+					if (value == "enter") {
+						if (positionSquare == word.length) {
+							let lettersArray = [];
+
+							for (let i = 0; i < word.length; i++) {
+								let element = document.querySelector(`#row${positionRow}square${i}`);
+								lettersArray.push(element.innerHTML);
+
+								if (lettersArray[i] == word[i]) {
+									element.style = "border-color: var(--c4); background-color: var(--c4);";
+								} else if (word.includes(lettersArray[i])) {
+									element.style = "border-color: var(--c5); background-color: var(--c5);";
+									// don't forget about multi-letter rules!
+								} else {
+									element.style = "border-color: var(--c2); background-color: var(--c2)";
+								}
+							}
+							if (lettersArray.join("") == word || positionRow == word.length) done = true;
+							if (lettersArray.join("") == word) win = true;
+
+							positionRow++;
+							positionSquare = 0;
+						}
+					} else if (value == "←") {
+						if (positionSquare > 0) {
+							let element = document.querySelector(`#row${positionRow}square${positionSquare - 1}`);
+							element.innerHTML = "";
+							element.style = "";
+							positionSquare--;
+						}
+					} else {
+						if (positionSquare < word.length) {
+							let element = document.querySelector(`#row${positionRow}square${positionSquare}`);
+							element.innerHTML = value;
+							element.style = "border-color: var(--c3)";
+							positionSquare++;
+						}
+					}
+				}
+			}
+
+			document.querySelectorAll(".letters div div").forEach((button) => {
+				button.addEventListener("click", (e) => {
+					letterInput(button.innerHTML);
+				});
+			});
+
+			const keys = {};
+
+			document.addEventListener("keydown", (e) => {
+				keys[e.key] = true;
+
+				if (keys["Control"] === true) return;
+
+				if (e.keyCode == 13) letterInput("enter");
+				if (e.keyCode == 8) letterInput("←");
+				if (e.keyCode >= 65 && e.keyCode <= 90) {
+					letterInput(e.key.toUpperCase());
+				}
+			});
+
+			document.addEventListener("keyup", (e) => {
+				delete keys[e.key];
+			});
+
+			// 4. help (explain)
+
+			// 5: settings (no)
+
+			// 6: win / lose (set next word / you dumb)
+
+			// responsive design
+			// CHANGE THE KEYBOARD COLOURS HOW COULD I FORGET
+			// change title too with guess/guesses
+		</script>
+	</body>
+</html>
