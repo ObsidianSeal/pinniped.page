@@ -19,12 +19,23 @@
 		<style>
 			@import url(https://use.typekit.net/rzo4wst.css);
 
+			/* 
+			OLD COLOURS
 			:root {
 				--c1: #22162b;
 				--c2: #451f55;
 				--c3: #724e91;
 				--c4: #e54f6d;
 				--c5: #f8c630;
+			} 
+			*/
+
+			:root {
+				--c1: #252525;
+				--c2: #464646;
+				--c3: #7d7d7d;
+				--c4: #448ccb;
+				--c5: #f68e56;
 			}
 
 			* {
@@ -34,13 +45,45 @@
 				font-family: "miller-text";
 				font-size: 24px;
 				font-weight: 400;
-				user-select: none;
 			}
 
 			body {
 				background-color: var(--c1);
 				color: white;
-				padding: 120px 0 250px 0;
+				padding: 120px 0 260px 0;
+			}
+
+			h2 {
+				font-size: 48px;
+				color: var(--c5);
+			}
+
+			.done h2 {
+				color: var(--c4);
+			}
+
+			input {
+				color: var(--c1);
+				caret-color: var(--c1);
+				padding: 0 5px 0 5px;
+				width: 440px;
+				text-transform: lowercase;
+			}
+
+			input:focus {
+				outline: none;
+			}
+
+			input::placeholder {
+				color: var(--c3);
+			}
+
+			::selection {
+				background-color: var(--c2);
+			}
+
+			input::selection {
+				color: white;
 			}
 
 			::-webkit-scrollbar {
@@ -53,6 +96,12 @@
 
 			::-webkit-scrollbar-thumb:hover {
 				background-color: var(--c3);
+			}
+
+			.header,
+			.guesses,
+			.letters {
+				user-select: none;
 			}
 
 			.header {
@@ -74,9 +123,16 @@
 				transition: text-decoration-color 0.5s;
 			}
 
-			.header p:hover {
+			.header p:hover,
+			.header p:focus {
 				cursor: pointer;
 				text-decoration-color: var(--c3);
+				outline: none;
+			}
+
+			/* the responsiveness of the guess squares SUCKS */
+			.guesses {
+				padding: 0 10px 0 10px;
 			}
 
 			.guesses div {
@@ -102,10 +158,10 @@
 			}
 
 			.letters {
-				width: 100%;
+				width: calc(100% - 20px);
 				position: fixed;
 				bottom: 0;
-				padding: 20px 0 30px 0;
+				padding: 20px 10px 30px 10px;
 				background-color: var(--c1);
 				border-top: 1px solid var(--c2);
 			}
@@ -141,14 +197,143 @@
 				margin: 0;
 			}
 
-			.settings,
+			.question,
 			.done {
 				position: fixed;
 				display: none;
 				top: 0;
-				width: 100%;
-				height: 100%;
+				width: calc(100% - 100px);
+				height: calc(100% - 100px);
+				background-color: var(--c1);
+				padding: 50px;
+			}
+
+			.question p,
+			.done p {
+				margin-top: 20px;
+			}
+
+			.question p:first-child,
+			.done p:first-child {
+				margin: 0 0 20px 0;
+				text-decoration: underline;
+				text-decoration-color: transparent;
+				transition: text-decoration-color 0.5s;
+				user-select: none;
+				width: fit-content;
+			}
+
+			.question p:first-child:hover,
+			.question p:first-child:focus,
+			.done p:first-child:hover,
+			.done p:first-child:focus {
+				text-decoration-color: var(--c3);
+				cursor: pointer;
+				outline: none;
+			}
+
+			.guesses div div.active {
+				border-color: var(--c3);
+			}
+
+			.guesses div div.correct,
+			.letters div div.correct {
+				border-color: var(--c4);
+				background-color: var(--c4);
+			}
+
+			.guesses div div.present,
+			.letters div div.present {
+				border-color: var(--c5);
+				background-color: var(--c5);
+			}
+
+			.guesses div div.absent,
+			.letters div div.absent {
+				border-color: var(--c2);
 				background-color: var(--c2);
+			}
+
+			.show {
+				display: initial;
+			}
+
+			.hide {
+				display: none;
+			}
+
+			.blue {
+				color: var(--c4);
+			}
+
+			.orange {
+				color: var(--c5);
+			}
+
+			#headerExitButton {
+				left: 50px;
+			}
+
+			#headerQuestionButton {
+				right: 50px;
+			}
+
+			#← {
+				font-size: 30px;
+			}
+
+			#nextWordSubmit {
+				text-decoration: underline;
+				text-decoration-color: transparent;
+				transition: text-decoration-color 0.5s;
+				user-select: none;
+				display: inline-block;
+			}
+
+			#nextWordSubmit:hover,
+			#nextWordSubmit:focus {
+				cursor: pointer;
+				text-decoration-color: var(--c3);
+				outline: none;
+			}
+
+			@media all and (max-width: 550px) {
+				input {
+					width: calc(100% - 10px);
+				}
+
+				#headerExitButton {
+					left: 20px;
+				}
+
+				#headerQuestionButton {
+					right: 20px;
+				}
+			}
+
+			@media all and (max-width: 440px) {
+				h2 {
+					font-size: 36px;
+				}
+
+				#enter {
+					font-size: 14px;
+				}
+			}
+
+			@media all and (max-width: 330px) {
+				.question,
+				.done {
+					width: calc(100% - 40px);
+					height: calc(100% - 100px);
+					padding: 50px 20px 50px 20px;
+				}
+			}
+
+			@media all and (max-height: 440px) {
+				.letters {
+					padding: 0 10px 10px 10px;
+				}
 			}
 		</style>
 	</head>
@@ -156,81 +341,163 @@
 	<body>
 		<div class="header">
 			<h1>wordle<span style="color: var(--c5)">le</span><span style="color: var(--c4)">le</span></h1>
-			<p id="headerBackButton" style="left: 50px"><span>←</span> back</p>
-			<p id="headerHelpButton" style="right: 200px">help</p>
-			<p id="headerSettingsButton" style="right: 50px">settings</p>
+			<p id="headerExitButton" tabindex="0">← exit</p>
+			<p id="headerQuestionButton" tabindex="0">???</p>
 		</div>
 
 		<div class="guesses"></div>
 
 		<div class="letters">
 			<div>
-				<div>Q</div>
-				<div>W</div>
-				<div>E</div>
-				<div>R</div>
-				<div>T</div>
-				<div>Y</div>
-				<div>U</div>
-				<div>I</div>
-				<div>O</div>
-				<div>P</div>
+				<div id="Q">Q</div>
+				<div id="W">W</div>
+				<div id="E">E</div>
+				<div id="R">R</div>
+				<div id="T">T</div>
+				<div id="Y">Y</div>
+				<div id="U">U</div>
+				<div id="I">I</div>
+				<div id="O">O</div>
+				<div id="P">P</div>
 			</div>
 			<div>
-				<div>A</div>
-				<div>S</div>
-				<div>D</div>
-				<div>F</div>
-				<div>G</div>
-				<div>H</div>
-				<div>J</div>
-				<div>K</div>
-				<div>L</div>
+				<div id="A">A</div>
+				<div id="S">S</div>
+				<div id="D">D</div>
+				<div id="F">F</div>
+				<div id="G">G</div>
+				<div id="H">H</div>
+				<div id="J">J</div>
+				<div id="K">K</div>
+				<div id="L">L</div>
 			</div>
 			<div>
-				<div>enter</div>
-				<div>Z</div>
-				<div>X</div>
-				<div>C</div>
-				<div>V</div>
-				<div>B</div>
-				<div>N</div>
-				<div>M</div>
-				<div>←</div>
+				<div id="enter">enter</div>
+				<div id="Z">Z</div>
+				<div id="X">X</div>
+				<div id="C">C</div>
+				<div id="V">V</div>
+				<div id="B">B</div>
+				<div id="N">N</div>
+				<div id="M">M</div>
+				<div id="←">←</div>
 			</div>
 		</div>
 
-		<div class="settings">settings</div>
+		<div class="question">
+			<p id="questionBackButton" tabindex="0">← back</p>
 
-		<div class="done">done</div>
+			<h2>About / How to Play</h2>
 
-		<script>
-			// 1: header
-			document.querySelector("#headerBackButton").addEventListener("click", (e) => {
-				history.back(); // could I determine if this is not my website, and default to projects+?
+			<p>wordle good</p>
+		</div>
+
+		<div class="done">
+			<p id="doneActionButton" tabindex="0">done_action</p>
+
+			<h2>done_message_title</h2>
+
+			<p>done_message_subtitle</p>
+
+			<p>Choose the next word: <input id="nextWordInput" maxlength="20" placeholder="new 1-20 letter word" /> <span id="nextWordSubmit" tabindex="0">SUBMIT →</span></p>
+
+			<p id="nextWordStatus" class="hide"></p>
+		</div>
+
+		<script type="module">
+			// 0. fireBASED
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+			import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+			const firebaseConfig = {
+				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+				authDomain: "the-pinniped-page.firebaseapp.com",
+				databaseURL: "https://the-pinniped-page.firebaseio.com",
+				projectId: "the-pinniped-page",
+				storageBucket: "the-pinniped-page.appspot.com",
+				messagingSenderId: "636989973689",
+				appId: "1:636989973689:web:6d938d9588606d803a6768",
+			};
+			const app = initializeApp(firebaseConfig);
+
+			// 1: header & other "back" buttons
+			function goBack() {
+				if (document.referrer.includes("pinniped.page")) history.back();
+				else window.location.href = "../projects+.html";
+			}
+
+			document.querySelector("#headerExitButton").addEventListener("click", (e) => {
+				goBack();
 			});
-			document.querySelector("#headerHelpButton").addEventListener("click", (e) => {
-				alert("no");
+			document.querySelector("#headerQuestionButton").addEventListener("click", (e) => {
+				document.querySelector(".question").classList.add("show");
 			});
-			document.querySelector("#headerSettingsButton").addEventListener("click", (e) => {
-				alert("no");
+
+			document.querySelector("#questionBackButton").addEventListener("click", (e) => {
+				document.querySelector(".question").classList.remove("show");
 			});
 
 			// 2: guesses
-			const word = "QUALITY"; // get from database!
+			var word;
 
-			for (let i = 0; i < word.length + 1; i++) {
-				let row = document.createElement("div");
-				row.setAttribute("id", `row${i}`);
+			async function loadWord() {
+				const db = getDatabase();
 
-				for (let j = 0; j < word.length; j++) {
-					let square = document.createElement("div");
-					square.setAttribute("id", `row${i}square${j}`);
-					row.appendChild(square);
+				await get(ref(db, "wordlelele/word")).then((snapshot) => {
+					word = snapshot.val().toUpperCase();
+				});
+
+				// are the right number of attempts given? (word length + 1, also used in the title (x2))
+				for (let i = 0; i < word.length + 1; i++) {
+					let row = document.createElement("div");
+					row.setAttribute("id", `row${i}`);
+
+					for (let j = 0; j < word.length; j++) {
+						let square = document.createElement("div");
+						square.setAttribute("id", `row${i}square${j}`);
+						row.appendChild(square);
+					}
+
+					document.querySelector(".guesses").appendChild(row);
 				}
 
-				document.querySelector(".guesses").appendChild(row);
+				document.querySelector("title").innerHTML = `wordlelele (1/${word.length + 1})`;
+
+				document.querySelectorAll(".letters div div").forEach((button) => {
+					button.addEventListener("click", (e) => {
+						letterInput(button.innerHTML);
+					});
+				});
+
+				var keys = {};
+
+				document.addEventListener("keydown", (e) => {
+					keys[e.key] = true;
+
+					if (keys["Control"] === true) return; // prevent letters showing up when shortcuts used, there are probably more keys like this
+
+					if (e.keyCode == 13) {
+						if (document.activeElement == document.querySelector("#headerExitButton")) goBack();
+						else if (document.activeElement == document.querySelector("#headerQuestionButton")) document.querySelector(".question").classList.add("show");
+						else if (document.activeElement == document.querySelector("#questionBackButton")) document.querySelector(".question").classList.remove("show");
+						else letterInput("enter");
+					}
+					if (e.keyCode == 8) letterInput("←");
+					if (e.keyCode >= 65 && e.keyCode <= 90) {
+						letterInput(e.key.toUpperCase());
+					}
+				});
+
+				document.addEventListener("keyup", (e) => {
+					delete keys[e.key];
+				});
+
+				// will this cause problems?
+				window.addEventListener("focus", (e) => {
+					keys = {};
+				});
 			}
+			loadWord();
 
 			// 3: letters
 			var positionRow = 0;
@@ -245,20 +512,38 @@
 							let lettersArray = [];
 
 							for (let i = 0; i < word.length; i++) {
-								let element = document.querySelector(`#row${positionRow}square${i}`);
-								lettersArray.push(element.innerHTML);
+								let squareElement = document.querySelector(`#row${positionRow}square${i}`);
+								lettersArray.push(squareElement.innerHTML);
+								let keyboardElement = document.querySelector(`#${lettersArray[i]}`);
+
+								squareElement.classList.remove("active");
 
 								if (lettersArray[i] == word[i]) {
-									element.style = "border-color: var(--c4); background-color: var(--c4);";
+									squareElement.classList.add("correct");
+									if (keyboardElement.classList.contains("present")) keyboardElement.classList.remove("present");
+									keyboardElement.classList.add("correct");
 								} else if (word.includes(lettersArray[i])) {
-									element.style = "border-color: var(--c5); background-color: var(--c5);";
-									// don't forget about multi-letter rules!
+									squareElement.classList.add("present");
+									if (!keyboardElement.classList.contains("correct")) keyboardElement.classList.add("present");
 								} else {
-									element.style = "border-color: var(--c2); background-color: var(--c2)";
+									squareElement.classList.add("absent");
+									keyboardElement.classList.add("absent");
 								}
 							}
-							if (lettersArray.join("") == word || positionRow == word.length) done = true;
-							if (lettersArray.join("") == word) win = true;
+
+							if (lettersArray.join("") == word || positionRow == word.length) {
+								done = true;
+								if (lettersArray.join("") == word) {
+									win = true;
+									document.querySelector("title").innerHTML = `wordlelele (success)`;
+									end(true);
+								} else {
+									document.querySelector("title").innerHTML = `wordlelele (fail)`;
+									end(false);
+								}
+							} else {
+								document.querySelector("title").innerHTML = `wordlelele (${positionRow + 2}/${word.length + 1})`;
+							}
 
 							positionRow++;
 							positionSquare = 0;
@@ -267,53 +552,83 @@
 						if (positionSquare > 0) {
 							let element = document.querySelector(`#row${positionRow}square${positionSquare - 1}`);
 							element.innerHTML = "";
-							element.style = "";
+							element.classList.remove("active");
 							positionSquare--;
 						}
 					} else {
 						if (positionSquare < word.length) {
 							let element = document.querySelector(`#row${positionRow}square${positionSquare}`);
 							element.innerHTML = value;
-							element.style = "border-color: var(--c3)";
+							element.classList.add("active");
 							positionSquare++;
 						}
 					}
 				}
 			}
 
-			document.querySelectorAll(".letters div div").forEach((button) => {
-				button.addEventListener("click", (e) => {
-					letterInput(button.innerHTML);
-				});
-			});
+			// 4: win / lose (set next word / you dumb)
+			function end(win) {
+				if (win) {
+					document.querySelector(".done p:first-child").innerHTML = "← back";
+					document.querySelector(".done h2").innerHTML = "Congratulations!";
+					document.querySelector(".done p:nth-child(3)").innerHTML = "You did it.";
 
-			const keys = {};
+					document.querySelector(".done p:first-child").addEventListener("click", (e) => {
+						document.querySelector(".done").classList.remove("show");
+					});
+					document.querySelector("#nextWordSubmit").addEventListener("click", (e) => {
+						setNextWord(document.querySelector("input").value.toLowerCase());
+					});
+					document.addEventListener("keydown", (e) => {
+						if (e.keyCode == 13) {
+							if (document.activeElement == document.querySelector("#doneActionButton")) {
+								document.querySelector(".done").classList.remove("show");
+							}
+							if (document.activeElement == document.querySelector("#nextWordInput") || document.activeElement == document.querySelector("#nextWordSubmit")) {
+								setNextWord(document.querySelector("input").value.toLowerCase());
+							}
+						}
+					});
+				} else {
+					document.querySelector(".done p:first-child").innerHTML = "← try again";
+					document.querySelector(".done h2").innerHTML = ":(";
+					document.querySelector(".done p:nth-child(3)").innerHTML = "Better luck next time.";
+					document.querySelector(".done p:nth-child(4)").classList.add("hide");
 
-			document.addEventListener("keydown", (e) => {
-				keys[e.key] = true;
-
-				if (keys["Control"] === true) return;
-
-				if (e.keyCode == 13) letterInput("enter");
-				if (e.keyCode == 8) letterInput("←");
-				if (e.keyCode >= 65 && e.keyCode <= 90) {
-					letterInput(e.key.toUpperCase());
+					document.querySelector(".done p:first-child").addEventListener("click", (e) => {
+						window.location.reload();
+					});
+					document.addEventListener("keydown", (e) => {
+						if (e.keyCode == 13 && document.activeElement == document.querySelector("#doneActionButton")) {
+							window.location.reload();
+						}
+					});
 				}
-			});
 
-			document.addEventListener("keyup", (e) => {
-				delete keys[e.key];
-			});
+				setTimeout(() => {
+					document.querySelector(".done").classList.add("show");
+					document.querySelector("#nextWordInput").focus();
+				}, 2000);
+			}
 
-			// 4. help (explain)
+			async function setNextWord(word) {
+				const db = getDatabase();
 
-			// 5: settings (no)
+				if (/^[a-zA-Z]{1,20}$/.test(word)) {
+					await set(ref(db, "wordlelele/lastUpdated"), Date.now());
+					await set(ref(db, "wordlelele/word"), word);
 
-			// 6: win / lose (set next word / you dumb)
-
-			// responsive design
-			// CHANGE THE KEYBOARD COLOURS HOW COULD I FORGET
-			// change title too with guess/guesses
+					document.querySelector("#nextWordStatus").classList.remove("hide");
+					document.querySelector("#nextWordStatus").classList.remove("orange");
+					document.querySelector("#nextWordStatus").classList.add("blue");
+					document.querySelector("#nextWordStatus").innerHTML = `Successfully set the next word to "${word}"`;
+				} else {
+					document.querySelector("#nextWordStatus").classList.remove("hide");
+					document.querySelector("#nextWordStatus").classList.remove("blue");
+					document.querySelector("#nextWordStatus").classList.add("orange");
+					document.querySelector("#nextWordStatus").innerHTML = `ERROR: invalid word`;
+				}
+			}
 		</script>
 	</body>
 </html>
