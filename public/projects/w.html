@@ -53,9 +53,21 @@
 				padding: 120px 0 260px 0;
 			}
 
+			h1 span:first-child {
+				color: var(--c5);
+			}
+
+			h1 span:last-child {
+				color: var(--c4);
+			}
+
 			h2 {
 				font-size: 48px;
 				color: var(--c5);
+			}
+
+			.question h2 {
+				margin: 20px 0 20px 0;
 			}
 
 			.done h2 {
@@ -76,6 +88,32 @@
 
 			input::placeholder {
 				color: var(--c3);
+			}
+
+			ul {
+				margin-left: 50px;
+			}
+
+			li {
+				margin-top: 5px;
+				width: fit-content;
+			}
+
+			li::marker {
+				color: var(--c3);
+			}
+
+			li span.correct {
+				background-color: var(--c4);
+			}
+
+			li span.present {
+				background-color: var(--c5);
+			}
+
+			li span.absent,
+			.question p span.absent {
+				background-color: var(--c2);
 			}
 
 			::selection {
@@ -206,6 +244,7 @@
 				height: calc(100% - 100px);
 				background-color: var(--c1);
 				padding: 50px;
+				overflow-y: scroll;
 			}
 
 			.question p,
@@ -234,6 +273,7 @@
 
 			.guesses div div.active {
 				border-color: var(--c3);
+				animation: appear 200ms;
 			}
 
 			.guesses div div.correct,
@@ -270,6 +310,10 @@
 				color: var(--c5);
 			}
 
+			.grey {
+				color: var(--c3);
+			}
+
 			#headerExitButton {
 				left: 50px;
 			}
@@ -282,7 +326,8 @@
 				font-size: 30px;
 			}
 
-			#nextWordSubmit {
+			#nextWordSubmit,
+			#shareButton {
 				text-decoration: underline;
 				text-decoration-color: transparent;
 				transition: text-decoration-color 0.5s;
@@ -290,11 +335,23 @@
 				display: inline-block;
 			}
 
+			#shareButton.hide {
+				display: none;
+			}
+
 			#nextWordSubmit:hover,
-			#nextWordSubmit:focus {
+			#shareButton:hover,
+			#nextWordSubmit:focus,
+			#shareButton:focus {
 				cursor: pointer;
 				text-decoration-color: var(--c3);
 				outline: none;
+			}
+
+			@keyframes appear {
+				50% {
+					transform: scale(1.1);
+				}
 			}
 
 			@media all and (max-width: 550px) {
@@ -340,7 +397,7 @@
 
 	<body>
 		<div class="header">
-			<h1>wordle<span style="color: var(--c5)">le</span><span style="color: var(--c4)">le</span></h1>
+			<h1>wordle<span>le</span><span>le</span></h1>
 			<p id="headerExitButton" tabindex="0">← exit</p>
 			<p id="headerQuestionButton" tabindex="0">???</p>
 		</div>
@@ -389,7 +446,47 @@
 
 			<h2>About / How to Play</h2>
 
-			<p>wordle good</p>
+			<p>
+				wordlelele: it's Wordle, but the word can be anywhere from one to twenty letters long. And because that's not crazy enough, if you successfully figure out what
+				the word is, YOU get to choose the next word. Unfortunately, that means there's no guarantee that the word is family friendly or even a word at all, so good
+				luck!
+			</p>
+
+			<p>The current word was set <span class="absent" id="lastChangedDisplay">? days ? hours ? minutes ? seconds</span> ago.</p>
+
+			<p>
+				However long the word is, you get one more guess than there are letters in the word. To make a guess, use either the provided on-screen keyboard or your own to
+				enter an appropriately long word (or random string of letters—I won't stop you), then press enter. The letters that make up your guess are then coloured based
+				on their presence in the target word as follows:
+			</p>
+
+			<ul>
+				<li><span class="correct">&nbsp;BLUE&nbsp;</span> = correct!</li>
+				<li><span class="present">&nbsp;ORANGE&nbsp;</span> = in the target word, but elsewhere</li>
+				<li><span class="absent">&nbsp;GREY&nbsp;</span> = not in the target word</li>
+			</ul>
+
+			<p>
+				If you successfully determine the word within the alloted number of guesses, congratulations! You can choose the next word and/or flex your luck and/or skill
+				with the share button (it copies text to your clipboard). If you can't get the word, don't fret: you can just reload the page and try again.
+			</p>
+
+			<h2>Frequently Asked Questions</h2>
+
+			<ul>
+				<li>Why isn't the guess grid showing up?<br /><span class="grey">Either your internet is slow or there's something wrong with the database.</span></li>
+				<li>
+					Why are the guess grid squares all squished together?<br /><span class="grey"
+						>Because...I can't seem to control them. For words longer than five or six letters you may want to play on a bigger screen. Sorry.</span
+					>
+				</li>
+				<li>Why can't I make &lt;invalid word&gt; the next word?<br /><span class="grey">Because words consist exclusively of letters.</span></li>
+				<li>
+					What do you mean by "the word in the database was invalid"?<br /><span class="grey"
+						>Somehow the word contains a character that is not a letter. Hopefully this never happens.</span
+					>
+				</li>
+			</ul>
 		</div>
 
 		<div class="done">
@@ -399,9 +496,16 @@
 
 			<p>done_message_subtitle</p>
 
-			<p>Choose the next word: <input id="nextWordInput" maxlength="20" placeholder="new 1-20 letter word" /> <span id="nextWordSubmit" tabindex="0">SUBMIT →</span></p>
+			<p>
+				Choose the next word: <input id="nextWordInput" maxlength="20" placeholder="new 1-20 letter word" autocomplete="off" />
+				<span id="nextWordSubmit" tabindex="0">SUBMIT →</span>
+			</p>
 
 			<p id="nextWordStatus" class="hide"></p>
+
+			<p id="shareButton" tabindex="0" class="hide">SHARE →</p>
+
+			<p id="shareButtonStatus" class="blue hide">Copied!</p>
 		</div>
 
 		<script type="module">
@@ -439,13 +543,53 @@
 
 			// 2: guesses
 			var word;
+			var lastUpdated;
+			var invalidWord = false;
+			var letters = {
+				A: 0,
+				B: 0,
+				C: 0,
+				D: 0,
+				E: 0,
+				F: 0,
+				G: 0,
+				H: 0,
+				I: 0,
+				J: 0,
+				K: 0,
+				L: 0,
+				M: 0,
+				N: 0,
+				O: 0,
+				P: 0,
+				Q: 0,
+				R: 0,
+				S: 0,
+				T: 0,
+				U: 0,
+				V: 0,
+				W: 0,
+				X: 0,
+				Y: 0,
+				Z: 0,
+			};
 
 			async function loadWord() {
 				const db = getDatabase();
 
-				await get(ref(db, "wordlelele/word")).then((snapshot) => {
-					word = snapshot.val().toUpperCase();
+				await get(ref(db, "wordlelele")).then((snapshot) => {
+					word = snapshot.val().word.toUpperCase();
+					lastUpdated = snapshot.val().lastUpdated;
 				});
+
+				if (!/^[a-zA-Z]{1,20}$/.test(word)) {
+					word = "X";
+					invalidWord = true;
+				}
+
+				for (let i = 0; i < word.length; i++) {
+					letters[word[i]]++;
+				}
 
 				// are the right number of attempts given? (word length + 1, also used in the title (x2))
 				for (let i = 0; i < word.length + 1; i++) {
@@ -510,24 +654,81 @@
 					if (value == "enter") {
 						if (positionSquare == word.length) {
 							let lettersArray = [];
+							let squares = [];
+							let keyboardElements = [];
+							let lettersColoured = {
+								A: 0,
+								B: 0,
+								C: 0,
+								D: 0,
+								E: 0,
+								F: 0,
+								G: 0,
+								H: 0,
+								I: 0,
+								J: 0,
+								K: 0,
+								L: 0,
+								M: 0,
+								N: 0,
+								O: 0,
+								P: 0,
+								Q: 0,
+								R: 0,
+								S: 0,
+								T: 0,
+								U: 0,
+								V: 0,
+								W: 0,
+								X: 0,
+								Y: 0,
+								Z: 0,
+							};
 
+							// (1) get letters
 							for (let i = 0; i < word.length; i++) {
-								let squareElement = document.querySelector(`#row${positionRow}square${i}`);
-								lettersArray.push(squareElement.innerHTML);
-								let keyboardElement = document.querySelector(`#${lettersArray[i]}`);
+								squares[i] = document.querySelector(`#row${positionRow}square${i}`);
+								squares[i].classList.remove("active");
+								lettersArray.push(squares[i].innerHTML);
 
-								squareElement.classList.remove("active");
+								keyboardElements[i] = document.querySelector(`#${lettersArray[i]}`);
+							}
 
+							// (2) CORRECT
+							for (let i = 0; i < word.length; i++) {
 								if (lettersArray[i] == word[i]) {
-									squareElement.classList.add("correct");
-									if (keyboardElement.classList.contains("present")) keyboardElement.classList.remove("present");
-									keyboardElement.classList.add("correct");
-								} else if (word.includes(lettersArray[i])) {
-									squareElement.classList.add("present");
-									if (!keyboardElement.classList.contains("correct")) keyboardElement.classList.add("present");
-								} else {
-									squareElement.classList.add("absent");
-									keyboardElement.classList.add("absent");
+									squares[i].classList.add("correct");
+									if (keyboardElements[i].classList.contains("present")) keyboardElements[i].classList.remove("present");
+									keyboardElements[i].classList.add("correct");
+
+									lettersColoured[lettersArray[i]]++;
+								}
+							}
+
+							// (3) PRESENT
+							for (let i = 0; i < word.length; i++) {
+								if (word.includes(lettersArray[i])) {
+									if (letters[lettersArray[i]] > lettersColoured[lettersArray[i]]) {
+										if (squares[i].classList.length == 0) {
+											squares[i].classList.add("present");
+											lettersColoured[lettersArray[i]]++;
+										}
+										if (!keyboardElements[i].classList.contains("correct")) keyboardElements[i].classList.add("present");
+									} else {
+										if (squares[i].classList.length == 0) squares[i].classList.add("absent");
+
+										lettersColoured[lettersArray[i]]++;
+									}
+								}
+							}
+
+							// (4) ABSENT
+							for (let i = 0; i < word.length; i++) {
+								if (!word.includes(lettersArray[i])) {
+									squares[i].classList.add("absent");
+									keyboardElements[i].classList.add("absent");
+
+									lettersColoured[lettersArray[i]]++;
 								}
 							}
 
@@ -535,11 +736,21 @@
 								done = true;
 								if (lettersArray.join("") == word) {
 									win = true;
-									document.querySelector("title").innerHTML = `wordlelele (success)`;
-									end(true);
+									if (invalidWord) {
+										end(true);
+										document.querySelector("title").innerHTML = `wordlelele (?!)`;
+									} else {
+										end(true);
+										document.querySelector("title").innerHTML = `wordlelele (success)`;
+									}
 								} else {
-									document.querySelector("title").innerHTML = `wordlelele (fail)`;
-									end(false);
+									if (invalidWord) {
+										end(true);
+										document.querySelector("title").innerHTML = `wordlelele (?!)`;
+									} else {
+										end(false);
+										document.querySelector("title").innerHTML = `wordlelele (fail)`;
+									}
 								}
 							} else {
 								document.querySelector("title").innerHTML = `wordlelele (${positionRow + 2}/${word.length + 1})`;
@@ -570,14 +781,23 @@
 			function end(win) {
 				if (win) {
 					document.querySelector(".done p:first-child").innerHTML = "← back";
-					document.querySelector(".done h2").innerHTML = "Congratulations!";
-					document.querySelector(".done p:nth-child(3)").innerHTML = "You did it.";
+					if (!invalidWord) {
+						document.querySelector(".done h2").innerHTML = "Congratulations!";
+						document.querySelector(".done p:nth-child(3)").innerHTML = "You did it.";
+						document.querySelector("#shareButton").classList.remove("hide");
+					} else {
+						document.querySelector(".done h2").innerHTML = "Sorry, the word in the database was invalid.";
+						document.querySelector(".done p:nth-child(3)").innerHTML = "Please change the word to something acceptable.";
+					}
 
 					document.querySelector(".done p:first-child").addEventListener("click", (e) => {
 						document.querySelector(".done").classList.remove("show");
 					});
 					document.querySelector("#nextWordSubmit").addEventListener("click", (e) => {
 						setNextWord(document.querySelector("input").value.toLowerCase());
+					});
+					document.querySelector("#shareButton").addEventListener("click", (e) => {
+						share();
 					});
 					document.addEventListener("keydown", (e) => {
 						if (e.keyCode == 13) {
@@ -587,20 +807,37 @@
 							if (document.activeElement == document.querySelector("#nextWordInput") || document.activeElement == document.querySelector("#nextWordSubmit")) {
 								setNextWord(document.querySelector("input").value.toLowerCase());
 							}
+							if (document.activeElement == document.querySelector("#shareButton")) {
+								share();
+							}
 						}
 					});
 				} else {
-					document.querySelector(".done p:first-child").innerHTML = "← try again";
+					document.querySelector(".done p:first-child").innerHTML = "← back";
 					document.querySelector(".done h2").innerHTML = ":(";
-					document.querySelector(".done p:nth-child(3)").innerHTML = "Better luck next time.";
-					document.querySelector(".done p:nth-child(4)").classList.add("hide");
+					document.querySelector(".done p:nth-child(3)").innerHTML = `Better luck next time.<br />The word was "${word.toLowerCase()}"`;
+					document.querySelector("#shareButton").classList.remove("hide");
 
 					document.querySelector(".done p:first-child").addEventListener("click", (e) => {
-						window.location.reload();
+						document.querySelector(".done").classList.remove("show");
+					});
+					document.querySelector("#nextWordSubmit").addEventListener("click", (e) => {
+						setNextWord(document.querySelector("input").value.toLowerCase());
+					});
+					document.querySelector("#shareButton").addEventListener("click", (e) => {
+						share();
 					});
 					document.addEventListener("keydown", (e) => {
-						if (e.keyCode == 13 && document.activeElement == document.querySelector("#doneActionButton")) {
-							window.location.reload();
+						if (e.keyCode == 13) {
+							if (document.activeElement == document.querySelector("#doneActionButton")) {
+								document.querySelector(".done").classList.remove("show");
+							}
+							if (document.activeElement == document.querySelector("#nextWordInput") || document.activeElement == document.querySelector("#nextWordSubmit")) {
+								setNextWord(document.querySelector("input").value.toLowerCase());
+							}
+							if (document.activeElement == document.querySelector("#shareButton")) {
+								share();
+							}
 						}
 					});
 				}
@@ -611,7 +848,9 @@
 				}, 2000);
 			}
 
+			// 5. set next word in database
 			async function setNextWord(word) {
+				word = word.replaceAll(" ", "");
 				const db = getDatabase();
 
 				if (/^[a-zA-Z]{1,20}$/.test(word)) {
@@ -629,6 +868,63 @@
 					document.querySelector("#nextWordStatus").innerHTML = `ERROR: invalid word`;
 				}
 			}
+
+			// 6. share (copy to clipboard)
+			function share() {
+				var guesses = "";
+				document.querySelectorAll(".guesses div div").forEach((letter) => {
+					if (letter.innerHTML != "") {
+						if (letter.id.substring(letter.id.length - 1) == 0 && letter.id.substring(letter.id.length - 2, letter.id.length - 1) != 1) guesses += "\n";
+						if (letter.classList.contains("correct")) guesses += "🟦";
+						if (letter.classList.contains("present")) guesses += "🟧";
+						if (letter.classList.contains("absent")) guesses += "⬛";
+					}
+				});
+				var finalMessage;
+				if (win) finalMessage = `wordlelele — ${word} in ${positionRow}${guesses}\nhttps://pinniped.page/w`;
+				else finalMessage = `wordlelele — ${word} in N/A${guesses}\nhttps://pinniped.page/w`;
+				navigator.clipboard.writeText(finalMessage);
+
+				document.querySelector("#shareButtonStatus").classList.remove("hide");
+				setTimeout(() => {
+					document.querySelector("#shareButtonStatus").classList.add("hide");
+				}, 4000);
+			}
+
+			// 7. update lastChangedDisplay
+			setInterval(() => {
+				var days = 0;
+				var hours = 0;
+				var minutes = 0;
+				var seconds = 0;
+
+				var daysWord = "days";
+				var hoursWord = "hours";
+				var minutesWord = "minutes";
+				var secondsWord = "seconds";
+
+				let timeElapsed = Math.floor((Date.now() - lastUpdated) / 1000);
+
+				days = Math.floor(timeElapsed / (60 * 60 * 24));
+				timeElapsed -= days * (60 * 60 * 24);
+
+				hours = Math.floor(timeElapsed / (60 * 60));
+				timeElapsed -= hours * (60 * 60);
+
+				minutes = Math.floor(timeElapsed / 60);
+				timeElapsed -= minutes * 60;
+
+				seconds = timeElapsed;
+
+				if (days == 1) daysWord = "day";
+				if (hours == 1) hoursWord = "hour";
+				if (minutes == 1) minutesWord = "minute";
+				if (seconds == 1) secondsWord = "second";
+
+				document.querySelector(
+					"#lastChangedDisplay"
+				).innerHTML = `&nbsp;${days} ${daysWord} ${hours} ${hoursWord} ${minutes} ${minutesWord} ${seconds} ${secondsWord}&nbsp;`;
+			}, 1000);
 		</script>
 	</body>
 </html>
