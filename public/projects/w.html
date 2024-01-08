@@ -152,6 +152,7 @@
 				border-bottom: 1px solid var(--c2);
 				position: fixed;
 				top: 0;
+				z-index: 1;
 			}
 
 			.header p {
@@ -245,6 +246,7 @@
 				background-color: var(--c1);
 				padding: 50px;
 				overflow-y: scroll;
+				z-index: 2;
 			}
 
 			.question p,
@@ -314,6 +316,10 @@
 				color: var(--c3);
 			}
 
+			.inline-block {
+				display: inline-block;
+			}
+
 			#headerExitButton {
 				left: 50px;
 			}
@@ -346,6 +352,16 @@
 				cursor: pointer;
 				text-decoration-color: var(--c3);
 				outline: none;
+			}
+
+			#lastChangedDisplay,
+			#version {
+				padding: 0 6px 0 6px;
+			}
+
+			#version {
+				background-color: var(--c2);
+				width: fit-content;
 			}
 
 			@keyframes appear {
@@ -452,7 +468,7 @@
 				luck!
 			</p>
 
-			<p>The current word was set <span class="absent" id="lastChangedDisplay">? days ? hours ? minutes ? seconds</span> ago.</p>
+			<p>The current word was set <span class="absent inline-block" id="lastChangedDisplay">? days ? hours ? minutes ? seconds</span> ago.</p>
 
 			<p>
 				However long the word is, you get one more guess than there are letters in the word. To make a guess, use either the provided on-screen keyboard or your own to
@@ -474,19 +490,32 @@
 			<h2>Frequently Asked Questions</h2>
 
 			<ul>
-				<li>Why isn't the guess grid showing up?<br /><span class="grey">Either your internet is slow or there's something wrong with the database.</span></li>
+				<li>Why orange and blue?<br /><span class="grey">I wanted to be different, and I personally like this colour scheme better.</span></li>
+				<li>
+					If the target word contains a letter more than once, is that reflected by the guess highlighting?<br /><span class="grey"
+						>Yes, just like how Wordle does it.</span
+					>
+				</li>
 				<li>
 					Why are the guess grid squares all squished together?<br /><span class="grey"
 						>Because...I can't seem to control them. For words longer than five or six letters you may want to play on a bigger screen. Sorry.</span
 					>
 				</li>
+				<li>Why isn't the guess grid showing up?<br /><span class="grey">Either your internet is slow or there's something wrong with the database.</span></li>
+				<li>
+					Why is the maximum word length twenty letters?<br /><span class="grey"
+						>Not only is twenty a nice round number, it's also the length of "uncharacteristically": the longest [English] word you might actually use.</span
+					>
+				</li>
 				<li>Why can't I make &lt;invalid word&gt; the next word?<br /><span class="grey">Because words consist exclusively of letters.</span></li>
 				<li>
 					What do you mean by "the word in the database was invalid"?<br /><span class="grey"
-						>Somehow the word contains a character that is not a letter. Hopefully this never happens.</span
+						>Either the word contained a character that was not a letter, or no word was found. Hopefully this never happens.</span
 					>
 				</li>
 			</ul>
+
+			<p id="version">wordlelele — a project by Obsidian_Seal</p>
 		</div>
 
 		<div class="done">
@@ -535,10 +564,12 @@
 			});
 			document.querySelector("#headerQuestionButton").addEventListener("click", (e) => {
 				document.querySelector(".question").classList.add("show");
+				document.querySelector(".guesses").classList.add("hide");
 			});
 
 			document.querySelector("#questionBackButton").addEventListener("click", (e) => {
 				document.querySelector(".question").classList.remove("show");
+				document.querySelector(".guesses").classList.remove("hide");
 			});
 
 			// 2: guesses
@@ -577,10 +608,15 @@
 			async function loadWord() {
 				const db = getDatabase();
 
-				await get(ref(db, "wordlelele")).then((snapshot) => {
-					word = snapshot.val().word.toUpperCase();
-					lastUpdated = snapshot.val().lastUpdated;
-				});
+				try {
+					await get(ref(db, "wordlelele")).then((snapshot) => {
+						word = snapshot.val().word.toUpperCase();
+						lastUpdated = snapshot.val().lastUpdated;
+					});
+				} catch (error) {
+					word = "X";
+					invalidWord = true;
+				}
 
 				if (!/^[a-zA-Z]{1,20}$/.test(word)) {
 					word = "X";
@@ -621,10 +657,15 @@
 					if (keys["Control"] === true) return; // prevent letters showing up when shortcuts used, there are probably more keys like this
 
 					if (e.keyCode == 13) {
-						if (document.activeElement == document.querySelector("#headerExitButton")) goBack();
-						else if (document.activeElement == document.querySelector("#headerQuestionButton")) document.querySelector(".question").classList.add("show");
-						else if (document.activeElement == document.querySelector("#questionBackButton")) document.querySelector(".question").classList.remove("show");
-						else letterInput("enter");
+						if (document.activeElement == document.querySelector("#headerExitButton")) {
+							goBack();
+						} else if (document.activeElement == document.querySelector("#headerQuestionButton")) {
+							document.querySelector(".question").classList.add("show");
+							document.querySelector(".guesses").classList.add("hide");
+						} else if (document.activeElement == document.querySelector("#questionBackButton")) {
+							document.querySelector(".question").classList.remove("show");
+							document.querySelector(".guesses").classList.remove("hide");
+						} else letterInput("enter");
 					}
 					if (e.keyCode == 8) letterInput("←");
 					if (e.keyCode >= 65 && e.keyCode <= 90) {
@@ -792,6 +833,7 @@
 
 					document.querySelector(".done p:first-child").addEventListener("click", (e) => {
 						document.querySelector(".done").classList.remove("show");
+						document.querySelector(".guesses").classList.remove("hide");
 					});
 					document.querySelector("#nextWordSubmit").addEventListener("click", (e) => {
 						setNextWord(document.querySelector("input").value.toLowerCase());
@@ -803,6 +845,7 @@
 						if (e.keyCode == 13) {
 							if (document.activeElement == document.querySelector("#doneActionButton")) {
 								document.querySelector(".done").classList.remove("show");
+								document.querySelector(".guesses").classList.remove("hide");
 							}
 							if (document.activeElement == document.querySelector("#nextWordInput") || document.activeElement == document.querySelector("#nextWordSubmit")) {
 								setNextWord(document.querySelector("input").value.toLowerCase());
@@ -820,6 +863,7 @@
 
 					document.querySelector(".done p:first-child").addEventListener("click", (e) => {
 						document.querySelector(".done").classList.remove("show");
+						document.querySelector(".guesses").classList.remove("hide");
 					});
 					document.querySelector("#nextWordSubmit").addEventListener("click", (e) => {
 						setNextWord(document.querySelector("input").value.toLowerCase());
@@ -831,6 +875,7 @@
 						if (e.keyCode == 13) {
 							if (document.activeElement == document.querySelector("#doneActionButton")) {
 								document.querySelector(".done").classList.remove("show");
+								document.querySelector(".guesses").classList.remove("hide");
 							}
 							if (document.activeElement == document.querySelector("#nextWordInput") || document.activeElement == document.querySelector("#nextWordSubmit")) {
 								setNextWord(document.querySelector("input").value.toLowerCase());
@@ -843,6 +888,7 @@
 				}
 
 				setTimeout(() => {
+					document.querySelector(".guesses").classList.add("hide");
 					document.querySelector(".done").classList.add("show");
 					document.querySelector("#nextWordInput").focus();
 				}, 2000);
@@ -921,10 +967,19 @@
 				if (minutes == 1) minutesWord = "minute";
 				if (seconds == 1) secondsWord = "second";
 
-				document.querySelector(
-					"#lastChangedDisplay"
-				).innerHTML = `&nbsp;${days} ${daysWord} ${hours} ${hoursWord} ${minutes} ${minutesWord} ${seconds} ${secondsWord}&nbsp;`;
+				if (isNaN(seconds)) {
+					document.querySelector("#lastChangedDisplay").innerHTML = `???`;
+				} else {
+					document.querySelector(
+						"#lastChangedDisplay"
+					).innerHTML = `<span class="inline-block">${days} ${daysWord}</span> <span class="inline-block">${hours} ${hoursWord}</span> <span class="inline-block">${minutes} ${minutesWord}</span> <span class="inline-block">${seconds} ${secondsWord}</span>`;
+				}
 			}, 1000);
+
+			// 8. version #
+			let version = "wordlelele v1.1.0 — a project by Obsidian_Seal";
+			document.querySelector("#version").innerHTML = version;
+			console.log(version);
 		</script>
 	</body>
 </html>
