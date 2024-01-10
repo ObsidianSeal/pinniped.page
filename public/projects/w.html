@@ -50,6 +50,22 @@
 				font-weight: 400;
 			}
 
+			::selection {
+				background-color: var(--c2);
+			}
+
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--c2);
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--c3);
+			}
+
 			body {
 				background-color: var(--c1);
 				color: white;
@@ -93,6 +109,10 @@
 				color: var(--c3);
 			}
 
+			input::selection {
+				color: white;
+			}
+
 			ul {
 				margin-left: 50px;
 			}
@@ -117,26 +137,6 @@
 			li span.absent,
 			.question p span.absent {
 				background-color: var(--c2);
-			}
-
-			::selection {
-				background-color: var(--c2);
-			}
-
-			input::selection {
-				color: white;
-			}
-
-			::-webkit-scrollbar {
-				width: 20px;
-			}
-
-			::-webkit-scrollbar-thumb {
-				background-color: var(--c2);
-			}
-
-			::-webkit-scrollbar-thumb:hover {
-				background-color: var(--c3);
 			}
 
 			.header,
@@ -175,6 +175,12 @@
 			/* the responsiveness of the guess squares SUCKS */
 			.guesses {
 				padding: 0 10px 0 10px;
+			}
+
+			.guesses h3,
+			.guesses h3 d {
+				font-size: 48px;
+				text-align: center;
 			}
 
 			.guesses div {
@@ -367,9 +373,90 @@
 				width: fit-content;
 			}
 
+			#d1,
+			#d2,
+			#d3 {
+				opacity: 0%;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 0.5s;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 0.5s;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 0.5s;
+			}
+
 			@keyframes appear {
 				50% {
 					transform: scale(1.1);
+				}
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
 				}
 			}
 
@@ -421,7 +508,9 @@
 			<p id="headerQuestionButton" tabindex="0">???</p>
 		</div>
 
-		<div class="guesses"></div>
+		<div class="guesses">
+			<h3>Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h3>
+		</div>
 
 		<div class="letters">
 			<div>
@@ -630,6 +719,8 @@
 					letters[word[i]]++;
 				}
 
+				document.querySelector(".guesses").innerHTML = "";
+
 				// are the right number of attempts given? (word length + 1, also used in the title (x2))
 				for (let i = 0; i < word.length + 1; i++) {
 					let row = document.createElement("div");
@@ -673,6 +764,11 @@
 					if (e.keyCode == 8) letterInput("←");
 					if (e.keyCode >= 65 && e.keyCode <= 90) {
 						letterInput(e.key.toUpperCase());
+					}
+
+					if (e.keyCode == 27) {
+						document.querySelector(".question").classList.remove("show");
+						document.querySelector(".guesses").classList.remove("hide");
 					}
 				});
 
@@ -844,18 +940,33 @@
 					document.querySelector("#shareButton").addEventListener("click", (e) => {
 						share();
 					});
+					document.querySelector("#enter").addEventListener("click", (e) => {
+						document.querySelector(".guesses").classList.add("hide");
+						document.querySelector(".done").classList.add("show");
+						document.querySelector("#nextWordInput").focus();
+					});
 					document.addEventListener("keydown", (e) => {
 						if (e.keyCode == 13) {
 							if (document.activeElement == document.querySelector("#doneActionButton")) {
 								document.querySelector(".done").classList.remove("show");
 								document.querySelector(".guesses").classList.remove("hide");
-							}
-							if (document.activeElement == document.querySelector("#nextWordInput") || document.activeElement == document.querySelector("#nextWordSubmit")) {
+							} else if (
+								document.activeElement == document.querySelector("#nextWordInput") ||
+								document.activeElement == document.querySelector("#nextWordSubmit")
+							) {
 								setNextWord(document.querySelector("input").value.toLowerCase());
-							}
-							if (document.activeElement == document.querySelector("#shareButton")) {
+							} else if (document.activeElement == document.querySelector("#shareButton")) {
 								share();
+							} else if (document.activeElement == document.querySelector("body")) {
+								console.log(document.activeElement);
+								document.querySelector(".guesses").classList.add("hide");
+								document.querySelector(".done").classList.add("show");
+								document.querySelector("#nextWordInput").focus();
 							}
+						}
+						if (e.keyCode == 27) {
+							document.querySelector(".done").classList.remove("show");
+							document.querySelector(".guesses").classList.remove("hide");
 						}
 					});
 				} else {
@@ -874,18 +985,32 @@
 					document.querySelector("#shareButton").addEventListener("click", (e) => {
 						share();
 					});
+					document.querySelector("#enter").addEventListener("click", (e) => {
+						document.querySelector(".guesses").classList.add("hide");
+						document.querySelector(".done").classList.add("show");
+						document.querySelector("#nextWordInput").focus();
+					});
 					document.addEventListener("keydown", (e) => {
 						if (e.keyCode == 13) {
 							if (document.activeElement == document.querySelector("#doneActionButton")) {
 								document.querySelector(".done").classList.remove("show");
 								document.querySelector(".guesses").classList.remove("hide");
-							}
-							if (document.activeElement == document.querySelector("#nextWordInput") || document.activeElement == document.querySelector("#nextWordSubmit")) {
+							} else if (
+								document.activeElement == document.querySelector("#nextWordInput") ||
+								document.activeElement == document.querySelector("#nextWordSubmit")
+							) {
 								setNextWord(document.querySelector("input").value.toLowerCase());
-							}
-							if (document.activeElement == document.querySelector("#shareButton")) {
+							} else if (document.activeElement == document.querySelector("#shareButton")) {
 								share();
+							} else if (document.activeElement == document.querySelector("body")) {
+								document.querySelector(".guesses").classList.add("hide");
+								document.querySelector(".done").classList.add("show");
+								document.querySelector("#nextWordInput").focus();
 							}
+						}
+						if (e.keyCode == 27) {
+							document.querySelector(".done").classList.remove("show");
+							document.querySelector(".guesses").classList.remove("hide");
 						}
 					});
 				}
@@ -930,7 +1055,7 @@
 					}
 				});
 				var finalMessage;
-				if (win) finalMessage = `wordlelele — ${word} in ${positionRow}${guesses}\nhttps://pinniped.page/w`;
+				if (win) finalMessage = `wordlelele — ${word} in ${positionRow}/${word.length + 1}${guesses}\nhttps://pinniped.page/w`;
 				else finalMessage = `wordlelele — ${word} in N/A${guesses}\nhttps://pinniped.page/w`;
 				navigator.clipboard.writeText(finalMessage);
 
@@ -980,7 +1105,7 @@
 			}, 1000);
 
 			// 8. version #
-			let version = "wordlelele v1.2.0 — a project by Obsidian_Seal";
+			let version = "wordlelele v1.3.0 — a project by Obsidian_Seal";
 			document.querySelector("#version").innerHTML = version;
 			console.log(version);
 		</script>
