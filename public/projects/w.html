@@ -17,7 +17,7 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<meta name="description" content="Weird Wordle: longer words, choose the next word." />
-		<meta name="keywords" content="wordle, wordlelele, pinniped, page, obsidian_seal, word, puzzle, custom, weird, crazy, fun, short, long" />
+		<meta name="keywords" content="wordle, wordlelele, pinniped, page, obsidian_seal, word, puzzle, custom, weird, crazy, fun, short, long, game, friends" />
 
 		<style>
 			@import url(https://use.typekit.net/rzo4wst.css);
@@ -342,7 +342,8 @@
 			}
 
 			#nextWordSubmit,
-			#shareButton {
+			#shareButton,
+			#newWordButton {
 				text-decoration: underline;
 				text-decoration-color: transparent;
 				transition: text-decoration-color 0.5s;
@@ -350,14 +351,17 @@
 				display: inline-block;
 			}
 
-			#shareButton.hide {
+			#shareButton.hide,
+			#newWordButton.hide {
 				display: none;
 			}
 
 			#nextWordSubmit:hover,
 			#shareButton:hover,
+			#newWordButton:hover,
 			#nextWordSubmit:focus,
-			#shareButton:focus {
+			#shareButton:focus,
+			#newWordButton:focus {
 				cursor: pointer;
 				text-decoration-color: var(--c3);
 				outline: none;
@@ -560,7 +564,10 @@
 				luck!
 			</p>
 
-			<p>The current word was set <span class="absent inline-block" id="lastChangedDisplay">? days ? hours ? minutes ? seconds</span> ago.</p>
+			<p>
+				The current word was set <span class="absent inline-block" id="lastChangedDisplay">? days ? hours ? minutes ? seconds</span> ago.
+				<span id="newWordButton" tabindex="0" class="hide">NEW WORD →</span>
+			</p>
 
 			<p>
 				However long the word is, you get one more guess than there are letters in the word. To make a guess, use either the provided on-screen keyboard or your own to
@@ -576,7 +583,7 @@
 
 			<p>
 				If you successfully determine the word within the alloted number of guesses, congratulations! You can choose the next word and/or flex your luck and/or skill
-				with the share button (it copies text to your clipboard). If you can't get the word, don't fret: you can just reload the page and try again.
+				with the share button (it copies text to your clipboard). If you can't get the word, don't fret: you still get to choose the next one.
 			</p>
 
 			<h2>Frequently Asked Questions</h2>
@@ -631,8 +638,8 @@
 
 		<script type="module">
 			// 0. fireBASED
-			import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-			import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+			import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 			const firebaseConfig = {
 				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
@@ -714,6 +721,8 @@
 					word = "X";
 					invalidWord = true;
 				}
+
+				checkForNewWord(); // ?
 
 				for (let i = 0; i < word.length; i++) {
 					letters[word[i]]++;
@@ -1104,8 +1113,28 @@
 				}
 			}, 1000);
 
-			// 8. version #
-			let version = "wordlelele v1.3.0 — a project by Obsidian_Seal";
+			// 8. detect more recent word
+			function checkForNewWord() {
+				const db = getDatabase();
+
+				onValue(ref(db, "wordlelele/word"), (snapshot) => {
+					var newWord = snapshot.val();
+
+					if (snapshot.exists()) {
+						newWord = newWord.toUpperCase();
+
+						if (/^[a-zA-Z]{1,20}$/.test(newWord) && newWord != word) {
+							document.querySelector("#newWordButton").classList.remove("hide");
+							document.querySelector("#newWordButton").addEventListener("click", (e) => {
+								window.location.reload();
+							});
+						}
+					}
+				});
+			}
+
+			// last: version #
+			let version = "wordlelele v1.4.0 — a project by Obsidian_Seal";
 			document.querySelector("#version").innerHTML = version;
 			console.log(version);
 		</script>
