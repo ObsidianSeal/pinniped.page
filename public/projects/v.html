@@ -253,10 +253,7 @@
 				width: 270px;
 			}
 
-			.button-container span:not(.currency):nth-child(2) {
-				width: 200px;
-			}
-
+			.button-container span:not(.currency):nth-child(2),
 			.button-container span:not(.currency):nth-child(3) {
 				width: 130px;
 			}
@@ -450,7 +447,7 @@
 
 		<div class="button-container">
 			<span tabindex="0" id="region-select-button"><i class="fa-solid fa-earth-americas"></i>select country/region</span
-			><span tabindex="0" id="legacy-button"><i class="fa-solid fa-bolt"></i>legacy version</span
+			><span tabindex="0" id="back-button"><i class="fa-solid fa-arrow-left"></i>go back</span
 			><span tabindex="0" id="reset-all-button"><i class="fa-solid fa-rotate"></i>reset all</span>
 		</div>
 
@@ -662,7 +659,7 @@
 
 		<script>
 			// version
-			const version = ` v${2}.${4}.${0}\n\n`;
+			const version = ` v${2}.${4}.${1}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
@@ -888,8 +885,9 @@
 					regionSelectButton.getBoundingClientRect().top - (document.body.getBoundingClientRect().top - bodyPadding)
 				}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
 			}
-			function legacyButton() {
-				window.location.href = "v-old.html";
+			function goBack() {
+				if (document.referrer.includes("pinniped.page")) history.back();
+				else window.location.href = "../projects+.html";
 			}
 			function resetAllButton() {
 				window.location.reload();
@@ -1063,8 +1061,8 @@
 			document.querySelector("#region-select-button").addEventListener("click", (e) => {
 				openRegionSelectMenu();
 			});
-			document.querySelector("#legacy-button").addEventListener("click", (e) => {
-				legacyButton();
+			document.querySelector("#back-button").addEventListener("click", (e) => {
+				goBack();
 			});
 			document.querySelector("#reset-all-button").addEventListener("click", (e) => {
 				resetAllButton();
@@ -1123,8 +1121,8 @@
 						document.querySelector("#region-select-menu-default").focus();
 					}
 
-					if (document.activeElement == document.querySelector("#legacy-button")) {
-						legacyButton();
+					if (document.activeElement == document.querySelector("#back-button")) {
+						goBack();
 					}
 					if (document.activeElement == document.querySelector("#reset-all-button")) {
 						resetAllButton();

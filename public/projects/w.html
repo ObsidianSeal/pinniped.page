@@ -1032,11 +1032,14 @@
 			}
 
 			// 5. set next word in database
+			var setWord;
 			async function setNextWord(word) {
 				word = word.replaceAll(" ", "");
 				const db = getDatabase();
 
 				if (/^[a-zA-Z]{1,20}$/.test(word)) {
+					setWord = word.toUpperCase();
+
 					await set(ref(db, "wordlelele/lastUpdated"), Date.now());
 					await set(ref(db, "wordlelele/word"), word);
 
@@ -1050,6 +1053,8 @@
 					document.querySelector("#nextWordStatus").classList.add("orange");
 					document.querySelector("#nextWordStatus").innerHTML = `ERROR: invalid word`;
 				}
+
+				document.querySelector("#nextWordInput").blur(); // does this work on mobile
 			}
 
 			// 6. share (copy to clipboard)
@@ -1123,7 +1128,7 @@
 					if (snapshot.exists()) {
 						newWord = newWord.toUpperCase();
 
-						if (/^[a-zA-Z]{1,20}$/.test(newWord) && newWord != word) {
+						if (/^[a-zA-Z]{1,20}$/.test(newWord) && newWord != word && newWord != setWord) {
 							document.querySelector("#newWordButton").classList.remove("hide");
 							document.querySelector("#newWordButton").addEventListener("click", newWordButtonClicked);
 						} else {
@@ -1139,7 +1144,7 @@
 			}
 
 			// last: version #
-			let version = "wordlelele v1.4.1 — a project by Obsidian_Seal";
+			let version = "wordlelele v1.4.2 — a project by Obsidian_Seal";
 			document.querySelector("#version").innerHTML = version;
 			console.log(version);
 		</script>
