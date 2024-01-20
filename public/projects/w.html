@@ -590,6 +590,8 @@
 
 			<ul>
 				<li>Why orange and blue?<br /><span class="grey">I wanted to be different, and I personally like this colour scheme better.</span></li>
+				<li>Do I have to guess real words?<br /><span class="grey">No.</span></li>
+				<li>How do I know if I set the word?<br /><span class="grey">A confirmation message appears under the input field.</span></li>
 				<li>
 					If the target word contains a letter more than once, is that reflected by the guess highlighting?<br /><span class="grey"
 						>Yes, just like how Wordle does it.</span
@@ -612,6 +614,7 @@
 						>Either the word contained a character that was not a letter, or no word was found. Hopefully this never happens.</span
 					>
 				</li>
+				<li>What font is this?<br /><span class="grey">Miller Text.</span></li>
 			</ul>
 
 			<p id="version">wordlelele — a project by Obsidian_Seal</p>
@@ -654,7 +657,7 @@
 
 			// 1: header & other "back" buttons
 			function goBack() {
-				if (document.referrer.includes("pinniped.page")) history.back();
+				if (document.referrer != "" && document.referrer != null && document.referrer.includes("pinniped.page")) history.back();
 				else window.location.href = "../projects+.html";
 			}
 
@@ -1144,7 +1147,7 @@
 			}
 
 			// last: version #
-			let version = "wordlelele v1.4.2 — a project by Obsidian_Seal";
+			let version = "wordlelele v1.4.3 — a project by Obsidian_Seal";
 			document.querySelector("#version").innerHTML = version;
 			console.log(version);
 		</script>
