@@ -22,7 +22,7 @@
 		<style>
 			@import url(https://use.typekit.net/rzo4wst.css);
 
-			/* 
+			/*
 			OLD COLOURS
 			:root {
 				--c1: #22162b;
@@ -30,7 +30,7 @@
 				--c3: #724e91;
 				--c4: #e54f6d;
 				--c5: #f8c630;
-			} 
+			}
 			*/
 
 			:root {
@@ -245,6 +245,10 @@
 				margin: 0;
 			}
 
+			.question * {
+				max-width: 1000px;
+			}
+
 			.question,
 			.done {
 				position: fixed;
@@ -375,6 +379,11 @@
 			#version {
 				background-color: var(--c2);
 				width: fit-content;
+			}
+
+			#version a {
+				color: white;
+				text-decoration: none;
 			}
 
 			#d1,
@@ -1147,9 +1156,9 @@
 			}
 
 			// last: version #
-			let version = "wordlelele v1.4.3 — a project by Obsidian_Seal";
-			document.querySelector("#version").innerHTML = version;
-			console.log(version);
+			let version = "1.4.4";
+			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
+			console.log(`w | v${version}`);
 		</script>
 	</body>
 </html>
