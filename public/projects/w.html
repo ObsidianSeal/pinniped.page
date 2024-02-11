@@ -19,27 +19,19 @@
 		<meta name="description" content="Weird Wordle: longer words, choose the next word." />
 		<meta name="keywords" content="wordle, wordlelele, pinniped, page, obsidian_seal, word, puzzle, custom, weird, crazy, fun, short, long, game, friends" />
 
-		<style>
-			@import url(https://use.typekit.net/rzo4wst.css);
-
-			/* 
-			OLD COLOURS
-			:root {
-				--c1: #22162b;
-				--c2: #451f55;
-				--c3: #724e91;
-				--c4: #e54f6d;
-				--c5: #f8c630;
-			} 
-			*/
-
+		<style id="theme">
 			:root {
 				--c1: #252525;
 				--c2: #464646;
 				--c3: #7d7d7d;
-				--c4: #448ccb;
-				--c5: #f68e56;
+				--c4: #ffffff;
+				--c5: #448ccb;
+				--c6: #f68e56;
 			}
+		</style>
+
+		<style>
+			@import url(https://use.typekit.net/rzo4wst.css);
 
 			* {
 				margin: 0;
@@ -73,16 +65,16 @@
 			}
 
 			h1 span:first-child {
-				color: var(--c5);
+				color: var(--c6);
 			}
 
 			h1 span:last-child {
-				color: var(--c4);
+				color: var(--c5);
 			}
 
 			h2 {
 				font-size: 48px;
-				color: var(--c5);
+				color: var(--c6);
 			}
 
 			.question h2 {
@@ -90,7 +82,7 @@
 			}
 
 			.done h2 {
-				color: var(--c4);
+				color: var(--c5);
 			}
 
 			input {
@@ -127,11 +119,11 @@
 			}
 
 			li span.correct {
-				background-color: var(--c4);
+				background-color: var(--c5);
 			}
 
 			li span.present {
-				background-color: var(--c5);
+				background-color: var(--c6);
 			}
 
 			li span.absent,
@@ -289,14 +281,14 @@
 
 			.guesses div div.correct,
 			.letters div div.correct {
-				border-color: var(--c4);
-				background-color: var(--c4);
+				border-color: var(--c5);
+				background-color: var(--c5);
 			}
 
 			.guesses div div.present,
 			.letters div div.present {
-				border-color: var(--c5);
-				background-color: var(--c5);
+				border-color: var(--c6);
+				background-color: var(--c6);
 			}
 
 			.guesses div div.absent,
@@ -314,11 +306,11 @@
 			}
 
 			.blue {
-				color: var(--c4);
+				color: var(--c5);
 			}
 
 			.orange {
-				color: var(--c5);
+				color: var(--c6);
 			}
 
 			.grey {
@@ -576,9 +568,9 @@
 			</p>
 
 			<ul>
-				<li><span class="correct">&nbsp;BLUE&nbsp;</span> = correct!</li>
-				<li><span class="present">&nbsp;ORANGE&nbsp;</span> = in the target word, but elsewhere</li>
-				<li><span class="absent">&nbsp;GREY&nbsp;</span> = not in the target word</li>
+				<li><span class="correct" id="c5colour">&nbsp;BLUE&nbsp;</span> = correct!</li>
+				<li><span class="present" id="c6colour">&nbsp;ORANGE&nbsp;</span> = in the target word, but elsewhere</li>
+				<li><span class="absent" id="c2colour">&nbsp;GREY&nbsp;</span> = not in the target word</li>
 			</ul>
 
 			<p>
@@ -1146,8 +1138,34 @@
 				window.location.reload();
 			}
 
+			// 9. themes!
+			function loadThemeFromURL() {
+				const query = window.location.search;
+				const item = new URLSearchParams(query);
+				const theme = item.get("theme");
+
+				if (
+					theme == null ||
+					theme == "" ||
+					!/^[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}$/.test(
+						theme
+					)
+				)
+					return;
+
+				const colours = theme.split("-");
+				document.querySelector(
+					"#theme"
+				).innerHTML = `:root {--c1: #${colours[0]}; --c2: #${colours[1]}; --c3: #${colours[2]}; --c4: #${colours[3]}; --c5: #${colours[4]}; --c6: #${colours[5]};}`;
+
+				document.querySelector("#c5colour").innerHTML = `&nbsp;#${colours[4]}&nbsp;`;
+				document.querySelector("#c6colour").innerHTML = `&nbsp;#${colours[5]}&nbsp;`;
+				document.querySelector("#c2colour").innerHTML = `&nbsp;#${colours[1]}&nbsp;`;
+			}
+			loadThemeFromURL();
+
 			// last: version #
-			let version = "wordlelele v1.4.3 — a project by Obsidian_Seal";
+			let version = "wordlelele v1.5.0 — a project by Obsidian_Seal";
 			document.querySelector("#version").innerHTML = version;
 			console.log(version);
 		</script>
