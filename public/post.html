@@ -59,7 +59,7 @@
 			<div class="content-end"></div>
 		</div>
 
-		<div style="display: none" id="footer">
+		<div id="footer">
 			<div class="footer" style="background: #ffffee"></div>
 			<div class="footer" style="background: #ff6b6b"></div>
 			<div class="footer" style="background: #ffe66d"></div>
@@ -76,8 +76,7 @@
 			var month = parseInt(item.get("m"));
 			var day = parseInt(item.get("d"));
 			var title = item.get("title");
-			var content = item.get("content");
-			var footer = item.get("footer");
+			var text = item.get("content");
 
 			if (year != null && year != "" && month != null && month > 0 && month < 13 && day != null && day > 0 && day < 32) {
 				if (month < 10 && day < 10) {
@@ -142,7 +141,7 @@
 				document.getElementById("date2").innerHTML = `Blog Post / ${monthWord} ${day}${dayWord}, ${year}`;
 			}
 
-			if (title.indexOf(">") > -1 || title.indexOf("<") > -1 || content.indexOf(">") > -1 || content.indexOf("<") > -1) {
+			if (title.indexOf(">") > -1 || title.indexOf("<") > -1 || text.indexOf(">") > -1 || text.indexOf("<") > -1) {
 				document.getElementById("title").innerHTML = "!!!";
 				document.getElementById("content").innerHTML = 'Possible malicious content detected (">" or "<" found). For your safety, the page will not be updated.';
 			} else {
@@ -150,14 +149,12 @@
 					document.getElementById("title").innerHTML = `${title}`;
 				}
 
-				if (content != null && content != "") {
-					document.getElementById("content").innerHTML = `${content}`;
+				if (text != null && text != "") {
+					document.getElementById("content").innerHTML = `${text}`;
 				}
 			}
-
-			if (footer != null && footer != "" && footer == "true") {
-				document.getElementById("footer").style.display = "block";
-			}
 		</script>
+
+		<script src="files/footer.js"></script>
 	</body>
 </html>
