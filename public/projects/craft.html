@@ -32,6 +32,8 @@
 				--c5: #00afb9;
 				--c6: #ffffff;
 				--c7: #000000;
+
+				--c3o60: #f0716760;
 			}
 
 			/* ALL THINGS */
@@ -111,22 +113,16 @@
 
 			.item:hover {
 				cursor: pointer;
+				background-image: linear-gradient(var(--c2), var(--c3o60));
 			}
 		</style>
 	</head>
 
 	<body class="b1">
-		<div class="item-container">
-			<div id="item-idea" class="item b2">💡 idea</div>
-			<div id="item-opposite" class="item b2">💫 opposite</div>
-			<div id="item-love" class="item b2">❤️ love</div>
-			<div id="item-book" class="item b2">📕 book</div>
-			<div id="item-cool" class="item b2">😎 cool</div>
-			<div id="item-computer" class="item b2">🖥️ computer</div>
-		</div>
+		<div class="item-container"></div>
 
 		<script>
-			// DRAG & DROP
+			// --- DRAG & DROP ---
 			var drag = false; // dragging currently?
 			var dragElement; // what to drag?
 			var dragOffsetX = 0;
@@ -151,8 +147,125 @@
 			});
 
 			document.addEventListener("mouseup", (e) => {
-				if (drag) drag = false; // stop dragging
+				if (drag) {
+					drag = false; // stop dragging
+
+					// check for overlap --> craft!
+					checkForOverlap();
+				}
 			});
+
+			function checkForOverlap() {
+				var combinationsFound = [];
+
+				document.querySelectorAll(".item").forEach((item) => {
+					var item1 = dragElement.innerHTML;
+					var item2 = item.innerHTML;
+
+					if (item1 != item2) {
+						var rect1 = item.getBoundingClientRect();
+						var rect2 = dragElement.getBoundingClientRect();
+
+						var overlap = !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
+						if (overlap) {
+							let centres = [];
+							centres.push(dragElement.offsetLeft + dragElement.offsetWidth / 2);
+							centres.push(dragElement.offsetLeft + dragElement.offsetWidth / 2);
+							centres.push(item.offsetLeft + item.offsetWidth / 2);
+							centres.push(item.offsetLeft + item.offsetWidth / 2);
+
+							let midpointX = centres[0] + (centres[0] - centres[2]);
+							let midpointY = centres[1] + (centres[1] - centres[3]);
+							// !!!
+
+							combinationsFound.push([item1, item2, dragElement, item, midpointX, midpointY]);
+						}
+					}
+				});
+
+				if (combinationsFound.length > 0) {
+					combineItems(combinationsFound[combinationsFound.length - 1]);
+				}
+			}
+
+			// --- CRAFTING ---
+			const combinations = {
+				"💡 idea": [
+					["💧 liquid", "💦 wet"],
+					["📕 book", "✒️ writing"],
+					["🦭 seal", "🐢 animal"],
+				],
+				"💫 opposite": [
+					["❤️ love", "😡 hate"],
+					["✒️ writing", "📖 reading"],
+					["💦 wet", "🏜️ dry"],
+				],
+				"❤️ love": [],
+				"📕 book": [],
+				"😎 cool": [],
+				"🖥️ computer": [],
+				"🪨 solid": [],
+				"💧 liquid": [["😎 cool", "🌊 water"]],
+				"💭 gas": [],
+				"🦭 seal": [],
+				"💦 wet": [],
+				"✒️ writing": [],
+				"🐢 animal": [],
+				"😡 hate": [],
+				"📖 reading": [],
+				"🏜️ dry": [],
+				"🌡️ hot": [
+					["🪨 solid", "💧 liquid"],
+					["💧 liquid", "💭 gas"],
+					["🐢 animal", "🐕 dog"],
+				],
+				"🐕 dog": [["🌊 water", "🦭 seal"]],
+				"🌊 water": [],
+			};
+
+			function combineItems(items) {
+				var alreadyCombined = false;
+
+				combinations[items[0]].forEach((combination) => {
+					if (combination[0] == items[1]) {
+						alreadyCombined = true;
+						placeItem(items[2], items[3], combination[1], items[4], items[5]);
+					}
+				});
+
+				if (!alreadyCombined) {
+					combinations[items[1]].forEach((combination) => {
+						if (combination[0] == items[0]) {
+							placeItem(items[2], items[3], combination[1], items[4], items[5]);
+						}
+					});
+				}
+			}
+
+			function placeItem(element1, element2, item, x, y) {
+				// create and append new item element
+				let newItemElement = document.createElement("div");
+				newItemElement.classList.add("item");
+				newItemElement.classList.add("b2");
+				newItemElement.innerHTML = item;
+				console.log(newItemElement.offsetHeight, newItemElement.offsetHeight); // !
+				newItemElement.style = `left: ${x}px; top: ${y}px`;
+				document.querySelector(".item-container").appendChild(newItemElement);
+
+				// remove ingredients
+				if (element1 != null && element2 != null) {
+					element1.remove();
+					element2.remove();
+				}
+			}
+
+			// --- temporary: RANDOM ITEM PLACEMENTS ---
+			placeItem(null, null, "🌡️ hot", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
+			placeItem(null, null, "🪨 solid", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
+			placeItem(null, null, "💧 liquid", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
+			placeItem(null, null, "💭 gas", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
+			placeItem(null, null, "🦭 seal", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
+			placeItem(null, null, "💡 idea", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
 		</script>
 	</body>
 </html>
