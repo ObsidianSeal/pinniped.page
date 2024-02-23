@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Finite Craft</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/craft" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Finite Craft" />
+		<meta property="og:description" content="Infinite Craft, but just the crafting part." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Infinite Craft, but just the crafting part." />
+		<meta name="keywords" content="craft" />
+
+		<style>
+			/* FONTS FROM GOOGLE FONTS */
+			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700");
+
+			/* THEME */
+			:root {
+				--c1: #fdfcdc;
+				--c2: #fed9b7;
+				--c3: #f07167;
+				--c4: #0081a7;
+				--c5: #00afb9;
+				--c6: #ffffff;
+				--c7: #000000;
+			}
+
+			/* ALL THINGS */
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				font-family: "Space Grotesk";
+				font-size: 20px;
+				user-select: none;
+			}
+
+			/* COLOUR & BACKGROUND CLASSES */
+			.c1 {
+				color: var(--c1);
+			}
+
+			.c2 {
+				color: var(--c2);
+			}
+
+			.c3 {
+				color: var(--c3);
+			}
+
+			.c4 {
+				color: var(--c4);
+			}
+
+			.c5 {
+				color: var(--c5);
+			}
+
+			.c6 {
+				color: var(--c6);
+			}
+
+			.c7 {
+				color: var(--c7);
+			}
+
+			.b1 {
+				background-color: var(--c1);
+			}
+
+			.b2 {
+				background-color: var(--c2);
+			}
+
+			.b3 {
+				background-color: var(--c3);
+			}
+
+			.b4 {
+				background-color: var(--c4);
+			}
+
+			.b5 {
+				background-color: var(--c5);
+			}
+
+			.b6 {
+				background-color: var(--c6);
+			}
+
+			.b7 {
+				background-color: var(--c7);
+			}
+
+			/* ACTUAL CSS*/
+			.item {
+				position: absolute;
+				padding: 3px 7px 7px 7px;
+				border: 1px solid var(--c3);
+				border-radius: 5px;
+			}
+
+			.item:hover {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body class="b1">
+		<div class="item-container">
+			<div id="item-idea" class="item b2">💡 idea</div>
+			<div id="item-opposite" class="item b2">💫 opposite</div>
+			<div id="item-love" class="item b2">❤️ love</div>
+			<div id="item-book" class="item b2">📕 book</div>
+			<div id="item-cool" class="item b2">😎 cool</div>
+			<div id="item-computer" class="item b2">🖥️ computer</div>
+		</div>
+
+		<script>
+			// DRAG & DROP
+			var drag = false; // dragging currently?
+			var dragElement; // what to drag?
+			var dragOffsetX = 0;
+			var dragOffsetY = 0;
+
+			document.addEventListener("mousedown", (e) => {
+				if (e.target.classList.contains("item")) {
+					drag = true; // start dragging
+					dragElement = e.target; // set dragElement to element clicked
+					dragOffsetX = e.offsetX;
+					dragOffsetY = e.offsetY;
+					document.querySelector(".item:last-child").after(dragElement); // move element to top!
+				}
+			});
+
+			document.addEventListener("mousemove", (e) => {
+				if (drag) {
+					var x = e.pageX;
+					var y = e.pageY;
+					dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
+				}
+			});
+
+			document.addEventListener("mouseup", (e) => {
+				if (drag) drag = false; // stop dragging
+			});
+		</script>
+	</body>
+</html>
