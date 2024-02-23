@@ -169,14 +169,15 @@
 						var overlap = !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
 						if (overlap) {
 							let centres = [];
+
 							centres.push(dragElement.offsetLeft + dragElement.offsetWidth / 2);
-							centres.push(dragElement.offsetLeft + dragElement.offsetWidth / 2);
-							centres.push(item.offsetLeft + item.offsetWidth / 2);
 							centres.push(item.offsetLeft + item.offsetWidth / 2);
 
-							let midpointX = centres[0] + (centres[0] - centres[2]);
-							let midpointY = centres[1] + (centres[1] - centres[3]);
-							// !!!
+							centres.push(dragElement.offsetTop + dragElement.offsetHeight / 2);
+							centres.push(item.offsetTop + item.offsetHeight / 2);
+
+							let midpointX = (centres[0] + centres[1]) / 2;
+							let midpointY = (centres[2] + centres[3]) / 2;
 
 							combinationsFound.push([item1, item2, dragElement, item, midpointX, midpointY]);
 						}
@@ -248,9 +249,17 @@
 				newItemElement.classList.add("item");
 				newItemElement.classList.add("b2");
 				newItemElement.innerHTML = item;
-				console.log(newItemElement.offsetHeight, newItemElement.offsetHeight); // !
-				newItemElement.style = `left: ${x}px; top: ${y}px`;
 				document.querySelector(".item-container").appendChild(newItemElement);
+
+				// set the correct position
+				let justPlacedElement = document.querySelector(".item:last-child");
+				if (x != null && y != null) {
+					let newX = justPlacedElement.offsetWidth / 2;
+					let newY = justPlacedElement.offsetHeight / 2;
+					justPlacedElement.style = `left: ${x - newX}px; top: ${y - newY}px`;
+				} else {
+					justPlacedElement.style = `left: ${Math.floor(Math.random() * 1000) + 50}px; top: ${Math.floor(Math.random() * 500) + 50}px`;
+				}
 
 				// remove ingredients
 				if (element1 != null && element2 != null) {
@@ -260,12 +269,12 @@
 			}
 
 			// --- temporary: RANDOM ITEM PLACEMENTS ---
-			placeItem(null, null, "🌡️ hot", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
-			placeItem(null, null, "🪨 solid", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
-			placeItem(null, null, "💧 liquid", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
-			placeItem(null, null, "💭 gas", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
-			placeItem(null, null, "🦭 seal", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
-			placeItem(null, null, "💡 idea", Math.floor(Math.random() * 500), Math.floor(Math.random() * 500));
+			placeItem(null, null, "🌡️ hot");
+			placeItem(null, null, "🪨 solid");
+			placeItem(null, null, "💧 liquid");
+			placeItem(null, null, "💭 gas");
+			placeItem(null, null, "🦭 seal");
+			placeItem(null, null, "💡 idea");
 		</script>
 	</body>
 </html>
