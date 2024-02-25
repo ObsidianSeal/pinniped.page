@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Finite Craft (old version)</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/craft-old" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Finite Craft (old version)" />
+		<meta property="og:description" content="Infinite Craft, but just the crafting part." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Infinite Craft, but just the crafting part." />
+		<meta name="keywords" content="craft" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<style>
+			/* FONTS FROM GOOGLE FONTS */
+			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700");
+
+			/* THEME */
+			:root {
+				--c1: #fdfcdc;
+				--c2: #fed9b7;
+				--c3: #f07167;
+				--c4: #0081a7;
+				--c5: #00afb9;
+				--c6: #ffffff;
+				--c7: #000000;
+
+				--c3o60: #f0716760;
+			}
+
+			/* STUFF */
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				font-family: "Space Grotesk";
+				font-size: 20px;
+				user-select: none;
+			}
+
+			body {
+				background-color: var(--c1);
+			}
+
+			.item {
+				background-color: var(--c2);
+				position: absolute;
+
+				padding: 3px 7px 7px 7px;
+				border: 1px solid var(--c3);
+				border-radius: 5px;
+			}
+
+			.item i {
+				color: var(--c4);
+				translate: 0 2px;
+			}
+
+			.item:hover {
+				cursor: pointer;
+				background-image: linear-gradient(var(--c2), var(--c3o60));
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="item-container"></div>
+
+		<script>
+			// --- DOUBLE CLICK RELATED VARIABLES ---
+			var latestElementId = 0;
+			var lastClickTime = 0;
+			var lastClickElement;
+
+			// --- DRAG & DROP ---
+			var drag = false; // dragging currently?
+			var dragElement; // what to drag?
+			var dragOffsetX = 0;
+			var dragOffsetY = 0;
+
+			var fromX;
+			var fromY;
+
+			document.addEventListener("mousedown", (e) => {
+				if (e.button == 0) {
+					if (e.target.classList.contains("item")) {
+						if (Date.now() - lastClickTime < 500 && e.target == lastClickElement) {
+							var rect = e.target.getBoundingClientRect();
+							placeItem(null, null, e.target.innerHTML, rect.left + 10, rect.top - 10, false);
+						} else {
+							drag = true; // start dragging
+							dragElement = e.target; // set dragElement to element clicked
+							dragOffsetX = e.offsetX;
+							dragOffsetY = e.offsetY;
+							fromX = e.pageX;
+							fromY = e.pageY;
+							document.querySelector(".item:last-child").after(dragElement); // move element to top!
+						}
+					}
+
+					lastClickTime = Date.now();
+					lastClickElement = e.target;
+				}
+			});
+
+			document.addEventListener("mousemove", (e) => {
+				if (drag) {
+					var x = e.pageX;
+					var y = e.pageY;
+					dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
+				}
+			});
+
+			document.addEventListener("mouseup", (e) => {
+				if (drag) {
+					drag = false; // stop dragging
+
+					// check for overlap --> craft! (but only if there's been movement)
+					if (e.pageX != fromX && e.pageY != fromY) checkForOverlap();
+				}
+			});
+
+			function checkForOverlap() {
+				var combinationsFound = [];
+
+				document.querySelectorAll(".item").forEach((item) => {
+					var item1 = dragElement.innerHTML;
+					var item2 = item.innerHTML;
+
+					if (dragElement.id != item.id) {
+						var rect1 = item.getBoundingClientRect();
+						var rect2 = dragElement.getBoundingClientRect();
+
+						var overlap = !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
+						if (overlap) {
+							let centres = [];
+
+							centres.push(dragElement.offsetLeft + dragElement.offsetWidth / 2);
+							centres.push(item.offsetLeft + item.offsetWidth / 2);
+
+							centres.push(dragElement.offsetTop + dragElement.offsetHeight / 2);
+							centres.push(item.offsetTop + item.offsetHeight / 2);
+
+							let midpointX = (centres[0] + centres[1]) / 2;
+							let midpointY = (centres[2] + centres[3]) / 2;
+
+							combinationsFound.push([item1, item2, dragElement, item, midpointX, midpointY]);
+						}
+					}
+				});
+
+				if (combinationsFound.length > 0) {
+					combineItems(combinationsFound[combinationsFound.length - 1]);
+				}
+			}
+
+			// --- CRAFTING ---
+			const combinations = {
+				"💡 idea": [
+					["💧 liquid", "💦 wet"],
+					["🌊 water", "💦 wet"],
+					["📕 book", "✒️ writing"],
+					["🦭 seal", "🐢 animal"],
+					["💡 idea", "🧠 example"],
+					["🧠 example", "💫 opposite"],
+					["😎 cool", "⏱ time"],
+					["🎆 2024", "⏱ time"],
+				],
+				"💫 opposite": [
+					["😡 hate", "❤️ love"],
+					["❤️ love", "😡 hate"],
+					["✒️ writing", "📖 reading"],
+					["📖 reading", "✒️ writing"],
+					["💦 wet", "🏜️ dry"],
+					["🏜️ dry", "💦 wet"],
+					["🧱 solid", "💭 gas"],
+					["💭 gas", "🧱 solid"],
+					["😎 cool", "🌡️ hot"],
+					["🌡️ hot", "😎 cool"],
+					["💫 opposite", "⁉️ ???"],
+				],
+				"❤️ love": [
+					["🐢 animal", "🐕 dog"],
+					["🧍 human", "🧍 human"],
+				],
+				"📕 book": [["🧠 example", "📙 1984"]],
+				"😎 cool": [],
+				"🖥️ computer": [],
+				"🧱 solid": [["🧱 solid", "🪨 rock"]],
+				"💧 liquid": [
+					["😎 cool", "🌊 water"],
+					["💧 liquid", "😎 cool"],
+				],
+				"💭 gas": [["🧠 example", "🔬 oxygen"]],
+				"🦭 seal": [],
+				"💦 wet": [],
+				"✒️ writing": [["🧠 example", "📙 1984"]],
+				"🐢 animal": [
+					["😎 cool", "🦭 seal"],
+					["💦 wet", "🦭 seal"],
+				],
+				"😡 hate": [],
+				"📖 reading": [],
+				"🏜️ dry": [],
+				"🌡️ hot": [
+					["🪨 solid", "💧 liquid"],
+					["💧 liquid", "💭 gas"],
+					["🐢 animal", "🐕 dog"],
+				],
+				"🐕 dog": [["🌊 water", "🦭 seal"]],
+				"🌊 water": [],
+				"✈️ airplane": [],
+				"⁉️ ???": [],
+				"🗺️ map": [["🖥️ computer", "🔍 Google"]],
+				"🚗 car": [],
+				"🧍 human": [
+					["💡 idea", "✒️ writing"],
+					["✒️ writing", "📕 book"],
+					["🧍 human", "❤️ love"],
+					["💭 gas", "🏎️ vrooooom!"],
+				],
+				"🌌 space": [],
+				"🪨 rock": [
+					["🌡️ hot", "🌋 lava"],
+					["🪨 rock", "🛣️ road"],
+				],
+				"🌋 lava": [["🌊 water", "🗻 obsidian"]],
+				"🗻 obsidian": [["🦭 seal", "🔹 Obsidian_Seal"]],
+				"🔹 Obsidian_Seal": [],
+				"🧠 example": [
+					["🧱 solid", "🪨 rock"],
+					["🧠 example", "🧍 human"],
+				],
+				"📙 1984": [
+					["⏱ time", "🎆 2024"],
+					["💫 opposite", "🎆 2024"],
+				],
+				"🔬 oxygen": [["❓ ???", "🧪 nitrogen"]],
+				"⏱ time": [],
+				"🎆 2024": [["⏱ time", "🔮 THE FUTURE"]],
+				"🔍 Google": [],
+				"🌞 sky": [],
+				"🏎️ vrooooom!": [
+					["🛣️ road", "🚗 car"],
+					["🌞 sky", "✈️ airplane"],
+				],
+				"🛣️ road": [],
+				"🧪 nitrogen": [["🔬 oxygen", "💨 air"]],
+				"💨 air": [["💨 air", "🌞 sky"]],
+			};
+			console.log(`there are ${Object.keys(combinations).length} items`);
+
+			function combineItems(items) {
+				var alreadyCombined = false;
+
+				combinations[items[0]].forEach((combination) => {
+					if (combination[0] == items[1]) {
+						alreadyCombined = true;
+						placeItem(items[2], items[3], combination[1], items[4], items[5], true);
+					}
+				});
+
+				if (!alreadyCombined) {
+					combinations[items[1]].forEach((combination) => {
+						if (combination[0] == items[0]) {
+							placeItem(items[2], items[3], combination[1], items[4], items[5], true);
+						}
+					});
+				}
+			}
+
+			function placeItem(element1, element2, item, x, y, merged) {
+				// create and append new item element
+				let newItemElement = document.createElement("div");
+				newItemElement.classList.add("item");
+				newItemElement.id = latestElementId++;
+				newItemElement.innerHTML = item;
+				document.querySelector(".item-container").appendChild(newItemElement);
+
+				// set the correct position
+				let justPlacedElement = document.querySelector(".item:last-child");
+				if (x != null && y != null) {
+					if (merged) {
+						let newX = justPlacedElement.offsetWidth / 2;
+						let newY = justPlacedElement.offsetHeight / 2;
+						justPlacedElement.style = `left: ${x - newX}px; top: ${y - newY}px`;
+					} else {
+						justPlacedElement.style = `left: ${x}px; top: ${y}px`;
+					}
+				} else {
+					justPlacedElement.style = `left: ${Math.floor(Math.random() * (window.innerWidth - 200)) + 100}px; top: ${
+						Math.floor(Math.random() * (window.innerHeight - 200)) + 100
+					}px`;
+				}
+
+				// remove ingredients
+				if (element1 != null && element2 != null) {
+					element1.remove();
+					element2.remove();
+				}
+			}
+
+			// --- temporary: RANDOM ITEM PLACEMENTS ---
+			// placeItem(null, null, '<i class="fa-solid fa-earth"></i> earth');
+			// placeItem(null, null, '<i class="fa-solid fa-wind"></i> wind');
+			// placeItem(null, null, '<i class="fa-solid fa-fire"></i> fire');
+			// placeItem(null, null, '<i class="fa-solid fa-calendar-check"></i> September');
+			// placeItem(null, null, '<i class="fa-solid fa-otter"></i> seal');
+
+			placeItem(null, null, "🧱 solid");
+			placeItem(null, null, "💧 liquid");
+			placeItem(null, null, "💭 gas");
+			placeItem(null, null, "💡 idea");
+		</script>
+	</body>
+</html>

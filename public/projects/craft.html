@@ -19,262 +19,603 @@
 		<meta name="description" content="Infinite Craft, but just the crafting part." />
 		<meta name="keywords" content="craft" />
 
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
 		<style>
-			/* FONTS FROM GOOGLE FONTS */
-			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700");
+			/* FONT(S) FROM GOOGLE FONTS */
+			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300");
 
-			/* THEME */
+			/* PHOTOSHOP "GRAYSCALE", "LIGHT", and 2 from "PALE" COLOURS, plus ~38% opacity */
 			:root {
-				--c1: #fdfcdc;
-				--c2: #fed9b7;
-				--c3: #f07167;
-				--c4: #0081a7;
-				--c5: #00afb9;
-				--c6: #ffffff;
-				--c7: #000000;
+				--white: #ffffff;
+				--grey10: #ebebeb;
+				--grey15: #e1e1e1;
+				--grey20: #d7d7d7;
+				--grey25: #cccccc;
+				--grey30: #c2c2c2;
+				--grey35: #b7b7b7;
+				--grey40: #acacac;
+				--grey45: #a1a1a1;
+				--grey50: #959595;
+				--grey55: #898989;
+				--grey60: #7d7d7d;
+				--grey65: #707070;
+				--grey70: #636363;
+				--grey75: #555555;
+				--grey80: #464646;
+				--grey85: #363636;
+				--grey90: #252525;
+				--grey95: #111111;
+				--black: #000000;
 
-				--c3o60: #f0716760;
+				--red: #f26c4f;
+				--red-orange: #f68e56;
+				--yellow-orange: #fbaf5d;
+				--yellow: #fff568;
+				--pea-green: #acd373;
+				--yellow-green: #7cc576;
+				--green: #3cb878;
+				--green-cyan: #1cbbb4;
+				--cyan: #00bff3;
+				--cyan-blue: #448ccb;
+				--blue: #5674b9;
+				--blue-violet: #605ca8;
+				--violet: #8560a8;
+				--violet-magenta: #a864a8;
+				--magenta: #f06eaa;
+				--magenta-red: #f26d7d;
+
+				--tan: #c69c6d;
+				--brown: #8c6239;
+
+				--red-less: #f26c4f80;
+				--red-orange-less: #f68e5680;
+				--yellow-orange-less: #fbaf5d80;
+				--yellow-less: #fff56880;
+				--pea-green-less: #acd37380;
+				--yellow-green-less: #7cc57680;
+				--green-less: #3cb87880;
+				--green-cyan-less: #1cbbb480;
+				--cyan-less: #00bff380;
+				--cyan-blue-less: #448ccb80;
+				--blue-less: #5674b980;
+				--blue-violet-less: #605ca880;
+				--violet-less: #8560a880;
+				--violet-magenta-less: #a864a880;
+				--magenta-less: #f06eaa80;
+				--magenta-red-less: #f26d7d80;
+
+				--tan-less: #c69c6d60;
+				--brown-less: #8c623960;
+
+				--light-grey-less: #c2c2c280;
+				--dark-grey-less: #7d7d7d80;
 			}
 
-			/* ALL THINGS */
+			/* REGULAR CSS */
+
 			* {
 				margin: 0;
 				border: 0;
 				padding: 0;
 				font-family: "Space Grotesk";
+				font-weight: 300;
 				font-size: 20px;
 				user-select: none;
 			}
 
-			/* COLOUR & BACKGROUND CLASSES */
-			.c1 {
-				color: var(--c1);
+			body {
+				background-color: var(--white);
 			}
 
-			.c2 {
-				color: var(--c2);
-			}
-
-			.c3 {
-				color: var(--c3);
-			}
-
-			.c4 {
-				color: var(--c4);
-			}
-
-			.c5 {
-				color: var(--c5);
-			}
-
-			.c6 {
-				color: var(--c6);
-			}
-
-			.c7 {
-				color: var(--c7);
-			}
-
-			.b1 {
-				background-color: var(--c1);
-			}
-
-			.b2 {
-				background-color: var(--c2);
-			}
-
-			.b3 {
-				background-color: var(--c3);
-			}
-
-			.b4 {
-				background-color: var(--c4);
-			}
-
-			.b5 {
-				background-color: var(--c5);
-			}
-
-			.b6 {
-				background-color: var(--c6);
-			}
-
-			.b7 {
-				background-color: var(--c7);
-			}
-
-			/* ACTUAL CSS*/
 			.item {
+				background-color: var(--black);
+				color: var(--white);
 				position: absolute;
+
 				padding: 3px 7px 7px 7px;
-				border: 1px solid var(--c3);
-				border-radius: 5px;
+				border-width: 2px;
+				border-style: solid;
+				border-radius: 7px;
+			}
+
+			.item i {
+				margin-right: 10px;
+				translate: 0 2px;
 			}
 
 			.item:hover {
 				cursor: pointer;
-				background-image: linear-gradient(var(--c2), var(--c3o60));
+			}
+
+			/* COLOUR CLASSES - border */
+
+			.red {
+				border-color: var(--red);
+			}
+
+			.red-orange {
+				border-color: var(--red-orange);
+			}
+
+			.yellow-orange {
+				border-color: var(--yellow-orange);
+			}
+
+			.yellow {
+				border-color: var(--yellow);
+			}
+
+			.pea-green {
+				border-color: var(--pea-green);
+			}
+
+			.yellow-green {
+				border-color: var(--yellow-green);
+			}
+
+			.green {
+				border-color: var(--green);
+			}
+
+			.green-cyan {
+				border-color: var(--green-cyan);
+			}
+
+			.cyan {
+				border-color: var(--cyan);
+			}
+
+			.cyan-blue {
+				border-color: var(--cyan-blue);
+			}
+
+			.blue {
+				border-color: var(--blue);
+			}
+
+			.blue-violet {
+				border-color: var(--blue-violet);
+			}
+
+			.violet {
+				border-color: var(--violet);
+			}
+
+			.violet-magenta {
+				border-color: var(--violet-magenta);
+			}
+
+			.magenta {
+				border-color: var(--magenta);
+			}
+
+			.magenta-red {
+				border-color: var(--magenta-red);
+			}
+
+			.tan {
+				border-color: var(--tan);
+			}
+
+			.brown {
+				border-color: var(--brown);
+			}
+
+			.light-grey {
+				border-color: var(--grey30);
+			}
+
+			.dark-grey {
+				border-color: var(--grey60);
+			}
+
+			/* COLOUR CLASSES - icon */
+
+			.red i {
+				color: var(--red);
+			}
+
+			.red-orange i {
+				color: var(--red-orange);
+			}
+
+			.yellow-orange i {
+				color: var(--yellow-orange);
+			}
+
+			.yellow i {
+				color: var(--yellow);
+			}
+
+			.pea-green i {
+				color: var(--pea-green);
+			}
+
+			.yellow-green i {
+				color: var(--yellow-green);
+			}
+
+			.green i {
+				color: var(--green);
+			}
+
+			.green-cyan i {
+				color: var(--green-cyan);
+			}
+
+			.cyan i {
+				color: var(--cyan);
+			}
+
+			.cyan-blue i {
+				color: var(--cyan-blue);
+			}
+
+			.blue i {
+				color: var(--blue);
+			}
+
+			.blue-violet i {
+				color: var(--blue-violet);
+			}
+
+			.violet i {
+				color: var(--violet);
+			}
+
+			.violet-magenta i {
+				color: var(--violet-magenta);
+			}
+
+			.magenta i {
+				color: var(--magenta);
+			}
+
+			.magenta-red i {
+				color: var(--magenta-red);
+			}
+
+			.tan i {
+				color: var(--tan);
+			}
+
+			.brown i {
+				color: var(--brown);
+			}
+
+			.light-grey i {
+				color: var(--grey30);
+			}
+
+			.dark-grey i {
+				color: var(--grey60);
+			}
+
+			/* COLOUR CLASSES - hover (background) */
+
+			.red:hover {
+				background-image: linear-gradient(var(--black), var(--red-less));
+			}
+
+			.red-orange:hover {
+				background-image: linear-gradient(var(--black), var(--red-orange-less));
+			}
+
+			.yellow-orange:hover {
+				background-image: linear-gradient(var(--black), var(--yellow-orange-less));
+			}
+
+			.yellow:hover {
+				background-image: linear-gradient(var(--black), var(--yellow-less));
+			}
+
+			.pea-green:hover {
+				background-image: linear-gradient(var(--black), var(--pea-green-less));
+			}
+
+			.yellow-green:hover {
+				background-image: linear-gradient(var(--black), var(--yellow-green-less));
+			}
+
+			.green:hover {
+				background-image: linear-gradient(var(--black), var(--green-less));
+			}
+
+			.green-cyan:hover {
+				background-image: linear-gradient(var(--black), var(--green-cyan-less));
+			}
+
+			.cyan:hover {
+				background-image: linear-gradient(var(--black), var(--cyan-less));
+			}
+
+			.cyan-blue:hover {
+				background-image: linear-gradient(var(--black), var(--cyan-blue-less));
+			}
+
+			.blue:hover {
+				background-image: linear-gradient(var(--black), var(--blue-less));
+			}
+
+			.blue-violet:hover {
+				background-image: linear-gradient(var(--black), var(--blue-violet-less));
+			}
+
+			.violet:hover {
+				background-image: linear-gradient(var(--black), var(--violet-less));
+			}
+
+			.violet-magenta:hover {
+				background-image: linear-gradient(var(--black), var(--violet-magenta-less));
+			}
+
+			.magenta:hover {
+				background-image: linear-gradient(var(--black), var(--magenta-less));
+			}
+
+			.magenta-red:hover {
+				background-image: linear-gradient(var(--black), var(--magenta-red-less));
+			}
+
+			.tan:hover {
+				background-image: linear-gradient(var(--black), var(--tan-less));
+			}
+
+			.brown:hover {
+				background-image: linear-gradient(var(--black), var(--brown-less));
+			}
+
+			.light-grey:hover {
+				background-image: linear-gradient(var(--black), var(--light-grey-less));
+			}
+
+			.dark-grey:hover {
+				background-image: linear-gradient(var(--black), var(--dark-grey-less));
 			}
 		</style>
 	</head>
 
-	<body class="b1">
+	<body>
 		<div class="item-container"></div>
 
 		<script>
-			// --- DRAG & DROP ---
+			const version = "0";
+
+			// frequently referenced elements
+			const itemContainer = document.querySelector(".item-container");
+
+			// combinations!
+			const recipes = [
+				["earth", "earth", "land"],
+				["land", "land", "country"],
+				["earth", "air", "dust"],
+				["earth", "fire", "brick"],
+				["earth", "water", "mud"],
+				["air", "air", "atmosphere"],
+				["air", "fire", "smoke"],
+				["air", "water", "bubble"],
+				["fire", "fire", "hot"],
+				["fire", "water", "steam"],
+				["water", "water", "puddle"],
+				["puddle", "puddle", "pond"],
+				["house", "life", "human"],
+				["human", "smoke", "death"],
+				["human", "human", "love"],
+				["pond", "pond", "river"],
+				["river", "river", "lake"],
+				["lake", "lake", "sea"],
+				["sea", "sea", "ocean"],
+				["country", "country", "continent"],
+				["continent", "continent", "planet"],
+				["planet", "atmosphere", "life"],
+				["mud", "brick", "house"],
+				["house", "house", "village"],
+				["village", "village", "town"],
+				["town", "town", "city"],
+				["town", "house", "building"],
+				["city", "house", "tower"],
+				["air", "life", "bird"],
+				["earth", "life", "bug"],
+				["fire", "life", "death"],
+				["water", "life", "fish"],
+				["land", "life", "animal"],
+				["bug", "earth", "ant"],
+				["animal", "city", "raccoon"],
+				["sea", "life", "seal"],
+				["ocean", "life", "whale"],
+				["hot", "air", "steam"],
+			];
+
+			// associate items with their Font Awesome style, icon, and colour
+			const iconAssociations = {
+				earth: ["fa-solid", "fa-earth", "brown"],
+				air: ["fa-solid", "fa-wind", "green-cyan"],
+				fire: ["fa-solid", "fa-fire", "red-orange"],
+				water: ["fa-solid", "fa-droplet", "cyan"],
+				land: ["fa-solid", "fa-mountain-sun", "pea-green"],
+				country: ["fa-solid", "fa-globe", "yellow-green"],
+				dust: ["fa-solid", "fa-braille", "tan"],
+				brick: ["fa-solid", "fa-trowel-bricks", "red"],
+				mud: ["fa-solid", "fa-splotch", "brown"],
+				atmosphere: ["fa-solid", "fa-cloud", "cyan"],
+				smoke: ["fa-solid", "fa-smog", "light-grey"],
+				bubble: ["fa-solid", "fa-soap", "cyan-blue"],
+				hot: ["fa-solid", "fa-temperature-full", "red"],
+				steam: ["fa-brands", "fa-steam-symbol", "light-grey"],
+				puddle: ["fa-solid", "fa-splotch", "cyan-blue"],
+				pond: ["fa-solid", "fa-water", "green-cyan"],
+				river: ["fa-solid", "fa-water", "cyan"],
+				lake: ["fa-solid", "fa-water", "green-cyan"],
+				sea: ["fa-solid", "fa-water", "cyan-blue"],
+				ocean: ["fa-solid", "fa-water", "blue"],
+				continent: ["fa-solid", "fa-earth-europe", "green"],
+				planet: ["fa-solid", "fa-earth-africa", "blue"],
+				life: ["fa-solid", "fa-dna", "pea-green"],
+				house: ["fa-solid", "fa-house", "magenta-red"],
+				village: ["fa-solid", "fa-house-chimney", "magenta"],
+				town: ["fa-solid", "fa-house-flag", "violet-magenta"],
+				building: ["fa-solid", "fa-warehouse", "blue-violet"],
+				city: ["fa-solid", "fa-house-medical", "violet"],
+				tower: ["fa-solid", "fa-gopuram", "blue"],
+				bird: ["fa-solid", "fa-feather-pointed", ""],
+				bug: ["fa-solid", "fa-bug", "yellow-orange"],
+				ant: ["fa-solid", "fa-bugs", "magenta-red"],
+				death: ["fa-solid", "fa-skull", "dark-grey"],
+				human: ["fa-solid", "fa-person", "yellow"],
+				fish: ["fa-solid", "fa-fish", "cyan"],
+				animal: ["fa-solid", "fa-paw", "yellow"],
+				raccoon: ["fa-solid", "fa-paw", "brown"],
+				seal: ["fa-solid", "fa-otter", "green-cyan"],
+				whale: ["fa-solid", "fa-fish-fins", "blue-violet"],
+				love: ["fa-solid", "fa-heart", "red"],
+			};
+			console.log(`Finite Craft v${version}\n(${Object.keys(iconAssociations).length} total items, ${recipes.length} total recipes)`);
+
+			// place a new item on the screen: specified item, x, y
+			function spawnItem(item, x, y) {
+				let newItemElement = document.createElement("div");
+				newItemElement.classList.add("item");
+				newItemElement.classList.add(iconAssociations[item][2]); // colour
+				newItemElement.style = `left: ${x}px; top: ${y}px`;
+				newItemElement.id = Date.now(); // make the element unique with a time-related id
+				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				itemContainer.appendChild(newItemElement);
+			}
+
+			// place a new item on the screen: specified item, midpoints
+			function spawnItemFromMidpoints(item, midpointX, midpointY) {
+				let newItemElement = document.createElement("div");
+				newItemElement.classList.add("item");
+				newItemElement.classList.add(iconAssociations[item][2]); // colour
+				newItemElement.id = Date.now(); // make the element unique with a time-related id
+				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				itemContainer.appendChild(newItemElement);
+
+				let justPlacedElement = document.querySelector(".item:last-child");
+				let newX = justPlacedElement.offsetWidth / 2;
+				let newY = justPlacedElement.offsetHeight / 2;
+				justPlacedElement.style = `left: ${midpointX - newX}px; top: ${midpointY - newY}px`;
+			}
+
+			spawnItem("earth", 100, 100);
+			spawnItem("air", 100, 150);
+			spawnItem("fire", 100, 200);
+			spawnItem("water", 100, 250);
+
+			// get the item element
+			function getItemElement(element) {
+				if (element instanceof HTMLDivElement) {
+					return element;
+				} else {
+					return element.parentElement;
+				}
+			}
+
+			// get item name from item element
+			function extractItemName(element) {
+				return element.children[element.children.length - 1].innerHTML;
+			}
+
+			// drag and drop variables
 			var drag = false; // dragging currently?
 			var dragElement; // what to drag?
-			var dragOffsetX = 0;
-			var dragOffsetY = 0;
+			var dragOffsetX = 0; // difference between click x and left of dragElement
+			var dragOffsetY = 0; // difference between click y and top of dragElement
+			var fromX = 0; // initial page x
+			var fromY = 0; // initial page y
 
-			document.addEventListener("mousedown", (e) => {
-				if (e.target.classList.contains("item")) {
-					drag = true; // start dragging
-					dragElement = e.target; // set dragElement to element clicked
-					dragOffsetX = e.offsetX;
-					dragOffsetY = e.offsetY;
-					document.querySelector(".item:last-child").after(dragElement); // move element to top!
+			// double click variables
+			var lastClickTime = 0;
+			var lastClickElement;
+
+			// "mousedown" listener
+			itemContainer.addEventListener("mousedown", (e) => {
+				if (e.button == 0) {
+					let itemElement = getItemElement(e.target);
+					let rect = itemElement.getBoundingClientRect();
+
+					if (Date.now() - lastClickTime < 500 && e.target == lastClickElement) {
+						// double click: duplicate item
+						spawnItem(extractItemName(itemElement), rect.left + 10, rect.top - 10);
+					} else {
+						// click and drag: move item
+						drag = true; // start dragging
+						dragElement = itemElement; // set dragElement to item element clicked
+						dragOffsetX = e.pageX - rect.left;
+						dragOffsetY = e.pageY - rect.top;
+						fromX = e.pageX;
+						fromY = e.pageY;
+						document.querySelector(".item:last-child").after(dragElement); // move element to top!
+					}
+
+					lastClickTime = Date.now();
+					lastClickElement = e.target;
 				}
 			});
 
+			// "mousemove" listener
 			document.addEventListener("mousemove", (e) => {
 				if (drag) {
-					var x = e.pageX;
-					var y = e.pageY;
+					let x = e.pageX;
+					let y = e.pageY;
 					dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
 				}
 			});
 
+			// "mouseup" listener
 			document.addEventListener("mouseup", (e) => {
 				if (drag) {
 					drag = false; // stop dragging
-
-					// check for overlap --> craft!
-					checkForOverlap();
+					if (e.pageX != fromX && e.pageY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
 				}
 			});
 
+			// determine if two elements are overlapping
 			function checkForOverlap() {
-				var combinationsFound = [];
+				let elementsFound = []; // store a list of elements overlapped by dragElement, to choose the last one
 
-				document.querySelectorAll(".item").forEach((item) => {
-					var item1 = dragElement.innerHTML;
-					var item2 = item.innerHTML;
+				itemContainer.querySelectorAll(".item").forEach((item) => {
+					let item1 = extractItemName(dragElement);
+					let item2 = extractItemName(item);
 
-					if (item1 != item2) {
-						var rect1 = item.getBoundingClientRect();
-						var rect2 = dragElement.getBoundingClientRect();
+					if (item1 != item2 || dragElement.id != item.id) {
+						let rect1 = dragElement.getBoundingClientRect();
+						let rect2 = item.getBoundingClientRect();
 
-						var overlap = !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
-						if (overlap) {
-							let centres = [];
-
-							centres.push(dragElement.offsetLeft + dragElement.offsetWidth / 2);
-							centres.push(item.offsetLeft + item.offsetWidth / 2);
-
-							centres.push(dragElement.offsetTop + dragElement.offsetHeight / 2);
-							centres.push(item.offsetTop + item.offsetHeight / 2);
-
-							let midpointX = (centres[0] + centres[1]) / 2;
-							let midpointY = (centres[2] + centres[3]) / 2;
-
-							combinationsFound.push([item1, item2, dragElement, item, midpointX, midpointY]);
+						if (!(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom)) {
+							elementsFound.unshift(item);
 						}
 					}
 				});
 
-				if (combinationsFound.length > 0) {
-					combineItems(combinationsFound[combinationsFound.length - 1]);
+				if (elementsFound.length > 0) findRecipe(elementsFound[0]);
+			}
+
+			// see if dragElement and another go together
+			function findRecipe(element) {
+				let item1 = extractItemName(dragElement);
+				let item2 = extractItemName(element);
+
+				for (let i = 0; i < recipes.length; i++) {
+					if (recipes[i][0] == item1 && recipes[i][1] == item2) craft(dragElement, element, recipes[i][2]);
+					else if (recipes[i][1] == item1 && recipes[i][0] == item2) craft(dragElement, element, recipes[i][2]);
 				}
 			}
 
-			// --- CRAFTING ---
-			const combinations = {
-				"💡 idea": [
-					["💧 liquid", "💦 wet"],
-					["📕 book", "✒️ writing"],
-					["🦭 seal", "🐢 animal"],
-				],
-				"💫 opposite": [
-					["❤️ love", "😡 hate"],
-					["✒️ writing", "📖 reading"],
-					["💦 wet", "🏜️ dry"],
-				],
-				"❤️ love": [],
-				"📕 book": [],
-				"😎 cool": [],
-				"🖥️ computer": [],
-				"🪨 solid": [],
-				"💧 liquid": [["😎 cool", "🌊 water"]],
-				"💭 gas": [],
-				"🦭 seal": [],
-				"💦 wet": [],
-				"✒️ writing": [],
-				"🐢 animal": [],
-				"😡 hate": [],
-				"📖 reading": [],
-				"🏜️ dry": [],
-				"🌡️ hot": [
-					["🪨 solid", "💧 liquid"],
-					["💧 liquid", "💭 gas"],
-					["🐢 animal", "🐕 dog"],
-				],
-				"🐕 dog": [["🌊 water", "🦭 seal"]],
-				"🌊 water": [],
-			};
+			// craft!
+			function craft(ingredient1, ingredient2, result) {
+				// get the midpoint between the two ingredients
+				let midpointX = (ingredient1.offsetLeft + ingredient1.offsetWidth / 2 + ingredient2.offsetLeft + ingredient2.offsetWidth / 2) / 2;
+				let midpointY = (ingredient1.offsetTop + ingredient1.offsetHeight / 2 + ingredient2.offsetTop + ingredient2.offsetHeight / 2) / 2;
 
-			function combineItems(items) {
-				var alreadyCombined = false;
+				// place the result
+				spawnItemFromMidpoints(result, midpointX, midpointY);
 
-				combinations[items[0]].forEach((combination) => {
-					if (combination[0] == items[1]) {
-						alreadyCombined = true;
-						placeItem(items[2], items[3], combination[1], items[4], items[5]);
-					}
-				});
-
-				if (!alreadyCombined) {
-					combinations[items[1]].forEach((combination) => {
-						if (combination[0] == items[0]) {
-							placeItem(items[2], items[3], combination[1], items[4], items[5]);
-						}
-					});
-				}
+				// remove the ingredients
+				ingredient1.remove();
+				ingredient2.remove();
 			}
-
-			function placeItem(element1, element2, item, x, y) {
-				// create and append new item element
-				let newItemElement = document.createElement("div");
-				newItemElement.classList.add("item");
-				newItemElement.classList.add("b2");
-				newItemElement.innerHTML = item;
-				document.querySelector(".item-container").appendChild(newItemElement);
-
-				// set the correct position
-				let justPlacedElement = document.querySelector(".item:last-child");
-				if (x != null && y != null) {
-					let newX = justPlacedElement.offsetWidth / 2;
-					let newY = justPlacedElement.offsetHeight / 2;
-					justPlacedElement.style = `left: ${x - newX}px; top: ${y - newY}px`;
-				} else {
-					justPlacedElement.style = `left: ${Math.floor(Math.random() * 1000) + 50}px; top: ${Math.floor(Math.random() * 500) + 50}px`;
-				}
-
-				// remove ingredients
-				if (element1 != null && element2 != null) {
-					element1.remove();
-					element2.remove();
-				}
-			}
-
-			// --- temporary: RANDOM ITEM PLACEMENTS ---
-			placeItem(null, null, "🌡️ hot");
-			placeItem(null, null, "🪨 solid");
-			placeItem(null, null, "💧 liquid");
-			placeItem(null, null, "💭 gas");
-			placeItem(null, null, "🦭 seal");
-			placeItem(null, null, "💡 idea");
 		</script>
 	</body>
 </html>
