@@ -23,6 +23,7 @@
 
 		<style>
 			/* FONT(S) FROM GOOGLE FONTS */
+			@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500;700");
 			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300");
 
 			/* PHOTOSHOP "GRAYSCALE", "LIGHT", and 2 from "PALE" COLOURS, plus ~38% opacity */
@@ -85,8 +86,8 @@
 				--magenta-less: #f06eaa80;
 				--magenta-red-less: #f26d7d80;
 
-				--tan-less: #c69c6d60;
-				--brown-less: #8c623960;
+				--tan-less: #c69c6d80;
+				--brown-less: #8c623980;
 
 				--light-grey-less: #c2c2c280;
 				--dark-grey-less: #7d7d7d80;
@@ -104,19 +105,103 @@
 				user-select: none;
 			}
 
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--grey90);
+				border: 5px solid var(--grey85);
+				border-radius: 50px;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--grey95);
+				cursor: pointer;
+			}
+
 			body {
-				background-color: var(--white);
+				background-color: var(--grey90);
+
+				overflow: hidden;
+			}
+
+			h1,
+			.discovered-percentage,
+			.clear-button {
+				position: absolute;
+				font-family: "Roboto";
+				color: var(--grey85);
+			}
+
+			h1 {
+				top: 50px;
+				left: 50px;
+				font-weight: 700;
+				font-size: 50px;
+			}
+
+			h1 a {
+				font-family: inherit;
+				font-weight: inherit;
+				font-size: inherit;
+				color: inherit;
+
+				text-decoration: none;
+			}
+
+			h1 a:hover,
+			.clear-button:hover {
+				color: var(--grey80);
+				cursor: pointer;
+			}
+
+			.discovered-items {
+				position: absolute;
+				right: 0;
+				display: flex;
+				align-content: flex-start;
+				gap: 20px;
+				flex-wrap: wrap;
+
+				width: calc(500px - 40px);
+				height: calc(100% - 40px);
+				padding: 20px;
+
+				background-color: var(--grey85);
+
+				overflow-y: scroll;
+			}
+
+			.discovered-percentage {
+				bottom: 50px;
+				left: 50px;
+				font-weight: 700;
+				font-size: 80px;
+			}
+
+			.clear-button {
+				bottom: 50px;
+				right: 550px;
+				font-weight: 500;
+				font-size: 30px;
+			}
+
+			.item-container .item {
+				position: absolute;
 			}
 
 			.item {
-				background-color: var(--black);
-				color: var(--white);
-				position: absolute;
-
+				height: fit-content;
 				padding: 3px 7px 7px 7px;
 				border-width: 2px;
 				border-style: solid;
 				border-radius: 7px;
+
+				background-color: var(--black);
+				color: var(--white);
+
+				white-space: nowrap;
 			}
 
 			.item i {
@@ -377,14 +462,13 @@
 	</head>
 
 	<body>
+		<div class="discovered-items"></div>
+		<h1><a href="../index.html">pinniped.page</a>/craft</h1>
+		<span class="discovered-percentage"></span>
+		<span class="clear-button">clear</span>
 		<div class="item-container"></div>
 
 		<script>
-			const version = "0";
-
-			// frequently referenced elements
-			const itemContainer = document.querySelector(".item-container");
-
 			// combinations!
 			const recipes = [
 				["earth", "earth", "land"],
@@ -424,12 +508,112 @@
 				["animal", "city", "raccoon"],
 				["sea", "animal", "seal"],
 				["ocean", "animal", "whale"],
-				["hot", "air", "steam"],
+				["hot", "air", "wind"],
+				["life", "death", "opposite"],
+				["brick", "brick", "wall"],
+				["brick", "earth", "road"],
+				["opposite", "death", "life"],
+				["opposite", "life", "death"],
+				["opposite", "hot", "cold"],
+				["opposite", "cold", "hot"],
+				["opposite", "love", "hate"],
+				["opposite", "hate", "love"],
+				["opposite", "wall", "door"],
+				["opposite", "door", "wall"],
+				["antonym", "death", "life"],
+				["antonym", "life", "death"],
+				["antonym", "hot", "cold"],
+				["antonym", "cold", "hot"],
+				["antonym", "love", "hate"],
+				["antonym", "hate", "love"],
+				["antonym", "wall", "door"],
+				["antonym", "door", "wall"],
+				["opposite", "opposite", "synonym"],
+				["opposite", "synonym", "antonym"],
+				["opposite", "antonym", "synonym"],
+				["synonym", "antonym", "opposite"],
+				["antonym", "antonym", "synonym"],
+				["human", "synonym", "thinking"],
+				["human", "antonym", "thinking"],
+				["thinking", "thinking", "idea"],
+				["earth", "idea", "dig"],
+				["air", "idea", "breathe"],
+				["fire", "idea", "hot"],
+				["water", "idea", "drink"],
+				["breathe", "idea", "life"],
+				["hot", "idea", "cook"],
+				["dig", "human", "mine"],
+				["mine", "idea", "property"],
+				["mine", "thinking", "deep"],
+				["house", "property", "yard"],
+				["road", "idea", "movement"],
+				["human", "movement", "dance"],
+				["human", "dance", "dancer"],
+				["movement", "idea", "travel"],
+				["travel", "idea", "vehicle"],
+				["vehicle", "idea", "engine"],
+				["vehicle", "thinking", "wheel"],
+				["road", "vehicle", "car"],
+				["water", "vehicle", "boat"],
+				["boat", "boat", "ship"],
+				["earth", "thinking", "dirt"],
+				["air", "thinking", "sky"],
+				["fire", "thinking", "hot"],
+				["water", "thinking", "cold"],
+				["sky", "vehicle", "airplane"],
+				["human", "engine", "engineer"],
+				["engine", "vehicle", "train"],
+				["city", "train", "subway"],
+				["boat", "human", "sailor"],
+				["airplane", "human", "pilot"],
+				["pilot", "thinking", "navigation"],
+				["sky", "fire", "sun"],
+				["sun", "opposite", "moon"],
+				["sun", "antonym", "moon"],
+				["moon", "opposite", "sun"],
+				["moon", "antonym", "sun"],
+				["human", "idea", "writing"],
+				["human", "thinking", "art"],
+				["human", "writing", "book"],
+				["human", "art", "painting"],
+				["thinking", "idea", "example"],
+				["idea", "idea", "invention"],
+				["earth", "synonym", "dirt"],
+				["air", "dirt", "dust"],
+				["fish", "fire", "food"],
+				["writing", "example", "script"],
+				["book", "example", "1984"],
+				["1984", "idea", "time"],
+				["1984", "thinking", "time"],
+				["1984", "time", "2024"],
+				["2024", "time", "the future"],
+				["human", "land", "property"],
+				["engine", "engineer", "generator"],
+				["generator", "water", "electricity"],
+				["generator", "wind", "electricity"],
+				["generator", "the tide", "electricity"],
+				["sea", "moon", "the tide"],
+				["ocean", "moon", "the tide"],
+				["electricity", "idea", "energy"],
+				["electricity", "thinking", "energy"],
+				["the tide", "thinking", "movement"],
+				["example", "movement", "the tide"],
+				["movement", "invention", "vehicle"],
+				["boat", "movement", "travel"],
+				["human", "life", "thinking"],
+				["synonym", "synonym", "example"],
+				["airplane", "example", "Boeing 737"],
+				["hot", "water", "steam"],
+				["steam", "generator", "electricity"],
+				["example", "earth", "clay"],
+				["hot", "drink", "coffee"],
+				["pond", "animal", "frog"],
+				["wall", "door", "house"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
 			const iconAssociations = {
-				earth: ["fa-solid", "fa-earth", "brown"],
+				earth: ["fa-solid", "fa-earth", "tan"],
 				air: ["fa-solid", "fa-wind", "green-cyan"],
 				fire: ["fa-solid", "fa-fire", "red-orange"],
 				water: ["fa-solid", "fa-droplet", "cyan"],
@@ -458,7 +642,7 @@
 				building: ["fa-solid", "fa-warehouse", "blue-violet"],
 				city: ["fa-solid", "fa-house-medical", "violet"],
 				tower: ["fa-solid", "fa-gopuram", "blue"],
-				bird: ["fa-solid", "fa-feather-pointed", ""],
+				bird: ["fa-solid", "fa-feather-pointed", "cyan"], // thanks Gemini for telling me to make bird "light blue"
 				bug: ["fa-solid", "fa-bug", "yellow-orange"],
 				ant: ["fa-solid", "fa-bugs", "magenta-red"],
 				death: ["fa-solid", "fa-skull", "dark-grey"],
@@ -469,8 +653,96 @@
 				seal: ["fa-solid", "fa-otter", "green-cyan"],
 				whale: ["fa-solid", "fa-fish-fins", "blue-violet"],
 				love: ["fa-solid", "fa-heart", "red"],
+				opposite: ["fa-solid", "fa-rotate", "violet"],
+				wall: ["fa-solid", "fa-trowel-bricks", "magenta-red"],
+				road: ["fa-solid", "fa-road", "dark-grey"],
+				cold: ["fa-regular", "fa-snowflake", "cyan"],
+				hate: ["fa-solid", "fa-thumbs-down", "red"],
+				door: ["fa-solid", "fa-door-open", "violet-magenta"],
+				synonym: ["fa-solid", "fa-arrow-trend-up", "yellow-green"],
+				antonym: ["fa-solid", "fa-retweet", "red-orange"],
+				thinking: ["fa-solid", "fa-brain", "magenta"],
+				idea: ["fa-solid", "fa-lightbulb", "yellow"],
+				dig: ["fa-solid", "fa-person-digging", "brown"],
+				breathe: ["fa-solid", "fa-lungs", "green-cyan"],
+				drink: ["fa-solid", "fa-bottle-droplet", "cyan-blue"],
+				cook: ["fa-solid", "fa-fire-burner", "yellow-orange"],
+				mine: ["fa-solid", "fa-person-digging", "light-grey"],
+				property: ["fa-regular", "fa-square", "pea-green"],
+				yard: ["fa-solid", "fa-seedling", "yellow-green"],
+				movement: ["fa-solid", "fa-arrow-right", "cyan-blue"],
+				dance: ["fa-solid", "fa-child-reaching", "blue-violet"],
+				travel: ["fa-solid", "fa-person-walking", "green-cyan"],
+				vehicle: ["fa-solid", "fa-gear", "cyan-blue"],
+				engine: ["fa-solid", "fa-gears", "dark-grey"],
+				car: ["fa-solid", "fa-car", "red"],
+				boat: ["fa-solid", "fa-anchor", "cyan"],
+				ship: ["fa-solid", "fa-boat", "cyan-blue"],
+				dirt: ["fa-solid", "fa-mound", "brown"],
+				sky: ["fa-regular", "fa-sun", "cyan"],
+				airplane: ["fa-solid", "fa-plane", "cyan-blue"],
+				engineer: ["fa-solid", "fa-user-gear", "cyan-blue"],
+				train: ["fa-solid", "fa-train", "magenta-red"],
+				subway: ["fa-solid", "fa-train-subway", "green-cyan"],
+				sailor: ["fa-solid", "fa-anchor", "violet-magenta"],
+				pilot: ["fa-solid", "fa-paper-plane", "green-cyan"],
+				navigation: ["fa-solid", "fa-compass", "yellow-orange"],
+				dancer: ["fa-solid", "fa-child-reaching", "violet"],
+				wheel: ["fa-solid", "fa-record-vinyl", "light-grey"],
+				sun: ["fa-solid", "fa-sun", "yellow"],
+				writing: ["fa-solid", "fa-pen-fancy", "green"],
+				art: ["fa-solid", "fa-hand", "magenta-red"],
+				painting: ["fa-solid", "fa-paintbrush", "blue-violet"],
+				book: ["fa-solid", "fa-book", "yellow-green"],
+				example: ["fa-solid", "fa-quote-left", "tan"],
+				invention: ["fa-solid", "fa-cube", "green-cyan"],
+				deep: ["fa-solid", "fa-down-long", "dark-grey"],
+				food: ["fa-solid", "fa-pizza-slice", "red"],
+				script: ["fa-solid", "fa-scroll", "tan"],
+				1984: ["fa-solid", "fa-book-bookmark", "red"],
+				time: ["fa-solid", "fa-clock", "green-cyan"],
+				2024: ["fa-solid", "fa-calendar", "magenta-red"],
+				"the future": ["fa-solid", "fa-calendar-plus", "magenta"],
+				wind: ["fa-solid", "fa-wind", "cyan"],
+				generator: ["fa-solid", "fa-gears", "dark-grey"],
+				energy: ["fa-solid", "fa-bolt", "yellow"],
+				electricity: ["fa-solid", "fa-plug", "yellow"],
+				moon: ["fa-solid", "fa-moon", "yellow"],
+				"the tide": ["fa-solid", "fa-up-down", "cyan-blue"],
+				"Boeing 737": ["fa-solid", "fa-plane-departure", "blue"],
+				clay: ["fa-solid", "fa-mound", "light-grey"],
+				coffee: ["fa-solid", "fa-mug-hot", "brown"],
+				frog: ["fa-solid", "fa-frog", "green"],
 			};
-			console.log(`Finite Craft v${version}\n(${Object.keys(iconAssociations).length} total items, ${recipes.length} total recipes)`);
+
+			// version #
+			const version = "1.0.0";
+
+			// frequently referenced elements
+			const discoveredItemsContainer = document.querySelector(".discovered-items");
+			const discoveredPercentage = document.querySelector(".discovered-percentage");
+			const clearButton = document.querySelector(".clear-button");
+			const itemContainer = document.querySelector(".item-container");
+
+			// "storage area" a.k.a. discoveredItemsContainer width
+			const storageAreaWidth = discoveredItemsContainer.getBoundingClientRect().width;
+
+			// # of items, # of recipes, what has been discovered so far
+			const totalItems = Object.keys(iconAssociations).length;
+			const totalRecipes = recipes.length;
+			var discoveredItems = [];
+
+			// debug message
+			console.log(`Finite Craft v${version}\n(${totalItems} total items, ${totalRecipes} total recipes)`);
+
+			// add item to list of discoveries
+			function discover(item) {
+				if (!discoveredItems.includes(item)) {
+					discoveredItems.push(item);
+					discoveredPercentage.innerHTML = `${discoveredItems.length}/${totalItems} (${Math.floor((discoveredItems.length / totalItems) * 10000) / 100}%)`;
+					discoveredItemsContainer.appendChild(createItem(item));
+				}
+			}
 
 			// place a new item on the screen: specified item, x, y
 			function spawnItem(item, x, y) {
@@ -481,6 +753,13 @@
 				newItemElement.id = Date.now(); // make the element unique with a time-related id
 				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
 				itemContainer.appendChild(newItemElement);
+				discover(item);
+				return newItemElement;
+			}
+
+			// for quick testing:
+			function si(item) {
+				spawnItem(item, 50, 50);
 			}
 
 			// place a new item on the screen: specified item, midpoints
@@ -491,17 +770,45 @@
 				newItemElement.id = Date.now(); // make the element unique with a time-related id
 				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
 				itemContainer.appendChild(newItemElement);
+				discover(item);
 
-				let justPlacedElement = document.querySelector(".item:last-child");
+				let justPlacedElement = document.querySelector(".item-container .item:last-child");
 				let newX = justPlacedElement.offsetWidth / 2;
 				let newY = justPlacedElement.offsetHeight / 2;
 				justPlacedElement.style = `left: ${midpointX - newX}px; top: ${midpointY - newY}px`;
 			}
 
-			spawnItem("earth", 100, 100);
-			spawnItem("air", 100, 150);
-			spawnItem("fire", 100, 200);
-			spawnItem("water", 100, 250);
+			// random position item spawn
+			function spawnItemAtRandomPosition(item) {
+				let newItemElement = document.createElement("div");
+				newItemElement.classList.add("item");
+				newItemElement.classList.add(iconAssociations[item][2]); // colour
+
+				let x = Math.floor(Math.random() * (window.innerWidth - storageAreaWidth - 700) + 200);
+				let y = Math.floor(Math.random() * (window.innerHeight - 500) + 200);
+
+				newItemElement.style = `left: ${x}px; top: ${y}px`;
+
+				newItemElement.id = Date.now(); // make the element unique with a time-related id
+				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				itemContainer.appendChild(newItemElement);
+			}
+
+			// create item element for the discovered items container, don't discover
+			function createItem(item) {
+				let newItemElement = document.createElement("div");
+				newItemElement.classList.add("item");
+				newItemElement.classList.add(iconAssociations[item][2]); // colour
+				newItemElement.id = Date.now(); // make the element unique with a time-related id
+				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				return newItemElement;
+			}
+
+			// initial items!!!
+			discover("earth");
+			discover("air");
+			discover("fire");
+			discover("water");
 
 			// get the item element
 			function getItemElement(element) {
@@ -524,17 +831,19 @@
 			var dragOffsetY = 0; // difference between click y and top of dragElement
 			var fromX = 0; // initial page x
 			var fromY = 0; // initial page y
+			var clickedDiscovery = false; // was the click from the discoveries panel?
 
 			// double click variables
 			var lastClickTime = 0;
 			var lastClickElement;
 
-			// "mousedown" listener
+			// "mousedown" listener - for the main area
 			itemContainer.addEventListener("mousedown", (e) => {
-				if (e.button == 0) {
-					let itemElement = getItemElement(e.target);
-					let rect = itemElement.getBoundingClientRect();
+				let itemElement = getItemElement(e.target);
+				let rect = itemElement.getBoundingClientRect();
 
+				// left click: drag or duplicate
+				if (e.button == 0) {
 					if (Date.now() - lastClickTime < 500 && e.target == lastClickElement) {
 						// double click: duplicate item
 						spawnItem(extractItemName(itemElement), rect.left + 10, rect.top - 10);
@@ -546,12 +855,38 @@
 						dragOffsetY = e.pageY - rect.top;
 						fromX = e.pageX;
 						fromY = e.pageY;
-						document.querySelector(".item:last-child").after(dragElement); // move element to top!
+						document.querySelector(".item-container .item:last-child").after(dragElement); // move element to top!
 					}
 
 					lastClickTime = Date.now();
 					lastClickElement = e.target;
 				}
+
+				// middle click: duplicate
+				if (e.button == 1) spawnItem(extractItemName(itemElement), rect.left + 10, rect.top - 10);
+			});
+
+			// "mousedown" listener - for the "storage area"
+			discoveredItemsContainer.addEventListener("mousedown", (e) => {
+				if (e.target == discoveredItemsContainer) return;
+
+				let itemElement = getItemElement(e.target);
+				let itemName = extractItemName(itemElement);
+				let rect = itemElement.getBoundingClientRect();
+
+				if (e.button == 0) {
+					drag = true; // start dragging
+					dragElement = spawnItem(itemName, rect.left, rect.top); // set dragElement to item element clicked
+					dragOffsetX = e.pageX - rect.left;
+					dragOffsetY = e.pageY - rect.top;
+					fromX = e.pageX;
+					fromY = e.pageY;
+					itemContainer.appendChild(dragElement); // move element to top!
+
+					clickedDiscovery = true;
+				}
+
+				if (e.button == 1) spawnItemAtRandomPosition(itemName);
 			});
 
 			// "mousemove" listener
@@ -567,7 +902,14 @@
 			document.addEventListener("mouseup", (e) => {
 				if (drag) {
 					drag = false; // stop dragging
-					if (e.pageX != fromX && e.pageY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
+					if (e.pageX > window.innerWidth - storageAreaWidth) dragElement.remove(); // remove if within "storage area"
+					else if (e.pageX != fromX && e.pageY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
+
+					// if the element never moved, but was in the storage/discoveries area, place a copy somewhere on the screen
+					if (e.pageX == fromX && e.pageY == fromY && clickedDiscovery) spawnItemAtRandomPosition(extractItemName(dragElement));
+
+					// regardless of outcome, reset "clickedDiscovery"
+					clickedDiscovery = false;
 				}
 			});
 
@@ -589,7 +931,9 @@
 					}
 				});
 
-				if (elementsFound.length > 0) findRecipe(elementsFound[0]);
+				for (let i = 0; i < elementsFound.length; i++) {
+					if (findRecipe(elementsFound[i])) break;
+				}
 			}
 
 			// see if dragElement and another go together
@@ -598,9 +942,12 @@
 				let item2 = extractItemName(element);
 
 				for (let i = 0; i < recipes.length; i++) {
-					if (recipes[i][0] == item1 && recipes[i][1] == item2) craft(dragElement, element, recipes[i][2]);
-					else if (recipes[i][1] == item1 && recipes[i][0] == item2) craft(dragElement, element, recipes[i][2]);
+					if ((recipes[i][0] == item1 && recipes[i][1] == item2) || (recipes[i][1] == item1 && recipes[i][0] == item2)) {
+						craft(dragElement, element, recipes[i][2]);
+						return true;
+					}
 				}
+				return false;
 			}
 
 			// craft!
@@ -616,6 +963,30 @@
 				ingredient1.remove();
 				ingredient2.remove();
 			}
+
+			// right click to delete item
+			itemContainer.addEventListener("contextmenu", (e) => {
+				e.preventDefault();
+				getItemElement(e.target).remove();
+				return false;
+			});
+
+			// clear button
+			clearButton.addEventListener("click", (e) => {
+				itemContainer.innerHTML = "";
+			});
+
+			// debug: get everything
+			function getAll() {
+				for (let thing in iconAssociations) {
+					discover(thing);
+				}
+			}
+
+			// TODO: save?
+			// TODO: sound?
+			// TODO: animations?
+			// TODO: sort?
 		</script>
 	</body>
 </html>
