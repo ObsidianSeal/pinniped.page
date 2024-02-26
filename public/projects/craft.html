@@ -128,6 +128,7 @@
 
 			h1,
 			.discovered-percentage,
+			.version,
 			.clear-button {
 				position: absolute;
 				font-family: "Roboto";
@@ -180,11 +181,20 @@
 				font-size: 80px;
 			}
 
+			.version,
 			.clear-button {
-				bottom: 50px;
-				right: 550px;
 				font-weight: 500;
 				font-size: 30px;
+			}
+
+			.version {
+				top: 120px;
+				left: 50px;
+			}
+
+			.clear-button {
+				right: 550px;
+				bottom: 50px;
 			}
 
 			.item-container .item {
@@ -465,6 +475,7 @@
 		<div class="discovered-items"></div>
 		<h1><a href="../index.html">pinniped.page</a>/craft</h1>
 		<span class="discovered-percentage"></span>
+		<span class="version"></span>
 		<span class="clear-button">clear</span>
 		<div class="item-container"></div>
 
@@ -609,6 +620,18 @@
 				["hot", "drink", "coffee"],
 				["pond", "animal", "frog"],
 				["wall", "door", "house"],
+				["2024", "thinking", "AI"],
+				["dust", "human", "allergies"],
+				["opposite", "AI", "human"],
+				["AI", "bug", "error"],
+				["engine", "AI", "computer"],
+				["script", "generator", "AI"],
+				["smoke", "generator", "fire"],
+				["human", "error", "mistake"],
+				["AI", "land", "computer"],
+				["AI", "house", "computer"],
+				["computer", "bug", "error"],
+				["human", "invention", "time"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -677,7 +700,7 @@
 				engine: ["fa-solid", "fa-gears", "dark-grey"],
 				car: ["fa-solid", "fa-car", "red"],
 				boat: ["fa-solid", "fa-anchor", "cyan"],
-				ship: ["fa-solid", "fa-boat", "cyan-blue"],
+				ship: ["fa-solid", "fa-ship", "cyan-blue"],
 				dirt: ["fa-solid", "fa-mound", "brown"],
 				sky: ["fa-regular", "fa-sun", "cyan"],
 				airplane: ["fa-solid", "fa-plane", "cyan-blue"],
@@ -713,14 +736,20 @@
 				clay: ["fa-solid", "fa-mound", "light-grey"],
 				coffee: ["fa-solid", "fa-mug-hot", "brown"],
 				frog: ["fa-solid", "fa-frog", "green"],
+				allergies: ["fa-solid", "fa-head-side-cough", "red-orange"],
+				AI: ["fa-solid", "fa-robot", "violet-magenta"],
+				computer: ["fa-solid", "fa-computer", "cyan-blue"],
+				error: ["fa-solid", "fa-circle-exclamation", "red"],
+				mistake: ["fa-solid", "fa-triangle-exclamation", "yellow-orange"],
 			};
 
 			// version #
-			const version = "1.0.0";
+			const version = "v1.0.1";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
 			const discoveredPercentage = document.querySelector(".discovered-percentage");
+			const versionElement = document.querySelector(".version");
 			const clearButton = document.querySelector(".clear-button");
 			const itemContainer = document.querySelector(".item-container");
 
@@ -732,8 +761,10 @@
 			const totalRecipes = recipes.length;
 			var discoveredItems = [];
 
-			// debug message
-			console.log(`Finite Craft v${version}\n(${totalItems} total items, ${totalRecipes} total recipes)`);
+			// version & info message
+			console.log(`Finite Craft ${version}\n(${totalItems} total items, ${totalRecipes} total recipes)`);
+			console.log('stuck? try si("<item name>");');
+			versionElement.innerHTML = version;
 
 			// add item to list of discoveries
 			function discover(item) {
@@ -759,7 +790,7 @@
 
 			// for quick testing:
 			function si(item) {
-				spawnItem(item, 50, 50);
+				spawnItemAtRandomPosition(item);
 			}
 
 			// place a new item on the screen: specified item, midpoints
@@ -982,11 +1013,6 @@
 					discover(thing);
 				}
 			}
-
-			// TODO: save?
-			// TODO: sound?
-			// TODO: animations?
-			// TODO: sort?
 		</script>
 	</body>
 </html>

@@ -54,6 +54,16 @@
 				<h2 class="box-thing invert">#1</h2>
 
 				<div>
+					<a class="title title-alt hoverable-title" href="projects/craft.html">Finite Craft</a>
+
+					<p class="box-subtitle-alt">Infinite Craft, but just the crafting part.</p>
+				</div>
+			</div>
+
+			<div class="box box-alt">
+				<h2 class="box-thing invert">#2</h2>
+
+				<div>
 					<a class="title title-alt hoverable-title" href="projects/w.html">wordlelele</a>
 
 					<p class="box-subtitle-alt">Weird Wordle: longer words, choose the next word.</p>
@@ -61,7 +71,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#2</h2>
+				<h2 class="box-thing invert">#3</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/tictactoe.html?o=0">TicTacToe</a>
@@ -71,7 +81,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#3</h2>
+				<h2 class="box-thing invert">#4</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/v.html">v</a>
@@ -81,7 +91,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#4</h2>
+				<h2 class="box-thing invert">#5</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/plain-planes.html">PlainPlanes</a>
@@ -91,7 +101,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#5</h2>
+				<h2 class="box-thing invert">#6</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/rate.html" target="_blank">10/10 would recommend</a>
@@ -111,5 +121,22 @@
 		<div class="footer" style="background: #ff6b6b"></div>
 		<div class="footer" style="background: #ffe66d"></div>
 		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script>
+			const content = document.querySelector(".box-area"); // footer.js but with .box-area
+			const contentBottom = content.getBoundingClientRect().bottom;
+			const screenHeight = window.innerHeight;
+
+			// console.log(screenHeight, contentBottom);
+			// console.log(screenHeight - 100 > contentBottom);
+
+			if (screenHeight - 100 > contentBottom) {
+				const space = document.createElement("div");
+				const height = screenHeight - 100 - contentBottom;
+				console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
+				space.setAttribute("style", `height: ${height}px`);
+				content.appendChild(space);
+			}
+		</script>
 	</body>
 </html>
