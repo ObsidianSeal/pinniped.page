@@ -102,7 +102,12 @@
 				font-family: "Space Grotesk";
 				font-weight: 300;
 				font-size: 20px;
-				user-select: none;
+
+				/* all user-select properties, from https://css-tricks.com/almanac/properties/u/user-select/ */
+				-webkit-user-select: none; /* Chrome all / Safari all */
+				-moz-user-select: none; /* Firefox all */
+				-ms-user-select: none; /* IE 10+ */
+				user-select: none; /* Likely future */
 			}
 
 			::-webkit-scrollbar {
@@ -117,7 +122,6 @@
 
 			::-webkit-scrollbar-thumb:hover {
 				background-color: var(--grey95);
-				cursor: pointer;
 			}
 
 			body {
@@ -162,7 +166,7 @@
 				right: 0;
 				display: flex;
 				align-content: flex-start;
-				gap: 20px;
+				gap: 10px;
 				flex-wrap: wrap;
 
 				width: calc(500px - 40px);
@@ -480,6 +484,74 @@
 		<div class="item-container"></div>
 
 		<script>
+			// for decimal/base64 conversion
+			const characters = [
+				"0",
+				"1",
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"7",
+				"8",
+				"9",
+				"a",
+				"b",
+				"c",
+				"d",
+				"e",
+				"f",
+				"g",
+				"h",
+				"i",
+				"j",
+				"k",
+				"l",
+				"m",
+				"n",
+				"o",
+				"p",
+				"q",
+				"r",
+				"s",
+				"t",
+				"u",
+				"v",
+				"w",
+				"x",
+				"y",
+				"z",
+				"A",
+				"B",
+				"C",
+				"D",
+				"E",
+				"F",
+				"G",
+				"H",
+				"I",
+				"J",
+				"K",
+				"L",
+				"M",
+				"N",
+				"O",
+				"P",
+				"Q",
+				"R",
+				"S",
+				"T",
+				"U",
+				"V",
+				"W",
+				"X",
+				"Y",
+				"Z",
+				"-",
+				"_",
+			];
+
 			// combinations!
 			const recipes = [
 				["earth", "earth", "land"],
@@ -624,6 +696,10 @@
 				["dust", "human", "allergies"],
 				["opposite", "AI", "human"],
 				["AI", "bug", "error"],
+				["code", "bug", "error"],
+				["program", "bug", "error"],
+				["programmer", "bug", "error"],
+				["programming language", "bug", "error"],
 				["engine", "AI", "computer"],
 				["script", "generator", "AI"],
 				["smoke", "generator", "fire"],
@@ -677,136 +753,150 @@
 				["water", "rock", "sand"],
 				["desert", "dirt", "sand"],
 				["desert", "earth", "sand"],
+				["wheel", "wheel", "bicycle"],
+				["cold", "drink", "water"],
+				["clay", "fire", "brick"],
+				["human", "wheel", "travel"],
+				["programming language", "programmer", "code"],
+				["program", "program", "computer"],
+				["building", "train", "station"],
+				["deep", "station", "subway station"],
+				["building", "subway", "subway station"],
+				["subway", "station", "subway station"],
+				["fun", "fun", "happiness"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
 			const iconAssociations = {
-				"earth": ["fa-solid", "fa-earth", "tan"],
-				"air": ["fa-solid", "fa-wind", "green-cyan"],
-				"fire": ["fa-solid", "fa-fire", "red-orange"],
-				"water": ["fa-solid", "fa-droplet", "cyan"],
-				"land": ["fa-solid", "fa-mountain-sun", "pea-green"],
-				"country": ["fa-solid", "fa-globe", "yellow-green"],
-				"dust": ["fa-solid", "fa-braille", "tan"],
-				"brick": ["fa-solid", "fa-trowel-bricks", "red"],
-				"mud": ["fa-solid", "fa-splotch", "brown"],
-				"atmosphere": ["fa-solid", "fa-cloud", "cyan"],
-				"smoke": ["fa-solid", "fa-smog", "light-grey"],
-				"bubble": ["fa-solid", "fa-soap", "cyan-blue"],
-				"hot": ["fa-solid", "fa-temperature-full", "red"],
-				"steam": ["fa-brands", "fa-steam-symbol", "light-grey"],
-				"puddle": ["fa-solid", "fa-splotch", "cyan-blue"],
-				"pond": ["fa-solid", "fa-water", "green-cyan"],
-				"river": ["fa-solid", "fa-water", "cyan"],
-				"lake": ["fa-solid", "fa-water", "green-cyan"],
-				"sea": ["fa-solid", "fa-water", "cyan-blue"],
-				"ocean": ["fa-solid", "fa-water", "blue"],
-				"continent": ["fa-solid", "fa-earth-europe", "green"],
-				"planet": ["fa-solid", "fa-earth-africa", "blue"],
-				"life": ["fa-solid", "fa-dna", "pea-green"],
-				"house": ["fa-solid", "fa-house", "magenta-red"],
-				"village": ["fa-solid", "fa-house-chimney", "magenta"],
-				"town": ["fa-solid", "fa-house-flag", "violet-magenta"],
-				"building": ["fa-solid", "fa-warehouse", "blue-violet"],
-				"city": ["fa-solid", "fa-house-medical", "violet"],
-				"tower": ["fa-solid", "fa-gopuram", "blue"],
-				"bird": ["fa-solid", "fa-feather-pointed", "cyan"], // thanks Gemini for telling me to make bird "light blue"
-				"bug": ["fa-solid", "fa-bug", "yellow-orange"],
-				"ant": ["fa-solid", "fa-bugs", "magenta-red"],
-				"death": ["fa-solid", "fa-skull", "dark-grey"],
-				"human": ["fa-solid", "fa-person", "yellow"],
-				"fish": ["fa-solid", "fa-fish", "cyan"],
-				"animal": ["fa-solid", "fa-paw", "yellow"],
-				"raccoon": ["fa-solid", "fa-paw", "brown"],
-				"seal": ["fa-solid", "fa-otter", "green-cyan"],
-				"whale": ["fa-solid", "fa-fish-fins", "blue-violet"],
-				"love": ["fa-solid", "fa-heart", "red"],
-				"opposite": ["fa-solid", "fa-rotate", "violet"],
-				"wall": ["fa-solid", "fa-trowel-bricks", "magenta-red"],
-				"road": ["fa-solid", "fa-road", "dark-grey"],
-				"cold": ["fa-regular", "fa-snowflake", "cyan"],
-				"hate": ["fa-solid", "fa-thumbs-down", "red"],
-				"door": ["fa-solid", "fa-door-open", "violet-magenta"],
-				"synonym": ["fa-solid", "fa-arrow-trend-up", "yellow-green"],
-				"antonym": ["fa-solid", "fa-retweet", "red-orange"],
-				"thinking": ["fa-solid", "fa-brain", "magenta"],
-				"idea": ["fa-solid", "fa-lightbulb", "yellow"],
-				"dig": ["fa-solid", "fa-person-digging", "brown"],
-				"breathe": ["fa-solid", "fa-lungs", "green-cyan"],
-				"drink": ["fa-solid", "fa-bottle-droplet", "cyan-blue"],
-				"cook": ["fa-solid", "fa-fire-burner", "yellow-orange"],
-				"mine": ["fa-solid", "fa-person-digging", "light-grey"],
-				"property": ["fa-regular", "fa-square", "pea-green"],
-				"yard": ["fa-solid", "fa-seedling", "yellow-green"],
-				"movement": ["fa-solid", "fa-arrow-right", "cyan-blue"],
-				"dance": ["fa-solid", "fa-child-reaching", "blue-violet"],
-				"travel": ["fa-solid", "fa-person-walking", "green-cyan"],
-				"vehicle": ["fa-solid", "fa-gear", "cyan-blue"],
-				"engine": ["fa-solid", "fa-gears", "dark-grey"],
-				"car": ["fa-solid", "fa-car", "red"],
-				"boat": ["fa-solid", "fa-anchor", "cyan"],
-				"ship": ["fa-solid", "fa-ship", "cyan-blue"],
-				"dirt": ["fa-solid", "fa-mound", "brown"],
-				"sky": ["fa-regular", "fa-sun", "cyan"],
-				"airplane": ["fa-solid", "fa-plane", "cyan-blue"],
-				"engineer": ["fa-solid", "fa-user-gear", "cyan-blue"],
-				"train": ["fa-solid", "fa-train", "magenta-red"],
-				"subway": ["fa-solid", "fa-train-subway", "green-cyan"],
-				"sailor": ["fa-solid", "fa-anchor", "violet-magenta"],
-				"pilot": ["fa-solid", "fa-paper-plane", "green-cyan"],
-				"navigation": ["fa-solid", "fa-compass", "yellow-orange"],
-				"dancer": ["fa-solid", "fa-child-reaching", "violet"],
-				"wheel": ["fa-solid", "fa-record-vinyl", "light-grey"],
-				"sun": ["fa-solid", "fa-sun", "yellow"],
-				"writing": ["fa-solid", "fa-pen-fancy", "green"],
-				"art": ["fa-solid", "fa-hand", "magenta-red"],
-				"painting": ["fa-solid", "fa-paintbrush", "blue-violet"],
-				"book": ["fa-solid", "fa-book", "yellow-green"],
-				"example": ["fa-solid", "fa-quote-left", "tan"],
-				"invention": ["fa-solid", "fa-cube", "green-cyan"],
-				"deep": ["fa-solid", "fa-down-long", "dark-grey"],
-				"food": ["fa-solid", "fa-pizza-slice", "red"],
-				"script": ["fa-solid", "fa-scroll", "tan"],
-				"1984": ["fa-solid", "fa-book-bookmark", "red"],
-				"time": ["fa-solid", "fa-clock", "green-cyan"],
-				"2024": ["fa-solid", "fa-calendar", "magenta-red"],
-				"the future": ["fa-solid", "fa-calendar-plus", "magenta"],
-				"wind": ["fa-solid", "fa-wind", "cyan"],
-				"generator": ["fa-solid", "fa-gears", "dark-grey"],
-				"energy": ["fa-solid", "fa-bolt", "yellow"],
-				"electricity": ["fa-solid", "fa-plug", "yellow"],
-				"moon": ["fa-solid", "fa-moon", "yellow"],
-				"the tide": ["fa-solid", "fa-up-down", "cyan-blue"],
-				"Boeing 737": ["fa-solid", "fa-plane-departure", "blue"],
-				"clay": ["fa-solid", "fa-mound", "light-grey"],
-				"coffee": ["fa-solid", "fa-mug-hot", "brown"],
-				"frog": ["fa-solid", "fa-frog", "green"],
-				"allergies": ["fa-solid", "fa-head-side-cough", "red-orange"],
-				"AI": ["fa-solid", "fa-robot", "violet-magenta"],
-				"computer": ["fa-solid", "fa-computer", "cyan-blue"],
-				"error": ["fa-solid", "fa-circle-exclamation", "red"],
-				"mistake": ["fa-solid", "fa-triangle-exclamation", "yellow-orange"],
-				"happiness": ["fa-solid", "fa-face-smile", "yellow"],
-				"fun": ["fa-solid", "fa-face-smile-beam", "yellow-orange"],
-				"emotion": ["fa-regular", "fa-face-smile", "cyan-blue"],
-				"video game": ["fa-solid", "fa-gamepad", "violet"],
-				"Lethal Company": ["fa-brands", "fa-space-awesome", "red"],
-				"code": ["fa-solid", "fa-code", "green"],
-				"program": ["fa-regular", "fa-file-code", "pea-green"],
-				"programmer": ["fa-solid", "fa-laptop-code", "cyan-blue"],
-				"programming language": ["fa-solid", "fa-bars-staggered", "red-orange"],
-				"Java": ["fa-brands", "fa-java", "blue"],
-				"big": ["fa-solid", "fa-maximize", "magenta-red"],
-				"small": ["fa-solid", "fa-minimize", "violet-magenta"],
-				"reading": ["fa-solid", "fa-book-open-reader", "green"],
-				"sadness": ["fa-solid", "fa-face-frown", "red-orange"],
-				"desert": ["fa-solid", "fa-plant-wilt", "yellow-orange"],
-				"sand": ["fa-solid", "fa-mound", "tan"],
-				"rock": ["fa-solid", "fa-hill-rockslide", "dark-grey"],
+				"earth": ["solid", "earth", "tan"],
+				"air": ["solid", "wind", "green-cyan"],
+				"fire": ["solid", "fire", "red-orange"],
+				"water": ["solid", "droplet", "cyan"],
+				"land": ["solid", "mountain-sun", "pea-green"],
+				"country": ["solid", "globe", "yellow-green"],
+				"dust": ["solid", "braille", "tan"],
+				"brick": ["solid", "trowel-bricks", "red"],
+				"mud": ["solid", "splotch", "brown"],
+				"atmosphere": ["solid", "cloud", "cyan"],
+				"smoke": ["solid", "smog", "light-grey"],
+				"bubble": ["solid", "soap", "cyan-blue"],
+				"hot": ["solid", "temperature-full", "red"],
+				"steam": ["solid", "mug-hot", "light-grey"],
+				"puddle": ["solid", "splotch", "cyan-blue"],
+				"pond": ["solid", "water", "green-cyan"],
+				"river": ["solid", "water", "cyan"],
+				"lake": ["solid", "water", "green-cyan"],
+				"sea": ["solid", "water", "cyan-blue"],
+				"ocean": ["solid", "water", "blue"],
+				"continent": ["solid", "earth-europe", "green"],
+				"planet": ["solid", "earth-africa", "blue"],
+				"life": ["solid", "dna", "pea-green"],
+				"house": ["solid", "house", "magenta-red"],
+				"village": ["solid", "house-chimney", "magenta"],
+				"town": ["solid", "house-flag", "violet-magenta"],
+				"building": ["solid", "arrow-right-to-city", "blue-violet"],
+				"city": ["solid", "city", "violet"],
+				"tower": ["solid", "hotel", "blue"],
+				"bird": ["solid", "feather-pointed", "cyan"], // thanks Gemini for telling me to make bird "light blue"
+				"bug": ["solid", "bug", "yellow-orange"],
+				"ant": ["solid", "bugs", "magenta-red"],
+				"death": ["solid", "skull", "dark-grey"],
+				"human": ["solid", "person", "yellow"],
+				"fish": ["solid", "fish", "cyan"],
+				"animal": ["solid", "paw", "yellow"],
+				"raccoon": ["solid", "paw", "brown"],
+				"seal": ["solid", "otter", "green-cyan"],
+				"whale": ["solid", "fish-fins", "blue-violet"],
+				"love": ["solid", "heart", "red"],
+				"opposite": ["solid", "rotate", "violet"],
+				"wall": ["solid", "trowel-bricks", "magenta-red"],
+				"road": ["solid", "road", "dark-grey"],
+				"cold": ["regular", "snowflake", "cyan"],
+				"hate": ["solid", "thumbs-down", "red"],
+				"door": ["solid", "door-open", "violet-magenta"],
+				"synonym": ["solid", "arrow-trend-up", "yellow-green"],
+				"antonym": ["solid", "retweet", "red-orange"],
+				"thinking": ["solid", "brain", "magenta"],
+				"idea": ["solid", "lightbulb", "yellow"],
+				"dig": ["solid", "person-digging", "brown"],
+				"breathe": ["solid", "lungs", "green-cyan"],
+				"drink": ["solid", "bottle-droplet", "cyan-blue"],
+				"cook": ["solid", "fire-burner", "yellow-orange"],
+				"mine": ["solid", "person-digging", "light-grey"],
+				"property": ["regular", "square", "pea-green"],
+				"yard": ["solid", "seedling", "yellow-green"],
+				"movement": ["solid", "arrow-right", "cyan-blue"],
+				"dance": ["solid", "child-reaching", "blue-violet"],
+				"travel": ["solid", "person-walking", "green-cyan"],
+				"vehicle": ["solid", "gear", "cyan-blue"],
+				"engine": ["solid", "gears", "dark-grey"],
+				"car": ["solid", "car", "red"],
+				"boat": ["solid", "anchor", "cyan"],
+				"ship": ["solid", "ship", "cyan-blue"],
+				"dirt": ["solid", "mound", "brown"],
+				"sky": ["regular", "sun", "cyan"],
+				"airplane": ["solid", "plane", "cyan-blue"],
+				"engineer": ["solid", "user-gear", "cyan-blue"],
+				"train": ["solid", "train", "magenta-red"],
+				"subway": ["solid", "train-subway", "green-cyan"],
+				"sailor": ["solid", "anchor", "violet-magenta"],
+				"pilot": ["solid", "paper-plane", "green-cyan"],
+				"navigation": ["solid", "compass", "yellow-orange"],
+				"dancer": ["solid", "child-reaching", "violet"],
+				"wheel": ["solid", "record-vinyl", "light-grey"],
+				"sun": ["solid", "sun", "yellow"],
+				"writing": ["solid", "pen-fancy", "green"],
+				"art": ["solid", "hand", "magenta-red"],
+				"painting": ["solid", "paintbrush", "blue-violet"],
+				"book": ["solid", "book", "yellow-green"],
+				"example": ["solid", "quote-left", "tan"],
+				"invention": ["solid", "cube", "green-cyan"],
+				"deep": ["solid", "down-long", "dark-grey"],
+				"food": ["solid", "pizza-slice", "red"],
+				"script": ["solid", "scroll", "tan"],
+				"1984": ["solid", "book-bookmark", "red"],
+				"time": ["solid", "clock", "green-cyan"],
+				"2024": ["solid", "calendar", "magenta-red"],
+				"the future": ["solid", "calendar-plus", "magenta"],
+				"wind": ["solid", "wind", "cyan"],
+				"generator": ["solid", "gears", "dark-grey"],
+				"energy": ["solid", "bolt", "yellow"],
+				"electricity": ["solid", "plug", "yellow"],
+				"moon": ["solid", "moon", "yellow"],
+				"the tide": ["solid", "up-down", "cyan-blue"],
+				"Boeing 737": ["solid", "plane-departure", "blue"],
+				"clay": ["solid", "mound", "light-grey"],
+				"coffee": ["solid", "mug-hot", "brown"],
+				"frog": ["solid", "frog", "green"],
+				"allergies": ["solid", "head-side-cough", "red-orange"],
+				"AI": ["solid", "robot", "violet-magenta"],
+				"computer": ["solid", "computer", "cyan-blue"],
+				"error": ["solid", "circle-exclamation", "red"],
+				"mistake": ["solid", "triangle-exclamation", "yellow-orange"],
+				"happiness": ["solid", "face-smile", "yellow"],
+				"fun": ["solid", "face-smile-beam", "yellow-orange"],
+				"emotion": ["regular", "face-smile", "cyan-blue"],
+				"video game": ["solid", "gamepad", "violet"],
+				"Lethal Company": ["solid", "user-astronaut", "red"],
+				"code": ["solid", "code", "green"],
+				"program": ["regular", "file-code", "pea-green"],
+				"programmer": ["solid", "laptop-code", "cyan-blue"],
+				"programming language": ["solid", "bars-staggered", "red-orange"],
+				"Java": ["solid", "mug-hot", "blue"],
+				"big": ["solid", "maximize", "magenta-red"],
+				"small": ["solid", "minimize", "violet-magenta"],
+				"reading": ["solid", "book-open-reader", "green"],
+				"sadness": ["solid", "face-frown", "red-orange"],
+				"desert": ["solid", "plant-wilt", "yellow-orange"],
+				"sand": ["solid", "mound", "tan"],
+				"rock": ["solid", "hill-rockslide", "dark-grey"],
+				"bicycle": ["solid", "bicycle", "blue"],
+				"station": ["solid", "building-columns", "magenta-red"],
+				"subway station": ["solid", "building-columns", "green-cyan"],
 			};
 
 			// version #
-			const version = "v1.1.0-beta";
+			const version = "v1.1.0";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -824,18 +914,23 @@
 			var discoveredItems = [];
 
 			// version & info message
-			console.log(`Finite Craft ${version}\n(${totalItems} total items, ${totalRecipes} total recipes)`);
-			console.log('stuck? try si("<item name>");');
+			console.log(`Finite Craft\n${version}\n(${totalItems} total items, ${totalRecipes} total recipes)`);
 			versionElement.innerHTML = version;
 
 			// add item to list of discoveries
 			function discover(item) {
-				if (!discoveredItems.includes(item)) {
+				if (item != null && item != undefined && !discoveredItems.includes(item)) {
 					discoveredItems.push(item);
 					discoveredPercentage.innerHTML = `${discoveredItems.length}/${totalItems}`;
 					discoveredItemsContainer.appendChild(createItem(item));
+
+					if (!initialItems.includes(item)) window.history.replaceState({}, "", "?x=" + toBase64(getProgress()));
 				}
 			}
+
+			// initial items!!!
+			const initialItems = ["earth", "air", "fire", "water"];
+			for (let i = 0; i < initialItems.length; i++) discover(initialItems[i]);
 
 			// place a new item on the screen: specified item, x, y
 			function spawnItem(item, x, y) {
@@ -844,7 +939,7 @@
 				newItemElement.classList.add(iconAssociations[item][2]); // colour
 				newItemElement.style = `left: ${x}px; top: ${y}px`;
 				newItemElement.id = Date.now(); // make the element unique with a time-related id
-				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				newItemElement.innerHTML = `<i class="fa-${iconAssociations[item][0]} fa-${iconAssociations[item][1]}"></i><span>${item}</span>`;
 				itemContainer.appendChild(newItemElement);
 				discover(item);
 				return newItemElement;
@@ -861,7 +956,7 @@
 				newItemElement.classList.add("item");
 				newItemElement.classList.add(iconAssociations[item][2]); // colour
 				newItemElement.id = Date.now(); // make the element unique with a time-related id
-				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				newItemElement.innerHTML = `<i class="fa-${iconAssociations[item][0]} fa-${iconAssociations[item][1]}"></i><span>${item}</span>`;
 				itemContainer.appendChild(newItemElement);
 				discover(item);
 
@@ -883,8 +978,9 @@
 				newItemElement.style = `left: ${x}px; top: ${y}px`;
 
 				newItemElement.id = Date.now(); // make the element unique with a time-related id
-				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				newItemElement.innerHTML = `<i class="fa-${iconAssociations[item][0]} fa-${iconAssociations[item][1]}"></i><span>${item}</span>`;
 				itemContainer.appendChild(newItemElement);
+				discover(item);
 			}
 
 			// create item element for the discovered items container, don't discover
@@ -893,15 +989,9 @@
 				newItemElement.classList.add("item");
 				newItemElement.classList.add(iconAssociations[item][2]); // colour
 				newItemElement.id = Date.now(); // make the element unique with a time-related id
-				newItemElement.innerHTML = `<i class="${iconAssociations[item][0]} ${iconAssociations[item][1]}"></i><span>${item}</span>`;
+				newItemElement.innerHTML = `<i class="fa-${iconAssociations[item][0]} fa-${iconAssociations[item][1]}"></i><span>${item}</span>`;
 				return newItemElement;
 			}
-
-			// initial items!!!
-			discover("earth");
-			discover("air");
-			discover("fire");
-			discover("water");
 
 			// get the item element
 			function getItemElement(element) {
@@ -1080,22 +1170,52 @@
 
 			// convert the discoveries array to a binary number
 			function getProgress() {
-				let progressString = "";
+				let binaryString = "";
 
 				// each item gets "true" or "false"
 				for (let thing in iconAssociations) {
-					if (discoveredItems.includes(thing)) progressString = "1" + progressString;
-					else progressString = "0" + progressString;
+					if (discoveredItems.includes(thing)) binaryString = "1" + binaryString;
+					else binaryString = "0" + binaryString;
 				}
 
-				return progressString;
+				return binaryString;
+			}
+
+			// pad beginning of binary to make it a 6-bit-long chunk
+			function padStartBinary(binaryString) {
+				if (binaryString.length % 6 != 0) binaryString = binaryString.padStart(binaryString.length + (6 - (binaryString.length % 6)), "0");
+				return binaryString;
 			}
 
 			// convert binary to base64
-			function toBase64() {}
+			function toBase64(binaryString) {
+				let base64String = "";
+
+				// make sure the string consists of 6-bit-long chunks
+				binaryString = padStartBinary(binaryString);
+
+				let binaryChunks = binaryString.match(/.{6}/g); // split the string into chunks
+
+				// go through chunks, add base64 value to string
+				for (let i = 0; i < binaryChunks.length; i++) {
+					let number = parseInt(binaryChunks[i], 2);
+					base64String = base64String + characters[number];
+				}
+
+				return base64String.replace(/^0+/, "");
+			}
 
 			// convert base64 to binary
-			function fromBase64() {}
+			function fromBase64(base64String) {
+				let binaryString = "";
+
+				let base64characters = base64String.split("");
+				for (let i = 0; i < base64characters.length; i++) {
+					binaryString = binaryString + padStartBinary(characters.indexOf(base64characters[i]).toString(2));
+				}
+
+				return binaryString;
+			}
 
 			// convert a binary number to discoveries
 			function loadProgress(binaryString) {
@@ -1107,6 +1227,13 @@
 					if (binaryArray[i] == 1) discover(Object.keys(iconAssociations)[i]);
 				}
 			}
+
+			// load discoveries from URL
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const save = item.get("x");
+
+			if (save != null && save != "") loadProgress(fromBase64(save));
 		</script>
 	</body>
 </html>
