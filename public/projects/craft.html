@@ -798,7 +798,28 @@
 				["airplane", "crash", "death"],
 				["Airbus", "example", "A380"],
 				["airplane", "bus", "Airbus"],
+				["air", "bus", "Airbus"],
 				["continent", "example", "Antarctica"],
+				["ice", "hot", "water"],
+				["ice", "fire", "water"],
+				["bird", "thinking", "flight"],
+				["airplane", "thinking", "flight"],
+				["airplane", "travel", "flight"],
+				["desert", "example", "Sahara"],
+				["country", "example", "Germany"],
+				["mud", "water", "swamp"],
+				["mud", "pond", "swamp"],
+				["swamp", "animal", "bug"],
+				["video game", "flight", "Microsoft Flight Simulator"],
+				["video game", "airplane", "Microsoft Flight Simulator"],
+				["video game", "Airbus", "Microsoft Flight Simulator"],
+				["video game", "Boeing 737", "Microsoft Flight Simulator"],
+				["video game", "A380", "Microsoft Flight Simulator"],
+				["Microsoft Flight Simulator", "vehicle", "airplane"],
+				["Microsoft Flight Simulator", "airplane", "Airbus"],
+				["house", "road", "town"],
+				["house", "fire", "smoke"],
+				["dust", "fire", "ash"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -944,10 +965,16 @@
 				"Airbus": ["solid", "truck-plane", "cyan-blue"],
 				"A380": ["solid", "plane-up", "blue"],
 				"crash": ["solid", "explosion", "red"],
+				"swamp": ["solid", "water", "green"],
+				"Microsoft Flight Simulator": ["solid", "plane-arrival", "cyan-blue"],
+				"flight": ["solid", "plane-departure", "cyan-blue"],
+				"Germany": ["solid", "earth-europe", "red"],
+				"Sahara": ["solid", "mountain-sun", "tan"],
+				"ash": ["solid", "braille", "light-grey"],
 			};
 
 			// version #
-			const version = "v1.1.1";
+			const version = "v1.1.3";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
