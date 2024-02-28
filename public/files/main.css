@@ -141,6 +141,10 @@ ul {
 	margin-bottom: 0;
 }
 
+ul li::marker {
+	color: #292f367f;
+}
+
 li::marker {
 	font-weight: bold;
 }
