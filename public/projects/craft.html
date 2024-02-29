@@ -726,7 +726,7 @@
 				["continent", "thinking", "big"],
 				["ocean", "thinking", "big"],
 				["book", "human", "reading"],
-				["sun", "moon", "opposite"],
+				["sun", "moon", "eclipse"],
 				["hot", "cold", "opposite"],
 				["big", "small", "opposite"],
 				["love", "hate", "opposite"],
@@ -852,8 +852,8 @@
 				["Paris", "country", "France"],
 				["France", "city", "Paris"],
 				["city", "example", "Tokyo"],
-				["Tokyo", "Airport", "Haneda Airport (RJTT)"],
-				["Paris", "Airport", "Charles de Gaulle Airport (LFPG)"],
+				["Tokyo", "airport", "Haneda Airport (RJTT)"],
+				["Paris", "airport", "Charles de Gaulle Airport (LFPG)"],
 				["writing", "script", "language"],
 				["human", "language", "writing"],
 				["language", "example", "German"],
@@ -884,6 +884,42 @@
 				["example", "planet", "Mars"],
 				["Mars", "life", "alien"],
 				["computer", "art", "graphic design"],
+				["wizard", "writing", "spell"],
+				["land", "highway", "infrastructure"],
+				["1984", "human", "George Orwell"],
+				["example", "fun", "video game"],
+				["smoke", "atmosphere", "pollution"],
+				["car", "highway", "traffic"],
+				["car", "city", "traffic"],
+				["wizard", "book", "Harry Potter"],
+				["witch", "vehicle", "broom"],
+				["small", "human", "child"],
+				["Tokyo", "country", "Japan"],
+				["Japan", "continent", "Asia"],
+				["Tokyo", "continent", "Asia"],
+				["Germany", "continent", "Europe"],
+				["France", "continent", "Europe"],
+				["Paris", "continent", "Europe"],
+				["solar system", "solar system", "galaxy"],
+				["galaxy", "galaxy", "universe"],
+				["universe", "universe", "multiverse"],
+				["emotion", "example", "happiness"],
+				["mine", "video game", "Minecraft"],
+				["wizard", "example", "Harry Potter"],
+				["food", "smoke", "barbecue"],
+				["bird", "example", "hawk"],
+				["idea", "universe", "space"],
+				["idea", "space", "empty"],
+				["empty", "opposite", "full"],
+				["empty", "antonym", "full"],
+				["full", "antonym", "empty"],
+				["full", "opposite", "empty"],
+				["empty", "full", "opposite"],
+				["universe", "thinking", "space"],
+				["space", "thinking", "container"],
+				["water", "container", "bucket"],
+				["big", "bucket", "bath"],
+				["bath", "bubble", "bubble bath"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -1069,10 +1105,35 @@
 				"Mars": ["solid", "earth-asia", "red-orange"],
 				"alien": ["solid", "person-circle-question", "green"],
 				"graphic design": ["solid", "pen-to-square", "green-cyan"],
+				"galaxy": ["solid", "record-vinyl", "violet"],
+				"universe": ["solid", "ring", "violet-magenta"],
+				"multiverse": ["solid", "circle-nodes", "magenta"],
+				"spell": ["solid", "scroll", "yellow-green"],
+				"infrastructure": ["solid", "plug", "light-grey"],
+				"George Orwell": ["solid", "person-rays", "cyan"],
+				"pollution": ["solid", "smog", "dark-grey"],
+				"traffic": ["solid", "car-on", "red"],
+				"Harry Potter": ["solid", "hat-wizard", "tan"],
+				"broom": ["solid", "broom", "brown"],
+				"child": ["solid", "child", "pea-green"],
+				"Japan": ["solid", "earth-asia", "violet-magenta"],
+				"Europe": ["solid", "earth-europe", "red"],
+				"Asia": ["solid", "earth-asia", "violet"],
+				"eclipse": ["solid", "circle-half-stroke", "yellow-orange"],
+				"Minecraft": ["solid", "cubes", "green"],
+				"barbecue": ["solid", "hotdog", "red"],
+				"hawk": ["solid", "feather", "brown"],
+				"space": ["regular", "square", "blue-violet"],
+				"empty": ["regular", "square", "magenta-red"],
+				"full": ["solid", "square", "red"],
+				"container": ["solid", "box-open", "green-cyan"],
+				"bucket": ["solid", "bucket", "light-grey"],
+				"bath": ["solid", "bath", "cyan-blue"],
+				"bubble bath": ["solid", "soap", "blue"],
 			};
 
 			// version #
-			const version = "v1.1.4";
+			const version = "v1.1.6";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1088,6 +1149,7 @@
 			const totalItems = Object.keys(iconAssociations).length;
 			const totalRecipes = recipes.length;
 			var discoveredItems = [];
+			var discoveredItemsData = [];
 
 			// version & info message
 			console.log(`Finite Craft\n${version}\n(${totalItems} total items, ${totalRecipes} total recipes)`);
@@ -1100,13 +1162,22 @@
 					discoveredPercentage.innerHTML = `${discoveredItems.length}/${totalItems}`;
 					discoveredItemsContainer.appendChild(createItem(item));
 
+					discoveredItemsData.push([item, Date.now(), iconAssociations[item][2]]);
+
 					if (!initialItems.includes(item)) window.history.replaceState({}, "", "?x=" + toBase64(getProgress()));
 				}
 			}
 
-			// initial items!!!
-			const initialItems = ["earth", "air", "fire", "water"];
-			for (let i = 0; i < initialItems.length; i++) discover(initialItems[i]);
+			// add item to list of discoveries but don't change the URL
+			function discoverWithoutReplaceState(item) {
+				if (item != null && item != undefined && !discoveredItems.includes(item)) {
+					discoveredItems.push(item);
+					discoveredPercentage.innerHTML = `${discoveredItems.length}/${totalItems}`;
+					discoveredItemsContainer.appendChild(createItem(item));
+
+					discoveredItemsData.push([item, 0, iconAssociations[item][2]]);
+				}
+			}
 
 			// place a new item on the screen: specified item, x, y
 			function spawnItem(item, x, y) {
@@ -1400,7 +1471,7 @@
 
 				for (let i = 0; i < binaryArray.length; i++) {
 					// discovers the items that are "true" - this will break across versions if I add more 'int' keys
-					if (binaryArray[i] == 1) discover(Object.keys(iconAssociations)[i]);
+					if (binaryArray[i] == 1) discoverWithoutReplaceState(Object.keys(iconAssociations)[i]);
 				}
 			}
 
@@ -1410,6 +1481,10 @@
 			const save = item.get("x");
 
 			if (save != null && save != "") loadProgress(fromBase64(save));
+
+			// initial items!!!
+			const initialItems = ["earth", "air", "fire", "water"];
+			for (let i = 0; i < initialItems.length; i++) discover(initialItems[i]);
 		</script>
 	</body>
 </html>
