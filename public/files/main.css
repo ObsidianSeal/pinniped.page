@@ -514,6 +514,10 @@ ul {
 	opacity: 50%;
 }
 
+.highlighted {
+	background-color: #292f3630;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;

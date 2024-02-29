@@ -55,8 +55,9 @@
 				<i class="fa-brands fa-youtube"></i>
 				<a class="link" href="https://www.youtube.com/watch?v=MwRbr-MjwII" target="_blank">"RoadTrip, MathsJam 2023" — cool video; contains elements of graph theory</a>
 			</p>
-			<p><i class="fa-solid fa-circle-question"></i> <a class="link" href="#">Glossary of bolded terms</a></p>
-			<p><i class="fa-solid fa-bars-staggered"></i> <a class="link" href="#">Sources</a></p>
+			<p><i class="fa-solid fa-list-ol"></i> <a class="link" href="#">Table of Contents</a></p>
+			<p><i class="fa-solid fa-spell-check"></i> <a class="link" href="#">Glossary of Bolded Terms</a></p>
+			<p><i class="fa-solid fa-list-ul"></i> <a class="link" href="#">List of Sources</a></p>
 
 			<div class="break"></div>
 
@@ -86,15 +87,15 @@
 
 			<div class="blog-image-container">
 				<div class="blog-image">
-					<p class="half-opacity">fg. 1.1 — example graph: a road network</p>
+					<p class="half-opacity">fig. 1.1 — example graph: a road network</p>
 					<img class="blog-image" src="../images/graph-theory-example-1.png" alt="example graph: a road network" title="example graph: a road network" />
 				</div>
 				<div class="blog-image">
-					<p class="half-opacity">fg. 1.2 — example graph: friends</p>
+					<p class="half-opacity">fig. 1.2 — example graph: friends</p>
 					<img class="blog-image" src="../images/graph-theory-example-2.png" alt="example graph: friends" title="example graph: friends" />
 				</div>
 				<div class="blog-image">
-					<p class="half-opacity">fg. 1.3 — example graph: a subway system</p>
+					<p class="half-opacity">fig. 1.3 — example graph: a subway system</p>
 					<img class="blog-image" src="../images/graph-theory-example-3.png" alt="example graph: a subway system" title="example graph: a subway system" />
 				</div>
 			</div>
@@ -106,17 +107,57 @@
 
 			<div class="break"></div>
 
+			<div class="blog-image-container">
+				<div class="blog-image">
+					<p class="half-opacity">fig. 1.4 — a graph showing the degree of two nodes</p>
+					<img
+						class="blog-image"
+						src="../images/graph-theory-degree.png"
+						alt="a graph showing the degree of two nodes"
+						title="a graph showing the degree of two nodes"
+					/>
+				</div>
+			</div>
+
+			<div class="break"></div>
+
 			<h5 class="title">CONNECTED BY EDGES...</h5>
 			<p class="text">
 				Nodes can be connected by more than one edge, called a <b>multiple edge</b>. This can represent, say, a multi-lane road or a molecule's double bond. Nodes can
-				also be connected to themselves with a special type of edge called a <b>loop</b>. Edges can be one-way, like a one-way street or a link from one website to
-				another.
+				also be connected to themselves with a special type of edge called a <b>loop</b>. The ends of the subway lines in
+				<span class="highlighted">fig. 1.3</span> could be considered loops, as trains turn around when they reach them.<br /><br />Edges can have a set direction. They
+				can be one-way, like a one-way street or a link from one website to another, or two-way. Edges with a specified direction are called <b>directed edges</b>.
 			</p>
 
 			<div class="break"></div>
 
+			<div class="blog-image-container">
+				<div class="blog-image">
+					<p class="half-opacity">fig. 1.5 — a graph with one loop and two multiple edges</p>
+					<img
+						class="blog-image"
+						src="../images/graph-theory-multiple-edge-loop.png"
+						alt="a graph with one loop and two multiple edges"
+						title="a graph with one loop and two multiple edges"
+					/>
+				</div>
+				<div class="blog-image">
+					<p class="half-opacity">fig. 1.6 — one-way edges</p>
+					<img class="blog-image" src="../images/graph-theory-directed-graph-1.png" alt="one-way edges" title="one-way edges" />
+				</div>
+				<div class="blog-image">
+					<p class="half-opacity">fig. 1.7 — one-way and two-way edges</p>
+					<img class="blog-image" src="../images/graph-theory-directed-graph-2.png" alt="one-way and two-way edges" title="one-way and two-way edges" />
+				</div>
+			</div>
+
+			<div class="break"></div>
+
 			<h5 class="title">FORM A GRAPH!</h5>
-			<p class="text">text</p>
+			<p class="text">
+				Graphs without loops or multiple edges (like <span class="highlighted">fig. 1.7</span>) are called <b>simple graphs</b>. Graphs that consist of directed edges
+				are called <b>directed graphs</b>. Both <span class="highlighted">fig. 1.6</span> and <span class="highlighted">fig. 1.7</span> are directed graphs.
+			</p>
 
 			<div class="break"></div>
 
