@@ -23,6 +23,36 @@
 		<meta property="og:title" content="Graph Theory EXPLAINED" />
 		<meta property="og:description" content="Exactly what the title says." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			#to_top_button {
+				width: 50px;
+				height: 50px;
+
+				border-radius: 25px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				position: fixed;
+				right: 50px;
+				bottom: 80px;
+
+				font-size: 24px;
+
+				background-color: #292f367f;
+			}
+
+			#to_top_button:hover {
+				background-color: #292f36;
+				cursor: pointer;
+			}
+
+			#to_top_button i {
+				color: #ffffee;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -55,9 +85,9 @@
 				<i class="fa-brands fa-youtube"></i>
 				<a class="link" href="https://www.youtube.com/watch?v=MwRbr-MjwII" target="_blank">"RoadTrip, MathsJam 2023" — cool video; contains elements of graph theory</a>
 			</p>
-			<p><i class="fa-solid fa-list-ol"></i> <a class="link" href="#">Table of Contents</a></p>
-			<p><i class="fa-solid fa-spell-check"></i> <a class="link" href="#">Glossary of Bolded Terms</a></p>
-			<p><i class="fa-solid fa-list-ul"></i> <a class="link" href="#">List of Sources</a></p>
+			<p><i class="fa-solid fa-list-ol"></i> <a class="link same-page-link" href="#contents">Table of Contents</a></p>
+			<p><i class="fa-solid fa-spell-check"></i> <a class="link same-page-link" href="#glossary">Glossary of Bolded Terms</a></p>
+			<p><i class="fa-solid fa-list-ul"></i> <a class="link same-page-link" href="#sources">List of Sources</a></p>
 
 			<div class="break"></div>
 
@@ -65,15 +95,30 @@
 
 			<hr />
 
-			<h4 class="title">Contents</h4>
+			<h4 class="title" id="contents">Contents</h4>
 
 			<ol>
-				<li>THE BASICS — WHAT IS GRAPH THEORY?</li>
+				<li><a class="link same-page-link" href="#basics">THE BASICS — WHAT IS GRAPH THEORY?</a></li>
+				<ul style="list-style-type: none">
+					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-nodes">NODES...</a></li>
+					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-edges">CONNECTED BY EDGES...</a></li>
+					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-graph">FORM A GRAPH!</a></li>
+					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-trees">REMEMBER TREES?</a></li>
+					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-math">THE MATH</a></li>
+				</ul>
+				<li><a class="link same-page-link" href="#in-programming">GRAPH THEORY IN PROGRAMMING</a></li>
+				<li><a class="link same-page-link" href="#history">HISTORY</a></li>
+				<li><a class="link same-page-link" href="#uses">USES</a></li>
+				<li><a class="link same-page-link" href="#related-fields">RELATED FIELDS</a></li>
+				<li><a class="link same-page-link" href="#impact-on-society">IMPACT ON SOCIETY</a></li>
+				<li><a class="link same-page-link" href="#ethics">ETHICS?</a></li>
+				<li><a class="link same-page-link" href="#careers">CAREERS</a></li>
+				<li><a class="link same-page-link" href="#finite-craft">HOW I USED GRAPH THEORY — FINITE CRAFT</a></li>
 			</ol>
 
 			<hr />
 
-			<h4 class="title">1. THE BASICS — WHAT IS GRAPH THEORY?</h4>
+			<h4 class="title" id="basics">1. THE BASICS — WHAT IS GRAPH THEORY?</h4>
 
 			<div class="break"></div>
 
@@ -102,7 +147,7 @@
 
 			<div class="break"></div>
 
-			<h5 class="title">NODES...</h5>
+			<h5 class="title" id="basics-nodes">NODES...</h5>
 			<p class="text">Nodes can be connected to any number of other nodes, or none at all. The <b>degree</b> of a node refers to the number of connected edges.</p>
 
 			<div class="break"></div>
@@ -121,7 +166,7 @@
 
 			<div class="break"></div>
 
-			<h5 class="title">CONNECTED BY EDGES...</h5>
+			<h5 class="title" id="basics-edges">CONNECTED BY EDGES...</h5>
 			<p class="text">
 				Two nodes can be connected by more than one edge, each called a <b>multiple edge</b>. This can represent, say, a multi-lane road or a molecule's double bond.
 				Nodes can also be connected to themselves with a special type of edge called a <b>loop</b>. The ends of the subway lines in
@@ -153,7 +198,7 @@
 
 			<div class="break"></div>
 
-			<h5 class="title">FORM A GRAPH!</h5>
+			<h5 class="title" id="basics-graph">FORM A GRAPH!</h5>
 			<p class="text">
 				Graphs without loops or multiple edges (like <span class="highlighted">fig. 1.7</span>) are called <b>simple graphs</b>. Graphs that consist of directed edges
 				are called <b>directed graphs</b>. Both <span class="highlighted">fig. 1.6</span> and <span class="highlighted">fig. 1.7</span> are directed graphs. A route
@@ -237,7 +282,7 @@
 
 			<div class="break"></div>
 
-			<h5 class="title">REMEMBER TREES?</h5>
+			<h5 class="title" id="basics-trees">REMEMBER TREES?</h5>
 			<p class="text">
 				If you've ever programmed or learned about probability, you've probably come across an example of a <b>tree</b>. Trees are a restricted type of graph in which
 				all nodes stem from one, meaning there is only one path between any two nodes. All trees are graphs, but not all graphs are trees.
@@ -252,9 +297,134 @@
 				</div>
 			</div>
 
+			<div class="break"></div>
+
+			<h5 class="title" id="basics-math">THE MATH</h5>
+			<p class="text">
+				In math, graphs are defined as a set of nodes and a set of edges. The set of edges in an undirected graph contains unordered pairs of nodes, and the set of
+				edges in a directed graph contains ordered pairs of nodes. Proper notation is shown in <span class="highlighted">fig. 1.13</span>.
+			</p>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<div class="blog-image">
+					<p class="half-opacity">fig. 1.13 — graph notation</p>
+					<img class="blog-image" src="../images/graph-theory-graph-notation.png" alt="graph notation" title="graph notation" />
+				</div>
+			</div>
+
+			<div class="break"></div>
+
+			<p class="text">The above notation is very easy to convert into code.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="in-programming">2. GRAPH THEORY IN PROGRAMMING</h4>
+
+			<div class="break"></div>
+
+			<p class="text">Some text.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="history">3. HISTORY</h4>
+
+			<div class="break"></div>
+
+			<p class="text">Some text.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="uses">4. USES</h4>
+
+			<div class="break"></div>
+
+			<p class="text">Some text.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="related-fields">5. RELATED FIELDS</h4>
+
+			<div class="break"></div>
+
+			<p class="text">Some text.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="impact-on-society">6. IMPACT ON SOCIETY</h4>
+
+			<div class="break"></div>
+
+			<p class="text">Some text.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="ethics">7. ETHICS?</h4>
+
+			<div class="break"></div>
+
+			<p class="text">Some text.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="careers">8. CAREERS</h4>
+
+			<div class="break"></div>
+
+			<p class="text">Some text.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title" id="finite-craft">9. HOW I USED GRAPH THEORY — FINITE CRAFT</h4>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Inspired by <a class="link" href="https://neal.fun/infinite-craft/" target="_blank">Neal Agarwal's Infinite Craft</a>, a game where you can combine the four
+				elements into whatever you can imagine, I made <a class="link" href="craft.html">Finite Craft</a>. Each item can be considered a node in a graph, and each edge
+				a combination, or recipe, that makes a new item. The code contains a large array of recipes and results, and although new items aren't AI generated like they
+				are in Infinite Craft, it's still pretty fun. Thinking about the items in terms of graph theory let me make sure I added every combination of the first four
+				items. The number of possible combinations between any number of items is a <b>triangular number</b>, and can be found with the formula in
+				<span class="highlighted">fig. 9.3</span>.
+			</p>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<div class="blog-image">
+					<p class="half-opacity">fig. 9.1 — connections between the initial elements in Finite Craft</p>
+					<img
+						class="blog-image"
+						src="../images/graph-theory-elements.png"
+						alt="connections between the initial elements in Finite Craft"
+						title="connections between the initial elements in Finite Craft"
+					/>
+				</div>
+				<div class="blog-image">
+					<p class="half-opacity">fig. 9.2 — the first dozen recipes in Finite Craft</p>
+					<img
+						class="blog-image"
+						src="../images/graph-theory-elements-array.png"
+						alt="the first dozen recipes in Finite Craft"
+						title="the first dozen recipes in Finite Craft"
+					/>
+				</div>
+				<div class="blog-image">
+					<p class="half-opacity">fig. 9.3 — the triangular number formula</p>
+					<img
+						class="blog-image"
+						src="../images/graph-theory-triangle-number-formula.png"
+						alt="the triangular number formula"
+						title="the triangular number formula"
+						style="max-width: 100px"
+					/>
+				</div>
+			</div>
+
 			<hr />
 
-			<h4 class="title">Glossary</h4>
+			<h4 class="title" id="glossary">Glossary</h4>
 
 			<ul>
 				<li>term</li>
@@ -262,7 +432,7 @@
 
 			<hr />
 
-			<h4 class="title">Sources</h4>
+			<h4 class="title" id="sources">Sources</h4>
 
 			<ul>
 				<li><a class="link" href="https://www.maths.ed.ac.uk/~v1ranick/papers/wilsongraph.pdf" target="_blank">1</a></li>
@@ -270,11 +440,32 @@
 			</ul>
 
 			<div class="content-end"></div>
+
+			<div id="to_top_button" style="display: none"><i class="fa-solid fa-arrow-up-long"></i></div>
 		</div>
 
 		<div class="footer" style="background: #ffffee"></div>
 		<div class="footer" style="background: #ff6b6b"></div>
 		<div class="footer" style="background: #ffe66d"></div>
 		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script>
+			document.querySelectorAll(".same-page-link").forEach((link) => {
+				link.addEventListener("click", (e) => {
+					setTimeout(() => {
+						window.scrollBy(0, -80);
+					}, 5);
+				});
+			});
+
+			document.querySelector("#to_top_button").addEventListener("click", (e) => {
+				window.scroll(0, 0);
+			});
+
+			document.addEventListener("scroll", (e) => {
+				if (window.scrollY > 300) document.querySelector("#to_top_button").style = "display: flex";
+				else document.querySelector("#to_top_button").style = "display: none";
+			});
+		</script>
 	</body>
 </html>
