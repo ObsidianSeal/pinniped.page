@@ -50,7 +50,7 @@
 
 			<div class="break"></div>
 
-			<p><i class="fa-solid fa-diagram-project"></i> <a class="link" href="craft.html">Graph Theory in the wild — a crafting game</a></p>
+			<p><i class="fa-solid fa-diagram-project"></i> <a class="link" href="craft.html">Graph theory in the wild — a crafting game</a></p>
 			<p>
 				<i class="fa-brands fa-youtube"></i>
 				<a class="link" href="https://www.youtube.com/watch?v=MwRbr-MjwII" target="_blank">"RoadTrip, MathsJam 2023" — cool video; contains elements of graph theory</a>
@@ -63,7 +63,7 @@
 
 			<img class="blog-image" src="../images/graph-theory-title.png" alt='"Graph Theory" title and an example graph' title='"Graph Theory" title and an example graph' />
 
-			<div class="break"></div>
+			<hr />
 
 			<h4 class="title">Contents</h4>
 
@@ -71,14 +71,14 @@
 				<li>THE BASICS — WHAT IS GRAPH THEORY?</li>
 			</ol>
 
-			<div class="break"></div>
+			<hr />
 
 			<h4 class="title">1. THE BASICS — WHAT IS GRAPH THEORY?</h4>
 
 			<div class="break"></div>
 
 			<p class="text">
-				Graph Theory is a field of <b>discrete mathematics</b> that deals with the ideas of <b>graphs</b>. In their simplest form, graphs are networks of
+				Graph theory is a field of <b>discrete mathematics</b> that deals with the ideas of <b>graphs</b>. In their simplest form, graphs are networks of
 				<b>nodes</b> (also known as vertices) connected by <b>edges</b>. Anything that can be drawn as dots connected by lines can also be represented by a graph.
 				Examples of this include road networks, friend groups, electrical circuits, subway systems, and molecular structures.
 			</p>
@@ -123,8 +123,8 @@
 
 			<h5 class="title">CONNECTED BY EDGES...</h5>
 			<p class="text">
-				Nodes can be connected by more than one edge, called a <b>multiple edge</b>. This can represent, say, a multi-lane road or a molecule's double bond. Nodes can
-				also be connected to themselves with a special type of edge called a <b>loop</b>. The ends of the subway lines in
+				Two nodes can be connected by more than one edge, each called a <b>multiple edge</b>. This can represent, say, a multi-lane road or a molecule's double bond.
+				Nodes can also be connected to themselves with a special type of edge called a <b>loop</b>. The ends of the subway lines in
 				<span class="highlighted">fig. 1.3</span> could be considered loops, as trains turn around when they reach them.<br /><br />Edges can have a set direction. They
 				can be one-way, like a one-way street or a link from one website to another, or two-way. Edges with a specified direction are called <b>directed edges</b>.
 			</p>
@@ -133,12 +133,12 @@
 
 			<div class="blog-image-container">
 				<div class="blog-image">
-					<p class="half-opacity">fig. 1.5 — a graph with one loop and two multiple edges</p>
+					<p class="half-opacity">fig. 1.5 — a graph with one loop and some multiple edges</p>
 					<img
 						class="blog-image"
 						src="../images/graph-theory-multiple-edge-loop.png"
-						alt="a graph with one loop and two multiple edges"
-						title="a graph with one loop and two multiple edges"
+						alt="a graph with one loop and some multiple edges"
+						title="a graph with one loop and some multiple edges"
 					/>
 				</div>
 				<div class="blog-image">
@@ -156,10 +156,103 @@
 			<h5 class="title">FORM A GRAPH!</h5>
 			<p class="text">
 				Graphs without loops or multiple edges (like <span class="highlighted">fig. 1.7</span>) are called <b>simple graphs</b>. Graphs that consist of directed edges
-				are called <b>directed graphs</b>. Both <span class="highlighted">fig. 1.6</span> and <span class="highlighted">fig. 1.7</span> are directed graphs.
+				are called <b>directed graphs</b>. Both <span class="highlighted">fig. 1.6</span> and <span class="highlighted">fig. 1.7</span> are directed graphs. A route
+				from one node to another is called a <b>walk</b>. A walk without repeated edges is called a <b>trail</b>, and a walk without repeated nodes is called a
+				<b>path</b>. A walk that ends at the same node where it began is called a <b>cycle</b>. Any loop or pair of multiple edges is a cycle. Trails and paths that are
+				also cycles are considered <b>closed</b>.
 			</p>
 
 			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<div class="big-picture">
+					<p class="half-opacity">fig. 1.8 — some walks</p>
+					<img class="big-picture" src="../images/graph-theory-walks.png" alt="some walks" title="some walks" />
+				</div>
+			</div>
+
+			<div class="break"></div>
+
+			<p class="text">
+				If a graph contains a closed trail that travels across every edge, that graph is <b>Eulerian</b>. And if a graph contains a closed path that visits every node,
+				that graph is <b>Hamiltonian</b>.
+			</p>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<div class="big-picture">
+					<p class="half-opacity">fig. 1.9 — an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so</p>
+					<img
+						class="big-picture"
+						src="../images/graph-theory-eulerian-hamiltonian.png"
+						alt="an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so"
+						title="an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so"
+					/>
+				</div>
+			</div>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Most graphs are <b>connected</b>, meaning every node has a degree of at least one, but they can be <b>disconnected</b>, like
+				<span class="highlighted">fig. 1.4</span> and <span class="highlighted">fig. 1.10</span>.
+			</p>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<div class="big-picture">
+					<p class="half-opacity">fig. 1.10 — an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)</p>
+					<img
+						class="big-picture"
+						src="../images/graph-theory-notes.png"
+						alt="an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)"
+						title="an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)"
+					/>
+				</div>
+			</div>
+
+			<div class="break"></div>
+
+			<p class="text">
+				Other than in <span class="highlighted">fig. 1.10</span>, none of the edges in any of the above diagrams cross. Because graphs aren't physical objects, but
+				rather representations of networks, it doesn't matter if edges cross. However, if a graph can be drawn without any edges crossing, it is called a
+				<b>planar graph</b>.
+			</p>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<div class="blog-image">
+					<p class="half-opacity">fig. 1.11 — a non-planar graph redrawn as a planar graph</p>
+					<img
+						class="blog-image"
+						src="../images/graph-theory-planar.png"
+						alt="a non-planar graph redrawn as a planar graph"
+						title="a non-planar graph redrawn as a planar graph"
+					/>
+				</div>
+			</div>
+
+			<div class="break"></div>
+
+			<h5 class="title">REMEMBER TREES?</h5>
+			<p class="text">
+				If you've ever programmed or learned about probability, you've probably come across an example of a <b>tree</b>. Trees are a restricted type of graph in which
+				all nodes stem from one, meaning there is only one path between any two nodes. All trees are graphs, but not all graphs are trees.
+			</p>
+
+			<div class="break"></div>
+
+			<div class="blog-image-container">
+				<div class="blog-image">
+					<p class="half-opacity">fig. 1.12 — a tree</p>
+					<img class="blog-image" src="../images/graph-theory-tree.png" alt="a tree" title="a tree" />
+				</div>
+			</div>
+
+			<hr />
 
 			<h4 class="title">Glossary</h4>
 
@@ -167,7 +260,7 @@
 				<li>term</li>
 			</ul>
 
-			<div class="break"></div>
+			<hr />
 
 			<h4 class="title">Sources</h4>
 
