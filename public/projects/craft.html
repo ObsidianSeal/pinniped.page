@@ -1409,7 +1409,7 @@
 			// debug: get everything
 			function getAll() {
 				for (let thing in iconAssociations) {
-					discover(thing);
+					discoverWithoutReplaceState(thing);
 				}
 			}
 
@@ -1481,6 +1481,121 @@
 			const save = item.get("x");
 
 			if (save != null && save != "") loadProgress(fromBase64(save));
+
+			// sort discoveries alphabetically
+			function sortDiscoveriesByName() {
+				discoveredItemsData.sort();
+				console.log(discoveredItemsData);
+			}
+
+			// sort discoveries by time*
+			function sortDiscoveriesByTime() {
+				// swap time to first index
+				for (let i = 0; i < discoveredItemsData.length; i++) {
+					[discoveredItemsData[i][0], discoveredItemsData[i][1]] = [discoveredItemsData[i][1], discoveredItemsData[i][0]];
+				}
+				discoveredItemsData.sort(); // sort, swap back
+				for (let i = 0; i < discoveredItemsData.length; i++) {
+					[discoveredItemsData[i][0], discoveredItemsData[i][1]] = [discoveredItemsData[i][1], discoveredItemsData[i][0]];
+				}
+				console.log(discoveredItemsData);
+			}
+
+			// sort discoveries by colour (then alphabetically)
+			function sortDiscoveriesByColour() {
+				// an array for each colour
+				let red = [];
+				let redOrange = [];
+				let yellowOrange = [];
+				let yellow = [];
+				let peaGreen = [];
+				let yellowGreen = [];
+				let green = [];
+				let greenCyan = [];
+				let cyan = [];
+				let cyanBlue = [];
+				let blue = [];
+				let blueViolet = [];
+				let violet = [];
+				let violetMagenta = [];
+				let magenta = [];
+				let magentaRed = [];
+				let tan = [];
+				let brown = [];
+				let lightGrey = [];
+				let darkGrey = [];
+
+				// separate colours
+				for (let i = 0; i < discoveredItemsData.length; i++) {
+					if (discoveredItemsData[i][2] == "red") red.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "red-orange") redOrange.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "yellow-orange") yellowOrange.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "yellow") yellow.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "pea-green") peaGreen.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "yellow-green") yellowGreen.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "green") green.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "green-cyan") greenCyan.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "cyan") cyan.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "cyan-blue") cyanBlue.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "blue") blue.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "blue-violet") blueViolet.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "violet") violet.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "violet-magenta") violetMagenta.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "magenta") magenta.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "magenta-red") magentaRed.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "tan") tan.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "brown") brown.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "light-grey") lightGrey.push(discoveredItemsData[i]);
+					if (discoveredItemsData[i][2] == "dark-grey") darkGrey.push(discoveredItemsData[i]);
+				}
+
+				// sort each alphabetically
+				red.sort();
+				redOrange.sort();
+				yellowOrange.sort();
+				yellow.sort();
+				peaGreen.sort();
+				yellowGreen.sort();
+				green.sort();
+				greenCyan.sort();
+				cyan.sort();
+				cyanBlue.sort();
+				blue.sort();
+				blueViolet.sort();
+				violet.sort();
+				violetMagenta.sort();
+				magenta.sort();
+				magentaRed.sort();
+				tan.sort();
+				brown.sort();
+				lightGrey.sort();
+				darkGrey.sort();
+
+				// combine and overwrite
+				discoveredItemsData = red.concat(
+					redOrange,
+					yellowOrange,
+					yellow,
+					peaGreen,
+					yellowGreen,
+					green,
+					greenCyan,
+					cyan,
+					cyanBlue,
+					blue,
+					blueViolet,
+					violet,
+					violetMagenta,
+					magenta,
+					magentaRed,
+					tan,
+					brown,
+					lightGrey,
+					darkGrey
+				);
+
+				console.log(discoveredItemsData);
+			}
 
 			// initial items!!!
 			const initialItems = ["earth", "air", "fire", "water"];
