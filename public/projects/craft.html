@@ -924,8 +924,8 @@
 
 			// associate items with their Font Awesome style, icon, and colour
 			const iconAssociations = {
-				"earth": ["solid", "earth", "tan"],
 				"air": ["solid", "wind", "green-cyan"],
+				"earth": ["solid", "earth", "tan"],
 				"fire": ["solid", "fire", "red-orange"],
 				"water": ["solid", "droplet", "cyan"],
 				"land": ["solid", "mountain-sun", "pea-green"],
@@ -1148,7 +1148,6 @@
 			// # of items, # of recipes, what has been discovered so far
 			const totalItems = Object.keys(iconAssociations).length;
 			const totalRecipes = recipes.length;
-			var discoveredItems = [];
 			var discoveredItemsData = [];
 
 			// version & info message
@@ -1157,12 +1156,16 @@
 
 			// add item to list of discoveries
 			function discover(item) {
-				if (item != null && item != undefined && !discoveredItems.includes(item)) {
-					discoveredItems.push(item);
-					discoveredPercentage.innerHTML = `${discoveredItems.length}/${totalItems}`;
-					discoveredItemsContainer.appendChild(createItem(item));
+				if (item != null && item != undefined) {
+					for (let i = 0; i < discoveredItemsData.length; i++) {
+						if (discoveredItemsData[i][0] == item) {
+							return;
+						}
+					}
 
 					discoveredItemsData.push([item, Date.now(), iconAssociations[item][2]]);
+					discoveredPercentage.innerHTML = `${discoveredItemsData.length}/${totalItems}`;
+					discoveredItemsContainer.appendChild(createItem(item));
 
 					if (!initialItems.includes(item)) window.history.replaceState({}, "", "?x=" + toBase64(getProgress()));
 				}
@@ -1170,12 +1173,16 @@
 
 			// add item to list of discoveries but don't change the URL
 			function discoverWithoutReplaceState(item) {
-				if (item != null && item != undefined && !discoveredItems.includes(item)) {
-					discoveredItems.push(item);
-					discoveredPercentage.innerHTML = `${discoveredItems.length}/${totalItems}`;
-					discoveredItemsContainer.appendChild(createItem(item));
+				if (item != null && item != undefined) {
+					for (let i = 0; i < discoveredItemsData.length; i++) {
+						if (discoveredItemsData[i][0] == item) {
+							return;
+						}
+					}
 
 					discoveredItemsData.push([item, 0, iconAssociations[item][2]]);
+					discoveredPercentage.innerHTML = `${discoveredItemsData.length}/${totalItems}`;
+					discoveredItemsContainer.appendChild(createItem(item));
 				}
 			}
 
@@ -1419,6 +1426,12 @@
 			function getProgress() {
 				let binaryString = "";
 
+				// temporary list of discoveries
+				let discoveredItems = [];
+				for (let i = 0; i < discoveredItemsData.length; i++) {
+					discoveredItems.push(discoveredItemsData[i][0]);
+				}
+
 				// each item gets "true" or "false"
 				for (let thing in iconAssociations) {
 					if (discoveredItems.includes(thing)) binaryString = "1" + binaryString;
@@ -1605,14 +1618,13 @@
 			function showSortedItems() {
 				discoveredItemsContainer.innerHTML = "";
 
-				discoveredItems = [];
 				for (let i = 0; i < discoveredItemsData.length; i++) {
-					discoverWithoutReplaceState(discoveredItemsData[i][0]);
+					discoveredItemsContainer.appendChild(createItem(discoveredItemsData[i][0]));
 				}
 			}
 
 			// initial items!!!
-			const initialItems = ["earth", "air", "fire", "water"];
+			const initialItems = ["air", "earth", "fire", "water"];
 			for (let i = 0; i < initialItems.length; i++) discoverWithoutReplaceState(initialItems[i]);
 		</script>
 	</body>
