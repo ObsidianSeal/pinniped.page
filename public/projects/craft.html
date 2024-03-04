@@ -1133,7 +1133,7 @@
 			};
 
 			// version #
-			const version = "v1.1.6";
+			const version = "v1.2.0-beta";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1482,10 +1482,13 @@
 
 			if (save != null && save != "") loadProgress(fromBase64(save));
 
+			// looks like I need a "collator", whatever that is
+			const collator = new Intl.Collator("en");
+
 			// sort discoveries alphabetically
 			function sortDiscoveriesByName() {
-				discoveredItemsData.sort();
-				console.log(discoveredItemsData);
+				discoveredItemsData.sort(collator.compare);
+				showSortedItems();
 			}
 
 			// sort discoveries by time*
@@ -1498,7 +1501,8 @@
 				for (let i = 0; i < discoveredItemsData.length; i++) {
 					[discoveredItemsData[i][0], discoveredItemsData[i][1]] = [discoveredItemsData[i][1], discoveredItemsData[i][0]];
 				}
-				console.log(discoveredItemsData);
+
+				showSortedItems();
 			}
 
 			// sort discoveries by colour (then alphabetically)
@@ -1550,26 +1554,26 @@
 				}
 
 				// sort each alphabetically
-				red.sort();
-				redOrange.sort();
-				yellowOrange.sort();
-				yellow.sort();
-				peaGreen.sort();
-				yellowGreen.sort();
-				green.sort();
-				greenCyan.sort();
-				cyan.sort();
-				cyanBlue.sort();
-				blue.sort();
-				blueViolet.sort();
-				violet.sort();
-				violetMagenta.sort();
-				magenta.sort();
-				magentaRed.sort();
-				tan.sort();
-				brown.sort();
-				lightGrey.sort();
-				darkGrey.sort();
+				red.sort(collator.compare);
+				redOrange.sort(collator.compare);
+				yellowOrange.sort(collator.compare);
+				yellow.sort(collator.compare);
+				peaGreen.sort(collator.compare);
+				yellowGreen.sort(collator.compare);
+				green.sort(collator.compare);
+				greenCyan.sort(collator.compare);
+				cyan.sort(collator.compare);
+				cyanBlue.sort(collator.compare);
+				blue.sort(collator.compare);
+				blueViolet.sort(collator.compare);
+				violet.sort(collator.compare);
+				violetMagenta.sort(collator.compare);
+				magenta.sort(collator.compare);
+				magentaRed.sort(collator.compare);
+				tan.sort(collator.compare);
+				brown.sort(collator.compare);
+				lightGrey.sort(collator.compare);
+				darkGrey.sort(collator.compare);
 
 				// combine and overwrite
 				discoveredItemsData = red.concat(
@@ -1594,12 +1598,22 @@
 					darkGrey
 				);
 
-				console.log(discoveredItemsData);
+				showSortedItems();
+			}
+
+			// TEST: CHANGE ITEM ORDER
+			function showSortedItems() {
+				discoveredItemsContainer.innerHTML = "";
+
+				discoveredItems = [];
+				for (let i = 0; i < discoveredItemsData.length; i++) {
+					discoverWithoutReplaceState(discoveredItemsData[i][0]);
+				}
 			}
 
 			// initial items!!!
 			const initialItems = ["earth", "air", "fire", "water"];
-			for (let i = 0; i < initialItems.length; i++) discover(initialItems[i]);
+			for (let i = 0; i < initialItems.length; i++) discoverWithoutReplaceState(initialItems[i]);
 		</script>
 	</body>
 </html>
