@@ -143,6 +143,10 @@
 				top: 50px;
 				left: 50px;
 				font-weight: 700;
+			}
+
+			h1,
+			.clear-button i {
 				font-size: 50px;
 			}
 
@@ -161,19 +165,26 @@
 				cursor: pointer;
 			}
 
-			.discovered-items {
+			.discoveries-sidebar {
 				position: absolute;
 				right: 0;
+
+				width: calc(500px);
+				height: calc(100%);
+
+				background-color: var(--grey85);
+			}
+
+			.discovered-items {
 				display: flex;
 				align-content: flex-start;
 				gap: 10px;
 				flex-wrap: wrap;
 
 				width: calc(500px - 40px);
-				height: calc(100% - 40px);
-				padding: 20px;
+				height: calc(100% - 110px);
 
-				background-color: var(--grey85);
+				padding: 20px 20px 0 20px;
 
 				overflow-y: scroll;
 			}
@@ -225,6 +236,69 @@
 
 			.item:hover {
 				cursor: pointer;
+			}
+
+			.sorting-options {
+				display: flex;
+				gap: 10px;
+
+				padding: 20px;
+			}
+
+			.sorting-options div,
+			input {
+				min-width: 50px;
+				height: 50px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				border-radius: 7px;
+
+				background-color: var(--grey90);
+				color: var(--grey85);
+			}
+
+			.sorting-options input {
+				width: 260px;
+				height: 40px;
+
+				padding: 5px 10px 5px 10px;
+				outline: none;
+
+				color: var(--white);
+
+				font-size: 24px;
+			}
+
+			input::selection {
+				background-color: var(--grey85);
+			}
+
+			input::placeholder {
+				color: var(--grey80);
+			}
+
+			.sorting-options div:not(.sorting-options div:first-child, .active):hover {
+				color: var(--grey80);
+				cursor: pointer;
+			}
+
+			.sorting-options div:nth-child(2).active {
+				color: var(--red);
+			}
+
+			.sorting-options div:nth-child(3).active {
+				color: var(--yellow);
+			}
+
+			.sorting-options div:nth-child(4).active {
+				color: var(--cyan-blue);
+			}
+
+			.sorting-options div i {
+				font-size: 30px;
 			}
 
 			/* COLOUR CLASSES - border */
@@ -476,11 +550,19 @@
 	</head>
 
 	<body>
-		<div class="discovered-items"></div>
+		<div class="discoveries-sidebar">
+			<div class="discovered-items"></div>
+			<div class="sorting-options">
+				<input id="search" autocomplete="off" placeholder="search?" />
+				<div id="sort-time"><i class="fa-solid fa-clock"></i></div>
+				<div id="sort-name"><i class="fa-solid fa-arrow-down-a-z"></i></div>
+				<div id="sort-colour"><i class="fa-solid fa-palette"></i></div>
+			</div>
+		</div>
 		<h1><a href="../index.html">pinniped.page</a>/craft</h1>
 		<span class="discovered-fraction"></span>
 		<span class="version"></span>
-		<span class="clear-button">clear</span>
+		<span class="clear-button"><i class="fa-solid fa-trash-can"></i></span>
 		<div class="item-container"></div>
 
 		<script>
@@ -920,6 +1002,25 @@
 				["water", "container", "bucket"],
 				["big", "bucket", "bath"],
 				["bath", "bubble", "bubble bath"],
+				["Harry Potter", "country", "England"],
+				["England", "continent", "Europe"],
+				["pollution", "pollution", "global warming"],
+				["airplane", "sky", "flight"],
+				["fun", "travel", "vacation"],
+				["airplane", "building", "airport"],
+				["airplane", "infrastructure", "runway"],
+				["Harry Potter", "flight", "broom"],
+				["witch", "flight", "broom"],
+				["Lethal Company", "friends", "fun"],
+				["Tokyo", "tower", "Tokyo Tower"],
+				["George Orwell", "country", "England"],
+				["bus", "idea", "public transportation"],
+				["program", "graphic design", "Adobe Photoshop"],
+				["subway", "idea", "public transportation"],
+				["subway station", "idea", "public transportation"],
+				["public transportation", "example", "bus"],
+				["traffic", "emotion", "hate"],
+				["cloud", "cloud", "sky"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -1130,10 +1231,15 @@
 				"bucket": ["solid", "bucket", "light-grey"],
 				"bath": ["solid", "bath", "cyan-blue"],
 				"bubble bath": ["solid", "soap", "blue"],
+				"England": ["solid", "earth-europe", "red"],
+				"vacation": ["solid", "map-pin", "blue-violet"],
+				"Tokyo Tower": ["solid", "tower-observation", "red"],
+				"public transportation": ["solid", "wheelchair-move", "cyan-blue"],
+				"Adobe Photoshop": ["solid", "file-image", "blue"],
 			};
 
 			// version #
-			const version = "v1.2.0-beta";
+			const version = "v1.2.0";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1141,6 +1247,12 @@
 			const versionElement = document.querySelector(".version");
 			const clearButton = document.querySelector(".clear-button");
 			const itemContainer = document.querySelector(".item-container");
+
+			const sortByTimeButton = document.querySelector("#sort-time");
+			const sortByNameButton = document.querySelector("#sort-name");
+			const sortByColourButton = document.querySelector("#sort-colour");
+
+			const searchField = document.querySelector("#search");
 
 			// "storage area" a.k.a. discoveredItemsContainer width
 			const storageAreaWidth = discoveredItemsContainer.getBoundingClientRect().width;
@@ -1167,6 +1279,10 @@
 					discoveredPercentage.innerHTML = `${discoveredItemsData.length}/${totalItems}`;
 					discoveredItemsContainer.appendChild(createItem(item));
 
+					if (sortMode == "name") sortDiscoveriesByName();
+					if (sortMode == "colour") sortDiscoveriesByColour();
+					search();
+
 					if (!initialItems.includes(item)) window.history.replaceState({}, "", "?x=" + toBase64(getProgress()));
 				}
 			}
@@ -1183,6 +1299,10 @@
 					discoveredItemsData.push([item, 0, iconAssociations[item][2]]);
 					discoveredPercentage.innerHTML = `${discoveredItemsData.length}/${totalItems}`;
 					discoveredItemsContainer.appendChild(createItem(item));
+
+					if (sortMode == "name") sortDiscoveriesByName();
+					if (sortMode == "colour") sortDiscoveriesByColour();
+					search();
 				}
 			}
 
@@ -1242,7 +1362,6 @@
 				let newItemElement = document.createElement("div");
 				newItemElement.classList.add("item");
 				newItemElement.classList.add(iconAssociations[item][2]); // colour
-				newItemElement.id = Date.now(); // make the element unique with a time-related id
 				newItemElement.innerHTML = `<i class="fa-${iconAssociations[item][0]} fa-${iconAssociations[item][1]}"></i><span>${item}</span>`;
 				return newItemElement;
 			}
@@ -1484,7 +1603,10 @@
 
 				for (let i = 0; i < binaryArray.length; i++) {
 					// discovers the items that are "true" - this will break across versions if I add more 'int' keys
-					if (binaryArray[i] == 1) discoverWithoutReplaceState(Object.keys(iconAssociations)[i]);
+					if (binaryArray[i] == 1) {
+						discoverWithoutReplaceState(Object.keys(iconAssociations)[i]);
+						discoveredItemsData[discoveredItemsData.length - 1][1] = (i + 1).toString().padStart(10, "0");
+					}
 				}
 			}
 
@@ -1614,7 +1736,7 @@
 				showSortedItems();
 			}
 
-			// TEST: CHANGE ITEM ORDER
+			// replace discovered items with new order
 			function showSortedItems() {
 				discoveredItemsContainer.innerHTML = "";
 
@@ -1623,9 +1745,59 @@
 				}
 			}
 
+			// click on sort buttons
+			sortByTimeButton.addEventListener("click", (e) => {
+				sortDiscoveriesByTime();
+				search();
+
+				sortByTimeButton.classList.add("active");
+				sortByNameButton.classList.remove("active");
+				sortByColourButton.classList.remove("active");
+
+				sortMode = "time";
+			});
+			sortByNameButton.addEventListener("click", (e) => {
+				sortDiscoveriesByName();
+				search();
+
+				sortByTimeButton.classList.remove("active");
+				sortByNameButton.classList.add("active");
+				sortByColourButton.classList.remove("active");
+
+				sortMode = "name";
+			});
+			sortByColourButton.addEventListener("click", (e) => {
+				sortDiscoveriesByColour();
+				search();
+
+				sortByTimeButton.classList.remove("active");
+				sortByNameButton.classList.remove("active");
+				sortByColourButton.classList.add("active");
+
+				sortMode = "colour";
+			});
+
+			var sortMode = "time";
+
+			// search!!!!!
+			searchField.addEventListener("input", (e) => {
+				search();
+			});
+			function search() {
+				for (let i = 0; i < discoveredItemsContainer.children.length; i++) {
+					let itemElement = discoveredItemsContainer.children[i];
+					let itemName = extractItemName(itemElement).toLowerCase();
+					let searchTerm = searchField.value.toLowerCase();
+
+					if (itemName.includes(searchTerm)) itemElement.style = "display: initial";
+					else itemElement.style = "display: none";
+				}
+			}
+
 			// initial items!!!
 			const initialItems = ["air", "earth", "fire", "water"];
 			for (let i = 0; i < initialItems.length; i++) discoverWithoutReplaceState(initialItems[i]);
+			sortByTimeButton.classList.add("active");
 		</script>
 	</body>
 </html>
