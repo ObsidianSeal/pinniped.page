@@ -1022,6 +1022,8 @@
 				["public transportation", "example", "bus"],
 				["traffic", "emotion", "hate"],
 				["cloud", "cloud", "sky"],
+				["Boeing 737", "big", "Boeing 747"],
+				["water", "planet", "GJ 1214 b"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -1237,10 +1239,12 @@
 				"Tokyo Tower": ["solid", "tower-observation", "red"],
 				"public transportation": ["solid", "wheelchair-move", "cyan-blue"],
 				"Adobe Photoshop": ["solid", "file-image", "blue"],
+				"Boeing 747": ["solid", "plane-departure", "blue"],
+				"GJ 1214 b": ["solid", "circle", "blue"],
 			};
 
 			// version #
-			const version = "v1.2.1";
+			const version = "v something is being cooked up";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1796,7 +1800,9 @@
 						if (searchTerm.test(itemName)) itemElement.style = "display: initial";
 						else itemElement.style = "display: none";
 					}
-				} catch {}
+				} catch {
+					console.log("INVALID RegEx");
+				}
 			}
 
 			// initial items!!!
