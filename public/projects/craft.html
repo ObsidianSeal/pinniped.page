@@ -553,7 +553,7 @@
 		<div class="discoveries-sidebar">
 			<div class="discovered-items"></div>
 			<div class="sorting-options">
-				<input id="search" autocomplete="off" placeholder="search?" />
+				<input id="search" autocomplete="off" placeholder="search? (RegEx)" />
 				<div id="sort-time"><i class="fa-solid fa-clock"></i></div>
 				<div id="sort-name"><i class="fa-solid fa-arrow-down-a-z"></i></div>
 				<div id="sort-colour"><i class="fa-solid fa-palette"></i></div>
@@ -954,6 +954,7 @@
 				["human", "fear", "death"],
 				["fish", "cook", "food"],
 				["sadness", "sadness", "depression"],
+				["big", "sadness", "depression"],
 				["big", "depression", "The Great Depression"],
 				["animal", "land", "mammal"],
 				["mammal", "example", "platypus"],
@@ -1239,7 +1240,7 @@
 			};
 
 			// version #
-			const version = "v1.2.0";
+			const version = "v1.2.1";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1784,14 +1785,18 @@
 				search();
 			});
 			function search() {
-				for (let i = 0; i < discoveredItemsContainer.children.length; i++) {
-					let itemElement = discoveredItemsContainer.children[i];
-					let itemName = extractItemName(itemElement).toLowerCase();
-					let searchTerm = searchField.value.toLowerCase();
+				let searchTerm = searchField.value;
+				try {
+					searchTerm = new RegExp(searchTerm);
 
-					if (itemName.includes(searchTerm)) itemElement.style = "display: initial";
-					else itemElement.style = "display: none";
-				}
+					for (let i = 0; i < discoveredItemsContainer.children.length; i++) {
+						let itemElement = discoveredItemsContainer.children[i];
+						let itemName = extractItemName(itemElement);
+
+						if (searchTerm.test(itemName)) itemElement.style = "display: initial";
+						else itemElement.style = "display: none";
+					}
+				} catch {}
 			}
 
 			// initial items!!!
