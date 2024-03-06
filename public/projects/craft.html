@@ -1244,7 +1244,7 @@
 			};
 
 			// version #
-			const version = "v1.2.1+";
+			const version = "v1.3.0";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1392,6 +1392,8 @@
 			var dragOffsetY = 0; // difference between click y and top of dragElement
 			var fromX = 0; // initial page x
 			var fromY = 0; // initial page y
+			var toX = 0; // new page x (required for touches)
+			var toY = 0; // new page y (required for touches)
 			var clickedDiscovery = false; // was the click from the discoveries panel?
 
 			// double click variables
@@ -1425,6 +1427,34 @@
 
 				// middle click: duplicate
 				if (e.button == 1) spawnItem(extractItemName(itemElement), rect.left + 10, rect.top - 10);
+
+				console.log(`"mousedown" listener - for the main area`);
+			});
+
+			// "touchstart" listener - for the main area ("mousedown" but for fingers)
+			itemContainer.addEventListener("touchstart", (e) => {
+				let itemElement = getItemElement(e.touches[0].target);
+				let rect = itemElement.getBoundingClientRect();
+
+				// there is only "left click" (tap)
+				if (Date.now() - lastClickTime < 500 && e.touches[0].target == lastClickElement) {
+					// double tap: duplicate item
+					spawnItem(extractItemName(itemElement), rect.left + 10, rect.top - 10);
+				} else {
+					// tap and drag: move item
+					drag = true; // start dragging
+					dragElement = itemElement; // set dragElement to item element clicked
+					dragOffsetX = e.touches[0].pageX - rect.left;
+					dragOffsetY = e.touches[0].pageY - rect.top;
+					fromX = e.touches[0].pageX;
+					fromY = e.touches[0].pageY;
+					document.querySelector(".item-container .item:last-child").after(dragElement); // move element to top!
+				}
+
+				lastClickTime = Date.now();
+				lastClickElement = e.touches[0].target;
+
+				console.log(`"touchstart" listener - for the main area ("mousedown" but for fingers)`);
 			});
 
 			// "mousedown" listener - for the "storage area"
@@ -1448,6 +1478,32 @@
 				}
 
 				if (e.button == 1) spawnItemAtRandomPosition(itemName);
+
+				console.log(`"mousedown" listener - for the "storage area"`);
+			});
+
+			// "touchstart" listener - for the "storage area" ("mousedown" but for fingers)
+			discoveredItemsContainer.addEventListener("touchstart", (e) => {
+				if (e.touches[0].target == discoveredItemsContainer) return;
+
+				let itemElement = getItemElement(e.touches[0].target);
+				let itemName = extractItemName(itemElement);
+				let rect = itemElement.getBoundingClientRect();
+
+				drag = true; // start dragging
+				dragElement = spawnItem(itemName, rect.left, rect.top); // set dragElement to item element clicked
+				dragOffsetX = e.touches[0].pageX - rect.left;
+				dragOffsetY = e.touches[0].pageY - rect.top;
+				fromX = e.touches[0].pageX;
+				fromY = e.touches[0].pageY;
+				itemContainer.appendChild(dragElement); // move element to top!
+
+				clickedDiscovery = true;
+
+				toX = fromX;
+				toY = fromY;
+
+				console.log(`"touchstart" listener - for the "storage area" ("mousedown" but for fingers)`);
 			});
 
 			// "mousemove" listener
@@ -1457,6 +1513,22 @@
 					let y = e.pageY;
 					dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
 				}
+
+				console.log(`"mousemove" listener`);
+			});
+
+			// "touchmove" listener ("mousemove" but for fingers)
+			document.addEventListener("touchmove", (e) => {
+				if (drag) {
+					let x = e.touches[0].pageX;
+					let y = e.touches[0].pageY;
+					dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
+
+					toX = x;
+					toY = y;
+				}
+
+				console.log(`"touchmove" listener ("mousemove" but for fingers)`);
 			});
 
 			// "mouseup" listener
@@ -1472,6 +1544,25 @@
 					// regardless of outcome, reset "clickedDiscovery"
 					clickedDiscovery = false;
 				}
+
+				console.log(`"mouseup" listener`);
+			});
+
+			// "touchend" listener ("mouseup" but for fingers)
+			document.addEventListener("touchend", (e) => {
+				if (drag) {
+					drag = false; // stop dragging
+					if (toX > window.innerWidth - storageAreaWidth) dragElement.remove(); // remove if within "storage area"
+					else if (toX != fromX && toY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
+
+					// if the element never moved, but was in the storage/discoveries area, place a copy somewhere on the screen
+					if (toX == fromX && toY == fromY && clickedDiscovery) spawnItemAtRandomPosition(extractItemName(dragElement));
+
+					// regardless of outcome, reset "clickedDiscovery"
+					clickedDiscovery = false;
+				}
+
+				console.log(`"touchend" listener ("mouseup" but for fingers)`);
 			});
 
 			// determine if two elements are overlapping
@@ -1543,8 +1634,6 @@
 					discoverWithoutReplaceState(thing);
 				}
 			}
-
-			// --- in progress: save-related functions ---
 
 			// convert the discoveries array to a binary number
 			function getProgress() {
