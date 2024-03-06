@@ -137,7 +137,8 @@
 			h1,
 			.discovered-fraction,
 			.version,
-			.clear-button {
+			.clear-button,
+			.help-button {
 				position: absolute;
 				font-family: "Roboto";
 				color: var(--grey85);
@@ -150,7 +151,8 @@
 			}
 
 			h1,
-			.clear-button i {
+			.clear-button i,
+			.help-button i {
 				font-size: 50px;
 			}
 
@@ -164,7 +166,8 @@
 			}
 
 			h1 a:hover,
-			.clear-button:hover {
+			.clear-button:hover,
+			.help-button:hover {
 				color: var(--grey80);
 				cursor: pointer;
 			}
@@ -200,13 +203,10 @@
 				font-size: 80px;
 			}
 
-			.version,
-			.clear-button {
+			.version {
 				font-weight: 500;
 				font-size: 30px;
-			}
 
-			.version {
 				top: 120px;
 				left: 50px;
 			}
@@ -214,6 +214,11 @@
 			.clear-button {
 				right: 550px;
 				bottom: 50px;
+			}
+
+			.help-button {
+				top: 50px;
+				right: 550px;
 			}
 
 			.item-container .item {
@@ -566,6 +571,7 @@
 		<h1><a href="../index.html">pinniped.page</a>/craft</h1>
 		<span class="discovered-fraction"></span>
 		<span class="version"></span>
+		<span class="help-button"><i class="fa-solid fa-question"></i></span>
 		<span class="clear-button"><i class="fa-solid fa-trash-can"></i></span>
 		<div class="item-container"></div>
 
@@ -1276,12 +1282,13 @@
 			};
 
 			// version #
-			const version = "v1.3.0";
+			const version = "v1.4.0";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
 			const discoveredPercentage = document.querySelector(".discovered-fraction");
 			const versionElement = document.querySelector(".version");
+			const helpButton = document.querySelector(".help-button");
 			const clearButton = document.querySelector(".clear-button");
 			const itemContainer = document.querySelector(".item-container");
 
@@ -1638,6 +1645,11 @@
 				e.preventDefault();
 				getItemElement(e.target).remove();
 				return false;
+			});
+
+			// help button
+			helpButton.addEventListener("click", (e) => {
+				window.open("craft/how-to.html", "_blank").focus();
 			});
 
 			// clear button
