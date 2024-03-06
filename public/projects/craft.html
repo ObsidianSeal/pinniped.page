@@ -108,6 +108,10 @@
 				-moz-user-select: none; /* Firefox all */
 				-ms-user-select: none; /* IE 10+ */
 				user-select: none; /* Likely future */
+
+				/* TEST: https://stackoverflow.com/questions/6211959/html5-div-flashes-on-tap */
+				-webkit-tap-highlight-color: transparent;
+				/* TEST SUCCESSFUL!!! */
 			}
 
 			::-webkit-scrollbar {
@@ -1024,6 +1028,24 @@
 				["cloud", "cloud", "sky"],
 				["Boeing 737", "big", "Boeing 747"],
 				["water", "planet", "GJ 1214 b"],
+				["bird", "house", "birdhouse"],
+				["sun", "thinking", "light"],
+				["sun", "time", "supernova"],
+				["light", "opposite", "darkness"],
+				["light", "antonym", "darkness"],
+				["light", "darkness", "opposite"],
+				["darkness", "opposite", "light"],
+				["darkness", "antonym", "light"],
+				["Minecraft", "mine", "diamond"],
+				["Minecraft", "rock", "stone"],
+				["human", "animal", "pet"],
+				["human", "pet", "dog"],
+				["Minecraft", "animal", "cow"],
+				["pet", "example", "cat"],
+				["Minecraft", "pet", "dog"],
+				["Minecraft", "empty", "air"],
+				["Minecraft", "earth", "dirt"],
+				["sun", "human", "hot"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -1241,6 +1263,16 @@
 				"Adobe Photoshop": ["solid", "file-image", "blue"],
 				"Boeing 747": ["solid", "plane-departure", "blue"],
 				"GJ 1214 b": ["solid", "circle", "blue"],
+				"birdhouse": ["solid", "crow", "red-orange"],
+				"light": ["regular", "lightbulb", "yellow"],
+				"supernova": ["solid", "explosion", "magenta"],
+				"darkness": ["solid", "circle-half-stroke", "blue-violet"],
+				"diamond": ["solid", "diamond", "cyan"],
+				"stone": ["solid", "hill-rockslide", "light-grey"],
+				"pet": ["solid", "shield-dog", "violet"],
+				"cow": ["solid", "cow", "brown"],
+				"dog": ["solid", "dog", "tan"],
+				"cat": ["solid", "cat", "tan"],
 			};
 
 			// version #
@@ -1427,35 +1459,27 @@
 
 				// middle click: duplicate
 				if (e.button == 1) spawnItem(extractItemName(itemElement), rect.left + 10, rect.top - 10);
-
-				console.log(`MOUSE: down`);
 			});
 
 			// "touchstart" listener - for the main area ("mousedown" but for fingers)
-			// itemContainer.addEventListener("touchstart", (e) => {
-			// 	let itemElement = getItemElement(e.touches[0].target);
-			// 	let rect = itemElement.getBoundingClientRect();
+			itemContainer.addEventListener("touchstart", (e) => {
+				let itemElement = getItemElement(e.touches[0].target);
+				let rect = itemElement.getBoundingClientRect();
 
-			// 	// there is only "left click" (tap)
-			// 	if (Date.now() - lastClickTime < 500 && e.touches[0].target == lastClickElement) {
-			// 		// double tap: duplicate item
-			// 		spawnItem(extractItemName(itemElement), rect.left + 10, rect.top - 10);
-			// 	} else {
-			// 		// tap and drag: move item
-			// 		drag = true; // start dragging
-			// 		dragElement = itemElement; // set dragElement to item element clicked
-			// 		dragOffsetX = e.touches[0].pageX - rect.left;
-			// 		dragOffsetY = e.touches[0].pageY - rect.top;
-			// 		fromX = e.touches[0].pageX;
-			// 		fromY = e.touches[0].pageY;
-			// 		document.querySelector(".item-container .item:last-child").after(dragElement); // move element to top!
-			// 	}
+				// there is only "left click" (tap) - to drag:
 
-			// 	lastClickTime = Date.now();
-			// 	lastClickElement = e.touches[0].target;
+				// tap and drag: move item
+				drag = true; // start dragging
+				dragElement = itemElement; // set dragElement to item element clicked
+				dragOffsetX = e.touches[0].pageX - rect.left;
+				dragOffsetY = e.touches[0].pageY - rect.top;
+				fromX = e.touches[0].pageX;
+				fromY = e.touches[0].pageY;
+				document.querySelector(".item-container .item:last-child").after(dragElement); // move element to top!
 
-			// 	console.log(`TOUCH: start`);
-			// });
+				toX = fromX;
+				toY = fromY;
+			});
 
 			// "mousedown" listener - for the "storage area"
 			discoveredItemsContainer.addEventListener("mousedown", (e) => {
@@ -1480,34 +1504,31 @@
 
 				// middle click: spawn item
 				if (e.button == 1) spawnItemAtRandomPosition(itemName);
-
-				console.log(`MOUSE: down (storage)`);
 			});
 
 			// "touchstart" listener - for the "storage area" ("mousedown" but for fingers)
-			// discoveredItemsContainer.addEventListener("touchstart", (e) => {
-			// 	if (e.touches[0].target == discoveredItemsContainer) return;
+			discoveredItemsContainer.addEventListener("touchstart", (e) => {
+				if (e.touches[0].target == discoveredItemsContainer) return;
 
-			// 	let itemElement = getItemElement(e.touches[0].target);
-			// 	let itemName = extractItemName(itemElement);
-			// 	let rect = itemElement.getBoundingClientRect();
+				let itemElement = getItemElement(e.touches[0].target);
+				let itemName = extractItemName(itemElement);
+				let rect = itemElement.getBoundingClientRect();
 
-			//  // there is only "left click" (tap)
-			// 	drag = true; // start dragging
-			// 	dragElement = spawnItem(itemName, rect.left, rect.top); // set dragElement to item element clicked
-			// 	dragOffsetX = e.touches[0].pageX - rect.left;
-			// 	dragOffsetY = e.touches[0].pageY - rect.top;
-			// 	fromX = e.touches[0].pageX;
-			// 	fromY = e.touches[0].pageY;
-			// 	itemContainer.appendChild(dragElement); // move element to top!
+				// there is only "left click" (tap) - to drag:
 
-			// 	clickedDiscovery = true;
+				drag = true; // start dragging
+				dragElement = spawnItem(itemName, rect.left, rect.top); // set dragElement to item element clicked
+				dragOffsetX = e.touches[0].pageX - rect.left;
+				dragOffsetY = e.touches[0].pageY - rect.top;
+				fromX = e.touches[0].pageX;
+				fromY = e.touches[0].pageY;
+				itemContainer.appendChild(dragElement); // move element to top!
 
-			// 	toX = fromX;
-			// 	toY = fromY;
+				clickedDiscovery = true;
 
-			// 	console.log(`TOUCH: start (storage)`);
-			// });
+				toX = fromX;
+				toY = fromY;
+			});
 
 			// "mousemove" listener
 			document.addEventListener("mousemove", (e) => {
@@ -1516,28 +1537,25 @@
 					let y = e.pageY;
 					dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
 				}
-
-				console.log(`MOUSE: move`);
 			});
 
 			// "touchmove" listener ("mousemove" but for fingers)
-			// document.addEventListener("touchmove", (e) => {
-			// 	if (drag) {
-			// 		let x = e.touches[0].pageX;
-			// 		let y = e.touches[0].pageY;
-			// 		dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
+			document.addEventListener("touchmove", (e) => {
+				if (drag) {
+					let x = e.touches[0].pageX;
+					let y = e.touches[0].pageY;
+					dragElement.style = `left: ${x - dragOffsetX}px; top: ${y - dragOffsetY}px`; // set x and y coordinate of element
 
-			// 		toX = x;
-			// 		toY = y;
-			// 	}
-
-			// 	console.log(`TOUCH: move`);
-			// });
+					toX = x;
+					toY = y;
+				}
+			});
 
 			// "mouseup" listener
 			document.addEventListener("mouseup", (e) => {
 				if (drag) {
 					drag = false; // stop dragging
+
 					if (e.pageX > window.innerWidth - storageAreaWidth) dragElement.remove(); // remove if within "storage area"
 					else if (e.pageX != fromX && e.pageY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
 
@@ -1547,26 +1565,22 @@
 					// regardless of outcome, reset "clickedDiscovery"
 					clickedDiscovery = false;
 				}
-
-				console.log(`MOUSE: up`);
 			});
 
 			// "touchend" listener ("mouseup" but for fingers)
-			// document.addEventListener("touchend", (e) => {
-			// 	if (drag) {
-			// 		drag = false; // stop dragging
-			// 		if (toX > window.innerWidth - storageAreaWidth) dragElement.remove(); // remove if within "storage area"
-			// 		else if (toX != fromX && toY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
+			document.addEventListener("touchend", (e) => {
+				if (drag) {
+					drag = false; // stop dragging
 
-			// 		// if the element never moved, but was in the storage/discoveries area, place a copy somewhere on the screen
-			// 		if (toX == fromX && toY == fromY && clickedDiscovery) spawnItemAtRandomPosition(extractItemName(dragElement));
+					if (toX > window.innerWidth - storageAreaWidth) dragElement.remove(); // remove if within "storage area"
+					else if (toX != fromX && toY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
 
-			// 		// regardless of outcome, reset "clickedDiscovery"
-			// 		clickedDiscovery = false;
-			// 	}
+					// for some reason, 'mouseup' handles spawnItemAtRandomPosition(); (test on an actual touchscreen device!)
 
-			// 	console.log(`TOUCH: end`);
-			// });
+					// regardless of outcome, reset "clickedDiscovery"
+					clickedDiscovery = false;
+				}
+			});
 
 			// determine if two elements are overlapping
 			function checkForOverlap() {
