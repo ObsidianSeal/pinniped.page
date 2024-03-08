@@ -143,10 +143,12 @@
 
 			if (title.indexOf(">") > -1 || title.indexOf("<") > -1 || text.indexOf(">") > -1 || text.indexOf("<") > -1) {
 				document.getElementById("title").innerHTML = "!!!";
-				document.getElementById("content").innerHTML = 'Possible malicious content detected (">" or "<" found). For your safety, the page will not be updated.';
+				document.getElementById("content").innerHTML =
+					"Possible malicious content detected (&ldquo;>&rdquo; or &ldquo;<&rdquo; found). For your safety, the page will not be updated.";
 			} else {
 				if (title != null && title != "") {
 					document.getElementById("title").innerHTML = `${title}`;
+					document.querySelector("title").innerHTML = title + " — " + document.querySelector("title").innerHTML;
 				}
 
 				if (text != null && text != "") {

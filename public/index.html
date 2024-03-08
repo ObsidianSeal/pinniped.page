@@ -28,7 +28,7 @@
 		<meta property="og:url" content="https://pinniped.page/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="The Pinniped Page" />
-		<meta property="og:description" content="Obsidian_Seal's Website" />
+		<meta property="og:description" content="Obsidian_Seal&rsquo;s Website" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
@@ -81,7 +81,7 @@
 
 				<div style="height: 50px"></div>
 
-				<h3 id="subtitle">Obsidian_Seal's Website</h3>
+				<h3 id="subtitle"></h3>
 			</div>
 		</div>
 
@@ -104,13 +104,13 @@
 			// ------- random subtitle -------
 
 			const subtitles = [
-				"Obsidian_Seal's Website",
+				"Obsidian_Seal&rsquo;s Website",
 				"What are you doing here?",
 				"Now with 50% more .page!",
 				"1234567890",
 				"Hosted by Firebase!",
 				"Domain from Google Domains",
-				"Yeah, it's pretty cool.",
+				"Yeah, it&rsquo;s pretty cool.",
 				"???",
 				"Woah.",
 				"You should probably look at something else.",
@@ -129,7 +129,7 @@
 				"Maybe visit the projects page?",
 				"Maybe look at the blog page?",
 				"VSCode = epic",
-				"You're pretty cool.",
+				"You&rsquo;re pretty cool.",
 				"MMXX.XI.XXVIII IV:IV",
 				"transition: all 0.5s;",
 				"Blog posts count views...",
@@ -140,15 +140,15 @@
 				"Hello",
 				"Hi",
 				"o/",
-				"Je n'aime pas Squarespace",
+				"Je n&rsquo;aime pas Squarespace",
 				"Hello! / Bonjour! / Hola!",
 				"Have you done the wordlelele yet today?",
 				"try the wordlelele!",
 				"now with wordlelele",
-				"press shift, then 'w', then enter",
+				"press shift, then &lsquo;w&rsquo;, then enter",
 				"wordlelele: words 1-20 letters long",
 				"I wonder who last set the wordlelele",
-				"play VALORANT? try 'v'",
+				"play VALORANT? try &lsquo;v&rsquo;",
 				"Ich heiße Obsidian_Seal",
 				"Robben sind meine Lieblingstiere",
 				"Finite Craft",
@@ -191,6 +191,9 @@
 				}
 				noticeHidden = !noticeHidden;
 			}
+
+			// if there should not be a notice
+			document.querySelector("#notice").remove();
 
 			// ------- footer position, subtitle visibility -------
 

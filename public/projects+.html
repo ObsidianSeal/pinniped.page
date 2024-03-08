@@ -21,7 +21,7 @@
 		<meta property="og:url" content="https://pinniped.page/projects+" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="The Pinniped Page — Projects (a-z)" />
-		<meta property="og:description" content="Obsidian_Seal's projects, listed alphabetically." />
+		<meta property="og:description" content="Obsidian_Seal&rsquo;s projects, listed alphabetically." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 	</head>
 
@@ -123,11 +123,11 @@
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-gavel icon-24"></i><a class="link" href="projects/mjolnir.html">Mjölnir</a>
-				<span class="blog-archive">— Plugin; adds Thor's mythical hammer to Minecraft.</span>
+				<span class="blog-archive">— Plugin; adds Thor&rsquo;s mythical hammer to Minecraft.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-arrow-pointer icon-15"></i><a class="link" href="projects/mouse-maze.html">MouseMaze</a>
-				<span class="blog-archive">— It's a maze...for the mouse!</span>
+				<span class="blog-archive">— It&rsquo;s a maze...for the mouse!</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-hashtag icon-21"></i><a class="link" href="projects/numbers.html?b=1">numbers</a>
@@ -146,7 +146,7 @@
 				<span class="blog-archive">— Create progress bars.</span>
 			</p>
 			<p class="blog-archive">
-				<i class="fa-solid fa-cubes icon-27"></i><a class="link" href="projects/cube.html" target="_blank">Rubik's Cube Scrambler</a>
+				<i class="fa-solid fa-cubes icon-27"></i><a class="link" href="projects/cube.html" target="_blank">Rubik&rsquo;s Cube Scrambler</a>
 				<span class="blog-archive">— Scramble generator for 1x1 to 5x5 cubes, pyraminx, etc.</span>
 			</p>
 			<p class="blog-archive">
@@ -159,7 +159,7 @@
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-quote-left icon-21"></i><a class="link" href="projects/text.html" target="_blank">text</a>
-				<span class="blog-archive">— I'm trying to learn Firebase Realtime Database.</span>
+				<span class="blog-archive">— I&rsquo;m trying to learn Firebase Realtime Database.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-robot icon-30"></i><a class="link" href="projects/the-square.html">The Square</a>
@@ -167,7 +167,7 @@
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-xmark icon-18"></i><a class="link" href="projects/tictactoe.html?o=1">TicTacToe</a>
-				<span class="blog-archive">— The classic game of Xs and Os, but it's an online 1v1.</span>
+				<span class="blog-archive">— The classic game of Xs and Os, but it&rsquo;s an online 1v1.</span>
 			</p>
 			<p class="blog-archive">
 				<i class="fa-solid fa-keyboard icon-27"></i><a class="link" href="projects/type.html" target="_blank">Type</a>
@@ -204,7 +204,7 @@
 		const query = window.location.search;
 		const item = new URLSearchParams(query);
 		const tag = item.get("tag");
-		const search = item.get("search");
+		const search = item.get("search").replace("'", "’"); // because I use &rsquo; now
 
 		// function to remove elements from list
 		function refine(type, whatToKeep) {
