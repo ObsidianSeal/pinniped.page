@@ -204,7 +204,7 @@
 		const query = window.location.search;
 		const item = new URLSearchParams(query);
 		const tag = item.get("tag");
-		const search = item.get("search").replace("'", "’"); // because I use &rsquo; now
+		const search = item.get("search");
 
 		// function to remove elements from list
 		function refine(type, whatToKeep) {
@@ -250,7 +250,7 @@
 
 		// use search?
 		if (search != null && search != "") {
-			refine("search", search);
+			refine("search", search.replace("'", "’")); // because I use &rsquo; now
 		}
 
 		// no results?

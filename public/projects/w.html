@@ -660,7 +660,15 @@
 
 			// 1: header & other "back" buttons
 			function goBack() {
-				if (document.referrer != "" && document.referrer != null && document.referrer.includes("pinniped.page")) history.back();
+				console.log(document.referrer);
+				if (
+					document.referrer != "" &&
+					document.referrer != null &&
+					document.referrer != "https://pinniped.page/w" &&
+					document.referrer != "https://pinniped.page/projects/w" &&
+					document.referrer.includes("pinniped.page")
+				)
+					history.back();
 				else window.location.href = "../projects+.html";
 			}
 
@@ -1176,7 +1184,7 @@
 			loadThemeFromURL();
 
 			// last: version #
-			let version = "1.5.3";
+			let version = "1.5.4";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
 		</script>
