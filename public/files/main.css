@@ -145,6 +145,10 @@ ul li::marker {
 	color: #292f367f;
 }
 
+li {
+	word-wrap: break-word; /* TEST: better wrapping */
+}
+
 li::marker {
 	font-weight: bold;
 }

@@ -50,7 +50,7 @@
 
 			<div class="break"></div>
 
-			<p class="text"><i class="fa-solid fa-circle-question"></i> <a class="link" href="../s.html" target="_blank">link</a></p>
+			<p><i class="fa-solid fa-circle-question"></i> <a class="link" href="../s.html" target="_blank">link</a></p>
 
 			<div class="break"></div>
 
