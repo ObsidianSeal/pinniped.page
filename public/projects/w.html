@@ -562,9 +562,9 @@
 			<h2>About / How to Play</h2>
 
 			<p>
-				wordlelele: it's Wordle, but the word can be anywhere from one to twenty letters long. And because that's not crazy enough, if you successfully figure out what
-				the word is, YOU get to choose the next word. Unfortunately, that means there's no guarantee that the word is family friendly or even a word at all, so good
-				luck!
+				wordlelele: it&rsquo;s Wordle, but the word can be anywhere from one to twenty letters long. And because that&rsquo;s not crazy enough, if you successfully
+				figure out what the word is, YOU get to choose the next word. Unfortunately, that means there&rsquo;s no guarantee that the word is family friendly or even a
+				word at all, so good luck!
 			</p>
 
 			<p>
@@ -574,8 +574,8 @@
 
 			<p>
 				However long the word is, you get one more guess than there are letters in the word. To make a guess, use either the provided on-screen keyboard or your own to
-				enter an appropriately long word (or random string of letters—I won't stop you), then press enter. The letters that make up your guess are then coloured based
-				on their presence in the target word as follows:
+				enter an appropriately long word (or random string of letters—I won&rsquo;t stop you), then press enter. The letters that make up your guess are then coloured
+				based on their presence in the target word as follows:
 			</p>
 
 			<ul>
@@ -586,7 +586,7 @@
 
 			<p>
 				If you successfully determine the word within the alloted number of guesses, congratulations! You can choose the next word and/or flex your luck and/or skill
-				with the share button (it copies text to your clipboard). If you can't get the word, don't fret: you still get to choose the next one.
+				with the share button (it copies text to your clipboard). If you can&rsquo;t get the word, don&rsquo;t fret: you still get to choose the next one.
 			</p>
 
 			<h2>Frequently Asked Questions</h2>
@@ -602,18 +602,21 @@
 				</li>
 				<li>
 					Why are the guess grid squares all squished together?<br /><span class="grey"
-						>Because...I can't seem to control them. For words longer than five or six letters you may want to play on a bigger screen. Sorry.</span
+						>Because...I can&rsquo;t seem to control them. For words longer than five or six letters you may want to play on a bigger screen. Sorry.</span
 					>
 				</li>
-				<li>Why isn't the guess grid showing up?<br /><span class="grey">Either your internet is slow or there's something wrong with the database.</span></li>
+				<li>
+					Why isn&rsquo;t the guess grid showing up?<br /><span class="grey">Either your internet is slow or there&rsquo;s something wrong with the database.</span>
+				</li>
 				<li>
 					Why is the maximum word length twenty letters?<br /><span class="grey"
-						>Not only is twenty a nice round number, it's also the length of "uncharacteristically": the longest [English] word you might actually use.</span
+						>Not only is twenty a nice round number, it&rsquo;s also the length of &ldquo;uncharacteristically&rdquo;: the longest [English] word you might
+						actually use.</span
 					>
 				</li>
-				<li>Why can't I make &lt;invalid word&gt; the next word?<br /><span class="grey">Because words consist exclusively of letters.</span></li>
+				<li>Why can&rsquo;t I make &lt;invalid word&gt; the next word?<br /><span class="grey">Because words consist exclusively of letters.</span></li>
 				<li>
-					What do you mean by "the word in the database was invalid"?<br /><span class="grey"
+					What do you mean by &ldquo;the word in the database was invalid&rdquo;?<br /><span class="grey"
 						>Either the word contained a character that was not a letter, or no word was found. Hopefully this never happens.</span
 					>
 				</li>
@@ -995,7 +998,7 @@
 				} else {
 					document.querySelector(".done p:first-child").innerHTML = "← back";
 					document.querySelector(".done h2").innerHTML = ":(";
-					document.querySelector(".done p:nth-child(3)").innerHTML = `Better luck next time.<br />The word was "${word.toLowerCase()}"`;
+					document.querySelector(".done p:nth-child(3)").innerHTML = `Better luck next time.<br />The word was &ldquo;${word.toLowerCase()}&rdquo;`;
 					document.querySelector("#shareButton").classList.remove("hide");
 
 					document.querySelector(".done p:first-child").addEventListener("click", (e) => {
@@ -1060,7 +1063,7 @@
 					document.querySelector("#nextWordStatus").classList.remove("hide");
 					document.querySelector("#nextWordStatus").classList.remove("orange");
 					document.querySelector("#nextWordStatus").classList.add("blue");
-					document.querySelector("#nextWordStatus").innerHTML = `Successfully set the next word to "${word}"`;
+					document.querySelector("#nextWordStatus").innerHTML = `Successfully set the next word to &ldquo;${word}&rdquo;`;
 				} else {
 					document.querySelector("#nextWordStatus").classList.remove("hide");
 					document.querySelector("#nextWordStatus").classList.remove("blue");
@@ -1184,7 +1187,7 @@
 			loadThemeFromURL();
 
 			// last: version #
-			let version = "1.5.4";
+			let version = "1.5.5";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
 		</script>

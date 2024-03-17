@@ -1292,7 +1292,7 @@
 					if (!checkForWin()) {
 						if (newData == "x") {
 							if (player) {
-								textBelow.innerHTML = "It's your turn!";
+								textBelow.innerHTML = "It&rsquo;s your turn!";
 							} else {
 								textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
 							}
@@ -1300,7 +1300,7 @@
 							if (player) {
 								textBelow.innerHTML = "Waiting for opponent<d id='d1'>.</d><d id='d2'>.</d><d id='d3'>.</d>";
 							} else {
-								textBelow.innerHTML = "It's your turn!";
+								textBelow.innerHTML = "It&rsquo;s your turn!";
 							}
 						}
 					}
@@ -1587,7 +1587,7 @@
 
 		// list
 		const tooltips = [
-			'number of times the "new game" and "next" buttons have been clicked',
+			"number of times the &ldquo;new game&rdquo; and &ldquo;next&rdquo; buttons have been clicked",
 			"games with at least one move (of the total created games)",
 			"number of games joined by a second player (of the total created games)",
 			"number of games won or tied (of the total created games)",
@@ -1595,10 +1595,10 @@
 			"number of games won by player two (of the total completed games)",
 			"number of games with no winner (of the total completed games)",
 			"average number of moves in completed games",
-			"average time between completed games' <u>creation</u> and completion",
-			"time between the shortest completed game's <u>creation</u> and completion", // add!
-			"time between the longest completed game's <u>creation</u> and completion", // add!
-			'number of games continued for another round by way of the "next" button (of the total completed games)',
+			"average time between completed games&rsquo; <u>creation</u> and completion",
+			"time between the shortest completed game&rsquo;s <u>creation</u> and completion", // add!
+			"time between the longest completed game&rsquo;s <u>creation</u> and completion", // add!
+			"number of games continued for another round by way of the &ldquo;next&rdquo; button (of the total completed games)",
 			"position of the most common first move overall (in <u>started</u> games)",
 			"position of the most common last move overall (in completed games)",
 			"position of the most common first move in games won by X", // add; provide the number!
