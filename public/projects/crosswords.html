@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>crosswords</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..200" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/crosswords" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="crosswords" />
+		<meta property="og:description" content="Crossword renderer beta. [description subject to change]" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Crossword renderer beta. [description subject to change]" />
+		<meta name="keywords" content="crosswords" />
+
+		<style>
+			.crossword {
+				width: fit-content;
+			}
+
+			.crossword .row {
+				display: flex;
+				width: fit-content;
+			}
+
+			.crossword .row .square {
+				width: 50px;
+				height: 50px;
+
+				border-top: 2px solid #4ecdc4;
+				border-left: 2px solid #4ecdc4;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.crossword .row .square:last-child {
+				border-right: 2px solid #4ecdc4;
+			}
+
+			.crossword .row:last-child .square {
+				border-bottom: 2px solid #4ecdc4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="crossword">
+			<div class="row">
+				<div class="square">-</div>
+				<div class="square">-</div>
+				<div class="square">g</div>
+				<div class="square">g</div>
+				<div class="square">a</div>
+			</div>
+			<div class="row">
+				<div class="square">a</div>
+				<div class="square">-</div>
+				<div class="square">f</div>
+				<div class="square">-</div>
+				<div class="square">t</div>
+			</div>
+			<div class="row">
+				<div class="square">y</div>
+				<div class="square">-</div>
+				<div class="square">-</div>
+				<div class="square">-</div>
+				<div class="square">k</div>
+			</div>
+			<div class="row">
+				<div class="square">l</div>
+				<div class="square">d</div>
+				<div class="square">b</div>
+				<div class="square">z</div>
+				<div class="square">-</div>
+			</div>
+			<div class="row">
+				<div class="square">x</div>
+				<div class="square">w</div>
+				<div class="square">-</div>
+				<div class="square">b</div>
+				<div class="square">q</div>
+			</div>
+		</div>
+
+		<script>
+			console.log("hello world");
+		</script>
+	</body>
+</html>
