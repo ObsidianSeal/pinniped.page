@@ -21,78 +21,112 @@
 		<meta name="keywords" content="crosswords" />
 
 		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900");
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				font-family: "Roboto Slab";
+			}
+
+			body {
+				margin: 20px;
+				border: 2px solid #8a9295;
+				padding: 20px;
+
+				background-color: #16262c;
+				height: calc(100vh - 84px);
+			}
+
+			h1 {
+				font-size: 72px;
+				font-weight: 900;
+
+				margin-bottom: 50px;
+				color: #d4d7d8;
+			}
+
+			h1::selection {
+				background-color: #27363c;
+			}
+
+			.crossword-container {
+				display: flex;
+				justify-content: center;
+				user-select: none;
+			}
+
 			.crossword {
 				width: fit-content;
 			}
 
-			.crossword .row {
+			.row {
 				display: flex;
 				width: fit-content;
 			}
 
-			.crossword .row .square {
+			.square {
 				width: 50px;
-				height: 50px;
+				height: 40px;
 
-				border-top: 2px solid #4ecdc4;
-				border-left: 2px solid #4ecdc4;
+				border-top: 2px solid #8a9295;
+				border-left: 2px solid #8a9295;
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
+
+				font-size: 36px;
+				font-weight: 500;
+				padding-top: 10px;
+
+				color: #d4d7d8;
 			}
 
-			.crossword .row .square:last-child {
-				border-right: 2px solid #4ecdc4;
+			.square:last-child {
+				border-right: 2px solid #8a9295;
 			}
 
-			.crossword .row:last-child .square {
-				border-bottom: 2px solid #4ecdc4;
+			.row:last-child .square {
+				border-bottom: 2px solid #8a9295;
+			}
+
+			.void {
+				background-color: #8a9295;
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="crossword">
-			<div class="row">
-				<div class="square">-</div>
-				<div class="square">-</div>
-				<div class="square">g</div>
-				<div class="square">g</div>
-				<div class="square">a</div>
-			</div>
-			<div class="row">
-				<div class="square">a</div>
-				<div class="square">-</div>
-				<div class="square">f</div>
-				<div class="square">-</div>
-				<div class="square">t</div>
-			</div>
-			<div class="row">
-				<div class="square">y</div>
-				<div class="square">-</div>
-				<div class="square">-</div>
-				<div class="square">-</div>
-				<div class="square">k</div>
-			</div>
-			<div class="row">
-				<div class="square">l</div>
-				<div class="square">d</div>
-				<div class="square">b</div>
-				<div class="square">z</div>
-				<div class="square">-</div>
-			</div>
-			<div class="row">
-				<div class="square">x</div>
-				<div class="square">w</div>
-				<div class="square">-</div>
-				<div class="square">b</div>
-				<div class="square">q</div>
-			</div>
-		</div>
+		<h1></h1>
+
+		<div class="crossword-container"><div class="crossword"></div></div>
 
 		<script>
-			console.log("hello world");
+			const crosswords = ["QUIET/U----/EARTH/E---E/NEVER", "THREE/E-O-A/NOD-R", "------/ABCDEF/GHIJKL/MNOPQR/STUVWX/YZ----"];
+
+			const crosswordNumber = Math.floor(Math.random() * crosswords.length);
+			const crosswordArray = crosswords[crosswordNumber].split("/");
+			for (let i = 0; i < crosswordArray.length; i++) crosswordArray[i] = crosswordArray[i].split("");
+
+			document.querySelector("h1").innerHTML = `crossword #${crosswordNumber + 1}`;
+
+			for (let i = 0; i < crosswordArray.length; i++) {
+				let rowElement = document.createElement("div");
+				rowElement.classList.add("row");
+
+				for (let j = 0; j < crosswordArray[i].length; j++) {
+					let squareElement = document.createElement("div");
+					squareElement.classList.add("square");
+					let letter = crosswordArray[i][j];
+					if (letter == "-") squareElement.classList.add("void");
+					else squareElement.innerHTML = letter;
+					rowElement.append(squareElement);
+				}
+
+				document.querySelector(".crossword").appendChild(rowElement);
+			}
 		</script>
 	</body>
 </html>
