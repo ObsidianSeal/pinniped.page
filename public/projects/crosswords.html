@@ -35,6 +35,19 @@
 				--error-extra: #ff645a;
 			}
 
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--main);
+				border: 5px solid var(--bg);
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--sub);
+			}
+
 			* {
 				margin: 0;
 				border: 0;
@@ -48,17 +61,19 @@
 				padding: 20px;
 
 				background-color: var(--bg);
-				height: calc(100vh - 84px);
+				min-height: calc(100vh - 84px);
 			}
 
 			h1,
 			h2 {
 				color: var(--main);
+				width: fit-content;
 			}
 
 			h1 {
 				font-size: 72px;
 				font-weight: 700;
+				position: relative;
 			}
 
 			h2 {
@@ -74,8 +89,56 @@
 
 			h1::selection,
 			h2::selection,
-			h2 span::selection {
+			h2 span::selection,
+			.puzzle-title::selection {
 				background-color: var(--sub-alt);
+			}
+
+			.material-symbols-outlined {
+				font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+			}
+
+			h1 .material-symbols-outlined {
+				font-size: 72px;
+				translate: 0 5px;
+			}
+
+			h1 .material-symbols-outlined:hover {
+				cursor: pointer;
+			}
+
+			.choose-puzzle-menu {
+				width: 500px;
+				height: 300px;
+
+				position: absolute;
+				top: 100px;
+				right: 0;
+
+				background-color: var(--bg);
+				border: 2px solid var(--sub-alt);
+
+				z-index: 1;
+				overflow-y: scroll;
+			}
+
+			.choose-puzzle-menu div {
+				font-size: 32px;
+				font-weight: 500;
+				padding: 0 0 5px 10px;
+			}
+
+			.choose-puzzle-menu div:hover {
+				cursor: pointer;
+				background-color: var(--sub-alt);
+			}
+
+			.choose-puzzle-menu,
+			.material-symbols-outlined {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
 			}
 
 			.crossword-container {
@@ -109,6 +172,7 @@
 				padding-top: 10px;
 
 				color: var(--text);
+				background-color: var(--bg);
 
 				position: relative;
 			}
@@ -137,7 +201,10 @@
 	</head>
 
 	<body>
-		<h1></h1>
+		<h1>
+			&ldquo;<span class="puzzle-title"></span>&rdquo; <span class="material-symbols-outlined">arrow_drop_down</span>
+			<div class="choose-puzzle-menu"></div>
+		</h1>
 		<h2>by <span></span></h2>
 
 		<div class="crossword-container"><div class="crossword"></div></div>
@@ -147,11 +214,11 @@
 
 			const crosswords = [
 				[
-					"&ldquo;Friday, March 15th, 2024&rdquo;",
+					"Friday, March 15th, 2024",
 					"Obsidian_Seal",
 					"H-ARMS--HOLD/E-L-E-H-O-A-/XYLEM-ATTACK/A---E-TO--E-/GRASS-ROUNDS/O-----E--U-E/N-CHILDREN-N/S-H-N--E-SIT/-SENDS-N----/T-A-I--TRAYS/EXTRAS--ITEM/N-S--OXYGENS",
 				],
-				["&ldquo;Tuesday, March 19th, 2024&rdquo;", "Obsidian_Seal", "QUEUE/U-M-A/ALTER/IT-ON/LEANS"],
+				["Tuesday, March 19th, 2024", "Obsidian_Seal", "QUEUE/U-M-A/ALTER/IT-ON/LEANS"],
 			];
 
 			var crosswordNumber = Math.floor(Math.random() * crosswords.length);
@@ -168,8 +235,15 @@
 			const crosswordArray = crosswords[crosswordNumber][2].split("/");
 			for (let i = 0; i < crosswordArray.length; i++) crosswordArray[i] = crosswordArray[i].split("");
 
-			document.querySelector("h1").innerHTML = crosswords[crosswordNumber][0];
+			document.querySelector("h1 span").innerHTML = crosswords[crosswordNumber][0];
 			document.querySelector("h2 span").innerHTML = crosswords[crosswordNumber][1];
+
+			const choosePuzzleMenuElement = document.querySelector(".choose-puzzle-menu");
+			for (let i = 0; i < crosswords.length; i++) {
+				let puzzleListItemElement = document.createElement("div");
+				puzzleListItemElement.innerHTML = crosswords[i][0];
+				choosePuzzleMenuElement.appendChild(puzzleListItemElement);
+			}
 
 			for (let i = 0; i < crosswordArray.length; i++) {
 				let rowElement = document.createElement("div");
