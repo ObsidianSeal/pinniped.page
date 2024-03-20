@@ -23,6 +23,18 @@
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900");
 
+			:root {
+				/* Thank you monkeytype (earthsong) */
+				--bg: #292521;
+				--main: #509452;
+				--caret: #1298ba;
+				--sub: #f5ae2d;
+				--sub-alt: #1d1b18;
+				--text: #e6c7a8;
+				--error: #7e2a33;
+				--error-extra: #ff645a;
+			}
+
 			* {
 				margin: 0;
 				border: 0;
@@ -32,23 +44,38 @@
 
 			body {
 				margin: 20px;
-				border: 2px solid #8a9295;
+				border: 2px solid var(--main);
 				padding: 20px;
 
-				background-color: #16262c;
+				background-color: var(--bg);
 				height: calc(100vh - 84px);
+			}
+
+			h1,
+			h2 {
+				color: var(--main);
 			}
 
 			h1 {
 				font-size: 72px;
-				font-weight: 900;
-
-				margin-bottom: 50px;
-				color: #d4d7d8;
+				font-weight: 700;
 			}
 
-			h1::selection {
-				background-color: #27363c;
+			h2 {
+				font-size: 36px;
+				font-weight: 500;
+
+				margin-bottom: 50px;
+			}
+
+			h2 span {
+				color: var(--sub);
+			}
+
+			h1::selection,
+			h2::selection,
+			h2 span::selection {
+				background-color: var(--sub-alt);
 			}
 
 			.crossword-container {
@@ -70,8 +97,8 @@
 				width: 50px;
 				height: 40px;
 
-				border-top: 2px solid #8a9295;
-				border-left: 2px solid #8a9295;
+				border-top: 2px solid var(--sub-alt);
+				border-left: 2px solid var(--sub-alt);
 
 				display: flex;
 				align-items: center;
@@ -81,36 +108,68 @@
 				font-weight: 500;
 				padding-top: 10px;
 
-				color: #d4d7d8;
+				color: var(--text);
+
+				position: relative;
 			}
 
 			.square:last-child {
-				border-right: 2px solid #8a9295;
+				border-right: 2px solid var(--sub-alt);
 			}
 
 			.row:last-child .square {
-				border-bottom: 2px solid #8a9295;
+				border-bottom: 2px solid var(--sub-alt);
 			}
 
 			.void {
-				background-color: #8a9295;
+				background-color: var(--sub-alt);
+			}
+
+			.square span {
+				font-size: 12px;
+				font-weight: 300;
+
+				position: absolute;
+				top: 0;
+				left: 5px;
 			}
 		</style>
 	</head>
 
 	<body>
 		<h1></h1>
+		<h2>by <span></span></h2>
 
 		<div class="crossword-container"><div class="crossword"></div></div>
 
 		<script>
-			const crosswords = ["QUIET/U----/EARTH/E---E/NEVER", "THREE/E-O-A/NOD-R", "------/ABCDEF/GHIJKL/MNOPQR/STUVWX/YZ----"];
+			// --- 1. load crossword & word numbers ---
 
-			const crosswordNumber = Math.floor(Math.random() * crosswords.length);
-			const crosswordArray = crosswords[crosswordNumber].split("/");
+			const crosswords = [
+				[
+					"&ldquo;Friday, March 15th, 2024&rdquo;",
+					"Obsidian_Seal",
+					"H-ARMS--HOLD/E-L-E-H-O-A-/XYLEM-ATTACK/A---E-TO--E-/GRASS-ROUNDS/O-----E--U-E/N-CHILDREN-N/S-H-N--E-SIT/-SENDS-N----/T-A-I--TRAYS/EXTRAS--ITEM/N-S--OXYGENS",
+				],
+				["&ldquo;Tuesday, March 19th, 2024&rdquo;", "Obsidian_Seal", "QUEUE/U-M-A/ALTER/IT-ON/LEANS"],
+			];
+
+			var crosswordNumber = Math.floor(Math.random() * crosswords.length);
+
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			var puzzleNumber = item.get("puzzle");
+
+			if (/^\d+$/.test(puzzleNumber)) {
+				puzzleNumber = parseInt(puzzleNumber);
+				if (puzzleNumber < crosswords.length) crosswordNumber = parseInt(puzzleNumber);
+			}
+
+			const crosswordArray = crosswords[crosswordNumber][2].split("/");
 			for (let i = 0; i < crosswordArray.length; i++) crosswordArray[i] = crosswordArray[i].split("");
 
-			document.querySelector("h1").innerHTML = `crossword #${crosswordNumber + 1}`;
+			document.querySelector("h1").innerHTML = crosswords[crosswordNumber][0];
+			document.querySelector("h2 span").innerHTML = crosswords[crosswordNumber][1];
 
 			for (let i = 0; i < crosswordArray.length; i++) {
 				let rowElement = document.createElement("div");
@@ -119,14 +178,79 @@
 				for (let j = 0; j < crosswordArray[i].length; j++) {
 					let squareElement = document.createElement("div");
 					squareElement.classList.add("square");
+
 					let letter = crosswordArray[i][j];
 					if (letter == "-") squareElement.classList.add("void");
 					else squareElement.innerHTML = letter;
+
 					rowElement.append(squareElement);
 				}
 
 				document.querySelector(".crossword").appendChild(rowElement);
 			}
+
+			var numberCount = 0;
+			for (let i = 0; i < crosswordArray.length; i++) {
+				for (let j = 0; j < crosswordArray[i].length; j++) {
+					if (crosswordArray[i][j] == "-") continue;
+
+					var upVoid = false;
+					var leftVoid = false;
+					var downVoid = false;
+					var rightVoid = false;
+
+					if (i == 0) upVoid = true;
+					else if (crosswordArray[i - 1][j] == "-") upVoid = true;
+
+					if (j == 0) leftVoid = true;
+					else if (crosswordArray[i][j - 1] == "-") leftVoid = true;
+
+					if (i == crosswordArray.length - 1) downVoid = true;
+					else if (crosswordArray[i + 1][j] == "-") downVoid = true;
+
+					if (j == crosswordArray[i].length - 1) rightVoid = true;
+					else if (crosswordArray[i][j + 1] == "-") rightVoid = true;
+
+					if ((leftVoid && !rightVoid) || (upVoid && !downVoid)) {
+						let numberElement = document.createElement("span");
+						numberElement.innerHTML = ++numberCount;
+						document.querySelector(`.row:nth-child(${i + 1}) .square:nth-child(${j + 1})`).appendChild(numberElement);
+					}
+				}
+			}
+
+			// --- 2. keyboard input ---
+
+			document.addEventListener("keydown", (e) => {
+				if (e.keyCode >= 65 && e.keyCode <= 90) {
+					console.log("type: " + e.key.toUpperCase());
+				}
+
+				if (e.key == " ") {
+					console.log("space to switch direction!");
+				}
+
+				if (e.keyCode >= 37 && e.keyCode <= 40) {
+					console.log("arrow keys to change direction and move");
+				}
+
+				if (e.key == "Tab" || e.key == "Enter") {
+					if (e.key == "Tab") e.preventDefault();
+					console.log("tab/enter to next clue (shift tab/enter for back)");
+				}
+
+				if (e.key == "Backspace" || e.key == "Delete") {
+					console.log("backspace/delete");
+				}
+			});
+
+			// --- 3. the mouse
+
+			document.querySelectorAll(".square:not(.void)").forEach((openSquare) => {
+				openSquare.addEventListener("click", (e) => {
+					console.log("click to move to (same direction)\nclick current to change direction");
+				});
+			});
 		</script>
 	</body>
 </html>
