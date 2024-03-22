@@ -33,6 +33,8 @@
 				--text: #e6c7a8;
 				--error: #7e2a33;
 				--error-extra: #ff645a;
+
+				--other: #4b181e;
 			}
 
 			::-webkit-scrollbar {
@@ -233,6 +235,14 @@
 				left: 5px;
 			}
 
+			.active-word-square {
+				background-color: var(--other);
+			}
+
+			.active-square {
+				background-color: var(--error);
+			}
+
 			.clues-container {
 				border: 2px solid var(--sub-alt);
 				color: var(--text);
@@ -261,14 +271,18 @@
 				height: 100%;
 				overflow: auto;
 				max-height: 450px;
-				padding: 10px 10px 10px 0;
+				padding: 7px 0 13px 0;
 			}
 
 			.clue {
-				margin-bottom: 10px;
+				padding: 3px 10px 7px 0;
 				display: grid;
 				grid-template-columns: 30px auto;
 				gap: 10px;
+			}
+
+			.clue.active-clue {
+				background-color: var(--error);
 			}
 
 			.clue div:first-child {
@@ -322,29 +336,118 @@
 
 			const crosswords = [
 				[
-					"Friday, March 15th, 2024",
+					"crossword #1",
 					"Obsidian_Seal",
-					"H-ARMS--HOLD/E-L-E-H-O-A-/XYLEM-ATTACK/A---E-TO--E-/GRASS-ROUNDS/O-----E--U-E/N-CHILDREN-N/S-H-N--E-SIT/-SENDS-N----/T-A-I--TRAYS/EXTRAS--ITEM/N-S--OXYGENS",
-					["not yet written"],
-					["not yet written"],
+					"H-ARMS--HOLD/E-L-E-H-O-A-/XYLEM-ATTACK/A---E-TO--E-/GRASS-ROUNDS/O-----E--U-E/N-CHILDREN-N/S-H-N--E-SIT/-BENDS-N----/T-A-I--TRAYS/EXTRAS--ITEM/N-S--OXYGENS",
+					[
+						"",
+						"weapons",
+						"",
+						"a request for a library book",
+						"",
+						"",
+						"transports water from a plant&rsquo;s roots to its stem and leaves",
+						"brute force, for example",
+						"",
+						"homonym of the second number",
+						"the green part of a lawn",
+						"a game may consist of several",
+						"",
+						"",
+						"young people",
+						"",
+						"",
+						"use a chair",
+						"warps",
+						"",
+						"cafeteria food holders",
+						"",
+						"",
+						"",
+						"",
+						"people seen in the background of a movie",
+						"",
+						"thing",
+						"there are two in peroxide",
+					],
+					[
+						"six-sided shape",
+						"___together",
+						"funny things on the internet",
+						"opposite of cold",
+						"tied shoes",
+						"intense dislike",
+						"",
+						"",
+						"also",
+						"",
+						"",
+						"",
+						"women belonging to a religious order",
+						"folder for emails you&rsquo;ve written",
+						"doesn&rsquo;t follow the rules",
+						"large country southwest of China",
+						"play written by Jonathan Larson",
+						"",
+						"",
+						"first natural number with two digits",
+						"",
+						"oil ___",
+						"consumed food",
+						"Japanese currency",
+						"a type of text message",
+						"",
+						"therefore",
+						"",
+						"",
+					],
 				],
 				[
-					"Tuesday, March 19th, 2024",
+					"mini #1",
 					"Obsidian_Seal",
 					"QUEUE/U-M-A/ALTER/IT-ON/LEANS",
 					["line up", "", "", "change", "", "", "well-known Stephen King novel", "atop", "the Tower of Pisa does this"],
-					["bird", "ambulance employee", "makes money", "", "a standard for wireless data transmission", "very, very long time"],
+					["bird", "ambulance employee", "makes money", "", "a standard for wireless data transmission", "very, very long time", "", "", ""],
 				],
-				["animals", "Obsidian_Seal", "SEAL----/H----R--/ELEPHANT/E----C-U/PIG--C-R/--OX-O-T/--A--O-L/CAT--N-E", ["not yet written"], ["not yet written"]],
-				["mini puzzle, big fun", "Obsidian_Seal", "SLATE/PET-A/IDEAS/N---T/EXIT-", ["not yet written"], ["not yet written"]],
+				[
+					"animals",
+					"Obsidian_Seal",
+					"SEAL----/H----R--/ELEPHANT/E----C-U/PIG--C-R/--OX-O-T/--A--O-L/CAT--N-E",
+					["the animal in Obsidian_Seal", "", "has a trunk", "", "farm animal associated with mud", "", "often used for plowing", "purring pet"],
+					[
+						"animal whose name is often used to refer to those who follow others blindly",
+						"city critter common near garbage bins",
+						"",
+						"reptile with a shell",
+						"",
+						"animal whose name is also the acronym for Greatest of All Time",
+						"",
+						"",
+					],
+				],
+				[
+					"mini #2",
+					"Obsidian_Seal",
+					"SLATE/PET-A/IDEAS/N---T/EXIT-",
+					["blank _____", "", "", "", "animal in a house", "result of brainstorming", "what a sign above a door may read"],
+					["back supporting bones", "type of light", "had lunch", "opposite west", "", "", ""],
+				],
 				[
 					"drowssorc",
 					"that queer astrophysicist",
 					"ANODE-------------/S------F----YAP---/TRANSFORMER---L---/R--O---O----PLANET/O------GAY--L-Y--H/PROTON------A----U/H-R--ELECTRONS---R/Y-B--U--O-H--PI--S/S----T--R-Y--A---D/ICY--R--E-T--C---A/C-E-SON-Y-HERE---Y/S-E--N----M-I-----/--TWO-------P-----",
-					["not yet written"],
-					["not yet written"],
+					["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+					["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+				],
+				[
+					"mini #3",
+					"Obsidian_Seal",
+					"LEVEL/E-E-A/MONEY/U-T-E/RISER",
+					["flat (palindrome)", "", "paper with value", "", "early _____"],
+					["long-tailed primates from Madagascar", "lets out emotion", "one of several coverings", "", ""],
 				],
 			];
+			crosswords.sort();
 
 			var crosswordNumber = Math.floor(Math.random() * crosswords.length);
 
@@ -359,7 +462,9 @@
 			} else window.location.href = "?puzzle=" + crosswordNumber;
 
 			const crosswordArray = crosswords[crosswordNumber][2].split("/");
-			for (let i = 0; i < crosswordArray.length; i++) crosswordArray[i] = crosswordArray[i].split("");
+			const crosswordWidth = crosswordArray[0].length;
+			const crosswordHeight = crosswordArray.length;
+			for (let i = 0; i < crosswordHeight; i++) crosswordArray[i] = crosswordArray[i].split("");
 
 			document.querySelector("h1 span").innerHTML = crosswords[crosswordNumber][0];
 			document.querySelector("h2 span").innerHTML = crosswords[crosswordNumber][1];
@@ -403,17 +508,17 @@
 				}
 			}, 10);
 
-			for (let i = 0; i < crosswordArray.length; i++) {
+			for (let i = 0; i < crosswordHeight; i++) {
 				let rowElement = document.createElement("div");
 				rowElement.classList.add("row");
 
-				for (let j = 0; j < crosswordArray[i].length; j++) {
+				for (let j = 0; j < crosswordWidth; j++) {
 					let squareElement = document.createElement("div");
 					squareElement.classList.add("square");
 
 					let letter = crosswordArray[i][j];
 					if (letter == "-") squareElement.classList.add("void");
-					else squareElement.innerHTML = letter;
+					//else squareElement.innerHTML = letter;
 
 					rowElement.append(squareElement);
 				}
@@ -422,8 +527,13 @@
 			}
 
 			var numberCount = 0;
-			for (let i = 0; i < crosswordArray.length; i++) {
-				for (let j = 0; j < crosswordArray[i].length; j++) {
+			var wordNumbers = [];
+
+			for (let i = 0; i < crosswordHeight; i++) {
+				for (let j = 0; j < crosswordWidth; j++) {
+					let squareElement = document.querySelector(`.row:nth-child(${i + 1}) .square:nth-child(${j + 1})`);
+					squareElement.id = `s${i}-${j}`;
+
 					if (crosswordArray[i][j] == "-") continue;
 
 					var upVoid = false;
@@ -437,16 +547,17 @@
 					if (j == 0) leftVoid = true;
 					else if (crosswordArray[i][j - 1] == "-") leftVoid = true;
 
-					if (i == crosswordArray.length - 1) downVoid = true;
+					if (i == crosswordHeight - 1) downVoid = true;
 					else if (crosswordArray[i + 1][j] == "-") downVoid = true;
 
-					if (j == crosswordArray[i].length - 1) rightVoid = true;
+					if (j == crosswordWidth - 1) rightVoid = true;
 					else if (crosswordArray[i][j + 1] == "-") rightVoid = true;
 
 					if ((leftVoid && !rightVoid) || (upVoid && !downVoid)) {
 						let numberElement = document.createElement("span");
 						numberElement.innerHTML = ++numberCount;
-						document.querySelector(`.row:nth-child(${i + 1}) .square:nth-child(${j + 1})`).appendChild(numberElement);
+						squareElement.appendChild(numberElement);
+						wordNumbers.push(`s${i}-${j}`);
 					}
 				}
 			}
@@ -475,7 +586,45 @@
 				if (crosswords[crosswordNumber][4][i] != "") createClueElement(i + 1, crosswords[crosswordNumber][4][i], downCluesContainerElement);
 			}
 
-			// --- 2. keyboard input ---
+			// --- 2. word highlighting & keyboard input ---
+
+			// var direction = true;
+			// var wordNumber, x, y;
+
+			// function highlightWordSquares(newWordNumber, newX, newY) {
+			// 	if (wordNumber != null) {
+			// 		document.querySelector(`#s${x}-${y}`).classList.remove("active-square");
+			// 		document.querySelectorAll(".active-word-square").forEach((square) => {
+			// 			square.classList.remove("active-word-square");
+			// 		});
+			// 	}
+
+			// 	wordNumber = newWordNumber;
+			// 	// let separatorIndex = wordNumbers[wordNumber].indexOf("-");
+			// 	// x = parseInt(wordNumbers[wordNumber].substring(1, separatorIndex));
+			// 	// y = parseInt(wordNumbers[wordNumber].substring(separatorIndex + 1));
+
+			// 	document.querySelector(`#s${newX}-${newY}`).classList.add("active-square");
+			// 	if (direction) {
+			// 		while (y < crosswordWidth - 1) {
+			// 			let element = document.querySelector(`#s${x}-${++y}`);
+
+			// 			if (!element.classList.contains("void")) {
+			// 				element.classList.add("active-word-square");
+			// 			} else break;
+			// 		}
+			// 	} else {
+			// 		while (x < crosswordWidth - 1) {
+			// 			let element = document.querySelector(`#s${++x}-${y}`);
+
+			// 			if (!element.classList.contains("void")) {
+			// 				element.classList.add("active-word-square");
+			// 			} else break;
+			// 		}
+			// 	}
+			// }
+
+			// highlightWordSquares(0, 0, 0);
 
 			const keys = {};
 
@@ -488,6 +637,8 @@
 
 				if (e.key == " ") {
 					console.log("space to switch direction!");
+					// direction = !direction;
+					// highlightWordSquares(wordNumber);
 				}
 
 				if (e.keyCode >= 37 && e.keyCode <= 40) {
