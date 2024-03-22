@@ -349,7 +349,7 @@
 						"transports water from a plant&rsquo;s roots to its stem and leaves",
 						"brute force, for example",
 						"",
-						"homonym of the second number",
+						"homophone of the second number",
 						"the green part of a lawn",
 						"a game may consist of several",
 						"",
@@ -515,10 +515,11 @@
 				for (let j = 0; j < crosswordWidth; j++) {
 					let squareElement = document.createElement("div");
 					squareElement.classList.add("square");
+					squareElement.appendChild(document.createElement("div"));
 
 					let letter = crosswordArray[i][j];
 					if (letter == "-") squareElement.classList.add("void");
-					//else squareElement.innerHTML = letter;
+					// else squareElement.children[0].innerHTML = letter;
 
 					rowElement.append(squareElement);
 				}
@@ -527,7 +528,10 @@
 			}
 
 			var numberCount = 0;
-			var wordNumbers = [];
+			var acrossWordNumbers = [];
+			var downWordNumbers = [];
+			var acrossWordNumbersNoBlank = [];
+			var downWordNumbersNoBlank = [];
 
 			for (let i = 0; i < crosswordHeight; i++) {
 				for (let j = 0; j < crosswordWidth; j++) {
@@ -557,7 +561,15 @@
 						let numberElement = document.createElement("span");
 						numberElement.innerHTML = ++numberCount;
 						squareElement.appendChild(numberElement);
-						wordNumbers.push(`s${i}-${j}`);
+
+						if (leftVoid && !rightVoid) {
+							acrossWordNumbers.push(`s${i}-${j}`);
+							acrossWordNumbersNoBlank.push(numberCount);
+						} else acrossWordNumbers.push("");
+						if (upVoid && !downVoid) {
+							downWordNumbers.push(`s${i}-${j}`);
+							downWordNumbersNoBlank.push(numberCount);
+						} else downWordNumbers.push("");
 					}
 				}
 			}
@@ -588,70 +600,263 @@
 
 			// --- 2. word highlighting & keyboard input ---
 
-			// var direction = true;
-			// var wordNumber, x, y;
+			var direction = true;
+			var wordNumber = -1;
+			var activeX = -1;
+			var activeY = 0;
 
-			// function highlightWordSquares(newWordNumber, newX, newY) {
-			// 	if (wordNumber != null) {
-			// 		document.querySelector(`#s${x}-${y}`).classList.remove("active-square");
-			// 		document.querySelectorAll(".active-word-square").forEach((square) => {
-			// 			square.classList.remove("active-word-square");
-			// 		});
-			// 	}
+			function nextWordNumber() {
+				if (direction) {
+					wordNumber++;
+					while (acrossWordNumbers[wordNumber] == "") wordNumber++;
+					if (wordNumber >= acrossWordNumbers.length) {
+						direction = !direction;
+						wordNumber = 0;
+						while (downWordNumbers[wordNumber] == "") wordNumber++;
+					}
+				} else {
+					wordNumber++;
+					while (downWordNumbers[wordNumber] == "") wordNumber++;
+					if (wordNumber >= downWordNumbers.length) {
+						direction = !direction;
+						wordNumber = 0;
+						while (acrossWordNumbers[wordNumber] == "") wordNumber++;
+					}
+				}
 
-			// 	wordNumber = newWordNumber;
-			// 	// let separatorIndex = wordNumbers[wordNumber].indexOf("-");
-			// 	// x = parseInt(wordNumbers[wordNumber].substring(1, separatorIndex));
-			// 	// y = parseInt(wordNumbers[wordNumber].substring(separatorIndex + 1));
+				if (direction) {
+					let separatorIndex = acrossWordNumbers[wordNumber].indexOf("-");
+					let x = parseInt(acrossWordNumbers[wordNumber].substring(1, separatorIndex));
+					let y = parseInt(acrossWordNumbers[wordNumber].substring(separatorIndex + 1));
+					activeX = x;
+					activeY = y;
+				} else {
+					let separatorIndex = downWordNumbers[wordNumber].indexOf("-");
+					let x = parseInt(downWordNumbers[wordNumber].substring(1, separatorIndex));
+					let y = parseInt(downWordNumbers[wordNumber].substring(separatorIndex + 1));
+					activeX = x;
+					activeY = y;
+				}
+			}
 
-			// 	document.querySelector(`#s${newX}-${newY}`).classList.add("active-square");
-			// 	if (direction) {
-			// 		while (y < crosswordWidth - 1) {
-			// 			let element = document.querySelector(`#s${x}-${++y}`);
+			function previousWordNumber() {
+				if (direction) {
+					wordNumber--;
+					while (acrossWordNumbers[wordNumber] == "") wordNumber--;
+					if (wordNumber < 0) {
+						direction = !direction;
+						wordNumber = downWordNumbers.length - 1;
+						while (downWordNumbers[wordNumber] == "") wordNumber--;
+					}
+				} else {
+					wordNumber--;
+					while (downWordNumbers[wordNumber] == "") wordNumber--;
+					if (wordNumber < 0) {
+						direction = !direction;
+						wordNumber = acrossWordNumbers.length - 1;
+						while (acrossWordNumbers[wordNumber] == "") wordNumber--;
+					}
+				}
 
-			// 			if (!element.classList.contains("void")) {
-			// 				element.classList.add("active-word-square");
-			// 			} else break;
-			// 		}
-			// 	} else {
-			// 		while (x < crosswordWidth - 1) {
-			// 			let element = document.querySelector(`#s${++x}-${y}`);
+				if (direction) {
+					let separatorIndex = acrossWordNumbers[wordNumber].indexOf("-");
+					let x = parseInt(acrossWordNumbers[wordNumber].substring(1, separatorIndex));
+					let y = parseInt(acrossWordNumbers[wordNumber].substring(separatorIndex + 1));
+					activeX = x;
+					activeY = y;
+				} else {
+					let separatorIndex = downWordNumbers[wordNumber].indexOf("-");
+					let x = parseInt(downWordNumbers[wordNumber].substring(1, separatorIndex));
+					let y = parseInt(downWordNumbers[wordNumber].substring(separatorIndex + 1));
+					activeX = x;
+					activeY = y;
+				}
+			}
 
-			// 			if (!element.classList.contains("void")) {
-			// 				element.classList.add("active-word-square");
-			// 			} else break;
-			// 		}
-			// 	}
-			// }
+			nextWordNumber();
 
-			// highlightWordSquares(0, 0, 0);
+			function highlightWordSquares() {
+				document.querySelectorAll(".active-word-square").forEach((square) => {
+					square.classList.remove("active-word-square");
+				});
+				document.querySelectorAll(".active-square").forEach((square) => {
+					square.classList.remove("active-square");
+				});
+				document.querySelectorAll(".active-clue").forEach((clue) => {
+					clue.classList.remove("active-clue");
+				});
+
+				if (direction) {
+					let separatorIndex = acrossWordNumbers[wordNumber].indexOf("-");
+					let x = parseInt(acrossWordNumbers[wordNumber].substring(1, separatorIndex));
+					let y = parseInt(acrossWordNumbers[wordNumber].substring(separatorIndex + 1));
+
+					while (y < crosswordWidth) {
+						let element = document.querySelector(`#s${x}-${y++}`);
+
+						if (!element.classList.contains("void")) {
+							element.classList.add("active-word-square");
+						} else break;
+					}
+				} else {
+					let separatorIndex = downWordNumbers[wordNumber].indexOf("-");
+					let x = parseInt(downWordNumbers[wordNumber].substring(1, separatorIndex));
+					let y = parseInt(downWordNumbers[wordNumber].substring(separatorIndex + 1));
+
+					while (x < crosswordHeight) {
+						let element = document.querySelector(`#s${x++}-${y}`);
+
+						if (!element.classList.contains("void")) {
+							element.classList.add("active-word-square");
+						} else break;
+					}
+				}
+
+				let element = document.querySelector(`#s${activeX}-${activeY}`);
+				element.classList.add("active-square");
+
+				let clueElement;
+				if (direction) clueElement = acrossCluesContainerElement.children[acrossWordNumbersNoBlank.indexOf(wordNumber + 1)];
+				else clueElement = downCluesContainerElement.children[downWordNumbersNoBlank.indexOf(wordNumber + 1)];
+				clueElement.classList.add("active-clue");
+
+				if (direction) {
+					let containerRect = acrossCluesContainerElement.getBoundingClientRect();
+					let elementRect = clueElement.getBoundingClientRect();
+
+					console.log(containerRect.top, elementRect.top);
+					acrossCluesContainerElement.scroll(0, elementRect.top - containerRect.top);
+				} else {
+					let containerRect = downCluesContainerElement.getBoundingClientRect();
+					let elementRect = clueElement.getBoundingClientRect();
+
+					console.log(containerRect.top, elementRect.top);
+					downCluesContainerElement.scroll(0, elementRect.top - containerRect.top);
+				}
+			}
+
+			highlightWordSquares();
 
 			const keys = {};
 
 			document.addEventListener("keydown", (e) => {
 				keys[e.key] = true;
 
-				if (e.keyCode >= 65 && e.keyCode <= 90) {
-					console.log("type: " + e.key.toUpperCase());
+				// A - Z & delete
+				if ((e.keyCode >= 65 && e.keyCode <= 90) || e.key == "Delete") {
+					let activeElement = document.querySelector(`#s${activeX}-${activeY} div`);
+					activeElement.innerHTML = "";
+					if (e.key != "Delete") activeElement.innerHTML = e.key.toUpperCase();
+
+					if (direction) {
+						if (activeY < crosswordWidth - 1) {
+							if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+						}
+					} else {
+						if (activeX < crosswordHeight - 1) {
+							if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
+						}
+					}
+
+					highlightWordSquares();
+
+					// skip already filled
 				}
 
+				// space
 				if (e.key == " ") {
-					console.log("space to switch direction!");
-					// direction = !direction;
-					// highlightWordSquares(wordNumber);
+					direction = !direction;
+					// change to active square
+					if (direction) {
+						if (acrossWordNumbers[wordNumber] != "") highlightWordSquares();
+						else direction = !direction;
+					} else {
+						if (downWordNumbers[wordNumber] != "") highlightWordSquares();
+						else direction = !direction;
+					}
 				}
 
+				// arrow keys
 				if (e.keyCode >= 37 && e.keyCode <= 40) {
-					console.log("arrow keys to change direction and move");
+					e.preventDefault();
+
+					if (direction) {
+						if (e.keyCode == 37 && activeY > 0) {
+							if (!document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void")) activeY--;
+						}
+						if (e.keyCode == 38 && activeX > 0) {
+							if (!document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void")) activeX--;
+						}
+						if (e.keyCode == 39 && activeY < crosswordWidth - 1) {
+							if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+						}
+						if (e.keyCode == 40 && activeX < crosswordHeight - 1) {
+							if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
+						}
+					} else {
+						if (e.keyCode == 37 && activeY > 0) {
+							if (!document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void")) activeY--;
+						}
+						if (e.keyCode == 38 && activeX > 0) {
+							if (!document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void")) activeX--;
+						}
+						if (e.keyCode == 39 && activeY < crosswordWidth - 1) {
+							if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+						}
+						if (e.keyCode == 40 && activeX < crosswordHeight - 1) {
+							if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
+						}
+					}
+
+					highlightWordSquares();
+
+					// determine word number and move there
 				}
 
+				// tab & enter
 				if (e.key == "Tab" || e.key == "Enter") {
 					if (e.key == "Tab") e.preventDefault();
-					console.log("tab/enter to next clue (shift tab/enter for back)");
+
+					if (keys["Shift"]) previousWordNumber();
+					else nextWordNumber();
+
+					highlightWordSquares();
+
+					// goes to first open square or end
 				}
 
-				if (e.key == "Backspace" || e.key == "Delete") {
-					console.log("backspace/delete");
+				// backspace
+				if (e.key == "Backspace") {
+					if (direction) {
+						if (activeY > 0) {
+							var rightVoid = false;
+							if (activeY == crosswordWidth - 1) rightVoid = true;
+							else if (document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) rightVoid = true;
+
+							var leftVoid = document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void");
+							var squareEmpty = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML == "";
+
+							if (!leftVoid && !(rightVoid && !squareEmpty)) activeY--;
+						}
+					} else {
+						if (activeX > 0) {
+							var downVoid = false;
+							if (activeX == crosswordHeight - 1) downVoid = true;
+							else if (document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) downVoid = true;
+
+							var upVoid = document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void");
+							var squareEmpty = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML == "";
+
+							if (!upVoid && !(downVoid && !squareEmpty)) activeX--;
+						}
+					}
+
+					let activeElement = document.querySelector(`#s${activeX}-${activeY} div`);
+					activeElement.innerHTML = "";
+
+					highlightWordSquares();
+
+					// backspace!!!
 				}
 			});
 
