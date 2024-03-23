@@ -14,7 +14,7 @@
 		<meta property="og:url" content="https://pinniped.page/projects/crosswords" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="crosswords" />
-		<meta property="og:description" content="Crossword renderer beta. [description subject to change]" />
+		<!-- <meta property="og:description" content="Solve crosswords by Obsidian_Seal and others." /> -->
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<meta name="description" content="Crossword renderer beta. [description subject to change]" />
@@ -39,6 +39,7 @@
 
 			::-webkit-scrollbar {
 				width: 20px;
+				height: 20px;
 			}
 
 			::-webkit-scrollbar-thumb {
@@ -50,11 +51,19 @@
 				background-color: var(--sub);
 			}
 
+			::-webkit-scrollbar-corner {
+				background-color: var(--bg);
+			}
+
 			* {
 				margin: 0;
 				border: 0;
 				padding: 0;
 				font-family: "Roboto Slab";
+			}
+
+			*::selection {
+				background-color: var(--sub-alt);
 			}
 
 			body {
@@ -89,13 +98,47 @@
 				color: var(--sub);
 			}
 
-			h1::selection,
-			h2::selection,
-			h2 span::selection,
-			.puzzle-title::selection,
-			.clues-title::selection,
-			.clues div::selection {
+			h3,
+			h4,
+			h5 {
+				color: var(--caret);
+			}
+
+			h3 {
+				font-size: 36px;
+				font-weight: 500;
+
+				margin-bottom: 20px;
+			}
+
+			h4,
+			h5 {
+				font-size: 24px;
+			}
+
+			h4 {
+				font-weight: 300;
+				margin-bottom: 50px;
+			}
+
+			h4 span {
 				background-color: var(--sub-alt);
+				font-weight: 500;
+			}
+
+			h5 {
+				font-weight: 700;
+				width: fit-content;
+			}
+
+			h5:hover,
+			h5:focus {
+				color: var(--sub);
+				cursor: pointer;
+			}
+
+			h5 .material-symbols-outlined {
+				translate: 0 3px;
 			}
 
 			.material-symbols-outlined {
@@ -163,15 +206,12 @@
 				translate: 0 7px;
 			}
 
-			.pause-button:hover {
-				color: var(--sub);
-				cursor: pointer;
-			}
-
+			h5,
 			.choose-puzzle-menu,
 			.material-symbols-outlined,
 			.timer,
-			.crossword {
+			.crossword,
+			.blur * {
 				-webkit-user-select: none;
 				-moz-user-select: none;
 				-ms-user-select: none;
@@ -290,12 +330,56 @@
 				text-align: right;
 			}
 
+			.win-panel {
+				position: absolute;
+				top: 200px;
+				left: calc((100vw - 504px) / 2);
+
+				border: 2px solid var(--sub-alt);
+				background-color: var(--bg);
+				width: 460px;
+				height: 260px;
+				padding: 20px 0 20px 40px;
+			}
+
+			.close-button {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				color: var(--caret);
+			}
+
+			.close-button:hover,
+			.close-button:focus {
+				color: var(--sub);
+				cursor: pointer;
+			}
+
 			.show {
 				display: initial;
 			}
 
 			.hide {
 				display: none;
+			}
+
+			.blur {
+				filter: blur(5px);
+			}
+		</style>
+
+		<style id="styles-to-remove">
+			.pause-button:hover {
+				color: var(--sub);
+				cursor: pointer;
+			}
+
+			.square:not(.void):hover {
+				cursor: pointer;
+			}
+
+			.clue:hover {
+				cursor: pointer;
 			}
 		</style>
 	</head>
@@ -322,7 +406,19 @@
 			</div>
 		</div>
 
+		<div class="win-panel hide">
+			<div>
+				<h3>You did it!</h3>
+				<h4>You solved the puzzle in <span>0:00</span>.</h4>
+				<h5 tabindex="0">SHARE <span class="material-symbols-outlined">share</span></h5>
+				<span class="material-symbols-outlined close-button" tabindex="0">close</span>
+			</div>
+		</div>
+
 		<script>
+			const version = "1.0.0";
+			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
+
 			// --- 0. element constants ---
 			const choosePuzzleMenuElement = document.querySelector(".choose-puzzle-menu");
 			const menuArrowElement = document.querySelector("h1 .material-symbols-outlined");
@@ -331,6 +427,8 @@
 			const pauseButtonElement = document.querySelector(".pause-button");
 			const acrossCluesContainerElement = document.querySelector(".across-clues .clues");
 			const downCluesContainerElement = document.querySelector(".down-clues .clues");
+			const shareButtonElement = document.querySelector("h5");
+			const closeButtonElement = document.querySelector(".close-button");
 
 			// --- 1. load crossword & word numbers; set title, subtitle, and menu ---
 
@@ -371,7 +469,7 @@
 						"there are two in peroxide",
 					],
 					[
-						"six-sided shape",
+						"six-sided shapes",
 						"___together",
 						"funny things on the internet",
 						"opposite of cold",
@@ -436,8 +534,56 @@
 					"drowssorc",
 					"that queer astrophysicist",
 					"ANODE-------------/S------F----YAP---/TRANSFORMER---L---/R--O---O----PLANET/O------GAY--L-Y--H/PROTON------A----U/H-R--ELECTRONS---R/Y-B--U--O-H--PI--S/S----T--R-Y--A---D/ICY--R--E-T--C---A/C-E-SON-Y-HERE---Y/S-E--N----M-I-----/--TWO-------P-----",
-					["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-					["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+					[
+						"an electrode",
+						"",
+						"to talk a lot about nothing particularly meaningful",
+						"",
+						"robots in disguise~~",
+						"",
+						"we live on one of them!",
+						"",
+						"✨homosexual✨, also a word for happy",
+						"positively charged subatomic particle",
+						"",
+						"",
+						"negatively charged subatomic particle",
+						"",
+						"",
+						"",
+						"a greek letter, also a delicious dessert",
+						"slippery due to the cold",
+						"",
+						"the sun but not",
+						"not there",
+						"",
+						"second",
+					],
+					[
+						"a field in science relating to space",
+						"ribbit",
+						"",
+						"something children typically do",
+						"",
+						"not yes",
+						"&ldquo;it is better to __ than to be unprepared&rdquo;",
+						"fifth day of the week",
+						"",
+						"",
+						"a spherical object",
+						"a subatomic particle that is not positive nor negative",
+						"",
+						"a name that means &ldquo;hollow&rdquo;",
+						"sounds to a beat",
+						"where galaxies and stars and planets are found",
+						"",
+						"",
+						"to throw something, also a meme",
+						"",
+						"",
+						"a phrase commonly on a tombstone",
+						"",
+					],
 				],
 				[
 					"mini #3",
@@ -598,7 +744,29 @@
 				if (crosswords[crosswordNumber][4][i] != "") createClueElement(i + 1, crosswords[crosswordNumber][4][i], downCluesContainerElement);
 			}
 
-			// --- 2. word highlighting & keyboard input ---
+			// --- 2. timer ---
+
+			var minutes = 0;
+			var seconds = 0;
+			var pad = "";
+			var pause = false;
+
+			setInterval(() => {
+				if (!pause) {
+					seconds++;
+					if (seconds == 60) {
+						seconds = 0;
+						minutes++;
+
+						timerContainerElement.style = `width: ${92 + 18 * minutes.toString().length}px`;
+					}
+					if (seconds < 10) pad = "0";
+					else pad = "";
+					timerElement.innerHTML = `${minutes}:${pad}${seconds}`;
+				}
+			}, 1000);
+
+			// --- 3. word highlighting & keyboard input ---
 
 			var direction = true;
 			var wordNumber = -1;
@@ -630,12 +798,42 @@
 					let y = parseInt(acrossWordNumbers[wordNumber].substring(separatorIndex + 1));
 					activeX = x;
 					activeY = y;
+
+					while (true) {
+						let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+						if (letter != "") {
+							activeY++;
+							if (activeY == crosswordWidth) {
+								activeY = y;
+								break;
+							} else if (document.querySelector(`#s${activeX}-${activeY}`).classList.contains("void")) {
+								activeY = y;
+								break;
+							}
+						} else break;
+					}
 				} else {
 					let separatorIndex = downWordNumbers[wordNumber].indexOf("-");
 					let x = parseInt(downWordNumbers[wordNumber].substring(1, separatorIndex));
 					let y = parseInt(downWordNumbers[wordNumber].substring(separatorIndex + 1));
 					activeX = x;
 					activeY = y;
+
+					while (true) {
+						let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+						if (letter != "") {
+							activeX++;
+							if (activeX == crosswordHeight) {
+								activeX = x;
+								break;
+							} else if (document.querySelector(`#s${activeX}-${activeY}`).classList.contains("void")) {
+								activeX = x;
+								break;
+							}
+						} else break;
+					}
 				}
 			}
 
@@ -664,12 +862,42 @@
 					let y = parseInt(acrossWordNumbers[wordNumber].substring(separatorIndex + 1));
 					activeX = x;
 					activeY = y;
+
+					while (true) {
+						let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+						if (letter != "") {
+							activeY++;
+							if (activeY == crosswordWidth) {
+								activeY = y;
+								break;
+							} else if (document.querySelector(`#s${activeX}-${activeY}`).classList.contains("void")) {
+								activeY = y;
+								break;
+							}
+						} else break;
+					}
 				} else {
 					let separatorIndex = downWordNumbers[wordNumber].indexOf("-");
 					let x = parseInt(downWordNumbers[wordNumber].substring(1, separatorIndex));
 					let y = parseInt(downWordNumbers[wordNumber].substring(separatorIndex + 1));
 					activeX = x;
 					activeY = y;
+
+					while (true) {
+						let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+						if (letter != "") {
+							activeX++;
+							if (activeX == crosswordHeight) {
+								activeX = x;
+								break;
+							} else if (document.querySelector(`#s${activeX}-${activeY}`).classList.contains("void")) {
+								activeX = x;
+								break;
+							}
+						} else break;
+					}
 				}
 			}
 
@@ -724,139 +952,387 @@
 					let containerRect = acrossCluesContainerElement.getBoundingClientRect();
 					let elementRect = clueElement.getBoundingClientRect();
 
-					console.log(containerRect.top, elementRect.top);
-					acrossCluesContainerElement.scroll(0, elementRect.top - containerRect.top);
+					acrossCluesContainerElement.scrollBy(0, elementRect.top - (containerRect.top + 7));
 				} else {
 					let containerRect = downCluesContainerElement.getBoundingClientRect();
 					let elementRect = clueElement.getBoundingClientRect();
 
-					console.log(containerRect.top, elementRect.top);
-					downCluesContainerElement.scroll(0, elementRect.top - containerRect.top);
+					downCluesContainerElement.scrollBy(0, elementRect.top - (containerRect.top + 7));
 				}
 			}
 
 			highlightWordSquares();
 
-			const keys = {};
+			function getWordNumber() {
+				let x = activeX;
+				let y = activeY;
+
+				if (direction) {
+					while (true) {
+						if (y == 0) {
+							let element = document.querySelector(`#s${x}-${y}`);
+							if (element.children.length > 1) {
+								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								break;
+							}
+						}
+
+						let element = document.querySelector(`#s${x}-${--y}`);
+						if (element.classList.contains("void")) {
+							element = document.querySelector(`#s${x}-${++y}`);
+							wordNumber = parseInt(element.children[1].innerHTML) - 1;
+							break;
+						}
+
+						if (element.children.length > 1) {
+							if (y == 0) {
+								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								break;
+							} else {
+								if (document.querySelector(`#s${x}-${--y}`).classList.contains("void")) {
+									wordNumber = parseInt(element.children[1].innerHTML) - 1;
+									break;
+								}
+							}
+						}
+					}
+				} else {
+					while (true) {
+						if (x == 0) {
+							let element = document.querySelector(`#s${x}-${y}`);
+							if (element.children.length > 1) {
+								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								break;
+							}
+						}
+
+						let element = document.querySelector(`#s${--x}-${y}`);
+						if (element.classList.contains("void")) {
+							element = document.querySelector(`#s${++x}-${y}`);
+							wordNumber = parseInt(element.children[1].innerHTML) - 1;
+							break;
+						}
+
+						if (element.children.length > 1) {
+							if (x == 0) {
+								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								break;
+							} else {
+								if (document.querySelector(`#s${--x}-${y}`).classList.contains("void")) {
+									wordNumber = parseInt(element.children[1].innerHTML) - 1;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			function checkForWin() {
+				let crosswordString = "";
+
+				for (let i = 0; i < crosswordHeight; i++) {
+					for (let j = 0; j < crosswordWidth; j++) {
+						if (document.querySelector(`#s${i}-${j}`).classList.contains("void")) {
+							crosswordString += "-";
+						} else {
+							let letter = document.querySelector(`#s${i}-${j} div`).innerHTML;
+							if (letter == "") crosswordString += "x";
+							else crosswordString += letter;
+						}
+					}
+					if (i < crosswordHeight - 1) crosswordString += "/";
+				}
+
+				if (crosswordString == crosswords[crosswordNumber][2]) handleWin();
+			}
+
+			var win = false;
+
+			function handleWin() {
+				win = true;
+				pause = true;
+				document.querySelector("h4 span").innerHTML = `${minutes}:${pad}${seconds}`;
+
+				document.querySelector("#styles-to-remove").remove();
+
+				setTimeout(() => {
+					document.querySelector(".crossword-container").classList.add("blur");
+					toggleVisibility(document.querySelector(".win-panel"));
+					pauseButtonElement.innerHTML = "done";
+				}, 1000);
+			}
+
+			function share() {
+				navigator.clipboard.writeText(
+					`--------------------\nI solved “${crosswords[crosswordNumber][0]}” by ${crosswords[crosswordNumber][1]} in **${minutes}:${pad}${seconds}**!\nhttps://pinniped.page/projects/crosswords?puzzle=${crosswordNumber}`
+				);
+
+				let savedHTML = shareButtonElement.innerHTML;
+				shareButtonElement.innerHTML = "Copied!";
+
+				setTimeout(() => {
+					shareButtonElement.innerHTML = savedHTML;
+				}, 3000);
+			}
+
+			function close() {
+				if (!document.querySelector(".crossword-container").classList.contains("blur")) {
+					document.querySelector(".crossword-container").classList.add("blur");
+				} else {
+					document.querySelector(".crossword-container").classList.remove("blur");
+				}
+				toggleVisibility(document.querySelector(".win-panel"));
+			}
+
+			shareButtonElement.addEventListener("click", (e) => {
+				share();
+			});
+
+			closeButtonElement.addEventListener("click", (e) => {
+				close();
+			});
+
+			var keys = {};
 
 			document.addEventListener("keydown", (e) => {
 				keys[e.key] = true;
 
-				// A - Z & delete
-				if ((e.keyCode >= 65 && e.keyCode <= 90) || e.key == "Delete") {
-					let activeElement = document.querySelector(`#s${activeX}-${activeY} div`);
-					activeElement.innerHTML = "";
-					if (e.key != "Delete") activeElement.innerHTML = e.key.toUpperCase();
-
-					if (direction) {
-						if (activeY < crosswordWidth - 1) {
-							if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+				if (e.key == "Escape") {
+					if (!win) togglePause();
+					else {
+						if (!document.querySelector(".crossword-container").classList.contains("blur")) {
+							document.querySelector(".crossword-container").classList.add("blur");
+						} else {
+							document.querySelector(".crossword-container").classList.remove("blur");
 						}
-					} else {
-						if (activeX < crosswordHeight - 1) {
-							if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
-						}
-					}
-
-					highlightWordSquares();
-
-					// skip already filled
-				}
-
-				// space
-				if (e.key == " ") {
-					direction = !direction;
-					// change to active square
-					if (direction) {
-						if (acrossWordNumbers[wordNumber] != "") highlightWordSquares();
-						else direction = !direction;
-					} else {
-						if (downWordNumbers[wordNumber] != "") highlightWordSquares();
-						else direction = !direction;
+						toggleVisibility(document.querySelector(".win-panel"));
 					}
 				}
 
-				// arrow keys
-				if (e.keyCode >= 37 && e.keyCode <= 40) {
-					e.preventDefault();
+				if (!pause) {
+					// A - Z
+					if (e.keyCode >= 65 && e.keyCode <= 90) {
+						let activeElement = document.querySelector(`#s${activeX}-${activeY} div`);
+						activeElement.innerHTML = "";
+						activeElement.innerHTML = e.key.toUpperCase();
 
-					if (direction) {
-						if (e.keyCode == 37 && activeY > 0) {
-							if (!document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void")) activeY--;
+						if (direction) {
+							if (activeY < crosswordWidth - 1) {
+								if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+
+								while (true) {
+									let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+									if (letter != "") {
+										if (activeY + 1 == crosswordWidth) break;
+										else if (document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) break;
+										activeY++;
+									} else break;
+								}
+							}
+						} else {
+							if (activeX < crosswordHeight - 1) {
+								if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
+
+								while (true) {
+									let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+									if (letter != "") {
+										if (activeX + 1 == crosswordHeight) break;
+										else if (document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) break;
+										activeX++;
+									} else break;
+								}
+							}
 						}
-						if (e.keyCode == 38 && activeX > 0) {
-							if (!document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void")) activeX--;
-						}
-						if (e.keyCode == 39 && activeY < crosswordWidth - 1) {
-							if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
-						}
-						if (e.keyCode == 40 && activeX < crosswordHeight - 1) {
-							if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
-						}
-					} else {
-						if (e.keyCode == 37 && activeY > 0) {
-							if (!document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void")) activeY--;
-						}
-						if (e.keyCode == 38 && activeX > 0) {
-							if (!document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void")) activeX--;
-						}
-						if (e.keyCode == 39 && activeY < crosswordWidth - 1) {
-							if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
-						}
-						if (e.keyCode == 40 && activeX < crosswordHeight - 1) {
-							if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
-						}
+
+						highlightWordSquares();
+						checkForWin();
 					}
 
-					highlightWordSquares();
+					// space
+					if (e.key == " ") {
+						direction = !direction;
 
-					// determine word number and move there
-				}
-
-				// tab & enter
-				if (e.key == "Tab" || e.key == "Enter") {
-					if (e.key == "Tab") e.preventDefault();
-
-					if (keys["Shift"]) previousWordNumber();
-					else nextWordNumber();
-
-					highlightWordSquares();
-
-					// goes to first open square or end
-				}
-
-				// backspace
-				if (e.key == "Backspace") {
-					if (direction) {
-						if (activeY > 0) {
+						if (direction) {
+							var leftVoid = false;
 							var rightVoid = false;
+
+							if (activeY == 0) leftVoid = true;
+							else if (crosswordArray[activeX][activeY - 1] == "-") leftVoid = true;
+
 							if (activeY == crosswordWidth - 1) rightVoid = true;
-							else if (document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) rightVoid = true;
+							else if (crosswordArray[activeX][activeY + 1] == "-") rightVoid = true;
 
-							var leftVoid = document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void");
-							var squareEmpty = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML == "";
-
-							if (!leftVoid && !(rightVoid && !squareEmpty)) activeY--;
-						}
-					} else {
-						if (activeX > 0) {
+							if (leftVoid && rightVoid) direction = !direction;
+						} else {
+							var upVoid = false;
 							var downVoid = false;
+
+							if (activeX == 0) upVoid = true;
+							else if (crosswordArray[activeX - 1][activeY] == "-") upVoid = true;
+
 							if (activeX == crosswordHeight - 1) downVoid = true;
-							else if (document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) downVoid = true;
+							else if (crosswordArray[activeX + 1][activeY] == "-") downVoid = true;
 
-							var upVoid = document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void");
-							var squareEmpty = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML == "";
-
-							if (!upVoid && !(downVoid && !squareEmpty)) activeX--;
+							if (upVoid && downVoid) direction = !direction;
 						}
+
+						getWordNumber();
+
+						highlightWordSquares();
 					}
 
-					let activeElement = document.querySelector(`#s${activeX}-${activeY} div`);
-					activeElement.innerHTML = "";
+					// arrow keys
+					if (e.keyCode >= 37 && e.keyCode <= 40) {
+						e.preventDefault();
 
-					highlightWordSquares();
+						if (direction) {
+							if (e.keyCode == 37 && activeY > 0) {
+								if (!document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void")) activeY--;
+							}
+							if (e.keyCode == 38 && activeX > 0) {
+								if (!document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void")) activeX--;
+								direction = !direction;
 
-					// backspace!!!
+								var upVoid = false;
+								var downVoid = false;
+
+								if (activeX == 0) upVoid = true;
+								else if (crosswordArray[activeX - 1][activeY] == "-") upVoid = true;
+
+								if (activeX == crosswordHeight - 1) downVoid = true;
+								else if (crosswordArray[activeX + 1][activeY] == "-") downVoid = true;
+
+								if (upVoid && downVoid) direction = !direction;
+
+								getWordNumber();
+							}
+							if (e.keyCode == 39 && activeY < crosswordWidth - 1) {
+								if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+							}
+							if (e.keyCode == 40 && activeX < crosswordHeight - 1) {
+								if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
+								direction = !direction;
+
+								var upVoid = false;
+								var downVoid = false;
+
+								if (activeX == 0) upVoid = true;
+								else if (crosswordArray[activeX - 1][activeY] == "-") upVoid = true;
+
+								if (activeX == crosswordHeight - 1) downVoid = true;
+								else if (crosswordArray[activeX + 1][activeY] == "-") downVoid = true;
+
+								if (upVoid && downVoid) direction = !direction;
+
+								getWordNumber();
+							}
+						} else {
+							if (e.keyCode == 37 && activeY > 0) {
+								if (!document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void")) activeY--;
+								direction = !direction;
+
+								var leftVoid = false;
+								var rightVoid = false;
+
+								if (activeY == 0) leftVoid = true;
+								else if (crosswordArray[activeX][activeY - 1] == "-") leftVoid = true;
+
+								if (activeY == crosswordWidth - 1) rightVoid = true;
+								else if (crosswordArray[activeX][activeY + 1] == "-") rightVoid = true;
+
+								if (leftVoid && rightVoid) direction = !direction;
+
+								getWordNumber();
+							}
+							if (e.keyCode == 38 && activeX > 0) {
+								if (!document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void")) activeX--;
+							}
+							if (e.keyCode == 39 && activeY < crosswordWidth - 1) {
+								if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+								direction = !direction;
+
+								var leftVoid = false;
+								var rightVoid = false;
+
+								if (activeY == 0) leftVoid = true;
+								else if (crosswordArray[activeX][activeY - 1] == "-") leftVoid = true;
+
+								if (activeY == crosswordWidth - 1) rightVoid = true;
+								else if (crosswordArray[activeX][activeY + 1] == "-") rightVoid = true;
+
+								if (leftVoid && rightVoid) direction = !direction;
+
+								getWordNumber();
+							}
+							if (e.keyCode == 40 && activeX < crosswordHeight - 1) {
+								if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
+							}
+						}
+
+						highlightWordSquares();
+					}
+
+					// tab & enter
+					if (e.key == "Tab" || e.key == "Enter") {
+						if (e.key == "Tab") e.preventDefault();
+
+						if (keys["Shift"]) previousWordNumber();
+						else nextWordNumber();
+
+						highlightWordSquares();
+					}
+
+					// backspace
+					if (e.key == "Backspace") {
+						var squareEmpty = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML == "";
+
+						if (direction) {
+							if (activeY > 0) {
+								var leftVoid = document.querySelector(`#s${activeX}-${activeY - 1}`).classList.contains("void");
+								if (squareEmpty && !leftVoid) activeY--;
+							}
+						} else {
+							if (activeX > 0) {
+								var upVoid = document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void");
+								if (squareEmpty && !upVoid) activeX--;
+							}
+						}
+
+						let activeElement = document.querySelector(`#s${activeX}-${activeY} div`);
+						activeElement.innerHTML = "";
+
+						highlightWordSquares();
+					}
+
+					// delete (backwards backspace...so...forward space?)
+					if (e.key == "Delete") {
+						var squareEmpty = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML == "";
+
+						if (direction) {
+							if (activeY < crosswordWidth - 1) {
+								var rightVoid = document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void");
+								if (squareEmpty && !rightVoid) activeY++;
+							}
+						} else {
+							if (activeX < crosswordHeight - 1) {
+								var downVoid = document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void");
+								if (squareEmpty && !downVoid) activeX++;
+							}
+						}
+
+						let activeElement = document.querySelector(`#s${activeX}-${activeY} div`);
+						activeElement.innerHTML = "";
+
+						highlightWordSquares();
+					}
+				} else {
+					if (e.key == "Enter") {
+						if (document.activeElement == shareButtonElement) share();
+						if (document.activeElement == closeButtonElement) close();
+					}
 				}
 			});
 
@@ -864,41 +1340,135 @@
 				delete keys[e.key];
 			});
 
-			// --- 3. the mouse ---
+			// --- 4. the mouse ---
 
 			document.querySelectorAll(".square:not(.void)").forEach((openSquare) => {
 				openSquare.addEventListener("click", (e) => {
-					console.log("click to move to (same direction)\nclick current to change direction");
+					if (!pause) {
+						let separatorIndex = openSquare.id.indexOf("-");
+						let x = parseInt(openSquare.id.substring(1, separatorIndex));
+						let y = parseInt(openSquare.id.substring(separatorIndex + 1));
+
+						if (x == activeX && y == activeY) direction = !direction;
+						else {
+							activeX = x;
+							activeY = y;
+						}
+
+						if (direction) {
+							var leftVoid = false;
+							var rightVoid = false;
+
+							if (activeY == 0) leftVoid = true;
+							else if (crosswordArray[activeX][activeY - 1] == "-") leftVoid = true;
+
+							if (activeY == crosswordWidth - 1) rightVoid = true;
+							else if (crosswordArray[activeX][activeY + 1] == "-") rightVoid = true;
+
+							if (leftVoid && rightVoid) direction = !direction;
+						} else {
+							var upVoid = false;
+							var downVoid = false;
+
+							if (activeX == 0) upVoid = true;
+							else if (crosswordArray[activeX - 1][activeY] == "-") upVoid = true;
+
+							if (activeX == crosswordHeight - 1) downVoid = true;
+							else if (crosswordArray[activeX + 1][activeY] == "-") downVoid = true;
+
+							if (upVoid && downVoid) direction = !direction;
+						}
+
+						getWordNumber();
+						highlightWordSquares();
+					}
 				});
 			});
 
-			// --- 4. timer ---
-
-			var minutes = 0;
-			var seconds = 0;
-			var pad = "";
-			var pause = false;
-
-			setInterval(() => {
-				if (!pause) {
-					seconds++;
-					if (seconds == 60) {
-						seconds = 0;
-						minutes++;
-
-						timerContainerElement.style = `width: ${92 + 18 * minutes.toString().length}px`;
-					}
-					if (seconds < 10) pad = "0";
-					else pad = "";
-					timerElement.innerHTML = `${minutes}:${pad}${seconds}`;
-				}
-			}, 1000);
-
 			// --- 5. pause ---
 
+			function togglePause() {
+				pause = !pause;
+
+				if (pause) {
+					pauseButtonElement.innerHTML = "play_arrow";
+					document.querySelector(".crossword-container").classList.add("blur");
+				} else {
+					pauseButtonElement.innerHTML = "pause";
+					document.querySelector(".crossword-container").classList.remove("blur");
+				}
+			}
+
 			pauseButtonElement.addEventListener("click", (e) => {
-				pause = true;
-				// pause menu with continue button
+				if (!win) togglePause();
+			});
+
+			// --- 6. click clues ---
+			document.querySelectorAll(".across-clues .clue").forEach((clue) => {
+				clue.addEventListener("click", (e) => {
+					if (!pause) {
+						direction = true;
+						wordNumber = parseInt(clue.children[0].innerHTML) - 1;
+
+						let separatorIndex = acrossWordNumbers[wordNumber].indexOf("-");
+						activeX = parseInt(acrossWordNumbers[wordNumber].substring(1, separatorIndex));
+						activeY = parseInt(acrossWordNumbers[wordNumber].substring(separatorIndex + 1));
+						let x = activeX;
+						let y = activeY;
+
+						if (!clue.classList.contains("active-clue")) {
+							while (true) {
+								let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+								if (letter != "") {
+									activeY++;
+									if (activeY == crosswordWidth) {
+										activeY = y;
+										break;
+									} else if (document.querySelector(`#s${activeX}-${activeY}`).classList.contains("void")) {
+										activeY = y;
+										break;
+									}
+								} else break;
+							}
+						}
+
+						highlightWordSquares();
+					}
+				});
+			});
+			document.querySelectorAll(".down-clues .clue").forEach((clue) => {
+				clue.addEventListener("click", (e) => {
+					if (!pause) {
+						direction = false;
+						wordNumber = parseInt(clue.children[0].innerHTML) - 1;
+
+						let separatorIndex = downWordNumbers[wordNumber].indexOf("-");
+						activeX = parseInt(downWordNumbers[wordNumber].substring(1, separatorIndex));
+						activeY = parseInt(downWordNumbers[wordNumber].substring(separatorIndex + 1));
+						let x = activeX;
+						let y = activeY;
+
+						if (!clue.classList.contains("active-clue")) {
+							while (true) {
+								let letter = document.querySelector(`#s${activeX}-${activeY} div`).innerHTML;
+
+								if (letter != "") {
+									activeX++;
+									if (activeX == crosswordWidth) {
+										activeX = x;
+										break;
+									} else if (document.querySelector(`#s${activeX}-${activeY}`).classList.contains("void")) {
+										activeX = x;
+										break;
+									}
+								} else break;
+							}
+						}
+
+						highlightWordSquares();
+					}
+				});
 			});
 		</script>
 	</body>
