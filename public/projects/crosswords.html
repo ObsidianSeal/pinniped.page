@@ -14,7 +14,7 @@
 		<meta property="og:url" content="https://pinniped.page/projects/crosswords" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="crosswords" />
-		<!-- <meta property="og:description" content="Solve crosswords by Obsidian_Seal and others." /> -->
+		<meta property="og:description" content="Solve crosswords by Obsidian_Seal and others." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<meta name="description" content="Crossword renderer beta. [description subject to change]" />
@@ -321,6 +321,10 @@
 				gap: 10px;
 			}
 
+			.clue.active-clue-opposite {
+				background-color: var(--other);
+			}
+
 			.clue.active-clue {
 				background-color: var(--error);
 			}
@@ -416,7 +420,7 @@
 		</div>
 
 		<script>
-			const version = "1.0.0";
+			const version = "1.1.0";
 			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
 
 			// --- 0. element constants ---
@@ -591,6 +595,54 @@
 					"LEVEL/E-E-A/MONEY/U-T-E/RISER",
 					["flat (palindrome)", "", "paper with value", "", "early _____"],
 					["long-tailed primates from Madagascar", "lets out emotion", "one of several coverings", "", ""],
+				],
+				[
+					"do this one",
+					"Obsidian_Seal",
+					"SQUARES/-U--ANA/SIGHTED/PE-E-M-/AT-YOYO/MLA-P-N/SYNAPSE",
+					[
+						"quadrilaterals with equal sides",
+						"",
+						"",
+						"",
+						"",
+						"airline headquartered in Minato, Tokyo",
+						"spotted",
+						"",
+						"gym class",
+						"pronunciation of &ldquo;@&rdquo;",
+						"spinning toy that returns when thrown",
+						"",
+						"",
+						"paper style guidelines",
+						"",
+						"small gap between two neurons",
+					],
+					[
+						"",
+						"opposite of loudly",
+						"medium-sized rodent",
+						"&ldquo;I wouldn&rsquo;t wish that on my worst _____&rdquo;",
+						"not happy",
+						"",
+						"messages repeatedly",
+						"informal greeting",
+						"",
+						"",
+						"",
+						"police force in one of Canada&rsquo;s provinces",
+						"&ldquo;invisible&rdquo; exponent",
+						"",
+						"&ldquo;I have __ idea&rdquo;",
+						"",
+					],
+				],
+				[
+					"test",
+					"test",
+					"G-B-V-W-X-Y--Z/G-B-V-W-X-Y--Z/G-------------/G-B-V-WA-X-Y-Z/G-B-V-W--X-Y-Z/G-------------/G-B-V-W-X-Y--Z/G-B-V-W-X-Y--Z/G-------------/G-B-V-W-X-Y--Z/G-B-V-W-X-Y--Z",
+					["", "", "", "", "", "", "", "", "", "a", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+					["g", "b", "v", "w", "x", "y", "z", "", "b", "v", "w", "x", "y", "z", "b", "v", "w", "x", "y", "z", "", "b", "v", "w", "x", "y", "z"],
 				],
 			];
 			crosswords.sort();
@@ -770,6 +822,7 @@
 
 			var direction = true;
 			var wordNumber = -1;
+			var firstWord = true;
 			var activeX = -1;
 			var activeY = 0;
 
@@ -913,6 +966,9 @@
 				document.querySelectorAll(".active-clue").forEach((clue) => {
 					clue.classList.remove("active-clue");
 				});
+				document.querySelectorAll(".active-clue-opposite").forEach((clue) => {
+					clue.classList.remove("active-clue-opposite");
+				});
 
 				if (direction) {
 					let separatorIndex = acrossWordNumbers[wordNumber].indexOf("-");
@@ -943,6 +999,40 @@
 				let element = document.querySelector(`#s${activeX}-${activeY}`);
 				element.classList.add("active-square");
 
+				let oppositeWordNumber;
+
+				if (direction) {
+					var upVoid = false;
+					var downVoid = false;
+
+					if (activeX == 0) upVoid = true;
+					else if (crosswordArray[activeX - 1][activeY] == "-") upVoid = true;
+
+					if (activeX == crosswordHeight - 1) downVoid = true;
+					else if (crosswordArray[activeX + 1][activeY] == "-") downVoid = true;
+
+					if (!(upVoid && downVoid)) {
+						direction = !direction;
+						oppositeWordNumber = getWordNumber();
+						direction = !direction;
+					}
+				} else {
+					var leftVoid = false;
+					var rightVoid = false;
+
+					if (activeY == 0) leftVoid = true;
+					else if (crosswordArray[activeX][activeY - 1] == "-") leftVoid = true;
+
+					if (activeY == crosswordWidth - 1) rightVoid = true;
+					else if (crosswordArray[activeX][activeY + 1] == "-") rightVoid = true;
+
+					if (!(leftVoid && rightVoid)) {
+						direction = !direction;
+						oppositeWordNumber = getWordNumber();
+						direction = !direction;
+					}
+				}
+
 				let clueElement;
 				if (direction) clueElement = acrossCluesContainerElement.children[acrossWordNumbersNoBlank.indexOf(wordNumber + 1)];
 				else clueElement = downCluesContainerElement.children[downWordNumbersNoBlank.indexOf(wordNumber + 1)];
@@ -959,6 +1049,36 @@
 
 					downCluesContainerElement.scrollBy(0, elementRect.top - (containerRect.top + 7));
 				}
+
+				let oppositeClueElement;
+				if (direction) oppositeClueElement = downCluesContainerElement.children[downWordNumbersNoBlank.indexOf(oppositeWordNumber + 1)];
+				else oppositeClueElement = acrossCluesContainerElement.children[acrossWordNumbersNoBlank.indexOf(oppositeWordNumber + 1)];
+
+				if (oppositeClueElement != null) {
+					oppositeClueElement.classList.add("active-clue-opposite");
+
+					if (firstWord) {
+						firstWord = false;
+
+						const clueElementHeightCheck = setInterval(() => {
+							if (document.querySelector(".active-clue div").getBoundingClientRect().height == 21) {
+								let clueRectTop = clueElement.getBoundingClientRect().top;
+								let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
+
+								if (direction) downCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
+								else acrossCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
+
+								clearInterval(clueElementHeightCheck);
+							}
+						}, 10);
+					} else {
+						let clueRectTop = clueElement.getBoundingClientRect().top;
+						let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
+
+						if (direction) downCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
+						else acrossCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
+					}
+				}
 			}
 
 			highlightWordSquares();
@@ -972,7 +1092,7 @@
 						if (y == 0) {
 							let element = document.querySelector(`#s${x}-${y}`);
 							if (element.children.length > 1) {
-								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								return parseInt(element.children[1].innerHTML) - 1;
 								break;
 							}
 						}
@@ -980,17 +1100,17 @@
 						let element = document.querySelector(`#s${x}-${--y}`);
 						if (element.classList.contains("void")) {
 							element = document.querySelector(`#s${x}-${++y}`);
-							wordNumber = parseInt(element.children[1].innerHTML) - 1;
+							return parseInt(element.children[1].innerHTML) - 1;
 							break;
 						}
 
 						if (element.children.length > 1) {
 							if (y == 0) {
-								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								return parseInt(element.children[1].innerHTML) - 1;
 								break;
 							} else {
 								if (document.querySelector(`#s${x}-${--y}`).classList.contains("void")) {
-									wordNumber = parseInt(element.children[1].innerHTML) - 1;
+									return parseInt(element.children[1].innerHTML) - 1;
 									break;
 								}
 							}
@@ -1001,7 +1121,7 @@
 						if (x == 0) {
 							let element = document.querySelector(`#s${x}-${y}`);
 							if (element.children.length > 1) {
-								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								return parseInt(element.children[1].innerHTML) - 1;
 								break;
 							}
 						}
@@ -1009,17 +1129,17 @@
 						let element = document.querySelector(`#s${--x}-${y}`);
 						if (element.classList.contains("void")) {
 							element = document.querySelector(`#s${++x}-${y}`);
-							wordNumber = parseInt(element.children[1].innerHTML) - 1;
+							return parseInt(element.children[1].innerHTML) - 1;
 							break;
 						}
 
 						if (element.children.length > 1) {
 							if (x == 0) {
-								wordNumber = parseInt(element.children[1].innerHTML) - 1;
+								return parseInt(element.children[1].innerHTML) - 1;
 								break;
 							} else {
 								if (document.querySelector(`#s${--x}-${y}`).classList.contains("void")) {
-									wordNumber = parseInt(element.children[1].innerHTML) - 1;
+									return parseInt(element.children[1].innerHTML) - 1;
 									break;
 								}
 							}
@@ -1179,7 +1299,7 @@
 							if (upVoid && downVoid) direction = !direction;
 						}
 
-						getWordNumber();
+						wordNumber = getWordNumber();
 
 						highlightWordSquares();
 					}
@@ -1207,7 +1327,7 @@
 
 								if (upVoid && downVoid) direction = !direction;
 
-								getWordNumber();
+								wordNumber = getWordNumber();
 							}
 							if (e.keyCode == 39 && activeY < crosswordWidth - 1) {
 								if (!document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
@@ -1227,7 +1347,7 @@
 
 								if (upVoid && downVoid) direction = !direction;
 
-								getWordNumber();
+								wordNumber = getWordNumber();
 							}
 						} else {
 							if (e.keyCode == 37 && activeY > 0) {
@@ -1245,7 +1365,7 @@
 
 								if (leftVoid && rightVoid) direction = !direction;
 
-								getWordNumber();
+								wordNumber = getWordNumber();
 							}
 							if (e.keyCode == 38 && activeX > 0) {
 								if (!document.querySelector(`#s${activeX - 1}-${activeY}`).classList.contains("void")) activeX--;
@@ -1265,7 +1385,7 @@
 
 								if (leftVoid && rightVoid) direction = !direction;
 
-								getWordNumber();
+								wordNumber = getWordNumber();
 							}
 							if (e.keyCode == 40 && activeX < crosswordHeight - 1) {
 								if (!document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
@@ -1379,7 +1499,7 @@
 							if (upVoid && downVoid) direction = !direction;
 						}
 
-						getWordNumber();
+						wordNumber = getWordNumber();
 						highlightWordSquares();
 					}
 				});
