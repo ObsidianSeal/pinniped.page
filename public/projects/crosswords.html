@@ -149,19 +149,29 @@
 				font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
 			}
 
-			h1 .material-symbols-outlined {
+			h1 .material-symbols-outlined:not(.circle, .x) {
 				font-size: 72px;
 				translate: 0 10px;
 			}
 
-			h1 .material-symbols-outlined:hover {
+			h1 .material-symbols-outlined:not(.circle, .x):hover {
 				cursor: pointer;
 				color: var(--sub);
+			}
+			.circle {
+				font-size: 6px;
+				translate: 0 -3px;
+				margin: 0 10px 0 10px;
+			}
+
+			.x {
+				font-size: 16px;
+				translate: 0 2px;
 			}
 
 			.choose-puzzle-menu {
 				width: 500px;
-				height: 300px;
+				height: 395px;
 
 				position: absolute;
 				top: 100px;
@@ -177,13 +187,21 @@
 			.choose-puzzle-menu div {
 				font-size: 32px;
 				font-weight: 500;
-				padding: 0 0 5px 10px;
-				color: var(--text);
+				padding: 5px 0 10px 10px;
+				color: var(--main);
 			}
 
 			.choose-puzzle-menu div:hover {
 				cursor: pointer;
 				background-color: var(--sub-alt);
+			}
+
+			.choose-puzzle-menu div div {
+				font-size: 16px;
+				font-weight: 300;
+				padding: 0;
+
+				color: var(--text);
 			}
 
 			.timer {
@@ -420,7 +438,7 @@
 		</div>
 
 		<script>
-			const version = "1.1.0";
+			const version = "1.2.0";
 			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
 
 			// --- 0. element constants ---
@@ -593,7 +611,7 @@
 					"mini #3",
 					"Obsidian_Seal",
 					"LEVEL/E-E-A/MONEY/U-T-E/RISER",
-					["flat (palindrome)", "", "paper with value", "", "early _____"],
+					["flat (palindrome)", "", "", "paper with value", "early _____"],
 					["long-tailed primates from Madagascar", "lets out emotion", "one of several coverings", "", ""],
 				],
 				[
@@ -637,8 +655,29 @@
 						"",
 					],
 				],
+				[
+					"4 by 4",
+					"Obsidian_Seal",
+					"FORK/IRON/RATE/ELSE",
+					["utensil", "", "", "", "Fe", "judge numerically", "in many programming languages, denotes the code to run when a condition is not met"],
+					["the hottest of the four elements", "relating to the mouth", "decays", "leg joint", "", "", ""],
+				],
+				[
+					"3 by 3",
+					"Obsidian_Seal",
+					"CRY/O-E/BUS",
+					["weep", "", "transit vehicle"],
+					["what kernels are attached to, with &ldquo;the&rdquo;", "", "response to &ldquo;Is the sun a star?&rdquo;"],
+				],
+				["2 by 2", "Obsidian_Seal", "NO/AR", ["response to &ldquo;Does four plus seven equal thirteen?&rdquo;", "", "argon"], ["sodium", "this __ that", ""]],
+				[
+					"mini #4",
+					"Obsidian_Seal",
+					"P-BAT/AIR-H/PLATE/E-I-R/RANGE",
+					["", "animal that uses echolocation", "", "what we breathe (mostly nitrogen)", "", "dish", "word after &ldquo;mountain&rdquo; or &ldquo;free&rdquo;"],
+					["page material", "protected by the skull, with &ldquo;the&rdquo;", "neither here nor _____", "", "French for &ldquo;he&rdquo;", "", ""],
+				],
 			];
-			crosswords.sort();
 
 			var crosswordNumber = Math.floor(Math.random() * crosswords.length);
 
@@ -661,8 +700,17 @@
 			document.querySelector("h2 span").innerHTML = crosswords[crosswordNumber][1];
 
 			for (let i = 0; i < crosswords.length; i++) {
+				let crosswordArray = crosswords[i][2].split("/");
+				let crosswordWidth = crosswordArray[0].length;
+				let crosswordHeight = crosswordArray.length;
+
 				let puzzleListItemElement = document.createElement("div");
 				puzzleListItemElement.innerHTML = crosswords[i][0];
+
+				let infoElement = document.createElement("div");
+				infoElement.innerHTML = `${crosswords[i][1]}<span class="material-symbols-outlined filled circle">circle</span>${crosswordWidth}<span class="material-symbols-outlined filled x">close</span>${crosswordHeight}`;
+				puzzleListItemElement.appendChild(infoElement);
+
 				choosePuzzleMenuElement.appendChild(puzzleListItemElement);
 
 				puzzleListItemElement.addEventListener("click", (e) => {
@@ -1055,21 +1103,33 @@
 
 						const clueElementHeightCheck = setInterval(() => {
 							if (document.querySelector(".active-clue div").getBoundingClientRect().height == 21) {
-								let clueRectTop = clueElement.getBoundingClientRect().top;
-								let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
+								if (direction) {
+									let containerRectTop = acrossCluesContainerElement.getBoundingClientRect().top;
+									let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
 
-								if (direction) downCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
-								else acrossCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
+									downCluesContainerElement.scrollBy(0, oppositeClueRectTop - (containerRectTop + 7));
+								} else {
+									let containerRectTop = downCluesContainerElement.getBoundingClientRect().top;
+									let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
+
+									acrossCluesContainerElement.scrollBy(0, oppositeClueRectTop - (containerRectTop + 7));
+								}
 
 								clearInterval(clueElementHeightCheck);
 							}
 						}, 10);
 					} else {
-						let clueRectTop = clueElement.getBoundingClientRect().top;
-						let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
+						if (direction) {
+							let containerRectTop = acrossCluesContainerElement.getBoundingClientRect().top;
+							let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
 
-						if (direction) downCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
-						else acrossCluesContainerElement.scrollBy(0, oppositeClueRectTop - clueRectTop);
+							downCluesContainerElement.scrollBy(0, oppositeClueRectTop - (containerRectTop + 7));
+						} else {
+							let containerRectTop = downCluesContainerElement.getBoundingClientRect().top;
+							let oppositeClueRectTop = oppositeClueElement.getBoundingClientRect().top;
+
+							acrossCluesContainerElement.scrollBy(0, oppositeClueRectTop - (containerRectTop + 7));
+						}
 					}
 				}
 			}
