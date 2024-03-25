@@ -229,6 +229,7 @@
 			.material-symbols-outlined,
 			.timer,
 			.crossword,
+			.loading-panel,
 			.blur * {
 				-webkit-user-select: none;
 				-moz-user-select: none;
@@ -377,6 +378,23 @@
 				cursor: pointer;
 			}
 
+			.loading-panel {
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				background-color: var(--sub-alt);
+				color: var(--text);
+				font-size: 108px;
+			}
+
 			.show {
 				display: initial;
 			}
@@ -387,6 +405,87 @@
 
 			.blur {
 				filter: blur(5px);
+			}
+
+			#d1,
+			#d2,
+			#d3 {
+				opacity: 0%;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 0.5s;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 0.5s;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 0.5s;
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
 			}
 		</style>
 
@@ -402,6 +501,12 @@
 
 			.clue:hover {
 				cursor: pointer;
+			}
+		</style>
+
+		<style id="styles-to-remove-2">
+			body {
+				overflow: hidden;
 			}
 		</style>
 	</head>
@@ -437,8 +542,10 @@
 			</div>
 		</div>
 
+		<div class="loading-panel">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
+
 		<script>
-			const version = "1.2.0";
+			const version = "1.3.0";
 			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
 
 			// --- 0. element constants ---
@@ -451,6 +558,7 @@
 			const downCluesContainerElement = document.querySelector(".down-clues .clues");
 			const shareButtonElement = document.querySelector("h5");
 			const closeButtonElement = document.querySelector(".close-button");
+			const loadingPanelElement = document.querySelector(".loading-panel");
 
 			// --- 1. load crossword & word numbers; set title, subtitle, and menu ---
 
@@ -677,6 +785,13 @@
 					["", "animal that uses echolocation", "", "what we breathe (mostly nitrogen)", "", "dish", "word after &ldquo;mountain&rdquo; or &ldquo;free&rdquo;"],
 					["page material", "protected by the skull, with &ldquo;the&rdquo;", "neither here nor _____", "", "French for &ldquo;he&rdquo;", "", ""],
 				],
+				[
+					"mini #5",
+					"Obsidian_Seal",
+					"TREES/R-NGO/ADDON/I-E-A/LIDAR",
+					["what you can&rsquo;t see the forest for", "", "", "", "Amnesty International, for example", "plugin", "important sensors for self-driving cars"],
+					["you might go to the forest for one", "completed, like a TV show", "can be big", "", "", "", "underwater sensors"],
+				],
 			];
 
 			var crosswordNumber = Math.floor(Math.random() * crosswords.length);
@@ -714,7 +829,9 @@
 				choosePuzzleMenuElement.appendChild(puzzleListItemElement);
 
 				puzzleListItemElement.addEventListener("click", (e) => {
-					window.location.href = "?puzzle=" + i;
+					setTimeout(() => {
+						window.location.href = "?puzzle=" + i;
+					}, 500);
 				});
 			}
 
@@ -737,15 +854,17 @@
 				if (choosePuzzleMenuElement.classList.contains("hide")) menuArrowElement.innerHTML = "arrow_drop_down";
 			});
 
-			const menuPositionCheck = setInterval(() => {
-				const menuArrowRect = menuArrowElement.getBoundingClientRect();
+			document.addEventListener("click", (e) => {
+				// hopefully this is good
+				if (e.target != menuArrowElement && e.target != choosePuzzleMenuElement) {
+					if (choosePuzzleMenuElement.classList.contains("show")) {
+						choosePuzzleMenuElement.classList.remove("show");
+						choosePuzzleMenuElement.classList.add("hide");
 
-				if (menuArrowRect.width < 100) {
-					if (menuArrowRect.left > 550) choosePuzzleMenuElement.style = "right: 0";
-					else choosePuzzleMenuElement.style = `left: ${Math.round(menuArrowRect.left) - 42}px`;
-					clearInterval(menuPositionCheck);
+						menuArrowElement.innerHTML = "arrow_drop_down";
+					}
 				}
-			}, 10);
+			});
 
 			for (let i = 0; i < crosswordHeight; i++) {
 				let rowElement = document.createElement("div");
@@ -841,23 +960,37 @@
 
 			var minutes = 0;
 			var seconds = 0;
-			var pad = "";
+			var pad = "0";
 			var pause = false;
 
-			setInterval(() => {
-				if (!pause) {
-					seconds++;
-					if (seconds == 60) {
-						seconds = 0;
-						minutes++;
+			const menuPositionCheck = setInterval(() => {
+				const menuArrowRect = menuArrowElement.getBoundingClientRect();
 
-						timerContainerElement.style = `width: ${92 + 18 * minutes.toString().length}px`;
-					}
-					if (seconds < 10) pad = "0";
-					else pad = "";
-					timerElement.innerHTML = `${minutes}:${pad}${seconds}`;
+				if (menuArrowRect.width < 100) {
+					if (menuArrowRect.left > 550) choosePuzzleMenuElement.style = "right: 0";
+					else choosePuzzleMenuElement.style = `left: ${Math.round(menuArrowRect.left) - 42}px`;
+
+					loadingPanelElement.remove();
+					document.querySelector("#styles-to-remove-2").remove();
+
+					setInterval(() => {
+						if (!pause) {
+							seconds++;
+							if (seconds == 60) {
+								seconds = 0;
+								minutes++;
+
+								timerContainerElement.style = `width: ${92 + 18 * minutes.toString().length}px`;
+							}
+							if (seconds < 10) pad = "0";
+							else pad = "";
+							timerElement.innerHTML = `${minutes}:${pad}${seconds}`;
+						}
+					}, 1000);
+
+					clearInterval(menuPositionCheck);
 				}
-			}, 1000);
+			}, 10);
 
 			// --- 3. word highlighting & keyboard input ---
 
