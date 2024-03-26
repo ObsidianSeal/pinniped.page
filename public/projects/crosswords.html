@@ -170,7 +170,7 @@
 			}
 
 			.choose-puzzle-menu {
-				width: 500px;
+				width: 545px;
 				height: 395px;
 
 				position: absolute;
@@ -545,7 +545,7 @@
 		<div class="loading-panel">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
 
 		<script>
-			const version = "1.4.1 (2024/03/26)";
+			const version = "1.4.2 (2024/03/26)";
 			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
 
 			// --- 0. element constants ---
@@ -629,6 +629,7 @@
 						"",
 						"",
 					],
+					"Friday, March 15th, 2024",
 				],
 				[
 					"mini #1",
@@ -636,6 +637,7 @@
 					"QUEUE/U-M-A/ALTER/IT-ON/LEANS",
 					["line up", "", "", "change", "", "", "well-known Stephen King novel", "atop", "the Tower of Pisa does this"],
 					["bird", "ambulance employee", "makes money", "", "a standard for wireless data transmission", "very, very long time", "", "", ""],
+					"Thursday, March 21st, 2024",
 				],
 				[
 					"animals",
@@ -652,6 +654,7 @@
 						"",
 						"",
 					],
+					"Friday, March 22nd, 2024",
 				],
 				[
 					"mini #2",
@@ -659,6 +662,7 @@
 					"SLATE/PET-A/IDEAS/N---T/EXIT-",
 					["blank _____", "", "", "", "animal in a house", "result of brainstorming", "what a sign above a door may read"],
 					["back supporting bones", "type of light", "had lunch", "opposite west", "", "", ""],
+					"Friday, March 22nd, 2024",
 				],
 				[
 					"drowssorc",
@@ -714,6 +718,7 @@
 						"a phrase commonly on a tombstone",
 						"",
 					],
+					"Friday, March 22nd, 2024",
 				],
 				[
 					"mini #3",
@@ -721,6 +726,7 @@
 					"LEVEL/E-E-A/MONEY/U-T-E/RISER",
 					["flat (palindrome)", "", "", "paper with value", "early _____"],
 					["long-tailed primates from Madagascar", "lets out emotion", "one of several coverings", "", ""],
+					"Friday, March 22nd, 2024",
 				],
 				[
 					"do this one",
@@ -762,6 +768,7 @@
 						"&ldquo;I have __ idea&rdquo;",
 						"",
 					],
+					"Saturday, March 23rd, 2024",
 				],
 				[
 					"4 by 4",
@@ -769,6 +776,7 @@
 					"FORK/IRON/RATE/ELSE",
 					["utensil", "", "", "", "Fe", "judge numerically", "in many programming languages, denotes the code to run when a condition is not met"],
 					["the hottest of the four elements", "relating to the mouth", "decays", "leg joint", "", "", ""],
+					"Sunday, March 24th, 2024",
 				],
 				[
 					"3 by 3",
@@ -776,14 +784,23 @@
 					"CRY/O-E/BUS",
 					["weep", "", "transit vehicle"],
 					["what kernels are attached to, with &ldquo;the&rdquo;", "", "response to &ldquo;Is the sun a star?&rdquo;"],
+					"Sunday, March 24th, 2024",
 				],
-				["2 by 2", "Obsidian_Seal", "NO/AR", ["response to &ldquo;Does four plus seven equal thirteen?&rdquo;", "", "argon"], ["sodium", "this __ that", ""]],
+				[
+					"2 by 2",
+					"Obsidian_Seal",
+					"NO/AR",
+					["response to &ldquo;Does four plus seven equal thirteen?&rdquo;", "", "argon"],
+					["sodium", "this __ that", ""],
+					"Sunday, March 24th, 2024",
+				],
 				[
 					"mini #4",
 					"Obsidian_Seal",
 					"P-BAT/AIR-H/PLATE/E-I-R/RANGE",
 					["", "animal that uses echolocation", "", "what we breathe (mostly nitrogen)", "", "dish", "word after &ldquo;mountain&rdquo; or &ldquo;free&rdquo;"],
 					["page material", "protected by the skull, with &ldquo;the&rdquo;", "neither here nor _____", "", "French for &ldquo;he&rdquo;", "", ""],
+					"Sunday, March 24th, 2024",
 				],
 				[
 					"mini #5",
@@ -791,6 +808,7 @@
 					"TREES/R-NGO/ADDON/I-E-A/LIDAR",
 					["what you can&rsquo;t see the forest for", "", "", "", "Amnesty International, for example", "plugin", "important sensors for self-driving cars"],
 					["you might go to the forest for one", "completed, like a TV show", "can be big", "underwater sensors", "", "", ""],
+					"Monday, March 25th, 2024",
 				],
 				[
 					"mini #6 - 2024/03/26",
@@ -798,6 +816,7 @@
 					"ORGAN/T-AGO/TIMES/EVE-E/RISKY",
 					["the brain is an example of one", "", "", "", "some time ___", "tables to remember", "", "night before", "could end badly"],
 					["river mammal", "Risk, Battleship, Taboo, etc.", "years lived", "not the kind of neighbour you want", "", "", "4 & 1", "", ""],
+					"Tuesday, March 26th, 2024",
 				],
 			];
 
@@ -832,7 +851,7 @@
 				puzzleListItemElement.innerHTML = crosswords[i][0];
 
 				let infoElement = document.createElement("div");
-				infoElement.innerHTML = `${crosswords[i][1]}<span class="material-symbols-outlined filled circle">circle</span>${crosswordWidth}<span class="material-symbols-outlined filled x">close</span>${crosswordHeight}`;
+				infoElement.innerHTML = `${crosswords[i][1]}<span class="material-symbols-outlined filled circle">circle</span>${crosswordWidth}<span class="material-symbols-outlined filled x">close</span>${crosswordHeight}<span class="material-symbols-outlined filled circle">circle</span>${crosswords[i][5]}`;
 				puzzleListItemElement.appendChild(infoElement);
 
 				choosePuzzleMenuElement.appendChild(puzzleListItemElement);
