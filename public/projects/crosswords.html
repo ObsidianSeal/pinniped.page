@@ -545,7 +545,7 @@
 		<div class="loading-panel">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
 
 		<script>
-			const version = "1.4.0 (2024/03/26)";
+			const version = "1.4.1 (2024/03/26)";
 			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
 
 			// --- 0. element constants ---
@@ -801,7 +801,7 @@
 				],
 			];
 
-			var crosswordNumber = Math.floor(Math.random() * crosswords.length);
+			var crosswordNumber = crosswords.length - 1;
 
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
