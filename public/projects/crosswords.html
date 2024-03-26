@@ -545,7 +545,7 @@
 		<div class="loading-panel">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
 
 		<script>
-			const version = "1.4.2 (2024/03/26)";
+			const version = "1.4.3 (2024/03/26)"; // display underneath loading...?
 			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
 
 			// --- 0. element constants ---
@@ -817,6 +817,26 @@
 					["the brain is an example of one", "", "", "", "some time ___", "tables to remember", "", "night before", "could end badly"],
 					["river mammal", "Risk, Battleship, Taboo, etc.", "years lived", "not the kind of neighbour you want", "", "", "4 & 1", "", ""],
 					"Tuesday, March 26th, 2024",
+				],
+				[
+					"mini #7",
+					"Obsidian_Seal",
+					"C-PIP/AM-DR/RATIO/BLOOM/SEPT-",
+					[
+						"",
+						"die dot",
+						"",
+						"",
+						"morning time",
+						"",
+						"last word in many road names, abbr.",
+						"numbers separated by a colon",
+						"",
+						"what flowers do in the spring",
+						"the longest month, abbr.",
+					],
+					["in bread", "", "dumb dumb", "year-end dance", "", "sounds like what the postal service delivers", "", "", "a.k.a. shirt", "", ""],
+					"Wednesday, March 27th, 2024",
 				],
 			];
 
@@ -1399,7 +1419,7 @@
 
 			function share() {
 				navigator.clipboard.writeText(
-					`--------------------\nI solved “${crosswords[crosswordNumber][0]}” by ${crosswords[crosswordNumber][1]} in **${minutes}:${pad}${seconds}**!\nhttps://pinniped.page/projects/crosswords?puzzle=${crosswordNumber}`
+					`☑️ I solved “[${crosswords[crosswordNumber][0]}](https://pinniped.page/projects/crosswords?puzzle=${crosswordNumber})” by ${crosswords[crosswordNumber][1]} in **${minutes}:${pad}${seconds}**!`
 				);
 
 				let savedHTML = shareButtonElement.innerHTML;
