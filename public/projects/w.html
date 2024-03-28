@@ -166,7 +166,7 @@
 				outline: none;
 			}
 
-			/* the responsiveness of the guess squares SUCKS */
+			/* the responsiveness of the guess squares IS MEDIOCRE */
 			.guesses {
 				padding: 0 10px 0 10px;
 			}
@@ -615,6 +615,12 @@
 					>
 				</li>
 				<li>Why can&rsquo;t I make &lt;invalid word&gt; the next word?<br /><span class="grey">Because words consist exclusively of letters.</span></li>
+				<li>
+					Someone set the word to something offensive, and I would rather not type it in. Is there a way to report words?<br /><span class="grey"
+						>Unfortunately, no. If you don&rsquo;t want to solve the puzzle, you can always just enter random letters until you run out of guesses, at which point
+						you can change the word. Alternatively, send me a message on Discord and I&rsquo;ll delete the word from the database.</span
+					>
+				</li>
 				<li>
 					What do you mean by &ldquo;the word in the database was invalid&rdquo;?<br /><span class="grey"
 						>Either the word contained a character that was not a letter, or no word was found. Hopefully this never happens.</span
@@ -1187,7 +1193,7 @@
 			loadThemeFromURL();
 
 			// last: version #
-			let version = "1.5.5";
+			let version = "1.5.6";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
 		</script>
