@@ -229,7 +229,7 @@
 			.material-symbols-outlined,
 			.timer,
 			.crossword,
-			.loading-panel,
+			.loading-panel div:not(#version),
 			.blur * {
 				-webkit-user-select: none;
 				-moz-user-select: none;
@@ -389,10 +389,31 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				flex-direction: column;
 
 				background-color: var(--sub-alt);
 				color: var(--text);
+			}
+
+			.loading-panel div:first-child {
 				font-size: 108px;
+				font-weight: 500;
+			}
+
+			.loading-panel div#version,
+			.loading-panel div#load-error {
+				margin-top: 20px;
+				font-size: 24px;
+				font-weight: 300;
+			}
+
+			.loading-panel div#version::selection {
+				background-color: var(--bg);
+			}
+
+			.loading-panel div#load-error:hover {
+				cursor: pointer;
+				color: var(--error-extra);
 			}
 
 			.show {
@@ -542,13 +563,19 @@
 			</div>
 		</div>
 
-		<div class="loading-panel">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
+		<div class="loading-panel">
+			<div>Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
+			<div id="version"></div>
+			<div id="load-error">Internet-unrelated loading issue?</div>
+		</div>
 
 		<script>
-			const version = "1.4.3 (2024/03/26)"; // display underneath loading...?
-			console.log(`%ccrosswords v${version}`, "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
+			// VERSION 1.4.4 (change all these when updating)
+			console.log("%ccrosswords v1.4.4 (2024/03/27)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
+			document.querySelector(".loading-panel div#version").innerHTML = "v1.4.4 — 2024/03/27";
 
 			// --- 0. element constants ---
+
 			const choosePuzzleMenuElement = document.querySelector(".choose-puzzle-menu");
 			const menuArrowElement = document.querySelector("h1 .material-symbols-outlined");
 			const timerContainerElement = document.querySelector(".timer");
@@ -838,6 +865,32 @@
 					["in bread", "", "dumb dumb", "year-end dance", "", "sounds like what the postal service delivers", "", "", "a.k.a. shirt", "", ""],
 					"Wednesday, March 27th, 2024",
 				],
+				[
+					"Greek Letters",
+					"Obsidian_Seal",
+					"----K---U-P/THETA---PHI/----P---S--/----P--XI-L/----A---L-A/--------O-M/--OMICRON-B/-C--O-H---D/-H--T-OMEGA/SIGMA---P--/--A----PSI-/--MU----I-T/Z-M-B-DELTA/ETA-E---O-U/T---T---NU-/ALPHA------",
+					["", "", "", "Θ θ", "Φ φ", "Ξ ξ", "", "Ο ο", "", "", "", "Ω ω", "", "Σ σ/ς", "", "Ψ ψ", "Μ μ", "", "", "", "Δ δ", "Η η", "Ν ν", "Α α"],
+					["Κ κ", "Υ υ", "Π π", "", "", "", "Λ λ", "", "Ι ι", "Ρ ρ", "Χ χ", "", "Ε ε", "", "Γ γ", "", "", "Τ τ", "Ζ ζ", "Β β", "", "", "", ""],
+					"Thursday, March 28th, 2024",
+				],
+				[
+					"mini #8",
+					"Obsidian_Seal",
+					"TWICE/V-RAM/ADORE/DONOR/SHYLY",
+					[
+						"how many times a year there&rsquo;s a solstice",
+						"",
+						"",
+						"",
+						"a computer may have 16GB of it",
+						"love",
+						"",
+						"someone who gives something to a cause",
+						"timidly",
+					],
+					["commercials", "a fire at a fire station, for example", "_____ of the bells", "nail care board", "", "", "Play-___", "", ""],
+					"Thursday, March 28th, 2024",
+				],
 			];
 
 			var crosswordNumber = crosswords.length - 1;
@@ -849,8 +902,8 @@
 			if (/^\d+$/.test(puzzleNumber)) {
 				puzzleNumber = parseInt(puzzleNumber);
 				if (puzzleNumber < crosswords.length) crosswordNumber = parseInt(puzzleNumber);
-				else window.location.href = "?puzzle=" + crosswordNumber;
-			} else window.location.href = "?puzzle=" + crosswordNumber;
+				else window.history.replaceState({}, "", "?puzzle=" + crosswordNumber);
+			}
 
 			document.querySelector("title").innerHTML = `&ldquo;${crosswords[crosswordNumber][0]}&rdquo; by ${crosswords[crosswordNumber][1]}`;
 
@@ -931,6 +984,16 @@
 				}
 
 				document.querySelector(".crossword").appendChild(rowElement);
+			}
+
+			function fill() {
+				for (let i = 0; i < crosswordHeight; i++) {
+					for (let j = 0; j < crosswordWidth; j++) {
+						let squareElement = document.querySelector(`#s${i}-${j}`);
+						let letter = crosswordArray[i][j];
+						if (letter != "-") squareElement.innerHTML = letter + squareElement.innerHTML;
+					}
+				}
 			}
 
 			var numberCount = 0;
@@ -1758,6 +1821,7 @@
 			});
 
 			// --- 6. click clues ---
+
 			document.querySelectorAll(".across-clues .clue").forEach((clue) => {
 				clue.addEventListener("click", (e) => {
 					if (!pause) {
@@ -1823,6 +1887,12 @@
 						highlightWordSquares();
 					}
 				});
+			});
+
+			// --- 7. loading error, help page button (coming soon) ---
+
+			document.querySelector("#load-error").addEventListener("click", (e) => {
+				window.location.href = "https://discord.gg/yswDu7kywv";
 			});
 		</script>
 	</body>
