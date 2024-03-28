@@ -570,9 +570,9 @@
 		</div>
 
 		<script>
-			// VERSION 1.4.4 (change all these when updating)
-			console.log("%ccrosswords v1.4.4 (2024/03/27)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
-			document.querySelector(".loading-panel div#version").innerHTML = "v1.4.4 — 2024/03/27";
+			// VERSION 1.4.5 (change all these when updating)
+			console.log("%ccrosswords v1.4.5 (2024/03/28)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
+			document.querySelector(".loading-panel div#version").innerHTML = "v1.4.5 — 2024/03/28";
 
 			// --- 0. element constants ---
 
@@ -890,6 +890,25 @@
 					],
 					["commercials", "a fire at a fire station, for example", "_____ of the bells", "nail care board", "", "", "Play-___", "", ""],
 					"Thursday, March 28th, 2024",
+				],
+				[
+					"mini #9",
+					"Obsidian_Seal",
+					"FLAME/AI-EV/AMPLE/-BOON/POINT",
+					["produced by a Bunsen burner", "", "", "", "ChatGPT, for example", "vehicle you plug in", "enough", "", "&ldquo;a timely benefit&rdquo;", "(3, -4)"],
+					[
+						"aviation regulator in the USA",
+						"bend over to fit under a bar",
+						"big, round, green food",
+						"closed for a special _____",
+						"",
+						"",
+						"",
+						"the solution of two lines",
+						"",
+						"",
+					],
+					"Friday, March 29th, 2024",
 				],
 			];
 
@@ -1570,6 +1589,7 @@
 
 					// space
 					if (e.key == " ") {
+						e.preventDefault();
 						direction = !direction;
 
 						if (direction) {
