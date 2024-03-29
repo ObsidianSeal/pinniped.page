@@ -556,8 +556,8 @@
 
 		<div class="win-panel hide">
 			<div>
-				<h3>You did it!</h3>
-				<h4>You solved the puzzle in <span>0:00</span>.</h4>
+				<h3>default_win_message</h3>
+				<h4>You solved the puzzle in <span>unknown</span>.</h4>
 				<h5 tabindex="0">SHARE <span class="material-symbols-outlined">share</span></h5>
 				<span class="material-symbols-outlined close-button" tabindex="0">close</span>
 			</div>
@@ -1484,10 +1484,29 @@
 			}
 
 			var win = false;
+			const winMessages = [
+				"You did it!",
+				"Congratulations!",
+				"Yippee!",
+				"Yay!",
+				"Incredible!",
+				"Amazing!",
+				"Wow!",
+				"Excellent!",
+				"Awesome!",
+				"Super!",
+				"Fantastic!",
+				"Wonderful!",
+				"Bingo!",
+				"Way to go!",
+				"Great!",
+				"Brilliant!",
+			];
 
 			function handleWin() {
 				win = true;
 				pause = true;
+				document.querySelector("h3").innerHTML = winMessages[Math.floor(Math.random() * winMessages.length)];
 				document.querySelector("h4 span").innerHTML = `${minutes}:${pad}${seconds}`;
 
 				document.querySelector("#styles-to-remove").remove();
