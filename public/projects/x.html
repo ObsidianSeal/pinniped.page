@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>x</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/x" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="x" />
+		<meta property="og:description" content="x" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="x" />
+		<meta name="keywords" content="x" />
+
+		<style>
+			/* Bebas Neue Rounded from Adobe Fonts */
+			@import url(https://use.typekit.net/rzo4wst.css);
+
+			:root {
+				/* default Photoshop swatches */
+				--white: #ffffff;
+				--grey10: #ebebeb;
+				--grey15: #e1e1e1;
+				--grey20: #d7d7d7;
+				--grey25: #cccccc;
+				--grey30: #c2c2c2;
+				--grey35: #b7b7b7;
+				--grey40: #acacac;
+				--grey45: #a1a1a1;
+				--grey50: #959595;
+				--grey55: #898989;
+				--grey60: #7d7d7d;
+				--grey65: #707070;
+				--grey70: #636363;
+				--grey75: #555555;
+				--grey80: #464646;
+				--grey85: #363636;
+				--grey90: #252525;
+				--grey95: #111111;
+				--black: #000000;
+
+				/* colours from the Coolors 'Explore' page */
+				--red: #e76f51;
+				--orange: #f4a261;
+				--yellow: #e9c46a;
+				--green: #a3b18a;
+
+				--blue-green: #2a9d8f;
+				--dark-blue-green: #264653;
+
+				--green1: #dad7cd;
+				--green2: #588157;
+				--green3: #3a5a40;
+				--green4: #344e41;
+			}
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-family: bebas-neue-rounded, sans-serif;
+				font-style: normal;
+				font-weight: 400;
+				font-size: 32px;
+
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			body {
+				background-color: var(--grey10);
+			}
+
+			.game-container {
+				width: 100vw;
+				height: 100vh;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.board {
+				width: calc((150px * 4) + (20px * 3));
+				height: calc((100px * 4) + (20px * 3));
+
+				display: flex;
+				flex-wrap: wrap;
+				gap: 20px;
+			}
+
+			.word {
+				width: 150px;
+				height: 100px;
+				background-color: var(--grey20);
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				border-radius: 5px;
+			}
+
+			.word:hover {
+				cursor: pointer;
+			}
+
+			.selected {
+				background-color: var(--grey40);
+			}
+
+			.loading-container {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: var(--green1);
+
+				width: 100vw;
+				height: 100vh;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+
+			.loading-text {
+				color: var(--blue-green);
+				font-size: 160px;
+			}
+
+			.version,
+			.loading-help {
+				color: var(--dark-blue-green);
+			}
+
+			.loading-help {
+				margin-top: 40px;
+			}
+
+			.loading-help:hover,
+			.loading-help:focus {
+				color: var(--red);
+				cursor: pointer;
+			}
+
+			.show {
+				display: initial;
+			}
+
+			.hide {
+				display: none;
+			}
+
+			#d1,
+			#d2,
+			#d3 {
+				opacity: 0%;
+				font-size: 160px;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 0.5s;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 0.5s;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 0.5s;
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="game-container">
+			<div class="board"></div>
+		</div>
+
+		<div class="loading-container">
+			<div class="loading-text">loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
+			<div class="version"></div>
+			<div class="loading-help" tabindex="0">internet-unrelated loading issue?</div>
+		</div>
+
+		<script>
+			// --- LOADING PANEL ---
+			const versionString = "x v0.0.0";
+			console.log(versionString);
+			document.querySelector(".version").innerHTML = versionString;
+
+			document.querySelector(".loading-help").addEventListener("click", (e) => {
+				window.location.href = "https://discord.gg/yswDu7kywv";
+			});
+
+			// --- GAME DATA FORMAT ---
+			const gameData = {
+				words: ["bullet", "express", "freight", "subway", "bucket", "cup", "pool", "cloud", "java", "ruby", "python", "swift", "hat", "was", "hell", "toll"],
+			};
+
+			// --- (SIMPLIFIED) ARRAY SHUFFLE from https://bost.ocks.org/mike/shuffle/ ---
+			function shuffle(array) {
+				var m = array.length;
+				while (m) {
+					let i = Math.floor(Math.random() * m--);
+					[array[i], array[m]] = [array[m], array[i]];
+				}
+				return array;
+			}
+
+			// --- SHUFFLE THE WORDS ---
+			const wordsCopy = [];
+			for (let i = 0; i < gameData.words.length; i++) wordsCopy[i] = gameData.words[i];
+			const shuffledWords = shuffle(wordsCopy);
+
+			// --- PLACE WORDS ---
+			for (let i = 0; i < shuffledWords.length; i++) {
+				let wordContainer = document.createElement("div");
+				wordContainer.classList.add("word");
+				wordContainer.setAttribute("tabindex", 0);
+				wordContainer.innerHTML = shuffledWords[i];
+				document.querySelector(".board").appendChild(wordContainer);
+
+				wordContainer.addEventListener("click", (e) => {
+					if (!wordContainer.classList.contains("selected")) {
+						wordContainer.classList.add("selected");
+					} else {
+						wordContainer.classList.remove("selected");
+					}
+				});
+			}
+
+			// --- FULLY LOADED ---
+			document.querySelector(".loading-container").classList.add("hide");
+		</script>
+	</body>
+</html>
