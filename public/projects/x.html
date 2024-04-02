@@ -59,7 +59,14 @@
 				--green2: #588157;
 				--green3: #3a5a40;
 				--green4: #344e41;
+
+				--board-width: 660px;
+				--board-height: 460px;
+				--gap: 20px;
+				--padding: 10px;
 			}
+
+			/* all & specific elements */
 
 			* {
 				margin: 0;
@@ -71,96 +78,250 @@
 				font-weight: 400;
 				font-size: 32px;
 
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
+				-webkit-tap-highlight-color: transparent;
+
+				touch-action: manipulation;
 			}
 
 			body {
 				background-color: var(--grey10);
 			}
 
+			/* classes */
+
 			.game-container {
-				width: 100vw;
-				height: 100vh;
+				width: 100%;
+				height: 100%;
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				flex-direction: column;
+				gap: 40px;
 			}
 
 			.board {
-				width: calc((150px * 4) + (20px * 3));
-				height: calc((100px * 4) + (20px * 3));
-
-				display: flex;
-				flex-wrap: wrap;
-				gap: 20px;
+				width: var(--board-width);
+				height: var(--board-height);
 			}
 
 			.word {
-				width: 150px;
-				height: 100px;
+				width: calc(((var(--board-width) - (var(--gap) * 3)) / 4) - (var(--padding) * 2));
+				height: calc(((var(--board-height) - (var(--gap) * 3)) / 4) - (var(--padding) * 2));
+				min-width: fit-content;
+				min-height: fit-content;
 				background-color: var(--grey20);
+				padding: var(--padding);
+
+				position: absolute;
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
 
 				border-radius: 5px;
+
+				transition: top 1s, left 1s;
 			}
 
-			.word:hover {
+			.word:not(.disabled):hover {
 				cursor: pointer;
+			}
+
+			.solved {
+				width: var(--board-width);
+				height: calc((var(--board-height) - (var(--gap) * 3)) / 4);
+
+				position: absolute;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+
+				border-radius: 5px;
+			}
+
+			.solved div:last-child {
+				opacity: 50%;
+			}
+
+			.solved.new-solve {
+				animation: appear 300ms;
+			}
+
+			.red {
+				background-color: var(--red);
+			}
+
+			.orange {
+				background-color: var(--orange);
+			}
+
+			.yellow {
+				background-color: var(--yellow);
+			}
+
+			.green {
+				background-color: var(--green);
+			}
+
+			.incorrect {
+				animation: shake 600ms;
 			}
 
 			.selected {
 				background-color: var(--grey40);
 			}
 
-			.loading-container {
+			.buttons {
+				width: var(--board-width);
+
+				display: flex;
+				justify-content: center;
+				gap: 80px;
+			}
+
+			.clear,
+			.submit {
+				width: 200px;
+				height: 50px;
+
+				background-color: var(--grey15);
+
+				border: 2px solid var(--grey40);
+				border-radius: 5px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.clear.disabled,
+			.submit.disabled {
+				background-color: var(--grey10);
+				border-color: var(--grey20);
+				color: var(--grey40);
+			}
+
+			.clear:not(.disabled):hover,
+			.clear:not(.disabled):focus,
+			.submit:not(.disabled):hover,
+			.submit:not(.disabled):focus {
+				border-color: var(--grey60);
+				cursor: pointer;
+			}
+
+			/*
+			.word:focus,
+			.clear:focus,
+			.submit:focus,
+			.loading-help:focus {
+				outline: solid 4px var(--blue-green);
+			}
+			*/
+
+			.loading-container,
+			.win-container {
 				position: absolute;
 				top: 0;
 				left: 0;
 				background-color: var(--green1);
 
-				width: 100vw;
-				height: 100vh;
+				width: 100%;
+				height: 100%;
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				flex-direction: column;
+
+				z-index: 1;
 			}
 
-			.loading-text {
+			.loading-text,
+			.win-title {
 				color: var(--blue-green);
 				font-size: 160px;
+
+				text-align: center;
 			}
 
 			.version,
-			.loading-help {
+			.loading-help,
+			.win-text,
+			.win-buttons {
 				color: var(--dark-blue-green);
+				padding: 0 20px 0 20px;
+				text-align: center;
 			}
 
-			.loading-help {
+			.copy-alert {
+				width: 120px;
+				height: 50px;
+
+				background-color: var(--dark-blue-green);
+				color: var(--green1);
+				border-radius: 5px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				position: absolute;
+				top: 150px;
+			}
+
+			.loading-help,
+			.win-buttons {
 				margin-top: 40px;
 			}
 
 			.loading-help:hover,
-			.loading-help:focus {
+			.loading-help:focus,
+			.win-buttons span:hover,
+			.win-buttons span:focus {
 				color: var(--red);
 				cursor: pointer;
-			}
-
-			.show {
-				display: initial;
 			}
 
 			.hide {
 				display: none;
 			}
+
+			/* SELECTION */
+
+			.word,
+			.buttons,
+			.loading-container,
+			.win-container {
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.red div::selection {
+				background-color: var(--black);
+				color: var(--red);
+			}
+
+			.orange div::selection {
+				background-color: var(--black);
+				color: var(--orange);
+			}
+
+			.yellow div::selection {
+				background-color: var(--black);
+				color: var(--yellow);
+			}
+
+			.green div::selection {
+				background-color: var(--black);
+				color: var(--green);
+			}
+
+			/* loading dots & animations */
 
 			#d1,
 			#d2,
@@ -179,6 +340,27 @@
 
 			#d3 {
 				animation: d3 2.5s infinite 0.5s;
+			}
+
+			@keyframes appear {
+				50% {
+					transform: scale(1.1);
+				}
+			}
+
+			@keyframes shake {
+				20% {
+					transform: translateX(10px);
+				}
+				40% {
+					transform: translateX(-10px);
+				}
+				60% {
+					transform: translateX(10px);
+				}
+				80% {
+					transform: translateX(-10px);
+				}
 			}
 
 			@keyframes d1 {
@@ -243,21 +425,160 @@
 					opacity: 0%;
 				}
 			}
+
+			/* MEDIA QUERIES */
+
+			@media all and (max-width: 700px) {
+				:root {
+					--board-width: 430px;
+					--board-height: 330px;
+					--gap: 10px;
+				}
+
+				@keyframes shake {
+					20% {
+						transform: translateX(5px);
+					}
+					40% {
+						transform: translateX(-5px);
+					}
+					60% {
+						transform: translateX(5px);
+					}
+					80% {
+						transform: translateX(-5px);
+					}
+				}
+
+				.solved div {
+					font-size: 24px;
+				}
+
+				.buttons {
+					gap: 40px;
+				}
+
+				.clear,
+				.submit {
+					width: 150px;
+				}
+
+				.loading-text,
+				.win-title,
+				#d1,
+				#d2,
+				#d3 {
+					font-size: 120px;
+				}
+			}
+
+			@media all and (max-width: 450px) {
+				:root {
+					--board-width: 330px;
+					--board-height: 230px;
+					--gap: 10px;
+					--padding: 5px;
+				}
+
+				.solved div {
+					font-size: 16px;
+				}
+
+				.buttons {
+					gap: 30px;
+				}
+
+				.clear,
+				.submit {
+					width: 120px;
+				}
+
+				.loading-text,
+				.win-title,
+				#d1,
+				#d2,
+				#d3 {
+					font-size: 60px;
+				}
+
+				.version,
+				.loading-help,
+				.win-text,
+				.win-text span,
+				.win-buttons,
+				.win-buttons span {
+					font-size: 24px;
+				}
+			}
+
+			@media all and (max-width: 350px) {
+				:root {
+					--board-width: 215px;
+					--board-height: 115px;
+					--gap: 5px;
+					--padding: 3px;
+				}
+
+				@keyframes shake {
+					20% {
+						transform: translateX(3px);
+					}
+					40% {
+						transform: translateX(-3px);
+					}
+					60% {
+						transform: translateX(3px);
+					}
+					80% {
+						transform: translateX(-3px);
+					}
+				}
+
+				.solved div {
+					font-size: 10px;
+				}
+
+				.buttons {
+					gap: 20px;
+				}
+
+				.clear,
+				.submit {
+					width: 80px;
+					font-size: 24px;
+				}
+			}
 		</style>
 	</head>
 
 	<body>
-		<div class="game-container">
-			<div class="board"></div>
-		</div>
-
 		<div class="loading-container">
 			<div class="loading-text">loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
 			<div class="version"></div>
 			<div class="loading-help" tabindex="0">internet-unrelated loading issue?</div>
 		</div>
 
+		<div class="game-container">
+			<div class="board"></div>
+			<div class="buttons">
+				<div class="clear disabled" tabindex="0">clear</div>
+				<div class="submit disabled" tabindex="0">submit</div>
+			</div>
+		</div>
+
+		<div class="win-container hide">
+			<div class="win-title"></div>
+			<div class="win-text">you solved the puzzle in <span>?</span> guesses!</div>
+			<div class="win-buttons"><span tabindex="0">share</span> / <span tabindex="0">close</span> / <span tabindex="0">exit</span></div>
+			<div class="copy-alert hide">copied!</div>
+		</div>
+
 		<script>
+			// --- "PERFECT POSITION" ---
+			const screenWidth = window.innerWidth;
+			const screenHeight = window.innerHeight;
+			document.querySelector("body").style = `height: ${screenHeight}px`;
+
 			// --- LOADING PANEL ---
 			const versionString = "x v0.0.0";
 			console.log(versionString);
@@ -267,12 +588,7 @@
 				window.location.href = "https://discord.gg/yswDu7kywv";
 			});
 
-			// --- GAME DATA FORMAT ---
-			const gameData = {
-				words: ["bullet", "express", "freight", "subway", "bucket", "cup", "pool", "cloud", "java", "ruby", "python", "swift", "hat", "was", "hell", "toll"],
-			};
-
-			// --- (SIMPLIFIED) ARRAY SHUFFLE from https://bost.ocks.org/mike/shuffle/ ---
+			// --- ARRAY SHUFFLE, modified from https://bost.ocks.org/mike/shuffle/ ---
 			function shuffle(array) {
 				var m = array.length;
 				while (m) {
@@ -282,30 +598,456 @@
 				return array;
 			}
 
+			// --- GET DATA FROM FIREBASE ---
+			var date = "Tuesday, April 2nd, 2024";
+			var topics = "social media actions//comes from a spool//things to conform to//types of numbers";
+			var words = "comment;post;share;like/thread;string;twine;cord/constraints;guidelines;requirements;rules/real;natural;whole;rational";
+
+			topics = topics.split("//");
+			words = words.split(/[;\/]/);
+
 			// --- SHUFFLE THE WORDS ---
-			const wordsCopy = [];
-			for (let i = 0; i < gameData.words.length; i++) wordsCopy[i] = gameData.words[i];
-			const shuffledWords = shuffle(wordsCopy);
+			var mixedWords = [];
+			for (let i = 0; i < words.length; i++) mixedWords[i] = words[i];
+			mixedWords = shuffle(mixedWords);
 
-			// --- PLACE WORDS ---
-			for (let i = 0; i < shuffledWords.length; i++) {
-				let wordContainer = document.createElement("div");
-				wordContainer.classList.add("word");
-				wordContainer.setAttribute("tabindex", 0);
-				wordContainer.innerHTML = shuffledWords[i];
-				document.querySelector(".board").appendChild(wordContainer);
+			// --- MAKE BOTH ARRAYS 2D ---
+			function toFourByFourArray(array) {
+				let newArray = [[], [], [], []];
+				for (let i = 0; i < array.length; i++) {
+					newArray[Math.floor(i / 4)].push(array[i]);
+				}
+				return newArray;
+			}
+			words = toFourByFourArray(words);
+			for (let i = 0; i < 4; i++) words[i].sort();
+			mixedWords = toFourByFourArray(mixedWords);
 
-				wordContainer.addEventListener("click", (e) => {
-					if (!wordContainer.classList.contains("selected")) {
-						wordContainer.classList.add("selected");
-					} else {
-						wordContainer.classList.remove("selected");
+			// --- PLACE WORDS, WORD SELECTING ---
+			var solved = ["", "", "", ""];
+			var boardRect = document.querySelector(".board").getBoundingClientRect();
+			var selectedWords = 0;
+			var fontSizes = {};
+
+			// getTextNodeHeight, modified to getTextNodeWidth; from https://stackoverflow.com/questions/6961022/measure-bounding-box-of-text-node-in-javascript
+			function getTextNodeWidth(textNode) {
+				var width = 0;
+				if (document.createRange) {
+					var range = document.createRange();
+					range.selectNodeContents(textNode);
+					if (range.getBoundingClientRect) {
+						var rect = range.getBoundingClientRect();
+						if (rect) {
+							width = rect.right - rect.left;
+						}
 					}
-				});
+				}
+				return width;
+			}
+			function getTextNodeHeight(textNode) {
+				var height = 0;
+				if (document.createRange) {
+					var range = document.createRange();
+					range.selectNodeContents(textNode);
+					if (range.getBoundingClientRect) {
+						var rect = range.getBoundingClientRect();
+						if (rect) {
+							height = rect.bottom - rect.top;
+						}
+					}
+				}
+				return height;
 			}
 
+			function placeWords() {
+				document.querySelector(".board").innerHTML = "";
+
+				for (let i = 0; i < 4; i++) {
+					if (solved[i] == "") {
+						for (let j = 0; j < 4; j++) {
+							let wordContainer = document.createElement("div");
+							wordContainer.classList.add("word");
+							wordContainer.setAttribute("tabindex", 0);
+
+							let gap = (boardRect.width % 100) / 3;
+							let w = (boardRect.width + gap) / 4;
+							let h = (boardRect.height + gap) / 4;
+
+							let top = boardRect.top + i * h;
+							let left = boardRect.left + j * w;
+
+							let x = j;
+							let y = i;
+							wordContainer.id = `w${x}-${y}`;
+
+							wordContainer.innerHTML = mixedWords[i][j];
+							document.querySelector(".board").appendChild(wordContainer);
+
+							if (!fontSizes.hasOwnProperty(mixedWords[i][j])) {
+								let fontSize = 36;
+								let gW = w - gap;
+								let gH = h - gap;
+
+								if (gW == 150 || gW == 100) {
+									gW -= 20;
+									gH -= 20;
+								}
+								if (gW == 75) {
+									gW -= 10;
+									gH -= 10;
+								}
+								if (gW == 50) {
+									gW -= 6;
+									gH -= 6;
+								}
+
+								do {
+									wordContainer.style = `top: ${top}px; left: ${left}px; font-size: ${fontSize}px`;
+									fontSizes[mixedWords[i][j]] = fontSize;
+									fontSize -= 2;
+								} while (getTextNodeWidth(wordContainer.firstChild) > gW || getTextNodeHeight(wordContainer.firstChild) > gH);
+							} else {
+								wordContainer.style = `top: ${top}px; left: ${left}px; font-size: ${fontSizes[mixedWords[i][j]]}px`;
+							}
+
+							wordContainer.addEventListener("click", (e) => {
+								if (!wordContainer.classList.contains("disabled")) {
+									if (!wordContainer.classList.contains("selected")) {
+										if (selectedWords < 4) {
+											wordContainer.classList.add("selected");
+											selectedWords++;
+										}
+									} else {
+										wordContainer.classList.remove("selected");
+										selectedWords--;
+									}
+
+									if (selectedWords == 4) document.querySelector(".submit").classList.remove("disabled");
+									else document.querySelector(".submit").classList.add("disabled");
+
+									if (selectedWords > 0) document.querySelector(".clear").classList.remove("disabled");
+									else document.querySelector(".clear").classList.add("disabled");
+								}
+							});
+						}
+					} else {
+						let solvedContainer = document.createElement("div");
+						solvedContainer.classList.add("solved");
+						solvedContainer.classList.add(solved[i]);
+						if (solved[i + 1] == "" || i == 3) solvedContainer.classList.add("new-solve");
+
+						let gap = (boardRect.width % 100) / 3;
+						let h = (boardRect.height + gap) / 4;
+
+						let top = boardRect.top + i * h;
+						let left = boardRect.left;
+						solvedContainer.style = `top: ${top}px; left: ${left}px`;
+
+						let topicNumber = topicColours.indexOf(solved[i]);
+						solvedContainer.innerHTML = `<div>${topics[topicNumber]}</div><div>${words[topicNumber][0]}, ${words[topicNumber][1]}, ${words[topicNumber][2]}, ${words[topicNumber][3]}</div>`;
+						document.querySelector(".board").appendChild(solvedContainer);
+					}
+				}
+			}
+
+			document.querySelector(".clear").addEventListener("click", (e) => {
+				if (!document.querySelector(".clear").classList.contains("disabled")) {
+					document.querySelectorAll(".selected").forEach((selected) => {
+						selected.classList.remove("selected");
+					});
+					document.querySelector(".clear").classList.add("disabled");
+					document.querySelector(".submit").classList.add("disabled");
+					selectedWords = 0;
+				}
+			});
+
+			// --- SUBMIT SELECTION ---
+			var swapX = 0;
+			var swapY = 0;
+			var guessColours = [];
+			const topicColours = ["green", "yellow", "orange", "red"];
+			const topicEmojis = ["🟩", "🟨", "🟧", "🟥"];
+			var win = false;
+
+			function topicCheck() {
+				let sWA = [];
+				document.querySelectorAll(".selected").forEach((selected) => {
+					sWA.push(selected.innerHTML);
+				});
+				sWA.sort();
+
+				for (let i = 0; i < 4; i++) {
+					if (sWA[0] == words[i][0] && sWA[1] == words[i][1] && sWA[2] == words[i][2] && sWA[3] == words[i][3]) {
+						solved[swapY] = topicColours[i];
+						guessColours.push(topicEmojis[i] + topicEmojis[i] + topicEmojis[i] + topicEmojis[i]);
+
+						document.querySelector(".clear").classList.add("disabled");
+						document.querySelector(".submit").classList.add("disabled");
+
+						merge();
+
+						if (solved[0] != "" && solved[1] != "" && solved[2] != "" && solved[3] != "") {
+							setTimeout(() => {
+								win = true;
+								document.querySelector(".win-container").classList.remove("hide");
+								document.querySelector(".game-container").classList.add("hide");
+								document.querySelector(".new-solve").classList.remove("new-solve");
+							}, 1800);
+						}
+
+						return;
+					}
+				}
+
+				let thisGuess = "";
+				document.querySelectorAll(".selected").forEach((selected) => {
+					for (let i = 0; i < 4; i++) {
+						if (words[i].includes(selected.innerHTML)) {
+							thisGuess += topicEmojis[i];
+						}
+					}
+
+					selected.classList.add("incorrect");
+
+					document.querySelector(".clear").classList.add("disabled");
+					document.querySelector(".submit").classList.add("disabled");
+				});
+				guessColours.push(thisGuess);
+
+				document.querySelectorAll(".word").forEach((word) => {
+					word.classList.add("disabled");
+				});
+
+				setTimeout(() => {
+					document.querySelectorAll(".selected").forEach((selected) => {
+						selected.classList.remove("incorrect");
+
+						document.querySelector(".clear").classList.remove("disabled");
+						document.querySelector(".submit").classList.remove("disabled");
+					});
+
+					document.querySelectorAll(".word").forEach((word) => {
+						word.classList.remove("disabled");
+					});
+				}, 1000);
+			}
+
+			function merge() {
+				document.querySelectorAll(".selected").forEach((selected) => {
+					//let selectedX = parseInt(selected.id.substring(1, 2));
+					//let selectedY = parseInt(selected.id.substring(3, 4));
+					let swapElement = document.querySelector(`#w${swapX++}-${swapY}`);
+
+					let id1 = swapElement.id;
+					let id2 = selected.id;
+
+					swapElement.id = id2;
+					selected.id = id1;
+
+					let position1 = swapElement.style.cssText;
+					let position2 = selected.style.cssText;
+
+					let word1 = swapElement.innerHTML;
+					let word2 = selected.innerHTML;
+
+					newPosition1 = position1.substring(0, position1.indexOf(" font"));
+					newPosition2 = position2.substring(0, position2.indexOf(" font"));
+
+					swapElement.style = position2 + ` font-size: ${fontSizes[word1]}px`;
+					selected.style = position1 + ` font-size: ${fontSizes[word2]}px`;
+				});
+
+				for (let i = 0; i < 4; i++) {
+					for (let j = 0; j < 4; j++) {
+						try {
+							mixedWords[j][i] = document.querySelector(`#w${i}-${j}`).innerHTML;
+						} catch {
+							mixedWords[j][i] = "";
+						}
+					}
+				}
+
+				swapX = 0;
+				swapY++;
+				selectedWords = 0;
+
+				let delay = 1500;
+				if (swapY == 4) delay = 500;
+
+				document.querySelectorAll(".word").forEach((word) => {
+					word.removeAttribute("tabindex");
+					word.classList.add("disabled");
+				});
+
+				setTimeout(() => {
+					placeWords();
+
+					document.querySelectorAll(".word").forEach((word) => {
+						word.classList.remove("disabled");
+					});
+				}, delay);
+			}
+
+			var guesses = 0;
+			document.querySelector(".submit").addEventListener("click", (e) => {
+				if (!document.querySelector(".submit").classList.contains("disabled")) {
+					topicCheck();
+					document.querySelector(".win-text span").innerHTML = ++guesses;
+				}
+			});
+
+			// --- PLAY WITH KEYBOARD ---
+			var keys = {};
+
+			document.addEventListener("keydown", (e) => {
+				keys[e.key] = true;
+
+				if (e.key == "Enter") {
+					if (!document.querySelector(".submit").classList.contains("disabled")) {
+						topicCheck();
+						document.querySelector(".win-text span").innerHTML = ++guesses;
+					}
+
+					if (document.activeElement == document.querySelector(".loading-help")) {
+						window.location.href = "https://discord.gg/yswDu7kywv";
+					}
+
+					if (document.activeElement.classList.contains("word")) {
+						if (!document.activeElement.classList.contains("disabled")) {
+							if (!document.activeElement.classList.contains("selected")) {
+								if (selectedWords < 4) {
+									document.activeElement.classList.add("selected");
+									selectedWords++;
+								}
+							} else {
+								document.activeElement.classList.remove("selected");
+								selectedWords--;
+							}
+
+							if (selectedWords == 4) document.querySelector(".submit").classList.remove("disabled");
+							else document.querySelector(".submit").classList.add("disabled");
+
+							if (selectedWords > 0) document.querySelector(".clear").classList.remove("disabled");
+							else document.querySelector(".clear").classList.add("disabled");
+						}
+					}
+
+					if (document.activeElement == document.querySelector(".clear")) {
+						if (!document.querySelector(".clear").classList.contains("disabled")) {
+							document.querySelectorAll(".selected").forEach((selected) => {
+								selected.classList.remove("selected");
+							});
+							document.querySelector(".clear").classList.add("disabled");
+							document.querySelector(".submit").classList.add("disabled");
+							selectedWords = 0;
+						}
+					}
+
+					if (document.activeElement == document.querySelector(".win-buttons span:nth-child(1)")) {
+						let shareText = `x — ${date} — ${guesses} guesses`;
+						for (let i = 0; i < guessColours.length; i++) {
+							if (i == 16) {
+								shareText += "\n...";
+								break;
+							}
+							shareText += "\n" + guessColours[i];
+						}
+						shareText += "\nhttps://pinniped.page/x";
+						navigator.clipboard.writeText(shareText);
+
+						document.querySelector(".copy-alert").classList.remove("hide");
+
+						setTimeout(() => {
+							document.querySelector(".copy-alert").classList.add("hide");
+						}, 2000);
+					}
+					if (document.activeElement == document.querySelector(".win-buttons span:nth-child(2)")) {
+						document.querySelector(".game-container").classList.remove("hide");
+						document.querySelector(".win-container").classList.add("hide");
+					}
+					if (document.activeElement == document.querySelector(".win-buttons span:nth-child(3)")) {
+						window.location.href = "../index.html";
+					}
+				}
+
+				if (e.key == "Escape" && win) {
+					if (document.querySelector(".win-container").classList.contains("hide")) {
+						document.querySelector(".win-container").classList.remove("hide");
+						document.querySelector(".game-container").classList.add("hide");
+					} else {
+						document.querySelector(".game-container").classList.remove("hide");
+						document.querySelector(".win-container").classList.add("hide");
+					}
+				}
+
+				if (e.key == "Backspace") {
+					if (!document.querySelector(".clear").classList.contains("disabled")) {
+						document.querySelectorAll(".selected").forEach((selected) => {
+							selected.classList.remove("selected");
+						});
+						document.querySelector(".clear").classList.add("disabled");
+						document.querySelector(".submit").classList.add("disabled");
+						selectedWords = 0;
+					}
+				}
+			});
+
+			document.addEventListener("keyup", (e) => {
+				delete keys[e.key];
+			});
+
+			// --- WIN PANEL & SHARE ---
+			const winMessages = [
+				"you did it!",
+				"congratulations!",
+				"yippee!",
+				"yay!",
+				"incredible!",
+				"amazing!",
+				"wow!",
+				"excellent!",
+				"awesome!",
+				"super!",
+				"fantastic!",
+				"wonderful!",
+				"bingo!",
+				"way to go!",
+				"great!",
+				"brilliant!",
+			];
+			document.querySelector(".win-title").innerHTML = winMessages[Math.floor(Math.random() * winMessages.length)];
+
+			document.querySelector(".win-buttons span:nth-child(1)").addEventListener("click", (e) => {
+				let shareText = `x — ${date} — ${guesses} guesses`;
+				for (let i = 0; i < guessColours.length; i++) {
+					if (i == 16) {
+						shareText += "\n...";
+						break;
+					}
+					shareText += "\n" + guessColours[i];
+				}
+				shareText += "\nhttps://pinniped.page/x";
+				navigator.clipboard.writeText(shareText);
+
+				document.querySelector(".copy-alert").classList.remove("hide");
+
+				setTimeout(() => {
+					document.querySelector(".copy-alert").classList.add("hide");
+				}, 2000);
+			});
+			document.querySelector(".win-buttons span:nth-child(2)").addEventListener("click", (e) => {
+				document.querySelector(".game-container").classList.remove("hide");
+				document.querySelector(".win-container").classList.add("hide");
+			});
+			document.querySelector(".win-buttons span:nth-child(3)").addEventListener("click", (e) => {
+				window.location.href = "../index.html";
+			});
+
 			// --- FULLY LOADED ---
-			document.querySelector(".loading-container").classList.add("hide");
+			setTimeout(() => {
+				placeWords(); // this is here temporarily before I add database functionality
+				document.querySelector(".loading-container").classList.add("hide");
+			}, 500);
 		</script>
 	</body>
 </html>
