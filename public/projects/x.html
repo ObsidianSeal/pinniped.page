@@ -183,7 +183,8 @@
 			}
 
 			.clear,
-			.submit {
+			.submit,
+			.results {
 				width: 200px;
 				height: 50px;
 
@@ -207,7 +208,9 @@
 			.clear:not(.disabled):hover,
 			.clear:not(.disabled):focus,
 			.submit:not(.disabled):hover,
-			.submit:not(.disabled):focus {
+			.submit:not(.disabled):focus,
+			.results:hover,
+			.results:focus {
 				border-color: var(--grey60);
 				cursor: pointer;
 			}
@@ -269,7 +272,7 @@
 				justify-content: center;
 
 				position: absolute;
-				top: 150px;
+				top: 80px;
 			}
 
 			.loading-help,
@@ -575,13 +578,21 @@
 
 		<script>
 			// --- "PERFECT POSITION" ---
-			const screenWidth = window.innerWidth;
-			const screenHeight = window.innerHeight;
+			var screenWidth = window.innerWidth;
+			var screenHeight = window.innerHeight;
 			document.querySelector("body").style = `height: ${screenHeight}px`;
+
+			addEventListener("resize", (e) => {
+				screenWidth = window.innerWidth;
+				screenHeight = window.innerHeight;
+				setTimeout(() => {
+					document.querySelector("body").style = `height: ${screenHeight}px`;
+				}, 200);
+			});
 
 			// --- LOADING PANEL ---
 			const versionString = "x v0.0.0";
-			console.log(versionString);
+			console.log(`%cINFO: ${versionString}`, "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px");
 			document.querySelector(".version").innerHTML = versionString;
 
 			document.querySelector(".loading-help").addEventListener("click", (e) => {
@@ -600,8 +611,8 @@
 
 			// --- GET DATA FROM FIREBASE ---
 			var date = "Tuesday, April 2nd, 2024";
-			var topics = "social media actions//comes from a spool//things to conform to//types of numbers";
-			var words = "comment;post;share;like/thread;string;twine;cord/constraints;guidelines;requirements;rules/real;natural;whole;rational";
+			var topics = "metals on the periodic table//nouns that sound like letters//fingers//fruits that are also companies";
+			var words = "gold;tin;sodium;iron/bee;sea;pea;tea/index;ring;middle;pinky/apple;blackberry;tangerine;banana";
 
 			topics = topics.split("//");
 			words = words.split(/[;\/]/);
@@ -789,9 +800,17 @@
 						if (solved[0] != "" && solved[1] != "" && solved[2] != "" && solved[3] != "") {
 							setTimeout(() => {
 								win = true;
+
 								document.querySelector(".win-container").classList.remove("hide");
 								document.querySelector(".game-container").classList.add("hide");
 								document.querySelector(".new-solve").classList.remove("new-solve");
+
+								document.querySelector(".buttons").innerHTML = '<div class="results" tabindex="0">results</div>';
+
+								document.querySelector(".results").addEventListener("click", (e) => {
+									document.querySelector(".win-container").classList.remove("hide");
+									document.querySelector(".game-container").classList.add("hide");
+								});
 							}, 1800);
 						}
 
@@ -863,6 +882,7 @@
 							mixedWords[j][i] = document.querySelector(`#w${i}-${j}`).innerHTML;
 						} catch {
 							mixedWords[j][i] = "";
+							console.log(`%cERROR: element #w${i}-${j} does not exist!`, "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
 						}
 					}
 				}
@@ -903,44 +923,37 @@
 				keys[e.key] = true;
 
 				if (e.key == "Enter") {
-					if (!document.querySelector(".submit").classList.contains("disabled")) {
-						topicCheck();
-						document.querySelector(".win-text span").innerHTML = ++guesses;
+					try {
+						if (!document.querySelector(".submit").classList.contains("disabled")) {
+							topicCheck();
+							document.querySelector(".win-text span").innerHTML = ++guesses;
+						}
+					} catch {
+						console.log("%cERROR: there is no submit element!", "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
 					}
 
 					if (document.activeElement == document.querySelector(".loading-help")) {
 						window.location.href = "https://discord.gg/yswDu7kywv";
 					}
 
-					if (document.activeElement.classList.contains("word")) {
-						if (!document.activeElement.classList.contains("disabled")) {
-							if (!document.activeElement.classList.contains("selected")) {
-								if (selectedWords < 4) {
-									document.activeElement.classList.add("selected");
-									selectedWords++;
-								}
-							} else {
-								document.activeElement.classList.remove("selected");
-								selectedWords--;
+					try {
+						if (document.activeElement == document.querySelector(".clear")) {
+							if (!document.querySelector(".clear").classList.contains("disabled")) {
+								document.querySelectorAll(".selected").forEach((selected) => {
+									selected.classList.remove("selected");
+								});
+								document.querySelector(".clear").classList.add("disabled");
+								document.querySelector(".submit").classList.add("disabled");
+								selectedWords = 0;
 							}
-
-							if (selectedWords == 4) document.querySelector(".submit").classList.remove("disabled");
-							else document.querySelector(".submit").classList.add("disabled");
-
-							if (selectedWords > 0) document.querySelector(".clear").classList.remove("disabled");
-							else document.querySelector(".clear").classList.add("disabled");
 						}
+					} catch {
+						console.log("%cERROR: there is no clear element!", "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
 					}
 
-					if (document.activeElement == document.querySelector(".clear")) {
-						if (!document.querySelector(".clear").classList.contains("disabled")) {
-							document.querySelectorAll(".selected").forEach((selected) => {
-								selected.classList.remove("selected");
-							});
-							document.querySelector(".clear").classList.add("disabled");
-							document.querySelector(".submit").classList.add("disabled");
-							selectedWords = 0;
-						}
+					if (document.activeElement == document.querySelector(".results")) {
+						document.querySelector(".win-container").classList.remove("hide");
+						document.querySelector(".game-container").classList.add("hide");
 					}
 
 					if (document.activeElement == document.querySelector(".win-buttons span:nth-child(1)")) {
@@ -988,6 +1001,37 @@
 						document.querySelector(".clear").classList.add("disabled");
 						document.querySelector(".submit").classList.add("disabled");
 						selectedWords = 0;
+					}
+				}
+
+				if (e.key == " " && document.activeElement.classList.contains("word")) {
+					if (!document.activeElement.classList.contains("disabled")) {
+						if (!document.activeElement.classList.contains("selected")) {
+							if (selectedWords < 4) {
+								document.activeElement.classList.add("selected");
+								selectedWords++;
+							}
+						} else {
+							document.activeElement.classList.remove("selected");
+							selectedWords--;
+						}
+
+						if (selectedWords == 4) document.querySelector(".submit").classList.remove("disabled");
+						else document.querySelector(".submit").classList.add("disabled");
+
+						if (selectedWords > 0) document.querySelector(".clear").classList.remove("disabled");
+						else document.querySelector(".clear").classList.add("disabled");
+					}
+				}
+
+				if (e.keyCode >= 37 && e.keyCode <= 40) {
+					try {
+						if (e.keyCode == 37) document.activeElement.previousElementSibling.focus();
+						if (e.keyCode == 38) document.activeElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.focus();
+						if (e.keyCode == 39) document.activeElement.nextElementSibling.focus();
+						if (e.keyCode == 40) document.activeElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.focus();
+					} catch {
+						console.log("%cERROR: can't go that way!", "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
 					}
 				}
 			});
