@@ -2,7 +2,7 @@
 
 <html lang="en">
 	<head>
-		<title>x</title>
+		<title>Think Four | pinniped.page</title>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,14 +10,14 @@
 
 		<link rel="icon" href="../images/icon.png" />
 
-		<meta property="og:url" content="https://pinniped.page/projects/x" />
+		<meta property="og:url" content="https://pinniped.page/projects/think-four" />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="x" />
-		<meta property="og:description" content="x" />
+		<meta property="og:title" content="Think Four" />
+		<meta property="og:description" content="Determine the topics, group the words." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
-		<meta name="description" content="x" />
-		<meta name="keywords" content="x" />
+		<meta name="description" content="Determine the topics, group the words." />
+		<meta name="keywords" content="topics, words, puzzle, connections, fun, share, think, four, sixteen, guess" />
 
 		<style>
 			/* Bebas Neue Rounded from Adobe Fonts */
@@ -591,7 +591,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "x v0.0.0";
+			const versionString = "Think Four v1.0.0";
 			console.log(`%cINFO: ${versionString}`, "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px");
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -610,10 +610,11 @@
 			}
 
 			// --- GET DATA FROM FIREBASE ---
-			var date = "Tuesday, April 2nd, 2024";
-			var topics = "metals on the periodic table//nouns that sound like letters//fingers//fruits that are also companies";
+			var date = "2024/04/03";
+			var topics = "metals on the periodic table//nouns that sound like letters (and rhyme)//fingers//fruits that are also companies";
 			var words = "gold;tin;sodium;iron/bee;sea;pea;tea/index;ring;middle;pinky/apple;blackberry;tangerine;banana";
 
+			document.querySelector("title").innerHTML = `Think Four | ${date}`;
 			topics = topics.split("//");
 			words = words.split(/[;\/]/);
 
@@ -957,7 +958,7 @@
 					}
 
 					if (document.activeElement == document.querySelector(".win-buttons span:nth-child(1)")) {
-						let shareText = `x — ${date} — ${guesses} guesses`;
+						let shareText = `Think Four — ${date} — ${guesses} guesses`;
 						for (let i = 0; i < guessColours.length; i++) {
 							if (i == 16) {
 								shareText += "\n...";
@@ -965,7 +966,7 @@
 							}
 							shareText += "\n" + guessColours[i];
 						}
-						shareText += "\nhttps://pinniped.page/x";
+						shareText += "\nhttps://pinniped.page/think-four";
 						navigator.clipboard.writeText(shareText);
 
 						document.querySelector(".copy-alert").classList.remove("hide");
@@ -1062,7 +1063,7 @@
 			document.querySelector(".win-title").innerHTML = winMessages[Math.floor(Math.random() * winMessages.length)];
 
 			document.querySelector(".win-buttons span:nth-child(1)").addEventListener("click", (e) => {
-				let shareText = `x — ${date} — ${guesses} guesses`;
+				let shareText = `Think Four — ${date} — ${guesses} guesses`;
 				for (let i = 0; i < guessColours.length; i++) {
 					if (i == 16) {
 						shareText += "\n...";
@@ -1070,7 +1071,7 @@
 					}
 					shareText += "\n" + guessColours[i];
 				}
-				shareText += "\nhttps://pinniped.page/x";
+				shareText += "\nhttps://pinniped.page/think-four";
 				navigator.clipboard.writeText(shareText);
 
 				document.querySelector(".copy-alert").classList.remove("hide");
