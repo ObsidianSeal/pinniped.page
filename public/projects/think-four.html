@@ -87,6 +87,30 @@
 				background-color: var(--grey10);
 			}
 
+			h1 {
+				font-size: 128px;
+				color: var(--blue-green);
+			}
+
+			h2 {
+				font-size: 48px;
+				color: var(--dark-blue-green);
+			}
+
+			h3 {
+				position: absolute;
+				top: 50px;
+				right: 50px;
+				font-size: 30px;
+				color: var(--grey60);
+			}
+
+			h3:hover,
+			h3:focus {
+				cursor: pointer;
+				color: var(--black);
+			}
+
 			/* classes */
 
 			.game-container {
@@ -288,12 +312,19 @@
 				cursor: pointer;
 			}
 
+			.titles {
+				position: absolute;
+				top: 50px;
+				left: 50px;
+			}
+
 			.hide {
 				display: none;
 			}
 
 			/* SELECTION */
 
+			h3,
 			.word,
 			.buttons,
 			.loading-container,
@@ -302,6 +333,11 @@
 				-moz-user-select: none;
 				-ms-user-select: none;
 				user-select: none;
+			}
+
+			h1::selection,
+			h2::selection {
+				background-color: var(--grey20);
 			}
 
 			.red div::selection {
@@ -438,19 +474,12 @@
 					--gap: 10px;
 				}
 
-				@keyframes shake {
-					20% {
-						transform: translateX(5px);
-					}
-					40% {
-						transform: translateX(-5px);
-					}
-					60% {
-						transform: translateX(5px);
-					}
-					80% {
-						transform: translateX(-5px);
-					}
+				h1 {
+					font-size: 80px;
+				}
+
+				h2 {
+					font-size: 36px;
 				}
 
 				.solved div {
@@ -473,6 +502,21 @@
 				#d3 {
 					font-size: 120px;
 				}
+
+				@keyframes shake {
+					20% {
+						transform: translateX(5px);
+					}
+					40% {
+						transform: translateX(-5px);
+					}
+					60% {
+						transform: translateX(5px);
+					}
+					80% {
+						transform: translateX(-5px);
+					}
+				}
 			}
 
 			@media all and (max-width: 450px) {
@@ -481,6 +525,24 @@
 					--board-height: 230px;
 					--gap: 10px;
 					--padding: 5px;
+				}
+
+				h1 {
+					font-size: 56px;
+				}
+
+				h2 {
+					font-size: 28px;
+				}
+
+				h3 {
+					top: 30px;
+					right: 30px;
+				}
+
+				.titles {
+					top: 30px;
+					left: 30px;
 				}
 
 				.solved div {
@@ -522,19 +584,17 @@
 					--padding: 3px;
 				}
 
-				@keyframes shake {
-					20% {
-						transform: translateX(3px);
-					}
-					40% {
-						transform: translateX(-3px);
-					}
-					60% {
-						transform: translateX(3px);
-					}
-					80% {
-						transform: translateX(-3px);
-					}
+				h1 {
+					font-size: 48px;
+				}
+
+				h2 {
+					font-size: 24px;
+				}
+
+				h3 {
+					top: 20px;
+					right: 20px;
 				}
 
 				.solved div {
@@ -550,6 +610,21 @@
 					width: 80px;
 					font-size: 24px;
 				}
+
+				@keyframes shake {
+					20% {
+						transform: translateX(3px);
+					}
+					40% {
+						transform: translateX(-3px);
+					}
+					60% {
+						transform: translateX(3px);
+					}
+					80% {
+						transform: translateX(-3px);
+					}
+				}
 			}
 		</style>
 	</head>
@@ -562,6 +637,12 @@
 		</div>
 
 		<div class="game-container">
+			<div class="titles">
+				<h1>Think Four</h1>
+				<h2>unknown_date</h2>
+			</div>
+			<h3 tabindex="0">exit</h3>
+
 			<div class="board"></div>
 			<div class="buttons">
 				<div class="clear disabled" tabindex="0">clear</div>
@@ -591,7 +672,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.0.0";
+			const versionString = "Think Four v1.1.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px");
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -617,6 +698,28 @@
 			document.querySelector("title").innerHTML = `Think Four | ${date}`;
 			topics = topics.split("//");
 			words = words.split(/[;\/]/);
+
+			// --- DATE ---
+			const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+			function setDate() {
+				let year = parseInt(date.substring(0, 4));
+				let month = parseInt(date.substring(5, 7));
+				let day = parseInt(date.substring(8, 10));
+
+				let dateObject = new Date(year, month - 1, day);
+				let dayOfWeek = days[dateObject.getDay()];
+				month = months[month - 1];
+
+				if (day == 1 || day == 21 || day == 31) day += "st";
+				else if (day == 2 || day == 22) day += "nd";
+				else if (day == 3 || day == 23) day += "rd";
+				else day += "th";
+
+				document.querySelector("h2").innerHTML = `${dayOfWeek}, ${month} ${day}, ${year}`;
+			}
+			setDate();
 
 			// --- SHUFFLE THE WORDS ---
 			var mixedWords = [];
@@ -982,6 +1085,10 @@
 					if (document.activeElement == document.querySelector(".win-buttons span:nth-child(3)")) {
 						window.location.href = "../index.html";
 					}
+
+					if (document.activeElement == document.querySelector("h3")) {
+						window.location.href = "../projects+.html";
+					}
 				}
 
 				if (e.key == "Escape" && win) {
@@ -1088,9 +1195,23 @@
 				window.location.href = "../index.html";
 			});
 
+			// --- EXIT BUTTON ---
+			document.querySelector("h3").addEventListener("click", (e) => {
+				window.location.href = "../projects+.html";
+			});
+
 			// --- FULLY LOADED ---
 			setTimeout(() => {
 				placeWords(); // this is here temporarily before I add database functionality
+
+				// ???
+				if (screenWidth > screenHeight) {
+					let titleStyle = `width: ${
+						document.querySelector(".board").getBoundingClientRect().left - document.querySelector("h1").getBoundingClientRect().left - 20
+					}px`;
+					document.querySelector(".titles").style = titleStyle;
+				}
+
 				document.querySelector(".loading-container").classList.add("hide");
 			}, 500);
 		</script>
