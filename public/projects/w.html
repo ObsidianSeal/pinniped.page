@@ -951,11 +951,29 @@
 			}
 
 			// 4: win / lose (set next word / you dumb)
+			const winMessages = [
+				"Congratulations!",
+				"Yippee!",
+				"Yay!",
+				"Incredible!",
+				"Amazing!",
+				"Wow!",
+				"Excellent!",
+				"Awesome!",
+				"Super!",
+				"Fantastic!",
+				"Wonderful!",
+				"Bingo!",
+				"Way to go!",
+				"Great!",
+				"Brilliant!",
+			];
+
 			function end(win) {
 				if (win) {
 					document.querySelector(".done p:first-child").innerHTML = "← back";
 					if (!invalidWord) {
-						document.querySelector(".done h2").innerHTML = "Congratulations!";
+						document.querySelector(".done h2").innerHTML = winMessages[Math.floor(Math.random() * winMessages.length)];
 						document.querySelector(".done p:nth-child(3)").innerHTML = "You did it.";
 						document.querySelector("#shareButton").classList.remove("hide");
 					} else {
@@ -1194,7 +1212,7 @@
 			loadThemeFromURL();
 
 			// last: version #
-			let version = "1.5.6";
+			let version = "1.5.7";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
 		</script>
