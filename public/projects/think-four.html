@@ -672,7 +672,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.1.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.1.0.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px");
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -691,9 +691,9 @@
 			}
 
 			// --- GET DATA FROM FIREBASE ---
-			var date = "2024/04/04";
-			var topics = "place fortified against attack//sand _____//smart//means something else in German";
-			var words = "fortress;stronghold;citadel;fort/man;castle;box;dune/bright;canny;sharp;quick/stark;male;links;gut";
+			var date = "2024/04/05";
+			var topics = "rest//confuse//geometric elements//_____ phone";
+			var words = "relax;lounge;unwind;recline/discombobulate;confound;bewilder;baffle/point;line;plane;volume/cell;smart;mobile;home";
 
 			document.querySelector("title").innerHTML = `Think Four | ${date}`;
 			topics = topics.split("//");
@@ -915,7 +915,7 @@
 									document.querySelector(".win-container").classList.remove("hide");
 									document.querySelector(".game-container").classList.add("hide");
 								});
-							}, 1800);
+							}, 2000);
 						}
 
 						return;
