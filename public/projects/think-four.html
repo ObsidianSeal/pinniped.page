@@ -366,7 +366,18 @@
 			#d2,
 			#d3 {
 				opacity: 0%;
+			}
+
+			.loading-text #d1,
+			.loading-text #d2,
+			.loading-text #d3 {
 				font-size: 160px;
+			}
+
+			.version #d1,
+			.version #d2,
+			.version #d3 {
+				font-size: 32px;
 			}
 
 			#d1 {
@@ -497,9 +508,9 @@
 
 				.loading-text,
 				.win-title,
-				#d1,
-				#d2,
-				#d3 {
+				.loading-text #d1,
+				.loading-text #d2,
+				.loading-text #d3 {
 					font-size: 120px;
 				}
 
@@ -560,9 +571,9 @@
 
 				.loading-text,
 				.win-title,
-				#d1,
-				#d2,
-				#d3 {
+				.loading-text #d1,
+				.loading-text #d2,
+				.loading-text #d3 {
 					font-size: 60px;
 				}
 
@@ -572,6 +583,12 @@
 				.win-text span,
 				.win-buttons,
 				.win-buttons span {
+					font-size: 24px;
+				}
+
+				.version #d1,
+				.version #d2,
+				.version #d3 {
 					font-size: 24px;
 				}
 			}
@@ -632,7 +649,7 @@
 	<body>
 		<div class="loading-container">
 			<div class="loading-text">loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
-			<div class="version"></div>
+			<div class="version">loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
 			<div class="loading-help" tabindex="0">internet-unrelated loading issue?</div>
 		</div>
 
@@ -658,6 +675,10 @@
 		</div>
 
 		<script>
+			const infoStyle = "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px";
+			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
+			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
+
 			// --- "PERFECT POSITION" ---
 			var screenWidth = window.innerWidth;
 			var screenHeight = window.innerHeight;
@@ -672,8 +693,8 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.1.0.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
-			console.log(`%cINFO: ${versionString}`, "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px");
+			const versionString = "Think Four v1.2.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			console.log(`%cINFO: ${versionString}`, infoStyle);
 			document.querySelector(".version").innerHTML = versionString;
 
 			document.querySelector(".loading-help").addEventListener("click", (e) => {
@@ -690,20 +711,11 @@
 				return array;
 			}
 
-			// --- GET DATA FROM FIREBASE ---
-			var date = "2024/04/05";
-			var topics = "rest//confuse//geometric elements//_____ phone";
-			var words = "relax;lounge;unwind;recline/discombobulate;confound;bewilder;baffle/point;line;plane;volume/cell;smart;mobile;home";
-
-			document.querySelector("title").innerHTML = `Think Four | ${date}`;
-			topics = topics.split("//");
-			words = words.split(/[;\/]/);
-
 			// --- DATE ---
 			const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-			function setDate() {
+			function setDate(date) {
 				let year = parseInt(date.substring(0, 4));
 				let month = parseInt(date.substring(5, 7));
 				let day = parseInt(date.substring(8, 10));
@@ -719,14 +731,8 @@
 
 				document.querySelector("h2").innerHTML = `${dayOfWeek}, ${month} ${day}, ${year}`;
 			}
-			setDate();
 
-			// --- SHUFFLE THE WORDS ---
-			var mixedWords = [];
-			for (let i = 0; i < words.length; i++) mixedWords[i] = words[i];
-			mixedWords = shuffle(mixedWords);
-
-			// --- MAKE BOTH ARRAYS 2D ---
+			// --- MAKE BOTH ARRAYS 2D (function) ---
 			function toFourByFourArray(array) {
 				let newArray = [[], [], [], []];
 				for (let i = 0; i < array.length; i++) {
@@ -734,9 +740,88 @@
 				}
 				return newArray;
 			}
-			words = toFourByFourArray(words);
-			for (let i = 0; i < 4; i++) words[i].sort();
-			mixedWords = toFourByFourArray(mixedWords);
+
+			// --- MAIN GAME START STUFF ---
+			var date, topics, words, mixedWords;
+			var dateFromURL = new URLSearchParams(window.location.search).get("puzzle");
+
+			async function gameStart() {
+				try {
+					// --- GET PUZZLES AND OTHER DATA ---
+					const requestURL = "../files/think-four.json";
+					const request = new Request(requestURL);
+					const response = await fetch(request);
+					const thinkFourData = await response.json();
+
+					const dateObject = new Date();
+					let todayYear = dateObject.getFullYear().toString();
+					let todayMonth = (dateObject.getMonth() + 1).toString().padStart(2, "0");
+					let todayDay = dateObject.getDate().toString().padStart(2, "0");
+					date = `${todayYear}/${todayMonth}/${todayDay}`;
+					let alternateDate = date;
+
+					let pageURL = window.location.href;
+
+					if (/^\d{4}\/\d{2}\/\d{2}$/.test(dateFromURL)) {
+						let alternateYear = parseInt(dateFromURL.substring(0, 4));
+						let alternateMonth = parseInt(dateFromURL.substring(5, 7));
+						let alternateDay = parseInt(dateFromURL.substring(8, 10));
+
+						let alternateDateObject = new Date(alternateYear, alternateMonth - 1, alternateDay);
+						if (alternateDateObject.getTime() <= dateObject.getTime() || (pageURL.includes("public") && !pageURL.includes("&"))) {
+							alternateDate = dateFromURL;
+						}
+					}
+
+					let isDeployedSite = !pageURL.includes("public") || (pageURL.includes("public") && pageURL.includes("&"));
+
+					try {
+						topics = thinkFourData.puzzles[alternateDate].topics;
+						words = thinkFourData.puzzles[alternateDate].words;
+						if (date == alternateDate && isDeployedSite) {
+							window.history.replaceState(null, "", "think-four");
+						}
+						date = alternateDate;
+					} catch {
+						console.log(`%cERROR: no puzzle exists for ${alternateDate}, loading today's`, errorStyle);
+						if (isDeployedSite) {
+							window.history.replaceState(null, "", "think-four");
+						}
+
+						try {
+							topics = thinkFourData.puzzles[date].topics;
+							words = thinkFourData.puzzles[date].words;
+						} catch {
+							console.log(`%cERROR: no puzzle exists for today, loading most recent`, errorStyle);
+
+							for (let puzzle in thinkFourData.puzzles) {
+								date = puzzle;
+								topics = thinkFourData.puzzles[puzzle].topics;
+								words = thinkFourData.puzzles[puzzle].words;
+							}
+						}
+					}
+
+					document.querySelector("title").innerHTML = `Think Four | ${date}`;
+					topics = topics.split("//");
+					words = words.split(/[;\/]/);
+
+					setDate(date);
+
+					// --- SHUFFLE THE WORDS ---
+					mixedWords = [];
+					for (let i = 0; i < words.length; i++) mixedWords[i] = words[i];
+					mixedWords = shuffle(mixedWords);
+
+					// --- MAKE BOTH ARRAYS 2D ---
+					words = toFourByFourArray(words);
+					for (let i = 0; i < 4; i++) words[i].sort();
+					mixedWords = toFourByFourArray(mixedWords);
+				} catch {
+					console.log("%cERROR: gameStart() error (is the page from a server?)", errorStyle);
+				}
+			}
+			gameStart();
 
 			// --- PLACE WORDS, WORD SELECTING ---
 			var solved = ["", "", "", ""];
@@ -986,7 +1071,7 @@
 							mixedWords[j][i] = document.querySelector(`#w${i}-${j}`).innerHTML;
 						} catch {
 							mixedWords[j][i] = "";
-							console.log(`%cERROR: element #w${i}-${j} does not exist!`, "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
+							console.log(`%cERROR: element #w${i}-${j} does not exist!`, errorStyle);
 						}
 					}
 				}
@@ -1017,6 +1102,7 @@
 				if (!document.querySelector(".submit").classList.contains("disabled")) {
 					topicCheck();
 					document.querySelector(".win-text span").innerHTML = ++guesses;
+					if (guesses == 8) document.querySelector(".win-text span").style = "color: var(--red)";
 				}
 			});
 
@@ -1031,9 +1117,10 @@
 						if (!document.querySelector(".submit").classList.contains("disabled")) {
 							topicCheck();
 							document.querySelector(".win-text span").innerHTML = ++guesses;
+							if (guesses == 8) document.querySelector(".win-text span").style = "color: var(--red)";
 						}
 					} catch {
-						console.log("%cERROR: there is no submit element!", "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
+						console.log("%cERROR: there is no submit element!", errorStyle);
 					}
 
 					if (document.activeElement == document.querySelector(".loading-help")) {
@@ -1052,7 +1139,7 @@
 							}
 						}
 					} catch {
-						console.log("%cERROR: there is no clear element!", "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
+						console.log("%cERROR: there is no clear element!", errorStyle);
 					}
 
 					if (document.activeElement == document.querySelector(".results")) {
@@ -1139,7 +1226,7 @@
 						if (e.keyCode == 39) document.activeElement.nextElementSibling.focus();
 						if (e.keyCode == 40) document.activeElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.focus();
 					} catch {
-						console.log("%cERROR: can't go that way!", "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px");
+						console.log("%cERROR: can't go that way!", errorStyle);
 					}
 				}
 			});
@@ -1202,17 +1289,21 @@
 
 			// --- FULLY LOADED ---
 			setTimeout(() => {
-				placeWords(); // this is here temporarily before I add database functionality
+				try {
+					placeWords(); // this is here temporarily before I add database functionality
 
-				// ???
-				if (screenWidth > screenHeight) {
-					let titleStyle = `width: ${
-						document.querySelector(".board").getBoundingClientRect().left - document.querySelector("h1").getBoundingClientRect().left - 20
-					}px`;
-					document.querySelector(".titles").style = titleStyle;
+					// ???
+					if (screenWidth > screenHeight) {
+						let titleStyle = `width: ${
+							document.querySelector(".board").getBoundingClientRect().left - document.querySelector("h1").getBoundingClientRect().left - 20
+						}px`;
+						document.querySelector(".titles").style = titleStyle;
+					}
+
+					document.querySelector(".loading-container").classList.add("hide");
+				} catch {
+					console.log("%cERROR: could not initialize board, probably because puzzle data could not be loaded", errorStyle);
 				}
-
-				document.querySelector(".loading-container").classList.add("hide");
 			}, 500);
 		</script>
 	</body>
