@@ -19,6 +19,8 @@
 		<meta name="description" content="Determine the topics, group the words." />
 		<meta name="keywords" content="topics, words, puzzle, connections, fun, share, think, four, sixteen, guess" />
 
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
 		<style>
 			/* Bebas Neue Rounded from Adobe Fonts */
 			@import url(https://use.typekit.net/rzo4wst.css);
@@ -308,6 +310,23 @@
 			.loading-help:focus,
 			.win-buttons span:hover,
 			.win-buttons span:focus {
+				color: var(--red);
+				cursor: pointer;
+			}
+
+			.puzzle-select-buttons {
+				margin-top: 10px;
+				color: var(--dark-blue-green);
+				display: flex;
+				gap: 20px;
+			}
+
+			.puzzle-select-buttons span.disabled {
+				opacity: 50%;
+			}
+
+			.puzzle-select-buttons span:not(.disabled):hover,
+			.puzzle-select-buttons span:not(.disabled):focus {
 				color: var(--red);
 				cursor: pointer;
 			}
@@ -669,8 +688,15 @@
 
 		<div class="win-container hide">
 			<div class="win-title"></div>
-			<div class="win-text">you solved the puzzle in <span>?</span> guesses!</div>
+			<div class="win-text">you solved the puzzle in <span>_</span> guesses!</div>
 			<div class="win-buttons"><span tabindex="0">share</span> / <span tabindex="0">close</span> / <span tabindex="0">exit</span></div>
+			<div class="puzzle-select-buttons">
+				<span title="first puzzle" tabindex="0"><i class="fa-solid fa-backward-step"></i></span>
+				<span title="previous puzzle" tabindex="0"><i class="fa-solid fa-backward"></i></span>
+				<span title="play again" tabindex="0"><i class="fa-solid fa-rotate-right"></i></span>
+				<span title="next puzzle" tabindex="0"><i class="fa-solid fa-forward"></i></span>
+				<span title="last puzzle" tabindex="0"><i class="fa-solid fa-forward-step"></i></span>
+			</div>
 			<div class="copy-alert hide">copied!</div>
 		</div>
 
@@ -693,7 +719,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.2.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.3.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, infoStyle);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -744,6 +770,10 @@
 			// --- MAIN GAME START STUFF ---
 			var date, topics, words, mixedWords;
 			var dateFromURL = new URLSearchParams(window.location.search).get("puzzle");
+			var thinkFourData;
+			const firstPuzzle = "2024/04/01";
+			var previousPuzzle = "2024/04/01";
+			var nextPuzzle, lastPuzzle;
 
 			async function gameStart() {
 				try {
@@ -751,7 +781,7 @@
 					const requestURL = "../files/think-four.json";
 					const request = new Request(requestURL);
 					const response = await fetch(request);
-					const thinkFourData = await response.json();
+					thinkFourData = await response.json();
 
 					const dateObject = new Date();
 					let todayYear = dateObject.getFullYear().toString();
@@ -817,6 +847,51 @@
 					words = toFourByFourArray(words);
 					for (let i = 0; i < 4; i++) words[i].sort();
 					mixedWords = toFourByFourArray(mixedWords);
+
+					// --- GET PUZZLES FOR SELECT PUZZLE BUTTONS ---
+					// 2. previous
+					for (let puzzle in thinkFourData.puzzles) {
+						if (puzzle == date) break;
+						previousPuzzle = puzzle;
+					}
+
+					// 4. next
+					var foundToday = false;
+					for (let puzzle in thinkFourData.puzzles) {
+						if (foundToday) {
+							nextPuzzle = puzzle;
+							break;
+						}
+						if (puzzle == date) {
+							foundToday = true;
+						}
+					}
+
+					let selectPuzzleYear = parseInt(nextPuzzle.substring(0, 4));
+					let selectPuzzleMonth = parseInt(nextPuzzle.substring(5, 7));
+					let selectPuzzleDay = parseInt(nextPuzzle.substring(8, 10));
+
+					let todayDateObject = new Date();
+					let selectPuzzleDateObject = new Date(selectPuzzleYear, selectPuzzleMonth - 1, selectPuzzleDay);
+
+					if (selectPuzzleDateObject.getTime() > todayDateObject.getTime()) nextPuzzle = date;
+
+					// 5. last
+					for (let puzzle in thinkFourData.puzzles) {
+						let selectPuzzleYear = parseInt(puzzle.substring(0, 4));
+						let selectPuzzleMonth = parseInt(puzzle.substring(5, 7));
+						let selectPuzzleDay = parseInt(puzzle.substring(8, 10));
+
+						let todayDateObject = new Date();
+						let selectPuzzleDateObject = new Date(selectPuzzleYear, selectPuzzleMonth - 1, selectPuzzleDay);
+						if (selectPuzzleDateObject.getTime() <= todayDateObject.getTime()) lastPuzzle = puzzle;
+					}
+
+					// disable same
+					if (firstPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(1)").classList.add("disabled");
+					if (previousPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(2)").classList.add("disabled");
+					if (nextPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(4)").classList.add("disabled");
+					if (lastPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(5)").classList.add("disabled");
 				} catch {
 					console.log("%cERROR: gameStart() error (is the page from a server?)", errorStyle);
 				}
@@ -1176,6 +1251,32 @@
 					if (document.activeElement == document.querySelector("h3")) {
 						window.location.href = "../projects+.html";
 					}
+
+					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(1)")) {
+						if (!document.querySelector(".puzzle-select-buttons span:nth-child(1)").classList.contains("disabled")) {
+							window.location.href = "think-four.html?puzzle=" + firstPuzzle;
+						}
+					}
+					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(2)")) {
+						if (!document.querySelector(".puzzle-select-buttons span:nth-child(2)").classList.contains("disabled")) {
+							window.location.href = "think-four.html?puzzle=" + previousPuzzle;
+						}
+					}
+					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(3)")) {
+						if (!document.querySelector(".puzzle-select-buttons span:nth-child(3)").classList.contains("disabled")) {
+							window.location.reload();
+						}
+					}
+					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(4)")) {
+						if (!document.querySelector(".puzzle-select-buttons span:nth-child(4)").classList.contains("disabled")) {
+							window.location.href = "think-four.html?puzzle=" + nextPuzzle;
+						}
+					}
+					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(5)")) {
+						if (!document.querySelector(".puzzle-select-buttons span:nth-child(5)").classList.contains("disabled")) {
+							window.location.href = "think-four.html?puzzle=" + lastPuzzle;
+						}
+					}
 				}
 
 				if (e.key == "Escape" && win) {
@@ -1238,7 +1339,6 @@
 			// --- WIN PANEL & SHARE ---
 			const winMessages = [
 				"you did it!",
-				"congratulations!",
 				"yippee!",
 				"yay!",
 				"incredible!",
@@ -1285,6 +1385,33 @@
 			// --- EXIT BUTTON ---
 			document.querySelector("h3").addEventListener("click", (e) => {
 				window.location.href = "../projects+.html";
+			});
+
+			// --- PUZZLE SELECT BUTTONS, LIKE MEDIA CONTROLS ---
+			document.querySelector(".puzzle-select-buttons span:nth-child(1)").addEventListener("click", (e) => {
+				if (!document.querySelector(".puzzle-select-buttons span:nth-child(1)").classList.contains("disabled")) {
+					window.location.href = "think-four.html?puzzle=" + firstPuzzle;
+				}
+			});
+			document.querySelector(".puzzle-select-buttons span:nth-child(2)").addEventListener("click", (e) => {
+				if (!document.querySelector(".puzzle-select-buttons span:nth-child(2)").classList.contains("disabled")) {
+					window.location.href = "think-four.html?puzzle=" + previousPuzzle;
+				}
+			});
+			document.querySelector(".puzzle-select-buttons span:nth-child(3)").addEventListener("click", (e) => {
+				if (!document.querySelector(".puzzle-select-buttons span:nth-child(3)").classList.contains("disabled")) {
+					window.location.reload();
+				}
+			});
+			document.querySelector(".puzzle-select-buttons span:nth-child(4)").addEventListener("click", (e) => {
+				if (!document.querySelector(".puzzle-select-buttons span:nth-child(4)").classList.contains("disabled")) {
+					window.location.href = "think-four.html?puzzle=" + nextPuzzle;
+				}
+			});
+			document.querySelector(".puzzle-select-buttons span:nth-child(5)").addEventListener("click", (e) => {
+				if (!document.querySelector(".puzzle-select-buttons span:nth-child(5)").classList.contains("disabled")) {
+					window.location.href = "think-four.html?puzzle=" + lastPuzzle;
+				}
 			});
 
 			// --- FULLY LOADED ---
