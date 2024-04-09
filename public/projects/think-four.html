@@ -302,7 +302,8 @@
 			}
 
 			.loading-help,
-			.win-buttons {
+			.win-buttons,
+			.puzzle-select-buttons {
 				margin-top: 40px;
 			}
 
@@ -315,7 +316,6 @@
 			}
 
 			.puzzle-select-buttons {
-				margin-top: 10px;
 				color: var(--dark-blue-green);
 				display: flex;
 				gap: 20px;
@@ -719,7 +719,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.3.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.3.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, infoStyle);
 			document.querySelector(".version").innerHTML = versionString;
 

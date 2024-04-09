@@ -83,6 +83,34 @@
 		"2024/04/21": {
 			"topics": "quarters of the day//watercraft//palindromes//Christopher Nolan films",
 			"words": "morning;afternoon;evening;night/boat;ship;yacht;barge/noon;refer;kayak;tenet/inception;memento;interstellar;prestige"
+		},
+		"2024/04/22": {
+			"topics": "shades of green//eclipse types//commonly collected//national _______",
+			"words": "olive;sage;lime;chartreuse/solar;lunar;total;partial/art;stamps;coins;cards/park;guard;geographic;holiday"
+		},
+		"2024/04/23": {
+			"topics": "_____ school//road signs//surrender//types of paper ruling",
+			"words": "primary;elementary;middle;public/yield;stop;crossing;merge/cede;renounce;relinquish;resign/lined;grid;dotted;blank"
+		},
+		"2024/04/24": {
+			"topics": "nothing//_____ sandwich//onomatopoeia//books",
+			"words": "jack;squat;zero;nada/ham;knuckle;PB&J;grilled cheese/boom;crash;pop;zip/Holes;It;Wonder;Inferno"
+		},
+		"2024/04/25": {
+			"topics": "awesome, yay!//typographical emphasis//made of rubber//words with silly spellings",
+			"words": "amazing;impressive;breathtaking;stunning/bold;italics;underline;strikethrough/boots;gloves;tires;ducks/cache;colonel;aisle;receipt"
+		},
+		"2024/04/26": {
+			"topics": "things that are green//things that are yellow//things that are orange//things that are red",
+			"words": "grasses;limes;frogs;cacti/bananas;pages;dandelions;taxis/oranges;carrots;basketballs;pumpkins/apples;hydrants;roses;cardinals"
+		},
+		"2024/04/27": {
+			"topics": "pre-published editions//a gas at zero degrees//inter_______//Twenty One Pilots songs",
+			"words": "draft;edit;revision;sketch/oxygen;helium;neon;hydrogen/national;net;view;section/Ride;Chlorine;Jumpsuit;Doubt"
+		},
+		"2024/04/28": {
+			"topics": "different sizes of celestial objects//artificial satellites; those who explore//space _____//black hole parts (yes this is the space themed one)",
+			"words": "stars;planets;moons;asteroids/Voyager;Pioneer;Mariner;Surveyor/ship;station;craft;agency/disc;horizon;singularity;jets"
 		}
 	}
 }
