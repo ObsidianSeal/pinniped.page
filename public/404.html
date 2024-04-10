@@ -57,12 +57,17 @@
 		<div class="footer" style="background: #4ecdc4"></div>
 
 		<script>
+			// "perfect position"
 			const screenHeight = window.innerHeight;
 			const height = screenHeight - 140;
 			document.querySelector("div.centre").style = `height: ${height}px`;
 
+			// project redirects
 			const url = window.location.href;
-			const ending = url.substring(url.lastIndexOf("page/") + 5);
+			const query = url.substring(22);
+			var project = query;
+			if (query.includes("?")) project = query.substring(0, query.indexOf("?"));
+			else if (query.includes("#")) project = query.substring(0, query.indexOf("#"));
 
 			const projects = [
 				"bezier-curves",
@@ -97,9 +102,9 @@
 				"w",
 			];
 
-			projects.forEach((project) => {
-				if (ending == project) window.location.href = "https://pinniped.page/projects/" + project;
-			});
+			for (let i = 0; i < projects.length; i++) {
+				if (project == projects[i]) window.location.href = "https://pinniped.page/projects/" + query;
+			}
 		</script>
 	</body>
 </html>
