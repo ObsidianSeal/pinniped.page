@@ -143,7 +143,9 @@
 
 				var countdownText = `${pad(days, 2)}:${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
 				text1.innerHTML = countdownText;
-				pageTitle.innerHTML = `${countdownText} — ${title}`;
+
+				if (/[<>]/.test(title)) pageTitle.innerHTML = `${countdownText} — !!!`;
+				else pageTitle.innerHTML = `${countdownText} — ${title}`;
 
 				if (distance < 0) {
 					clearInterval(x);

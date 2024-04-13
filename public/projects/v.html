@@ -659,7 +659,7 @@
 
 		<script>
 			// version
-			const version = ` v${2}.${4}.${1}\n\n`;
+			const version = ` v${2}.${4}.${2}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
@@ -886,8 +886,7 @@
 				}px; left: ${regionSelectButton.getBoundingClientRect().left}px`;
 			}
 			function goBack() {
-				if (document.referrer.includes("pinniped.page")) history.back();
-				else window.location.href = "../projects+.html";
+				window.location.href = "../projects+.html";
 			}
 			function resetAllButton() {
 				window.location.reload();

@@ -241,15 +241,6 @@
 				cursor: pointer;
 			}
 
-			/*
-			.word:focus,
-			.clear:focus,
-			.submit:focus,
-			.loading-help:focus {
-				outline: solid 4px var(--blue-green);
-			}
-			*/
-
 			.loading-container,
 			.win-container {
 				position: absolute;
@@ -310,7 +301,9 @@
 			.loading-help:hover,
 			.loading-help:focus,
 			.win-buttons span:hover,
-			.win-buttons span:focus {
+			.win-buttons span:focus,
+			.rate-puzzle span:last-child:not(.disabled):hover,
+			.rate-puzzle span:last-child:not(.disabled):focus {
 				color: var(--red);
 				cursor: pointer;
 			}
@@ -321,7 +314,9 @@
 				gap: 20px;
 			}
 
-			.puzzle-select-buttons span.disabled {
+			.puzzle-select-buttons span.disabled,
+			.rate-puzzle span.disabled,
+			.rate-puzzle div i.disabled {
 				opacity: 50%;
 			}
 
@@ -337,6 +332,34 @@
 				left: 50px;
 			}
 
+			.puzzle-rating {
+				margin-top: 10px;
+				color: var(--dark-blue-green);
+				width: calc(100vw - 50px);
+			}
+
+			.puzzle-rating i {
+				font-size: 36px;
+			}
+
+			.rate-puzzle {
+				margin-top: 80px;
+				color: var(--dark-blue-green);
+				text-align: center;
+			}
+
+			.rate-puzzle div {
+				margin-bottom: 20px;
+			}
+
+			.rate-puzzle i {
+				font-size: 28px;
+			}
+
+			.rate-puzzle i:not(.disabled):hover {
+				cursor: pointer;
+			}
+
 			.hide {
 				display: none;
 			}
@@ -347,7 +370,8 @@
 			.word,
 			.buttons,
 			.loading-container,
-			.win-container {
+			.win-container,
+			.puzzle-rating {
 				-webkit-user-select: none;
 				-moz-user-select: none;
 				-ms-user-select: none;
@@ -533,6 +557,14 @@
 					font-size: 120px;
 				}
 
+				.puzzle-rating {
+					margin-top: 0;
+				}
+
+				.puzzle-rating i {
+					font-size: 28px;
+				}
+
 				@keyframes shake {
 					20% {
 						transform: translateX(5px);
@@ -601,13 +633,22 @@
 				.win-text,
 				.win-text span,
 				.win-buttons,
-				.win-buttons span {
+				.win-buttons span,
+				.rate-puzzle span {
 					font-size: 24px;
 				}
 
 				.version #d1,
 				.version #d2,
 				.version #d3 {
+					font-size: 24px;
+				}
+
+				.puzzle-rating {
+					width: calc(100vw - 30px);
+				}
+
+				.puzzle-rating i {
 					font-size: 24px;
 				}
 			}
@@ -676,6 +717,13 @@
 			<div class="titles">
 				<h1>Think Four</h1>
 				<h2>unknown_date</h2>
+				<div class="puzzle-rating">
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+					<i class="fa-regular fa-star"></i>
+				</div>
 			</div>
 			<h3 tabindex="0">exit</h3>
 
@@ -697,13 +745,39 @@
 				<span title="next puzzle" tabindex="0"><i class="fa-solid fa-forward"></i></span>
 				<span title="last puzzle" tabindex="0"><i class="fa-solid fa-forward-step"></i></span>
 			</div>
+			<div class="rate-puzzle">
+				<span>rate puzzle:</span>
+				<div>
+					<i class="fa-regular fa-star" tabindex="0" id="star1"></i>
+					<i class="fa-regular fa-star" tabindex="0" id="star2"></i>
+					<i class="fa-regular fa-star" tabindex="0" id="star3"></i>
+					<i class="fa-regular fa-star" tabindex="0" id="star4"></i>
+					<i class="fa-regular fa-star" tabindex="0" id="star5"></i>
+				</div>
+				<span class="disabled" tabindex="0">submit</span>
+			</div>
 			<div class="copy-alert hide">copied!</div>
 		</div>
 
-		<script>
+		<script type="module">
 			const infoStyle = "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px";
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
+
+			// --- FIREBASE (v10.9.0) ---
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+			import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+
+			const firebaseConfig = {
+				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+				authDomain: "the-pinniped-page.firebaseapp.com",
+				databaseURL: "https://the-pinniped-page.firebaseio.com",
+				projectId: "the-pinniped-page",
+				storageBucket: "the-pinniped-page.appspot.com",
+				messagingSenderId: "636989973689",
+				appId: "1:636989973689:web:6d938d9588606d803a6768",
+			};
+			const app = initializeApp(firebaseConfig);
 
 			// --- "PERFECT POSITION" ---
 			var screenWidth = window.innerWidth;
@@ -715,11 +789,16 @@
 				screenHeight = window.innerHeight;
 				setTimeout(() => {
 					document.querySelector("body").style = `height: ${screenHeight}px`;
+
+					boardRect = document.querySelector(".board").getBoundingClientRect();
+					placeWords(true);
+					setTitleWidth();
+					selectedWords = 0;
 				}, 200);
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.3.1.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.4.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, infoStyle);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -772,8 +851,9 @@
 			var dateFromURL = new URLSearchParams(window.location.search).get("puzzle");
 			var thinkFourData;
 			const firstPuzzle = "2024/04/01";
-			var previousPuzzle = "2024/04/01";
+			var previousPuzzle = firstPuzzle;
 			var nextPuzzle, lastPuzzle;
+			var safeDate;
 
 			async function gameStart() {
 				try {
@@ -892,11 +972,32 @@
 					if (previousPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(2)").classList.add("disabled");
 					if (nextPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(4)").classList.add("disabled");
 					if (lastPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(5)").classList.add("disabled");
+
+					safeDate = date.replaceAll("/", "-");
 				} catch {
 					console.log("%cERROR: gameStart() error (is the page from a server?)", errorStyle);
 				}
+
+				try {
+					placeWords(false);
+					setTitleWidth();
+					await getRating();
+					document.querySelector(".loading-container").classList.add("hide");
+				} catch {
+					console.log("%cERROR: could not initialize board, probably because puzzle data could not be loaded", errorStyle);
+				}
 			}
 			gameStart();
+
+			function setTitleWidth() {
+				// attempt at making title appear in a good spot
+				if (screenWidth > screenHeight) {
+					let titleStyle = `width: ${
+						document.querySelector(".board").getBoundingClientRect().left - document.querySelector("h1").getBoundingClientRect().left - 20
+					}px`;
+					document.querySelector(".titles").style = titleStyle;
+				}
+			}
 
 			// --- PLACE WORDS, WORD SELECTING ---
 			var solved = ["", "", "", ""];
@@ -934,7 +1035,7 @@
 				return height;
 			}
 
-			function placeWords() {
+			function placeWords(resize) {
 				document.querySelector(".board").innerHTML = "";
 
 				for (let i = 0; i < 4; i++) {
@@ -1009,7 +1110,7 @@
 						let solvedContainer = document.createElement("div");
 						solvedContainer.classList.add("solved");
 						solvedContainer.classList.add(solved[i]);
-						if (solved[i + 1] == "" || i == 3) solvedContainer.classList.add("new-solve");
+						if ((solved[i + 1] == "" || i == 3) && resize == false) solvedContainer.classList.add("new-solve");
 
 						let gap = (boardRect.width % 100) / 3;
 						let h = (boardRect.height + gap) / 4;
@@ -1044,7 +1145,7 @@
 			const topicEmojis = ["🟩", "🟨", "🟧", "🟥"];
 			var win = false;
 
-			function topicCheck() {
+			async function topicCheck() {
 				let sWA = [];
 				document.querySelectorAll(".selected").forEach((selected) => {
 					sWA.push(selected.innerHTML);
@@ -1076,6 +1177,24 @@
 									document.querySelector(".game-container").classList.add("hide");
 								});
 							}, 2000);
+
+							const db = getDatabase();
+							let numberOfSolves;
+
+							await get(ref(db, "think-four/puzzles/" + safeDate)).then((snapshot) => {
+								if (snapshot.exists()) {
+									numberOfSolves = parseFloat(snapshot.val().solves);
+								} else {
+									console.log("%cWARNING: topicCheck() snapshot does not exist!", warningStyle);
+								}
+							});
+
+							if (isNaN(numberOfSolves) || numberOfSolves % 1 != 0) {
+								await set(ref(db, "think-four/puzzles/" + safeDate + "/solves"), 0);
+								numberOfSolves = 0;
+							}
+
+							await set(ref(db, "think-four/puzzles/" + safeDate + "/solves"), ++numberOfSolves);
 						}
 
 						return;
@@ -1117,8 +1236,6 @@
 
 			function merge() {
 				document.querySelectorAll(".selected").forEach((selected) => {
-					//let selectedX = parseInt(selected.id.substring(1, 2));
-					//let selectedY = parseInt(selected.id.substring(3, 4));
 					let swapElement = document.querySelector(`#w${swapX++}-${swapY}`);
 
 					let id1 = swapElement.id;
@@ -1133,11 +1250,8 @@
 					let word1 = swapElement.innerHTML;
 					let word2 = selected.innerHTML;
 
-					newPosition1 = position1.substring(0, position1.indexOf(" font"));
-					newPosition2 = position2.substring(0, position2.indexOf(" font"));
-
-					swapElement.style = position2 + ` font-size: ${fontSizes[word1]}px`;
-					selected.style = position1 + ` font-size: ${fontSizes[word2]}px`;
+					swapElement.style = position2.substring(0, position2.indexOf(" font")) + position1.substring(position1.indexOf(" font"), position1.length);
+					selected.style = position1.substring(0, position1.indexOf(" font")) + position2.substring(position2.indexOf(" font"), position2.length);
 				});
 
 				for (let i = 0; i < 4; i++) {
@@ -1164,7 +1278,7 @@
 				});
 
 				setTimeout(() => {
-					placeWords();
+					placeWords(false);
 
 					document.querySelectorAll(".word").forEach((word) => {
 						word.classList.remove("disabled");
@@ -1275,6 +1389,20 @@
 					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(5)")) {
 						if (!document.querySelector(".puzzle-select-buttons span:nth-child(5)").classList.contains("disabled")) {
 							window.location.href = "think-four.html?puzzle=" + lastPuzzle;
+						}
+					}
+
+					if (document.activeElement.classList.contains("fa-star")) {
+						if (!document.activeElement.classList.contains("disabled")) {
+							let starNumber = parseInt(document.activeElement.id.substring(4, 5));
+							fillStars(starNumber);
+							document.querySelector(".rate-puzzle span:last-child").classList.remove("disabled");
+						}
+					}
+
+					if (document.activeElement == document.querySelector(".rate-puzzle span:last-child")) {
+						if (!document.activeElement.classList.contains("disabled")) {
+							submitRating();
 						}
 					}
 				}
@@ -1414,24 +1542,113 @@
 				}
 			});
 
-			// --- FULLY LOADED ---
-			setTimeout(() => {
-				try {
-					placeWords(); // this is here temporarily before I add database functionality
+			// --- RATE PUZZLE ---
+			//document.querySelector(".win-container").classList.remove("hide");
 
-					// ???
-					if (screenWidth > screenHeight) {
-						let titleStyle = `width: ${
-							document.querySelector(".board").getBoundingClientRect().left - document.querySelector("h1").getBoundingClientRect().left - 20
-						}px`;
-						document.querySelector(".titles").style = titleStyle;
+			document.querySelectorAll(".rate-puzzle div i").forEach((star) => {
+				star.addEventListener("click", (e) => {
+					if (!star.classList.contains("disabled")) {
+						let starNumber = parseInt(star.id.substring(4, 5));
+						fillStars(starNumber);
+						document.querySelector(".rate-puzzle span:last-child").classList.remove("disabled");
 					}
+				});
+			});
 
-					document.querySelector(".loading-container").classList.add("hide");
-				} catch {
-					console.log("%cERROR: could not initialize board, probably because puzzle data could not be loaded", errorStyle);
+			function fillStars(starNumber) {
+				for (let i = 1; i <= 5; i++) {
+					let starElement = document.querySelector(`#star${i}`);
+
+					if (i <= starNumber) {
+						starElement.classList.remove("fa-regular");
+						starElement.classList.add("fa-solid");
+					} else {
+						starElement.classList.remove("fa-solid");
+						starElement.classList.add("fa-regular");
+					}
 				}
-			}, 500);
+			}
+
+			document.querySelector(".rate-puzzle span:last-child").addEventListener("click", (e) => {
+				if (!document.querySelector(".rate-puzzle span:last-child").classList.contains("disabled")) {
+					submitRating();
+				}
+			});
+
+			async function submitRating() {
+				document.querySelector(".rate-puzzle span:last-child").innerHTML = "thanks!";
+				let rating = 0;
+				for (let i = 1; i <= 5; i++) {
+					let starElement = document.querySelector(`#star${i}`);
+					if (starElement.classList.contains("fa-solid")) rating++;
+					starElement.classList.add("disabled");
+				}
+				document.querySelector(".rate-puzzle span:first-child").classList.add("disabled");
+				document.querySelector(".rate-puzzle span:last-child").classList.add("disabled");
+
+				const db = getDatabase();
+				let averageRating, numberOfRatings;
+
+				await get(ref(db, "think-four/puzzles/" + safeDate)).then((snapshot) => {
+					if (snapshot.exists()) {
+						averageRating = parseFloat(snapshot.val().rating);
+						numberOfRatings = parseFloat(snapshot.val().ratings);
+					} else {
+						console.log("%cWARNING: submitRating() snapshot does not exist!", warningStyle);
+					}
+				});
+
+				if (isNaN(averageRating) || averageRating < 1 || averageRating > 5 || isNaN(numberOfRatings) || numberOfRatings % 1 != 0) {
+					await set(ref(db, "think-four/puzzles/" + safeDate + "/rating"), 0);
+					await set(ref(db, "think-four/puzzles/" + safeDate + "/ratings"), 0);
+					averageRating = 0;
+					numberOfRatings = 0;
+				}
+
+				averageRating *= numberOfRatings;
+				averageRating += rating;
+				averageRating /= ++numberOfRatings;
+				averageRating = Math.round(averageRating * 100) / 100;
+
+				await set(ref(db, "think-four/puzzles/" + safeDate + "/rating"), averageRating);
+				await set(ref(db, "think-four/puzzles/" + safeDate + "/ratings"), numberOfRatings);
+			}
+
+			// --- GET PUZZLE RATING ---
+			async function getRating() {
+				const db = getDatabase();
+				let averageRating, numberOfRatings;
+
+				await get(ref(db, "think-four/puzzles/" + safeDate)).then((snapshot) => {
+					if (snapshot.exists()) {
+						averageRating = parseFloat(snapshot.val().rating);
+						numberOfRatings = parseFloat(snapshot.val().ratings);
+					} else {
+						console.log("%cWARNING: getRating() snapshot does not exist!", warningStyle);
+					}
+				});
+
+				if (isNaN(averageRating) || averageRating < 1 || averageRating > 5 || isNaN(numberOfRatings) || numberOfRatings % 1 != 0) {
+					await set(ref(db, "think-four/puzzles/" + safeDate + "/rating"), 0);
+					await set(ref(db, "think-four/puzzles/" + safeDate + "/ratings"), 0);
+					averageRating = 0;
+					numberOfRatings = 0;
+				}
+
+				averageRating = Math.round(averageRating * 2) / 2;
+
+				for (let i = 1; i <= 5; i++) {
+					if (averageRating >= 1) {
+						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.remove("fa-regular");
+						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.add("fa-solid");
+					}
+					if (averageRating == 0.5) {
+						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.remove("fa-star");
+						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.add("fa-star-half-stroke");
+					}
+					averageRating--;
+				}
+			}
 		</script>
 	</body>
 </html>
