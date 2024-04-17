@@ -741,7 +741,7 @@
 			<div class="puzzle-select-buttons">
 				<span title="first puzzle" tabindex="0"><i class="fa-solid fa-backward-step"></i></span>
 				<span title="previous puzzle" tabindex="0"><i class="fa-solid fa-backward"></i></span>
-				<span title="play again" tabindex="0"><i class="fa-solid fa-rotate-right"></i></span>
+				<span title="random puzzle" tabindex="0"><i class="fa-solid fa-dice-five"></i></span>
 				<span title="next puzzle" tabindex="0"><i class="fa-solid fa-forward"></i></span>
 				<span title="last puzzle" tabindex="0"><i class="fa-solid fa-forward-step"></i></span>
 			</div>
@@ -785,9 +785,9 @@
 			document.querySelector("body").style = `height: ${screenHeight}px`;
 
 			addEventListener("resize", (e) => {
-				screenWidth = window.innerWidth;
-				screenHeight = window.innerHeight;
 				setTimeout(() => {
+					screenWidth = window.innerWidth;
+					screenHeight = window.innerHeight;
 					document.querySelector("body").style = `height: ${screenHeight}px`;
 
 					boardRect = document.querySelector(".board").getBoundingClientRect();
@@ -798,7 +798,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.4.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.5.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, infoStyle);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -852,8 +852,9 @@
 			var thinkFourData;
 			const firstPuzzle = "2024/04/01";
 			var previousPuzzle = firstPuzzle;
-			var nextPuzzle, lastPuzzle;
+			var randomPuzzle, nextPuzzle, lastPuzzle;
 			var safeDate;
+			var isDeployedSite;
 
 			async function gameStart() {
 				try {
@@ -883,7 +884,7 @@
 						}
 					}
 
-					let isDeployedSite = !pageURL.includes("public") || (pageURL.includes("public") && pageURL.includes("&"));
+					isDeployedSite = !pageURL.includes("public") || (pageURL.includes("public") && pageURL.includes("&"));
 
 					try {
 						topics = thinkFourData.puzzles[alternateDate].topics;
@@ -966,6 +967,14 @@
 						let selectPuzzleDateObject = new Date(selectPuzzleYear, selectPuzzleMonth - 1, selectPuzzleDay);
 						if (selectPuzzleDateObject.getTime() <= todayDateObject.getTime()) lastPuzzle = puzzle;
 					}
+
+					// 3. random
+					let possibleRandomPuzzleDates = [];
+					for (let puzzle in thinkFourData.puzzles) {
+						if (date != puzzle) possibleRandomPuzzleDates.push(puzzle);
+						if (puzzle == lastPuzzle) break;
+					}
+					randomPuzzle = possibleRandomPuzzleDates[Math.floor(Math.random() * possibleRandomPuzzleDates.length)];
 
 					// disable same
 					if (firstPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(1)").classList.add("disabled");
@@ -1189,12 +1198,12 @@
 								}
 							});
 
-							if (isNaN(numberOfSolves) || numberOfSolves % 1 != 0) {
+							if (isNaN(numberOfSolves) || numberOfSolves % 1 != 0 || numberOfSolves < 0) {
 								await set(ref(db, "think-four/puzzles/" + safeDate + "/solves"), 0);
 								numberOfSolves = 0;
 							}
 
-							await set(ref(db, "think-four/puzzles/" + safeDate + "/solves"), ++numberOfSolves);
+							if (isDeployedSite) await set(ref(db, "think-four/puzzles/" + safeDate + "/solves"), ++numberOfSolves);
 						}
 
 						return;
@@ -1235,6 +1244,8 @@
 			}
 
 			function merge() {
+				var samePositionCount = 0;
+
 				document.querySelectorAll(".selected").forEach((selected) => {
 					let swapElement = document.querySelector(`#w${swapX++}-${swapY}`);
 
@@ -1249,6 +1260,9 @@
 
 					let word1 = swapElement.innerHTML;
 					let word2 = selected.innerHTML;
+
+					// did the word swap with itself?
+					if (position2.substring(0, position2.indexOf(" font")) == position1.substring(0, position1.indexOf(" font"))) samePositionCount++;
 
 					swapElement.style = position2.substring(0, position2.indexOf(" font")) + position1.substring(position1.indexOf(" font"), position1.length);
 					selected.style = position1.substring(0, position1.indexOf(" font")) + position2.substring(position2.indexOf(" font"), position2.length);
@@ -1270,7 +1284,7 @@
 				selectedWords = 0;
 
 				let delay = 1500;
-				if (swapY == 4) delay = 500;
+				if (samePositionCount == 4) delay = 500; // did none of the words move?
 
 				document.querySelectorAll(".word").forEach((word) => {
 					word.removeAttribute("tabindex");
@@ -1378,7 +1392,7 @@
 					}
 					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(3)")) {
 						if (!document.querySelector(".puzzle-select-buttons span:nth-child(3)").classList.contains("disabled")) {
-							window.location.reload();
+							window.location.href = "think-four.html?puzzle=" + randomPuzzle;
 						}
 					}
 					if (document.activeElement == document.querySelector(".puzzle-select-buttons span:nth-child(4)")) {
@@ -1528,7 +1542,7 @@
 			});
 			document.querySelector(".puzzle-select-buttons span:nth-child(3)").addEventListener("click", (e) => {
 				if (!document.querySelector(".puzzle-select-buttons span:nth-child(3)").classList.contains("disabled")) {
-					window.location.reload();
+					window.location.href = "think-four.html?puzzle=" + randomPuzzle;
 				}
 			});
 			document.querySelector(".puzzle-select-buttons span:nth-child(4)").addEventListener("click", (e) => {
@@ -1598,7 +1612,7 @@
 					}
 				});
 
-				if (isNaN(averageRating) || averageRating < 1 || averageRating > 5 || isNaN(numberOfRatings) || numberOfRatings % 1 != 0) {
+				if (isNaN(averageRating) || averageRating < 1 || averageRating > 5 || isNaN(numberOfRatings) || numberOfRatings % 1 != 0 || numberOfRatings < 0) {
 					await set(ref(db, "think-four/puzzles/" + safeDate + "/rating"), 0);
 					await set(ref(db, "think-four/puzzles/" + safeDate + "/ratings"), 0);
 					averageRating = 0;
@@ -1617,22 +1631,28 @@
 			// --- GET PUZZLE RATING ---
 			async function getRating() {
 				const db = getDatabase();
-				let averageRating, numberOfRatings;
+				let averageRating, numberOfRatings, numberOfSolves;
 
 				await get(ref(db, "think-four/puzzles/" + safeDate)).then((snapshot) => {
 					if (snapshot.exists()) {
 						averageRating = parseFloat(snapshot.val().rating);
 						numberOfRatings = parseFloat(snapshot.val().ratings);
+						numberOfSolves = parseFloat(snapshot.val().solves);
 					} else {
 						console.log("%cWARNING: getRating() snapshot does not exist!", warningStyle);
 					}
 				});
 
-				if (isNaN(averageRating) || averageRating < 1 || averageRating > 5 || isNaN(numberOfRatings) || numberOfRatings % 1 != 0) {
+				if (isNaN(averageRating) || averageRating < 1 || averageRating > 5 || isNaN(numberOfRatings) || numberOfRatings % 1 != 0 || numberOfRatings < 0) {
 					await set(ref(db, "think-four/puzzles/" + safeDate + "/rating"), 0);
 					await set(ref(db, "think-four/puzzles/" + safeDate + "/ratings"), 0);
 					averageRating = 0;
 					numberOfRatings = 0;
+				}
+
+				if (isNaN(numberOfSolves) || numberOfSolves % 1 != 0 || numberOfSolves < 0) {
+					await set(ref(db, "think-four/puzzles/" + safeDate + "/solves"), 0);
+					numberOfSolves = 0;
 				}
 
 				averageRating = Math.round(averageRating * 2) / 2;
