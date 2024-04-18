@@ -99,18 +99,29 @@
 				color: var(--dark-blue-green);
 			}
 
-			h3 {
+			h3,
+			h4 {
 				position: absolute;
-				top: 50px;
-				right: 50px;
 				font-size: 30px;
 				color: var(--grey60);
 			}
 
 			h3:hover,
-			h3:focus {
+			h3:focus,
+			h4:hover,
+			h4:focus {
 				cursor: pointer;
 				color: var(--black);
+			}
+
+			h3 {
+				top: 50px;
+				right: 50px;
+			}
+
+			h4 {
+				bottom: 50px;
+				left: 50px;
 			}
 
 			/* classes */
@@ -367,6 +378,7 @@
 			/* SELECTION */
 
 			h3,
+			h4,
 			.word,
 			.buttons,
 			.loading-container,
@@ -602,6 +614,11 @@
 					right: 30px;
 				}
 
+				h4 {
+					bottom: 30px;
+					left: 30px;
+				}
+
 				.titles {
 					top: 30px;
 					left: 30px;
@@ -674,6 +691,11 @@
 					right: 20px;
 				}
 
+				h4 {
+					bottom: 20px;
+					left: 20px;
+				}
+
 				.solved div {
 					font-size: 10px;
 				}
@@ -726,6 +748,7 @@
 				</div>
 			</div>
 			<h3 tabindex="0">exit</h3>
+			<h4 tabindex="0">help!</h4>
 
 			<div class="board"></div>
 			<div class="buttons">
@@ -798,7 +821,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.5.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.6.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, infoStyle);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -1419,6 +1442,10 @@
 							submitRating();
 						}
 					}
+
+					if (document.activeElement == document.querySelector("h4")) {
+						window.open("../files/think-four.pdf");
+					}
 				}
 
 				if (e.key == "Escape" && win) {
@@ -1669,6 +1696,11 @@
 					averageRating--;
 				}
 			}
+
+			// --- HELP! ---
+			document.querySelector("h4").addEventListener("click", (e) => {
+				window.open("../files/think-four.pdf");
+			});
 		</script>
 	</body>
 </html>
