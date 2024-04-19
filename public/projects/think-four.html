@@ -5,7 +5,7 @@
 		<title>Think Four | pinniped.page</title>
 
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 		<meta name="theme-color" content="#4ecdc4" />
 
 		<link rel="icon" href="../images/icon.png" />
@@ -807,6 +807,14 @@
 			var screenHeight = window.innerHeight;
 			document.querySelector("body").style = `height: ${screenHeight}px`;
 
+			// TEST: if vertical, and if overlapping with titles: move down, shrink gap between board and buttons [does not update on resize]
+			if (screenHeight > screenWidth) {
+				if (document.querySelector(".board").getBoundingClientRect().top <= document.querySelector(".titles").getBoundingClientRect().bottom) {
+					document.querySelector(".game-container").style = "justify-content: flex-end; gap: 20px";
+					document.querySelector(".buttons").style = "margin-bottom: 100px;";
+				}
+			}
+
 			addEventListener("resize", (e) => {
 				setTimeout(() => {
 					screenWidth = window.innerWidth;
@@ -821,7 +829,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.6.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.6.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO: ${versionString}`, infoStyle);
 			document.querySelector(".version").innerHTML = versionString;
 
