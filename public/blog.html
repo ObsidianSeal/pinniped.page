@@ -50,7 +50,7 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
 
-		<div class="navbar-space"></div>
+		<h2 class="page-title"><span class="half-opacity">pinniped.page/</span><span class="title title-2">blog</span><i class="fa-solid fa-rss"></i></h2>
 
 		<div class="box-area">
 			<div class="box">
@@ -202,7 +202,7 @@
 					});
 
 					i = 0;
-					document.querySelectorAll("span").forEach((element) => {
+					document.querySelectorAll(".box-subtitle span").forEach((element) => {
 						if (views[i] == 1) {
 							element.innerHTML = `${views[i].toLocaleString()} view`;
 						} else if (views[i] > 1) {

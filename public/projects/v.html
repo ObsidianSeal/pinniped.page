@@ -446,13 +446,13 @@
 		<div class="h50"></div>
 
 		<div class="button-container">
-			<span tabindex="0" id="region-select-button"><i class="fa-solid fa-earth-americas"></i>select country/region</span
-			><span tabindex="0" id="back-button"><i class="fa-solid fa-arrow-left"></i>go back</span
-			><span tabindex="0" id="reset-all-button"><i class="fa-solid fa-rotate"></i>reset all</span>
+			<span tabindex="0" id="region-select-button"><i class="fa-solid fa-location-dot"></i>select country/region</span
+			><span tabindex="0" id="back-button"><i class="fa-solid fa-arrow-turn-up"></i>go back</span
+			><span tabindex="0" id="reset-all-button"><i class="fa-solid fa-eraser"></i>reset all</span>
 		</div>
 
 		<div id="region-select-menu">
-			<div tabindex="0" id="region-select-menu-default"><i class="fa-solid fa-earth-americas"></i>select country/region</div>
+			<div tabindex="0" id="region-select-menu-default"><i class="fa-solid fa-location-dot"></i>select country/region</div>
 			<div tabindex="0" id="region1">Argentina <span class="currency">(ARS)</span></div>
 			<div tabindex="0" id="region2">Australia <span class="currency">(A$)</span></div>
 			<div tabindex="0" id="region3">Brazil <span class="currency">(R$)</span></div>
@@ -481,7 +481,11 @@
 		<div class="h50"></div>
 
 		<div class="calculate">
-			<input id="calc-input" pattern="^\d+$" placeholder="VALORANT Points" maxlength="7" /><i class="fa-solid fa-circle-check" id="calc-check" tabindex="0"></i
+			<input id="calc-input" placeholder="VALORANT Points" maxlength="7" autocomplete="off" spellcheck="false" /><i
+				class="fa-solid fa-circle-check"
+				id="calc-check"
+				tabindex="0"
+			></i
 			><i class="fa-solid fa-circle-xmark" id="calc-xmark" tabindex="0"></i><span id="calc-alert"></span>
 
 			<p><span class="calc-points">please </span><span class="calc-amount"></span> <span class="price-per"></span></p>
@@ -659,7 +663,7 @@
 
 		<script>
 			// version
-			const version = ` v${2}.${4}.${2}\n\n`;
+			const version = ` v${2}.${4}.${3}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
@@ -895,7 +899,7 @@
 				regionNumber = regionID;
 				closeMenu();
 
-				regionSelectButton.innerHTML = '<i class="fa-solid fa-earth-americas"></i>' + document.querySelector(`#${regionNumber}`).innerHTML;
+				regionSelectButton.innerHTML = '<i class="fa-solid fa-location-dot"></i>' + document.querySelector(`#${regionNumber}`).innerHTML;
 				window.history.pushState({}, "", `?x=${regionNumber}`);
 
 				for (let i = 0; i < 6; i++) {

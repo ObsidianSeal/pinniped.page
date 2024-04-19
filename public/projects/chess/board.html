@@ -314,9 +314,9 @@
 
 	<body>
 		<button-container>
-			<div onclick="clickToggleMenu()"><i class="fa-solid fa-compress"></i>hide menu</div>
-			<div onclick="clickBack()"><i class="fa-solid fa-arrow-left"></i>back</div>
-			<div onclick="clickReset()"><i class="fa-solid fa-rotate-right"></i>reset board</div>
+			<div onclick="clickToggleMenu()"><i class="fa-solid fa-chevron-up"></i>hide menu</div>
+			<div onclick="clickBack()"><i class="fa-solid fa-reply-all"></i>back</div>
+			<div onclick="clickReset()"><i class="fa-solid fa-clock-rotate-left"></i>reset board</div>
 			<div onclick="clickCopy()" id="copy2"><i class="fa-solid fa-link"></i>copy link</div>
 			<div onclick="clickExport()" id="copy"><i class="fa-regular fa-clone"></i>copy FEN</div>
 			<div onclick="clickImport()" id="import"><i class="fa-solid fa-terminal"></i>import FEN</div>
@@ -404,6 +404,8 @@
 		</div>
 
 		<script>
+			console.log("%cCHESS/BOARD v1.1.0 (2024/04/19)", "background-color: #363337; color: #78dce8; padding: 5px");
+
 			// --- perfect position on mobile too ---
 			const screenWidth = window.innerWidth;
 			const screenHeight = window.innerHeight;
@@ -428,6 +430,8 @@
 				pieceIcon.setAttribute("class", `fa-solid ${pieceType} ${pieceColour}`);
 				pieceIcon.setAttribute("draggable", "true");
 				document.getElementById(`square-${pieceNumber}`).appendChild(pieceIcon);
+
+				addIconEventListeners(pieceIcon);
 			}
 
 			// --- load FEN onto board ---
@@ -510,7 +514,7 @@
 			var ogSquare;
 			var newSquare;
 
-			document.querySelectorAll("i").forEach((icon) => {
+			function addIconEventListeners(icon) {
 				icon.addEventListener("click", (e) => {
 					document.getElementById(e.target.id).remove();
 
@@ -548,12 +552,13 @@
 
 					newSquare = `square-${newSquare}`;
 
+					console.log("touchend");
 					document.getElementById(newSquare).innerHTML = "";
 					document.getElementById(newSquare).appendChild(icon);
 
 					getFEN(true);
 				});
-			});
+			}
 
 			document.querySelectorAll(".board div").forEach((icon) => {
 				icon.addEventListener("dragover", (e) => {
@@ -590,7 +595,7 @@
 
 			function clickToggleMenu() {
 				if (toggleMenu) {
-					document.querySelector("button-container").innerHTML = '<div onclick="clickToggleMenu()"><i class="fa-solid fa-expand"></i>show menu</div>';
+					document.querySelector("button-container").innerHTML = '<div onclick="clickToggleMenu()"><i class="fa-solid fa-chevron-down"></i>show menu</div>';
 				} else {
 					document.querySelector("button-container").innerHTML = ogMenu;
 				}
@@ -627,11 +632,11 @@
 				if (toggleImport) {
 					document.getElementById("FENinput").style = "display: flex";
 					document.querySelector("input").focus();
-					document.getElementById("import").innerHTML = '<i class="fa-solid fa-terminal"></i>hide text box';
+					if (toggleMenu) document.getElementById("import").innerHTML = '<i class="fa-solid fa-terminal"></i>hide text box';
 				} else {
 					document.getElementById("FENinput").style = "display: none";
-					document.getElementById("import").innerHTML = '<i class="fa-solid fa-terminal"></i>import FEN';
-					window.location.reload();
+					if (toggleMenu) document.getElementById("import").innerHTML = '<i class="fa-solid fa-terminal"></i>import FEN';
+					//window.location.reload();
 				}
 				toggleImport = !toggleImport;
 			}
@@ -679,27 +684,29 @@
 							let x = Math.floor((mouseX - boardX) / (boardSize / 8)) + 1;
 							let y = Math.floor((mouseY - boardY) / (boardSize / 8));
 
-							let square = x + y * 8;
+							if (x > 0 && x <= 8 && y >= 0 && y < 8) {
+								let square = x + y * 8;
 
-							if (document.getElementById(`square-${square}`).innerHTML != "") {
-								document.getElementById(square).remove();
+								if (document.getElementById(`square-${square}`).innerHTML != "") {
+									document.getElementById(square).remove();
+								}
+
+								if (e.key === "1") setPieceClasses(square, "fa-chess-pawn", "red");
+								if (e.key === "2") setPieceClasses(square, "fa-chess-rook", "red");
+								if (e.key === "3") setPieceClasses(square, "fa-chess-knight", "red");
+								if (e.key === "4") setPieceClasses(square, "fa-chess-bishop", "red");
+								if (e.key === "5") setPieceClasses(square, "fa-chess-queen", "red");
+								if (e.key === "6") setPieceClasses(square, "fa-chess-king", "red");
+
+								if (e.key === "q") setPieceClasses(square, "fa-chess-pawn", "blue");
+								if (e.key === "w") setPieceClasses(square, "fa-chess-rook", "blue");
+								if (e.key === "e") setPieceClasses(square, "fa-chess-knight", "blue");
+								if (e.key === "r") setPieceClasses(square, "fa-chess-bishop", "blue");
+								if (e.key === "t") setPieceClasses(square, "fa-chess-queen", "blue");
+								if (e.key === "y") setPieceClasses(square, "fa-chess-king", "blue");
+
+								getFEN(true);
 							}
-
-							if (e.key === "1") setPieceClasses(square, "fa-chess-pawn", "red");
-							if (e.key === "2") setPieceClasses(square, "fa-chess-rook", "red");
-							if (e.key === "3") setPieceClasses(square, "fa-chess-knight", "red");
-							if (e.key === "4") setPieceClasses(square, "fa-chess-bishop", "red");
-							if (e.key === "5") setPieceClasses(square, "fa-chess-queen", "red");
-							if (e.key === "6") setPieceClasses(square, "fa-chess-king", "red");
-
-							if (e.key === "q") setPieceClasses(square, "fa-chess-pawn", "blue");
-							if (e.key === "w") setPieceClasses(square, "fa-chess-rook", "blue");
-							if (e.key === "e") setPieceClasses(square, "fa-chess-knight", "blue");
-							if (e.key === "r") setPieceClasses(square, "fa-chess-bishop", "blue");
-							if (e.key === "t") setPieceClasses(square, "fa-chess-queen", "blue");
-							if (e.key === "y") setPieceClasses(square, "fa-chess-king", "blue");
-
-							getFEN(true);
 						}
 					}
 				} else {

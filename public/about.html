@@ -29,13 +29,13 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
-			i:not(#menu-open, #menu-close) {
+			i:not(#menu-open, #menu-close, .page-title i, .content i) {
 				position: absolute;
 				opacity: 50%;
 				transition: opacity 1s;
 			}
 
-			i:not(#menu-open, #menu-close):hover {
+			i:not(#menu-open, #menu-close, .page-title i, .content i):hover {
 				opacity: 100%;
 			}
 		</style>
@@ -59,13 +59,9 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
 
-		<div class="navbar-space"></div>
+		<h2 class="page-title"><span class="half-opacity">pinniped.page/</span><span class="title title-3">about</span><i class="fa-solid fa-at"></i></h2>
 
 		<div class="content">
-			<h3 class="title title-3">About</h3>
-
-			<div class="break"></div>
-
 			<p class="text">
 				Hi there, I&rsquo;m Obsidian_Seal. Welcome to my website! I&rsquo;ll use this space for all sorts of things, like practising my javascript, providing downloads
 				for my creations, <a href="posts/2023-11-17.html" class="link-3">posting pictures of seals</a>, and much more. If you head over to the &lsquo;projects&rsquo;
@@ -77,7 +73,7 @@
 
 			<div class="break"></div>
 
-			<h3 class="title title-3">Design</h3>
+			<h3 class="subheading"><span class="title title-3">Design</span><i class="fa-solid fa-palette"></i></h3>
 
 			<div class="break"></div>
 
@@ -107,15 +103,16 @@
 
 			<div class="break"></div>
 
-			<h3 class="title title-3">Creation</h3>
+			<h3 class="subheading"><span class="title title-3">Creation</span><i class="fa-solid fa-wand-magic-sparkles"></i></h3>
 
 			<div class="break"></div>
 
 			<p class="text">
 				Before I start talking about hosting, domains, HTML, and all that fun stuff, let me explain why The Pinniped Page is called The Pinniped Page. Google defines
-				<a href="https://en.wikipedia.org/wiki/Pinniped" class="link-3" target="_blank">pinniped</a> as “a carnivorous aquatic mammal of the order Pinnipedia, such as a
-				seal or walrus”. Seals are my favourite animals, but all the good (and inexpensive) seal domains were taken, so I went with pinniped instead. One of cheapest
-				pinniped domains was, of course, pinniped.page. It also happens to be very general, short, and alliterative! And so, my website became The Pinniped Page.
+				<a href="https://en.wikipedia.org/wiki/Pinniped" class="link-3" target="_blank">pinniped</a> as &ldquo;a carnivorous aquatic mammal of the order Pinnipedia,
+				such as a seal or walrus&rdquo;. Seals are my favourite animals, but all the good (and inexpensive) seal domains were taken, so I went with pinniped instead.
+				One of cheapest pinniped domains was, of course, pinniped.page. It also happens to be very general, short, and alliterative! And so, my website became The
+				Pinniped Page.
 			</p>
 
 			<div class="break"></div>
@@ -133,61 +130,61 @@
 			<div class="content-end"></div>
 		</div>
 
-		<i class="fa-solid fa-code fa-5x fa-rotate-by" style="top: 180px; left: 1400px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-kiwi-bird fa-5x fa-rotate-by" style="top: 280px; left: 1600px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-egg fa-5x fa-rotate-by" style="top: 400px; left: 1480px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-palette fa-5x fa-rotate-by" style="top: 550px; left: 1430px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-brush fa-5x fa-rotate-by" style="top: 600px; left: 1660px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-paragraph fa-5x fa-rotate-by" style="top: 720px; left: 1450px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-icons fa-5x fa-rotate-by" style="top: 860px; left: 1550px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-droplet fa-5x fa-rotate-by" style="top: 1050px; left: 1450px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-fire fa-5x fa-rotate-by" style="top: 1200px; left: 1500px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-paper-plane fa-5x fa-rotate-by" style="top: 1300px; left: 1600px; --fa-rotate-angle: 30deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-code" style="top: 180px; left: 1400px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-kiwi-bird" style="top: 280px; left: 1600px; --fa-rotate-angle: -5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-egg" style="top: 400px; left: 1480px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-palette" style="top: 550px; left: 1430px; --fa-rotate-angle: 20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-brush" style="top: 600px; left: 1660px; --fa-rotate-angle: -20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-paragraph" style="top: 720px; left: 1450px; --fa-rotate-angle: 20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-icons" style="top: 860px; left: 1550px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-droplet" style="top: 1050px; left: 1450px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-fire" style="top: 1200px; left: 1500px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-paper-plane" style="top: 1300px; left: 1600px; --fa-rotate-angle: 30deg"></i>
 
-		<i class="fa-solid fa-wand-magic-sparkles fa-5x fa-rotate-by" style="top: 980px; left: 1700px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-quote-left fa-5x fa-rotate-by" style="top: 1150px; left: 1680px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-asterisk fa-5x fa-rotate-by" style="top: 1280px; left: 1380px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-leaf fa-5x fa-rotate-by" style="top: 880px; left: 1380px; --fa-rotate-angle: -30deg"></i>
-		<i class="fa-solid fa-hashtag fa-5x fa-rotate-by" style="top: 120px; left: 1760px; --fa-rotate-angle: -20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-wand-magic-sparkles" style="top: 980px; left: 1700px; --fa-rotate-angle: 20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-quote-left" style="top: 1150px; left: 1680px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-asterisk" style="top: 1280px; left: 1380px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-leaf" style="top: 880px; left: 1380px; --fa-rotate-angle: -30deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-hashtag" style="top: 120px; left: 1760px; --fa-rotate-angle: -20deg"></i>
 
-		<i class="fa-solid fa-exclamation fa-5x fa-rotate-by" style="top: 350px; left: 1380px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-at fa-5x fa-rotate-by" style="top: 440px; left: 1720px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-question fa-5x fa-rotate-by" style="top: 780px; left: 1740px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-pencil fa-5x fa-rotate-by" style="top: 1250px; left: 1800px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-bicycle fa-5x fa-rotate-by" style="top: 220px; left: 1900px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-exclamation" style="top: 350px; left: 1380px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-at" style="top: 440px; left: 1720px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-question" style="top: 780px; left: 1740px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-pencil" style="top: 1250px; left: 1800px; --fa-rotate-angle: -20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-bicycle" style="top: 220px; left: 1900px; --fa-rotate-angle: 10deg"></i>
 
-		<i class="fa-solid fa-rocket fa-5x fa-rotate-by" style="top: 360px; left: 1950px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-bus fa-5x fa-rotate-by" style="top: 520px; left: 1870px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-laptop-code fa-5x fa-rotate-by" style="top: 670px; left: 1900px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-chess fa-5x fa-rotate-by" style="top: 830px; left: 1870px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-cloud fa-5x fa-rotate-by" style="top: 1020px; left: 1880px; --fa-rotate-angle: -5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-rocket" style="top: 360px; left: 1950px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-bus" style="top: 520px; left: 1870px; --fa-rotate-angle: 5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-laptop-code" style="top: 670px; left: 1900px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-chess" style="top: 830px; left: 1870px; --fa-rotate-angle: 5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-cloud" style="top: 1020px; left: 1880px; --fa-rotate-angle: -5deg"></i>
 
-		<i class="fa-solid fa-star fa-5x fa-rotate-by" style="top: 1170px; left: 1950px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-moon fa-5x fa-rotate-by" style="top: 150px; left: 2060px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-microphone fa-5x fa-rotate-by" style="top: 480px; left: 2050px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-face-smile fa-5x fa-rotate-by" style="top: 630px; left: 2100px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-ghost fa-5x fa-rotate-by" style="top: 790px; left: 2050px; --fa-rotate-angle: -5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-star" style="top: 1170px; left: 1950px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-moon" style="top: 150px; left: 2060px; --fa-rotate-angle: -5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-microphone" style="top: 480px; left: 2050px; --fa-rotate-angle: -5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-face-smile" style="top: 630px; left: 2100px; --fa-rotate-angle: 5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-ghost" style="top: 790px; left: 2050px; --fa-rotate-angle: -5deg"></i>
 
-		<i class="fa-solid fa-share fa-5x fa-rotate-by" style="top: 950px; left: 2100px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-flask fa-5x fa-rotate-by" style="top: 1300px; left: 2060px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-compass fa-5x fa-rotate-by" style="top: 1230px; left: 2220px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-person fa-5x fa-rotate-by" style="top: 1100px; left: 2100px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-fish fa-5x fa-rotate-by" style="top: 280px; left: 2150px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-share" style="top: 950px; left: 2100px; --fa-rotate-angle: 20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-flask" style="top: 1300px; left: 2060px; --fa-rotate-angle: -5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-compass" style="top: 1230px; left: 2220px; --fa-rotate-angle: -20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-person" style="top: 1100px; left: 2100px; --fa-rotate-angle: 5deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-fish" style="top: 280px; left: 2150px; --fa-rotate-angle: 10deg"></i>
 
-		<i class="fa-solid fa-clock fa-5x fa-rotate-by" style="top: 430px; left: 2200px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-play fa-5x fa-rotate-by" style="top: 1060px; left: 2260px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-flag fa-5x fa-rotate-by" style="top: 230px; left: 2420px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-brain fa-5x fa-rotate-by" style="top: 120px; left: 2250px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-cube fa-5x fa-rotate-by" style="top: 1300px; left: 2400px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-clock" style="top: 430px; left: 2200px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-play" style="top: 1060px; left: 2260px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-flag" style="top: 230px; left: 2420px; --fa-rotate-angle: -20deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-brain" style="top: 120px; left: 2250px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-cube" style="top: 1300px; left: 2400px; --fa-rotate-angle: -10deg"></i>
 
-		<i class="fa-solid fa-i-cursor fa-5x fa-rotate-by" style="top: 1120px; left: 2430px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-recycle fa-5x fa-rotate-by" style="top: 920px; left: 2350px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-ruler fa-5x fa-rotate-by" style="top: 110px; left: 1580px; --fa-rotate-angle: 0deg"></i>
-		<i class="fa-solid fa-lightbulb fa-5x fa-rotate-by" style="top: 820px; left: 2230px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-triangle-exclamation fa-5x fa-rotate-by" style="top: 750px; left: 2400px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-i-cursor" style="top: 1120px; left: 2430px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-recycle" style="top: 920px; left: 2350px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-ruler" style="top: 110px; left: 1580px; --fa-rotate-angle: 0deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-lightbulb" style="top: 820px; left: 2230px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-triangle-exclamation" style="top: 750px; left: 2400px; --fa-rotate-angle: -10deg"></i>
 
-		<i class="fa-solid fa-spoon fa-5x fa-rotate-by" style="top: 480px; left: 2380px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-share-nodes fa-5x fa-rotate-by" style="top: 650px; left: 2280px; --fa-rotate-angle: 10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-spoon" style="top: 480px; left: 2380px; --fa-rotate-angle: -10deg"></i>
+		<i class="fa-solid fa-5x fa-rotate-by fa-share-nodes" style="top: 650px; left: 2280px; --fa-rotate-angle: 10deg"></i>
 
 		<div class="footer" style="background: #ffffee"></div>
 		<div class="footer" style="background: #ff6b6b"></div>

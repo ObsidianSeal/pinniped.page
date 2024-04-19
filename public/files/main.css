@@ -522,6 +522,18 @@ ul {
 	background-color: #292f3630;
 }
 
+.page-title {
+	margin: 80px 0 40px 40px;
+}
+
+.page-title i {
+	margin-left: 40px;
+}
+
+.subheading i {
+	margin-left: 30px;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -678,6 +690,11 @@ ul {
 		height: calc((100vw - 60px) / 16 * 9);
 	}
 
+	.page-title span:first-child {
+		display: block;
+		font-size: 36px;
+	}
+
 	#menu-open {
 		color: #ffffee;
 	}
@@ -763,6 +780,11 @@ ul {
 
 	.box-alt {
 		width: calc(100% - 10px);
+	}
+
+	.page-title span:first-child {
+		display: block;
+		font-size: 24px;
 	}
 }
 
