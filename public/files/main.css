@@ -187,7 +187,18 @@ hr {
 .navbar-item {
 	height: 60px;
 	line-height: 60px;
-	transition: color 0.5s;
+	transition: color 250ms;
+}
+
+.navbar-item:first-child {
+	display: flex;
+	align-items: center;
+	padding-right: 20px;
+}
+
+.navbar-icon {
+	width: 40px;
+	height: 40px;
 }
 
 .navbar-item-mobile {
@@ -211,7 +222,7 @@ hr {
 .navbar-item-mobile-2:nth-child(3) a,
 .navbar-item-mobile-2:nth-child(4) a {
 	color: #ffffee;
-	transition: color 0.5s;
+	transition: color 250ms;
 }
 
 .navbar-item-mobile-2:nth-child(2) a:hover,
