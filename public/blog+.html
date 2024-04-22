@@ -198,7 +198,7 @@
 			var i = 0;
 
 			document.querySelectorAll(".link-2").forEach((element) => {
-				titles[i] = element.innerHTML.replace(/[.#$\[\]\/\\]+/, "_");
+				titles[i] = element.innerHTML.replaceAll(/[.#$\[\]\/\\]+/g, "_");
 				i++;
 			});
 
