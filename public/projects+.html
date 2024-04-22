@@ -216,6 +216,7 @@
 		const item = new URLSearchParams(query);
 		const tag = item.get("tag");
 		const search = item.get("search");
+		const regexBoolean = item.get("r");
 
 		// function to remove elements from list
 		function refine(type, whatToKeep) {
@@ -233,8 +234,15 @@
 			} else {
 				// or by text (in title)
 				document.querySelectorAll(`p.blog-archive`).forEach((element) => {
-					if (!element.children[1].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) {
-						element.remove();
+					if (regexBoolean == "t") {
+						var regexString = new RegExp(whatToKeep);
+						if (!regexString.test(element.children[1].innerHTML)) {
+							element.remove();
+						}
+					} else {
+						if (!element.children[1].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) {
+							element.remove();
+						}
 					}
 				});
 			}
