@@ -11,7 +11,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var postName = document.querySelector("h3").innerHTML;
-postName = postName.replace(/[.#$\[\]\/\\]+/, "_");
+postName = postName.replaceAll(/[.#$\[\]\/\\]+/g, "_"); // replaceAll requires RegEx with global flag!
 var alreadyViewed = false;
 
 const postViewsRef = firebase.database().ref("/post-views/" + postName);
