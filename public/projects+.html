@@ -64,8 +64,10 @@
 			<div class="search">
 				<div class="search-main">
 					<b>SEARCH:</b>
-					<input type="text" autocapitalize="off" autocomplete="off" id="search" placeholder="to use RegEx, start with an &ldquo;!&rdquo;" spellcheck="off" />
-					<b tabindex="0" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></b>
+					<div>
+						<input type="text" autocapitalize="off" autocomplete="off" id="search" placeholder="to use RegEx, start with an &ldquo;!&rdquo;" spellcheck="off" />
+						<b tabindex="0" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></b>
+					</div>
 				</div>
 				<div class="search-tags">
 					<b>TAG:</b>
@@ -304,11 +306,11 @@
 				let string = "";
 
 				if (tag == null) {
-					string = `<p style="line-height: 44px">Your search of <span class="special-box">&nbsp;tag=<b>null</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+					string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>null</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
 				} else if (tag == "") {
-					string = `<p style="line-height: 44px">Your search of <span class="special-box">&nbsp;tag=<b>any</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+					string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>any</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
 				} else {
-					string = `<p style="line-height: 44px">Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+					string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
 				}
 
 				document.querySelector(".content-end").innerHTML = string;
