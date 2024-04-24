@@ -27,6 +27,27 @@
 		<meta property="og:title" content="The Pinniped Page — Projects" />
 		<meta property="og:description" content="Downloads, information, pictures, and more!" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@media all and (max-width: 1650px) {
+				.search {
+					margin: 40px 0 0 50px;
+				}
+			}
+
+			@media all and (max-width: 950px) {
+				.search {
+					margin: 40px 0 0 0;
+				}
+			}
+
+			@media all and (max-width: 340px) {
+				.page-title i {
+					display: block;
+					margin: 20px 0 0 0;
+				}
+			}
+		</style>
 	</head>
 
 	<body>
@@ -125,6 +146,22 @@
 					ALL PROJECTS &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
 				</a>
 			</div>
+
+			<div class="search">
+				<div class="search-main">
+					<b>SEARCH:</b>
+					<input type="text" autocapitalize="off" autocomplete="off" id="search" placeholder="to use RegEx, start with an &ldquo;!&rdquo;" spellcheck="off" />
+					<b tabindex="0" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></b>
+				</div>
+				<div class="search-tags">
+					<b>TAG:</b>
+					<p tabindex="0">ANY</p>
+					<p tabindex="0">NEW</p>
+					<p tabindex="0">UPDATED</p>
+					<p tabindex="0">BETA</p>
+					<p tabindex="0" class="search-tag-active">NULL</p>
+				</div>
+			</div>
 		</div>
 
 		<div class="footer" style="height: 40px; background: #ffffee"></div>
@@ -147,6 +184,68 @@
 				space.setAttribute("style", `height: ${height}px`);
 				content.appendChild(space);
 			}
+
+			// -----
+
+			var selectedTag = "null";
+
+			function setSelectedTag(tagButton) {
+				document.querySelectorAll(".search-tags p").forEach((tagButtonAgain) => {
+					tagButtonAgain.classList.remove("search-tag-active");
+				});
+				tagButton.classList.add("search-tag-active");
+				selectedTag = tagButton.innerHTML.toLowerCase();
+			}
+
+			document.querySelectorAll(".search-tags p").forEach((tagButton) => {
+				tagButton.addEventListener("click", (e) => {
+					setSelectedTag(tagButton);
+				});
+			});
+
+			function search() {
+				const searchInput = encodeURIComponent(document.querySelector("#search").value);
+
+				var tagString = `tag=${selectedTag}`;
+				var searchString = `search=${searchInput}`;
+				var regexString = "";
+
+				if (searchInput == "") searchString = "";
+
+				if (searchInput.substring(0, 1) == "!") {
+					searchString = `search=${searchInput.substring(1)}`;
+					regexString = "&r=t";
+				}
+
+				if (selectedTag == "any") tagString = "tag";
+				if (selectedTag == "null") tagString = "";
+
+				if (!(tagString == "" && searchString == "")) {
+					if (tagString == "") window.location.href = `projects+.html?${searchString}${regexString}`;
+					else if (searchString != "") window.location.href = `projects+.html?${tagString}&${searchString}${regexString}`;
+					else window.location.href = `projects+.html?${tagString}`;
+				} else {
+					window.location.href = "projects+.html";
+				}
+			}
+
+			document.querySelector(".search-button").addEventListener("click", (e) => {
+				search();
+			});
+
+			document.addEventListener("keydown", (e) => {
+				if (e.key == "Enter") {
+					document.querySelectorAll(".search-tags p").forEach((tagButton) => {
+						if (document.activeElement == tagButton) {
+							setSelectedTag(tagButton);
+						}
+					});
+
+					if (document.activeElement == document.querySelector(".search-button") || document.activeElement == document.querySelector("#search")) {
+						search();
+					}
+				}
+			});
 		</script>
 	</body>
 </html>

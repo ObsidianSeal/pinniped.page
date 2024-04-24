@@ -23,6 +23,15 @@
 		<meta property="og:title" content="The Pinniped Page — Projects (a-z)" />
 		<meta property="og:description" content="Obsidian_Seal&rsquo;s projects, listed alphabetically." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@media all and (max-width: 360px) {
+				.page-title i {
+					display: block;
+					margin: 20px 0 0 0;
+				}
+			}
+		</style>
 	</head>
 
 	<body>
@@ -50,6 +59,22 @@
 				<a class="invert" id="download-link" href="projects.html">
 					<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>&nbsp; FEATURED PROJECTS
 				</a>
+			</div>
+
+			<div class="search">
+				<div class="search-main">
+					<b>SEARCH:</b>
+					<input type="text" autocapitalize="off" autocomplete="off" id="search" placeholder="to use RegEx, start with an &ldquo;!&rdquo;" spellcheck="off" />
+					<b tabindex="0" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></b>
+				</div>
+				<div class="search-tags">
+					<b>TAG:</b>
+					<p tabindex="0">ANY</p>
+					<p tabindex="0">NEW</p>
+					<p tabindex="0">UPDATED</p>
+					<p tabindex="0">BETA</p>
+					<p tabindex="0" class="search-tag-active">NULL</p>
+				</div>
 			</div>
 
 			<p class="blog-archive">
@@ -211,79 +236,147 @@
 	</body>
 
 	<script>
-		// get things from URL
-		const query = window.location.search;
-		const item = new URLSearchParams(query);
-		const tag = item.get("tag");
-		const search = item.get("search");
-		const regexBoolean = item.get("r");
+		// --- PART ONE: FILTER RESULTS ---
+		try {
+			// get things from URL
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const tag = item.get("tag");
+			const search = item.get("search");
+			const regexBoolean = item.get("r");
 
-		// function to remove elements from list
-		function refine(type, whatToKeep) {
-			if (type == "tag") {
-				// by tag
-				if (whatToKeep != null) {
-					document.querySelectorAll(`p.blog-archive:not(p:has(.${whatToKeep}))`).forEach((element) => {
-						element.remove();
-					});
+			// function to remove elements from list
+			function refine(type, whatToKeep) {
+				if (type == "tag") {
+					// by tag
+					if (whatToKeep != null) {
+						document.querySelectorAll(`p.blog-archive:not(p:has(.${whatToKeep}))`).forEach((element) => {
+							element.remove();
+						});
+					} else {
+						document.querySelectorAll(`p.blog-archive:not(p:has(.new, .updated, .beta, .tag))`).forEach((element) => {
+							element.remove();
+						});
+					}
 				} else {
-					document.querySelectorAll(`p.blog-archive:not(p:has(.new, .updated, .beta, .tag))`).forEach((element) => {
-						element.remove();
+					// or by text (in title)
+					document.querySelectorAll(`p.blog-archive`).forEach((element) => {
+						if (regexBoolean == "t") {
+							var regexString = new RegExp(whatToKeep);
+							if (!regexString.test(element.children[1].innerHTML)) {
+								element.remove();
+							}
+						} else {
+							if (!element.children[1].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) {
+								element.remove();
+							}
+						}
 					});
 				}
-			} else {
-				// or by text (in title)
-				document.querySelectorAll(`p.blog-archive`).forEach((element) => {
-					if (regexBoolean == "t") {
-						var regexString = new RegExp(whatToKeep);
-						if (!regexString.test(element.children[1].innerHTML)) {
-							element.remove();
-						}
+			}
+
+			// use tag?
+			if (tag != null) {
+				if (tag != "") {
+					if (isNaN(tag)) {
+						refine("tag", tag);
 					} else {
-						if (!element.children[1].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) {
-							element.remove();
-						}
+						refine("tag", "null");
+					}
+					// ⬆️ this should allow for 'no results' if the tag is invalid or the selector is a number
+					// if (tag == "new" || tag == "updated" || tag == "beta" || tag == "tag") {
+					// 	refine("tag", tag);
+					// } else {
+					// 	console.log("tag is a string, but not a known tag");
+					// }
+				} else {
+					refine("tag", null);
+				}
+			}
+
+			// use search?
+			if (search != null && search != "") {
+				refine("search", search.replace("'", "’")); // because I use &rsquo; now
+			}
+
+			// no results?
+			if (document.querySelectorAll(".blog-archive").length == 0) {
+				let string = "";
+
+				if (tag == null) {
+					string = `<p style="line-height: 44px">Your search of <span class="special-box">&nbsp;tag=<b>null</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+				} else if (tag == "") {
+					string = `<p style="line-height: 44px">Your search of <span class="special-box">&nbsp;tag=<b>any</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+				} else {
+					string = `<p style="line-height: 44px">Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+				}
+
+				document.querySelector(".content-end").innerHTML = string;
+			}
+		} catch {
+			window.location.href = "s.html?s=400";
+		}
+
+		// --- PART TWO: SEARCH ---
+		var selectedTag = "null";
+
+		function setSelectedTag(tagButton) {
+			document.querySelectorAll(".search-tags p").forEach((tagButtonAgain) => {
+				tagButtonAgain.classList.remove("search-tag-active");
+			});
+			tagButton.classList.add("search-tag-active");
+			selectedTag = tagButton.innerHTML.toLowerCase();
+		}
+
+		document.querySelectorAll(".search-tags p").forEach((tagButton) => {
+			tagButton.addEventListener("click", (e) => {
+				setSelectedTag(tagButton);
+			});
+		});
+
+		function search() {
+			const searchInput = encodeURIComponent(document.querySelector("#search").value);
+
+			var tagString = `tag=${selectedTag}`;
+			var searchString = `search=${searchInput}`;
+			var regexString = "";
+
+			if (searchInput == "") searchString = "";
+
+			if (searchInput.substring(0, 1) == "!") {
+				searchString = `search=${searchInput.substring(1)}`;
+				regexString = "&r=t";
+			}
+
+			if (selectedTag == "any") tagString = "tag";
+			if (selectedTag == "null") tagString = "";
+
+			if (!(tagString == "" && searchString == "")) {
+				if (tagString == "") window.location.href = `?${searchString}${regexString}`;
+				else if (searchString != "") window.location.href = `?${tagString}&${searchString}${regexString}`;
+				else window.location.href = `?${tagString}`;
+			} else {
+				window.location.href = "projects+.html";
+			}
+		}
+
+		document.querySelector(".search-button").addEventListener("click", (e) => {
+			search();
+		});
+
+		document.addEventListener("keydown", (e) => {
+			if (e.key == "Enter") {
+				document.querySelectorAll(".search-tags p").forEach((tagButton) => {
+					if (document.activeElement == tagButton) {
+						setSelectedTag(tagButton);
 					}
 				});
-			}
-		}
 
-		// use tag?
-		if (tag != null) {
-			if (tag != "") {
-				if (isNaN(tag)) {
-					refine("tag", tag);
-				} else {
-					refine("tag", "null");
+				if (document.activeElement == document.querySelector(".search-button") || document.activeElement == document.querySelector("#search")) {
+					search();
 				}
-				// ⬆️ this should allow for 'no results' if the tag is invalid or the selector is a number
-				// if (tag == "new" || tag == "updated" || tag == "beta" || tag == "tag") {
-				// 	refine("tag", tag);
-				// } else {
-				// 	console.log("tag is a string, but not a known tag");
-				// }
-			} else {
-				refine("tag", null);
 			}
-		}
-
-		// use search?
-		if (search != null && search != "") {
-			refine("search", search.replace("'", "’")); // because I use &rsquo; now
-		}
-
-		// no results?
-		if (document.querySelectorAll(".blog-archive").length == 0) {
-			let string = "";
-
-			if (tag == null || tag == "") {
-				string = `<p>Your search of <span class="special-box">&nbsp;any_tag&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <a class="link" href="projects+.html">Click here to clear the search.</a></p>`;
-			} else {
-				string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <a class="link" href="projects+.html">Click here to clear the search.</a></p>`;
-			}
-
-			document.querySelector(".content-end").innerHTML = string;
-		}
+		});
 
 		// then use footer.js ⬇ to place footer at the bottom
 	</script>
