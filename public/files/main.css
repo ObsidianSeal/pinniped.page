@@ -638,6 +638,10 @@ ul {
 	color: #292f36;
 }
 
+.search-no-results {
+	line-height: 44px;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -895,6 +899,10 @@ ul {
 
 	.search-tags {
 		line-height: 32px;
+	}
+
+	.search-no-results {
+		line-height: 36px;
 	}
 }
 

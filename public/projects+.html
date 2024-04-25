@@ -306,14 +306,18 @@
 				let string = "";
 
 				if (tag == null) {
-					string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>null</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+					string = `Your search of <span class="special-box">&nbsp;tag=<b>null</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b style="display: inline-block"><a class="link" href="projects+.html">CLEAR SEARCH?</a></b>`;
 				} else if (tag == "") {
-					string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>any</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+					string = `Your search of <span class="special-box">&nbsp;tag=<b>any</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b style="display: inline-block"><a class="link" href="projects+.html">CLEAR SEARCH?</a></b>`;
 				} else {
-					string = `<p>Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b><a class="link" href="projects+.html">CLEAR SEARCH?</a></b></p>`;
+					string = `Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b style="display: inline-block"><a class="link" href="projects+.html">CLEAR SEARCH?</a></b>`;
 				}
 
-				document.querySelector(".content-end").innerHTML = string;
+				let pElement = document.createElement("p");
+				pElement.innerHTML = string;
+				pElement.classList.add("search-no-results");
+
+				document.querySelector(".content-end").before(pElement);
 			}
 		} catch {
 			window.location.href = "s.html?s=400";
@@ -380,8 +384,33 @@
 			}
 		});
 
-		// then use footer.js ⬇ to place footer at the bottom
-	</script>
+		// --- PART THREE: MODIFIED FOOTER.JS TO PLACE FOOTER AT BOTTOM AFTER FONT AWESOME HAS LOADED ---
+		const content = document.querySelector(".content");
+		const icon = document.querySelector(".page-title i");
 
-	<script src="files/footer.js"></script>
+		function setFooterSpace() {
+			let contentBottom = content.getBoundingClientRect().bottom;
+			let screenHeight = window.innerHeight;
+
+			if (screenHeight - 80 > contentBottom) {
+				const space = document.createElement("div");
+				const height = screenHeight - 80 - contentBottom;
+				console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
+				space.setAttribute("style", `height: ${height}px`);
+				content.appendChild(space);
+			}
+		}
+
+		const iconSizeCheck = setInterval(() => {
+			let iconWidth = icon.getBoundingClientRect().width;
+			let iconHeight = icon.getBoundingClientRect().height;
+
+			console.log(iconWidth, iconHeight);
+
+			if (iconWidth != 0 && iconHeight != 0) {
+				setFooterSpace();
+				clearInterval(iconSizeCheck);
+			}
+		}, 20);
+	</script>
 </html>
