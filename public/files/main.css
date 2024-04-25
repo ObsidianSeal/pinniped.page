@@ -275,6 +275,7 @@ ul {
 	gap: 15px;
 	padding: 0;
 	padding-right: 10px;
+	position: relative;
 }
 
 .box-alt div {
@@ -337,6 +338,14 @@ ul {
 
 .box-subtitle-alt {
 	margin-bottom: 8px;
+}
+
+.box-subtitle-alt span:only-child {
+	position: absolute;
+	top: -22px;
+	right: 30px;
+	display: flex;
+	gap: 10px;
 }
 
 .content {
@@ -579,7 +588,9 @@ ul {
 	width: 380px;
 	height: 30px;
 
+	margin: 0;
 	border: 2px solid #292f367f;
+	border-radius: 0;
 	transition: border-color 250ms;
 	padding: 5px;
 
@@ -904,6 +915,10 @@ ul {
 
 	.search-no-results {
 		line-height: 36px;
+	}
+
+	.box-subtitle-alt span:only-child {
+		top: -18px;
 	}
 }
 
