@@ -640,6 +640,7 @@ ul {
 
 .search-no-results {
 	line-height: 44px;
+	max-width: 1200px;
 }
 
 #download-link {

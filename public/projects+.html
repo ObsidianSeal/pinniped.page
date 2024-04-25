@@ -324,6 +324,7 @@
 		}
 
 		// --- PART TWO: SEARCH ---
+		if (window.innerWidth <= 700) document.querySelector(".search-main input").placeholder = "! for RegEx";
 		var selectedTag = "null";
 
 		function setSelectedTag(tagButton) {
