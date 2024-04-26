@@ -81,9 +81,16 @@
 				<h2 class="box-thing invert">#1</h2>
 
 				<div>
-					<a class="title title-alt hoverable-title" href="projects/w.html">wordlelele</a>
+					<a class="title title-alt hoverable-title" href="projects/think-four.html">Think Four</a>
 
-					<p class="box-subtitle-alt"><span class="updated">&nbsp;UPDATED&nbsp;</span>Weird Wordle: longer words, choose the next word.</p>
+					<p class="box-subtitle-alt">
+						<span
+							><span class="new"><span class="tooltip">March 29th</span>&nbsp;NEW&nbsp;</span
+							><span class="updated"
+								><span class="tooltip">April 18th — attempted improvements to the mobile &ldquo;experience&rdquo;</span>&nbsp;UPDATED&nbsp;</span
+							></span
+						>Determine the topics, group the words.
+					</p>
 				</div>
 			</div>
 
@@ -91,11 +98,12 @@
 				<h2 class="box-thing invert">#2</h2>
 
 				<div>
-					<a class="title title-alt hoverable-title" href="projects/think-four.html">Think Four</a>
+					<a class="title title-alt hoverable-title" href="projects/w.html">wordlelele</a>
 
 					<p class="box-subtitle-alt">
-						<span><span class="new">&nbsp;NEW&nbsp;</span><span class="updated">&nbsp;UPDATED&nbsp;</span></span
-						>Determine the topics, group the words.
+						<span
+							><span class="updated"><span class="tooltip">April 4th — random win messages!</span>&nbsp;UPDATED&nbsp;</span></span
+						>Weird Wordle: longer words, choose the next word.
 					</p>
 				</div>
 			</div>
@@ -107,7 +115,9 @@
 					<a class="title title-alt hoverable-title" href="projects/crosswords.html" target="_blank">crosswords</a>
 
 					<p class="box-subtitle-alt">
-						<span><span class="new">&nbsp;NEW&nbsp;</span><span class="updated">&nbsp;UPDATED&nbsp;</span></span
+						<span
+							><span class="new"><span class="tooltip">March 18th</span>&nbsp;NEW&nbsp;</span
+							><span class="updated"><span class="tooltip">April 2nd — one line CSS addition</span>&nbsp;UPDATED&nbsp;</span></span
 						>Solve crosswords by me and others.
 					</p>
 				</div>
@@ -120,7 +130,9 @@
 					<a class="title title-alt hoverable-title" href="projects/craft.html">Finite Craft</a>
 
 					<p class="box-subtitle-alt">
-						<span><span class="new">&nbsp;NEW&nbsp;</span><span class="updated">&nbsp;UPDATED&nbsp;</span></span
+						<span
+							><span class="new"><span class="tooltip">February 23rd</span>&nbsp;NEW&nbsp;</span
+							><span class="updated"><span class="tooltip">April 10th — three new recipes</span>&nbsp;UPDATED&nbsp;</span></span
 						>Infinite Craft, but just the crafting part.
 					</p>
 				</div>
@@ -130,9 +142,9 @@
 				<h2 class="box-thing invert">#5</h2>
 
 				<div>
-					<a class="title title-alt hoverable-title" href="projects/v.html">v</a>
+					<a class="title title-alt hoverable-title" href="projects/tictactoe.html?o=0">TicTacToe</a>
 
-					<p class="box-subtitle-alt"><span class="updated">&nbsp;UPDATED&nbsp;</span>VALORANT Points calculator: spend as little as possible.</p>
+					<p class="box-subtitle-alt">The classic game of Xs and Os, but it&rsquo;s an online 1v1.</p>
 				</div>
 			</div>
 
@@ -140,9 +152,13 @@
 				<h2 class="box-thing invert">#6</h2>
 
 				<div>
-					<a class="title title-alt hoverable-title" href="projects/tictactoe.html?o=0">TicTacToe</a>
+					<a class="title title-alt hoverable-title" href="projects/v.html">v</a>
 
-					<p class="box-subtitle-alt">The classic game of Xs and Os, but it&rsquo;s an online 1v1.</p>
+					<p class="box-subtitle-alt">
+						<span
+							><span class="updated"><span class="tooltip">April 19th — icon changes, etc.</span>&nbsp;UPDATED&nbsp;</span></span
+						>VALORANT Points calculator: spend as little as possible.
+					</p>
 				</div>
 			</div>
 
@@ -153,7 +169,9 @@
 					<a class="title title-alt hoverable-title" href="projects/graph-theory.html">Graph Theory EXPLAINED</a>
 
 					<p class="box-subtitle-alt">
-						<span><span class="new">&nbsp;NEW&nbsp;</span><span class="updated">&nbsp;UPDATED&nbsp;</span></span
+						<span
+							><span class="new"><span class="tooltip">February 22nd</span>&nbsp;NEW&nbsp;</span
+							><span class="updated"><span class="tooltip">April 6th — another video listed in the top links</span>&nbsp;UPDATED&nbsp;</span></span
 						>Exactly what the title says.
 					</p>
 				</div>
@@ -169,7 +187,7 @@
 				<div class="search-main">
 					<b>SEARCH:</b>
 					<div>
-						<input type="text" autocapitalize="off" autocomplete="off" id="search" placeholder="to use RegEx, start with an &ldquo;!&rdquo;" spellcheck="off" />
+						<input type="text" autocapitalize="off" autocomplete="off" id="search" placeholder="to use RegEx, start with an &ldquo;!&rdquo;" spellcheck="false" />
 						<b tabindex="0" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></b>
 					</div>
 				</div>
@@ -268,6 +286,19 @@
 			});
 
 			if (window.innerWidth <= 700) document.querySelector(".search-main input").placeholder = "! for RegEx";
+
+			// -----
+
+			document.querySelectorAll(".new, .updated, .beta, .tag").forEach((tooltipZone) => {
+				const tooltip = tooltipZone.children[0];
+
+				tooltipZone.addEventListener("mousemove", (e) => {
+					tooltip.style = tooltip.style = `display: block; top: ${e.clientY + 10}px; left: ${e.clientX + 20}px`;
+				});
+				tooltipZone.addEventListener("mouseout", (e) => {
+					tooltip.style = "";
+				});
+			});
 		</script>
 	</body>
 </html>

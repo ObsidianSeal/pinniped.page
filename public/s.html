@@ -132,6 +132,7 @@
 
 			if (status != null && status != "" && status in codes) {
 				document.getElementById("message").innerHTML = codes[status];
+				document.querySelector("title").innerHTML = codes[status];
 			} else {
 				document.getElementById("message").innerHTML = "???";
 			}

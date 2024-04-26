@@ -88,8 +88,7 @@
 		<div class="notice" id="notice">
 			<p>
 				<!-- can change icon, icon colour, and text -- make sure to check .js -->
-				<i class="fa-solid fa-warning" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i
-				><span class="invert" id="notice-text">Google + Squarespace are being meanies, expect the worst!</span
+				<i class="fa-solid fa-warning" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i><span class="invert" id="notice-text"></span
 				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i
 				><i class="fa-solid fa-angle-right notice-x" id="notice-arrow" style="display: none" onclick="hideNotice()"></i>
 			</p>
@@ -165,6 +164,9 @@
 				"no, I did not make Obsidian",
 				"Think Four yourself",
 				"there are NO cookies (from me)",
+				"Don&rsquo;t know what a pinniped is? Read the About page!",
+				"pinnipeds = seals, sea lions, and walruses",
+				"pinniped = seal",
 			];
 
 			let x = Math.floor(Math.random() * subtitles.length);
@@ -175,11 +177,8 @@
 			var noticeHidden = false;
 			const screenWidth = window.innerWidth;
 
-			// change if change text!
-			if (screenWidth < 900) document.getElementById("notice-text").innerHTML = "***, expect the worst!";
-			if (screenWidth < 450) document.getElementById("notice-text").innerHTML = "expect the worst!";
-			if (screenWidth < 350) document.getElementById("notice-text").innerHTML = "big sad";
-			if (screenWidth < 250) document.getElementById("notice-text").innerHTML = ":(";
+			// CHANGE IF CHANGE TEXT!!!
+			// if (screenWidth < 500) document.getElementById("notice-text").innerHTML = "";
 
 			function hideNotice() {
 				if (!noticeHidden) {
@@ -191,14 +190,14 @@
 
 					// HIDE NOTICE
 					document.getElementById("notice-text").style = "display: none"; // remove text
-					document.getElementById("notice-icon").style = "color: #ff6b6b"; // remove icon margin, change if change icon colour!
+					document.getElementById("notice-icon").style = "color: #ff6b6b"; // remove icon margin, CHANGE IF CHANGE ICON COLOUR!!!
 					document.getElementById("notice-x").style = "display: none"; // remove 'x'
 					document.getElementById("notice-arrow").style = "display: inline-block"; // show '>'
 				} else {
 					// SHOW NOTICE
 					document.getElementById("notice").classList.remove("hidden"); // keep notice on screen
 					document.getElementById("notice-text").style = "display: inline-block"; // show text
-					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px"; // add margin to icon, change if change icon colour!
+					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px"; // add margin to icon, CHANGE IF CHANGE ICON COLOUR!!!
 					document.getElementById("notice-x").style = "display: inline-block"; // show 'x'
 					document.getElementById("notice-arrow").style = "display: none"; // remove '>'
 				}
@@ -256,7 +255,7 @@
 			document.addEventListener("keydown", (e) => {
 				if (e.key === "Shift" && !locationSelected) pageLocation = "projects/";
 				if (e.key === "Control" && !locationSelected) pageLocation = "posts/";
-				if (e.key === "Backspace" && !locationSelected) pageLocation = "images/";
+				if (e.key === "Backspace" && !locationSelected) pageLocation = "files/";
 
 				if (e.key === "Enter" && pageName != "") {
 					let ending = ".html"; // default file extension
