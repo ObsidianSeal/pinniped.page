@@ -748,6 +748,7 @@ ul {
 
 	.box {
 		width: 800px;
+		grid-template-columns: 120px auto;
 	}
 
 	.box-alt {

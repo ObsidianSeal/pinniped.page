@@ -363,6 +363,16 @@
 				margin-bottom: 20px;
 			}
 
+			/* a lot of very interesting reading on https://stackoverflow.com/questions/1817792/is-there-a-previous-sibling-selector */
+
+			.rate-puzzle div:has(i:not(.disabled):hover):hover i:not(.disabled) {
+				color: var(--red);
+			}
+
+			.rate-puzzle div:has(i:not(.disabled):hover) i:not(.disabled):hover ~ i:not(.disabled) {
+				color: var(--dark-blue-green);
+			}
+
 			.rate-puzzle i {
 				font-size: 28px;
 			}
