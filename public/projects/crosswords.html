@@ -571,9 +571,9 @@
 		</div>
 
 		<script>
-			// VERSION 1.4.7 (change all these when updating)
-			console.log("%ccrosswords v1.4.7 (2024/04/02)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
-			document.querySelector(".loading-panel div#version").innerHTML = "v1.4.7 — 2024/04/02";
+			// VERSION 1.5.0 (change all these when updating)
+			console.log("%ccrosswords v1.5.0 (2024/04/29)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
+			document.querySelector(".loading-panel div#version").innerHTML = "v1.5.0 — 2024/04/29";
 
 			// --- 0. element constants ---
 
@@ -1568,16 +1568,6 @@
 				document.querySelector(".crossword").appendChild(rowElement);
 			}
 
-			function fill() {
-				for (let i = 0; i < crosswordHeight; i++) {
-					for (let j = 0; j < crosswordWidth; j++) {
-						let squareElement = document.querySelector(`#s${i}-${j}`);
-						let letter = crosswordArray[i][j];
-						if (letter != "-") squareElement.innerHTML = letter + squareElement.innerHTML;
-					}
-				}
-			}
-
 			var numberCount = 0;
 			var acrossWordNumbers = [];
 			var downWordNumbers = [];
@@ -1678,6 +1668,7 @@
 							if (seconds < 10) pad = "0";
 							else pad = "";
 							timerElement.innerHTML = `${minutes}:${pad}${seconds}`;
+							exportProgress();
 						}
 					}, 1000);
 
@@ -2047,7 +2038,12 @@
 					if (i < crosswordHeight - 1) crosswordString += "/";
 				}
 
-				if (crosswordString == crosswords[crosswordNumber][2]) handleWin();
+				if (crosswordString == crosswords[crosswordNumber][2]) {
+					handleWin();
+					return true;
+				} else {
+					return false;
+				}
 			}
 
 			var win = false;
@@ -2171,6 +2167,7 @@
 
 						highlightWordSquares();
 						checkForWin();
+						exportProgress();
 					}
 
 					// space
@@ -2205,6 +2202,7 @@
 						wordNumber = getWordNumber();
 
 						highlightWordSquares();
+						exportProgress();
 					}
 
 					// arrow keys
@@ -2328,6 +2326,7 @@
 						activeElement.innerHTML = "";
 
 						highlightWordSquares();
+						exportProgress();
 					}
 
 					// delete (backwards backspace...so...forward space?)
@@ -2350,6 +2349,7 @@
 						activeElement.innerHTML = "";
 
 						highlightWordSquares();
+						exportProgress();
 					}
 				} else {
 					if (e.key == "Enter") {
@@ -2495,11 +2495,78 @@
 				});
 			});
 
-			// --- 7. loading error, help page button (coming soon) ---
+			// --- 7. loading error ---
 
 			document.querySelector("#load-error").addEventListener("click", (e) => {
 				window.location.href = "https://discord.gg/yswDu7kywv";
 			});
+
+			// --- 8. save & load progress
+
+			function exportProgress() {
+				var progressString = "";
+
+				for (let i = 0; i < crosswordHeight; i++) {
+					for (let j = 0; j < crosswordWidth; j++) {
+						let squareElement = document.querySelector(`#s${i}-${j}`);
+						if (squareElement.children.length > 0) {
+							let letter = squareElement.firstChild.innerHTML;
+							if (letter == "") letter = "_";
+							progressString += letter;
+						} else {
+							progressString += "-";
+						}
+					}
+				}
+
+				window.history.replaceState({}, "", `?puzzle=${crosswordNumber}&progress=${progressString}&minutes=${minutes}&seconds=${seconds}`);
+				return progressString;
+			}
+
+			var minutesFromURL = item.get("minutes");
+			var secondsFromURL = item.get("seconds");
+
+			if (minutesFromURL != null && minutesFromURL != "" && secondsFromURL != null && secondsFromURL != "") {
+				minutes = parseInt(minutesFromURL);
+				seconds = parseInt(secondsFromURL);
+
+				if (isNaN(minutes) || isNaN(seconds)) {
+					window.location.href = "../s.html?s=400";
+				}
+			}
+
+			function importProgress(progressString) {
+				if (!/^[A-Z_\-]+$/.test(progressString)) throw new Error();
+				let progressArray = progressString.split("");
+
+				for (let i = 0; i < crosswordHeight; i++) {
+					for (let j = 0; j < crosswordWidth; j++) {
+						let squareElement = document.querySelector(`#s${i}-${j}`);
+						let letter = progressArray[i * crosswordWidth + j];
+						if (letter == undefined) throw new Error();
+						if (letter != "-" && letter != "_" && !squareElement.classList.contains("void")) {
+							squareElement.firstChild.innerHTML = letter;
+						}
+					}
+				}
+			}
+
+			var progressFromURL = item.get("progress");
+
+			if (progressFromURL != null && progressFromURL != "") {
+				try {
+					importProgress(progressFromURL);
+
+					timerContainerElement.style = `width: ${92 + 18 * minutes.toString().length}px`;
+					if (seconds < 10) pad = "0";
+					else pad = "";
+					timerElement.innerHTML = `${minutes}:${pad}${seconds}`;
+
+					checkForWin();
+				} catch {
+					window.location.href = "../s.html?s=400";
+				}
+			}
 		</script>
 	</body>
 </html>
