@@ -94,10 +94,11 @@
 				position: fixed;
 				top: 50px;
 				left: 50px;
-				/* transition: color 250ms; */
+				outline: none;
 			}
 
-			a:hover {
+			a:hover,
+			a:focus {
 				color: var(--main-color);
 			}
 
@@ -429,7 +430,6 @@
 							});
 
 							generateQuestion();
-							// document.querySelector("body").focus();
 						}, 1000);
 					} else {
 						choiceElement.classList.add("incorrect");
