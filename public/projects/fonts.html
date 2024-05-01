@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Guess the Font</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/fonts" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Guess the Font" />
+		<meta property="og:description" content="Multiple choice font guessing challenge." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Multiple choice font guessing challenge." />
+		<meta name="keywords" content="fonts, text, challenge" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<style>
+			/* FONTS! from various places... */
+
+			@import url(https://use.typekit.net/rzo4wst.css);
+
+			@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface");
+			@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue");
+			@import url("https://fonts.googleapis.com/css2?family=Bree+Serif");
+			@import url("https://fonts.googleapis.com/css2?family=Courier+Prime");
+			@import url("https://fonts.googleapis.com/css2?family=Fredoka");
+			@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans");
+			@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+			@import url("https://fonts.googleapis.com/css2?family=Neuton");
+			@import url("https://fonts.googleapis.com/css2?family=Nunito");
+			@import url("https://fonts.googleapis.com/css2?family=Oswald");
+			@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif");
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab");
+			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk");
+
+			@font-face {
+				font-family: "Select Mono";
+				src: url("../files/SelectMono-Italic.woff");
+			}
+
+			/* monkeytype onedark theme */
+
+			:root {
+				--bg-color: #2f343f;
+				--caret-color: #61afef;
+				--main-color: #61afef;
+				--sub-color: #eceff4;
+				--sub-alt-color: #262b34;
+				--text-color: #98c379;
+				--error-color: #e06c75;
+				--error-extra-color: #d62436;
+				--colorful-error-color: #d62436;
+				--colorful-error-extra-color: #ff0019;
+			}
+
+			/* main CSS */
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			::selection {
+				background-color: var(--sub-alt-color);
+			}
+
+			body {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				font-family: "Roboto Condensed";
+
+				background-color: var(--bg-color);
+				color: var(--main-color);
+			}
+
+			a {
+				font-size: 64px;
+				color: var(--sub-alt-color);
+				position: fixed;
+				top: 50px;
+				left: 50px;
+				/* transition: color 250ms; */
+			}
+
+			a:hover {
+				color: var(--main-color);
+			}
+
+			.main-container {
+				padding: 50px;
+			}
+
+			.main-container-area {
+				position: relative;
+			}
+
+			.font-specimen {
+				font-size: 64px;
+
+				margin: 0 0 20px 0;
+				border: 3px solid var(--sub-alt-color);
+				padding: 20px;
+			}
+
+			.info,
+			.stats {
+				position: absolute;
+				top: -42px;
+
+				color: var(--sub-color);
+				font-size: 24px;
+
+				border-top: 3px solid var(--sub-alt-color);
+				border-right: 3px solid var(--sub-alt-color);
+				border-left: 3px solid var(--sub-alt-color);
+
+				display: flex;
+			}
+
+			.info {
+				left: 0;
+			}
+
+			.stats {
+				right: 0;
+			}
+
+			.info div,
+			.stats div {
+				padding: 5px 10px 5px 10px;
+			}
+
+			.info div:not(div:first-child),
+			.stats div:not(div:first-child) {
+				border-left: 3px solid var(--sub-alt-color);
+			}
+
+			.info span {
+				margin-left: 10px;
+			}
+
+			.stats span {
+				margin-right: 10px;
+			}
+
+			.font-choices {
+				font-size: 32px;
+
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+			}
+
+			.font-choices div {
+				width: fit-content;
+				display: flex;
+
+				color: var(--sub-color);
+
+				border: 3px solid var(--sub-alt-color);
+				padding: 5px 20px 5px 20px;
+
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.font-choices div:not(.correct, .incorrect, .disabled):hover {
+				background-color: var(--sub-alt-color);
+				cursor: pointer;
+			}
+
+			.font-choices div:first-child {
+				border-left: 3px solid var(--sub-alt-color);
+			}
+
+			.font-choices div.correct {
+				color: var(--text-color);
+			}
+
+			.font-choices div.incorrect {
+				color: var(--error-color);
+			}
+
+			#fontSize48,
+			#fontSize32 {
+				display: none;
+			}
+
+			/* media queries */
+
+			@media all and (max-width: 1000px) {
+				.font-specimen {
+					font-size: 48px;
+				}
+
+				.info,
+				.stats {
+					font-size: 18px;
+					top: -35px;
+				}
+
+				.font-choices {
+					font-size: 24px;
+				}
+
+				#fontSize64 {
+					display: none;
+				}
+
+				#fontSize48 {
+					display: inline;
+				}
+			}
+
+			@media all and (max-width: 800px) {
+				.font-specimen {
+					font-size: 32px;
+				}
+
+				.info,
+				.stats {
+					font-size: 12px;
+					top: -27px;
+				}
+
+				.font-choices {
+					font-size: 16px;
+				}
+
+				#fontSize48 {
+					display: none;
+				}
+
+				#fontSize32 {
+					display: inline;
+				}
+			}
+
+			@media all and (max-width: 450px) {
+				.stats {
+					top: -81px;
+					border-bottom: 3px solid var(--sub-alt-color);
+				}
+			}
+
+			@media all and (max-width: 340px) {
+				body {
+					align-items: end;
+				}
+			}
+
+			/* current limit */
+
+			@media all and (max-width: 301px) {
+				body *:not(a) {
+					display: none;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<a href="../projects+.html" title="exit to Projects+"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i></a>
+
+		<div class="main-container">
+			<div class="main-container-area">
+				<div class="font-specimen" title="font specimen"></div>
+				<div class="info">
+					<div title="the goal of the game!"><i class="fa-solid fa-star" style="color: var(--main-color)"></i><span id="question">What font is this?</span></div>
+					<div title="size of font specimen">
+						<i class="fa-solid fa-text-height" style="color: var(--main-color)"></i><span id="fontSize64">64px</span><span id="fontSize48">48px</span
+						><span id="fontSize32">32px</span>
+					</div>
+				</div>
+				<div class="stats">
+					<div title="total correct guesses"><span id="correct">0</span><i class="fa-solid fa-check" style="color: var(--text-color)"></i></div>
+					<div title="total incorrect guesses"><span id="incorrect">0</span><i class="fa-solid fa-xmark" style="color: var(--error-color)"></i></div>
+				</div>
+			</div>
+			<div class="font-choices">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		const texts = [
+			"Waltz, bad nymph, for quick jigs vex.",
+			"Glib jocks quiz nymph to vex dwarf.",
+			"Sphinx of black quartz, judge my vow.",
+			"How quickly daft jumping zebras vex!",
+			"The five boxing wizards jump quickly.",
+			"Jackdaws love my big sphinx of quartz.",
+			"Pack my box with five dozen liquor jugs.",
+			"The quick brown fox jumps over the lazy dog.",
+			"Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich.",
+			"Portez ce vieux whisky au juge blond qui fume.",
+			"Two driven jocks help fax my big quiz.",
+			"My girl wove six dozen plaid jackets before she quit.",
+			"Sixty zippers were quickly picked from the woven jute bag.",
+			"A wizard&rsquo;s job is to vex chumps quickly in fog.",
+			"We promptly judged antique ivory buckles for the next prize.",
+			"When zombies arrive, quickly fax Judge Pat.",
+			"Waxy and quivering, jocks fumble the pizza.",
+			"The jay, pig, fox, zebra and my wolves quack!",
+			"The five boxing wizards jump quickly.",
+			"Farmer jack realized that big yellow quilts were expensive.",
+			"Amazingly few discotheques provide jukeboxes.",
+			"Five or six big jet planes zoomed quickly by the tower.",
+			"Six big devils from Japan quickly forgot how to waltz.",
+			"Five quacking zephyrs jolt my wax bed.",
+			"Brown jars prevented the mixture from freezing too quickly.",
+		];
+
+		const fonts = [
+			"Abril Fatface",
+			"Arial",
+			"Bebas Neue",
+			"bebas-neue-rounded",
+			"Bree Serif",
+			"Comic Sans MS",
+			"Courier Prime",
+			"Fredoka",
+			"Josefin Sans",
+			"miller-text",
+			"Montserrat",
+			"Neuton",
+			"Nunito",
+			"Oswald",
+			"Press Start 2P",
+			"Roboto",
+			"Roboto Condensed",
+			"Roboto Flex",
+			"Roboto Mono",
+			"Roboto Serif",
+			"Roboto Slab",
+			"Select Mono",
+			"Space Grotesk",
+			"Times New Roman",
+		];
+
+		function getRandomFont() {
+			return fonts[Math.floor(Math.random() * fonts.length)];
+		}
+
+		function getProperFontName(fontName) {
+			if (fontName == "Arial") fontName = "Arial*";
+			if (fontName == "Comic Sans MS") fontName = "Comic Sans*";
+			if (fontName == "bebas-neue-rounded") fontName = "Bebas Neue Rounded";
+			if (fontName == "miller-text") fontName = "Miller Text";
+			if (fontName == "Times New Roman") fontName = "Times New Roman*";
+			return fontName;
+		}
+
+		var correctFontPosition;
+		var correct = 0;
+		var incorrect = 0;
+
+		function generateQuestion() {
+			document.querySelector(".font-specimen").innerHTML = texts[Math.floor(Math.random() * texts.length)];
+
+			var screenWidth = window.innerWidth;
+			var screenHeight = window.innerHeight;
+			var correctFontName = getRandomFont();
+
+			document.querySelector("body").style = `height: ${screenHeight}px;`;
+			document.querySelector(".font-specimen").style = `font-family: "${correctFontName}"`;
+
+			correctFontName = getProperFontName(correctFontName);
+			var usedFonts = [correctFontName];
+			correctFontPosition = Math.floor(Math.random() * 4) + 1;
+
+			for (let i = 1; i <= 4; i++) {
+				let choiceElement = document.querySelector(`.font-choices div:nth-child(${i})`);
+
+				if (i == correctFontPosition) {
+					choiceElement.innerHTML = correctFontName;
+					choiceElement.title = `guess "${correctFontName}"`;
+				} else {
+					let randomFont = getProperFontName(getRandomFont());
+					while (usedFonts.includes(randomFont)) randomFont = getProperFontName(getRandomFont());
+					choiceElement.innerHTML = randomFont;
+					choiceElement.title = `guess "${randomFont}"`;
+					usedFonts.push(randomFont);
+				}
+			}
+		}
+
+		generateQuestion();
+
+		for (let i = 1; i <= 4; i++) {
+			let choiceElement = document.querySelector(`.font-choices div:nth-child(${i})`);
+
+			choiceElement.addEventListener("click", (e) => {
+				if (!choiceElement.classList.contains("disabled")) {
+					if (i == correctFontPosition) {
+						choiceElement.classList.add("correct");
+						document.querySelector("#correct").innerHTML = ++correct;
+
+						document.querySelectorAll(".font-choices div").forEach((choice) => {
+							choice.classList.add("disabled");
+						});
+
+						setTimeout(() => {
+							document.querySelectorAll(".font-choices div").forEach((choice) => {
+								choice.classList.remove("correct");
+								choice.classList.remove("incorrect");
+								choice.classList.remove("disabled");
+							});
+
+							generateQuestion();
+							// document.querySelector("body").focus();
+						}, 1000);
+					} else {
+						choiceElement.classList.add("incorrect");
+						document.querySelector("#incorrect").innerHTML = ++incorrect;
+						choiceElement.classList.add("disabled");
+					}
+				}
+			});
+		}
+	</script>
+</html>
