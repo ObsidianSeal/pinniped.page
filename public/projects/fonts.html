@@ -27,24 +27,48 @@
 			@import url(https://use.typekit.net/rzo4wst.css);
 
 			@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface");
+			@import url("https://fonts.googleapis.com/css2?family=Bad+Script");
+			@import url("https://fonts.googleapis.com/css2?family=Bangers");
 			@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue");
 			@import url("https://fonts.googleapis.com/css2?family=Bree+Serif");
+			@import url("https://fonts.googleapis.com/css2?family=Bungee");
+			@import url("https://fonts.googleapis.com/css2?family=Comfortaa");
 			@import url("https://fonts.googleapis.com/css2?family=Courier+Prime");
+			@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great");
 			@import url("https://fonts.googleapis.com/css2?family=Fredoka");
 			@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans");
+			@import url("https://fonts.googleapis.com/css2?family=Lobster");
+			@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy");
+			@import url("https://fonts.googleapis.com/css2?family=Monoton");
 			@import url("https://fonts.googleapis.com/css2?family=Montserrat");
 			@import url("https://fonts.googleapis.com/css2?family=Neuton");
 			@import url("https://fonts.googleapis.com/css2?family=Nunito");
 			@import url("https://fonts.googleapis.com/css2?family=Oswald");
+			@import url("https://fonts.googleapis.com/css2?family=Playfair+Display");
 			@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P");
+			@import url("https://fonts.googleapis.com/css2?family=Quicksand");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab");
+			@import url("https://fonts.googleapis.com/css2?family=Sniglet");
 			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk");
+			@import url("https://fonts.googleapis.com/css2?family=Space+Mono");
 
+			@font-face {
+				font-family: "Chomsky";
+				src: url("../files/Chomsky.woff2");
+			}
+			@font-face {
+				font-family: "JetBrains Mono";
+				src: url("../files/JetBrainsMono-Regular.woff2");
+			}
+			@font-face {
+				font-family: "Norse";
+				src: url("../files/Norse.woff2");
+			}
 			@font-face {
 				font-family: "Select Mono";
 				src: url("../files/SelectMono-Italic.woff");
@@ -116,6 +140,8 @@
 				margin: 0 0 20px 0;
 				border: 3px solid var(--sub-alt-color);
 				padding: 20px;
+
+				background-color: var(--bg-color);
 			}
 
 			.info,
@@ -131,6 +157,8 @@
 				border-left: 3px solid var(--sub-alt-color);
 
 				display: flex;
+
+				background-color: var(--bg-color);
 			}
 
 			.info {
@@ -180,11 +208,17 @@
 				-moz-user-select: none;
 				-ms-user-select: none;
 				user-select: none;
+
+				outline: none;
+
+				background-color: var(--bg-color);
 			}
 
-			.font-choices div:not(.correct, .incorrect, .disabled):hover {
+			.font-choices div:not(.correct, .incorrect, .disabled):hover,
+			.font-choices div:not(.correct, .incorrect, .disabled):focus {
 				background-color: var(--sub-alt-color);
 				cursor: pointer;
+				outline: none;
 			}
 
 			.font-choices div:first-child {
@@ -295,12 +329,7 @@
 					<div title="total incorrect guesses"><span id="incorrect">0</span><i class="fa-solid fa-xmark" style="color: var(--error-color)"></i></div>
 				</div>
 			</div>
-			<div class="font-choices">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
+			<div class="font-choices"></div>
 		</div>
 	</body>
 
@@ -335,19 +364,34 @@
 
 		const fonts = [
 			"Abril Fatface",
-			"Arial",
+			"Bad Script",
+			"Bangers",
 			"Bebas Neue",
 			"bebas-neue-rounded",
+			"blockhead-dark-side",
 			"Bree Serif",
-			"Comic Sans MS",
+			"Bungee",
+			"Chomsky",
+			"Comfortaa",
 			"Courier Prime",
+			"cubano",
+			"Fredericka the Great",
 			"Fredoka",
+			"gooddog-new",
+			"hydrophilia-iced",
+			"JetBrains Mono",
 			"Josefin Sans",
+			"Lobster",
+			"Luckiest Guy",
 			"miller-text",
+			"mono45-headline",
+			"Monoton",
 			"Montserrat",
 			"Neuton",
+			"Norse",
 			"Nunito",
 			"Oswald",
+			"Playfair Display",
 			"Press Start 2P",
 			"Roboto",
 			"Roboto Condensed",
@@ -356,20 +400,26 @@
 			"Roboto Serif",
 			"Roboto Slab",
 			"Select Mono",
+			"Sniglet",
 			"Space Grotesk",
-			"Times New Roman",
+			"Space Mono",
 		];
+
+		const version = "1.0.0";
+		console.log(`fonts v${version} - ${fonts.length} fonts, ${texts.length} texts`);
 
 		function getRandomFont() {
 			return fonts[Math.floor(Math.random() * fonts.length)];
 		}
 
 		function getProperFontName(fontName) {
-			if (fontName == "Arial") fontName = "Arial*";
-			if (fontName == "Comic Sans MS") fontName = "Comic Sans*";
+			if (fontName == "blockhead-dark-side") fontName = "Blockhead Dark Side";
+			if (fontName == "cubano") fontName = "Cubano";
 			if (fontName == "bebas-neue-rounded") fontName = "Bebas Neue Rounded";
+			if (fontName == "gooddog-new") fontName = "GoodDog New";
+			if (fontName == "hydrophilia-iced") fontName = "Hydrophilia Iced";
 			if (fontName == "miller-text") fontName = "Miller Text";
-			if (fontName == "Times New Roman") fontName = "Times New Roman*";
+			if (fontName == "mono45-headline") fontName = "Mono45 Headline";
 			return fontName;
 		}
 
@@ -391,8 +441,11 @@
 			var usedFonts = [correctFontName];
 			correctFontPosition = Math.floor(Math.random() * 4) + 1;
 
+			document.querySelector(".font-choices").innerHTML = "";
+
 			for (let i = 1; i <= 4; i++) {
-				let choiceElement = document.querySelector(`.font-choices div:nth-child(${i})`);
+				let choiceElement = document.createElement("div");
+				choiceElement.setAttribute("tabindex", 0);
 
 				if (i == correctFontPosition) {
 					choiceElement.innerHTML = correctFontName;
@@ -404,40 +457,57 @@
 					choiceElement.title = `guess "${randomFont}"`;
 					usedFonts.push(randomFont);
 				}
+
+				document.querySelector(".font-choices").appendChild(choiceElement);
 			}
+
+			addChoiceListeners();
 		}
 
 		generateQuestion();
 
-		for (let i = 1; i <= 4; i++) {
-			let choiceElement = document.querySelector(`.font-choices div:nth-child(${i})`);
+		function clickChoice(choiceElement, i) {
+			if (!choiceElement.classList.contains("disabled")) {
+				if (i == correctFontPosition) {
+					choiceElement.classList.add("correct");
+					document.querySelector("#correct").innerHTML = ++correct;
 
-			choiceElement.addEventListener("click", (e) => {
-				if (!choiceElement.classList.contains("disabled")) {
-					if (i == correctFontPosition) {
-						choiceElement.classList.add("correct");
-						document.querySelector("#correct").innerHTML = ++correct;
+					document.querySelectorAll(".font-choices div").forEach((choice) => {
+						choice.classList.add("disabled");
+					});
 
+					setTimeout(() => {
 						document.querySelectorAll(".font-choices div").forEach((choice) => {
-							choice.classList.add("disabled");
+							choice.classList.remove("correct");
+							choice.classList.remove("incorrect");
+							choice.classList.remove("disabled");
 						});
 
-						setTimeout(() => {
-							document.querySelectorAll(".font-choices div").forEach((choice) => {
-								choice.classList.remove("correct");
-								choice.classList.remove("incorrect");
-								choice.classList.remove("disabled");
-							});
-
-							generateQuestion();
-						}, 1000);
-					} else {
-						choiceElement.classList.add("incorrect");
-						document.querySelector("#incorrect").innerHTML = ++incorrect;
-						choiceElement.classList.add("disabled");
-					}
+						generateQuestion();
+					}, 1000);
+				} else {
+					choiceElement.classList.add("incorrect");
+					document.querySelector("#incorrect").innerHTML = ++incorrect;
+					choiceElement.classList.add("disabled");
+					choiceElement.removeAttribute("tabindex");
 				}
-			});
+			}
+		}
+
+		function addChoiceListeners() {
+			for (let i = 1; i <= 4; i++) {
+				let choiceElement = document.querySelector(`.font-choices div:nth-child(${i})`);
+
+				choiceElement.addEventListener("click", (e) => {
+					clickChoice(choiceElement, i);
+				});
+
+				choiceElement.addEventListener("keydown", (e) => {
+					if (e.key == "Enter" && document.activeElement == choiceElement) {
+						clickChoice(choiceElement, i);
+					}
+				});
+			}
 		}
 	</script>
 </html>

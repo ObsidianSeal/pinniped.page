@@ -571,9 +571,9 @@
 		</div>
 
 		<script>
-			// VERSION 1.5.0 (change all these when updating)
-			console.log("%ccrosswords v1.5.0 (2024/04/29)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
-			document.querySelector(".loading-panel div#version").innerHTML = "v1.5.0 — 2024/04/29";
+			// VERSION 1.5.1 (change all these when updating)
+			console.log("%ccrosswords v1.5.1 (2024/05/01)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
+			document.querySelector(".loading-panel div#version").innerHTML = "v1.5.1 — 2024/05/01";
 
 			// --- 0. element constants ---
 
@@ -2531,6 +2531,10 @@
 				seconds = parseInt(secondsFromURL);
 
 				if (isNaN(minutes) || isNaN(seconds)) {
+					window.location.href = "../s.html?s=400";
+				}
+
+				if (minutes < 0 || seconds < 0 || seconds >= 60) {
 					window.location.href = "../s.html?s=400";
 				}
 			}
