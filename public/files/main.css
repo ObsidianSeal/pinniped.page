@@ -664,6 +664,20 @@ ul {
 	padding: 2px 10px 2px 10px;
 }
 
+.download-button-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px 40px;
+}
+
+.download-button-group .download-button {
+	margin-top: 0;
+}
+
+.download-button-group .download-button:not(:first-child) {
+	margin-left: 0;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;

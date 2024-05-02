@@ -55,10 +55,18 @@
 		<h2 class="page-title"><span class="half-opacity">pinniped.page/</span><span class="title">projects+</span><i class="fa-solid fa-code"></i></h2>
 
 		<div class="content">
-			<div class="download-button download-button-long" style="margin-bottom: 30px">
-				<a class="invert" id="download-link" href="projects.html">
-					<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>&nbsp; FEATURED PROJECTS
-				</a>
+			<div class="download-button-group" style="margin-bottom: 30px">
+				<div class="download-button download-button-long">
+					<a class="invert" id="download-link" href="projects.html">
+						<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>&nbsp; FEATURED PROJECTS
+					</a>
+				</div>
+
+				<div class="download-button download-button-long" id="randomProjectButton">
+					<a class="invert" id="download-link" href="projects+.html">
+						RANDOM PROJECT &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+					</a>
+				</div>
 			</div>
 
 			<div class="search">
@@ -444,6 +452,64 @@
 			tooltipZone.addEventListener("mouseout", (e) => {
 				tooltip.style = "";
 			});
+		});
+
+		// --- PART FIVE: RANDOM PROJECT! ---
+
+		const projects = [
+			"10\\/10 would recommend",
+			"BezierCurves",
+			"Bus Ride Bingo",
+			"calc",
+			"Chess",
+			"Clock",
+			"countdown",
+			"crosswords",
+			"Crossword",
+			"crossword2",
+			"Deathrun\\+",
+			"fa\\-random",
+			"Finite Craft",
+			"fOnT mAsHeR",
+			"Graph Theory EXPLAINED",
+			"Guess the Font",
+			"Hues\\+Cues",
+			"Lethal Company Mods",
+			"Minecraft &amp; Motion",
+			"Mjölnir",
+			"MouseMaze",
+			"numbers",
+			"Obsidian_Seal",
+			"PlainPlanes",
+			"progress",
+			"Rubik’s Cube Scrambler",
+			"Shrink to Fit",
+			"Subject\\/Course Colour Graphs",
+			"text",
+			"The Square",
+			"Think Four",
+			"TicTacToe",
+			"Type",
+			"v",
+			"WandStuff",
+			"wordlelele",
+			"Words",
+		];
+
+		function randomSearch() {
+			document
+				.querySelector("#randomProjectButton a")
+				.setAttribute("href", `projects+.html?search=%5E${encodeURIComponent(projects[Math.floor(Math.random() * projects.length)])}%24&r=t`);
+		}
+
+		document.querySelector("#randomProjectButton a").addEventListener("click", (e) => {
+			randomSearch();
+		});
+
+		document.querySelector("#randomProjectButton a").addEventListener("keydown", (e) => {
+			if (e.key == "Enter") {
+				randomSearch();
+			}
 		});
 	</script>
 </html>
