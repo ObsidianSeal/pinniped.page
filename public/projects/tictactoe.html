@@ -849,7 +849,7 @@
 
 		// listen for clicks on square
 		function handleClick(square) {
-			console.log("handling click", turn, player);
+			// console.log("handling click", turn, player);
 			if (turn == player && document.querySelector(`#square${square}`).innerHTML == "" && !hasWon) {
 				if (turn) placeXO(square, "x");
 				else placeXO(square, "o");
@@ -903,7 +903,7 @@
 				if (move.substring(0, 1) == "x") winner = true;
 				else winner = false;
 			}
-			console.log("handleWin();", winner, player);
+			// console.log("handleWin();", winner, player);
 
 			if (winner == player) textBelow.innerHTML = "You win!";
 			else if (winner != null) textBelow.innerHTML = "You lose.";
@@ -1205,7 +1205,7 @@
 			if (player) set(ref(db, "tictactoe/" + code + "/turn"), "o");
 			else set(ref(db, "tictactoe/" + code + "/turn"), "x");
 
-			console.log(game, move);
+			// console.log(game, move);
 			if (game == "") game = move;
 			else game = game + " " + move;
 			set(ref(db, "tictactoe/" + code + "/game"), game);
@@ -1224,7 +1224,7 @@
 					const data = snapshot.val();
 					let status = data.status.toString();
 					let dbTurn = data.turn.toString();
-					console.log(status, dbTurn);
+					// console.log(status, dbTurn);
 
 					if (status == "waiting") {
 						set(ref(db, "tictactoe/" + code + "/status"), "playing");
@@ -1272,10 +1272,10 @@
 						move = newData;
 						placeXO(newData.substring(1, 2), newData.substring(0, 1));
 						if ((newData.substring(0, 1) == "x" && !player) || (newData.substring(0, 1) == "o" && player)) {
-							console.log(newData + " | " + game);
+							// console.log(newData + " | " + game);
 							if (game == "") game = newData;
 							else game = game + " " + newData;
-							console.log(newData + " | " + game);
+							// console.log(newData + " | " + game);
 							swapTurn();
 						}
 					}
@@ -1288,7 +1288,7 @@
 				if (data != null) {
 					let newData = data.toString();
 
-					console.log("checkForWin();" + !checkForWin());
+					// console.log("checkForWin();" + !checkForWin());
 					if (!checkForWin()) {
 						if (newData == "x") {
 							if (player) {
@@ -1310,7 +1310,7 @@
 			onValue(nextRef, (snapshot) => {
 				if (snapshot.exists()) {
 					const data = snapshot.val();
-					console.log(data);
+					// console.log(data);
 
 					if (data != null) {
 						let newData = data.toString();
@@ -1328,7 +1328,7 @@
 
 		// going back should return to menu
 		addEventListener("popstate", (e) => {
-			console.log("POPSTATE");
+			// console.log("POPSTATE");
 			if (window.location.href.includes("projects")) window.location.href = "tictactoe.html?o=" + origin;
 			else window.location.href = "https://pinniped.page/projects/tictactoe.html?o=" + origin;
 		});
@@ -1522,6 +1522,8 @@
 					totalTime += time;
 					if (time > longestTime) longestTime = time;
 					if (time < shortestTime) shortestTime = time;
+
+					if (time <= 0) console.log(`ALERT: impossible time difference in game ${game}`);
 				}
 			}
 			let averageTime = Math.round((totalTime / gamesCompleted) * 100) / 100;
@@ -1556,8 +1558,8 @@
 			}
 			document.querySelector("#data-move-last-all").innerHTML = `${moveNames[lastMoves.indexOf(Math.max(...lastMoves))]} <span>(${Math.max(...lastMoves)})</span>`;
 
-			console.table(firstMoves, firstMovesX, firstMovesO, firstMovesTie);
-			console.table(lastMoves, lastMovesX, lastMovesO, lastMovesTie);
+			// console.table(firstMoves, firstMovesX, firstMovesO, firstMovesTie);
+			// console.table(lastMoves, lastMovesX, lastMovesO, lastMovesTie);
 
 			// 15.
 			document.querySelector("#data-move-first-x").innerHTML = `${moveNames[firstMovesX.indexOf(Math.max(...firstMovesX))]} <span>(${Math.max(...firstMovesX)})</span>`;

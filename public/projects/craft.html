@@ -277,7 +277,7 @@
 				width: 260px;
 				height: 40px;
 
-				padding: 5px 10px 5px 10px;
+				padding: 5px 60px 5px 10px;
 				outline: none;
 
 				color: var(--white);
@@ -298,20 +298,32 @@
 				cursor: pointer;
 			}
 
-			.sorting-options div:nth-child(2).active {
+			.sorting-options div:nth-child(3).active {
 				color: var(--red);
 			}
 
-			.sorting-options div:nth-child(3).active {
+			.sorting-options div:nth-child(4).active {
 				color: var(--yellow);
 			}
 
-			.sorting-options div:nth-child(4).active {
+			.sorting-options div:nth-child(5).active {
 				color: var(--cyan-blue);
 			}
 
 			.sorting-options div i {
 				font-size: 30px;
+			}
+
+			#clear-search {
+				width: 50px;
+				height: 50px;
+				position: absolute;
+
+				right: 200px;
+
+				display: flex;
+				align-items: center;
+				justify-self: center;
 			}
 
 			/* COLOUR CLASSES - border */
@@ -567,16 +579,17 @@
 			<div class="discovered-items"></div>
 			<div class="sorting-options">
 				<input id="search" autocomplete="off" placeholder="search? (RegEx)" />
-				<div id="sort-time"><i class="fa-solid fa-clock"></i></div>
-				<div id="sort-name"><i class="fa-solid fa-arrow-down-a-z"></i></div>
-				<div id="sort-colour"><i class="fa-solid fa-palette"></i></div>
+				<div id="clear-search" title="clear search"><i class="fa-solid fa-xmark"></i></div>
+				<div id="sort-time" title="sort by time discovered"><i class="fa-solid fa-clock"></i></div>
+				<div id="sort-name" title="sort by name"><i class="fa-solid fa-arrow-down-a-z"></i></div>
+				<div id="sort-colour" title="sort by colour"><i class="fa-solid fa-palette"></i></div>
 			</div>
 		</div>
 		<h1><a href="../index.html">pinniped.page</a>/craft</h1>
 		<span class="discovered-fraction"></span>
 		<span class="version"></span>
-		<span class="help-button"><i class="fa-solid fa-question"></i></span>
-		<span class="clear-button"><i class="fa-solid fa-trash-can"></i></span>
+		<span class="help-button" title="info & help page"><i class="fa-solid fa-question"></i></span>
+		<span class="clear-button" title="clear workspace"><i class="fa-solid fa-trash-can"></i></span>
 		<div class="item-container"></div>
 
 		<script>
@@ -1059,6 +1072,20 @@
 				["Charles de Gaulle Airport (LFPG)", "city", "Paris"],
 				["Charles de Gaulle Airport (LFPG)", "country", "France"],
 				["Charles de Gaulle Airport (LFPG)", "continent", "Europe"],
+				["deep", "water", "ocean"],
+				["death", "book", "They Both Die at the End"],
+				["human", "property", "house"],
+				["big", "house", "mansion"],
+				["pond", "bird", "duck"],
+				["big", "duck", "goose"],
+				["goose", "video game", "Untitled Goose Game"],
+				["book", "building", "library"],
+				["video game", "engine", "game engine"],
+				["Lethal Company", "game engine", "Unity"],
+				["example", "game engine", "Unity"],
+				["animal", "language", "sound"],
+				["human", "sound", "speech"],
+				["sound", "example", "music"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -1286,10 +1313,20 @@
 				"cow": ["solid", "cow", "brown"],
 				"dog": ["solid", "dog", "tan"],
 				"cat": ["solid", "cat", "tan"],
+				"They Both Die at the End": ["solid", "skull", "blue-violet"],
+				"mansion": ["solid", "house-chimney-window", "magenta"],
+				"goose": ["solid", "kiwi-bird", "light-grey"],
+				"duck": ["solid", "dove", "green"],
+				"Untitled Goose Game": ["solid", "gamepad", "blue"],
+				"game engine": ["solid", "gears", "dark-grey"],
+				"Unity": ["solid", "gears", "light-grey"],
+				"sound": ["solid", "ear-listen", "yellow"],
+				"speech": ["solid", "comments", "yellow-orange"],
+				"music": ["solid", "music", "violet-magenta"],
 			};
 
 			// version #
-			const version = "v1.4.0.2";
+			const version = "v1.5.0";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1913,6 +1950,11 @@
 			searchField.addEventListener("input", (e) => {
 				search();
 			});
+			searchField.addEventListener("focus", (e) => {
+				setTimeout(() => {
+					searchField.setSelectionRange(0, searchField.value.length);
+				}, 100);
+			});
 			function search() {
 				let searchTerm = searchField.value;
 				try {
@@ -1929,6 +1971,12 @@
 					console.log("INVALID RegEx");
 				}
 			}
+
+			// somehow I didn't add a clear search button
+			document.querySelector("#clear-search").addEventListener("click", (e) => {
+				document.querySelector("input").value = "";
+				search();
+			});
 
 			// initial items!!!
 			const initialItems = ["air", "earth", "fire", "water"];
