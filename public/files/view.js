@@ -16,7 +16,7 @@ var alreadyViewed = false;
 
 const postViewsRef = firebase.database().ref("/post-views/" + postName);
 postViewsRef.on("value", (snapshot) => {
-	if (snapshot.exists() && parseInt(snapshot.val().views) != NaN) {
+	if (snapshot.exists() && !isNaN(parseInt(snapshot.val().views))) {
 		const views = snapshot.val().views;
 		addView(views);
 	} else {

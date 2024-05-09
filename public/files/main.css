@@ -23,11 +23,6 @@ body {
 	color: #ffffee;
 }
 
-.invert::selection {
-	background: #ffffee;
-	color: #292f36;
-}
-
 a {
 	color: #292f36;
 	text-decoration: none;
@@ -154,7 +149,7 @@ li::marker {
 }
 
 hr {
-	margin: 20px 0 20px 0;
+	margin: 20px 0;
 	border: 0;
 	border-top: 2px solid #292f367f;
 	max-width: 1200px;
@@ -279,7 +274,7 @@ ul {
 }
 
 .box-alt div {
-	padding: 5px 0 0 0;
+	padding: 5px 0 0;
 }
 
 .box-icon {
@@ -327,7 +322,7 @@ ul {
 .box-subtitle i.fa-circle,
 .blog-archive i.fa-circle {
 	font-size: 8px;
-	margin: 0 10px 0 10px;
+	margin: 0 10px;
 	translate: 0 -6px;
 	opacity: 50%;
 }
@@ -349,7 +344,7 @@ ul {
 }
 
 .content {
-	padding: 0 60px 0 60px;
+	padding: 0 60px;
 }
 
 .text {
@@ -540,7 +535,7 @@ ul {
 
 .special-box {
 	border: 2px solid #292f36;
-	padding: 4px 0 4px 0;
+	padding: 4px 0;
 }
 
 .half-opacity {
@@ -570,7 +565,7 @@ ul {
 	position: absolute;
 	top: 150px;
 	right: 80px;
-	margin: 0 0 30px 0;
+	margin: 0 0 30px;
 
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -661,7 +656,7 @@ ul {
 	z-index: 1;
 
 	background-color: #292f36;
-	padding: 2px 10px 2px 10px;
+	padding: 2px 10px;
 }
 
 .download-button-group {
@@ -753,7 +748,7 @@ ul {
 	}
 
 	.content {
-		padding: 0 30px 0 30px;
+		padding: 0 30px;
 	}
 
 	.space {
@@ -781,7 +776,7 @@ ul {
 	}
 
 	.box {
-		margin: 0 0 40px 0;
+		margin: 0 0 40px;
 		width: calc(100% - 20px);
 		grid-template-columns: none;
 		grid-template-rows: 60px auto;
@@ -797,7 +792,7 @@ ul {
 	}
 
 	.box-alt div {
-		padding: 0 10px 0 10px;
+		padding: 0 10px;
 	}
 
 	.box-thing {
