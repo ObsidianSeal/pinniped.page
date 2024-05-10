@@ -19,6 +19,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<link rel="stylesheet" href="files/main.css" />
+		<link rel="stylesheet" href="files/scrollbar.css" />
 
 		<script src="files/menu.js"></script>
 
@@ -29,6 +30,10 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
+			::-webkit-scrollbar-thumb:hover {
+				background-color: #ffe66d;
+			}
+
 			i:not(#menu-open, #menu-close, .page-title i, .content i) {
 				position: absolute;
 				opacity: 50%;
@@ -136,7 +141,7 @@
 
 			<div class="content-end"></div>
 
-			<b class="last-updated half-opacity">LAST UPDATED: March 8th, 2024</b>
+			<b class="small-text half-opacity">LAST UPDATED: March 8th, 2024</b>
 		</div>
 
 		<i class="fa-solid fa-5x fa-rotate-by fa-code" style="top: 180px; left: 1400px; --fa-rotate-angle: 10deg"></i>
