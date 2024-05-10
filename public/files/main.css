@@ -144,6 +144,10 @@ li {
 	word-wrap: break-word; /* TEST: better wrapping */
 }
 
+li:not(.no-li-margin) {
+	margin-bottom: 5px;
+}
+
 li::marker {
 	font-weight: bold;
 }
@@ -673,6 +677,10 @@ ul {
 	margin-left: 0;
 }
 
+.last-updated {
+	font-size: 16px;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -916,6 +924,10 @@ ul {
 	ol,
 	ul {
 		font-size: 18px;
+	}
+
+	.last-updated {
+		font-size: 14px;
 	}
 
 	.notice-x {
