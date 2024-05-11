@@ -222,7 +222,8 @@
 				const height = screenHeight - 140;
 				document.querySelector("div.centre").style = `height: ${height}px`;
 
-				if (screenHeight < 450) document.getElementById("subtitle").remove();
+				if (screenHeight < 450) document.getElementById("subtitle").style = "display: none";
+				else document.getElementById("subtitle").style = "display: block";
 			}
 			perfectPosition();
 

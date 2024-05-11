@@ -26,6 +26,7 @@ body {
 a {
 	color: #292f36;
 	text-decoration: none;
+	text-decoration-skip-ink: none;
 }
 
 a.link,
@@ -425,7 +426,8 @@ ul {
 }
 
 .content-end {
-	margin-top: 40px;
+	margin-top: 10px;
+	height: 30px;
 }
 
 .box-blog-text {
@@ -679,6 +681,7 @@ ul {
 
 .small-text {
 	font-size: 16px;
+	letter-spacing: 0.025em;
 }
 
 #download-link {
@@ -717,6 +720,34 @@ ul {
 #menu-close {
 	display: none;
 	color: transparent;
+}
+
+#to_top_button {
+	width: 50px;
+	height: 50px;
+
+	border-radius: 25px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: fixed;
+	right: 50px;
+	bottom: 80px;
+
+	font-size: 24px;
+
+	background-color: #292f367f;
+}
+
+#to_top_button:hover {
+	background-color: #292f36;
+	cursor: pointer;
+}
+
+#to_top_button i {
+	color: #ffffee;
 }
 
 /* Conditional Styles */

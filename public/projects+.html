@@ -268,6 +268,8 @@
 		<div class="footer" style="background: #4ecdc4"></div>
 	</body>
 
+	<script src="files/to-top.js"></script>
+
 	<script>
 		// --- PART ONE: FILTER RESULTS ---
 		try {
@@ -421,7 +423,7 @@
 		const icon = document.querySelector(".page-title i");
 
 		function setFooterSpace() {
-			let contentBottom = content.getBoundingClientRect().bottom;
+			let contentBottom = document.querySelector(".content-end").getBoundingClientRect().bottom;
 			let screenHeight = window.innerHeight;
 
 			if (screenHeight - 80 > contentBottom) {

@@ -24,36 +24,6 @@
 		<meta property="og:title" content="Graph Theory EXPLAINED" />
 		<meta property="og:description" content="Exactly what the title says." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
-
-		<style>
-			#to_top_button {
-				width: 50px;
-				height: 50px;
-
-				border-radius: 25px;
-
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
-				position: fixed;
-				right: 50px;
-				bottom: 80px;
-
-				font-size: 24px;
-
-				background-color: #292f367f;
-			}
-
-			#to_top_button:hover {
-				background-color: #292f36;
-				cursor: pointer;
-			}
-
-			#to_top_button i {
-				color: #ffffee;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -77,7 +47,7 @@
 		<div class="navbar-space"></div>
 
 		<div class="content">
-			<h3 class="title">Graph Theory EXPLAINED</h3>
+			<h2 class="title">Graph Theory EXPLAINED</h2>
 
 			<div class="break"></div>
 
@@ -847,14 +817,14 @@
 			<div class="content-end"></div>
 
 			<b class="small-text half-opacity">LAST UPDATED: April 6th, 2024</b>
-
-			<div id="to_top_button" style="display: none"><i class="fa-solid fa-arrow-up-long"></i></div>
 		</div>
 
 		<div class="footer" style="background: #ffffee"></div>
 		<div class="footer" style="background: #ff6b6b"></div>
 		<div class="footer" style="background: #ffe66d"></div>
 		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script src="../files/to-top.js"></script>
 
 		<script>
 			// scroll up enough to see title
@@ -869,17 +839,6 @@
 				link.addEventListener("click", (e) => {
 					scrollUpToTitle();
 				});
-			});
-
-			// to-top button scroll
-			document.querySelector("#to_top_button").addEventListener("click", (e) => {
-				window.scroll(0, 0);
-			});
-
-			// show/hide to-top button
-			document.addEventListener("scroll", (e) => {
-				if (window.scrollY > 300) document.querySelector("#to_top_button").style = "display: flex";
-				else document.querySelector("#to_top_button").style = "display: none";
 			});
 		</script>
 	</body>

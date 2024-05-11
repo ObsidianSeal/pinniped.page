@@ -176,12 +176,29 @@
 					OLDER POSTS &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
 				</a>
 			</div>
+
+			<div id="to_top_button" style="display: none"><i class="fa-solid fa-arrow-up-long"></i></div>
 		</div>
 
 		<div style="height: 40px; background: #ffffee"></div>
 		<div class="footer" style="background: #ff6b6b"></div>
 		<div class="footer" style="background: #ffe66d"></div>
 		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script>
+			const toTopButton = document.querySelector("#to_top_button");
+
+			// to-top button scroll
+			toTopButton.addEventListener("click", (e) => {
+				window.scroll(0, 0);
+			});
+
+			// show/hide to-top button
+			document.addEventListener("scroll", (e) => {
+				if (window.scrollY > 300) toTopButton.style = "display: flex";
+				else toTopButton.style = "display: none";
+			});
+		</script>
 
 		<script type="module">
 			const firebaseConfig = {
