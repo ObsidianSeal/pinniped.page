@@ -141,7 +141,7 @@ ul li::marker {
 }
 
 li {
-	word-wrap: break-word; /* TEST: better wrapping */
+	word-wrap: break-word;
 }
 
 li:not(.no-li-margin) {
@@ -293,7 +293,7 @@ ul {
 
 .title {
 	background-image: linear-gradient(90deg, #4ecdc47f, #4ecdc47f);
-	background-position: 0 0.9em; /* 1.15 for links? */
+	background-position: 0 0.9em;
 	background-repeat: repeat-x;
 	display: inline;
 }
@@ -357,7 +357,7 @@ ul {
 }
 
 .break {
-	height: 20px;
+	margin-top: 20px;
 }
 
 .bold {
@@ -425,7 +425,7 @@ ul {
 }
 
 .content-end {
-	height: 40px;
+	margin-top: 40px;
 }
 
 .box-blog-text {
@@ -760,7 +760,7 @@ ul {
 	}
 
 	.space {
-		height: calc(100vh - 243px); /* Where is this used? */
+		height: calc(100vh - 243px);
 	}
 
 	.box {

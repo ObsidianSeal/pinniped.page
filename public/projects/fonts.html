@@ -47,7 +47,9 @@
 			@import url("https://fonts.googleapis.com/css2?family=Monoton");
 			@import url("https://fonts.googleapis.com/css2?family=Montserrat");
 			@import url("https://fonts.googleapis.com/css2?family=Neuton");
+			@import url("https://fonts.googleapis.com/css2?family=Noto+Sans");
 			@import url("https://fonts.googleapis.com/css2?family=Nunito");
+			@import url("https://fonts.googleapis.com/css2?family=Open+Sans");
 			@import url("https://fonts.googleapis.com/css2?family=Oswald");
 			@import url("https://fonts.googleapis.com/css2?family=Playfair+Display");
 			@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P");
@@ -65,6 +67,14 @@
 			@font-face {
 				font-family: "Chomsky";
 				src: url("../files/Chomsky.woff2");
+			}
+			@font-face {
+				font-family: "Computer Modern Serif Italic";
+				src: url("../files/ComputerModern-SerifItalic.woff2");
+			}
+			@font-face {
+				font-family: "Computer Modern Serif Roman";
+				src: url("../files/ComputerModern-SerifRoman.woff2");
 			}
 			@font-face {
 				font-family: "JetBrains Mono";
@@ -378,6 +388,8 @@
 			"Bungee",
 			"Chomsky",
 			"Comfortaa",
+			"Computer Modern Serif Italic",
+			"Computer Modern Serif Roman",
 			"Courier Prime",
 			"cubano",
 			"Didact Gothic",
@@ -399,10 +411,13 @@
 			"Montserrat",
 			"Neuton",
 			"Norse",
+			"Noto Sans",
 			"Nunito",
+			"Open Sans",
 			"Oswald",
 			"Playfair Display",
 			"Press Start 2P",
+			"rig-solid-medium-fill",
 			"Roboto",
 			"Roboto Condensed",
 			"Roboto Flex",
@@ -415,7 +430,7 @@
 			"Space Mono",
 		];
 
-		const version = "1.0.1";
+		const version = "1.0.2";
 		console.log(`fonts v${version} - ${fonts.length} fonts, ${texts.length} texts`);
 
 		function getRandomFont() {
@@ -430,6 +445,7 @@
 			if (fontName == "hydrophilia-iced") fontName = "Hydrophilia Iced";
 			if (fontName == "miller-text") fontName = "Miller Text";
 			if (fontName == "mono45-headline") fontName = "Mono45 Headline";
+			if (fontName == "rig-solid-medium-fill") fontName = "Rig Solid Medium Fill";
 			return fontName;
 		}
 
