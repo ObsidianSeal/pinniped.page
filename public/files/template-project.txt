@@ -43,7 +43,7 @@
 		<div class="navbar-space"></div>
 
 		<div class="content">
-			<h3 class="title">title</h3>
+			<h2 class="title">title</h2>
 
 			<div class="break"></div>
 

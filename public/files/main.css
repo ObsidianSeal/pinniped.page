@@ -74,7 +74,6 @@ a.link-3:focus {
 
 a#download-link {
 	font-family: "Roboto Slab";
-	font-size: 16px;
 }
 
 h1,
@@ -349,6 +348,13 @@ ul {
 }
 
 .content {
+	margin: 0 auto;
+	max-width: 850px;
+}
+
+.content-alt {
+	margin: 0;
+	max-width: initial;
 	padding: 0 60px;
 }
 
@@ -684,6 +690,11 @@ ul {
 	letter-spacing: 0.025em;
 }
 
+.post-header {
+	display: flex;
+	justify-content: space-between;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -805,6 +816,10 @@ ul {
 
 	.box-icon {
 		font-size: 60px;
+	}
+
+	.post-header span:last-child {
+		display: none;
 	}
 }
 

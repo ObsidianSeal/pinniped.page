@@ -943,7 +943,7 @@
 				if (document.activeElement == document.querySelector(".main-menu p")) createGame();
 				if (document.activeElement == document.querySelector(".button")) exitGame();
 
-				if (document.activeElement == document.querySelector("#helpButton")) window.open("../files/tictactoe.pdf");
+				if (document.activeElement == document.querySelector("#helpButton")) window.open("../download.html?x=tictactoe.pdf");
 				if (document.activeElement == document.querySelector("#infoButton")) {
 					document.querySelector(".menu").style = "display: none";
 					document.querySelector(".data-page").style = "display: block";
@@ -1120,7 +1120,7 @@
 			createGame();
 		});
 		document.querySelector("#helpButton").addEventListener("click", (e) => {
-			window.open("../files/tictactoe.pdf");
+			window.open("../download.html?x=tictactoe.pdf");
 		});
 		document.querySelector("#infoButton").addEventListener("click", (e) => {
 			document.querySelector(".menu").style = "display: none";
