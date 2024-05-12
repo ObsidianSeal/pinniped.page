@@ -34,14 +34,22 @@
 				background-color: #ffe66d;
 			}
 
-			i:not(#menu-open, #menu-close, .page-title i, .content i) {
+			.content {
+				position: relative;
+			}
+
+			i.side-detail-icon {
 				position: absolute;
 				opacity: 50%;
 				transition: opacity 1s;
 			}
 
-			i:not(#menu-open, #menu-close, .page-title i, .content i):hover {
+			i.side-detail-icon:hover {
 				opacity: 100%;
+			}
+
+			.hide {
+				display: none;
 			}
 
 			@media all and (max-width: 280px) {
@@ -142,63 +150,63 @@
 			<div class="content-end"></div>
 
 			<b class="small-text half-opacity">LAST UPDATED: March 8th, 2024</b>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-code side-detail-icon" style="top: 75px; left: 1000px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-kiwi-bird side-detail-icon" style="top: 300px; left: 1200px; --fa-rotate-angle: -5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-egg side-detail-icon" style="top: 700px; left: 1100px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-palette side-detail-icon" style="top: 500px; left: -400px; --fa-rotate-angle: 20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-brush side-detail-icon" style="top: 750px; left: -700px; --fa-rotate-angle: -20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-paragraph side-detail-icon" style="top: 80px; left: -240px; --fa-rotate-angle: 20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-icons side-detail-icon" style="top: 300px; left: -600px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-droplet side-detail-icon" style="top: 1090px; left: 1040px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-fire side-detail-icon" style="top: 830px; left: -200px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-paper-plane side-detail-icon" style="top: 1070px; left: -520px; --fa-rotate-angle: 30deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-wand-magic-sparkles side-detail-icon" style="top: 910px; left: 1240px; --fa-rotate-angle: 20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-quote-left side-detail-icon" style="top: 420px; left: 980px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-asterisk side-detail-icon" style="top: 1340px; left: 1110px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-leaf side-detail-icon" style="top: 60px; left: 1370px; --fa-rotate-angle: -30deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-hashtag side-detail-icon" style="top: 120px; left: -460px; --fa-rotate-angle: -20deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-exclamation side-detail-icon" style="top: 350px; left: -150px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-at side-detail-icon" style="top: 1300px; left: -330px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-question side-detail-icon" style="top: 550px; left: 1330px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-pencil side-detail-icon" style="top: 770px; left: -460px; --fa-rotate-angle: -20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-bicycle side-detail-icon" style="top: 1370px; left: -830px; --fa-rotate-angle: 10deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-rocket side-detail-icon" style="top: 870px; left: 980px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-bus side-detail-icon" style="top: 590px; left: -240px; --fa-rotate-angle: 5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-laptop-code side-detail-icon" style="top: 80px; left: -870px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-chess side-detail-icon" style="top: 370px; left: -930px; --fa-rotate-angle: 5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-cloud side-detail-icon" style="top: 110px; left: 1180px; --fa-rotate-angle: -5deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-star side-detail-icon" style="top: 1110px; left: -260px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-moon side-detail-icon" style="top: 1170px; left: 1200px; --fa-rotate-angle: -5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-microphone side-detail-icon" style="top: 1420px; left: 970px; --fa-rotate-angle: -5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-face-smile side-detail-icon" style="top: 1420px; left: -200px; --fa-rotate-angle: 5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-ghost side-detail-icon" style="top: 1290px; left: 1400px; --fa-rotate-angle: -5deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-share side-detail-icon" style="top: 620px; left: -900px; --fa-rotate-angle: 20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-flask side-detail-icon" style="top: 1330px; left: -580px; --fa-rotate-angle: -5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-compass side-detail-icon" style="top: 930px; left: -800px; --fa-rotate-angle: -20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-person side-detail-icon" style="top: 230px; left: 1030px; --fa-rotate-angle: 5deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-fish side-detail-icon" style="top: 200px; left: 1600px; --fa-rotate-angle: 10deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-clock side-detail-icon" style="top: 380px; left: 1500px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-play side-detail-icon" style="top: 610px; left: 1600px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-flag side-detail-icon" style="top: 780px; left: 1470px; --fa-rotate-angle: -20deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-brain side-detail-icon" style="top: 1060px; left: 1410px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-cube side-detail-icon" style="top: 1170px; left: -930px; --fa-rotate-angle: -10deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-i-cursor side-detail-icon" style="top: 530px; left: -600px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-recycle side-detail-icon" style="top: 1400px; left: 1600px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-ruler side-detail-icon" style="top: 900px; left: 1690px; --fa-rotate-angle: 0deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-lightbulb side-detail-icon" style="top: 1140px; left: 1640px; --fa-rotate-angle: 10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-triangle-exclamation side-detail-icon" style="top: 410px; left: 1770px; --fa-rotate-angle: -10deg"></i>
+
+			<i class="fa-solid fa-5x fa-rotate-by fa-spoon side-detail-icon" style="top: 870px; left: -1000px; --fa-rotate-angle: -10deg"></i>
+			<i class="fa-solid fa-5x fa-rotate-by fa-share-nodes side-detail-icon" style="top: 100px; left: 1800px; --fa-rotate-angle: 10deg"></i>
 		</div>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-code" style="top: 180px; left: 1400px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-kiwi-bird" style="top: 280px; left: 1600px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-egg" style="top: 400px; left: 1480px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-palette" style="top: 550px; left: 1430px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-brush" style="top: 600px; left: 1660px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-paragraph" style="top: 720px; left: 1450px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-icons" style="top: 860px; left: 1550px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-droplet" style="top: 1050px; left: 1450px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-fire" style="top: 1200px; left: 1500px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-paper-plane" style="top: 1300px; left: 1600px; --fa-rotate-angle: 30deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-wand-magic-sparkles" style="top: 980px; left: 1700px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-quote-left" style="top: 1150px; left: 1680px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-asterisk" style="top: 1400px; left: 1450px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-leaf" style="top: 880px; left: 1380px; --fa-rotate-angle: -30deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-hashtag" style="top: 120px; left: 1760px; --fa-rotate-angle: -20deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-exclamation" style="top: 350px; left: 1420px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-at" style="top: 440px; left: 1720px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-question" style="top: 780px; left: 1740px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-pencil" style="top: 1250px; left: 1800px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-bicycle" style="top: 220px; left: 1900px; --fa-rotate-angle: 10deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-rocket" style="top: 360px; left: 1950px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-bus" style="top: 520px; left: 1870px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-laptop-code" style="top: 670px; left: 1900px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-chess" style="top: 830px; left: 1870px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-cloud" style="top: 1020px; left: 1880px; --fa-rotate-angle: -5deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-star" style="top: 1170px; left: 1950px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-moon" style="top: 150px; left: 2060px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-microphone" style="top: 480px; left: 2050px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-face-smile" style="top: 630px; left: 2100px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-ghost" style="top: 790px; left: 2050px; --fa-rotate-angle: -5deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-share" style="top: 950px; left: 2100px; --fa-rotate-angle: 20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-flask" style="top: 1300px; left: 2060px; --fa-rotate-angle: -5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-compass" style="top: 1230px; left: 2220px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-person" style="top: 1100px; left: 2100px; --fa-rotate-angle: 5deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-fish" style="top: 280px; left: 2150px; --fa-rotate-angle: 10deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-clock" style="top: 430px; left: 2200px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-play" style="top: 1060px; left: 2260px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-flag" style="top: 230px; left: 2420px; --fa-rotate-angle: -20deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-brain" style="top: 120px; left: 2250px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-cube" style="top: 1300px; left: 2400px; --fa-rotate-angle: -10deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-i-cursor" style="top: 1120px; left: 2430px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-recycle" style="top: 920px; left: 2350px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-ruler" style="top: 110px; left: 1580px; --fa-rotate-angle: 0deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-lightbulb" style="top: 820px; left: 2230px; --fa-rotate-angle: 10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-triangle-exclamation" style="top: 750px; left: 2400px; --fa-rotate-angle: -10deg"></i>
-
-		<i class="fa-solid fa-5x fa-rotate-by fa-spoon" style="top: 480px; left: 2380px; --fa-rotate-angle: -10deg"></i>
-		<i class="fa-solid fa-5x fa-rotate-by fa-share-nodes" style="top: 650px; left: 2280px; --fa-rotate-angle: 10deg"></i>
 
 		<div class="footer" style="background: #ffffee"></div>
 		<div class="footer" style="background: #ff6b6b"></div>
@@ -208,14 +216,25 @@
 		<script src="files/to-top.js"></script>
 
 		<script>
-			setTimeout(function () {
-				const rightEdge = document.querySelector("body").getBoundingClientRect().right;
+			function hideIcons() {
+				setTimeout(() => {
+					const leftEdge = document.querySelector("body").getBoundingClientRect().left;
+					const rightEdge = document.querySelector("body").getBoundingClientRect().right;
 
-				document.querySelectorAll("i.fa-solid").forEach((icon) => {
-					const rect = icon.getBoundingClientRect();
-					if (rect.right > rightEdge) icon.remove();
-				});
-			}, 200);
+					document.querySelectorAll("i.side-detail-icon").forEach((icon) => {
+						const rect = icon.getBoundingClientRect();
+						if (rect.right > rightEdge) icon.classList.add("hide");
+						else if (rect.left < leftEdge) icon.classList.add("hide");
+						else icon.classList.remove("hide");
+					});
+				}, 200);
+			}
+
+			hideIcons();
+
+			addEventListener("resize", (e) => {
+				hideIcons();
+			});
 		</script>
 	</body>
 </html>

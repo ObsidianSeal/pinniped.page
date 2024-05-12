@@ -1,4 +1,5 @@
-const content = document.querySelector(".content");
+const contentElements = document.querySelectorAll(".content");
+const content = contentElements[contentElements.length - 1];
 const contentBottom = content.getBoundingClientRect().bottom;
 const screenHeight = window.innerHeight;
 
