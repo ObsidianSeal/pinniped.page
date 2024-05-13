@@ -74,7 +74,6 @@ a.link-3:focus {
 
 a#download-link {
 	font-family: "Roboto Slab";
-	letter-spacing: 0.025em;
 }
 
 h1,
@@ -712,6 +711,11 @@ ul {
 	color: #ffe66d;
 }
 
+.project-top-link:not(.project-top-link *) {
+	display: grid;
+	grid-template-columns: 40px auto;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -999,6 +1003,10 @@ ul {
 
 	.blog-archive:not(.blog-archive *) {
 		grid-template-columns: 40px auto;
+	}
+
+	.project-top-link:not(.project-top-link *) {
+		grid-template-columns: 30px auto;
 	}
 
 	.blog-archive i.fa-circle {
