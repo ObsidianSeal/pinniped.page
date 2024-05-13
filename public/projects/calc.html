@@ -33,12 +33,12 @@
 				padding: 0;
 
 				font-family: "Roboto";
-				font-size: 24px;
+				font-size: 18px;
 				font-weight: 400;
 			}
 
 			body {
-				padding: 50px;
+				padding: 20px;
 
 				background-color: black;
 				color: white;
@@ -53,7 +53,12 @@
 			h2,
 			p {
 				width: fit-content;
-				margin-bottom: 20px;
+				margin-bottom: 5px;
+			}
+
+			p span {
+				font-size: 12px;
+				color: white;
 			}
 
 			h1,
@@ -65,17 +70,17 @@
 			}
 
 			h1 {
-				font-size: 56px;
+				font-size: 48px;
 				background-image: linear-gradient(to right, var(--c5), var(--c3));
 			}
 
 			h2 {
-				font-size: 40px;
+				font-size: 32px;
 				background-image: linear-gradient(to right, var(--c2), var(--c1));
 			}
 
 			input {
-				width: 100px;
+				width: 60px;
 
 				border-bottom: 2px solid white;
 
@@ -103,8 +108,8 @@
 	<body>
 		<h1>calc</h1>
 
-		<p>Δx: <input id="x-input" />m</p>
-		<p>Δy: <input id="y-input" />m</p>
+		<p>Δ<span>horizontal</span>: <input id="x-input" />m</p>
+		<p>Δ<span>vertical</span>: <input id="y-input" />m</p>
 		<p>angle: <input id="angle-input" />°</p>
 
 		<h2>output:</h2>
@@ -118,10 +123,10 @@
 
 			function calculate(a, b, c) {
 				let radians = c * (Math.PI / 180);
-				let answer = Math.sqrt(
-					(-9.8 * 0.014 * a * a) / (2 * Math.cos(radians) * Math.cos(radians) * (b - 0.3 * Math.sin(radians) - Math.tan(radians) * a) * 29.13) +
-						(2 * 0.014 * 9.8 * (b - 0.3 * Math.sin(radians))) / 29.13
-				);
+				let g = 9.8;
+				let m = 0.0137;
+				let k = 27.25333;
+				let answer = Math.sqrt((g * m * a * a) / (2 * k * Math.cos(radians) * Math.cos(radians) * (b - a * Math.tan(radians))));
 
 				return Math.round(answer * 10000) / 100;
 			}
