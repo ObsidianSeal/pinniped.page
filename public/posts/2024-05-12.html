@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>some LEGO — Blog Post (2024/05/12)</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#ff6b6b" />
+
+		<link rel="stylesheet" href="../files/main.css" />
+		<link rel="stylesheet" href="../files/scrollbar.css" />
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
+
+		<script src="../files/menu.js"></script>
+		<script type="module" src="../files/view.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/posts/2024-05-12" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Blog Post (2024/05/12)" />
+		<meta property="og:description" content="some LEGO" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			::-webkit-scrollbar-thumb:hover {
+				background-color: #ff6b6b;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item" href="../index.html"><img class="navbar-icon" src="../images/icon.png" alt="pinniped.page logo" /></a>
+			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
+		</div>
+
+		<div class="navbar-space"></div>
+
+		<div class="content">
+			<h5 class="post-header">
+				<span>Blog Post / May 12th, 2024</span>
+				<span><a href="2024-04-28.html" class="title title-2 hoverable-title">Previous</a> / <span class="half-opacity">Next</span></span>
+			</h5>
+
+			<div class="blog-line"></div>
+
+			<h3 class="title title-2">some LEGO</h3>
+
+			<div class="break"></div>
+
+			<p class="text">
+				To test the new blog post format, here are 30 of my LEGO creations. All of these were made in
+				<a href="https://www.bricklink.com/v3/studio/main.page" class="link-2" target="_blank">BrickLink Studio</a>.
+			</p>
+
+			<div class="break"></div>
+		</div>
+
+		<div class="blog-image-container">
+			<div class="big-picture"><img src="../images/LEGO-1.png" alt="LEGO creation #1" title="LEGO creation #1" class="big-picture" /></div>
+			<div class="blog-image"><img src="../images/LEGO-2.png" alt="LEGO creation #2" title="LEGO creation #2" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-3.png" alt="LEGO creation #3" title="LEGO creation #3" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-4.png" alt="LEGO creation #4" title="LEGO creation #4" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-5.png" alt="LEGO creation #5" title="LEGO creation #5" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-6.png" alt="LEGO creation #6" title="LEGO creation #6" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-7.png" alt="LEGO creation #7" title="LEGO creation #7" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-8.png" alt="LEGO creation #8" title="LEGO creation #8" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-9.png" alt="LEGO creation #9" title="LEGO creation #9" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-10.png" alt="LEGO creation #10" title="LEGO creation #10" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-11.png" alt="LEGO creation #11" title="LEGO creation #11" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-12.png" alt="LEGO creation #12" title="LEGO creation #12" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-13.png" alt="LEGO creation #13" title="LEGO creation #13" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-14.png" alt="LEGO creation #14" title="LEGO creation #14" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-15.png" alt="LEGO creation #15" title="LEGO creation #15" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-16.png" alt="LEGO creation #16" title="LEGO creation #16" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-17.png" alt="LEGO creation #17" title="LEGO creation #17" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-18.png" alt="LEGO creation #18" title="LEGO creation #18" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-19.png" alt="LEGO creation #19" title="LEGO creation #19" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-20.png" alt="LEGO creation #20" title="LEGO creation #20" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-21.png" alt="LEGO creation #21" title="LEGO creation #21" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-22.png" alt="LEGO creation #22" title="LEGO creation #22" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-23.png" alt="LEGO creation #23" title="LEGO creation #23" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-24.png" alt="LEGO creation #24" title="LEGO creation #24" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-25.png" alt="LEGO creation #25" title="LEGO creation #25" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-26.png" alt="LEGO creation #26" title="LEGO creation #26" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-27.png" alt="LEGO creation #27" title="LEGO creation #27" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-28.png" alt="LEGO creation #28" title="LEGO creation #28" class="blog-image" /></div>
+			<div class="blog-image"><img src="../images/LEGO-29.png" alt="LEGO creation #29" title="LEGO creation #29" class="blog-image" /></div>
+			<div class="big-picture"><img src="../images/LEGO-30.png" alt="LEGO creation #30" title="LEGO creation #30" class="big-picture" /></div>
+		</div>
+
+		<div class="content">
+			<div class="content-end"></div>
+
+			<b class="small-text half-opacity">LAST UPDATED: May 12th, 2024</b>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script src="../files/footer.js"></script>
+	</body>
+</html>

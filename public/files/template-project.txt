@@ -9,6 +9,7 @@
 		<meta name="theme-color" content="#4ecdc4" />
 
 		<link rel="stylesheet" href="../files/main.css" />
+		<link rel="stylesheet" href="../files/scrollbar.css" />
 		<link rel="icon" href="../images/icon.png" />
 
 		<script src="../files/menu.js"></script>
@@ -62,6 +63,8 @@
 			<p class="text">text</p>
 
 			<div class="content-end"></div>
+						
+			<b class="small-text half-opacity">LAST UPDATED: date</b>
 		</div>
 
 		<div class="footer" style="background: #ffffee"></div>
