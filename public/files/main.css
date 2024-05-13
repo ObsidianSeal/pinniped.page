@@ -1,7 +1,7 @@
 /* Google Fonts */
 
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700");
 
 /* Styles */
 
@@ -74,6 +74,7 @@ a.link-3:focus {
 
 a#download-link {
 	font-family: "Roboto Slab";
+	letter-spacing: 0.025em;
 }
 
 h1,
@@ -84,7 +85,7 @@ h5,
 h6,
 .box a {
 	font-family: "Abril Fatface";
-	font-weight: normal;
+	font-weight: 400;
 	margin-top: 0;
 	margin-bottom: 0;
 }
@@ -122,6 +123,10 @@ b {
 	margin-bottom: 0;
 }
 
+b {
+	font-weight: 700;
+}
+
 ol {
 	font-family: "Roboto Slab";
 	font-size: 24px;
@@ -149,7 +154,7 @@ li:not(.no-li-margin) {
 }
 
 li::marker {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 hr {
@@ -368,7 +373,7 @@ ul {
 }
 
 .bold {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .download-button {
@@ -691,7 +696,6 @@ ul {
 
 .small-text {
 	font-size: 16px;
-	letter-spacing: 0.025em;
 }
 
 .post-header {

@@ -25,6 +25,9 @@
 			/* Bebas Neue Rounded from Adobe Fonts */
 			@import url(https://use.typekit.net/rzo4wst.css);
 
+			/* Roboto Slab from Google Fonts */
+			@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700");
+
 			:root {
 				/* default Photoshop swatches */
 				--white: #ffffff;
@@ -385,6 +388,81 @@
 				display: none;
 			}
 
+			.notice-panel-container {
+				position: fixed;
+				top: 0;
+				left: 0;
+
+				background-color: #00000064;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				padding: 30px;
+				width: calc(100% - 60px);
+				height: calc(100% - 60px);
+			}
+
+			.notice-panel {
+				position: relative;
+
+				border: 5px solid var(--red);
+				border-radius: 8px;
+
+				background-color: var(--grey10);
+
+				max-width: 850px;
+			}
+
+			.notice-panel i {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+
+				color: var(--grey60);
+			}
+
+			.notice-panel i:hover,
+			.notice-panel i:focus {
+				color: var(--black);
+				cursor: pointer;
+			}
+
+			.notice-panel p {
+				margin: 10px 20px;
+
+				font-family: "Roboto Slab";
+				font-weight: 400;
+				font-size: 24px;
+			}
+
+			.notice-panel p:first-child {
+				font-weight: 700;
+				font-size: 32px;
+				margin: 10px 60px 10px 20px;
+			}
+
+			.notice-panel a {
+				font-family: "Roboto Slab";
+				font-weight: 400;
+				font-size: 24px;
+
+				color: var(--black);
+				text-decoration-color: var(--grey40);
+			}
+
+			.notice-panel a:hover {
+				text-decoration-color: var(--red);
+			}
+
+			.game-name {
+				color: var(--red);
+
+				font-family: "Roboto Slab";
+				font-weight: 700;
+			}
+
 			/* SELECTION */
 
 			h3,
@@ -401,7 +479,9 @@
 			}
 
 			h1::selection,
-			h2::selection {
+			h2::selection,
+			p::selection,
+			.notice-panel *::selection {
 				background-color: var(--grey20);
 			}
 
@@ -678,6 +758,16 @@
 				.puzzle-rating i {
 					font-size: 24px;
 				}
+
+				.notice-panel p,
+				.notice-panel a {
+					font-size: 18px;
+				}
+
+				.notice-panel p:first-child,
+				.game-name {
+					font-size: 24px;
+				}
 			}
 
 			@media all and (max-width: 350px) {
@@ -790,6 +880,19 @@
 				<span class="disabled" tabindex="0">submit</span>
 			</div>
 			<div class="copy-alert hide">copied!</div>
+		</div>
+
+		<div class="notice-panel-container other-font">
+			<div class="notice-panel">
+				<p>Daily <span class="game-name">Think Four</span> puzzles will (hopefully not) end on May 19th!</p>
+				<p>
+					If you&rsquo;d like to see Think Four continue, please send <a href="https://pinniped.page/discord" target="_blank">me</a> category suggestions (and
+					encouragement) on <a href="https://pinniped.page/discord" target="_blank">Discord</a>.
+				</p>
+				<p>Don&rsquo;t worry—once daily puzzles have run out, all previous puzzles will still be available.</p>
+				<p>Thanks for playing!</p>
+				<i class="fa-solid fa-xmark notice-panel-exit" tabindex="0"></i>
+			</div>
 		</div>
 
 		<script type="module">
@@ -1464,6 +1567,10 @@
 					if (document.activeElement == document.querySelector("h4")) {
 						window.open("../download.html?x=think-four.pdf");
 					}
+
+					if (document.activeElement == document.querySelector(".notice-panel-exit")) {
+						document.querySelector(".notice-panel-container").remove();
+					}
 				}
 
 				if (e.key == "Escape" && win) {
@@ -1474,6 +1581,10 @@
 						document.querySelector(".game-container").classList.remove("hide");
 						document.querySelector(".win-container").classList.add("hide");
 					}
+				}
+
+				if (e.key == "Escape" && document.querySelectorAll(".notice-panel-container").length != 0) {
+					document.querySelector(".notice-panel-container").remove();
 				}
 
 				if (e.key == "Backspace") {
@@ -1718,6 +1829,11 @@
 			// --- HELP! ---
 			document.querySelector("h4").addEventListener("click", (e) => {
 				window.open("../download.html?x=think-four.pdf");
+			});
+
+			// --- notice panel exit ---
+			document.querySelector(".notice-panel-exit").addEventListener("click", (e) => {
+				document.querySelector(".notice-panel-container").remove();
 			});
 		</script>
 	</body>
