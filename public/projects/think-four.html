@@ -443,6 +443,14 @@
 				margin: 10px 60px 10px 20px;
 			}
 
+			.notice-panel span {
+				font-family: "Roboto Slab";
+			}
+
+			.notice-panel span:not(.game-name) {
+				font-size: 24px;
+			}
+
 			.notice-panel a {
 				font-family: "Roboto Slab";
 				font-weight: 400;
@@ -459,8 +467,19 @@
 			.game-name {
 				color: var(--red);
 
-				font-family: "Roboto Slab";
 				font-weight: 700;
+			}
+
+			.notice-panel.green2 {
+				border-color: var(--green2);
+			}
+
+			.notice-panel.green2 .game-name {
+				color: var(--green2);
+			}
+
+			.notice-panel.green2 a:hover {
+				text-decoration-color: var(--green2);
 			}
 
 			/* SELECTION */
@@ -667,6 +686,10 @@
 					font-size: 28px;
 				}
 
+				.remove700 {
+					display: none;
+				}
+
 				@keyframes shake {
 					20% {
 						transform: translateX(5px);
@@ -767,6 +790,10 @@
 				.notice-panel p:first-child,
 				.game-name {
 					font-size: 24px;
+				}
+
+				.notice-panel span:not(.game-name) {
+					font-size: 18px;
 				}
 			}
 
@@ -890,7 +917,9 @@
 					encouragement) on <a href="https://pinniped.page/discord" target="_blank">Discord</a>.
 				</p>
 				<p>Don&rsquo;t worry—once daily puzzles have run out, all previous puzzles will still be available.</p>
-				<p>Thanks for playing!</p>
+				<p style="display: flex; justify-content: space-between">
+					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
+				</p>
 				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
 			</div>
 		</div>
