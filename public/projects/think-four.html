@@ -443,6 +443,11 @@
 				margin: 10px 60px 10px 20px;
 			}
 
+			.notice-panel p:first-child span {
+				font-weight: 700;
+				font-size: 32px;
+			}
+
 			.notice-panel span {
 				font-family: "Roboto Slab";
 			}
@@ -458,6 +463,12 @@
 
 				color: var(--black);
 				text-decoration-color: var(--grey40);
+				text-decoration-skip-ink: none;
+			}
+
+			.notice-panel p:first-child a {
+				font-weight: 700;
+				font-size: 32px;
 			}
 
 			.notice-panel a:hover {
@@ -795,6 +806,14 @@
 				.notice-panel span:not(.game-name) {
 					font-size: 18px;
 				}
+
+				.notice-panel p:first-child span {
+					font-size: 24px;
+				}
+
+				.notice-panel p:first-child a {
+					font-size: 24px;
+				}
 			}
 
 			@media all and (max-width: 350px) {
@@ -909,14 +928,30 @@
 			<div class="copy-alert hide">copied!</div>
 		</div>
 
-		<div class="notice-panel-container other-font">
+		<!-- <div class="notice-panel-container other-font">
 			<div class="notice-panel">
-				<p>Daily <span class="game-name">Think Four</span> puzzles will (hopefully not) end on May 20th!</p>
+				<p>Daily <span class="game-name">Think Four</span> puzzles will (hopefully not) end on <span class="last-puzzle-notice">unknown_date</span>!</p>
 				<p>
-					If you&rsquo;d like to see Think Four continue, please send <a href="https://pinniped.page/discord" target="_blank">me</a> category suggestions (and
-					encouragement) on <a href="https://pinniped.page/discord" target="_blank">Discord</a>.
+					If you&rsquo;d like to see Think Four continue, please send me category suggestions (and encouragement) on
+					<a href="https://pinniped.page/discord" target="_blank">Discord</a>.
 				</p>
 				<p>Don&rsquo;t worry—once daily puzzles have run out, all previous puzzles will still be available.</p>
+				<p style="display: flex; justify-content: space-between">
+					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
+				</p>
+				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
+			</div>
+		</div> -->
+
+		<div class="notice-panel-container other-font">
+			<div class="notice-panel green2">
+				<p>Welcome to <span class="game-name">Think Four</span> on the <a href="../index.html">pinniped.page</a>!</p>
+				<p>Daily puzzles have been set up to <span class="last-puzzle-notice">unknown_date</span>.</p>
+				<p>
+					A big thank you to everyone who has given me word, category, and puzzle suggestions. As always, if you&rsquo;d like to see Think Four continue, please send
+					me category suggestions (and encouragement) on
+					<a href="https://pinniped.page/discord" target="_blank">Discord</a>.
+				</p>
 				<p style="display: flex; justify-content: space-between">
 					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
 				</p>
@@ -925,6 +960,7 @@
 		</div>
 
 		<script type="module">
+			// --- log styles ---
 			const infoStyle = "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px";
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
@@ -971,8 +1007,8 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.7.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
-			console.log(`%cINFO: ${versionString}`, infoStyle);
+			const versionString = "Think Four v1.7.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			console.log(`%cINFO:`, infoStyle, versionString);
 			document.querySelector(".version").innerHTML = versionString;
 
 			document.querySelector(".loading-help").addEventListener("click", (e) => {
@@ -993,7 +1029,7 @@
 			const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-			function setDate(date) {
+			function toTextDate(date) {
 				let year = parseInt(date.substring(0, 4));
 				let month = parseInt(date.substring(5, 7));
 				let day = parseInt(date.substring(8, 10));
@@ -1007,7 +1043,7 @@
 				else if (day == 3 || day == 23) day += "rd";
 				else day += "th";
 
-				document.querySelector("h2").innerHTML = `${dayOfWeek}, ${month} ${day}, ${year}`;
+				return `${dayOfWeek}, ${month} ${day}, ${year}`;
 			}
 
 			// --- MAKE BOTH ARRAYS 2D (function) ---
@@ -1067,7 +1103,7 @@
 						}
 						date = alternateDate;
 					} catch {
-						console.log(`%cERROR: no puzzle exists for ${alternateDate}, loading today's`, errorStyle);
+						console.log(`%cERROR:`, errorStyle, `no puzzle exists for ${alternateDate}, loading today's`);
 						if (isDeployedSite) {
 							window.history.replaceState(null, "", "think-four");
 						}
@@ -1076,7 +1112,7 @@
 							topics = thinkFourData.puzzles[date].topics;
 							words = thinkFourData.puzzles[date].words;
 						} catch {
-							console.log(`%cERROR: no puzzle exists for today, loading most recent`, errorStyle);
+							console.log(`%cERROR:`, errorStyle, `no puzzle exists for today, loading most recent`);
 
 							for (let puzzle in thinkFourData.puzzles) {
 								date = puzzle;
@@ -1090,7 +1126,7 @@
 					topics = topics.split("//");
 					words = words.split(/\/{2}|\//);
 
-					setDate(date);
+					document.querySelector("h2").innerHTML = toTextDate(date);
 
 					// --- SHUFFLE THE WORDS ---
 					mixedWords = [];
@@ -1121,6 +1157,7 @@
 						}
 					}
 
+					if (nextPuzzle == undefined) nextPuzzle = date;
 					let selectPuzzleYear = parseInt(nextPuzzle.substring(0, 4));
 					let selectPuzzleMonth = parseInt(nextPuzzle.substring(5, 7));
 					let selectPuzzleDay = parseInt(nextPuzzle.substring(8, 10));
@@ -1131,6 +1168,7 @@
 					if (selectPuzzleDateObject.getTime() > todayDateObject.getTime()) nextPuzzle = date;
 
 					// 5. last
+					var lastSetPuzzle;
 					for (let puzzle in thinkFourData.puzzles) {
 						let selectPuzzleYear = parseInt(puzzle.substring(0, 4));
 						let selectPuzzleMonth = parseInt(puzzle.substring(5, 7));
@@ -1139,6 +1177,12 @@
 						let todayDateObject = new Date();
 						let selectPuzzleDateObject = new Date(selectPuzzleYear, selectPuzzleMonth - 1, selectPuzzleDay);
 						if (selectPuzzleDateObject.getTime() <= todayDateObject.getTime()) lastPuzzle = puzzle;
+
+						lastSetPuzzle = puzzle;
+					}
+
+					if (document.querySelectorAll(".last-puzzle-notice").length > 0) {
+						document.querySelector(".last-puzzle-notice").innerHTML = toTextDate(lastSetPuzzle);
 					}
 
 					// 3. random
@@ -1156,8 +1200,8 @@
 					if (lastPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(5)").classList.add("disabled");
 
 					safeDate = date.replaceAll("/", "-");
-				} catch {
-					console.log("%cERROR: gameStart() error (is the page from a server?)", errorStyle);
+				} catch (error) {
+					console.log("%cERROR:", errorStyle, `gameStart() error (are you trying to run locally?)`, error);
 				}
 
 				try {
@@ -1166,7 +1210,7 @@
 					await getRating();
 					document.querySelector(".loading-container").classList.add("hide");
 				} catch {
-					console.log("%cERROR: could not initialize board, probably because puzzle data could not be loaded", errorStyle);
+					console.log("%cERROR:", errorStyle, `could not initialize board, probably because puzzle data could not be loaded`);
 				}
 			}
 			gameStart();
@@ -1367,7 +1411,7 @@
 								if (snapshot.exists()) {
 									numberOfSolves = parseFloat(snapshot.val().solves);
 								} else {
-									console.log("%cWARNING: topicCheck() snapshot does not exist!", warningStyle);
+									console.log("%cWARNING:", warningStyle, `topicCheck() snapshot does not exist!`);
 								}
 							});
 
@@ -1447,7 +1491,7 @@
 							mixedWords[j][i] = document.querySelector(`#w${i}-${j}`).innerHTML;
 						} catch {
 							mixedWords[j][i] = "";
-							console.log(`%cERROR: element #w${i}-${j} does not exist!`, errorStyle);
+							console.log(`%cERROR:`, errorStyle, `element #w${i}-${j} does not exist!`);
 						}
 					}
 				}
@@ -1496,7 +1540,7 @@
 							if (guesses == 8) document.querySelector(".win-text span").style = "color: var(--red)";
 						}
 					} catch {
-						console.log("%cERROR: there is no submit element!", errorStyle);
+						console.log("%cERROR:", errorStyle, `there is no submit element!`);
 					}
 
 					if (document.activeElement == document.querySelector(".loading-help")) {
@@ -1515,7 +1559,7 @@
 							}
 						}
 					} catch {
-						console.log("%cERROR: there is no clear element!", errorStyle);
+						console.log("%cERROR:", errorStyle, `there is no clear element!`);
 					}
 
 					if (document.activeElement == document.querySelector(".results")) {
@@ -1654,7 +1698,7 @@
 						if (e.keyCode == 39) document.activeElement.nextElementSibling.focus();
 						if (e.keyCode == 40) document.activeElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.focus();
 					} catch {
-						console.log("%cERROR: can't go that way!", errorStyle);
+						console.log("%cERROR:", errorStyle, `can't go that way!`);
 					}
 				}
 			});
@@ -1680,6 +1724,7 @@
 				"way to go!",
 				"great!",
 				"brilliant!",
+				"splendid!",
 			];
 			document.querySelector(".win-title").innerHTML = winMessages[Math.floor(Math.random() * winMessages.length)];
 
@@ -1793,7 +1838,7 @@
 						averageRating = parseFloat(snapshot.val().rating);
 						numberOfRatings = parseFloat(snapshot.val().ratings);
 					} else {
-						console.log("%cWARNING: submitRating() snapshot does not exist!", warningStyle);
+						console.log("%cWARNING:", warningStyle, `submitRating() snapshot does not exist!`);
 					}
 				});
 
@@ -1824,7 +1869,7 @@
 						numberOfRatings = parseFloat(snapshot.val().ratings);
 						numberOfSolves = parseFloat(snapshot.val().solves);
 					} else {
-						console.log("%cWARNING: getRating() snapshot does not exist!", warningStyle);
+						console.log("%cWARNING:", warningStyle, `getRating() snapshot does not exist!`);
 					}
 				});
 
