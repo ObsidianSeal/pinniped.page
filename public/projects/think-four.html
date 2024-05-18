@@ -1007,7 +1007,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.7.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.7.1.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO:`, infoStyle, versionString);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -1072,6 +1072,8 @@
 					const request = new Request(requestURL);
 					const response = await fetch(request);
 					thinkFourData = await response.json();
+
+					console.log("%cINFO:", infoStyle, Object.keys(thinkFourData.puzzles).length + " puzzles have been set!");
 
 					const dateObject = new Date();
 					let todayYear = dateObject.getFullYear().toString();
