@@ -251,6 +251,34 @@
 		"2024/06/02": {
 			"topics": "medical issue categories*//potato chip flavours//types of galaxies*//animal groups*",
 			"words": "respiratory/cardiovascular/neurological/gastrointestinal//sour cream &amp; onion/ketchup/barbecue/salt &amp; vinegar//spiral/elliptical/irregular/lenticular//gaggle/murder/bed/school"
+		},
+		"2024/06/03": {
+			"topics": "use transportation//card games//poker hands//things you can flip",
+			"words": "drive/sail/fly/ride//uno/cheat/poker/fish//straight/flush/pair/house//pages/houses/burgers/bird"
+		},
+		"2024/06/04": {
+			"topics": "apparitions*//people in a courtroom//people in the Wild West//gods from various mythologies",
+			"words": "ghost/spirit/phantom/spectre//judge/jury/lawyer/witness//sheriff/outlaw/marshal/cowboy//Ares/Odin/Ra/Q’uq’umatz"
+		},
+		"2024/06/05": {
+			"topics": "other shapes!//(often) triangle-shaped//(often) circle-shaped//(often) square-shaped",
+			"words": "pentagon/dodecahedron/trapezoid/kite//truss/wedge/pizza slice/clothes hanger//plate/button/pool/ring//chessboard/window/canvas/sign"
+		},
+		"2024/06/06": {
+			"topics": "writing implements//fabrics*//black ______*//wizard wardrobe",
+			"words": "pencil/pen/quill/keyboard//tweed/denim/linen/corduroy//sabbath/magic/market/mail//wand/cloak/boots/cap"
+		},
+		"2024/06/07": {
+			"topics": "superpowers//seals!*//DING DONG HONK WHOOP//tick toc tick toc tick toc tick toc",
+			"words": "telekinesis/teleportation/invisibility/telepathy//harbour/leopard/bearded/elephant//alarm/bell/horn/klaxon//metronome/clock/bomb/drip"
+		},
+		"2024/06/08": {
+			"topics": "video game consoles//video games//video game genres//game engines",
+			"words": "XBOX/PS5/Switch/Wii//Minecraft/VALORANT/Portal/Terraria//puzzle/shooter/adventure/strategy//Unity/Unreal/Godot/GameMaker"
+		},
+		"2024/06/09": {
+			"topics": "units of length//units of volume//units of file size//units of force/energy",
+			"words": "ft/in/yd/km//oz/ml/gal/pt//KB/GB/MB/TB//kj/n/mw/gw"
 		}
 	}
 }
