@@ -289,8 +289,12 @@
 			"words": "Coral/Crustaceans/Urchins/Phytoplankton//Vans/Converse/Reef/Puma//Ocelot/Leopard/Bobcat/Tiger//Crocs/Tamagotchi/Heelys/Pop-It!"
 		},
 		"2024/06/12": {
-			"topics": "European Countries*//Common &ldquo;Fast&rdquo; Foods*//The &ldquo;Allies&rdquo; in WWII*//pasta shapes",
-			"words": "Belgium/Poland/Germany/Finland//Cheeseburger/Fried Chicken/Pizza/Submarine Sandwich//Great Britain/USA/Canada/Soviet Union//tube/shell/bowtie/spiral"
+			"topics": "European Countries*//Common &ldquo;Fast&rdquo; Foods*//The &ldquo;Allies&rdquo; in WWII*//Foods Often Preceded by Countries",
+			"words": "Belgium/Poland/Germany/Finland//Cheeseburger/Fried Chicken/Pizza/Submarine Sandwich//Great Britain/USA/Canada/Soviet Union//Waffles/Fries/Muffin/Yogurt"
+		},
+		"2024/06/13": {
+			"topics": "common academic formats*//forms of assessment*//loops in programming*//pasta shapes",
+			"words": "MLA/APA/Chicago/IEEE//exam/presentation/multiple choice/oral//while/for/do-while/for-each//tube/shell/bow tie/spiral"
 		}
 	}
 }
