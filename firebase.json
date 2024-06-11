@@ -13,6 +13,11 @@
 				"type": 301
 			},
 			{
+				"source": "/omega-seal",
+				"destination": "/projects/the-square.html",
+				"type": 301
+			},
+			{
 				"source": "/projects/brb",
 				"destination": "https://pinniped.page/s?s=503",
 				"type": 302
