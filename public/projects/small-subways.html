@@ -78,17 +78,188 @@
 
 				<p class="text">
 					Small Subways requires <u>at least</u> <a class="link-2" href="https://www.oracle.com/ca-en/java/technologies/downloads/" target="_blank">Java 22</a> to
-					run.
+					run, and I can only seem to get it to run from the command line. You can download the latest Java release from the link at the top of this page.
 				</p>
 			</div>
 
 			<div class="break"></div>
 
-			<h4 class="title">more information coming soon...</h4>
+			<div class="highlighted-box blue">
+				<i class="fa-solid fa-circle-info"></i>
+
+				<p class="text">
+					Small Subways is based on <a class="link" href="https://store.steampowered.com/app/287980/Mini_Metro/" target="_blank">Mini Metro</a> by
+					<a class="link" href="https://dinopoloclub.com/" target="_blank">Dinosaur Polo Club</a>. Make sure to check it out! Mini Metro was originally called
+					&ldquo;Mind the Gap&rdquo; and was an entry to one of the <a class="link" href="https://ludumdare.com/" target="_blank">Ludum Dare</a> game jams. After
+					being released on <a class="link" href="https://store.steampowered.com/app/287980/Mini_Metro/" target="_blank">Steam</a> in 2015 it became quite popular.
+					<a class="link" href="https://www.youtube.com/@RealCivilEngineerGaming" target="_blank">Real Civil Engineer</a> has some great YouTube videos of it. Now,
+					in typical pinniped.page fashion, I (with help) have copied it and changed the name very slightly.
+				</p>
+			</div>
 
 			<div class="break"></div>
 
-			<p class="text">more information coming soon...</p>
+			<h4 class="title">The Menus</h4>
+
+			<div class="break"></div>
+
+			<p class="text"><b>STUDIO TITLE SCREEN</b> — press ENTER to skip.</p>
+			<p class="text"><b>MAIN MENU</b> — from here you can enter the level select or settings menu, open this webpage, or exit.</p>
+			<p class="text">
+				<b>LEVEL SELECT</b> — choose a map to play on; use the LEFT and RIGHT arrow keys to move through the menu, press BACKSPACE to return to the main menu.
+			</p>
+			<p class="text"><b>SETTINGS</b> — edit settings; press BACKSPACE to return to the main menu.</p>
+			<p class="text"><b>GAME</b> — play the game; press BACKSPACE to return to the main menu.</p>
+
+			<div class="break"></div>
+
+			<h4 class="title">The Maps</h4>
+
+			<div class="break"></div>
+
+			<p class="text"><b>Elora & Fergus, Canada</b> — two towns connected by river.</p>
+			<p class="text"><b>London, Canada</b> — very average city, river forks in the centre.</p>
+			<p class="text"><b>Ottawa, Canada</b> — capital city with a canal.</p>
+			<p class="text"><b>Stratford, Canada</b> — note the loop of river in the centre.</p>
+			<p class="text"><b>Victoria, Canada</b> — on the coast of an island.</p>
+			<p class="text"><b>Waterloo, Canada</b> — really three cities.</p>
+
+			<div class="break"></div>
+
+			<img class="big-picture" src="../images/small-subways-level-select.png" alt="Small Subways level select" title="Small Subways level select" />
+
+			<div class="break"></div>
+
+			<h4 class="title">The Game</h4>
+
+			<div class="break"></div>
+
+			<h5 class="title">Interface Explanation</h5>
+
+			<div class="break"></div>
+
+			<p class="text"><b>Stations</b> — stations (shapes) appear on the map, connect them with lines.</p>
+			<p class="text"><b>Passengers</b> — passengers (small shapes) appear at stations, take them to a station that matches their type.</p>
+			<p class="text"><b>The Weekday Clock (top right)</b> — shows day/night and the day of the week, at the end of each week you unlock a new line.</p>
+			<p class="text">
+				<b>The Points Counter (left of the clock)</b> — once you have at least one point, your total points will appear next to the &ldquo;happy passenger&rdquo; icon.
+			</p>
+			<p class="text"><b>Resources (bottom left)</b> — shows how many of each resource you have available.</p>
+			<div class="highlighted-box yellow">
+				<i class="fa-solid fa-circle-exclamation"></i>
+
+				<p class="text">
+					Currently, the resource bar only counts the number of (unused and therefore available) trains, which, because there is no way to get more trains yet, is
+					just the number of lines you have not used.
+				</p>
+			</div>
+			<p class="text">
+				<b>Lines (bottom right)</b> — shows the colours of the lines you have unlocked and a bigger circle if the line consists of at least one station and/or you have
+				it selected.
+			</p>
+
+			<div class="break"></div>
+
+			<h5 class="title">Gameplay & Controls</h5>
+
+			<div class="break"></div>
+
+			<ul>
+				<li><b>Click</b> on a line circle (bottom right) to edit that line</li>
+				<li><b>Click</b> on stations to connect them to the line (or disconnect them if they&rsquo;re already attached)</li>
+				<li><b>Right-click</b> on stations to switch their diagonal state</li>
+				<li>
+					A train is automatically placed at the beginning of the line then begins travelling along it
+					<div class="highlighted-box red" style="margin-top: 5px">
+						<i class="fa-solid fa-circle-info"></i>
+
+						<p class="text">You cannot edit stations that are being accessed by a train, unless there are only two stations on the line.</p>
+					</div>
+				</li>
+				<li>
+					When a train arrives at a station, it picks up all the passengers that have destinations in the same direction that the train is going.
+					<div class="highlighted-box yellow" style="margin-top: 5px">
+						<i class="fa-solid fa-circle-info"></i>
+
+						<p class="text">Passengers do not know how to transfer yet and passengers are currently shown as text next to the train.</p>
+					</div>
+
+					<div class="break"></div>
+
+					<img
+						src="../images/small-subways-trains-and-passengers.png"
+						alt="Small Subways trains and passengers"
+						title="Small Subways trains and passengers"
+						style="max-width: 400px"
+					/>
+				</li>
+				<li>At the same time, the train drops off all the passengers of that station&rsquo;s type</li>
+				<li>
+					<u class="dark-grey-underline">You get a point for each completed trip</u> (passenger delivery)
+					<div class="highlighted-box blue" style="margin-top: 5px">
+						<i class="fa-solid fa-circle-info"></i>
+
+						<p class="text">If there are no passengers to pick up or deliver, the train skips the station, unless the station is at the end of a line.</p>
+					</div>
+				</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<h5 class="title">Keyboard Shortcuts, Other Mouse Things, Bonus Features</h5>
+
+			<div class="break"></div>
+
+			<ul>
+				<li>You can <b>scroll</b> through unlocked lines</li>
+				<li>You can select lines with numbers <b>1 to 7</b></li>
+				<li>If you <b>hover</b> over a station it highlights with the colour of the selected line</li>
+				<li>
+					If you <b>hover</b> over a line circle in the bottom right it highlights all the stations on the line
+
+					<img
+						class="big-picture"
+						src="../images/small-subways-station-highlighting.png"
+						alt="Small Subways station highlighting"
+						title="Small Subways station highlighting"
+						style="margin-top: 5px"
+					/>
+				</li>
+				<li>While holding <b>D</b>, stations added to lines are drawn to <u class="dark-grey-underline">d</u>iagonally first</li>
+				<li>While holding <b>S</b>, stations added to lines are added to the <u class="dark-grey-underline">s</u>tart of the line instead of the end</li>
+				<li>Press <b>SPACE</b> to toggle pause</li>
+				<li>Press the <b>UP</b> or <b>DOWN</b> arrow keys to speed up or slow down simulation (speeds are 0x, 1x, and 2x)</li>
+				<li>
+					Hold <b>CONTROL</b> to view debug information like grid square types
+					<div class="highlighted-box blue" style="margin-top: 5px">
+						<i class="fa-solid fa-circle-info"></i>
+
+						<p class="text">
+							Yellow squares are margins and menu areas, blue squares are water, red squares are station margins, and green squares are &ldquo;country&rdquo;.
+							Stations can only spawn on &ldquo;city&rdquo; (transparent) and &ldquo;country&rdquo; (green) squares, and there&rsquo;s only a 1 in 10 chance
+							for a station to spawn on a &ldquo;country&rdquo; square.
+						</p>
+					</div>
+				</li>
+			</ul>
+
+			<div class="break"></div>
+
+			<img
+				class="big-picture"
+				src="../images/small-subways-debug-view.png"
+				alt="Small Subways debug view on the Stratford map"
+				title="Small Subways debug view on the Stratford map"
+			/>
+
+			<hr />
+
+			<h4 class="title">Updates/Versions</h4>
+
+			<div class="break"></div>
+
+			<b>v1 — June 13th, 2024</b>
+			<p class="text">Initial release.</p>
 
 			<div class="content-end"></div>
 

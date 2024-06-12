@@ -791,6 +791,11 @@ ul {
 	background-color: #4ecdc4;
 }
 
+.dark-grey-underline {
+	text-decoration-color: #292f367f;
+	text-decoration-skip-ink: none;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
