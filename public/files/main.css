@@ -720,6 +720,77 @@ ul {
 	grid-template-columns: 40px auto;
 }
 
+.highlighted-box {
+	display: grid;
+	grid-template-columns: 60px auto;
+
+	padding: 10px 15px 10px 10px;
+}
+
+.highlighted-box > :first-child {
+	font-size: 32px;
+}
+
+.light-grey {
+	background-color: #292f3630;
+}
+
+.dark-grey {
+	background-color: #292f367f;
+}
+
+.red {
+	background-color: #ff6b6b7f;
+}
+
+.yellow {
+	background-color: #ffe66d7f;
+}
+
+.blue {
+	background-color: #4ecdc47f;
+}
+
+.light-grey a {
+	text-decoration-color: #ffffee;
+}
+
+.dark-grey a {
+	text-decoration-color: #d7d8cb;
+}
+
+.red a {
+	text-decoration-color: #ff6b6b;
+}
+
+.yellow a {
+	text-decoration-color: #ffe66d;
+}
+
+.blue a {
+	text-decoration-color: #4ecdc4;
+}
+
+.light-grey a:hover {
+	background-color: #ffffee;
+}
+
+.dark-grey a:hover {
+	background-color: #d7d8cb;
+}
+
+.red a:hover {
+	background-color: #ff6b6b;
+}
+
+.yellow a:hover {
+	background-color: #ffe66d;
+}
+
+.blue a:hover {
+	background-color: #4ecdc4;
+}
+
 #download-link {
 	display: flex;
 	align-items: center;
@@ -960,6 +1031,15 @@ ul {
 
 	.search-main input {
 		width: 210px;
+	}
+
+	.highlighted-box {
+		display: block;
+		padding: 10px;
+	}
+
+	.highlighted-box > :first-child {
+		margin-bottom: 5px;
 	}
 
 	#menu-open {
