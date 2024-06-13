@@ -71,7 +71,7 @@
 
 			<img class="big-picture" src="../images/small-subways-example.png" alt="a screenshot of Small Subways" title="a screenshot of Small Subways" />
 
-			<div class="break"></div>
+			<hr />
 
 			<div class="highlighted-box red">
 				<i class="fa-solid fa-triangle-exclamation"></i>
@@ -99,21 +99,20 @@
 
 			<div class="break"></div>
 
-			<h4 class="title">The Menus</h4>
+			<h4 class="subheading"><span class="title">The Menus</span><i class="fa-solid fa-location-dot"></i></h4>
 
 			<div class="break"></div>
 
-			<p class="text"><b>STUDIO TITLE SCREEN</b> — press ENTER to skip.</p>
+			<p class="text"><b>STUDIO TITLE</b> — it looks pretty cool.</p>
 			<p class="text"><b>MAIN MENU</b> — from here you can enter the level select or settings menu, open this webpage, or exit.</p>
-			<p class="text">
-				<b>LEVEL SELECT</b> — choose a map to play on; use the LEFT and RIGHT arrow keys to move through the menu, press BACKSPACE to return to the main menu.
-			</p>
-			<p class="text"><b>SETTINGS</b> — edit settings; press BACKSPACE to return to the main menu.</p>
-			<p class="text"><b>GAME</b> — play the game; press BACKSPACE to return to the main menu.</p>
+			<p class="text"><b>LEVEL SELECT</b> — choose a map to play on.</p>
+			<p class="text"><b>SETTINGS</b> — edit settings.</p>
+			<p class="text"><b>GAME</b> — play the game.</p>
+			<p class="text"><b>GAME OVER</b> — you lose, better luck next time.</p>
 
 			<div class="break"></div>
 
-			<h4 class="title">The Maps</h4>
+			<h4 class="subheading"><span class="title">The Maps</span><i class="fa-solid fa-map-location-dot"></i></h4>
 
 			<div class="break"></div>
 
@@ -126,15 +125,27 @@
 
 			<div class="break"></div>
 
-			<img class="big-picture" src="../images/small-subways-level-select.png" alt="Small Subways level select" title="Small Subways level select" />
+			<img class="big-picture" src="../images/small-subways-level-select.png" alt="level select" title="level select" />
+			<p class="small-text">level select</p>
 
 			<div class="break"></div>
 
-			<h4 class="title">The Game</h4>
+			<div class="highlighted-box light-grey">
+				<i class="fa-solid fa-bezier-curve"></i>
+
+				<p class="text">
+					Totally different from Mini Metro, the maps are made of very curvy shapes. They&rsquo;re just traced from Google Maps screenshots in
+					<a class="link" href="https://affinity.serif.com/designer" target="_blank">Affinity Designer</a>. And the colours came from all over the place.
+				</p>
+			</div>
 
 			<div class="break"></div>
 
-			<h5 class="title">Interface Explanation</h5>
+			<h4 class="subheading"><span class="title">The Game</span><i class="fa-solid fa-gamepad"></i></h4>
+
+			<div class="break"></div>
+
+			<h5 class="subheading"><span class="title">Interface Explanation</span><i class="fa-solid fa-vector-square"></i></h5>
 
 			<div class="break"></div>
 
@@ -157,10 +168,39 @@
 				<b>Lines (bottom right)</b> — shows the colours of the lines you have unlocked and a bigger circle if the line consists of at least one station and/or you have
 				it selected.
 			</p>
+			<p class="text">
+				<b>Trains (on lines)</b> — little rectangles that travel back and forth across lines carrying passengers (shown as tiny shapes next to the train) where they
+				want to go.
+			</p>
 
 			<div class="break"></div>
+		</div>
 
-			<h5 class="title">Gameplay & Controls</h5>
+		<div class="blog-image-container">
+			<div class="big-picture">
+				<img
+					class="big-picture"
+					src="../images/small-subways-example-full.png"
+					alt="example of all the lines on the London map"
+					title="example of all the lines on the London map"
+				/>
+				<p class="small-text">example of all the lines on the London map</p>
+			</div>
+			<div class="big-picture">
+				<img
+					class="big-picture"
+					src="../images/small-subways-new-train-passenger-display.png"
+					alt="trains now show passengers as shapes to the side"
+					title="trains now show passengers as shapes to the side"
+				/>
+				<p class="small-text">trains now show passengers as shapes to the side</p>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="break"></div>
+
+			<h5 class="subheading"><span class="title">Gameplay & Controls</span><i class="fa-solid fa-computer-mouse"></i></h5>
 
 			<div class="break"></div>
 
@@ -171,7 +211,7 @@
 				<li>
 					A train is automatically placed at the beginning of the line then begins travelling along it
 					<div class="highlighted-box red" style="margin-top: 5px">
-						<i class="fa-solid fa-circle-info"></i>
+						<i class="fa-solid fa-triangle-exclamation"></i>
 
 						<p class="text">You cannot edit stations that are being accessed by a train, unless there are only two stations on the line.</p>
 					</div>
@@ -179,38 +219,50 @@
 				<li>
 					When a train arrives at a station, it picks up all the passengers that have destinations in the same direction that the train is going.
 					<div class="highlighted-box yellow" style="margin-top: 5px">
-						<i class="fa-solid fa-circle-info"></i>
+						<i class="fa-solid fa-circle-exclamation"></i>
 
-						<p class="text">Passengers do not know how to transfer yet and passengers are currently shown as text next to the train.</p>
+						<p class="text">
+							Passengers do not know how to transfer yet and are currently shown beside the train. Most of the images show passengers as text beside trains,
+							but this has been improved.
+						</p>
 					</div>
 
 					<div class="break"></div>
 
 					<img
+						class="blog-image"
 						src="../images/small-subways-trains-and-passengers.png"
-						alt="Small Subways trains and passengers"
-						title="Small Subways trains and passengers"
+						alt="trains and passengers"
+						title="trains and passengers"
 						style="max-width: 400px"
 					/>
 				</li>
-				<li>At the same time, the train drops off all the passengers of that station&rsquo;s type</li>
 				<li>
-					<u class="dark-grey-underline">You get a point for each completed trip</u> (passenger delivery)
+					At the same time, the train drops off all the passengers of that station&rsquo;s type
 					<div class="highlighted-box blue" style="margin-top: 5px">
 						<i class="fa-solid fa-circle-info"></i>
 
 						<p class="text">If there are no passengers to pick up or deliver, the train skips the station, unless the station is at the end of a line.</p>
 					</div>
 				</li>
+				<li><u class="dark-grey-underline">You get a point for each completed trip</u> (passenger delivery)</li>
+				<li>
+					<u class="dark-grey-underline">If a station overcrowds</u> (currently that means &ldquo;has more than five waiting passengers&rdquo;),
+					<u class="dark-grey-underline">you lose</u>
+				</li>
 			</ul>
 
 			<div class="break"></div>
 
-			<h5 class="title">Keyboard Shortcuts, Other Mouse Things, Bonus Features</h5>
+			<h5 class="subheading"><span class="title">Additional Keyboard and Mouse Features</span><i class="fa-solid fa-arrow-pointer"></i></h5>
 
 			<div class="break"></div>
 
 			<ul>
+				<li>You can press <b>ENTER</b> to skip the studio title screen</li>
+				<li>You can press <b>ESCAPE</b> to exit the game while at the main menu</li>
+				<li>In the level select menu, use the <b>LEFT</b> and <b>RIGHT</b> arrow keys to traverse the list of maps</li>
+				<li><b>BACKSPACE</b> always takes you to the previous menu</li>
 				<li>You can <b>scroll</b> through unlocked lines</li>
 				<li>You can select lines with numbers <b>1 to 7</b></li>
 				<li>If you <b>hover</b> over a station it highlights with the colour of the selected line</li>
@@ -240,30 +292,47 @@
 							for a station to spawn on a &ldquo;country&rdquo; square.
 						</p>
 					</div>
+
+					<div class="break"></div>
+
+					<img
+						class="big-picture"
+						src="../images/small-subways-debug-view.png"
+						alt="Small Subways debug view on the Stratford map"
+						title="Small Subways debug view on the Stratford map"
+					/>
 				</li>
 			</ul>
 
+			<hr />
+
+			<h4 class="subheading"><span class="title">Possible Bugs...</span><i class="fa-solid fa-bugs"></i></h4>
+			<p class="text">
+				If you encounter any of these problems, please report them on
+				<a class="link" href="https://github.com/ObsidianSeal/SmallSubways/issues" target="_blank">GitHub</a>.
+			</p>
+
 			<div class="break"></div>
 
-			<img
-				class="big-picture"
-				src="../images/small-subways-debug-view.png"
-				alt="Small Subways debug view on the Stratford map"
-				title="Small Subways debug view on the Stratford map"
-			/>
+			<ul>
+				<li>End-of-week event doesn&rsquo;t trigger?</li>
+				<li>Passengers spawn of types that don&rsquo;t exist yet?</li>
+			</ul>
 
 			<hr />
 
-			<h4 class="title">Updates/Versions</h4>
+			<h4 class="subheading"><span class="title">Updates/Versions</span><i class="fa-solid fa-wrench"></i></h4>
 
 			<div class="break"></div>
 
-			<b>v1 — June 13th, 2024</b>
-			<p class="text">Initial release.</p>
+			<b><a class="link" href="../download.html?x=SmallSubways.jar">v1 — June 13th, 2024</a></b>
+			<ul>
+				<li>Initial release</li>
+			</ul>
 
 			<div class="content-end"></div>
 
-			<b class="small-text half-opacity">LAST UPDATED: June 12th, 2024</b>
+			<b class="small-text half-opacity">LAST UPDATED: June 13th, 2024</b>
 		</div>
 
 		<div class="footer" style="background: #ffffee"></div>
