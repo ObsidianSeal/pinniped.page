@@ -1,5 +1,6 @@
-# this should ignore all files and folder that begin with a period
-.*
+# folders to ignore
+.firebase/
+.vscode/
 
-# except this one
-!.gitignore
+# files to ignore
+.firebaserc
