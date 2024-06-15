@@ -1,0 +1,5 @@
+# this should ignore all files and folder that begin with a period
+.*
+
+# except this one
+!.gitignore
