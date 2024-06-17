@@ -1,6 +1,3 @@
 # folders to ignore
 .firebase/
 .vscode/
-
-# files to ignore
-.firebaserc
