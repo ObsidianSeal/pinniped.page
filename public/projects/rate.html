@@ -195,12 +195,11 @@
 			const body = document.querySelector("body");
 			const end = document.getElementById("buttons");
 
-			var stars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+			var stars = [];
 
 			var numberOfRatings = 0;
 			var editing = -1;
 			var pEditing = -1;
-			// var textArray = [];
 			var pText;
 			var justEscaped = false;
 			var specialEdit = false;
@@ -214,39 +213,6 @@
 			var hiddenButtons = false;
 
 			const keys = {};
-			// const allowedKeys = [
-			// 	" ",
-			// 	"`",
-			// 	"~",
-			// 	"!",
-			// 	"@",
-			// 	"#",
-			// 	"$",
-			// 	"%",
-			// 	"^",
-			// 	"&",
-			// 	"*",
-			// 	"(",
-			// 	")",
-			// 	"-",
-			// 	"_",
-			// 	"=",
-			// 	"+",
-			// 	"[",
-			// 	"{",
-			// 	"]",
-			// 	"}",
-			// 	"\\",
-			// 	"|",
-			// 	";",
-			// 	":",
-			// 	"'",
-			// 	'"',
-			// 	",",
-			// 	".",
-			// 	"/",
-			// 	"?",
-			// ];
 
 			function addRating(title) {
 				var colour = "678d58";
@@ -256,25 +222,25 @@
 					colour = "dd9787";
 				}
 
-				if (numberOfRatings < 20) {
-					const container = document.createElement("div");
-					container.setAttribute("class", "rating-container");
-					container.setAttribute("id", numberOfRatings);
-					container.innerHTML = `<p id="rating-${numberOfRatings}" onclick="editTitle(${numberOfRatings})" style="color: #${colour}">${title}</p><p><i onclick="setRating(${
-						numberOfRatings * 5
-					})" id="s${numberOfRatings * 5}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 1})" id="s${
-						numberOfRatings * 5 + 1
-					}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 2})" id="s${
-						numberOfRatings * 5 + 2
-					}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 3})" id="s${
-						numberOfRatings * 5 + 3
-					}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 4})" id="s${
-						numberOfRatings * 5 + 4
-					}" class="fa-regular fa-star"></i></p>`;
-					body.insertBefore(container, end);
+				const container = document.createElement("div");
+				container.setAttribute("class", "rating-container");
+				container.setAttribute("id", numberOfRatings);
+				container.innerHTML = `<p id="rating-${numberOfRatings}" onclick="editTitle(${numberOfRatings})" style="color: #${colour}">${title}</p><p><i onclick="setRating(${
+					numberOfRatings * 5
+				})" id="s${numberOfRatings * 5}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 1})" id="s${
+					numberOfRatings * 5 + 1
+				}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 2})" id="s${
+					numberOfRatings * 5 + 2
+				}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 3})" id="s${
+					numberOfRatings * 5 + 3
+				}" class="fa-regular fa-star"></i>&nbsp;<i onclick="setRating(${numberOfRatings * 5 + 4})" id="s${
+					numberOfRatings * 5 + 4
+				}" class="fa-regular fa-star"></i></p>`;
+				body.insertBefore(container, end);
 
-					numberOfRatings++;
-				}
+				stars[numberOfRatings] = 0;
+
+				numberOfRatings++;
 			}
 
 			function removeRating() {
@@ -296,13 +262,10 @@
 			function editTitle(rating) {
 				lastGoodString = "";
 				pEditing = editing;
-				//console.log(rating, pEditing, justEscaped);
 				if (rating == pEditing && !justEscaped) return; // 🐛 " && !justEscaped" is new and may introduce bugs (!!!)
-				//console.log(string, pText, editing, justEscaped);
 
 				if (editing != -1) {
 					if (!justEscaped) {
-						//let string = textArray.join("");
 						string = document.inputForm.inputBox.value;
 						if (string != "") {
 							document.getElementById(`rating-${pEditing}`).innerHTML = string;
@@ -315,7 +278,6 @@
 					}
 
 					editing = -1;
-					//textArray = [];
 					justEscaped = false;
 				}
 
@@ -323,9 +285,6 @@
 				document.getElementById(`rating-${rating}`).style = "";
 				document.getElementById(`rating-${rating}`).innerHTML = "<span>&nbsp;</span>";
 				editing = rating;
-
-				// console.log(editing * (46 + 25) + 50);
-				// document.getElementById("inputForm").style = `top: ${editing * (46 + 25) + 50}px`;
 
 				document.inputForm.inputBox.value = "";
 				document.inputForm.inputBox.focus();
@@ -379,10 +338,7 @@
 				if (editing == -1) return;
 
 				if (e.key === "Enter") {
-					//let string = textArray.join("");
-
 					string = document.inputForm.inputBox.value;
-					//console.log(string);
 					if (string != "") {
 						document.getElementById(`rating-${editing}`).innerHTML = string;
 					} else {
@@ -391,7 +347,6 @@
 					}
 
 					editing = -1;
-					//textArray = [];
 					document.activeElement.blur();
 				}
 
@@ -403,21 +358,6 @@
 					justEscaped = true;
 					document.activeElement.blur();
 				}
-
-				// if (e.key === "Backspace") {
-				// 	// textArray.pop();
-				// 	// let string = textArray.join("");
-				// 	//document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
-				// 	//document.inputForm.inputBox.value = string;
-				// }
-
-				// if ((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 48 && e.keyCode <= 57) || allowedKeys.includes(e.key)) {
-				// 	if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
-				// 		textArray.push(e.key);
-				// 		let string = textArray.join("");
-				// 		document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
-				// 	}
-				// }
 			});
 
 			document.getElementById("inputForm").addEventListener("submit", (e) => {
@@ -426,13 +366,9 @@
 
 			document.inputForm.inputBox.addEventListener("input", (e) => {
 				if (editing != -1) {
-					//console.log("input");
 					string = document.inputForm.inputBox.value;
-					//console.log(pString, pString.length, string, string.length);
 
 					if (document.getElementById(`rating-${editing}`).offsetWidth < 400) {
-						// textArray.push(e.key);
-						// let string = textArray.join("");
 						if (string.indexOf("<") == -1 && string.indexOf(">") == -1) {
 							document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
 							lastGoodString = string;
@@ -440,13 +376,10 @@
 							document.inputForm.inputBox.value = lastGoodString;
 						}
 					} else {
-						//console.log(pString.length > string.length);
 						if (pString.length > string.length) {
 							document.getElementById(`rating-${editing}`).innerHTML = string + "<span>&nbsp;</span>";
-							//console.log("less than");
 						} else {
 							document.inputForm.inputBox.value = lastGoodString;
-							//console.log("greater than");
 						}
 					}
 
@@ -468,19 +401,13 @@
 						document.getElementById(`s${i}`).classList.add("fa-regular");
 					}
 				}
-				//console.log(parseInt(star / 5));
 				stars[parseInt(star / 5)] = (star % 5) + 1;
-				//console.log(stars);
 			}
 
 			document.addEventListener("click", (e) => {
-				//console.log("click event", e.target, editing, pEditing);
 				if (editing != -1 && !justEscaped) {
-					//console.log("focus allowed");
 					document.inputForm.inputBox.focus();
 				}
-				//console.log(e.y);
-				//document.getElementById("inputForm").style = `top: ${e.y - 80}px`;
 			});
 
 			// --- import and export shared ratings
@@ -489,13 +416,16 @@
 				const query = window.location.search;
 				const item = new URLSearchParams(query);
 
-				for (let i = 0; i < 20; i++) {
+				console.log(item.size);
+
+				for (let i = 0; i < item.size; i++) {
 					const data = item.get(i);
 
 					if (data != null && data != "") {
 						const rating = data.substr(0, 1);
 						const title = data.substr(1);
-						//console.log(rating, i * 5 + parseInt(rating - 1), title);
+
+						console.log(i, rating, title);
 
 						if (rating >= 0 && rating <= 5) {
 							atLeastOneRating = true;
@@ -518,16 +448,11 @@
 			function shareRatings() {
 				const ratings = [];
 
-				for (let i = 0; i < numberOfRatings; i++) {
-					var title = document.getElementById(`rating-${i}`).innerHTML;
-					// console.log(title);
-					// title = title.replace("?", "%3F");
-					// title = title.replace("&", "%26");
-					// title = title.replace("=", "%3");
-					// console.log(title);
-					ratings.push(`${i}=${stars[i]}${encodeURIComponent(title)}`);
-				}
-				//console.log(ratings);
+				var count = 0;
+
+				document.querySelectorAll(".rating-container").forEach((rating) => {
+					ratings.push(`${count}=${stars[count++]}${encodeURIComponent(rating.children[0].innerHTML)}`);
+				});
 
 				var urlString = "?";
 
@@ -537,7 +462,6 @@
 						urlString = urlString + "&";
 					}
 				}
-				//console.log(encodeURI(urlString));
 				navigator.clipboard.writeText(`https://pinniped.page/projects/rate${urlString}`);
 
 				document.getElementById("copyMessage").style = "position: fixed; top: 30px; background-color: #DD9787; color: #F6E7CB; padding: 5px";
