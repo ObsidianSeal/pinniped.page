@@ -816,6 +816,30 @@
 				}
 			}
 
+			@media all and (max-width: 380px) {
+				.notice-panel p,
+				.notice-panel a {
+					font-size: 14px;
+				}
+
+				.notice-panel p:first-child,
+				.game-name {
+					font-size: 18px;
+				}
+
+				.notice-panel span:not(.game-name) {
+					font-size: 14px;
+				}
+
+				.notice-panel p:first-child span {
+					font-size: 18px;
+				}
+
+				.notice-panel p:first-child a {
+					font-size: 18px;
+				}
+			}
+
 			@media all and (max-width: 350px) {
 				:root {
 					--board-width: 215px;
@@ -854,28 +878,6 @@
 				.submit {
 					width: 80px;
 					font-size: 24px;
-				}
-
-				.notice-panel p,
-				.notice-panel a {
-					font-size: 14px;
-				}
-
-				.notice-panel p:first-child,
-				.game-name {
-					font-size: 18px;
-				}
-
-				.notice-panel span:not(.game-name) {
-					font-size: 14px;
-				}
-
-				.notice-panel p:first-child span {
-					font-size: 18px;
-				}
-
-				.notice-panel p:first-child a {
-					font-size: 18px;
 				}
 
 				@keyframes shake {
