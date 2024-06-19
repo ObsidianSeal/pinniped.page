@@ -581,7 +581,7 @@
 				<input id="search" autocomplete="off" placeholder="search? (RegEx)" />
 				<div id="clear-search" title="clear search"><i class="fa-solid fa-xmark"></i></div>
 				<div id="sort-time" title="sort by time discovered"><i class="fa-solid fa-clock"></i></div>
-				<div id="sort-name" title="sort by name"><i class="fa-solid fa-arrow-down-a-z"></i></div>
+				<div id="sort-name" title="sort by name"><i class="fa-light fa-arrow-down-a-z"></i></div>
 				<div id="sort-colour" title="sort by colour"><i class="fa-solid fa-palette"></i></div>
 			</div>
 		</div>
@@ -1086,6 +1086,10 @@
 				["animal", "language", "sound"],
 				["human", "sound", "speech"],
 				["sound", "example", "music"],
+				["pollution", "air", "air pollution"],
+				["pollution", "sound", "noise pollution"],
+				["pollution", "water", "contamination"],
+				["pollution", "dirt", "contamination"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -1315,18 +1319,21 @@
 				"cat": ["solid", "cat", "tan"],
 				"They Both Die at the End": ["solid", "skull", "blue-violet"],
 				"mansion": ["solid", "house-chimney-window", "magenta"],
-				"goose": ["solid", "kiwi-bird", "light-grey"],
-				"duck": ["solid", "dove", "green"],
+				"goose": ["solid", "feather-pointed", "light-grey"],
+				"duck": ["solid", "duck", "green"],
 				"Untitled Goose Game": ["solid", "gamepad", "blue"],
 				"game engine": ["solid", "gears", "dark-grey"],
 				"Unity": ["solid", "gears", "light-grey"],
-				"sound": ["solid", "ear-listen", "yellow"],
+				"sound": ["solid", "waveform", "yellow"],
 				"speech": ["solid", "comments", "yellow-orange"],
 				"music": ["solid", "music", "violet-magenta"],
+				"air pollution": ["solid", "wind-warning", "light-grey"],
+				"noise pollution": ["solid", "volume-high", "red-orange"],
+				"contamination": ["solid", "hexagon-exclamation", "red"],
 			};
 
 			// version #
-			const version = "v1.5.0";
+			const version = "v1.5.1";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
