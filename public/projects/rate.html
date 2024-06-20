@@ -81,12 +81,17 @@
 
 				border-radius: 40px;
 				padding: 15px;
-				width: fit-content;
+
+				aspect-ratio: 1;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 
 			.buttons i {
 				color: #dd9787;
-				font-size: 50px;
+				font-size: 40px;
 			}
 
 			.buttons i:hover {
@@ -174,16 +179,16 @@
 		</form>
 
 		<div id="buttons">
-			<div class="buttons">
-				<i id="button-plus" class="fa-solid fa-circle-plus"></i>
+			<div class="buttons" title="add new rating">
+				<i id="button-plus" class="fa-solid fa-layer-plus fa-fw"></i>
 			</div>
 
-			<div class="buttons">
-				<i id="button-minus" class="fa-solid fa-circle-minus"></i>
+			<div class="buttons" title="remove last rating">
+				<i id="button-minus" class="fa-solid fa-delete-left fa-fw"></i>
 			</div>
 
-			<div class="buttons">
-				<i id="button-done" class="fa-solid fa-circle-check" onclick="shareRatings()"></i>
+			<div class="buttons" title="copy link to ratings">
+				<i id="button-done" class="fa-solid fa-link fa-fw" onclick="shareRatings()"></i>
 			</div>
 		</div>
 
