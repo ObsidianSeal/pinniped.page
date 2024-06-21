@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>10/10 would recommend</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/rate" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="10/10 would recommend" />
+		<meta property="og:description" content="Rate anything out of five stars." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Rate anything out of five stars." />
+		<meta name="keywords" content="rate, ratings, stars" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<style>
+			@import url(https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@300;700);
+
+			:root {
+				--card-background: #f4f1de;
+				--input-ready: #e07a5f;
+				--selection: #f2cc8f;
+				--action: #81b29a;
+				--dim: #3d405b;
+				--background: #ffffff;
+				--main: #000000;
+			}
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-family: "Roboto Serif";
+				font-style: normal;
+				font-weight: 300;
+				font-size: 20px;
+
+				-webkit-tap-highlight-color: transparent;
+			}
+
+			*::selection {
+				background-color: var(--selection);
+				color: currentColor;
+			}
+
+			::-webkit-scrollbar {
+				width: 24px;
+			}
+
+			::-webkit-scrollbar-track {
+				background-color: var(--background);
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--input-ready);
+				border: 6px solid var(--background);
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--action);
+			}
+
+			body {
+				background-color: var(--background);
+				color: var(--main);
+			}
+
+			textarea {
+				resize: none;
+
+				background-color: var(--card-background);
+				color: var(--dim);
+
+				width: 500px;
+				height: 24px;
+			}
+
+			textarea:focus {
+				outline: none;
+			}
+
+			textarea::-webkit-scrollbar {
+				width: 0;
+			}
+
+			textarea::placeholder,
+			.rating i {
+				color: var(--input-ready);
+			}
+
+			.rating div:has(i:hover):hover i {
+				color: var(--action);
+				cursor: pointer;
+			}
+
+			.rating div:not(.rating-set):has(i:hover) i:hover ~ i {
+				color: var(--input-ready);
+			}
+
+			.rating div.rating-set:has(i:hover) i:hover ~ i {
+				color: var(--dim);
+			}
+
+			.rating-container {
+				padding: 50px;
+
+				display: flex;
+				gap: 30px;
+				flex-direction: column;
+				flex-wrap: wrap;
+				align-content: center;
+				justify-content: center;
+			}
+
+			.rating {
+				width: fit-content;
+
+				background-color: var(--card-background);
+
+				border: 1px solid var(--main);
+				padding: 8px 16px;
+
+				display: flex;
+				gap: 8px 24px;
+				flex-wrap: wrap;
+				justify-content: space-between;
+
+				box-shadow: 3px 3px var(--main);
+			}
+
+			.stars {
+				height: 24px;
+
+				display: flex;
+				gap: 4px;
+				align-items: center;
+			}
+
+			.button-container {
+				display: flex;
+				justify-content: center;
+				gap: 20px;
+
+				padding-bottom: 100px;
+			}
+
+			.button {
+				width: 80px;
+				height: 80px;
+
+				background-color: var(--card-background);
+
+				border: 1px solid var(--main);
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				box-shadow: 3px 3px var(--main);
+			}
+
+			.button:hover {
+				cursor: pointer;
+			}
+
+			.button:hover i {
+				color: var(--action);
+			}
+
+			.button i {
+				font-size: 40px;
+				color: var(--input-ready);
+			}
+
+			.alert {
+				position: fixed;
+				top: 30px;
+				left: 30px;
+				padding: 8px 16px;
+
+				border: 1px solid var(--main);
+				box-shadow: 3px 3px var(--main);
+
+				background-color: var(--selection);
+				font-weight: 700;
+
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+
+				display: none;
+			}
+
+			.rating-set i {
+				color: var(--dim);
+			}
+
+			@media all and (max-width: 800px) {
+				textarea {
+					width: 100%;
+				}
+
+				.button {
+					width: 60px;
+					height: 60px;
+				}
+
+				.button i {
+					font-size: 32px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="rating-container">
+			<!-- <div class="rating">
+				<textarea name="rating-title" placeholder="click to add title"></textarea>
+				<div class="stars">
+					<i class="fa-sharp fa-regular fa-star"></i>
+					<i class="fa-sharp fa-regular fa-star"></i>
+					<i class="fa-sharp fa-regular fa-star"></i>
+					<i class="fa-sharp fa-regular fa-star"></i>
+					<i class="fa-sharp fa-regular fa-star"></i>
+				</div>
+			</div> -->
+		</div>
+
+		<div class="button-container">
+			<div class="button" id="add-button" title="add another rating">
+				<i class="fa-sharp fa-solid fa-rectangle-history-circle-plus"></i>
+			</div>
+			<div class="button" id="remove-button" title="remove last rating">
+				<i class="fa-sharp fa-solid fa-delete-left"></i>
+			</div>
+			<div class="button" id="share-button" title="copy link to current ratings">
+				<i class="fa-sharp fa-solid fa-link"></i>
+			</div>
+		</div>
+
+		<div class="alert">link copied to clipboard</div>
+
+		<script>
+			function addRating(title, rateValue, update) {
+				let rating = document.createElement("div");
+				rating.classList.add("rating");
+
+				let textbox = document.createElement("textarea");
+				textbox.name = "rating-title";
+				textbox.placeholder = "click to add title";
+				if (title != null) if (title != "") textbox.value = title;
+				rating.appendChild(textbox);
+
+				let stars = document.createElement("div");
+				stars.classList.add("stars");
+				for (let i = 0; i < 5; i++) {
+					let star = document.createElement("i");
+					star.classList.add("fa-sharp", "fa-regular", "fa-star");
+					if (rateValue != null) {
+						if (i < rateValue) {
+							star.classList.replace("fa-regular", "fa-solid");
+							stars.classList.add("rating-set");
+						}
+					}
+					stars.appendChild(star);
+					addStarListener(star);
+				}
+				rating.appendChild(stars);
+
+				document.querySelector(".rating-container").appendChild(rating);
+
+				textbox.addEventListener("input", function () {
+					this.style.height = "0px";
+					this.style.height = this.scrollHeight + "px";
+
+					updateURL();
+				});
+
+				if (update != null) {
+					if (update) updateURL();
+				}
+			}
+
+			function removeRating() {
+				let ratingList = document.querySelectorAll(".rating");
+				if (ratingList.length > 0) document.querySelector(".rating-container").removeChild(ratingList[ratingList.length - 1]);
+
+				updateURL();
+			}
+
+			function shareRatings() {
+				navigator.clipboard.writeText(window.location.href);
+				document.querySelector(".alert").style.display = "block";
+				setTimeout(() => {
+					document.querySelector(".alert").style = "";
+				}, 2000);
+			}
+
+			document.querySelector("#add-button").addEventListener("click", () => {
+				addRating(null, null, true);
+			});
+			document.querySelector("#remove-button").addEventListener("click", () => {
+				removeRating();
+			});
+			document.querySelector("#share-button").addEventListener("click", () => {
+				shareRatings();
+			});
+
+			const keys = {};
+
+			document.addEventListener("keydown", (e) => {
+				keys[e.key] = true;
+
+				if (keys["Shift"]) {
+					if (document.activeElement == document.body) {
+						if (keys["Enter"]) addRating(null, null, true);
+						else if (keys["Backspace"]) removeRating();
+					}
+				}
+			});
+
+			document.addEventListener("keyup", (e) => {
+				delete keys[e.key];
+			});
+
+			function addStarListener(star) {
+				star.addEventListener("click", () => {
+					let container = star.parentElement;
+					for (let i = 4; i > 0; i--) {
+						container.children[i].classList.replace("fa-solid", "fa-regular");
+						if (container.children[i] == star) break;
+					}
+					for (let i = 0; i < 5; i++) {
+						container.children[i].classList.replace("fa-regular", "fa-solid");
+						if (container.children[i] == star) break;
+					}
+					container.classList.add("rating-set");
+					updateURL();
+				});
+			}
+
+			function updateURL() {
+				let URLString = "?";
+
+				let ratingList = document.querySelectorAll(".rating");
+
+				for (let i = 0; i < ratingList.length; i++) {
+					let title = encodeURI(ratingList[i].children[0].value);
+					let rateValue = 0;
+					for (let j = 0; j < 5; j++) {
+						if (ratingList[i].children[1].children[j].classList.contains("fa-solid")) rateValue++;
+					}
+					URLString += `${i}=${rateValue}${title}`;
+					if (i < ratingList.length - 1) URLString += "&";
+				}
+
+				window.history.replaceState(null, null, URLString);
+			}
+
+			const item = new URLSearchParams(window.location.search);
+			if (item.size == 0) addRating();
+			else
+				for (let i = 0; i < item.size; i++) {
+					let importedRating = item.get(i);
+					addRating(
+						importedRating.substring(importedRating.indexOf("=") + 2),
+						parseInt(importedRating.substring(importedRating.indexOf("=") + 1, importedRating.indexOf("=") + 2)),
+						false
+					);
+				}
+		</script>
+	</body>
+</html>
