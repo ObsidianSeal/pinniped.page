@@ -286,6 +286,9 @@
 					updateURL();
 				});
 
+				textbox.style.height = "0px";
+				textbox.style.height = textbox.scrollHeight + "px";
+
 				if (update != null) {
 					if (update) updateURL();
 				}
@@ -355,7 +358,7 @@
 				let ratingList = document.querySelectorAll(".rating");
 
 				for (let i = 0; i < ratingList.length; i++) {
-					let title = encodeURI(ratingList[i].children[0].value);
+					let title = encodeURIComponent(ratingList[i].children[0].value);
 					let rateValue = 0;
 					for (let j = 0; j < 5; j++) {
 						if (ratingList[i].children[1].children[j].classList.contains("fa-solid")) rateValue++;
@@ -373,7 +376,7 @@
 				for (let i = 0; i < item.size; i++) {
 					let importedRating = item.get(i);
 					addRating(
-						importedRating.substring(importedRating.indexOf("=") + 2),
+						decodeURIComponent(importedRating.substring(importedRating.indexOf("=") + 2)),
 						parseInt(importedRating.substring(importedRating.indexOf("=") + 1, importedRating.indexOf("=") + 2)),
 						false
 					);
