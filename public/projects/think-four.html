@@ -983,7 +983,7 @@
 			</div>
 		</div> -->
 
-		<div class="notice-panel-container other-font">
+		<!-- <div class="notice-panel-container other-font">
 			<div class="notice-panel">
 				<p>The 100th and final <span class="game-name">Think Four</span> puzzle will be on <span class="last-puzzle-notice">unknown_date</span>.</p>
 				<p>
@@ -995,6 +995,21 @@
 					Although a date has been set for the last puzzle, not all of the puzzles up to then have been made, so I still need suggestions!
 					<a href="https://pinniped.page/discord" target="_blank">Send them here.</a>
 				</p>
+				<p style="display: flex; justify-content: space-between">
+					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
+				</p>
+				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
+			</div>
+		</div> -->
+
+		<div class="notice-panel-container other-font">
+			<div class="notice-panel">
+				<p><span class="remaining-puzzles-notice">unknown_number</span> puzzles remain.</p>
+				<p>
+					The 100th and final puzzle (<span class="last-puzzle-notice">unknown_date</span>) draws near. All of the remaining puzzles have been made. This has been so
+					much fun! As always, a huge thank you to to all the people who have given me suggestions of any kind.
+				</p>
+				<p>Don&rsquo;t worry—once daily puzzles have run out, all previous puzzles will still be available.</p>
 				<p style="display: flex; justify-content: space-between">
 					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
 				</p>
@@ -1191,14 +1206,19 @@
 					}
 
 					// 4. next
+					var countToToday = 0;
 					var foundToday = false;
 					for (let puzzle in thinkFourData.puzzles) {
+						countToToday++;
+
 						if (foundToday) {
 							nextPuzzle = puzzle;
 							break;
 						}
 						if (puzzle == date) {
 							foundToday = true;
+
+							document.querySelector("title").innerHTML = `${document.querySelector("title").innerHTML} (#${countToToday})`; // show puzzle number in title
 						}
 					}
 
@@ -1213,15 +1233,22 @@
 					if (selectPuzzleDateObject.getTime() > todayDateObject.getTime()) nextPuzzle = date;
 
 					// 5. last
+					countToToday = 0;
 					var lastSetPuzzle;
 					for (let puzzle in thinkFourData.puzzles) {
+						countToToday++;
+
 						let selectPuzzleYear = parseInt(puzzle.substring(0, 4));
 						let selectPuzzleMonth = parseInt(puzzle.substring(5, 7));
 						let selectPuzzleDay = parseInt(puzzle.substring(8, 10));
 
 						let todayDateObject = new Date();
 						let selectPuzzleDateObject = new Date(selectPuzzleYear, selectPuzzleMonth - 1, selectPuzzleDay);
-						if (selectPuzzleDateObject.getTime() <= todayDateObject.getTime()) lastPuzzle = puzzle;
+						if (selectPuzzleDateObject.getTime() <= todayDateObject.getTime()) {
+							lastPuzzle = puzzle;
+
+							document.querySelector(".remaining-puzzles-notice").innerHTML = 101 - countToToday; // show number of remaining puzzles (includes "today")
+						}
 
 						lastSetPuzzle = puzzle;
 					}
@@ -1328,6 +1355,7 @@
 							wordContainer.id = `w${x}-${y}`;
 
 							wordContainer.innerHTML = mixedWords[i][j];
+							if (wordContainer.innerHTML.startsWith("fa-")) wordContainer.innerHTML = `<i class="fa-solid ${wordContainer.innerHTML}"></i>`; // accept Font Awesome icons!
 							document.querySelector(".board").appendChild(wordContainer);
 
 							if (!fontSizes.hasOwnProperty(mixedWords[i][j])) {
@@ -1392,6 +1420,10 @@
 
 						let topicNumber = topicColours.indexOf(solved[i]);
 						solvedContainer.innerHTML = `<div>${topics[topicNumber]}</div><div>${words[topicNumber][0]}, ${words[topicNumber][1]}, ${words[topicNumber][2]}, ${words[topicNumber][3]}</div>`;
+						if (words[topicNumber][0].startsWith("fa-")) {
+							// more (vile) Font Awesome-related code
+							solvedContainer.innerHTML = `<div>${topics[topicNumber]}</div><div><i class="fa-solid ${words[topicNumber][0]}"></i>, <i class="fa-solid ${words[topicNumber][1]}"></i>, <i class="fa-solid ${words[topicNumber][2]}"></i>, <i class="fa-solid ${words[topicNumber][3]}"></i></div>`;
+						}
 						document.querySelector(".board").appendChild(solvedContainer);
 					}
 				}
@@ -1419,7 +1451,9 @@
 			async function topicCheck() {
 				let sWA = [];
 				document.querySelectorAll(".selected").forEach((selected) => {
-					sWA.push(selected.innerHTML);
+					let selectedText = selected.innerHTML;
+					if (selectedText.includes("fa-")) selectedText = selectedText.split(/" | /)[2]; // accept Font Awesome icons
+					sWA.push(selectedText);
 				});
 				sWA.sort();
 
