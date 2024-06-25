@@ -88,8 +88,9 @@
 		<div class="notice" id="notice">
 			<p>
 				<!-- can change icon, icon colour, and text -- make sure to check .js -->
-				<i class="fa-solid fa-rectangle-pro" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i
-				><span class="invert" id="notice-text">now with Font Awesome Pro!</span><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i
+				<i class="fa-solid fa-octagon-exclamation" id="notice-icon" style="color: #ff6b6b; margin-right: 20px"></i
+				><span class="invert" id="notice-text">not sure what&rsquo;s wrong, or where, or how to fix it</span
+				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i
 				><i class="fa-solid fa-angle-right notice-x" id="notice-arrow" style="display: none" onclick="hideNotice()"></i>
 			</p>
 		</div>
@@ -188,8 +189,7 @@
 			const screenWidth = window.innerWidth;
 
 			// CHANGE IF CHANGE TEXT!!!
-			if (screenWidth < 550) document.getElementById("notice-text").innerHTML = "Font Awesome Pro!";
-			if (screenWidth < 430) document.querySelector("#notice").remove();
+			// removed until I improve it
 
 			function hideNotice() {
 				if (!noticeHidden) {
@@ -201,14 +201,14 @@
 
 					// HIDE NOTICE
 					document.getElementById("notice-text").style = "display: none"; // remove text
-					document.getElementById("notice-icon").style = "color: #4ecdc4"; // remove icon margin, CHANGE IF CHANGE ICON COLOUR!!!
+					document.getElementById("notice-icon").style = "color: #ff6b6b"; // remove icon margin, CHANGE IF CHANGE ICON COLOUR!!!
 					document.getElementById("notice-x").style = "display: none"; // remove 'x'
 					document.getElementById("notice-arrow").style = "display: inline-block"; // show '>'
 				} else {
 					// SHOW NOTICE
 					document.getElementById("notice").classList.remove("hidden"); // keep notice on screen
 					document.getElementById("notice-text").style = "display: inline-block"; // show text
-					document.getElementById("notice-icon").style = "color: #4ecdc4; margin-right: 20px"; // add margin to icon, CHANGE IF CHANGE ICON COLOUR!!!
+					document.getElementById("notice-icon").style = "color: #ff6b6b; margin-right: 20px"; // add margin to icon, CHANGE IF CHANGE ICON COLOUR!!!
 					document.getElementById("notice-x").style = "display: inline-block"; // show 'x'
 					document.getElementById("notice-arrow").style = "display: none"; // remove '>'
 				}
