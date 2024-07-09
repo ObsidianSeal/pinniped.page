@@ -225,7 +225,7 @@
 			.clear,
 			.submit,
 			.results {
-				width: 200px;
+				width: 220px;
 				height: 50px;
 
 				background-color: var(--grey15);
@@ -236,6 +236,24 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+
+				position: relative;
+			}
+
+			.clear span,
+			.submit span,
+			.results span {
+				position: absolute;
+				right: -8px;
+				bottom: 6px;
+
+				padding: 1px 5px;
+				border-radius: 3px;
+
+				font-size: 18px;
+
+				background-color: var(--black);
+				color: var(--grey15);
 			}
 
 			.clear.disabled,
@@ -243,6 +261,11 @@
 				background-color: var(--grey10);
 				border-color: var(--grey20);
 				color: var(--grey40);
+			}
+
+			.clear.disabled span,
+			.submit.disabled span {
+				display: none;
 			}
 
 			.clear:not(.disabled):hover,
@@ -697,7 +720,9 @@
 					font-size: 28px;
 				}
 
-				.remove700 {
+				.remove700,
+				.clear span,
+				.submit span {
 					display: none;
 				}
 
@@ -922,8 +947,8 @@
 
 			<div class="board"></div>
 			<div class="buttons">
-				<div class="clear disabled" tabindex="0">clear</div>
-				<div class="submit disabled" tabindex="0">submit</div>
+				<div class="clear disabled" tabindex="0">clear<span>BACKSPACE</span></div>
+				<div class="submit disabled" tabindex="0">submit<span>ENTER</span></div>
 			</div>
 		</div>
 
@@ -1002,7 +1027,7 @@
 			</div>
 		</div> -->
 
-		<div class="notice-panel-container other-font">
+		<!-- <div class="notice-panel-container other-font">
 			<div class="notice-panel">
 				<p><span class="remaining-puzzles-notice">unknown_number</span> puzzles remain.</p>
 				<p>
@@ -1015,7 +1040,7 @@
 				</p>
 				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
 			</div>
-		</div>
+		</div> -->
 
 		<script type="module">
 			// --- log styles ---
@@ -1065,7 +1090,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.8.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.8.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO:`, infoStyle, versionString);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -1247,7 +1272,9 @@
 						if (selectPuzzleDateObject.getTime() <= todayDateObject.getTime()) {
 							lastPuzzle = puzzle;
 
-							document.querySelector(".remaining-puzzles-notice").innerHTML = 101 - countToToday; // show number of remaining puzzles (includes "today")
+							document.querySelectorAll(".remaining-puzzles-notice").forEach((possibleElement) => {
+								possibleElement.innerHTML = 101 - countToToday; // show number of remaining puzzles (includes "today")
+							});
 						}
 
 						lastSetPuzzle = puzzle;
@@ -1475,7 +1502,7 @@
 								document.querySelector(".game-container").classList.add("hide");
 								document.querySelector(".new-solve").classList.remove("new-solve");
 
-								document.querySelector(".buttons").innerHTML = '<div class="results" tabindex="0">results</div>';
+								document.querySelector(".buttons").innerHTML = '<div class="results" tabindex="0">results<span>ESCAPE</span></div>';
 
 								document.querySelector(".results").addEventListener("click", (e) => {
 									document.querySelector(".win-container").classList.remove("hide");
@@ -1985,8 +2012,10 @@
 			});
 
 			// --- notice panel exit ---
-			document.querySelector(".notice-panel-exit").addEventListener("click", (e) => {
-				document.querySelector(".notice-panel-container").remove();
+			document.querySelectorAll(".notice-panel-exit").forEach((possibleElement) => {
+				possibleElement.addEventListener("click", (e) => {
+					document.querySelector(".notice-panel-container").remove();
+				});
 			});
 		</script>
 	</body>
