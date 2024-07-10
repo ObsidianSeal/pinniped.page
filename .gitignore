@@ -1,3 +1,6 @@
 # folders to ignore
 .firebase/
 .vscode/
+
+# files to ignore
+.firebase-debug.log
