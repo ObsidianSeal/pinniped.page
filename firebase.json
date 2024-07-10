@@ -21,6 +21,11 @@
 				"source": "/projects/brb",
 				"destination": "https://pinniped.page/s?s=503",
 				"type": 302
+			},
+			{
+				"source": "/projects/icons",
+				"destination": "https://pinniped.page/s?s=503",
+				"type": 302
 			}
 		],
 
