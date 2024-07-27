@@ -81,8 +81,20 @@
 				src: url("../files/JetBrainsMono-Regular.woff2");
 			}
 			@font-face {
+				font-family: "Neue Montreal";
+				src: url("../files/PPNeueMontreal-Regular.woff2");
+			}
+			@font-face {
 				font-family: "Norse";
 				src: url("../files/Norse.woff2");
+			}
+			@font-face {
+				font-family: "Pangram Sans Rounded Bold";
+				src: url("../files/PPPangramSansRounded-Bold.woff2");
+			}
+			@font-face {
+				font-family: "Pangram Sans Rounded Regular";
+				src: url("../files/PPPangramSansRounded-Regular.woff2");
 			}
 			@font-face {
 				font-family: "Select Mono";
@@ -409,12 +421,15 @@
 			"mono45-headline",
 			"Monoton",
 			"Montserrat",
+			"Neue Montreal",
 			"Neuton",
 			"Norse",
 			"Noto Sans",
 			"Nunito",
 			"Open Sans",
 			"Oswald",
+			"Pangram Sans Rounded Bold",
+			"Pangram Sans Rounded Regular",
 			"Playfair Display",
 			"Press Start 2P",
 			"rig-solid-medium-fill",
@@ -430,7 +445,7 @@
 			"Space Mono",
 		];
 
-		const version = "1.0.2";
+		const version = "1.0.3";
 		console.log(`fonts v${version} - ${fonts.length} fonts, ${texts.length} texts`);
 
 		function getRandomFont() {
