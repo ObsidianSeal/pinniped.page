@@ -97,6 +97,10 @@
 				left: 32px;
 			}
 
+			p span {
+				font-size: 14px;
+			}
+
 			a {
 				font-size: 14px;
 				color: var(--white);
@@ -217,6 +221,10 @@
 				font-size: 200px;
 			}
 
+			#random-icon:hover {
+				cursor: pointer;
+			}
+
 			.menu {
 				position: absolute;
 				bottom: 30px;
@@ -335,7 +343,7 @@
 
 			.style-option {
 				width: 400px;
-				margin-top: 5px;
+				margin-top: 8px;
 				padding: 10px;
 				border: 1px solid #ffffff80;
 				transition: border-color 200ms, color 200ms;
@@ -425,126 +433,301 @@
 			.help-content a:focus {
 				text-decoration-color: var(--red);
 			}
+
+			.loading-container {
+				background-color: var(--black);
+				gap: 30px;
+
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+
+				z-index: 1;
+				text-align: center;
+			}
+
+			.loading-text,
+			.loading-text d {
+				font-size: 150px;
+				font-weight: 700;
+				color: var(--blue);
+			}
+
+			.version,
+			.version d {
+				font-size: 40px;
+			}
+
+			.loading-help a {
+				text-decoration: underline;
+				text-decoration-color: #ffffff80;
+				font-size: 20px;
+				transition: text-decoration-color 200ms;
+			}
+
+			.loading-help a:hover,
+			.loading-help a:focus {
+				text-decoration-color: var(--blue);
+			}
+
+			.version,
+			.loading-help {
+				padding: 0 20px;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 0.5s;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 0.5s;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 0.5s;
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			.all-container {
+				display: none;
+			}
+
+			@media all and (max-width: 800px) {
+				.loading-text,
+				.loading-text d {
+					font-size: 90px;
+				}
+
+				.version,
+				.version d {
+					font-size: 30px;
+				}
+			}
+
+			@media all and (max-width: 600px) {
+				.version,
+				.version d {
+					font-size: 20px;
+				}
+			}
+
+			@media all and (max-width: 500px) {
+				.loading-text,
+				.loading-text d {
+					font-size: 50px;
+				}
+			}
+
+			@media all and (max-width: 250px) {
+				.all-container *,
+				.loading-container {
+					display: none;
+				}
+			}
 		</style>
 	</head>
 
 	<body>
-		<p>
-			&ldquo;fa-random&rdquo; v2.0.0 (2024/07/29) by <a href="../about.html" title="pinniped.page/about">Obsidian_Seal</a> on
-			<a href="../index.html" title="~ home ~">pinniped.page</a> — not affiliated with
-			<a href="https://fontawesome.com/" target="_blank" title="fontawesome.com [EXTERNAL]">Font Awesome</a> in any way
-		</p>
-		<div class="main-panel">
-			<div class="info">
-				<div class="button" tabindex="0" title="copy icon flavour (?)" id="button-flavour">loading...</div>
-				<div class="button" tabindex="0" title="copy icon style" id="button-style">loading...</div>
-				<div class="button" tabindex="0" title="copy icon name" id="button-name">loading...</div>
-				<div class="button" tabindex="0" title="view Font Awesome plans [EXTERNAL]" id="button-plan">loading...</div>
+		<div class="all-container">
+			<p>
+				&ldquo;fa-random&rdquo; <span id="version"></span> by <a href="../about.html" title="pinniped.page/about">Obsidian_Seal</a> on
+				<a href="../index.html" title="~ home ~">pinniped.page</a> — not affiliated with
+				<a href="https://fontawesome.com/" target="_blank" title="fontawesome.com [EXTERNAL]">Font Awesome</a> in any way
+			</p>
+			<div class="main-panel">
+				<div class="info">
+					<div class="button" tabindex="0" title="copy icon flavour (?)" id="button-flavour">loading...</div>
+					<div class="button" tabindex="0" title="copy icon style" id="button-style">loading...</div>
+					<div class="button" tabindex="0" title="copy icon name" id="button-name">loading...</div>
+					<div class="button" tabindex="0" title="view Font Awesome plans [EXTERNAL]" id="button-plan">loading...</div>
+				</div>
+				<div class="search">
+					<input name="search-box" type="text" placeholder="enter an icon name; press ENTER to view" title="shortcut: I — focus on text field" autocomplete="off" />
+					<div title="if the icon exists, show it"><i class="fa-solid fa-circle-check button" tabindex="0" id="search-enter"></i></div>
+					<div title="clear entry"><i class="fa-solid fa-circle-xmark button" tabindex="0" id="search-clear"></i></div>
+				</div>
+				<div class="icon" title="you can also click the icon to generate">
+					<i id="random-icon">loading...</i>
+				</div>
+				<div class="menu">
+					<div class="button" tabindex="0" title="shortcut: ENTER — show a random icon" id="button-generate">
+						<i class="fa-light fa-arrows-rotate"></i>GENERATE!!
+					</div>
+					<div tabindex="0" title="shortcut: LEFT (arrow) — view the previous icon" id="button-previous"><i class="fa-light fa-angles-left"></i>previous</div>
+					<div tabindex="0" title="shortcut: RIGHT (arrow) — view the next icon" id="button-next"><i class="fa-light fa-angles-right"></i>next</div>
+					<div class="button" tabindex="0" title="shortcut: SPACE — choose between classic, sharp, duotone, etc." id="button-styles">
+						<i class="fa-light fa-palette"></i>select style
+					</div>
+					<div tabindex="0" title="shortcut: BACKSPACE — view the first icon and clear icon history" id="button-reset">
+						<i class="fa-light fa-trash-arrow-up"></i>reset
+					</div>
+					<div class="button" tabindex="0" title="shortcut: C — copy a link to this icon on this page" id="button-link">
+						<i class="fa-light fa-clipboard"></i>copy link to icon preview
+					</div>
+					<div class="button" tabindex="0" title="shortcut: O — view this icon on fontawesome.com [EXTERNAL]" id="button-external">
+						<i class="fa-light fa-font-awesome"></i>view on official site
+					</div>
+					<div class="button" tabindex="0" title="shortcut: F — toggle fullscreen mode (has some quirks)" id="button-fullscreen">
+						<i class="fa-light fa-expand"></i>fullscreen*
+					</div>
+					<div class="button" tabindex="0" title="shortcut: H — show/hide the purple buttons" id="button-menu"><i class="fa-light fa-sunglasses"></i>hide menu</div>
+					<div class="button" tabindex="0" title="shortcut: J — show/hide the icon info" id="button-info"><i class="fa-light fa-eye-slash"></i>hide info</div>
+					<div class="button" tabindex="0" title="shortcut: ? — open the help/about panel" id="button-help">
+						<i class="fa-light fa-circle-question"></i>what is this?
+					</div>
+					<div class="button" tabindex="0" title="return to Projects+" id="button-exit"><i class="fa-light fa-door-open"></i>exit</div>
+				</div>
+				<div class="alert-space"></div>
 			</div>
-			<div class="search">
-				<input name="search-box" type="text" placeholder="enter an icon name; press ENTER to view" title="shortcut: I — focus on text field" />
-				<i class="fa-solid fa-circle-check button" tabindex="0" id="search-enter" title="if the icon exists, show it"></i>
-				<i class="fa-solid fa-circle-xmark button" tabindex="0" id="search-clear" title="clear entry"></i>
+			<div class="style-panel">
+				<div class="title">
+					<b>Select an icon style:</b
+					><b id="style-panel-exit" title="leave style selection (changes are saved)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
+				</div>
+
+				<div class="style-container">
+					<div class="style-section">
+						<span>classic</span>
+						<div class="style-option selected-style" title="set &ldquo;classic, solid&rdquo; as the styles to show new icons in" tabindex="0" id="classic.solid">
+							<i class="fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+						<div class="style-option" title="set &ldquo;classic, regular&rdquo; as the styles to show new icons in" tabindex="0" id="classic.regular">
+							<i class="fa-regular fa-icons"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+						<div class="style-option" title="set &ldquo;classic, light&rdquo; as the styles to show new icons in" tabindex="0" id="classic.light">
+							<i class="fa-light fa-icons"></i>light<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+						<div class="style-option" title="set &ldquo;classic, thin&rdquo; as the styles to show new icons in" tabindex="0" id="classic.thin">
+							<i class="fa-thin fa-icons"></i>thin<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
+						<span>duotone</span>
+						<div class="style-option" title="set &ldquo;duotone, solid&rdquo; as the styles to show new icons in" tabindex="0" id="duotone.solid">
+							<i class="fa-duotone fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
+						<span>sharp</span>
+						<div class="style-option" title="set &ldquo;sharp, solid&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.solid">
+							<i class="fa-sharp fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+						<div class="style-option" title="set &ldquo;sharp, regular&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.regular">
+							<i class="fa-sharp fa-regular fa-icons"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+						<div class="style-option" title="set &ldquo;sharp, light&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.light">
+							<i class="fa-sharp fa-light fa-icons"></i>light<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+						<div class="style-option" title="set &ldquo;sharp, thin&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.thin">
+							<i class="fa-sharp fa-thin fa-icons"></i>thin<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
+						<span>sharp-duotone</span>
+						<div class="style-option" title="set &ldquo;sharp-duotone, solid&rdquo; as the styles to show new icons in" tabindex="0" id="sharp-duotone.solid">
+							<i class="fa-sharp-duotone fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="icon">
-				<i id="random-icon">loading...</i>
+			<div class="help-panel">
+				<div class="title">
+					<b>What&rsquo;s all this then!?</b
+					><b id="help-panel-exit" title="leave help page (thanks for reading)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
+				</div>
+
+				<div class="help-content">
+					Welcome to &ldquo;fa-random&rdquo;, my <a href="https://coolors.co/" target="_blank" title="coolors.co [EXTERNAL]">Coolors</a>-style, random
+					<a href="https://fontawesome.com/" target="_blank" title="fontawesome.com [EXTERNAL]">Font Awesome</a> icon generator. Thanks for coming. This complete
+					rewrite of the <a href="icons-old.html" title="fa-random, legacy version" target="_blank">original page</a> has every single icon and style, which is
+					possible because I am now the proud owner of a
+					<a href="../posts/2024-07-08.html#icons" title="Costs &amp; Limitations — Blog Post (2024/07/08)">Font Awesome Pro license</a>.<br /><br />If you
+					don&rsquo;t understand how to use this tool, hover over things for slightly more information about what they do. There isn&rsquo;t much more I can tell
+					you.<br /><br />This project uses the font
+					<a href="../posts/2024-07-16.html" title="I bought 780+ fonts. — Blog Post (2024/07/16)">&ldquo;Pangram Sans Rounded&rdquo; from Pangram Pangram Foundry</a
+					>.<br /><br />If this help/about page hasn&rsquo;t satisfied your thirst for <a href="../index.html" title="~ home ~">pinniped.page</a>-related knowledge,
+					please don&rsquo;t hesitate to <a href="https://pinniped.page/discord" target="_blank" title="join my Discord server [EXTERNAL]">reach out on Discord</a>.
+				</div>
 			</div>
-			<div class="menu">
-				<div class="button" tabindex="0" title="shortcut: ENTER — show a random icon" id="button-generate"><i class="fa-light fa-arrows-rotate"></i>GENERATE!!</div>
-				<div tabindex="0" title="shortcut: LEFT (arrow) — view the previous icon" id="button-previous"><i class="fa-light fa-angles-left"></i>previous</div>
-				<div tabindex="0" title="shortcut: RIGHT (arrow) — view the next icon" id="button-next"><i class="fa-light fa-angles-right"></i>next</div>
-				<div class="button" tabindex="0" title="shortcut: SPACE — choose between classic, sharp, duotone, etc." id="button-styles">
-					<i class="fa-light fa-palette"></i>select style
-				</div>
-				<div tabindex="0" title="shortcut: BACKSPACE — view the first icon and clear icon history" id="button-reset">
-					<i class="fa-light fa-trash-arrow-up"></i>reset
-				</div>
-				<div class="button" tabindex="0" title="shortcut: C — copy a link to this icon on this page" id="button-link">
-					<i class="fa-light fa-clipboard"></i>copy link to icon preview
-				</div>
-				<div class="button" tabindex="0" title="shortcut: O — view this icon on fontawesome.com [EXTERNAL]" id="button-external">
-					<i class="fa-light fa-font-awesome"></i>view on official site
-				</div>
-				<div class="button" tabindex="0" title="shortcut: F — toggle fullscreen mode (has some quirks)" id="button-fullscreen">
-					<i class="fa-light fa-expand"></i>fullscreen*
-				</div>
-				<div class="button" tabindex="0" title="shortcut: H — show/hide the purple buttons" id="button-menu"><i class="fa-light fa-sunglasses"></i>hide menu</div>
-				<div class="button" tabindex="0" title="shortcut: J — show/hide the icon info" id="button-info"><i class="fa-light fa-eye-slash"></i>hide info</div>
-				<div class="button" tabindex="0" title="shortcut: ? — open the help/about panel" id="button-help"><i class="fa-light fa-circle-question"></i>what is this?</div>
-				<div class="button" tabindex="0" title="return to Projects+" id="button-exit"><i class="fa-light fa-door-open"></i>exit</div>
-			</div>
-			<div class="alert-space"></div>
 		</div>
-		<div class="style-panel">
-			<div class="title">
-				<b>Select an icon style:</b
-				><b id="style-panel-exit" title="leave style selection (changes are saved)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
-			</div>
-
-			<div class="style-container">
-				<div class="style-section">
-					<span>classic</span>
-					<div class="style-option selected-style" title="set &ldquo;classic, solid&rdquo; as the styles to show new icons in" tabindex="0" id="classic.solid">
-						<i class="fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-					<div class="style-option" title="set &ldquo;classic, regular&rdquo; as the styles to show new icons in" tabindex="0" id="classic.regular">
-						<i class="fa-regular fa-icons"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-					<div class="style-option" title="set &ldquo;classic, light&rdquo; as the styles to show new icons in" tabindex="0" id="classic.light">
-						<i class="fa-light fa-icons"></i>light<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-					<div class="style-option" title="set &ldquo;classic, thin&rdquo; as the styles to show new icons in" tabindex="0" id="classic.thin">
-						<i class="fa-thin fa-icons"></i>thin<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-				</div>
-
-				<div class="style-section">
-					<span>duotone</span>
-					<div class="style-option" title="set &ldquo;duotone, solid&rdquo; as the styles to show new icons in" tabindex="0" id="duotone.solid">
-						<i class="fa-duotone fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-				</div>
-
-				<div class="style-section">
-					<span>sharp</span>
-					<div class="style-option" title="set &ldquo;sharp, solid&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.solid">
-						<i class="fa-sharp fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-					<div class="style-option" title="set &ldquo;sharp, regular&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.regular">
-						<i class="fa-sharp fa-regular fa-icons"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-					<div class="style-option" title="set &ldquo;sharp, light&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.light">
-						<i class="fa-sharp fa-light fa-icons"></i>light<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-					<div class="style-option" title="set &ldquo;sharp, thin&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.thin">
-						<i class="fa-sharp fa-thin fa-icons"></i>thin<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-				</div>
-
-				<div class="style-section">
-					<span>sharp-duotone</span>
-					<div class="style-option" title="set &ldquo;sharp-duotone, solid&rdquo; as the styles to show new icons in" tabindex="0" id="sharp-duotone.solid">
-						<i class="fa-sharp-duotone fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="help-panel">
-			<div class="title">
-				<b>What&rsquo;s all this then!?</b
-				><b id="help-panel-exit" title="leave help page (thanks for reading)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
-			</div>
-
-			<div class="help-content">
-				Welcome to &ldquo;fa-random&rdquo;, my <a href="https://coolors.co/" target="_blank" title="coolors.co [EXTERNAL]">Coolors</a>-style, random
-				<a href="https://fontawesome.com/" target="_blank" title="fontawesome.com [EXTERNAL]">Font Awesome</a> icon generator. Thanks for coming. This complete rewrite
-				of the <a href="icons-old.html" title="fa-random, legacy version">original page</a> has every single icon and style, which is possible because I am now the
-				proud owner of a <a href="../posts/2024-07-08.html#icons" title="Costs &amp; Limitations — Blog Post (2024/07/08)">Font Awesome Pro license</a>.<br /><br />If
-				you don&rsquo;t understand how to use this tool, hover over things for slightly more information about what they do. There isn&rsquo;t much more I can tell
-				you.<br /><br />This project uses the font
-				<a href="../posts/2024-07-16.html" title="I bought 780+ fonts. — Blog Post (2024/07/16)">&ldquo;Pangram Sans Rounded&rdquo; from Pangram Pangram Foundry</a
-				>.<br /><br />If this help/about page hasn&rsquo;t satisfied your thirst for <a href="../index.html" target="~ home ~">pinniped.page</a>-related knowledge,
-				please don&rsquo;t hesitate to <a href="https://pinniped.page/discord" target="_blank" title="join my Discord server [EXTERNAL]">reach out on Discord</a>.
+		<div class="loading-container">
+			<div class="loading-text" title="loading...">loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
+			<div class="version" title="project version">loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
+			<div class="loading-help" title="join the support Discord server [EXTERNAL]">
+				<a href="https://pinniped.page/discord" target="_blank">internet-unrelated loading issue?</a>
 			</div>
 		</div>
 
@@ -5444,7 +5627,10 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			console.log(`%cINFO:`, infoStyle, `fa-random v2.0.0 (2024/07/29)`);
+			const version = "v2.0.0-beta2 (2024/07/29)";
+			document.querySelector("#version").innerHTML = version;
+			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
+			console.log(`%cINFO:`, infoStyle, `fa-random ${version}`);
 			console.log(`%cINFO:`, infoStyle, `Font Awesome Pro v6.6.0`);
 			console.log(`%cINFO:`, infoStyle, `${allIconsTotal} total icons, ${freeSolidIconsTotal} free SOLID icons, ${freeRegularIconsTotal} free REGULAR icons`);
 
@@ -5817,7 +6003,9 @@
 
 					if (key === " ") {
 						e.preventDefault();
-						styleSelect();
+						if (!helpOpen) {
+							styleSelect();
+						}
 					}
 					if (key === "Backspace") reset();
 
@@ -5826,7 +6014,7 @@
 					if (key === "f") toggleFullscreen();
 					if (key === "h") toggleMenu();
 					if (key === "j") toggleInfo();
-					if (key === "/" || key === "?") openHelp();
+					if ((key === "/" || key === "?") && !styleSelectOpen) openHelp();
 				}
 			});
 
@@ -5864,6 +6052,14 @@
 					setStyles(styleOption);
 				});
 			});
+
+			document.querySelector("#random-icon").addEventListener("click", (e) => {
+				generate();
+			});
+
+			// loading complete...
+			document.querySelector(".all-container").style.display = "initial";
+			document.querySelector(".loading-container").style.display = "none";
 		</script>
 	</body>
 </html>
