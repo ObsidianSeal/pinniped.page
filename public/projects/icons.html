@@ -22,8 +22,6 @@
 
 		<link rel="icon" href="../images/icon.png" />
 
-		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
-
 		<style>
 			@font-face {
 				font-family: "PP Pangram Sans Rounded";
@@ -95,6 +93,7 @@
 				position: absolute;
 				top: 8px;
 				left: 32px;
+				padding-right: 32px;
 			}
 
 			p span {
@@ -562,6 +561,18 @@
 				display: none;
 			}
 
+			@media all and (max-width: 900px) {
+				.title {
+					flex-direction: column-reverse;
+					gap: 10px;
+					margin-top: 30px;
+				}
+
+				.title b:last-child {
+					text-align: right;
+				}
+			}
+
 			@media all and (max-width: 800px) {
 				.loading-text,
 				.loading-text d {
@@ -581,10 +592,64 @@
 				}
 			}
 
+			@media all and (max-width: 530px) {
+				.style-option {
+					width: 300px;
+				}
+			}
+
 			@media all and (max-width: 500px) {
 				.loading-text,
 				.loading-text d {
 					font-size: 50px;
+				}
+
+				.title {
+					margin-top: 50px;
+				}
+
+				.title b:last-child,
+				.title b:last-child i {
+					font-size: 28px;
+				}
+
+				.style-option i:last-child {
+					margin-right: 0;
+				}
+			}
+
+			@media all and (max-width: 420px) {
+				.style-option {
+					width: 200px;
+					font-size: 16px;
+				}
+			}
+
+			@media all and (max-width: 350px) {
+				.title {
+					margin-top: 70px;
+				}
+			}
+
+			@media all and (max-width: 320px) {
+				.style-option i {
+					font-size: 24px;
+				}
+
+				.style-option {
+					width: 150px;
+				}
+			}
+
+			@media all and (max-width: 300px) {
+				.title {
+					margin-top: 80px;
+				}
+			}
+
+			@media all and (max-width: 265px) {
+				.title {
+					margin-top: 100px;
 				}
 			}
 
@@ -5627,7 +5692,7 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			const version = "v2.0.0-beta2 (2024/07/29)";
+			const version = "v2.0.0-beta3 (2024/07/29)";
 			document.querySelector("#version").innerHTML = version;
 			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
 			console.log(`%cINFO:`, infoStyle, `fa-random ${version}`);
@@ -5993,13 +6058,22 @@
 				}
 
 				if (focus != document.querySelector("input")) {
-					if (key === "i") {
-						e.preventDefault();
-						document.querySelector("input").focus();
-					}
+					if (!styleSelectOpen && !helpOpen) {
+						if (key === "i") {
+							e.preventDefault();
+							document.querySelector("input").focus();
+						}
 
-					if (key === "ArrowLeft") previousIcon();
-					if (key === "ArrowRight") nextIcon();
+						if (key === "ArrowLeft") previousIcon();
+						if (key === "ArrowRight") nextIcon();
+						if (key === "Backspace") reset();
+
+						if (key === "c") copyLink();
+						if (key === "o") viewOfficial();
+						if (key === "h") toggleMenu();
+						if (key === "j") toggleInfo();
+					}
+					if (key === "f") toggleFullscreen();
 
 					if (key === " ") {
 						e.preventDefault();
@@ -6007,13 +6081,6 @@
 							styleSelect();
 						}
 					}
-					if (key === "Backspace") reset();
-
-					if (key === "c") copyLink();
-					if (key === "o") viewOfficial();
-					if (key === "f") toggleFullscreen();
-					if (key === "h") toggleMenu();
-					if (key === "j") toggleInfo();
 					if ((key === "/" || key === "?") && !styleSelectOpen) openHelp();
 				}
 			});
@@ -6061,5 +6128,7 @@
 			document.querySelector(".all-container").style.display = "initial";
 			document.querySelector(".loading-container").style.display = "none";
 		</script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 	</body>
 </html>
