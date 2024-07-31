@@ -59,6 +59,8 @@
 				-ms-user-select: none;
 				user-select: none;
 
+				-webkit-tap-highlight-color: transparent;
+
 				transition: transform 200ms;
 			}
 
@@ -72,6 +74,10 @@
 
 			::-webkit-scrollbar-thumb:hover {
 				background-color: var(--white);
+			}
+
+			::-webkit-scrollbar-corner {
+				color: var(--black);
 			}
 
 			body {
@@ -113,16 +119,24 @@
 				text-decoration: underline;
 			}
 
-			.info {
+			.top {
 				position: absolute;
-				top: 20px;
+				top: 0;
 				left: 0;
 
+				margin: 40px 20px;
+
+				display: flex;
+				justify-content: space-between;
+				width: calc(100% - 40px);
+				flex-wrap: wrap;
+				gap: 20px;
+			}
+
+			.info {
 				display: flex;
 				gap: 20px;
 				flex-wrap: wrap;
-
-				margin: 20px;
 			}
 
 			.info div {
@@ -169,9 +183,7 @@
 			}
 
 			.search {
-				position: absolute;
-				top: 40px;
-				right: 20px;
+				position: relative;
 			}
 
 			.search input {
@@ -194,7 +206,6 @@
 			}
 
 			.search i {
-				position: absolute;
 				color: var(--purple);
 				transition: color 200ms;
 				outline: none;
@@ -204,6 +215,10 @@
 			.search i:focus {
 				color: var(--white);
 				cursor: pointer;
+			}
+
+			div > .search i {
+				position: absolute;
 			}
 
 			#search-enter {
@@ -224,16 +239,21 @@
 				cursor: pointer;
 			}
 
-			.menu {
+			.menu-container {
 				position: absolute;
 				bottom: 30px;
+				left: 0;
 
+				width: calc(100% - 40px);
+				margin: 20px;
+			}
+
+			.menu {
 				display: flex;
 				justify-content: center;
 				gap: 20px;
 				flex-wrap: wrap;
-
-				margin: 20px;
+				width: 100%;
 			}
 
 			.menu div {
@@ -246,6 +266,10 @@
 				padding: 0 20px;
 
 				background-color: var(--purple);
+			}
+
+			.menu div:last-child {
+				display: none;
 			}
 
 			.menu div:not(.button):hover,
@@ -568,8 +592,35 @@
 					margin-top: 30px;
 				}
 
+				.top {
+					top: 20px;
+				}
+
 				.title b:last-child {
 					text-align: right;
+				}
+
+				.menu-container {
+					overflow-x: scroll;
+					bottom: 0;
+					margin: 20px 0;
+					padding: 0 20px;
+				}
+
+				.menu {
+					justify-content: left;
+					flex-wrap: nowrap;
+					text-wrap: nowrap;
+				}
+
+				.menu .button:hover,
+				.menu .button:focus {
+					transform: none;
+				}
+
+				.menu div:last-child {
+					display: block;
+					background-color: var(--black);
 				}
 			}
 
@@ -589,6 +640,14 @@
 				.version,
 				.version d {
 					font-size: 20px;
+				}
+
+				.search {
+					width: 100%;
+				}
+
+				.search input {
+					width: calc(100% - 96px);
 				}
 			}
 
@@ -616,6 +675,22 @@
 				.style-option i:last-child {
 					margin-right: 0;
 				}
+
+				.top {
+					top: 40px;
+				}
+			}
+
+			@media all and (max-height: 500px) {
+				.loading-text,
+				.loading-text d {
+					font-size: 90px;
+				}
+
+				.version,
+				.version d {
+					font-size: 30px;
+				}
 			}
 
 			@media all and (max-width: 420px) {
@@ -628,6 +703,45 @@
 			@media all and (max-width: 350px) {
 				.title {
 					margin-top: 70px;
+				}
+
+				.top {
+					top: 55px;
+				}
+			}
+
+			@media all and (max-height: 350px) {
+				.loading-text,
+				.loading-text d {
+					font-size: 50px;
+				}
+
+				.version,
+				.version d {
+					font-size: 20px;
+				}
+
+				.menu-container {
+					overflow-x: scroll;
+					bottom: 0;
+					margin: 20px 0;
+					padding: 0 20px;
+				}
+
+				.menu {
+					justify-content: left;
+					flex-wrap: nowrap;
+					text-wrap: nowrap;
+				}
+
+				.menu .button:hover,
+				.menu .button:focus {
+					transform: none;
+				}
+
+				.menu div:last-child {
+					display: block;
+					background-color: var(--black);
 				}
 			}
 
@@ -645,15 +759,30 @@
 				.title {
 					margin-top: 80px;
 				}
+
+				.top {
+					top: 70px;
+				}
 			}
 
 			@media all and (max-width: 265px) {
 				.title {
 					margin-top: 100px;
 				}
+
+				.top {
+					top: 90px;
+				}
 			}
 
 			@media all and (max-width: 250px) {
+				.all-container *,
+				.loading-container {
+					display: none;
+				}
+			}
+
+			@media all and (max-height: 250px) {
 				.all-container *,
 				.loading-container {
 					display: none;
@@ -670,47 +799,60 @@
 				<a href="https://fontawesome.com/" target="_blank" title="fontawesome.com [EXTERNAL]">Font Awesome</a> in any way
 			</p>
 			<div class="main-panel">
-				<div class="info">
-					<div class="button" tabindex="0" title="copy icon flavour (?)" id="button-flavour">loading...</div>
-					<div class="button" tabindex="0" title="copy icon style" id="button-style">loading...</div>
-					<div class="button" tabindex="0" title="copy icon name" id="button-name">loading...</div>
-					<div class="button" tabindex="0" title="view Font Awesome plans [EXTERNAL]" id="button-plan">loading...</div>
-				</div>
-				<div class="search">
-					<input name="search-box" type="text" placeholder="enter an icon name; press ENTER to view" title="shortcut: I — focus on text field" autocomplete="off" />
-					<div title="if the icon exists, show it"><i class="fa-solid fa-circle-check button" tabindex="0" id="search-enter"></i></div>
-					<div title="clear entry"><i class="fa-solid fa-circle-xmark button" tabindex="0" id="search-clear"></i></div>
+				<div class="top">
+					<div class="info">
+						<div class="button" tabindex="0" title="copy icon flavour (?)" id="button-flavour">loading...</div>
+						<div class="button" tabindex="0" title="copy icon style" id="button-style">loading...</div>
+						<div class="button" tabindex="0" title="copy icon name" id="button-name">loading...</div>
+						<div class="button" tabindex="0" title="view Font Awesome plans [EXTERNAL]" id="button-plan">loading...</div>
+					</div>
+					<div class="search">
+						<input
+							name="search-box"
+							type="text"
+							placeholder="enter an icon name; press ENTER to view"
+							title="shortcut: I — focus on text field"
+							autocomplete="off"
+						/>
+						<div title="if the icon exists, show it"><i class="fa-solid fa-circle-check button" tabindex="0" id="search-enter" aria-hidden="false"></i></div>
+						<div title="clear entry"><i class="fa-solid fa-circle-xmark button" tabindex="0" id="search-clear" aria-hidden="false"></i></div>
+					</div>
 				</div>
 				<div class="icon" title="you can also click the icon to generate">
 					<i id="random-icon">loading...</i>
 				</div>
-				<div class="menu">
-					<div class="button" tabindex="0" title="shortcut: ENTER — show a random icon" id="button-generate">
-						<i class="fa-light fa-arrows-rotate"></i>GENERATE!!
+				<div class="menu-container">
+					<div class="menu">
+						<div class="button" tabindex="0" title="shortcut: ENTER — show a random icon" id="button-generate">
+							<i class="fa-light fa-arrows-rotate"></i>GENERATE!!
+						</div>
+						<div tabindex="0" title="shortcut: LEFT (arrow) — view the previous icon" id="button-previous"><i class="fa-light fa-angles-left"></i>previous</div>
+						<div tabindex="0" title="shortcut: RIGHT (arrow) — view the next icon" id="button-next"><i class="fa-light fa-angles-right"></i>next</div>
+						<div class="button" tabindex="0" title="shortcut: SPACE — choose between classic, sharp, duotone, etc." id="button-styles">
+							<i class="fa-light fa-palette"></i>select style
+						</div>
+						<div tabindex="0" title="shortcut: BACKSPACE — view the first icon and clear icon history" id="button-reset">
+							<i class="fa-light fa-trash-arrow-up"></i>reset
+						</div>
+						<div class="button" tabindex="0" title="shortcut: C — copy a link to this icon on this page" id="button-link">
+							<i class="fa-light fa-clipboard"></i>copy link to icon preview
+						</div>
+						<div class="button" tabindex="0" title="shortcut: O — view this icon on fontawesome.com [EXTERNAL]" id="button-external">
+							<i class="fa-light fa-font-awesome"></i>view on official site
+						</div>
+						<div class="button" tabindex="0" title="shortcut: F — toggle fullscreen mode (has some quirks)" id="button-fullscreen">
+							<i class="fa-light fa-expand"></i>fullscreen*
+						</div>
+						<div class="button" tabindex="0" title="shortcut: H — show/hide the purple buttons" id="button-menu">
+							<i class="fa-light fa-sunglasses"></i>hide menu
+						</div>
+						<div class="button" tabindex="0" title="shortcut: J — show/hide the icon info" id="button-info"><i class="fa-light fa-eye-slash"></i>hide info</div>
+						<div class="button" tabindex="0" title="shortcut: ? — open the help/about panel" id="button-help">
+							<i class="fa-light fa-circle-question"></i>what is this?
+						</div>
+						<div class="button" tabindex="0" title="return to Projects+" id="button-exit"><i class="fa-light fa-door-open"></i>exit</div>
+						<div></div>
 					</div>
-					<div tabindex="0" title="shortcut: LEFT (arrow) — view the previous icon" id="button-previous"><i class="fa-light fa-angles-left"></i>previous</div>
-					<div tabindex="0" title="shortcut: RIGHT (arrow) — view the next icon" id="button-next"><i class="fa-light fa-angles-right"></i>next</div>
-					<div class="button" tabindex="0" title="shortcut: SPACE — choose between classic, sharp, duotone, etc." id="button-styles">
-						<i class="fa-light fa-palette"></i>select style
-					</div>
-					<div tabindex="0" title="shortcut: BACKSPACE — view the first icon and clear icon history" id="button-reset">
-						<i class="fa-light fa-trash-arrow-up"></i>reset
-					</div>
-					<div class="button" tabindex="0" title="shortcut: C — copy a link to this icon on this page" id="button-link">
-						<i class="fa-light fa-clipboard"></i>copy link to icon preview
-					</div>
-					<div class="button" tabindex="0" title="shortcut: O — view this icon on fontawesome.com [EXTERNAL]" id="button-external">
-						<i class="fa-light fa-font-awesome"></i>view on official site
-					</div>
-					<div class="button" tabindex="0" title="shortcut: F — toggle fullscreen mode (has some quirks)" id="button-fullscreen">
-						<i class="fa-light fa-expand"></i>fullscreen*
-					</div>
-					<div class="button" tabindex="0" title="shortcut: H — show/hide the purple buttons" id="button-menu"><i class="fa-light fa-sunglasses"></i>hide menu</div>
-					<div class="button" tabindex="0" title="shortcut: J — show/hide the icon info" id="button-info"><i class="fa-light fa-eye-slash"></i>hide info</div>
-					<div class="button" tabindex="0" title="shortcut: ? — open the help/about panel" id="button-help">
-						<i class="fa-light fa-circle-question"></i>what is this?
-					</div>
-					<div class="button" tabindex="0" title="return to Projects+" id="button-exit"><i class="fa-light fa-door-open"></i>exit</div>
 				</div>
 				<div class="alert-space"></div>
 			</div>
@@ -779,9 +921,10 @@
 					<a href="https://fontawesome.com/" target="_blank" title="fontawesome.com [EXTERNAL]">Font Awesome</a> icon generator. Thanks for coming. This complete
 					rewrite of the <a href="icons-old.html" title="fa-random, legacy version" target="_blank">original page</a> has every single icon and style, which is
 					possible because I am now the proud owner of a
-					<a href="../posts/2024-07-08.html#icons" title="Costs &amp; Limitations — Blog Post (2024/07/08)">Font Awesome Pro license</a>.<br /><br />If you
-					don&rsquo;t understand how to use this tool, hover over things for slightly more information about what they do. There isn&rsquo;t much more I can tell
-					you.<br /><br />This project uses the font
+					<a href="../posts/2024-07-08.html#icons" title="Costs &amp; Limitations — Blog Post (2024/07/08)">Font Awesome Pro license</a>. The name
+					&ldquo;fa-random&rdquo; comes from the icons&rsquo; CSS, where every class name starts with &ldquo;fa-&rdquo;, which stands for Font Awesome. There is no
+					&ldquo;random&rdquo; icon, but that&rsquo;s what this tool provides.<br /><br />If you don&rsquo;t understand how to use this tool, hover over things for
+					slightly more information about what they do. There isn&rsquo;t much more I can tell you.<br /><br />This project uses the font
 					<a href="../posts/2024-07-16.html" title="I bought 780+ fonts. — Blog Post (2024/07/16)">&ldquo;Pangram Sans Rounded&rdquo; from Pangram Pangram Foundry</a
 					>.<br /><br />If this help/about page hasn&rsquo;t satisfied your thirst for <a href="../index.html" title="~ home ~">pinniped.page</a>-related knowledge,
 					please don&rsquo;t hesitate to <a href="https://pinniped.page/discord" target="_blank" title="join my Discord server [EXTERNAL]">reach out on Discord</a>.
@@ -5692,7 +5835,7 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			const version = "v2.0.0-beta3 (2024/07/29)";
+			const version = "v2.0.0-beta4 (2024/07/30)";
 			document.querySelector("#version").innerHTML = version;
 			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
 			console.log(`%cINFO:`, infoStyle, `fa-random ${version}`);
