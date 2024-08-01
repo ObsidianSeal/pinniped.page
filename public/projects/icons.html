@@ -22,6 +22,8 @@
 
 		<link rel="icon" href="../images/icon.png" />
 
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
 		<style>
 			@font-face {
 				font-family: "PP Pangram Sans Rounded";
@@ -129,7 +131,7 @@
 				display: flex;
 				justify-content: space-between;
 				width: calc(100% - 40px);
-				flex-wrap: wrap;
+				flex-wrap: wrap-reverse;
 				gap: 20px;
 			}
 
@@ -835,7 +837,7 @@
 							<i class="fa-light fa-trash-arrow-up"></i>reset
 						</div>
 						<div class="button" tabindex="0" title="shortcut: C — copy a link to this icon on this page" id="button-link">
-							<i class="fa-light fa-clipboard"></i>copy link to icon preview
+							<i class="fa-light fa-clipboard"></i>copy icon preview link
 						</div>
 						<div class="button" tabindex="0" title="shortcut: O — view this icon on fontawesome.com [EXTERNAL]" id="button-external">
 							<i class="fa-light fa-font-awesome"></i>view on official site
@@ -859,52 +861,57 @@
 			<div class="style-panel">
 				<div class="title">
 					<b>Select an icon style:</b
-					><b id="style-panel-exit" title="leave style selection (changes are saved)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
+					><b id="style-panel-exit" title="shortcut: SPACE — leave style selection (changes are saved)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
+				</div>
+
+				<div class="help-content">
+					Future icons will be displayed in the selected style&thinsp;—&thinsp;highlighted in green. If you select a different style than before, the current icon
+					will be duplicated in that style.
 				</div>
 
 				<div class="style-container">
 					<div class="style-section">
 						<span>classic</span>
-						<div class="style-option selected-style" title="set &ldquo;classic, solid&rdquo; as the styles to show new icons in" tabindex="0" id="classic.solid">
+						<div class="style-option selected-style" title="set &ldquo;classic, solid&rdquo; as the style to show new icons in" tabindex="0" id="classic.solid">
 							<i class="fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
-						<div class="style-option" title="set &ldquo;classic, regular&rdquo; as the styles to show new icons in" tabindex="0" id="classic.regular">
+						<div class="style-option" title="set &ldquo;classic, regular&rdquo; as the style to show new icons in" tabindex="0" id="classic.regular">
 							<i class="fa-regular fa-icons"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
-						<div class="style-option" title="set &ldquo;classic, light&rdquo; as the styles to show new icons in" tabindex="0" id="classic.light">
+						<div class="style-option" title="set &ldquo;classic, light&rdquo; as the style to show new icons in" tabindex="0" id="classic.light">
 							<i class="fa-light fa-icons"></i>light<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
-						<div class="style-option" title="set &ldquo;classic, thin&rdquo; as the styles to show new icons in" tabindex="0" id="classic.thin">
+						<div class="style-option" title="set &ldquo;classic, thin&rdquo; as the style to show new icons in" tabindex="0" id="classic.thin">
 							<i class="fa-thin fa-icons"></i>thin<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
 					</div>
 
 					<div class="style-section">
 						<span>duotone</span>
-						<div class="style-option" title="set &ldquo;duotone, solid&rdquo; as the styles to show new icons in" tabindex="0" id="duotone.solid">
+						<div class="style-option" title="set &ldquo;duotone, solid&rdquo; as the style to show new icons in" tabindex="0" id="duotone.solid">
 							<i class="fa-duotone fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
 					</div>
 
 					<div class="style-section">
 						<span>sharp</span>
-						<div class="style-option" title="set &ldquo;sharp, solid&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.solid">
+						<div class="style-option" title="set &ldquo;sharp, solid&rdquo; as the style to show new icons in" tabindex="0" id="sharp.solid">
 							<i class="fa-sharp fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
-						<div class="style-option" title="set &ldquo;sharp, regular&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.regular">
+						<div class="style-option" title="set &ldquo;sharp, regular&rdquo; as the style to show new icons in" tabindex="0" id="sharp.regular">
 							<i class="fa-sharp fa-regular fa-icons"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
-						<div class="style-option" title="set &ldquo;sharp, light&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.light">
+						<div class="style-option" title="set &ldquo;sharp, light&rdquo; as the style to show new icons in" tabindex="0" id="sharp.light">
 							<i class="fa-sharp fa-light fa-icons"></i>light<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
-						<div class="style-option" title="set &ldquo;sharp, thin&rdquo; as the styles to show new icons in" tabindex="0" id="sharp.thin">
+						<div class="style-option" title="set &ldquo;sharp, thin&rdquo; as the style to show new icons in" tabindex="0" id="sharp.thin">
 							<i class="fa-sharp fa-thin fa-icons"></i>thin<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
 					</div>
 
 					<div class="style-section">
 						<span>sharp-duotone</span>
-						<div class="style-option" title="set &ldquo;sharp-duotone, solid&rdquo; as the styles to show new icons in" tabindex="0" id="sharp-duotone.solid">
+						<div class="style-option" title="set &ldquo;sharp-duotone, solid&rdquo; as the style to show new icons in" tabindex="0" id="sharp-duotone.solid">
 							<i class="fa-sharp-duotone fa-solid fa-icons"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
 					</div>
@@ -913,18 +920,19 @@
 			<div class="help-panel">
 				<div class="title">
 					<b>What&rsquo;s all this then!?</b
-					><b id="help-panel-exit" title="leave help page (thanks for reading)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
+					><b id="help-panel-exit" title="shortcut: ? — leave help page (thanks for reading)" tabindex="0"><i class="fa-solid fa-arrow-left"></i>RETURN</b>
 				</div>
 
 				<div class="help-content">
 					Welcome to &ldquo;fa-random&rdquo;, my <a href="https://coolors.co/" target="_blank" title="coolors.co [EXTERNAL]">Coolors</a>-style, random
 					<a href="https://fontawesome.com/" target="_blank" title="fontawesome.com [EXTERNAL]">Font Awesome</a> icon generator. Thanks for coming. This complete
-					rewrite of the <a href="icons-old.html" title="fa-random, legacy version" target="_blank">original page</a> has every single icon and style, which is
-					possible because I am now the proud owner of a
-					<a href="../posts/2024-07-08.html#icons" title="Costs &amp; Limitations — Blog Post (2024/07/08)">Font Awesome Pro license</a>. The name
+					rewrite of the <a href="icons-old.html" title="fa-random, legacy version; will eventually lead to an error 404" target="_blank">original page</a> has every
+					single icon and style, which is possible because I am now the proud owner of a
+					<a href="../posts/2024-07-08.html#icons" title="Costs &amp; Limitations — Blog Post (2024/07/08)">Font Awesome Pro license</a>.<br /><br />The name
 					&ldquo;fa-random&rdquo; comes from the icons&rsquo; CSS, where every class name starts with &ldquo;fa-&rdquo;, which stands for Font Awesome. There is no
-					&ldquo;random&rdquo; icon, but that&rsquo;s what this tool provides.<br /><br />If you don&rsquo;t understand how to use this tool, hover over things for
-					slightly more information about what they do. There isn&rsquo;t much more I can tell you.<br /><br />This project uses the font
+					&ldquo;random&rdquo; icon, but that&rsquo;s what this tool provides.<br /><br />The style of the current icon is the style that future icons will be
+					displayed in. Keep this in mind when looking through your icon history.<br /><br />If you don&rsquo;t understand how to use this tool, hover over things
+					for slightly more information about what they do. There isn&rsquo;t much more I can tell you.<br /><br />This project uses the font
 					<a href="../posts/2024-07-16.html" title="I bought 780+ fonts. — Blog Post (2024/07/16)">&ldquo;Pangram Sans Rounded&rdquo; from Pangram Pangram Foundry</a
 					>.<br /><br />If this help/about page hasn&rsquo;t satisfied your thirst for <a href="../index.html" title="~ home ~">pinniped.page</a>-related knowledge,
 					please don&rsquo;t hesitate to <a href="https://pinniped.page/discord" target="_blank" title="join my Discord server [EXTERNAL]">reach out on Discord</a>.
@@ -5835,7 +5843,7 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			const version = "v2.0.0-beta4 (2024/07/30)";
+			const version = "v2.0.0-beta5 (2024/08/01)";
 			document.querySelector("#version").innerHTML = version;
 			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
 			console.log(`%cINFO:`, infoStyle, `fa-random ${version}`);
@@ -5947,9 +5955,16 @@
 			}
 			document.querySelector("#button-generate").addEventListener("click", () => generate());
 
+			function updateStyles() {
+				selectedFlavour = flavourMemory[index];
+				selectedStyle = styleMemory[index];
+				setStyles(document.getElementById(`${selectedFlavour}.${selectedStyle}`));
+			}
+
 			function previousIcon() {
 				if (index > 0) setIcon(flavourMemory[index - 1], styleMemory[index - 1], iconMemory[--index]);
 				else sendAlert("left-long-to-line", "first icon in history reached");
+				updateStyles();
 			}
 			document.querySelector("#button-previous").addEventListener("click", () => {
 				previousIcon();
@@ -5957,21 +5972,40 @@
 			function nextIcon() {
 				if (index < iconMemory.length - 1) setIcon(flavourMemory[index + 1], styleMemory[index + 1], iconMemory[++index]);
 				else sendAlert("right-long-to-line", "most recent icon in history reached");
+				updateStyles();
 			}
 			document.querySelector("#button-next").addEventListener("click", () => {
 				nextIcon();
 			});
 
 			var styleSelectOpen = false;
+			var previousFlavour, previousStyle;
+
 			function styleSelect() {
 				if (styleSelectOpen) {
 					document.querySelector(".main-panel").style.display = "flex";
 					document.querySelector(".style-panel").style.display = "none";
 
-					sendAlert("paintbrush", `styles have been updated: ${selectedFlavour} + ${selectedStyle}`);
+					if (selectedFlavour != previousFlavour || selectedStyle != previousStyle) {
+						sendAlert("paintbrush", `styles have been updated: ${selectedFlavour} + ${selectedStyle}`);
+
+						flavourMemory.push(selectedFlavour);
+						styleMemory.push(selectedStyle);
+						iconMemory.push(iconMemory[index]);
+
+						index = iconMemory.length - 1;
+						setIcon(flavourMemory[index], styleMemory[index], iconMemory[index]);
+					} else sendAlert("paint-roller", `continuing with previous styles`);
 				} else {
 					document.querySelector(".main-panel").style.display = "none";
 					document.querySelector(".style-panel").style.display = "block";
+
+					document.querySelectorAll(".style-option i:first-child").forEach((icon) => {
+						icon.classList.replace(icon.classList[icon.classList.length - 1], `fa-${iconMemory[index]}`);
+					});
+
+					previousFlavour = selectedFlavour;
+					previousStyle = selectedStyle;
 				}
 
 				styleSelectOpen = !styleSelectOpen;
@@ -6056,10 +6090,12 @@
 			function toggleInfo() {
 				if (infoHidden) {
 					document.querySelector(".info").style.display = "flex";
+					document.querySelector(".top").style = "";
 					document.querySelector("#button-info").innerHTML = `<i class="fa-light fa-eye-slash"></i>hide info`;
 					sendAlert("eye", "icon info has returned");
 				} else {
 					document.querySelector(".info").style.display = "none";
+					document.querySelector(".top").style = "flex-direction: row-reverse";
 					document.querySelector("#button-info").innerHTML = `<i class="fa-light fa-eye"></i>show info`;
 					sendAlert("eye-slash", "icon info is now hidden");
 				}
@@ -6271,7 +6307,5 @@
 			document.querySelector(".all-container").style.display = "initial";
 			document.querySelector(".loading-container").style.display = "none";
 		</script>
-
-		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 	</body>
 </html>
