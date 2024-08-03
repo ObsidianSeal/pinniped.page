@@ -5853,7 +5853,7 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			const version = "v2.0.0 (2024/08/02)";
+			const version = "v2.0.1 (2024/08/03)";
 			document.querySelector("#version").innerHTML = version;
 			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
 			console.log(`%cINFO:`, infoStyle, `fa-random ${version}`);
@@ -6035,6 +6035,8 @@
 					document.querySelector("#button-next").classList.remove("button");
 					document.querySelector("#button-reset").classList.remove("button");
 					index = 0;
+					selectedFlavour = flavourMemory[0];
+					selectedStyle = styleMemory[0];
 				} else {
 					sendAlert("ban", "there is no history to clear");
 				}
