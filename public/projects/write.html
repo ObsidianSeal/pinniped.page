@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Typewriter Simulator</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/write" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Typewriter Simulator" />
+		<meta property="og:description" content="A place to write simply, like it&rsquo;s 1921." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			@font-face {
+				font-family: "PP Neue Montreal";
+				font-weight: normal;
+				src: url("../files/PPNeueMontreal-Regular.woff2");
+			}
+			@font-face {
+				font-family: "PP Neue Montreal";
+				font-weight: bold;
+				src: url("../files/PPNeueMontreal-Bold.woff2");
+			}
+
+			@font-face {
+				font-family: "Select Mono";
+				src: url("../files/SelectMono-Italic.woff");
+			}
+			@font-face {
+				font-family: "Computer Modern";
+				src: url("../files/ComputerModern-SerifRoman.woff2");
+			}
+			@font-face {
+				font-family: "PP Writer";
+				src: url("../files/PPWriter-Regular.woff2");
+			}
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			::-webkit-scrollbar {
+				width: 0;
+			}
+
+			body {
+				background-color: #eeeeee;
+				padding: 50px;
+
+				font-size: 20px;
+				font-family: "PP Neue Montreal";
+				font-weight: normal;
+			}
+
+			.main-content {
+				display: flex;
+				justify-content: center;
+			}
+
+			textarea {
+				width: 7.5in;
+				height: 10in;
+
+				padding: 0.5in;
+
+				outline: none;
+				resize: none;
+
+				font-size: 16pt;
+				font-family: "PP Neue Montreal";
+				font-weight: normal;
+
+				line-height: 1.25em;
+			}
+
+			@media print {
+				body {
+					padding: 0;
+				}
+
+				textarea {
+					width: 100vw;
+					height: 100vh;
+				}
+			}
+
+			.hide {
+				display: none;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				font-weight: bold;
+			}
+
+			h1 {
+				font-size: 64px;
+				margin-bottom: 30px;
+			}
+
+			h2 {
+				font-size: 36px;
+				margin-bottom: 10px;
+			}
+
+			.alert {
+				border: 2px solid #f05454;
+				padding: 8px;
+				position: relative;
+				width: fit-content;
+				margin-bottom: 30px;
+				max-width: 700px;
+			}
+
+			.alert i {
+				font-size: 24px;
+				background-color: #eeeeee;
+				padding: 3px 5px;
+				position: absolute;
+				top: -16px;
+				left: -18px;
+				color: #f05454;
+			}
+
+			.alert p {
+				margin-top: 14px;
+			}
+
+			.font-option {
+				background-color: black;
+				color: white;
+				padding: 5px 15px;
+				margin-bottom: 10px;
+				font-size: 30px;
+				width: fit-content;
+				min-height: 40px;
+				display: flex;
+				align-items: center;
+				gap: 5px 30px;
+				transition: color 0.5s;
+				flex-wrap: wrap;
+			}
+
+			.font-option i {
+				margin: 0 10px 0 0;
+				transition: margin 0.5s;
+			}
+
+			.font-option:hover i {
+				margin: 0 0 0 10px;
+			}
+
+			.font-option:hover {
+				color: #51ffae;
+				cursor: pointer;
+			}
+
+			span {
+				opacity: 50%;
+			}
+
+			@media all and (max-width: 450px) {
+				h1 {
+					font-size: 36px;
+				}
+
+				h2 {
+					font-size: 24px;
+				}
+			}
+
+			@media all and (max-width: 250px) {
+				* {
+					display: none;
+				}
+			}
+
+			@media all and (max-height: 250px) {
+				* {
+					display: none;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="main-content hide">
+			<textarea></textarea>
+		</div>
+		<div class="welcome">
+			<h1>Welcome!</h1>
+
+			<div class="alert">
+				<i class="fa-solid fa-triangle-exclamation"></i>
+				<p>
+					Until I figure out how to better optimize this page for printing, if you want this page to print as it appears, you will probably have to carefully adjust
+					your print settings.
+				</p>
+			</div>
+
+			<div class="alert">
+				<i class="fa-solid fa-triangle-exclamation"></i>
+				<p>This page WILL NOT save your work. Write, then copy or print.</p>
+			</div>
+
+			<h2>Which font would you like to use?</h2>
+
+			<div class="font-options">
+				<div class="font-option" style="font-family: 'PP Neue Montreal'" onclick="setFont('PP Neue Montreal')">
+					Neue Montreal <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
+				</div>
+				<div class="font-option" style="font-family: 'Select Mono'" onclick="setFont('Select Mono')">
+					Select Mono <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
+				</div>
+				<div class="font-option" style="font-family: 'Computer Modern'" onclick="setFont('Computer Modern')">
+					Computer Modern <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
+				</div>
+				<div class="font-option" style="font-family: 'PP Writer'" onclick="setFont('PP Writer')">
+					Writer <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		function setFont(fontName) {
+			document.querySelector("textarea").style = `font-family: "${fontName}"`;
+
+			document.querySelector(".welcome").classList.add("hide");
+			document.querySelector(".main-content").classList.remove("hide");
+
+			document.querySelector("textarea").focus();
+
+			window.onbeforeunload = function () {
+				return true;
+			};
+		}
+	</script>
+</html>

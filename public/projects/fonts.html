@@ -39,8 +39,10 @@
 			@import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed");
 			@import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed");
 			@import url("https://fonts.googleapis.com/css2?family=Fira+Mono");
+			@import url("https://fonts.googleapis.com/css2?family=Forum");
 			@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great");
 			@import url("https://fonts.googleapis.com/css2?family=Fredoka");
+			@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono");
 			@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans");
 			@import url("https://fonts.googleapis.com/css2?family=Lobster");
 			@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy");
@@ -53,6 +55,7 @@
 			@import url("https://fonts.googleapis.com/css2?family=Oswald");
 			@import url("https://fonts.googleapis.com/css2?family=Playfair+Display");
 			@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P");
+			@import url("https://fonts.googleapis.com/css2?family=PT+Serif");
 			@import url("https://fonts.googleapis.com/css2?family=Quicksand");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto");
 			@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed");
@@ -69,12 +72,12 @@
 				src: url("../files/Chomsky.woff2");
 			}
 			@font-face {
-				font-family: "Computer Modern Serif Italic";
-				src: url("../files/ComputerModern-SerifItalic.woff2");
+				font-family: "Computer Modern";
+				src: url("../files/ComputerModern-SerifRoman.woff2");
 			}
 			@font-face {
-				font-family: "Computer Modern Serif Roman";
-				src: url("../files/ComputerModern-SerifRoman.woff2");
+				font-family: "Computer Modern Italic";
+				src: url("../files/ComputerModern-SerifItalic.woff2");
 			}
 			@font-face {
 				font-family: "JetBrains Mono";
@@ -89,16 +92,20 @@
 				src: url("../files/Norse.woff2");
 			}
 			@font-face {
-				font-family: "Pangram Sans Rounded Bold";
-				src: url("../files/PPPangramSansRounded-Bold.woff2");
-			}
-			@font-face {
-				font-family: "Pangram Sans Rounded Regular";
+				font-family: "Pangram Sans Rounded";
 				src: url("../files/PPPangramSansRounded-Regular.woff2");
 			}
 			@font-face {
 				font-family: "Select Mono";
 				src: url("../files/SelectMono-Italic.woff");
+			}
+			@font-face {
+				font-family: "Writer";
+				src: url("../files/PPWriter-Regular.woff2");
+			}
+			@font-face {
+				font-family: "Writer Italic";
+				src: url("../files/PPWriter-RegularItalic.woff2");
 			}
 
 			/* monkeytype onedark theme */
@@ -400,19 +407,22 @@
 			"Bungee",
 			"Chomsky",
 			"Comfortaa",
-			"Computer Modern Serif Italic",
-			"Computer Modern Serif Roman",
+			"Computer Modern",
+			"Computer Modern Italic",
 			"Courier Prime",
 			"cubano",
+			"degular-display",
 			"Didact Gothic",
 			"Fira Sans",
 			"Fira Sans Condensed",
 			"Fira Sans Extra Condensed",
 			"Fira Mono",
+			"Forum",
 			"Fredericka the Great",
 			"Fredoka",
 			"gooddog-new",
 			"hydrophilia-iced",
+			"IBM Plex Mono",
 			"JetBrains Mono",
 			"Josefin Sans",
 			"Lobster",
@@ -428,10 +438,10 @@
 			"Nunito",
 			"Open Sans",
 			"Oswald",
-			"Pangram Sans Rounded Bold",
-			"Pangram Sans Rounded Regular",
+			"Pangram Sans Rounded",
 			"Playfair Display",
 			"Press Start 2P",
+			"PT Serif",
 			"rig-solid-medium-fill",
 			"Roboto",
 			"Roboto Condensed",
@@ -439,13 +449,17 @@
 			"Roboto Mono",
 			"Roboto Serif",
 			"Roboto Slab",
+			"roca",
 			"Select Mono",
 			"Sniglet",
 			"Space Grotesk",
 			"Space Mono",
+			"swear-display",
+			"Writer",
+			"Writer Italic",
 		];
 
-		const version = "1.0.3";
+		const version = "1.0.4";
 		console.log(`fonts v${version} - ${fonts.length} fonts, ${texts.length} texts`);
 
 		function getRandomFont() {
@@ -456,11 +470,14 @@
 			if (fontName == "blockhead-dark-side") fontName = "Blockhead Dark Side";
 			if (fontName == "cubano") fontName = "Cubano";
 			if (fontName == "bebas-neue-rounded") fontName = "Bebas Neue Rounded";
+			if (fontName == "degular-display") fontName = "Degular Display";
 			if (fontName == "gooddog-new") fontName = "GoodDog New";
 			if (fontName == "hydrophilia-iced") fontName = "Hydrophilia Iced";
 			if (fontName == "miller-text") fontName = "Miller Text";
 			if (fontName == "mono45-headline") fontName = "Mono45 Headline";
 			if (fontName == "rig-solid-medium-fill") fontName = "Rig Solid Medium Fill";
+			if (fontName == "roca") fontName = "Roca";
+			if (fontName == "swear-display") fontName = "Swear Display";
 			return fontName;
 		}
 

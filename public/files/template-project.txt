@@ -16,7 +16,7 @@
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
-		<meta property="og:url" content="https://pinniped.page/???" />
+		<meta property="og:url" content="https://pinniped.page/projects/???" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="title" />
 		<meta property="og:description" content="description" />
