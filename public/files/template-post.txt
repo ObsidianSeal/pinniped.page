@@ -26,6 +26,9 @@
 		<meta property="og:description" content="???" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+
 		<style>
 			::-webkit-scrollbar-thumb:hover {
 				background-color: #ff6b6b;

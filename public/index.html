@@ -4,32 +4,28 @@
 	<head>
 		<title>pinniped.page</title>
 
-		<meta
-			name="description"
-			content="A space for Obsidian_Seal to post information about projects he's working on, downloads for things he's made, and random other stuff."
-		/>
-
 		<meta charset="UTF-8" />
-
-		<link rel="icon" href="images/icon.png" />
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#ffffee" />
 
-		<meta name="keywords" content="pinniped, page, obsidian_seal, seal, walrus, penguin, minecraft, plugins, discord, code, programming, projects, blog" />
-
-		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+		<link rel="icon" href="images/icon.png" />
 		<link rel="stylesheet" href="files/main.css" />
 
 		<script src="files/menu.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
 		<meta property="og:url" content="https://pinniped.page/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="The Pinniped Page" />
 		<meta property="og:description" content="Obsidian_Seal&rsquo;s Website" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta
+			name="description"
+			content="A space for Obsidian_Seal to post information about projects he&rsquo;s working on, downloads for things he&rsquo;s made, and random other stuff."
+		/>
+		<meta name="keywords" content="pinniped, page, obsidian_seal, seal, walrus, penguin, minecraft, plugins, discord, code, programming, projects, blog" />
 
 		<style>
 			.hidden {
@@ -85,15 +81,15 @@
 			</div>
 		</div>
 
-		<div class="notice" id="notice">
-			<p>
-				<!-- can change icon, icon colour, and text -- make sure to check .js -->
-				<i class="fa-solid fa-face-grin-beam" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i
-				><span class="invert" id="notice-text">thank you Firebase support, hopefully everything is back to normal</span
-				><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i
-				><i class="fa-solid fa-angle-right notice-x" id="notice-arrow" style="display: none" onclick="hideNotice()"></i>
-			</p>
-		</div>
+		<!-- <div class="notice" id="notice"> -->
+		<!-- <p> -->
+		<!-- can change icon, icon colour, and text -- make sure to check .js -->
+		<!-- <i class="fa-solid fa-face-grin-beam" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i -->
+		<!-- ><span class="invert" id="notice-text">thank you Firebase support, hopefully everything is back to normal</span -->
+		<!-- ><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i -->
+		<!-- ><i class="fa-solid fa-angle-right notice-x" id="notice-arrow" style="display: none" onclick="hideNotice()"></i> -->
+		<!-- </p> -->
+		<!-- </div> -->
 
 		<div class="footer" style="background: #ffffee"></div>
 		<div class="footer" style="background: #ff6b6b"></div>
@@ -181,6 +177,9 @@
 				"I love Firebase support",
 				"maybe the real websites are the friends we made along the way",
 				"made by, of, and for humans!",
+				"there used to be messages in the bottom left, but not anymore!",
+				"try the Playlists, they&rsquo;re delicious",
+				"with a copious amount of icons, so I can get my money&rsquo;s worth",
 			];
 
 			let x = Math.floor(Math.random() * subtitles.length);
@@ -188,29 +187,29 @@
 
 			// ------- notice -------
 
-			var noticeHidden = false;
+			// var noticeHidden = false;
 
-			function hideNotice() {
-				if (!noticeHidden) {
-					setTimeout(() => {
-						if (noticeHidden) document.getElementById("notice").classList.add("hidden");
-					}, 2000);
+			// function hideNotice() {
+			// 	if (!noticeHidden) {
+			// 		setTimeout(() => {
+			// 			if (noticeHidden) document.getElementById("notice").classList.add("hidden");
+			// 		}, 2000);
 
-					// HIDE NOTICE
-					document.getElementById("notice-text").style = "display: none"; // remove text
-					document.getElementById("notice-icon").style = "color: #4ecdc4"; // remove icon margin, CHANGE IF CHANGE ICON COLOUR!!!
-					document.getElementById("notice-x").style = "display: none"; // remove 'x'
-					document.getElementById("notice-arrow").style = "display: inline-block"; // show '>'
-				} else {
-					// SHOW NOTICE
-					document.getElementById("notice").classList.remove("hidden"); // keep notice on screen
-					document.getElementById("notice-text").style = "display: inline-block"; // show text
-					document.getElementById("notice-icon").style = "color: #4ecdc4; margin-right: 20px"; // add margin to icon, CHANGE IF CHANGE ICON COLOUR!!!
-					document.getElementById("notice-x").style = "display: inline-block"; // show 'x'
-					document.getElementById("notice-arrow").style = "display: none"; // remove '>'
-				}
-				noticeHidden = !noticeHidden;
-			}
+			// 		// HIDE NOTICE
+			// 		document.getElementById("notice-text").style = "display: none"; // remove text
+			// 		document.getElementById("notice-icon").style = "color: #4ecdc4"; // remove icon margin, CHANGE IF CHANGE ICON COLOUR!!!
+			// 		document.getElementById("notice-x").style = "display: none"; // remove 'x'
+			// 		document.getElementById("notice-arrow").style = "display: inline-block"; // show '>'
+			// 	} else {
+			// 		// SHOW NOTICE
+			// 		document.getElementById("notice").classList.remove("hidden"); // keep notice on screen
+			// 		document.getElementById("notice-text").style = "display: inline-block"; // show text
+			// 		document.getElementById("notice-icon").style = "color: #4ecdc4; margin-right: 20px"; // add margin to icon, CHANGE IF CHANGE ICON COLOUR!!!
+			// 		document.getElementById("notice-x").style = "display: inline-block"; // show 'x'
+			// 		document.getElementById("notice-arrow").style = "display: none"; // remove '>'
+			// 	}
+			// 	noticeHidden = !noticeHidden;
+			// }
 
 			// ------- footer position, subtitle visibility -------
 

@@ -21,6 +21,9 @@
 		<meta property="og:title" content="title" />
 		<meta property="og:description" content="description" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
 	</head>
 
 	<body>
