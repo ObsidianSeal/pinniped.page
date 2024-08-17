@@ -153,6 +153,7 @@
 				gap: 5px 30px;
 				transition: color 0.5s;
 				flex-wrap: wrap;
+				outline: none;
 			}
 
 			.font-option i {
@@ -160,11 +161,13 @@
 				transition: margin 0.5s;
 			}
 
-			.font-option:hover i {
+			.font-option:hover i,
+			.font-option:focus i {
 				margin: 0 0 0 10px;
 			}
 
-			.font-option:hover {
+			.font-option:hover,
+			.font-option:focus {
 				color: #51ffae;
 				cursor: pointer;
 			}
@@ -199,7 +202,7 @@
 
 	<body>
 		<div class="main-content hide">
-			<textarea></textarea>
+			<textarea id="page0"></textarea>
 		</div>
 		<div class="welcome">
 			<h1>Welcome!</h1>
@@ -220,16 +223,16 @@
 			<h2>Which font would you like to use?</h2>
 
 			<div class="font-options">
-				<div class="font-option" style="font-family: 'PP Neue Montreal'" onclick="setFont('PP Neue Montreal')">
+				<div class="font-option" tabindex="0" style="font-family: 'PP Neue Montreal'" onclick="setFont('PP Neue Montreal')">
 					Neue Montreal <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
 				</div>
-				<div class="font-option" style="font-family: 'Select Mono'" onclick="setFont('Select Mono')">
+				<div class="font-option" tabindex="0" style="font-family: 'Select Mono'" onclick="setFont('Select Mono')">
 					Select Mono <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
 				</div>
-				<div class="font-option" style="font-family: 'Computer Modern'" onclick="setFont('Computer Modern')">
+				<div class="font-option" tabindex="0" style="font-family: 'Computer Modern'" onclick="setFont('Computer Modern')">
 					Computer Modern <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
 				</div>
-				<div class="font-option" style="font-family: 'PP Writer'" onclick="setFont('PP Writer')">
+				<div class="font-option" tabindex="0" style="font-family: 'PP Writer'" onclick="setFont('PP Writer')">
 					Writer <span>(abc-123.,!)</span> <i class="fa-solid fa-angles-right"></i>
 				</div>
 			</div>
@@ -237,17 +240,48 @@
 	</body>
 
 	<script>
+		// list of fonts
+		const fonts = ["PP Neue Montreal", "Select Mono", "Computer Modern", "PP Writer"];
+
+		// set font to write with
 		function setFont(fontName) {
 			document.querySelector("textarea").style = `font-family: "${fontName}"`;
 
 			document.querySelector(".welcome").classList.add("hide");
 			document.querySelector(".main-content").classList.remove("hide");
 
+			// autofocus textarea
 			document.querySelector("textarea").focus();
 
+			// prevent accidental page closing
 			window.onbeforeunload = function () {
 				return true;
 			};
 		}
+
+		// select a font (enter key)
+		for (let i = 1; i <= fonts.length; i++) {
+			document.querySelector(`.font-option:nth-child(${i})`).addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					e.preventDefault();
+					setFont(fonts[i - 1]);
+				}
+			});
+		}
+
+		// general keyboard listener
+		addEventListener("keydown", (e) => {
+			// number keys to select a font, make 0 10
+			for (let i = 1; i <= fonts.length; i++) {
+				if (e.key === `${i}`) {
+					e.preventDefault();
+					setFont(fonts[i - 1]);
+				}
+			}
+			if (e.key === "0" && fonts.length >= 10) {
+				e.preventDefault();
+				setFont(fonts[9]);
+			}
+		});
 	</script>
 </html>

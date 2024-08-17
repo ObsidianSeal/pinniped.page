@@ -112,7 +112,7 @@ h5 {
 }
 
 h6 {
-	font-size: 16px;
+	font-size: 18px;
 }
 
 p,
@@ -704,7 +704,13 @@ ul {
 
 .post-header {
 	display: flex;
+	gap: 20px 50px;
 	justify-content: space-between;
+	flex-wrap: wrap-reverse;
+}
+
+.post-header span:last-child {
+	margin-left: auto;
 }
 
 .projects-colour {
@@ -895,11 +901,11 @@ ul {
 	}
 
 	h5 {
-		font-size: 16px;
+		font-size: 18px;
 	}
 
 	h6 {
-		font-size: 12px;
+		font-size: 16px;
 	}
 
 	.content {
@@ -921,10 +927,6 @@ ul {
 
 	.box-icon {
 		font-size: 60px;
-	}
-
-	.post-header span:last-child {
-		display: none;
 	}
 }
 

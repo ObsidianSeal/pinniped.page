@@ -19,7 +19,7 @@
 			},
 			{
 				"source": "/projects/brb",
-				"destination": "https://pinniped.page/s?s=503",
+				"destination": "../yikes.html?s=503",
 				"type": 302
 			}
 		],
