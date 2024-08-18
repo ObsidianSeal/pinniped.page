@@ -1088,6 +1088,11 @@ ul {
 		font-size: 18px;
 	}
 
+	ol,
+	ul {
+		padding-left: 30px;
+	}
+
 	.small-text {
 		font-size: 14px;
 	}

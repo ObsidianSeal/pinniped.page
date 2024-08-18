@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Status</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#ffe66d" />
+
+		<link rel="stylesheet" href="files/main.css" />
+		<link rel="stylesheet" href="files/scrollbar.css" />
+		<link rel="icon" href="images/icon.png" />
+
+		<script src="files/menu.js"></script>
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/status" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="pinniped.page — Status" />
+		<meta property="og:description" content="Monitor the status of services used and provided by the pinniped.page." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Monitor the status of services used and provided by the pinniped.page." />
+		<meta name="keywords" content="pinniped, page, obsidian_seal, seal, projects, blog, about, status, info" />
+
+		<style>
+			::-webkit-scrollbar-thumb:hover {
+				background-color: #ffe66d;
+			}
+
+			@media all and (max-width: 295px) {
+				.page-title i {
+					display: block;
+					margin: 20px 0 0;
+				}
+			}
+
+			hr {
+				margin-top: 60px;
+			}
+
+			.status-box {
+				display: flex;
+				gap: 0 50px;
+				justify-content: space-between;
+				margin-top: 60px;
+			}
+
+			.status-box p {
+				width: fit-content;
+				padding: 0 5px;
+				margin-top: 2px;
+				background-color: #292f36;
+				letter-spacing: 0.025em;
+			}
+
+			.status-bar {
+				display: flex;
+				position: relative;
+			}
+
+			.status-bar div {
+				width: 80px;
+				height: 30px;
+			}
+
+			.status-bar div:nth-child(1) {
+				background-color: #d7d8cb;
+			}
+
+			.status-bar div:nth-child(2) {
+				background-color: #949792;
+				margin-right: 20px;
+			}
+
+			.status-bar div:nth-child(3) {
+				background-color: #ff6b6b;
+			}
+
+			.status-bar div:nth-child(4) {
+				background-color: #ffe66d;
+			}
+
+			.status-bar div:nth-child(5) {
+				background-color: #4ecdc4;
+			}
+
+			.status-bar i {
+				font-size: 32px;
+				position: absolute;
+				top: 10px;
+			}
+
+			.status-upcoming {
+				color: #d7d8cb;
+			}
+
+			.status-maintenance {
+				color: #949792;
+			}
+
+			.status-critical {
+				color: #ff6b6b;
+			}
+
+			.status-minor {
+				color: #ffe66d;
+			}
+
+			.status-operational {
+				color: #4ecdc4;
+			}
+
+			.highlighted-box {
+				margin-top: 10px;
+			}
+
+			@media all and (max-width: 830px) {
+				.status-bar {
+					display: none;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a class="invert navbar-item item" href="index.html"><img class="navbar-icon" src="images/icon.png" alt="pinniped.page logo" /></a>
+			<a class="invert navbar-item item1" href="projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item2" href="blog.html"><p>Blog</p></a>
+			<a class="invert navbar-item item3" href="about.html"><p>About</p></a>
+
+			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
+			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		</div>
+
+		<div id="navbar-mobile">
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="index.html">Home</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="blog.html">Blog</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
+		</div>
+
+		<h2 class="page-title"><span class="half-opacity">pinniped.page/</span><span class="title title-3">status</span><i class="fa-solid fa-signal-bars"></i></h2>
+
+		<div class="content">
+			<h3 class="subheading">
+				<div><span class="title title-3">summary</span></div>
+				<i class="fa-solid fa-percent"></i>
+			</h3>
+			<h1 id="percentage"></h1>
+
+			<div class="download-button">
+				<a class="invert" id="download-link" href="https://docs.google.com/document/d/1DSCN7KvsPQahZsRxK2vRkkXe5rFov8GZRViIwIAEay8/pub" target="_blank">
+					COMPARE &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+				</a>
+			</div>
+
+			<hr />
+
+			<h3 class="subheading">
+				<div><span class="title title-3">main services</span></div>
+				<i class="fa-solid fa-star"></i>
+			</h3>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>CORE WEBSITE</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="highlighted-box blue">
+				<i class="fa-solid fa-mobile-screen"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 2:36<span class="small-text">AM</span></b
+					><br />This brand new page was just made mobile responsive and may still have some quirks.
+				</p>
+			</div>
+
+			<div class="highlighted-box blue">
+				<i class="fa-solid fa-align-left"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 2:02<span class="small-text">AM</span></b
+					><br />The &ldquo;About&rdquo; page will be rewritten soon.
+				</p>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>DISCORD BOT</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="highlighted-box light-grey">
+				<i class="fa-solid fa-plug"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 1:57<span class="small-text">AM</span></b
+					><br />This page is not connected to the bot yet.
+				</p>
+			</div>
+
+			<hr />
+
+			<h3 class="subheading">
+				<div><span class="title title-3">individual projects</span></div>
+				<i class="fa-solid fa-diagram-project"></i>
+			</h3>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;10/10 would recommend&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;BezierCurves&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Bus Ride Bingo&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="highlighted-box dark-grey">
+				<i class="fa-solid fa-traffic-cone"></i>
+
+				<p class="text">
+					<b>May 10th, 2024 @ 11:36<span class="small-text">PM</span></b
+					><br />The squares are not square.
+				</p>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;calc&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Chess — FEN preview&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;countdown&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;crosswords&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;fa-random&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Finite Craft&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;fOnT mAsHeR&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Guess the Font&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Hues+Cues&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;numbers&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;progress&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Rubik&rsquo;s Cube Scrambler&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Shrink to Fit&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Subject/Course Colour Graphs&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;text&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Think Four&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;TicTacToe&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="highlighted-box yellow">
+				<i class="fa-solid fa-person-to-door"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 1:52<span class="small-text">AM</span></b
+					><br />There may be issues that may include the exit button not working.
+				</p>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Type&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;Typewriter Simulator&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="highlighted-box yellow">
+				<i class="fa-solid fa-file-dashed-line"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 1:51<span class="small-text">AM</span></b
+					><br />Support for multiple pages has not yet been added.
+				</p>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;v&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="highlighted-box light-grey">
+				<i class="fa-solid fa-input-numeric"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 2:03<span class="small-text">AM</span></b
+					><br />Teeny tiny improvement coming soon.
+				</p>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>&ldquo;wordlelele&rdquo;</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="highlighted-box yellow">
+				<i class="fa-solid fa-keyboard-left"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 1:50<span class="small-text">AM</span></b
+					><br />Keyboard focus annoyances.
+				</p>
+			</div>
+
+			<hr />
+
+			<h3 class="subheading">
+				<div><span class="title title-3">external services</span></div>
+				<i class="fa-solid fa-hexagon-plus"></i>
+			</h3>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>Squarespace Domains</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>Firebase Hosting</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>Firebase Realtime Database</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>Font Awesome</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>Google Fonts</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>Adobe Fonts</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="status-box">
+				<div class="status-text">
+					<b>Discord API</b>
+					<p class="small-text"></p>
+				</div>
+
+				<div class="status-bar">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<i class="fa-sharp fa-solid fa-triangle"></i>
+				</div>
+			</div>
+
+			<div class="content-end"></div>
+		</div>
+
+		<div class="footer" style="background: #ffffee"></div>
+		<div class="footer" style="background: #ff6b6b"></div>
+		<div class="footer" style="background: #ffe66d"></div>
+		<div class="footer" style="background: #4ecdc4"></div>
+
+		<script src="files/footer.js"></script>
+		<script src="files/to-top.js"></script>
+
+		<script>
+			const classes = ["status-upcoming", "status-maintenance", "status-critical", "status-minor", "status-operational"];
+			const messages = [`UPCOMING CHANGES`, `UNAVAILABLE FOR MAINTENANCE`, `CRITICAL ISSUES`, `MINOR ISSUES`, `SEEMS TO BE WORKING`];
+			const positions = [24, 104, 204, 284, 364];
+
+			const statuses = [4, 0, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 0, 3, 4, 4, 4, 4, 4, 4, 4];
+
+			let i = 0;
+			let workingTotal = 0;
+			document.querySelectorAll(".status-box").forEach((statusBox) => {
+				if (statuses[i] == 4) workingTotal += 1;
+				if (statuses[i] == 3) workingTotal += 0.5;
+				if (statuses[i] == 0) workingTotal += 1;
+
+				statusBox.id = i;
+				statusBox.querySelector("p").classList.add(classes[statuses[i]]);
+				statusBox.querySelector("p").innerHTML = messages[statuses[i]];
+				statusBox.querySelector(".fa-triangle").style = `left: ${positions[statuses[i]]}px`;
+				i++;
+			});
+
+			let percentWorking = Math.round((workingTotal / statuses.length) * 10000) / 100;
+			let percentString = `${percentWorking}`;
+			if (percentString.indexOf(".") == -1) percentString += ".00";
+			if (percentString.substring(percentString.indexOf(".")).length == 2) percentString += "0";
+			document.querySelector("#percentage").innerHTML = `${percentString}%`;
+		</script>
+	</body>
+</html>
