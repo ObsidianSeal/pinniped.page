@@ -159,7 +159,13 @@
 			<h1 id="percentage"></h1>
 
 			<div class="download-button">
-				<a class="invert" id="download-link" href="https://docs.google.com/document/d/1DSCN7KvsPQahZsRxK2vRkkXe5rFov8GZRViIwIAEay8/pub" target="_blank">
+				<a
+					class="invert"
+					id="download-link"
+					href="https://docs.google.com/document/d/1DSCN7KvsPQahZsRxK2vRkkXe5rFov8GZRViIwIAEay8/pub"
+					target="_blank"
+					title="Google Docs / Status Page Tier List [EXTERNAL]"
+				>
 					COMPARE &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
 				</a>
 			</div>
@@ -187,20 +193,11 @@
 				</div>
 			</div>
 
-			<div class="highlighted-box blue">
-				<i class="fa-solid fa-mobile-screen"></i>
-
-				<p class="text">
-					<b>August 18th, 2024 @ 2:36<span class="small-text">AM</span></b
-					><br />This brand new page was just made mobile responsive and may still have some quirks.
-				</p>
-			</div>
-
-			<div class="highlighted-box blue">
+			<div class="highlighted-box light-grey">
 				<i class="fa-solid fa-align-left"></i>
 
 				<p class="text">
-					<b>August 18th, 2024 @ 2:02<span class="small-text">AM</span></b
+					<b>August 18th, 2024 @ 12:50<span class="small-text">PM</span></b
 					><br />The &ldquo;About&rdquo; page will be rewritten soon.
 				</p>
 			</div>
@@ -221,12 +218,13 @@
 				</div>
 			</div>
 
-			<div class="highlighted-box light-grey">
-				<i class="fa-solid fa-plug"></i>
+			<div class="highlighted-box dark-grey">
+				<i class="fa-solid fa-message-bot"></i>
 
 				<p class="text">
-					<b>August 18th, 2024 @ 1:57<span class="small-text">AM</span></b
-					><br />This page is not connected to the bot yet.
+					<b>August 18th, 2024 @ 8:22<span class="small-text">PM</span></b
+					><br />I&rsquo;m still deciding what to do with the bot. I need to brush up on my Discord bot skills and find somewhere to host the code. I also need to
+					clean the existing bot code.
 				</p>
 			</div>
 
@@ -689,6 +687,15 @@
 				</div>
 			</div>
 
+			<div class="highlighted-box blue">
+				<i class="fa-solid fa-book-atlas"></i>
+
+				<p class="text">
+					<b>August 18th, 2024 @ 7:44<span class="small-text">PM</span></b
+					><br />This page can now be accessed from <span style="word-wrap: break-word">https://status.pinniped.page/</span>.
+				</p>
+			</div>
+
 			<div class="status-box">
 				<div class="status-text">
 					<b>Firebase Hosting</b>
@@ -798,10 +805,10 @@
 
 		<script>
 			const classes = ["status-upcoming", "status-maintenance", "status-critical", "status-minor", "status-operational"];
-			const messages = [`UPCOMING CHANGES`, `UNAVAILABLE FOR MAINTENANCE`, `CRITICAL ISSUES`, `MINOR ISSUES`, `SEEMS TO BE WORKING`];
+			const messages = ["UPCOMING CHANGES", "UNAVAILABLE FOR MAINTENANCE", "CRITICAL ISSUES", "MINOR ISSUES", "SEEMS TO BE WORKING"];
 			const positions = [24, 104, 204, 284, 364];
 
-			const statuses = [4, 0, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 0, 3, 4, 4, 4, 4, 4, 4, 4];
+			const statuses = [0, 1, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 0, 3, 4, 4, 4, 4, 4, 4, 4];
 
 			let i = 0;
 			let workingTotal = 0;
