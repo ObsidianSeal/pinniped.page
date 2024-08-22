@@ -31,13 +31,16 @@
 		<meta name="keywords" content="pinniped, page, obsidian_seal, seal, minecraft, plugins, discord, code, programming, projects, blog, about, fun, puzzles, games, tools" />
 
 		<style>
-			.hidden {
-				opacity: 0%;
-				transition: opacity 0.5s;
+			.h60 {
+				height: 60px;
 			}
 
-			.hidden:hover {
-				opacity: 100%;
+			.h50 {
+				height: 50px;
+			}
+
+			.centre div {
+				text-align: center;
 			}
 
 			@media all and (max-width: 500px) {
@@ -72,27 +75,17 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
 
-		<div style="height: 60px"></div>
+		<div class="h60"></div>
 
 		<div class="centre more-wrap">
-			<div style="text-align: center">
+			<div>
 				<h1>pinniped.page</h1>
 
-				<div style="height: 50px"></div>
+				<div class="h50"></div>
 
 				<h3 id="subtitle"></h3>
 			</div>
 		</div>
-
-		<!-- <div class="notice" id="notice"> -->
-		<!-- <p> -->
-		<!-- can change icon, icon colour, and text -- make sure to check .js -->
-		<!-- <i class="fa-solid fa-face-grin-beam" id="notice-icon" style="color: #4ecdc4; margin-right: 20px"></i -->
-		<!-- ><span class="invert" id="notice-text">thank you Firebase support, hopefully everything is back to normal</span -->
-		<!-- ><i class="fa-solid fa-xmark notice-x" id="notice-x" onclick="hideNotice()"></i -->
-		<!-- ><i class="fa-solid fa-angle-right notice-x" id="notice-arrow" style="display: none" onclick="hideNotice()"></i> -->
-		<!-- </p> -->
-		<!-- </div> -->
 
 		<div class="footer" style="background: #ffffee"></div>
 		<div class="footer" style="background: #ff6b6b"></div>
@@ -188,32 +181,6 @@
 			let x = Math.floor(Math.random() * subtitles.length);
 			document.getElementById("subtitle").innerHTML = subtitles[x];
 
-			// ------- notice -------
-
-			// var noticeHidden = false;
-
-			// function hideNotice() {
-			// 	if (!noticeHidden) {
-			// 		setTimeout(() => {
-			// 			if (noticeHidden) document.getElementById("notice").classList.add("hidden");
-			// 		}, 2000);
-
-			// 		// HIDE NOTICE
-			// 		document.getElementById("notice-text").style = "display: none"; // remove text
-			// 		document.getElementById("notice-icon").style = "color: #4ecdc4"; // remove icon margin, CHANGE IF CHANGE ICON COLOUR!!!
-			// 		document.getElementById("notice-x").style = "display: none"; // remove 'x'
-			// 		document.getElementById("notice-arrow").style = "display: inline-block"; // show '>'
-			// 	} else {
-			// 		// SHOW NOTICE
-			// 		document.getElementById("notice").classList.remove("hidden"); // keep notice on screen
-			// 		document.getElementById("notice-text").style = "display: inline-block"; // show text
-			// 		document.getElementById("notice-icon").style = "color: #4ecdc4; margin-right: 20px"; // add margin to icon, CHANGE IF CHANGE ICON COLOUR!!!
-			// 		document.getElementById("notice-x").style = "display: inline-block"; // show 'x'
-			// 		document.getElementById("notice-arrow").style = "display: none"; // remove '>'
-			// 	}
-			// 	noticeHidden = !noticeHidden;
-			// }
-
 			// ------- footer position, subtitle visibility -------
 
 			function perfectPosition() {
@@ -270,8 +237,20 @@
 					if (pageName.indexOf("\\") != -1 || pageName.indexOf(".") != -1) ending = ""; // contains '\' (special - no extension) or '.' (for other extensions) -- use string as is
 					pageName = pageName.replace("\\", ""); // remove special '\' character
 
-					if (pageName.indexOf("?") == -1) window.location.href = pageLocation + pageName + ending; // no '?' -- navigate, regular
-					else window.location.href = pageLocation + pageName.replace("?", ending + "?"); // contains '?' -- navigate, place ending before '?'
+					if (pageName.indexOf("?") == -1 && pageName.indexOf("#") == -1)
+						window.location.href = pageLocation + pageName + ending; // no '?' or '#' -- navigate, regular
+					else {
+						// contains either '?', '#', or BOTH:
+						if (pageName.indexOf("?") != -1 && pageName.indexOf("#") != -1) {
+							if (pageName.indexOf("?") < pageName.indexOf("#"))
+								window.location.href = pageLocation + pageName.replace("?", ending + "?"); // contains '?' first -- navigate, place ending before '?'
+							else window.location.href = pageLocation + pageName.replace("#", ending + "#"); // contains '#' first -- navigate, place ending before '#'
+						} else if (pageName.indexOf("?") != -1) {
+							window.location.href = pageLocation + pageName.replace("?", ending + "?"); // contains '?' first -- navigate, place ending before '?'
+						} else {
+							window.location.href = pageLocation + pageName.replace("#", ending + "#"); // contains '#' first -- navigate, place ending before '#'
+						}
+					}
 				}
 				if (e.key === "Backspace") {
 					pageName = pageName.substring(0, pageName.length - 1);

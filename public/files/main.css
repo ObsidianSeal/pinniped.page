@@ -459,7 +459,8 @@ ul {
 	grid-template-columns: 60px auto;
 }
 
-.blog-archive span:not(.blog-archive-list-item, .blog-archive-list-marker, .new, .updated, .beta, .tag, .tooltip) {
+.blog-archive span:not(.blog-archive-list-item, .blog-archive-list-marker, .new, .updated, .beta, .tag, .tooltip),
+.blog-archive-list-item i {
 	opacity: 50%;
 }
 
@@ -870,6 +871,10 @@ ul {
 
 #to_top_button i {
 	color: #ffffee;
+}
+
+#searchable {
+	margin-top: 20px;
 }
 
 /* Conditional Styles */

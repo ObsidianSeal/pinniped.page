@@ -14,10 +14,10 @@
 		<meta property="og:url" content="https://pinniped.page/projects/crosswords" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="crosswords" />
-		<meta property="og:description" content="Solve crosswords by Obsidian_Seal and others." />
+		<meta property="og:description" content="Solve crosswords by Obsidian_Seal and others, timed and online. " />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
-		<meta name="description" content="Solve crosswords by Obsidian_Seal and others." />
+		<meta name="description" content="Solve crosswords by Obsidian_Seal and others, timed and online. " />
 		<meta name="keywords" content="crosswords, puzzles, clues, words, fun, game, timed, share" />
 
 		<style>
@@ -60,6 +60,7 @@
 				border: 0;
 				padding: 0;
 				font-family: "Roboto Slab";
+				outline: none;
 			}
 
 			*::selection {
@@ -2070,6 +2071,7 @@
 					handleWin();
 					return true;
 				} else {
+					// console.log(crosswordString, crosswords[crosswordNumber][2]);
 					return false;
 				}
 			}
