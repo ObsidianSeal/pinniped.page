@@ -20,6 +20,25 @@
 		<meta property="og:title" content="???" />
 		<meta property="og:description" content="HTTP response status codes" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<style>
+			.h60 {
+				height: 60px;
+			}
+
+			.centre {
+				flex-direction: column;
+			}
+
+			.centre h2 {
+				text-align: center;
+			}
+
+			.download-button-group {
+				justify-content: center;
+				margin-top: 40px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -40,10 +59,24 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
 
-		<div style="height: 60px"></div>
+		<div class="h60"></div>
 
 		<div class="centre more-wrap">
-			<h2 style="text-align: center" id="message"></h2>
+			<h2 id="message"></h2>
+
+			<div class="download-button-group small-text">
+				<div class="download-button">
+					<a class="invert" id="download-link" href="status.html">
+						WEBSITE STATUS &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+					</a>
+				</div>
+
+				<div class="download-button download-button-long">
+					<a class="invert" id="download-link" href="contact.html">
+						REPORT A PROBLEM &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+					</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="footer" style="background: #ffffee"></div>

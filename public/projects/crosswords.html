@@ -155,10 +155,12 @@
 				translate: 0 10px;
 			}
 
-			h1 .material-symbols-outlined:not(.circle, .x):hover {
+			h1 .material-symbols-outlined:not(.circle, .x):hover,
+			h1 .material-symbols-outlined:not(.circle, .x):focus {
 				cursor: pointer;
 				color: var(--sub);
 			}
+
 			.circle {
 				font-size: 6px;
 				translate: 0 -3px;
@@ -192,7 +194,8 @@
 				color: var(--main);
 			}
 
-			.choose-puzzle-menu div:hover {
+			.choose-puzzle-menu div:hover,
+			.choose-puzzle-menu div:focus {
 				cursor: pointer;
 				background-color: var(--sub-alt);
 			}
@@ -413,7 +416,8 @@
 				background-color: var(--bg);
 			}
 
-			.loading-panel div#load-error:hover {
+			.loading-panel div#load-error:hover,
+			.loading-panel div#load-error:focus {
 				cursor: pointer;
 				color: var(--error-extra);
 			}
@@ -568,13 +572,19 @@
 		<div class="loading-panel">
 			<div>Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
 			<div id="version"></div>
-			<div id="load-error">Internet-unrelated loading issue?</div>
+			<div id="load-error" tabindex="0">Internet-unrelated loading issue?</div>
 		</div>
 
 		<script>
-			// VERSION 1.5.1 (change all these when updating)
-			console.log("%ccrosswords v1.5.1 (2024/05/01)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
-			document.querySelector(".loading-panel div#version").innerHTML = "v1.5.1 — 2024/05/01";
+			// VERSION 1.6.0 (change all these when updating)
+			console.log("%ccrosswords v1.6.0 (2024/08/22)", "background: #4CAF50; color: #111; padding: 0 5px; border-radius: 10px");
+			document.querySelector(".loading-panel div#version").innerHTML = "v1.6.0 — 2024/08/22";
+
+			document.querySelector("#load-error").addEventListener("keydown", (e) => {
+				if (e.key == "Enter") {
+					window.location.href = "../status.html";
+				}
+			});
 
 			// --- 0. element constants ---
 
@@ -1533,6 +1543,7 @@
 				let crosswordHeight = crosswordArray.length;
 
 				let puzzleListItemElement = document.createElement("div");
+				puzzleListItemElement.tabIndex = 0;
 				puzzleListItemElement.innerHTML = crosswords[i][0];
 
 				let infoElement = document.createElement("div");
@@ -1561,10 +1572,14 @@
 				}
 			}
 
-			menuArrowElement.addEventListener("click", (e) => {
+			function togglePuzzleMenu() {
 				toggleVisibility(choosePuzzleMenuElement);
 				if (choosePuzzleMenuElement.classList.contains("show")) menuArrowElement.innerHTML = "arrow_drop_up";
 				if (choosePuzzleMenuElement.classList.contains("hide")) menuArrowElement.innerHTML = "arrow_drop_down";
+			}
+
+			menuArrowElement.addEventListener("click", (e) => {
+				togglePuzzleMenu();
 			});
 
 			document.addEventListener("click", (e) => {
@@ -2146,6 +2161,8 @@
 			document.addEventListener("keydown", (e) => {
 				keys[e.key] = true;
 
+				if (document.querySelectorAll(".loading-panel").length != 0) return;
+
 				if (e.key == "Escape") {
 					if (!win) togglePause();
 					else {
@@ -2381,10 +2398,61 @@
 						highlightWordSquares();
 						exportProgress();
 					}
+
+					// page up & page down
+					if (e.key == "PageUp" || e.key == "PageDown") {
+						e.preventDefault();
+
+						if (e.key == "PageUp") {
+							if (direction) wordNumber = acrossWordNumbersNoBlank[0] - 1;
+							else wordNumber = downWordNumbersNoBlank[0] - 1;
+						}
+
+						if (e.key == "PageDown") {
+							if (direction) wordNumber = acrossWordNumbersNoBlank[acrossWordNumbersNoBlank.length - 1] - 1;
+							else wordNumber = downWordNumbersNoBlank[downWordNumbersNoBlank.length - 1] - 1;
+						}
+
+						// DO NOT QUESTION IT
+						previousWordNumber();
+						nextWordNumber();
+
+						highlightWordSquares();
+					}
+
+					// home & end
+					if (e.key == "Home" || e.key == "End") {
+						if (e.key == "Home") {
+							previousWordNumber();
+							nextWordNumber();
+						}
+						if (e.key == "End") {
+							if (direction) {
+								while (activeY < crosswordWidth - 1 && !document.querySelector(`#s${activeX}-${activeY + 1}`).classList.contains("void")) activeY++;
+							} else {
+								while (activeX < crosswordHeight - 1 && !document.querySelector(`#s${activeX + 1}-${activeY}`).classList.contains("void")) activeX++;
+							}
+						}
+
+						highlightWordSquares();
+					}
 				} else {
 					if (e.key == "Enter") {
 						if (document.activeElement == shareButtonElement) share();
 						if (document.activeElement == closeButtonElement) close();
+						if (document.activeElement == document.querySelector("h1 .material-symbols-outlined")) togglePuzzleMenu();
+
+						let puzzleSelectIndex = 0;
+						let lookingForEntered = true;
+						document.querySelectorAll(".choose-puzzle-menu div[tabindex]").forEach((puzzleToChoose) => {
+							if (document.activeElement == puzzleToChoose) {
+								lookingForEntered = false;
+								setTimeout(() => {
+									window.location.href = "?puzzle=" + puzzleSelectIndex;
+								}, 500);
+							}
+							if (lookingForEntered) puzzleSelectIndex++;
+						});
 					}
 				}
 			});
@@ -2446,9 +2514,14 @@
 				if (pause) {
 					pauseButtonElement.innerHTML = "play_arrow";
 					document.querySelector(".crossword-container").classList.add("blur");
+					document.querySelector("h1 .material-symbols-outlined").tabIndex = "0";
 				} else {
 					pauseButtonElement.innerHTML = "pause";
 					document.querySelector(".crossword-container").classList.remove("blur");
+					document.querySelector("h1 .material-symbols-outlined").removeAttribute("tabindex");
+
+					choosePuzzleMenuElement.classList.replace("show", "hide");
+					menuArrowElement.innerHTML = "arrow_drop_down";
 				}
 			}
 
@@ -2528,7 +2601,7 @@
 			// --- 7. loading error ---
 
 			document.querySelector("#load-error").addEventListener("click", (e) => {
-				window.location.href = "https://discord.gg/yswDu7kywv";
+				window.location.href = "../status.html";
 			});
 
 			// --- 8. save & load progress
