@@ -662,7 +662,7 @@
 				<span class="material-symbols-outlined" tabindex="0" id="helpButton" title="how to play">help</span>
 				<span class="material-symbols-outlined" tabindex="0" id="infoButton" title="data">info</span>
 				<span class="material-symbols-outlined" tabindex="0" id="downloadButton" title="download Java version">download_for_offline</span>
-				<span class="material-symbols-outlined" tabindex="0" id="feedbackButton" title="feedback/support Discord server">error</span>
+				<span class="material-symbols-outlined" tabindex="0" id="feedbackButton" title="feedback/support (contact page)">error</span>
 				<span class="material-symbols-outlined" tabindex="0" id="newTabButton" title="open in another tab">outbound</span>
 			</p>
 		</div>
@@ -956,7 +956,7 @@
 					document.querySelector("title").innerHTML = "TicTacToe";
 				}
 				if (document.activeElement == document.querySelector("#downloadButton")) window.location.href = "../download.html?x=TicTacToe.jar";
-				if (document.activeElement == document.querySelector("#feedbackButton")) window.open("https://discord.gg/yswDu7kywv");
+				if (document.activeElement == document.querySelector("#feedbackButton")) window.open("../contact.html");
 				if (document.activeElement == document.querySelector("#newTabButton")) newWindow();
 				if (document.activeElement == document.querySelector("#code")) {
 					if (!hasWon) {
@@ -1139,7 +1139,7 @@
 			window.location.href = "../download.html?x=TicTacToe.jar";
 		});
 		document.querySelector("#feedbackButton").addEventListener("click", (e) => {
-			window.open("https://discord.gg/yswDu7kywv");
+			window.open("../contact.html");
 		});
 		document.querySelector("#newTabButton").addEventListener("click", (e) => {
 			newWindow();

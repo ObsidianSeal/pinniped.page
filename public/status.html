@@ -117,6 +117,10 @@
 				margin-top: 10px;
 			}
 
+			.download-button-group {
+				margin-top: 40px;
+			}
+
 			@media all and (max-width: 830px) {
 				.status-bar {
 					display: none;
@@ -158,7 +162,7 @@
 			</h3>
 			<h1 id="percentage"></h1>
 
-			<div class="download-button">
+			<div class="download-button small-text">
 				<a
 					class="invert"
 					id="download-link"
@@ -191,24 +195,6 @@
 					<div></div>
 					<i class="fa-sharp fa-solid fa-triangle"></i>
 				</div>
-			</div>
-
-			<div class="highlighted-box light-grey">
-				<i class="fa-solid fa-align-left"></i>
-
-				<p class="text">
-					<b>August 18th, 2024 @ 12:50<span class="small-text">PM</span></b
-					><br />The &ldquo;About&rdquo; page will be rewritten soon.
-				</p>
-			</div>
-
-			<div class="highlighted-box light-grey">
-				<i class="fa-solid fa-message-arrow-up-right"></i>
-
-				<p class="text">
-					<b>August 22nd, 2024 @ 3:01<span class="small-text">PM</span></b
-					><br />At some point: this page&rsquo;s companion, the &ldquo;contact&rdquo; page.
-				</p>
 			</div>
 
 			<div class="status-box">
@@ -783,6 +769,33 @@
 				</div>
 			</div>
 
+			<hr />
+
+			<h3 class="subheading">
+				<div><span class="title title-3">unsatisfied?</span></div>
+				<i class="fa-solid fa-face-dotted"></i>
+			</h3>
+
+			<div class="download-button-group small-text">
+				<div class="download-button">
+					<a class="invert" id="download-link" href="about.html" title="pinniped.page — About">
+						<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>&nbsp; LEARN MORE
+					</a>
+				</div>
+
+				<div class="download-button download-button-long">
+					<a class="invert" id="download-link" href="contact.html" title="pinniped.page — Contact">
+						REPORT A PROBLEM &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+					</a>
+				</div>
+
+				<div class="download-button">
+					<a class="invert" id="download-link" href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">
+						DISCORD SERVER &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+					</a>
+				</div>
+			</div>
+
 			<div class="content-end"></div>
 		</div>
 
@@ -799,7 +812,7 @@
 			const messages = ["UPCOMING CHANGES", "UNAVAILABLE FOR MAINTENANCE", "CRITICAL ISSUES", "MINOR ISSUES", "SEEMS TO BE WORKING"];
 			const positions = [24, 104, 204, 284, 364];
 
-			const statuses = [0, 1, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4];
+			const statuses = [4, 1, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4];
 
 			let i = 0;
 			let workingTotal = 0;
