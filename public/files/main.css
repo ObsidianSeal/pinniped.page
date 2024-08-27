@@ -193,6 +193,10 @@ ul {
 	padding-left: 40px;
 }
 
+.navbar > i {
+	padding-left: 20px;
+}
+
 .navbar-item {
 	height: 60px;
 	line-height: 60px;
@@ -202,7 +206,6 @@ ul {
 .navbar-item:first-child {
 	display: flex;
 	align-items: center;
-	padding-right: 20px;
 }
 
 .navbar-icon {
