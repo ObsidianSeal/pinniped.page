@@ -466,18 +466,24 @@
 			return fonts[Math.floor(Math.random() * fonts.length)];
 		}
 
+		// make fonts from Adobe Fonts have consistently formatted names
 		function getProperFontName(fontName) {
-			if (fontName == "blockhead-dark-side") fontName = "Blockhead Dark Side";
-			if (fontName == "cubano") fontName = "Cubano";
-			if (fontName == "bebas-neue-rounded") fontName = "Bebas Neue Rounded";
-			if (fontName == "degular-display") fontName = "Degular Display";
-			if (fontName == "gooddog-new") fontName = "GoodDog New";
-			if (fontName == "hydrophilia-iced") fontName = "Hydrophilia Iced";
-			if (fontName == "miller-text") fontName = "Miller Text";
-			if (fontName == "mono45-headline") fontName = "Mono45 Headline";
-			if (fontName == "rig-solid-medium-fill") fontName = "Rig Solid Medium Fill";
-			if (fontName == "roca") fontName = "Roca";
-			if (fontName == "swear-display") fontName = "Swear Display";
+			// remove "-"
+			fontName = fontName.replace(/-/g, " ");
+
+			// split, capitalize each word
+			words = fontName.split(" ");
+			fontName = "";
+			for (let word of words) {
+				if (word != words[0]) fontName += " ";
+				fontName += word.charAt(0).toUpperCase() + word.slice(1);
+			}
+
+			// this font has a capital in the middle
+			console.log(fontName);
+			if (fontName == "Gooddog New") return "GoodDog New";
+
+			// done!
 			return fontName;
 		}
 
