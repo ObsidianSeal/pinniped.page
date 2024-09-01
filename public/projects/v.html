@@ -386,6 +386,8 @@
 				border: 2px solid #00000064;
 				padding: 5px 10px;
 
+				background-color: white;
+
 				transition: border-color 0.25s;
 			}
 
@@ -481,7 +483,7 @@
 		<div class="h50"></div>
 
 		<div class="calculate">
-			<input id="calc-input" placeholder="VALORANT Points" maxlength="7" autocomplete="off" spellcheck="false" /><i
+			<input id="calc-input" placeholder="(read below)" maxlength="7" autocomplete="off" spellcheck="false" disabled /><i
 				class="fa-solid fa-circle-check"
 				id="calc-check"
 				tabindex="0"
@@ -663,7 +665,7 @@
 
 		<script>
 			// version
-			const version = ` v${2}.${4}.${3}\n\n`;
+			const version = ` v${2}.${4}.${4}\n\n`;
 			console.log("v  | " + version);
 			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
 
@@ -938,6 +940,8 @@
 				}
 
 				inputElement.value = "";
+				inputElement.removeAttribute("disabled");
+				inputElement.placeholder = "VALORANT Points";
 			}
 
 			// x, -, + functions
