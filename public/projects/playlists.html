@@ -8,166 +8,324 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#4ecdc4" />
 
-		<link rel="stylesheet" href="../files/main.css" />
-		<link rel="stylesheet" href="../files/scrollbar.css" />
 		<link rel="icon" href="../images/icon.png" />
-
-		<script src="../files/menu.js"></script>
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
 		<meta property="og:url" content="https://pinniped.page/projects/playlists" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="Playlists" />
-		<meta property="og:description" content="They&rsquo;re good I swear." />
+		<meta property="og:description" content="Music, yum!" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
+		<meta name="description" content="Music, yum!" />
+		<meta name="keywords" content="playlists, music, obsidian_seal" />
+
 		<style>
-			.fa-circle {
-				font-size: 8px;
-				margin: 0 10px;
-				translate: 0 -6px;
-				opacity: 50%;
+			/* TYPEFACES */
+
+			@import url(https://use.typekit.net/rzo4wst.css);
+
+			@font-face {
+				font-family: "PP Neue Montreal";
+				font-weight: normal;
+				src: url("../files/PPNeueMontreal-Regular.woff2");
+			}
+			@font-face {
+				font-family: "PP Neue Montreal";
+				font-weight: bold;
+				src: url("../files/PPNeueMontreal-Bold.woff2");
 			}
 
-			@media all and (max-width: 400px) {
-				.fa-circle {
-					font-size: 6px;
-					translate: 0 -5px;
-				}
+			/* VARIABLES */
+
+			:root {
+				--background: white;
+				--main: black;
+
+				--g: #00000030;
+
+				--c1: #4936577f;
+				--c2: #ce7da57f;
+				--c3: #bee5bf;
+				--c4: #dff3e3;
+				--c5: #ffd1ba;
+			}
+
+			/* SCROLLBAR(S) & SELECTION */
+
+			::-webkit-scrollbar {
+				width: 16px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--g);
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--c2);
+			}
+
+			/* GENERAL STYLES */
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			body {
+				background-color: var(--background);
+				color: var(--main);
+
+				font-family: "PP Neue Montreal";
+				font-weight: normal;
+				font-size: 24px;
+			}
+
+			h1 {
+				font-size: 96px;
+				margin-bottom: 10px;
+			}
+
+			h2 {
+				font-family: roca, sans-serif;
+				font-weight: 800;
+				font-style: normal;
+				font-size: 48px;
+			}
+
+			a {
+				color: var(--main);
+				text-decoration: none;
+				transition: background-position 0.5s;
+			}
+
+			a:hover,
+			a:focus {
+				background-position: 0 0;
+			}
+
+			hr {
+				border-bottom: 2px solid var(--g);
+				margin: 20px 0;
+			}
+
+			/* COMPONENT STYLES */
+
+			.exit-button {
+				display: flex;
+				position: fixed;
+				margin: 50px;
+				font-size: 48px;
+				color: var(--g);
+			}
+
+			.exit-button:hover,
+			.exit-button:focus {
+				color: var(--c2);
+				cursor: pointer;
+			}
+
+			.main-area {
+				max-width: 850px;
+				width: 100%;
+				margin: 0 auto;
+				padding: 50px 30px;
+			}
+
+			.highlight-underline {
+				background-repeat: repeat-x;
+				background-position: 0 26px;
+				display: inline;
+			}
+
+			.playlists {
+				margin: 80px 0;
+			}
+
+			.playlist {
+				margin: 30px 0 50px;
+			}
+
+			.playlist-title {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.playlist-title > :first-child {
+				margin-right: 50px;
+				line-height: 1.2;
+			}
+
+			.playlist-title a {
+				min-width: fit-content;
+				height: fit-content;
+			}
+
+			.playlist-info {
+				font-size: 18px;
+				font-weight: bold;
+				width: fit-content;
+				margin-top: 5px;
+			}
+
+			/* SPECIFIC COLOURS */
+
+			.highlight-underline.c1 {
+				background-image: linear-gradient(90deg, var(--c1), var(--c1));
+			}
+			.highlight-underline.c2 {
+				background-image: linear-gradient(90deg, var(--c2), var(--c2));
+			}
+			.highlight-underline.c3 {
+				background-image: linear-gradient(90deg, var(--c3), var(--c3));
+			}
+			.highlight-underline.c4 {
+				background-image: linear-gradient(90deg, var(--c4), var(--c4));
+			}
+			.highlight-underline.c5 {
+				background-image: linear-gradient(90deg, var(--c5), var(--c5));
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="navbar">
-			<a class="invert navbar-item" href="../index.html"><img class="navbar-icon" src="../images/icon.png" alt="pinniped.page logo" /></a>
-			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
-			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
-			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+		<div class="exit-button" title="return to the Projects+ page" tabindex="0"><i class="fa-solid fa-arrow-left-long"></i></div>
 
-			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
-			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		<div class="main-area">
+			<h1><i class="fa-solid fa-folder-music" style="margin-right: 30px"></i> Playlists</h1>
+			<p>
+				This page is a searchable list of all the
+				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a>
+				playlists I&rsquo;ve created. I&rsquo;d like to think they&rsquo;re pretty good, but your musical tastes may be completely different from mine. Regardless, I
+				hope you enjoy!
+			</p>
+
+			<h2 style="margin: 30px; line-height: 1.2; color: var(--g)">
+				<i class="fa-regular fa-music-magnifying-glass" style="margin-right: 20px"></i> search features, track lists, and a good mobile experience coming soon
+			</h2>
+
+			<div class="playlists"></div>
+
+			<hr />
+
+			<p>
+				If you&rsquo;d rather listen on another music streaming service, you might be able to find a converter or transferring service if you look. Happy listening.<br /><br />Exact
+				playlist lengths were determined with Srijan Sharma&rsquo;s
+				<a class="highlight-underline c3" href="https://ypc.vercel.app/" target="_blank" title="YouTube Playlist Calculator [EXTERNAL]">YouTube Playlist Calculator</a
+				>.<br /><br />This page is typeset in
+				<a
+					class="highlight-underline c3"
+					href="https://pangrampangram.com/products/neue-montreal"
+					target="_blank"
+					title="Pangram Pangram Foundry / Neue Montreal [EXTERNAL]"
+					>Neue Montreal</a
+				>
+				by Mat Desjardins from Pangram Pangram Foundry and
+				<a class="highlight-underline c3" href="https://fonts.adobe.com/fonts/roca" target="_blank" title="Adobe Fonts / Roca [EXTERNAL]">Roca</a> by Elena Genova from
+				My Creative Land.<br /><br />This page also makes use of
+				<a class="highlight-underline c3" href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a> icons.<br /><br />Found an
+				issue with this page? Report it on the <a class="highlight-underline c3" href="../contact.html" title="Contact">contact page</a>.<br /><br />For a limited time,
+				you can compare this page to the <a class="highlight-underline c3" href="playlists-old.html" title="Playlists (old version)">old version</a>.
+			</p>
 		</div>
 
-		<div id="navbar-mobile">
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
-		</div>
+		<script>
+			// let's START with keyboard shortcuts for once
+			addEventListener("keydown", (e) => {
+				const focus = document.activeElement;
 
-		<div class="navbar-space"></div>
+				if (e.key === "Enter") {
+					if (focus == document.querySelector(".exit-button")) window.location.href = "../projects+.html";
+				}
+			});
 
-		<div class="content">
-			<h2 class="title">Playlists</h2>
+			// click on things
+			document.querySelector(".exit-button").addEventListener("click", (e) => {
+				window.location.href = "../projects+.html";
+			});
 
-			<div class="break"></div>
+			// PLAYLIST DATA
+			const playlists = {
+				"🎵 - January 2024": {
+					link: "PLTKwBiSgGBsjWmvVJs1GIkiuoJB9m8-V2",
+					length: [20, "1:12:34"],
+					tracks: [],
+				},
+				"🎵 - February 2024": {
+					link: "PLTKwBiSgGBsg-n4Z1xWiSTKpfD0SUMJZ0",
+					length: [20, "1:14:27"],
+					tracks: [],
+				},
+				"🎵 - March 2024": {
+					link: "PLTKwBiSgGBsjfzhrlsFO_7X_Y64SqmXwS",
+					length: [20, "0:56:48"],
+					tracks: [],
+				},
+				"🎵 - April 2024": {
+					link: "PLTKwBiSgGBshYj0XNtFvGQKITi4TcvlWY",
+					length: [20, "1:11:58"],
+					tracks: [],
+				},
+				"🎵 - May 2024": {
+					link: "PLTKwBiSgGBsg4dHDdGrFVe6CQ3pPhI8Bk",
+					length: [20, "1:09:30"],
+					tracks: [],
+				},
+				"🎵 - June 2024": {
+					link: "PLTKwBiSgGBsgkeQ204ZutMEWOp9LpQj_e",
+					length: [20, "1:13:55"],
+					tracks: [],
+				},
+				"🎵 - July 2024": {
+					link: "PLTKwBiSgGBsj87CYvgVkBLjL7iPQ_a-mW",
+					length: [20, "1:15:46"],
+					tracks: [],
+				},
+				"🎵 - August 2024": {
+					link: "PLTKwBiSgGBsgrlmxKMnHeHg-GgWuG3c0h",
+					length: [20, "1:08:30"],
+					tracks: [],
+				},
+				"🎵 - September 2024": {
+					link: "PLTKwBiSgGBsiQ9TXENH2KzJ-3UviXTYQt",
+					length: [20, "1:11:26"],
+					tracks: [],
+				},
+				"guess the song from the first second": {
+					link: "PLTKwBiSgGBshltUP89mVEE74hLAZyMFRP",
+					length: [300, "18:38:33"],
+					tracks: [],
+				},
+				"oops all Conan Gray": {
+					link: "PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG",
+					length: [24, "1:14:16"],
+					tracks: [],
+				},
+				"⚡ Epic Music": {
+					link: "PLTKwBiSgGBsis3h4-sIFejNSZWdkGpnF6",
+					length: [26, "1:15:57"],
+					tracks: [],
+				},
+				"LETHAL COMPANY": {
+					link: "PLTKwBiSgGBshLvhKrVlYW0AzfZhp8oO3T",
+					length: [30, "1:39:01"],
+					tracks: [],
+				},
+			};
 
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsjWmvVJs1GIkiuoJB9m8-V2" target="_blank">🎵 - January 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:12:34</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsg-n4Z1xWiSTKpfD0SUMJZ0" target="_blank">🎵 - February 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:14:27</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsjfzhrlsFO_7X_Y64SqmXwS" target="_blank">🎵 - March 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 0:56:48</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBshYj0XNtFvGQKITi4TcvlWY" target="_blank">🎵 - April 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:11:58</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsg4dHDdGrFVe6CQ3pPhI8Bk" target="_blank">🎵 - May 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:09:30</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsgkeQ204ZutMEWOp9LpQj_e" target="_blank">🎵 - June 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:13:55</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsj87CYvgVkBLjL7iPQ_a-mW" target="_blank">🎵 - July 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:15:46</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsgrlmxKMnHeHg-GgWuG3c0h" target="_blank">🎵 - August 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:08:30</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsiQ9TXENH2KzJ-3UviXTYQt" target="_blank">🎵 - September 2024</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:11:26</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBshltUP89mVEE74hLAZyMFRP" target="_blank">guess the song from the first second</a>
-					<i class="fa-solid fa-circle"></i> 300 tracks <i class="fa-solid fa-circle"></i> 18:38:33</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG" target="_blank">oops all Conan Gray</a>
-					<i class="fa-solid fa-circle"></i> 22 tracks <i class="fa-solid fa-circle"></i> 1:14:16</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBsis3h4-sIFejNSZWdkGpnF6" target="_blank">⚡ Epic Music</a>
-					<i class="fa-solid fa-circle"></i> 26 tracks <i class="fa-solid fa-circle"></i> 1:15:57</span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://music.youtube.com/playlist?list=PLTKwBiSgGBshLvhKrVlYW0AzfZhp8oO3T" target="_blank">LETHAL COMPANY</a>
-					<i class="fa-solid fa-circle"></i> 20 tracks <i class="fa-solid fa-circle"></i> 1:39:01</span
-				>
-			</p>
+			// add all the data to the page
+			function addPlaylist(title, link, totalTracks, totalTime) {
+				let playlistContainer = document.createElement("div");
+				playlistContainer.classList.add("playlist");
+				playlistContainer.innerHTML = `<div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime}</div>`;
+				document.querySelector(".playlists").appendChild(playlistContainer);
+			}
 
-			<div class="content-end"></div>
-
-			<b class="small-text half-opacity">LAST UPDATED: September 1st, 2024</b>
-		</div>
-
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
-
-		<script src="../files/to-top.js"></script>
-
-		<script src="../files/footer.js"></script>
+			for (let title in playlists) {
+				addPlaylist(title, playlists[title].link, playlists[title].length[0], playlists[title].length[1]);
+			}
+		</script>
 	</body>
 </html>
