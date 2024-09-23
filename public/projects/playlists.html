@@ -145,7 +145,9 @@
 			}
 
 			.playlist {
-				margin: 30px 0 50px;
+				margin-top: 50px;
+				display: grid;
+				grid-template-columns: 60px auto;
 			}
 
 			.playlist-title {
@@ -163,11 +165,61 @@
 				height: fit-content;
 			}
 
+			.expand-button {
+				color: var(--g);
+				font-size: 48px;
+				width: fit-content;
+				height: fit-content;
+			}
+
+			.expand-button:hover,
+			.expand-button:focus {
+				color: var(--c2);
+				cursor: pointer;
+			}
+
 			.playlist-info {
 				font-size: 18px;
 				font-weight: bold;
 				width: fit-content;
 				margin-top: 5px;
+			}
+
+			.tracks {
+				display: none;
+				margin-top: 25px;
+				border: 2px dashed var(--g);
+				padding: 15px 15px 0 0;
+			}
+
+			.track {
+				display: grid;
+				grid-template-columns: 100px auto;
+				margin-bottom: 15px;
+			}
+
+			.track div div:first-child {
+				font-weight: bold;
+				font-size: 32px;
+			}
+
+			.track div div:last-child {
+				font-size: 16px;
+			}
+
+			.track div div:last-child i {
+				font-size: 6px;
+				color: var(--g);
+				translate: 0 -4px;
+				margin: 0 8px;
+			}
+
+			.track h2 {
+				font-family: "PP Neue Montreal";
+				font-weight: bold;
+				color: var(--g);
+				text-align: right;
+				margin-right: 20px;
 			}
 
 			/* SPECIFIC COLOURS */
@@ -251,47 +303,244 @@
 				"🎵 - January 2024": {
 					link: "PLTKwBiSgGBsjWmvVJs1GIkiuoJB9m8-V2",
 					length: [20, "1:12:34"],
-					tracks: [],
+					tracks: [
+						["2085", "AJR", "The Maybe Man"],
+						["Inertia", "AJR", "The Maybe Man"],
+						["Steve&rsquo;s Going to London", "AJR", "The Maybe Man"],
+						["The Less I Know The Better", "Tame Impala", "Currents"],
+						["Head Over Heels", "ABBA", "The Visitors (Deluxe Edition)"],
+						["When All Is Said And Done", "ABBA", "The Visitors (Deluxe Edition)"],
+						["Thank You For The Music", "ABBA", "The Album"],
+						["The Strahtkhaf Combo", "Jazz Emu", "Technically, Probably, More Of The Same, I Suppose, In Theory"],
+						["Amour plastique", "Videoclub & Adèle Castillon & Mattyeux", "Amour plastique"],
+						["Any Way You Want It", "Journey", "Departure"],
+						["Upside Down & Inside Out", "OK Go", "Hungry Ghosts"],
+						["Little One", "The Happy Fits", "Under The Shade of Green"],
+						["loneliness for love", "lovelytheband", "conversations with myself about you"],
+						["Viva La Vida", "Coldplay", "Viva La Vida (Prospekt&rsquo;s March Edition)"],
+						[
+							"Nothing You Can Take From Me (Boot-Stompin&rsquo; Version) (from The Hunger Games: The Ballad of Songbirds & Snakes)",
+							"Rachel Zegler & The Covey Band",
+							"The Hunger Games: The Ballad of Songbirds & Snakes (Music From & Inspired By)",
+						],
+						["Conditions Of A Punk", "half·alive", "Conditions Of A Punk"],
+						["Miranda Beach", "COIN", "How Will You Know If You Never Try"],
+						[
+							"Can&rsquo;t Catch Me Now (from The Hunger Games: The Ballad of Songbirds & Snakes)",
+							"Olivia Rodrigo",
+							"Can&rsquo;t Catch Me Now (from The Hunger Games: The Ballad of Songbirds & Snakes)",
+						],
+						["Killing Me", "Conan Gray", "Killing Me"],
+						["ALL MY FELLAS", "Frizk", "ALL MY FELLAS"],
+					],
 				},
 				"🎵 - February 2024": {
 					link: "PLTKwBiSgGBsg-n4Z1xWiSTKpfD0SUMJZ0",
 					length: [20, "1:14:27"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"🎵 - March 2024": {
 					link: "PLTKwBiSgGBsjfzhrlsFO_7X_Y64SqmXwS",
 					length: [20, "0:56:48"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"🎵 - April 2024": {
 					link: "PLTKwBiSgGBshYj0XNtFvGQKITi4TcvlWY",
 					length: [20, "1:11:58"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"🎵 - May 2024": {
 					link: "PLTKwBiSgGBsg4dHDdGrFVe6CQ3pPhI8Bk",
 					length: [20, "1:09:30"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"🎵 - June 2024": {
 					link: "PLTKwBiSgGBsgkeQ204ZutMEWOp9LpQj_e",
 					length: [20, "1:13:55"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"🎵 - July 2024": {
 					link: "PLTKwBiSgGBsj87CYvgVkBLjL7iPQ_a-mW",
 					length: [20, "1:15:46"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"🎵 - August 2024": {
 					link: "PLTKwBiSgGBsgrlmxKMnHeHg-GgWuG3c0h",
 					length: [20, "1:08:30"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"🎵 - September 2024": {
 					link: "PLTKwBiSgGBsiQ9TXENH2KzJ-3UviXTYQt",
 					length: [20, "1:11:26"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"guess the song from the first second": {
 					link: "PLTKwBiSgGBshltUP89mVEE74hLAZyMFRP",
@@ -301,17 +550,100 @@
 				"oops all Conan Gray": {
 					link: "PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG",
 					length: [24, "1:14:16"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"⚡ Epic Music": {
 					link: "PLTKwBiSgGBsis3h4-sIFejNSZWdkGpnF6",
 					length: [26, "1:15:57"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 				"LETHAL COMPANY": {
 					link: "PLTKwBiSgGBshLvhKrVlYW0AzfZhp8oO3T",
 					length: [30, "1:39:01"],
-					tracks: [],
+					tracks: [
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+						// ["", "", ""],
+					],
 				},
 			};
 
@@ -319,13 +651,64 @@
 			function addPlaylist(title, link, totalTracks, totalTime) {
 				let playlistContainer = document.createElement("div");
 				playlistContainer.classList.add("playlist");
-				playlistContainer.innerHTML = `<div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime}</div>`;
+				playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime}</div></div>`;
 				document.querySelector(".playlists").appendChild(playlistContainer);
+			}
+
+			function addTracks(playlistTitle) {
+				let trackContainer = document.createElement("div");
+				trackContainer.classList.add("tracks");
+
+				let trackList = playlists[playlistTitle].tracks;
+
+				for (let i = 0; i < trackList.length; i++) {
+					let track = document.createElement("div");
+					track.classList.add("track");
+					track.innerHTML = `<h2>${i + 1}</h2><div><div>${trackList[i][0]}</div><div>${trackList[i][1]}<i class="fa-solid fa-circle"></i>${
+						trackList[i][2]
+					}</div></div>`;
+					trackContainer.appendChild(track);
+				}
+
+				document.querySelector(".playlists").appendChild(trackContainer);
 			}
 
 			for (let title in playlists) {
 				addPlaylist(title, playlists[title].link, playlists[title].length[0], playlists[title].length[1]);
+				addTracks(title);
 			}
+
+			// expand
+
+			let index = 0;
+			document.querySelectorAll(".expand-button").forEach((button) => {
+				let playlistIndex = index;
+				let rotated = false;
+
+				function expand() {
+					document.querySelector;
+					if (rotated) {
+						button.style = "";
+						document.querySelectorAll(".tracks")[playlistIndex].style.display = "none";
+					} else {
+						button.style = "transform: rotate(90deg)";
+						document.querySelectorAll(".tracks")[playlistIndex].style.display = "block";
+					}
+					rotated = !rotated;
+				}
+
+				button.addEventListener("click", (e) => {
+					expand();
+				});
+
+				button.addEventListener("keydown", (e) => {
+					if (e.key === "Enter") {
+						expand();
+					}
+				});
+
+				index++;
+			});
 		</script>
 	</body>
 </html>
