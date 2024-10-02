@@ -81,6 +81,8 @@
 				font-family: "PP Neue Montreal";
 				font-weight: normal;
 				font-size: 24px;
+
+				padding: 50px 30px;
 			}
 
 			h1 {
@@ -99,6 +101,8 @@
 				color: var(--main);
 				text-decoration: none;
 				transition: background-position 0.5s;
+
+				width: fit-content;
 			}
 
 			a:hover,
@@ -119,6 +123,8 @@
 				margin: 50px;
 				font-size: 48px;
 				color: var(--g);
+				top: 0;
+				left: 0;
 			}
 
 			.exit-button:hover,
@@ -128,10 +134,8 @@
 			}
 
 			.main-area {
-				max-width: 850px;
-				width: 100%;
 				margin: 0 auto;
-				padding: 50px 30px;
+				max-width: 850px;
 			}
 
 			.highlight-underline {
@@ -153,6 +157,7 @@
 			.playlist-title {
 				display: flex;
 				justify-content: space-between;
+				gap: 5px 0;
 			}
 
 			.playlist-title > :first-child {
@@ -183,6 +188,7 @@
 				font-weight: bold;
 				width: fit-content;
 				margin-top: 5px;
+				letter-spacing: 0.025rem;
 			}
 
 			.tracks {
@@ -222,6 +228,40 @@
 				margin-right: 20px;
 			}
 
+			.buttons {
+				display: flex;
+				justify-content: center;
+				gap: 20px 50px;
+			}
+
+			.buttons div {
+				width: 200px;
+				height: 40px;
+				border: 2px solid var(--g);
+				font-size: 18px;
+				font-weight: bold;
+				letter-spacing: 0.025rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.buttons div i {
+				margin-left: 10px;
+				color: var(--g);
+			}
+
+			.buttons div:hover,
+			.buttons div:focus {
+				border-color: var(--c2);
+				cursor: pointer;
+			}
+
+			.buttons div:hover i,
+			.buttons div:focus i {
+				color: var(--c2);
+			}
+
 			/* SPECIFIC COLOURS */
 
 			.highlight-underline.c1 {
@@ -239,6 +279,89 @@
 			.highlight-underline.c5 {
 				background-image: linear-gradient(90deg, var(--c5), var(--c5));
 			}
+
+			/* MEDIA QUERIES */
+
+			@media all and (max-width: 1200px) {
+				.exit-button {
+					position: absolute;
+					top: -30px;
+					left: -10px;
+				}
+
+				h1 {
+					margin-top: 50px;
+				}
+			}
+
+			@media all and (max-width: 600px) {
+				body {
+					font-size: 18px;
+				}
+
+				h1 {
+					font-size: 72px;
+					margin-top: 30px;
+				}
+
+				h2,
+				.exit-button,
+				.expand-button {
+					font-size: 36px;
+				}
+
+				.playlist-title {
+					flex-direction: column;
+				}
+
+				.playlist-title > :first-child {
+					margin-right: 0;
+				}
+
+				.playlist-info {
+					font-size: 14px;
+				}
+
+				.track {
+					grid-template-columns: 80px auto;
+				}
+
+				.track div div:first-child {
+					font-size: 24px;
+				}
+
+				.track div div:last-child {
+					font-size: 12px;
+				}
+
+				.track div div:last-child i {
+					font-size: 4px;
+					translate: 0 -3px;
+				}
+
+				.buttons {
+					flex-direction: column;
+					align-items: center;
+				}
+
+				span.highlight-underline {
+					background-position: 0 13px;
+				}
+
+				a.highlight-underline {
+					background-position: 0 19px;
+				}
+			}
+
+			@media all and (max-width: 400px) {
+				h1 {
+					font-size: 54px;
+				}
+
+				h2:has(.highlight-underline) {
+					font-size: 24px;
+				}
+			}
 		</style>
 	</head>
 
@@ -255,9 +378,14 @@
 			</p>
 
 			<h2 style="margin: 30px; line-height: 1.2; color: var(--g)">
-				<i class="fa-regular fa-music-magnifying-glass" style="margin-right: 20px"></i> coming soon: a good mobile experience, more track lists, and
-				&ldquo;expand/collapse all&rdquo; buttons; press CTRL+F to search
+				<i class="fa-regular fa-music-magnifying-glass" style="margin-right: 20px"></i> search all expanded playlists with your browser&rsquo;s built-in search
+				function!
 			</h2>
+
+			<div class="buttons">
+				<div tabindex="0" class="expand-all-button">EXPAND ALL<i class="fa-solid fa-angles-down"></i></div>
+				<div tabindex="0" class="collapse-all-button">COLLAPSE ALL<i class="fa-solid fa-angles-up"></i></div>
+			</div>
 
 			<div class="playlists"></div>
 
@@ -291,6 +419,8 @@
 
 				if (e.key === "Enter") {
 					if (focus == document.querySelector(".exit-button")) window.location.href = "../projects+.html";
+					if (focus == document.querySelector(".expand-all-button")) expandAll();
+					if (focus == document.querySelector(".collapse-all-button")) collapseAll();
 				}
 			});
 
@@ -433,130 +563,160 @@
 					link: "PLTKwBiSgGBsg4dHDdGrFVe6CQ3pPhI8Bk",
 					length: [20, "1:09:30"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["Next Semester", "twenty one pilots", "Clancy"],
+						["Geronimo", "Sheppard", "Bombs Away"],
+						["Rich Friends", "Portugal. The Man", "Woodstock"],
+						["Thunderdome [W.T.A.] (feat. Black Thought & Natalia Lafourcade)", "Portugal. The Man", "Chris Black Changed My Life"],
+						["Champ (feat. Edgar Winter)", "Portugal. The Man", "Chris Black Changed My Life"],
+						["Shiawase", "Dion Timmer", "Shiawase"],
+						["Close To You", "Dayglow", "Harmony House"],
+						["Shotgun", "George Ezra", "Staying at Tamara&rsquo;s"],
+						[
+							"30/90",
+							"Andrew Garfield & Joshua Henry & Vanessa Hudgens & Robin de Jesús & Alexandra Shipp & Mj Rodriguez",
+							"tick, tick... BOOM! (Soundtrack from the Netflix Film)",
+						],
+						["Overture", "AJR", "Living Room"],
+						["Good Luck, Babe!", "Chappell Roan", "Good Luck, Babe!"],
+						["Feel Good", "Saint Motel", "Feel Good"],
+						["Sweet Talkin&rsquo; Woman", "Electric Light Orchestra", "Out of the Blue"],
+						["Evil Woman", "Electric Light Orchestra", "Face the Music"],
+						["Livin&rsquo; Thing", "Electric Light Orchestra", "A New World Record"],
+						["Overdrive", "Conan Gray", "Overdrive"],
+						["Medicine", "Dayglow", "Harmony House"],
+						["Fight or Flight", "Conan Gray", "Kid Krow"],
+						["Disaster", "Conan Gray", "Superache"],
+						["Backslide", "twenty one pilots", "Clancy"],
 					],
 				},
 				"🎵 - June 2024": {
 					link: "PLTKwBiSgGBsgkeQ204ZutMEWOp9LpQj_e",
 					length: [20, "1:13:55"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["Affluenza", "Conan Gray", "Kid Krow"],
+						["Forever With Me", "Conan Gray", "Found Heaven"],
+						["More Than a Feeling", "Boston", "Boston"],
+						["Undercover Martyn", "Two Door Cinema Club", "Tourist History"],
+						["I Won&rsquo;t Let You Down", "OK Go", "Hungry Ghosts"],
+						["Telepath", "Conan Gray", "Telepath"],
+						["My Blood", "twenty one pilots", "Trench"],
+						["Hey Jude", "The Beatles", "1"],
+						["Rescue Me", "OneRepublic", "Human (Deluxe)"],
+						["Supercollide", "BANNERS", "Where The Shadow Ends"],
+						["Overture", "AJR", "The Click"],
+						["Heavy, California", "Jungle", "For Ever"],
+						["The Good Part", "AJR", "The Click"],
+						["Little League", "Conan Gray", "Kid Krow"],
+						["Safe", "BANNERS", "Where The Shadow Ends"],
+						["Busyhead", "Noah Kahan", "Busyhead"],
+						["Don&rsquo;t Stop Believin&rsquo; (2024 Remaster)", "Journey", "Greatest Hits (2024 Remaster)"],
+						["This Is What Autumn Feels Like", "JVKE", "This Is What Autumn Feels Like"],
+						["Monster (feat. Jamie Lidell)", "Big Data", "Monster"],
+						["The Craving (single version)", "twenty one pilots", "The Craving (single version)"],
 					],
 				},
 				"🎵 - July 2024": {
 					link: "PLTKwBiSgGBsj87CYvgVkBLjL7iPQ_a-mW",
 					length: [20, "1:15:46"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["Routines In The Night", "twenty one pilots", "Clancy"],
+						["Lavish", "twenty one pilots", "Clancy"],
+						["Navigating", "twenty one pilots", "Clancy"],
+						["Oldies Station", "twenty one pilots", "Clancy"],
+						["At The Risk Of Feeling Dumb", "twenty one pilots", "Clancy"],
+						["Paladin Strait", "twenty one pilots", "Clancy"],
+						["Fado", "Milky Chance", "Mind The Moon"],
+						["Try Everything", "Shakira", "Zootopia (Original Motion Picture Soundtrack)"],
+						["Rewrite The Stars", "Zac Efron & Zendaya", "The Greatest Showman (Original Motion Picture Soundtrack)"],
+						["The Greatest Show", "Hugh Jackman & Keala Settle & Zac Efron & Zendaya", "The Greatest Showman (Original Motion Picture Soundtrack)"],
+						["The Other Side", "Hugh Jackman & Zac Efron", "The Greatest Showman (Original Motion Picture Soundtrack)"],
+						["Come Alive", "Hugh Jackman & Keala Settle & Daniel Everidge & Zendaya", "The Greatest Showman (Original Motion Picture Soundtrack)"],
+						["From Now On", "Hugh Jackman & The Greatest Showman Ensemble", "The Greatest Showman (Original Motion Picture Soundtrack)"],
+						["一翦梅 - Yi Jian Mei (xue hua piao piao bei feng xiao xiao)", "Yu-Ching Fei", "Boundless Love"],
+						["Soldier, Poet, King", "The Oh Hellos", "Dear Wormwood"],
+						["A Bar Song (Tipsy)", "Shaboozey", "A Bar Song (Tipsy)"],
+						["Too Sweet", "Hozier", "Unheard"],
+						["Crab Rave", "Noisestorm", "Crab Rave"],
+						["Honey, I&rsquo;m Good", "Andy Grammer", "Magazines Or Novels"],
+						["So Alright, Cool, Whatever", "The Happy Fits", "Concentrate"],
 					],
 				},
 				"🎵 - August 2024": {
 					link: "PLTKwBiSgGBsgrlmxKMnHeHg-GgWuG3c0h",
 					length: [20, "1:08:30"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["Distant", "AGST", "Distant — Reasons"],
+						["That&rsquo;s the Way It Is", "Céline Dion", "All The Way... A Decade Of Song"],
+						["Wish I Knew You", "The Revivalists", "Men Amongst Mountains"],
+						["Build Me Up Buttercup (Mono)", "The Foundations", "Baby Now That I&rsquo;ve Found You"],
+						["Eleanor Rigby", "The Beatles", "1"],
+						["Maps", "Maroon 5", "V"],
+						["This Girl (Kungs Vs. Cookin&rsquo; On 3 Burners) (Kungs Vs. Cookin&rsquo; On 3 Burners)", "Kungs & Cookin&rsquo; On 3 Burners", "Layers"],
+						["となりのトトロ - My Neighbor Totoro", "Azumi Inoue", "My Neighbor Totoro Image Song Collection"],
+						["Higher Love", "Kygo & Whitney Houston", "Golden Hour"],
+						["Die For You ft. Grabbitz // Official Music Video // VALORANT Champions 2021", "VALORANT", '<span style="color: #ce7da5">YouTube video</span>'],
+						["Ticking Away", "VALORANT & Grabbitz & bbno$", "Ticking Away"],
+						["Mess", "Noah Kahan", "Busyhead"],
+						["Sunshine", "OneRepublic", "Sunshine"],
+						["Nobody (from Kaiju No. 8)", "OneRepublic", "Nobody (from Kaiju No. 8)"],
+						["Ophelia", "The Lumineers", "Cleopatra"],
+						["Stargazing", "Myles Smith", "Stargazing"],
+						["Little Bit Better", "Caleb Hearn & ROSIE", "Little Bit Better"],
+						["SUPERPOWER", "VALORANT & KISS OF LIFE & Mark Tuan", "SUPERPOWER"],
+						["Prayer in C (Robin Schulz Radio Edit)", "Lilly Wood & The Prick & Robin Schulz", "Prayer"],
+						["Not the Future", "Bad Lip Reading", "Not the Future"],
 					],
 				},
 				"🎵 - September 2024": {
 					link: "PLTKwBiSgGBsiQ9TXENH2KzJ-3UviXTYQt",
 					length: [20, "1:11:26"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["Not Home Yet", "The Gray Havens", "She Waits"],
+						["See You Again", "The Gray Havens", "She Waits"],
+						["Diamonds and Gold", "The Gray Havens", "Ghost of A King"],
+						["Misery", "Maroon 5", "Hands All Over"],
+						["Didn&rsquo;t I", "OneRepublic", "Human (Deluxe)"],
+						["Fred Astaire", "Jukebox The Ghost", "Off To The Races (Deluxe Version)"],
+						["Dial Drunk", "Noah Kahan & Post Malone", "Dial Drunk"],
+						["Stick Season", "Noah Kahan", "Stick Season"],
+						["Takes One To Know One", "The Beaches", "Takes One To Know One"],
+						["Homesick", "Noah Kahan & Sam Fender", "Homesick"],
+						["Double Negative (Skeleton Milkshake)", "Dominic Fike", "What Could Possibly Go Wrong"],
+						["OK", "Wallows", "Remote (Deluxe)"],
+						["Separate Ways (Worlds Apart) [2024 Remaster]", "Journey", "Greatest Hits (2024 Remaster)"],
+						["Glorious (feat. Skylar Grey)", "Macklemore", "GEMINI"],
+						["Good Old Days", "Macklemore", "GEMINI"],
+						["Stubborn Love", "The Lumineers", "The Lumineers"],
+						["I Want It All", "COIN", "I Want It All"],
+						["Northern Attitude", "Noah Kahan & Hozier", "Stick Season (Forever)"],
+						["Passenger", "Noah Kahan", "Hurt Somebody"],
+						["Red Wine Supernova", "Chappell Roan", "The Rise and Fall of a Midwest Princess"],
+					],
+				},
+				"🎵 - October 2024": {
+					link: "PLTKwBiSgGBsizCcPKV5pDkaXdhwV4t91P",
+					length: [20, "1:06:40"],
+					tracks: [
+						["VYSE", "VALORANT & Kordhell", "VYSE"],
+						["Good Graces", "Sabrina Carpenter", "Short n&rsquo; Sweet"],
+						["Challengers", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
+						["New Perspective", "Noah Kahan", "Stick Season"],
+						["Symphony (feat. Zara Larsson)", "Clean Bandit", "What Is Love? (Deluxe Edition)"],
+						["Solo", "Myles Smith", "Solo"],
+						["Grow Up Tomorrow", "The Beaches", "Grow Up Tomorrow"],
+						["The Other Side", "Conan Gray", "The Other Side"],
+						["Disturbia", "Rihanna", "Good Girl Gone Bad: Reloaded"],
+						["Juno", "Sabrina Carpenter", "Short n&rsquo; Sweet"],
+						["3 O&rsquo;clock Things", "AJR", "OK Orchestra"],
+						["Gloria", "The Lumineers", "III"],
+						["Perfectly Broken", "BANNERS", "Perfectly Broken"],
+						["Jocelyn", "The Beaches", "Jocelyn"],
+						["RUN! (feat. Lay Bankz)", "VALORANT & Odetari", "RUN! (feat. Lay Bankz)"],
+						["2WORLDS", "Madge & VALORANT", "2WORLDS"],
+						["Part of Me", "Noah Kahan", "I Was / I Am"],
+						["Hyperspeed", "Engelwood & Vantage", "Hyperspeed"],
+						["Growing Pains", "COIN", "Growing Pains"],
+						["Growing Sideways", "Noah Kahan", "Stick Season"],
 					],
 				},
 				"guess the song from the first second": {
@@ -572,100 +732,121 @@
 				},
 				"oops all Conan Gray": {
 					link: "PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG",
-					length: [24, "1:14:16"],
+					length: [25, "1:18:01"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["Overdrive", "Conan Gray", "Overdrive"],
+						["Telepath", "Conan Gray", "Telepath"],
+						["Disaster", "Conan Gray", "Superache"],
+						["Jigsaw", "Conan Gray", "Superache"],
+						["Family Line", "Conan Gray", "Superache"],
+						["People Watching", "Conan Gray", "Superache"],
+						["Memories", "Conan Gray", "Superache"],
+						["Affluenza", "Conan Gray", "Kid Krow"],
+						["Fight or Flight", "Conan Gray", "Kid Krow"],
+						["Wish You Were Sober", "Conan Gray", "Kid Krow"],
+						["Little League", "Conan Gray", "Kid Krow"],
+						["Crush Culture", "Conan Gray", "Sunset Season"],
+						["Idle Town", "Conan Gray", "Sunset Season"],
+						["Generation Why", "Conan Gray", "Sunset Season"],
+						["Winner", "Conan Gray", "Winner"],
+						["Forever With Me", "Conan Gray", "Found Heaven"],
+						["Bourgeoisieses", "Conan Gray", "Found Heaven"],
+						["Boys & Girls", "Conan Gray", "Found Heaven"],
+						["Miss You", "Conan Gray", "Found Heaven"],
+						["Fainted Love", "Conan Gray", "Found Heaven"],
+						["Eye Of The Night", "Conan Gray", "Found Heaven"],
+						["The King", "Conan Gray", "The King"],
+						["Grow", "Conan Gray", "Grow"],
+						["The Other Side", "Conan Gray", "The Other Side"],
+						["Never Ending Song", "Conan Gray", "Never Ending Song"],
 					],
 				},
 				"⚡ Epic Music": {
 					link: "PLTKwBiSgGBsis3h4-sIFejNSZWdkGpnF6",
 					length: [26, "1:15:57"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["Andor (Main Title Theme) - Episode 1", "Nicholas", "Andor: Vol. 1 (Episodes 1-4) (Original Score)"],
+						["Challengers", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
+						["He&rsquo;s a Pirate", "Klaus Badelt", "Pirates of the Caribbean: The Curse of the Black Pearl (Original Motion Picture Soundtrack)"],
+						["His Dark Materials", "Lorne Balfe", "The Musical Anthology of His Dark Materials (Music From The Television Series)"],
+						[
+							"Renaissance (Main Title Theme) [from &ldquo;The White Lotus: Season 2&rdquo;]",
+							"Cristobal Tapia De Veer",
+							"The White Lotus: Season 2 (Soundtrack from the HBO&reg; Original Series)",
+						],
+						["Main Title", "Ramin Djawadi", "Game Of Thrones (Music From The HBO Series)"],
+						[
+							"Nick Fury (Main Title Theme) (From &ldquo;Secret Invasion&rdquo;)",
+							"Kris Bowers",
+							"Nick Fury (Main Title Theme) (From &ldquo;Secret Invasion&rdquo;)",
+						],
+						["The Avengers", "Alan Silvestri", "The Avengers (Original Motion Picture Soundtrack)"],
+						["Mission: Impossible Fallout Theme [Extended] by Lorne Balfe", "GPH Music", '<span style="color: #ce7da5">YouTube video</span>'],
+						["Moon Knight", "Hesham Nazih", "Moon Knight (Original Soundtrack)"],
+						["Death By Glamour", "Toby Fox", "UNDERTALE Soundtrack"],
+						["Loki Green Theme", "Natalie Holt", "Loki, Vol. 1 (Episodes 1-3) [Original Soundtrack]"],
+						["TVA", "Natalie Holt", "Loki, Vol. 1 (Episodes 1-3) [Original Soundtrack]"],
+						["Glorius Purpose", "Natalie Holt", "Loki, Vol. 1 (Episodes 1-3) [Original Soundtrack]"],
+						["MEGALOVANIA", "Toby Fox", "UNDERTALE Soundtrack"],
+						[
+							"Overture (From &lsquo;The Phantom Of The Opera&rsquo; Motion Picture)",
+							"Andrew Lloyd Webber",
+							"The Phantom Of The Opera (Original Motion Picture Soundtrack)",
+						],
+						["The Name&rsquo;s Bond... James Bond", "David Arnold", "Casino Royale [International Version]"],
+						["The Book of Boba Fett", "Ludwig Göransson", "The Book of Boba Fett: Vol. 1 (Chapters 1-4) (Original Soundtrack)"],
+						["The Manadalorian", "Ludwig Göransson", " The Mandalorian: Chapter 1 (Original Score)"],
+						["Across the Spider-Verse (Start a Band)", "Daniel Pemberton", "Spider-Man: Across the Spider-Verse (Original Score)"],
+						["No Time for Caution", "Hans Zimmer", "Interstellar (Original Motion Picture Soundtrack) [Expanded Edition]"],
+						["Vibing in the 20s", "Context Sensitive", "Vibing in the 20s"],
+						["Ascension", "Natalie Holt", "Loki: Season 2 - Vol. 2 (Episodes 4-6) (Original Soundtrack)"],
+						["Challengers: Match Point", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
+						["Indiana Jones Theme", "Unknown Artist", "Cine Gold, Vol. 3"],
+						["BBC Sherlock&rsquo;s Theme Melody", "BBCSherlockMusic", '<span style="color: #ce7da5">YouTube video</span>'],
 					],
 				},
 				"LETHAL COMPANY": {
 					link: "PLTKwBiSgGBshLvhKrVlYW0AzfZhp8oO3T",
 					length: [30, "1:39:01"],
 					tracks: [
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
-						// ["", "", ""],
+						["H.Y.C.Y.BH", "Tom Cardy", "Artificial Intelligence"],
+						["FOR THE COMPANY", "staryuceleste", "FOR THE COMPANY"],
+						["ALL MY FELLAS", "Frizk", "ALL MY FELLAS"],
+						["Running in the 90&rsquo;s", "Max Coveri & Maurizio De Jorio", "Running In The 90's / Golden Age"],
+						["Distant", "AGST", "Distant — Reasons"],
+						["Waterloo", "ABBA", "Waterloo"],
+						["GAS GAS GAS", "MANUEL", "SUPER EUROBEAT VOL.181"],
+						["Part Of Me", "Katy Perry", "Teenage Dream: The Complete Confection"],
+						["SOS", "ABBA", "Abba"],
+						[
+							"Overture (From &lsquo;The Phantom Of The Opera&rsquo; Motion Picture)",
+							"Andrew Lloyd Webber",
+							"The Phantom Of The Opera (Original Motion Picture Soundtrack)",
+						],
+						["He&rsquo;s a Pirate", "Klaus Badelt", "Pirates of the Caribbean: The Curse of the Black Pearl (Original Motion Picture Soundtrack)"],
+						["Immaculate Taste", "Engelwood", "Immaculate Taste"],
+						["Crystal Dolphin", "Engelwood", "Crust FM"],
+						["Saturday Night", "Bay City Rollers", "Rollin&rsquo;"],
+						[
+							"Renaissance (Main Title Theme) [Extended Version] [from &ldquo;The White Lotus: Season 2&rdquo;]",
+							"Cristobal Tapia De Veer",
+							"The White Lotus: Season 2 (Soundtrack from the HBO&reg; Original Series)",
+						],
+						["Rasputin", "Boney M.", "Nightflight to Venus"],
+						["Free Bird", "Lynyrd Skynyrd", "The Essential Lynyrd Skynyrd"],
+						["September", "Earth, Wind & Fire", "The Best Of Earth, Wind & Fire Vol. 1"],
+						["Challengers", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
+						["Don&rsquo;t Stop Me Now", "Queen", "Jazz (Deluxe Remastered Version)"],
+						["VYSE", "VALORANT & Kordhell", "VYSE"],
+						["The Avengers", "Alan Silvestri", "The Avengers (Original Motion Picture Soundtrack)"],
+						["Death By Glamour", "Toby Fox", "UNDERTALE Soundtrack"],
+						["Loki Green Theme", "Natalie Holt", "Loki, Vol. 1 (Episodes 1-3) [Original Soundtrack]"],
+						["MEGALOVANIA", "Toby Fox", "UNDERTALE Soundtrack"],
+						["The Name&rsquo;s Bond... James Bond", "David Arnold", "Casino Royale [International Version]"],
+						["Across the Spider-Verse (Start a Band)", "Daniel Pemberton", "Spider-Man: Across the Spider-Verse (Original Score)"],
+						["Vibing in the 20s", "Context Sensitive", "Vibing in the 20s"],
+						["Don&rsquo;t Stop Believin&rsquo; (2024 Remaster)", "Journey", "Greatest Hits (2024 Remaster)"],
+						["Separate Ways (Worlds Apart) [2024 Remaster]", "Journey", "Greatest Hits (2024 Remaster)"],
 					],
 				},
 			};
@@ -673,8 +854,9 @@
 			// add all the data to the page
 			function addPlaylist(title, link, totalTracks, totalTime) {
 				let playlistContainer = document.createElement("div");
+				playlistContainer.id = title;
 				playlistContainer.classList.add("playlist");
-				playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime}</div></div>`;
+				playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" aria-hidden="false" tabindex="0"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime}</div></div>`;
 				document.querySelector(".playlists").appendChild(playlistContainer);
 			}
 
@@ -704,20 +886,21 @@
 			// expand
 
 			let index = 0;
+			let rotated = [];
 			document.querySelectorAll(".expand-button").forEach((button) => {
 				let playlistIndex = index;
-				let rotated = false;
+				rotated[playlistIndex] = false;
 
 				function expand() {
 					document.querySelector;
-					if (rotated) {
+					if (rotated[playlistIndex]) {
 						button.style = "";
 						document.querySelectorAll(".tracks")[playlistIndex].style.display = "none";
 					} else {
 						button.style = "transform: rotate(90deg)";
 						document.querySelectorAll(".tracks")[playlistIndex].style.display = "block";
 					}
-					rotated = !rotated;
+					rotated[playlistIndex] = !rotated[playlistIndex];
 				}
 
 				button.addEventListener("click", (e) => {
@@ -732,6 +915,68 @@
 
 				index++;
 			});
+
+			function expandAll() {
+				let index = 0;
+				document.querySelectorAll(".tracks").forEach((trackList) => {
+					trackList.style.display = "block";
+					document.querySelectorAll(".expand-button")[index].style = "transform: rotate(90deg)";
+					rotated[index] = true;
+					index++;
+				});
+			}
+			function collapseAll() {
+				let index = 0;
+				document.querySelectorAll(".tracks").forEach((trackList) => {
+					trackList.style.display = "none";
+					document.querySelectorAll(".expand-button")[index].style = "";
+					rotated[index] = false;
+					index++;
+				});
+			}
+
+			document.querySelector(".expand-all-button").addEventListener("click", (e) => {
+				expandAll();
+			});
+			document.querySelector(".collapse-all-button").addEventListener("click", (e) => {
+				collapseAll();
+			});
+
+			let monthlyPlaylistNames = [
+				"🎵 - January 2024",
+				"🎵 - February 2024",
+				"🎵 - March 2024",
+				"🎵 - April 2024",
+				"🎵 - May 2024",
+				"🎵 - June 2024",
+				"🎵 - July 2024",
+				"🎵 - August 2024",
+				"🎵 - September 2024",
+				"🎵 - October 2024",
+			];
+
+			function addUpArtists() {
+				let artistNumbers = {};
+
+				for (let playlist of monthlyPlaylistNames) {
+					for (let track in playlists[playlist].tracks) {
+						for (let artist of playlists[playlist].tracks[track][1].split(" & ")) {
+							if (artist in artistNumbers) artistNumbers[artist]++;
+							else artistNumbers[artist] = 1;
+						}
+					}
+				}
+
+				console.table(artistNumbers);
+
+				let repeatArtists = {};
+				for (let artist in artistNumbers) {
+					if (artistNumbers[artist] > 1) repeatArtists[artist] = artistNumbers[artist];
+				}
+
+				console.table(repeatArtists);
+			}
+			addUpArtists();
 		</script>
 	</body>
 </html>
