@@ -344,12 +344,15 @@
 					align-items: center;
 				}
 
-				span.highlight-underline {
-					background-position: 0 13px;
-				}
-
+				span.highlight-underline,
 				a.highlight-underline {
 					background-position: 0 19px;
+					transition: background-position 0.5s;
+				}
+
+				a.highlight-underline:hover,
+				a.highlight-underline:focus {
+					background-position: 0 0;
 				}
 			}
 
@@ -358,8 +361,9 @@
 					font-size: 54px;
 				}
 
-				h2:has(.highlight-underline) {
+				span.highlight-underline {
 					font-size: 24px;
+					background-position: 0 13px;
 				}
 			}
 		</style>
