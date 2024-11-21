@@ -5890,11 +5890,11 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			const version = "v2.0.3 (2024/11/20)";
+			const version = "v2.0.4 (2024/11/21)";
 			document.querySelector("#version").innerHTML = version;
 			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
 			console.log(`%cINFO:`, infoStyle, `fa-random ${version}`);
-			console.log(`%cINFO:`, infoStyle, `Font Awesome Pro v6.7.0`);
+			console.log(`%cINFO:`, infoStyle, `Font Awesome Pro v6.7.1`);
 			console.log(`%cINFO:`, infoStyle, `${allIconsTotal} total icons, ${freeSolidIconsTotal} free SOLID icons, ${freeRegularIconsTotal} free REGULAR icons`);
 
 			// button functions
@@ -5927,17 +5927,11 @@
 			function loadIconFromURL() {
 				var goodURL = false;
 
-				if (urlIconFlavour == "classic" || urlIconFlavour == "sharp") {
+				if (urlIconFlavour == "classic" || urlIconFlavour == "sharp" || urlIconFlavour == "duotone" || urlIconFlavour == "sharp-duotone") {
 					if (urlIconStyle == "solid" || urlIconStyle == "regular" || urlIconStyle == "light" || urlIconStyle == "thin") {
 						if (allIcons.includes(urlIconName)) {
 							goodURL = true;
 						}
-					}
-				}
-
-				if (urlIconStyle == "solid" && (urlIconFlavour == "duotone" || urlIconFlavour == "sharp-duotone")) {
-					if (allIcons.includes(urlIconName)) {
-						goodURL = true;
 					}
 				}
 
