@@ -1090,7 +1090,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.8.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.8.2"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO:`, infoStyle, versionString);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -1147,6 +1147,7 @@
 			var randomPuzzle, nextPuzzle, lastPuzzle;
 			var safeDate;
 			var isDeployedSite;
+			var IGiveUpOnVariableNames;
 
 			async function gameStart() {
 				try {
@@ -1244,6 +1245,7 @@
 							foundToday = true;
 
 							document.querySelector("title").innerHTML = `${document.querySelector("title").innerHTML} (#${countToToday})`; // show puzzle number in title
+							IGiveUpOnVariableNames = countToToday;
 						}
 					}
 
@@ -1674,7 +1676,7 @@
 					}
 
 					if (document.activeElement == document.querySelector(".win-buttons span:nth-child(1)")) {
-						let shareText = `Think Four — ${date} — ${guesses} guesses`;
+						let shareText = `Think Four — ${date} (#${IGiveUpOnVariableNames}) — ${guesses} guesses`;
 						for (let i = 0; i < guessColours.length; i++) {
 							if (i == 16) {
 								shareText += "\n...";
@@ -1682,7 +1684,7 @@
 							}
 							shareText += "\n" + guessColours[i];
 						}
-						shareText += "\nhttps://pinniped.page/think-four";
+						shareText += `\nhttps://pinniped.page/think-four?puzzle=${date}`;
 						navigator.clipboard.writeText(shareText);
 
 						document.querySelector(".copy-alert").classList.remove("hide");
@@ -1835,7 +1837,7 @@
 			document.querySelector(".win-title").innerHTML = winMessages[Math.floor(Math.random() * winMessages.length)];
 
 			document.querySelector(".win-buttons span:nth-child(1)").addEventListener("click", (e) => {
-				let shareText = `Think Four — ${date} — ${guesses} guesses`;
+				let shareText = `Think Four — ${date} (#${IGiveUpOnVariableNames}) — ${guesses} guesses`;
 				for (let i = 0; i < guessColours.length; i++) {
 					if (i == 16) {
 						shareText += "\n...";
@@ -1843,7 +1845,7 @@
 					}
 					shareText += "\n" + guessColours[i];
 				}
-				shareText += "\nhttps://pinniped.page/think-four";
+				shareText += `\nhttps://pinniped.page/think-four?puzzle=${date}`;
 				navigator.clipboard.writeText(shareText);
 
 				document.querySelector(".copy-alert").classList.remove("hide");
