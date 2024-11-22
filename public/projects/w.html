@@ -1113,9 +1113,16 @@
 						if (letter.classList.contains("absent")) guesses += "⬛";
 					}
 				});
+
 				var finalMessage;
-				if (win) finalMessage = `wordlelele — ${word} in ${positionRow}/${word.length + 1}${guesses}\nhttps://pinniped.page/w`;
-				else finalMessage = `wordlelele — ${word} in N/A${guesses}\nhttps://pinniped.page/w`;
+				if (setWord == undefined || word == setWord) {
+					if (win) finalMessage = `wordlelele — (not yet changed) in ${positionRow}/${word.length + 1}${guesses}\nhttps://pinniped.page/w`;
+					else finalMessage = `wordlelele — (not yet changed) in N/A${guesses}\nhttps://pinniped.page/w`;
+				} else {
+					if (win) finalMessage = `wordlelele — ${word} in ${positionRow}/${word.length + 1}${guesses}\nhttps://pinniped.page/w`;
+					else finalMessage = `wordlelele — ${word} in N/A${guesses}\nhttps://pinniped.page/w`;
+				}
+
 				navigator.clipboard.writeText(finalMessage);
 
 				document.querySelector("#shareButtonStatus").classList.remove("hide");
@@ -1215,7 +1222,7 @@
 			loadThemeFromURL();
 
 			// last: version #
-			let version = "1.5.9";
+			let version = "1.5.10";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
 		</script>
