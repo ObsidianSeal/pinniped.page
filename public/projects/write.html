@@ -69,7 +69,8 @@
 
 			textarea {
 				width: 7.5in;
-				height: 10in;
+				min-height: 10in;
+				height: fit-content;
 
 				padding: 0.5in;
 
@@ -210,14 +211,19 @@
 			<div class="alert">
 				<i class="fa-solid fa-triangle-exclamation"></i>
 				<p>
-					Until I figure out how to better optimize this page for printing, if you want this page to print as it appears, you will probably have to carefully adjust
-					your print settings.
+					Unless I figure out how to better optimize this page for printing, if you want to print your writing as it appears on the page, you will probably have to
+					carefully adjust your print settings.
 				</p>
 			</div>
 
 			<div class="alert">
 				<i class="fa-solid fa-triangle-exclamation"></i>
 				<p>This page WILL NOT save your work. Write, then copy or print.</p>
+			</div>
+
+			<div class="alert">
+				<i class="fa-solid fa-triangle-exclamation"></i>
+				<p>You can write more than a page, but the page acts weird past its normal size.</p>
 			</div>
 
 			<h2>Which font would you like to use?</h2>
@@ -243,15 +249,18 @@
 		// list of fonts
 		const fonts = ["PP Neue Montreal", "Select Mono", "Computer Modern", "PP Writer"];
 
+		// the page
+		const textArea = document.querySelector("textarea");
+
 		// set font to write with
 		function setFont(fontName) {
-			document.querySelector("textarea").style = `font-family: "${fontName}"`;
+			textArea.style = `font-family: "${fontName}"`;
 
 			document.querySelector(".welcome").classList.add("hide");
 			document.querySelector(".main-content").classList.remove("hide");
 
 			// autofocus textarea
-			document.querySelector("textarea").focus();
+			textArea.focus();
 
 			// prevent accidental page closing
 			window.onbeforeunload = function () {
@@ -284,6 +293,12 @@
 					setFont(fonts[9]);
 				}
 			}
+		});
+
+		// increase page height for overflow (because I don't feel like making proper 'multi-page'); adapted from 10/10 would recommend
+		textArea.addEventListener("input", function () {
+			this.style.height = "0px";
+			this.style.height = `calc(${this.scrollHeight}px - 1in)`;
 		});
 	</script>
 </html>
