@@ -754,15 +754,38 @@
 						["Lone Digger", "Caravan Palace", "&lt;I°_°I&gt;"],
 					],
 				},
-				"guess the song from the first second": {
-					link: "PLTKwBiSgGBshltUP89mVEE74hLAZyMFRP",
-					length: [300, "18:38:33"],
+				"🎵 - December 2024": {
+					link: "PLTKwBiSgGBsiL5ktjLjNuthAQmF9Up5BY",
+					length: [20, "1:12:03"],
 					tracks: [
+						["The DJ is Crying for Help", "AJR", "The Maybe Man"],
+						["still feel.", "half·alive", "Now, Not Yet"],
+						["The Bones (with Hozier)", "Maren Morris & Hozier", "The Bones (with Hozier)"],
+						["Fire! I-DLE), JVKE) (feat. YUQI)", "Alan Walker & YUQI & JVKE", "Fire! (feat. YUQI ((G)I-DLE), JVKE)"],
+						["Someone New", "Hozier", "Hozier (Expanded Edition)"],
 						[
-							'<span style="color: #ce7da5">300 TRACKS</span>',
-							'<span style="color: #ce7da5">would take up way too much space here</span>',
-							'<span style="color: #ce7da5">and would take forever to write</span>',
+							"To Ashes and Blood (from the series Arcane League of Legends)",
+							"Woodkid",
+							"Arcane League of Legends: Season 2 (Soundtrack from the Animated Series)",
 						],
+						["Sucker (from the series Arcane League of Legends)", "Marcus King", "Remember Me (from the series Arcane League of Legends)"],
+						["Almost (Sweet Music)", "Hozier", "Wasteland, Baby!"],
+						["Reverse", "Caravan Palace", "Gangbusters Melody Club"],
+						["Ping! 2", "Exyl", "Ping! 2"],
+						["Nice To Meet You", "Myles Smith", "A Minute..."],
+						[
+							"Blood Sweat & Tears (from the series Arcane League of Legends)",
+							"Sheryl Lee Ralph",
+							"Arcane League of Legends: Season 2 (Soundtrack from the Animated Series)",
+						],
+						["The Stable Song", "Gregory Alan Isakov", "That Sea, The Gambler"],
+						["Piece By Piece", "Pharrell Williams & Princess Anne High School Fabulous Marching Cavaliers", "Piece By Piece"],
+						["Good News", "Shaboozey", "Good News"],
+						["All Things End", "Hozier", "Unreal Unearth"],
+						["Sedated", "Hozier", "Hozier (Expanded Edition)"],
+						["Moonshine", "Caravan Palace", "Chronologic"],
+						["Automatic", "half·alive", "Automatic"],
+						["Jackie and Wilson", "Hozier", "Hozier (Expanded Edition)"],
 					],
 				},
 				"oops all Conan Gray": {
@@ -801,7 +824,7 @@
 				},
 				"oops all Noah Kahan": {
 					link: "PLTKwBiSgGBsif8orVlqBx6FtwvyNG_3pL",
-					length: [13, "0:49:48"],
+					length: [13, "0:53:41"],
 					tracks: [
 						["Busyhead", "Noah Kahan", "Busyhead"],
 						["Mess", "Noah Kahan", "Busyhead"],
@@ -816,6 +839,24 @@
 						["Everywhere, Everything", "Noah Kahan", "Stick Season"],
 						["New Perspective", "Noah Kahan", "Stick Season"],
 						["Growing Sideways", "Noah Kahan", "Stick Season"],
+						["Maine", "Noah Kahan", "Cape Elizabeth"],
+					],
+				},
+				"oops all Hozier": {
+					link: "PLTKwBiSgGBsj3xxMUeuZRL4pPgnkgjlGf",
+					length: [11, "0:42:42"],
+					tracks: [
+						["Someone New", "Hozier", "Hozier (Expanded Edition)"],
+						["Sedated", "Hozier", "Hozier (Expanded Edition)"],
+						["Jackie and Wilson", "Hozier", "Hozier (Expanded Edition)"],
+						["Work Song", "Hozier", "Hozier (Expanded Edition)"],
+						["From Eden", "Hozier", "Hozier (Expanded Edition)"],
+						["Angel of Small Death and the Codeine Scene", "Hozier", "Hozier (Expanded Edition)"],
+						["Take Me to Church", "Hozier", "Take Me to Church EP"],
+						["Almost (Sweet Music)", "Hozier", "Wasteland, Baby!"],
+						["All Thing End", "Hozier", "Unreal Unearth"],
+						["Eat Your Young", "Hozier", "Unreal Unearth: Unaired"],
+						["Too Sweet", "Hozier", "Unreal Unearth: Unaired"],
 					],
 				},
 				"⚡ Epic Music": {
@@ -906,6 +947,17 @@
 						["Vibing in the 20s", "Context Sensitive", "Vibing in the 20s"],
 						["Don&rsquo;t Stop Believin&rsquo; (2024 Remaster)", "Journey", "Greatest Hits (2024 Remaster)"],
 						["Separate Ways (Worlds Apart) [2024 Remaster]", "Journey", "Greatest Hits (2024 Remaster)"],
+					],
+				},
+				"guess the song from the first second": {
+					link: "PLTKwBiSgGBshltUP89mVEE74hLAZyMFRP",
+					length: [300, "18:38:33"],
+					tracks: [
+						[
+							'<span style="color: #ce7da5">300 TRACKS</span>',
+							'<span style="color: #ce7da5">would take up way too much space here</span>',
+							'<span style="color: #ce7da5">and would take forever to write</span>',
+						],
 					],
 				},
 			};
@@ -1013,6 +1065,7 @@
 				"🎵 - September 2024",
 				"🎵 - October 2024",
 				"🎵 - November 2024",
+				"🎵 - December 2024",
 			];
 
 			function addUpArtists() {
@@ -1027,14 +1080,14 @@
 					}
 				}
 
-				console.table(artistNumbers);
+				console.log(artistNumbers);
 
 				let repeatArtists = {};
 				for (let artist in artistNumbers) {
 					if (artistNumbers[artist] > 1) repeatArtists[artist] = artistNumbers[artist];
 				}
 
-				console.table(repeatArtists);
+				console.log(repeatArtists);
 			}
 			addUpArtists();
 		</script>
