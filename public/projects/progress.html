@@ -183,6 +183,12 @@
 				document.querySelector("span").innerHTML = Math.round(percent * 100 * 100) / 100;
 				document.querySelector("#numerator").value = numbers[0];
 				document.querySelector("#denominator").value = numbers[1];
+
+				document.querySelector("#numerator").style.width = "0px";
+				document.querySelector("#numerator").style.width = `${document.querySelector("#numerator").scrollWidth}px`;
+
+				document.querySelector("#denominator").style.width = "0px";
+				document.querySelector("#denominator").style.width = `${document.querySelector("#denominator").scrollWidth}px`;
 			}
 
 			setProgress(percent, true);
