@@ -24,7 +24,7 @@
 		<style>
 			/* FONT(S) FROM GOOGLE FONTS */
 			@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500;700");
-			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300");
+			@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700");
 
 			/* PHOTOSHOP "GRAYSCALE", "LIGHT", and 2 from "PALE" COLOURS, plus ~38% opacity */
 			:root {
@@ -171,7 +171,8 @@
 
 			h1 a:hover,
 			.clear-button:hover,
-			.help-button:hover {
+			.help-button:hover,
+			.discovered-fraction:hover {
 				color: var(--grey80);
 				cursor: pointer;
 			}
@@ -270,7 +271,7 @@
 				border-radius: 7px;
 
 				background-color: var(--grey90);
-				color: var(--grey85);
+				color: var(--grey70);
 			}
 
 			.sorting-options input {
@@ -286,15 +287,17 @@
 			}
 
 			input::selection {
-				background-color: var(--grey85);
+				background-color: var(--grey75);
 			}
 
 			input::placeholder {
-				color: var(--grey80);
+				color: var(--grey70);
+				font-family: "Roboto";
 			}
 
-			.sorting-options div:not(.sorting-options div:first-child, .active):hover {
-				color: var(--grey80);
+			.sorting-options div:not(.sorting-options div:first-child, .active):hover,
+			.book-tab:hover {
+				color: var(--grey50);
 				cursor: pointer;
 			}
 
@@ -324,6 +327,97 @@
 				display: flex;
 				align-items: center;
 				justify-self: center;
+			}
+
+			.book-of-items-container {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: #00000080;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+
+			.book-of-items {
+				background-color: var(--grey85);
+				color: var(--white);
+
+				width: calc(100% - 100px * 2);
+				height: calc(100% - 100px * 2);
+				max-width: 780px;
+
+				overflow-y: scroll;
+
+				padding-left: 20px;
+			}
+
+			.item-info {
+				padding: 10px 0;
+			}
+
+			.item-info:not(.item-info:last-child) {
+				border-bottom: 2px solid var(--grey90);
+			}
+
+			.item-number {
+				font-size: 12px;
+				display: block;
+				margin-bottom: 5px;
+				color: var(--grey50);
+			}
+
+			h2 i {
+				font-size: 36px;
+				margin-right: 20px;
+			}
+
+			h2 span {
+				font-size: 36px;
+				font-weight: 700;
+			}
+
+			.item-number,
+			.recipe-info {
+				font-family: "Roboto";
+				font-weight: 500;
+			}
+
+			.recipe-info i {
+				margin: 0 8px 0 8px;
+				color: var(--grey50);
+			}
+
+			.tab-container {
+				width: calc(100% - 100px * 2);
+				max-width: 800px;
+
+				display: flex;
+				justify-content: flex-end;
+			}
+
+			.book-tab {
+				width: 50px;
+				height: 50px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				border-radius: 7px 7px 0 0;
+
+				background-color: var(--grey90);
+				color: var(--grey70);
+			}
+
+			.book-tab i {
+				font-size: 30px;
+			}
+
+			.hide {
+				display: none;
 			}
 
 			/* COLOUR CLASSES - border */
@@ -408,189 +502,215 @@
 				border-color: var(--grey60);
 			}
 
-			/* COLOUR CLASSES - icon */
+			/* COLOUR CLASSES - icon & book entry titles */
 
-			.red i {
+			.red i,
+			h2.red span {
 				color: var(--red);
 			}
 
-			.red-orange i {
+			.red-orange i,
+			h2.red-orange span {
 				color: var(--red-orange);
 			}
 
-			.yellow-orange i {
+			.yellow-orange i,
+			h2.yellow-orange span {
 				color: var(--yellow-orange);
 			}
 
-			.yellow i {
+			.yellow i,
+			h2.yellow span {
 				color: var(--yellow);
 			}
 
-			.pea-green i {
+			.pea-green i,
+			h2.pea-green span {
 				color: var(--pea-green);
 			}
 
-			.yellow-green i {
+			.yellow-green i,
+			h2.yellow-green span {
 				color: var(--yellow-green);
 			}
 
-			.green i {
+			.green i,
+			h2.green span {
 				color: var(--green);
 			}
 
-			.green-cyan i {
+			.green-cyan i,
+			h2.green-cyan span {
 				color: var(--green-cyan);
 			}
 
-			.cyan i {
+			.cyan i,
+			h2.cyan span {
 				color: var(--cyan);
 			}
 
-			.cyan-blue i {
+			.cyan-blue i,
+			h2.cyan-blue span {
 				color: var(--cyan-blue);
 			}
 
-			.blue i {
+			.blue i,
+			h2.blue span {
 				color: var(--blue);
 			}
 
-			.blue-violet i {
+			.blue-violet i,
+			h2.blue-violet span {
 				color: var(--blue-violet);
 			}
 
-			.violet i {
+			.violet i,
+			h2.violet span {
 				color: var(--violet);
 			}
 
-			.violet-magenta i {
+			.violet-magenta i,
+			h2.violet-magenta span {
 				color: var(--violet-magenta);
 			}
 
-			.magenta i {
+			.magenta i,
+			h2.magenta span {
 				color: var(--magenta);
 			}
 
-			.magenta-red i {
+			.magenta-red i,
+			h2.magenta-red span {
 				color: var(--magenta-red);
 			}
 
-			.tan i {
+			.tan i,
+			h2.tan span {
 				color: var(--tan);
 			}
 
-			.brown i {
+			.brown i,
+			h2.brown span {
 				color: var(--brown);
 			}
 
-			.light-grey i {
+			.light-grey i,
+			h2.light-grey span {
 				color: var(--grey30);
 			}
 
-			.dark-grey i {
+			.dark-grey i,
+			h2.dark-grey span {
 				color: var(--grey60);
 			}
 
 			/* COLOUR CLASSES - hover (background) */
 
-			.red:hover {
+			.red:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--red-less));
 			}
 
-			.red-orange:hover {
+			.red-orange:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--red-orange-less));
 			}
 
-			.yellow-orange:hover {
+			.yellow-orange:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--yellow-orange-less));
 			}
 
-			.yellow:hover {
+			.yellow:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--yellow-less));
 			}
 
-			.pea-green:hover {
+			.pea-green:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--pea-green-less));
 			}
 
-			.yellow-green:hover {
+			.yellow-green:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--yellow-green-less));
 			}
 
-			.green:hover {
+			.green:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--green-less));
 			}
 
-			.green-cyan:hover {
+			.green-cyan:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--green-cyan-less));
 			}
 
-			.cyan:hover {
+			.cyan:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--cyan-less));
 			}
 
-			.cyan-blue:hover {
+			.cyan-blue:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--cyan-blue-less));
 			}
 
-			.blue:hover {
+			.blue:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--blue-less));
 			}
 
-			.blue-violet:hover {
+			.blue-violet:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--blue-violet-less));
 			}
 
-			.violet:hover {
+			.violet:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--violet-less));
 			}
 
-			.violet-magenta:hover {
+			.violet-magenta:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--violet-magenta-less));
 			}
 
-			.magenta:hover {
+			.magenta:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--magenta-less));
 			}
 
-			.magenta-red:hover {
+			.magenta-red:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--magenta-red-less));
 			}
 
-			.tan:hover {
+			.tan:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--tan-less));
 			}
 
-			.brown:hover {
+			.brown:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--brown-less));
 			}
 
-			.light-grey:hover {
+			.light-grey:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--light-grey-less));
 			}
 
-			.dark-grey:hover {
+			.dark-grey:not(h2):hover {
 				background-image: linear-gradient(var(--black), var(--dark-grey-less));
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="discoveries-sidebar">
+		<div class="discoveries-sidebar" tabindex="-1">
 			<div class="discovered-items"></div>
 			<div class="sorting-options">
-				<input id="search" autocomplete="off" placeholder="search? (RegEx)" />
+				<input id="search" autocomplete="off" placeholder="search? (RegEx)" tabindex="-1" />
 				<div id="clear-search" title="clear search"><i class="fa-solid fa-xmark"></i></div>
 				<div id="sort-time" title="sort by time discovered"><i class="fa-solid fa-clock"></i></div>
 				<div id="sort-name" title="sort by name"><i class="fa-light fa-arrow-down-a-z"></i></div>
 				<div id="sort-colour" title="sort by colour"><i class="fa-solid fa-palette"></i></div>
 			</div>
 		</div>
-		<h1><a href="../index.html">pinniped.page</a>/craft</h1>
-		<span class="discovered-fraction"></span>
+		<h1><a href="../index.html" tabindex="-1">pinniped.page</a>/craft</h1>
+		<span class="discovered-fraction" title="view &ldquo;book of items&rdquo;"></span>
 		<span class="version"></span>
-		<span class="help-button" title="info & help page"><i class="fa-solid fa-question"></i></span>
+		<span class="help-button" title="info & help page (opens a new tab)"><i class="fa-solid fa-question"></i></span>
 		<span class="clear-button" title="clear workspace"><i class="fa-solid fa-trash-can"></i></span>
 		<div class="item-container"></div>
+		<div class="book-of-items-container hide">
+			<div class="tab-container">
+				<div class="book-tab tab-close" title="close (ESCAPE)"><i class="fa-solid fa-xmark"></i></div>
+			</div>
+			<div class="book-of-items"></div>
+		</div>
 
 		<script>
 			// for decimal/base64 conversion
@@ -1386,7 +1506,7 @@
 			};
 
 			// version #
-			const version = "v1.5.2";
+			const version = "v1.6.0";
 
 			// frequently referenced elements
 			const discoveredItemsContainer = document.querySelector(".discovered-items");
@@ -1432,6 +1552,8 @@
 					search();
 
 					if (!initialItems.includes(item)) window.history.replaceState({}, "", "?x=" + toBase64(getProgress()));
+
+					discoverBookEntry(item);
 				}
 			}
 
@@ -1451,6 +1573,8 @@
 					if (sortMode == "name") sortDiscoveriesByName();
 					if (sortMode == "colour") sortDiscoveriesByColour();
 					search();
+
+					discoverBookEntry(item);
 				}
 			}
 
@@ -2038,10 +2162,103 @@
 				search();
 			});
 
+			// find number of ways to get an item
+			function findRecipes(item) {
+				let count = 0;
+
+				for (let i = 0; i < recipes.length; i++) {
+					if (recipes[i][2] == item) count++;
+				}
+
+				return count;
+			}
+
+			// find number of uses for an item
+			function findUses(item) {
+				let count = 0;
+
+				for (let i = 0; i < recipes.length; i++) {
+					if (recipes[i][0] == item || recipes[i][1] == item) count++;
+				}
+
+				return count;
+			}
+
+			// book of items: add entry
+			let entries = 0;
+			function addBookEntry(item) {
+				entries++;
+
+				let entry = document.createElement("div");
+				entry.classList.add("item-info");
+
+				let entryNumber = document.createElement("span");
+				entryNumber.classList.add("item-number");
+				entryNumber.innerHTML = `#&hairsp;${String(entries).padStart(3, "0")}`;
+				entry.appendChild(entryNumber);
+
+				let entryTitle = document.createElement("h2");
+				entryTitle.classList.add(iconAssociations[item][2]);
+				let entryTitleIcon = document.createElement("i");
+				entryTitleIcon.classList.add(`fa-${iconAssociations[item][0]}`, `fa-${iconAssociations[item][1]}`);
+				let entryTitleText = document.createElement("span");
+				entryTitleText.innerHTML = item.replaceAll(/[^ ]/g, "?");
+				entryTitle.appendChild(entryTitleIcon);
+				entryTitle.appendChild(entryTitleText);
+				entry.appendChild(entryTitle);
+
+				let entryRecipeInfo = document.createElement("span");
+				entryRecipeInfo.classList.add("recipe-info");
+				entryRecipeInfo.innerHTML = `${findRecipes(item)}<i class="fa-solid fa-arrow-right-long"></i>${findUses(item)}`;
+				entry.appendChild(entryRecipeInfo);
+
+				document.querySelector(".book-of-items").appendChild(entry);
+			}
+			for (let thing in iconAssociations) {
+				addBookEntry(thing);
+			}
+
+			// un-obfuscate discoveries in book
+			function discoverBookEntry(item) {
+				let i = 0;
+				for (let thing in iconAssociations) {
+					i++;
+					if (thing == item) break;
+				}
+
+				document.querySelector(`.item-info:nth-child(${i}) h2 span`).innerHTML = item;
+			}
+
+			// click on the 'discovered fraction'
+			document.querySelector(".discovered-fraction").addEventListener("click", (e) => {
+				document.querySelector(".book-of-items-container").classList.remove("hide");
+			});
+
+			// click on the boom of item's close button to close it
+			document.querySelector(".tab-close").addEventListener("click", (e) => {
+				document.querySelector(".book-of-items-container").classList.add("hide");
+			});
+
+			// or use ESCAPE
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Escape") {
+					document.querySelector(".book-of-items-container").classList.add("hide");
+				}
+			});
+
+			// click outside to close :)
+			document.querySelector(".book-of-items-container").addEventListener("click", (e) => {
+				if (e.target == document.querySelector(".book-of-items-container")) {
+					document.querySelector(".book-of-items-container").classList.add("hide");
+				}
+			});
+
 			// initial items!!!
 			const initialItems = ["air", "earth", "fire", "water"];
 			for (let i = 0; i < initialItems.length; i++) discoverWithoutReplaceState(initialItems[i]);
 			sortByTimeButton.classList.add("active");
+
+			// getAll();
 		</script>
 	</body>
 </html>
