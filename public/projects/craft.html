@@ -690,7 +690,7 @@
 
 	<body>
 		<div class="discoveries-sidebar" tabindex="-1">
-			<div class="discovered-items"></div>
+			<div class="discovered-items" tabindex="-1"></div>
 			<div class="sorting-options">
 				<input id="search" autocomplete="off" placeholder="search? (RegEx)" tabindex="-1" />
 				<div id="clear-search" title="clear search"><i class="fa-solid fa-xmark"></i></div>
@@ -890,7 +890,7 @@
 				["human", "art", "painting"],
 				["thinking", "idea", "example"],
 				["idea", "idea", "invention"],
-				["earth", "synonym", "dirt"],
+				["earth", "synonym", "soil"],
 				["air", "dirt", "dust"],
 				["fish", "fire", "food"],
 				["writing", "example", "script"],
@@ -1248,6 +1248,91 @@
 				["song", "phone", "YouTube Music"],
 				["singer", "guitar", "song"],
 				["CD", "music", "song"],
+				["atmosphere", "dust", "pollution"],
+				["atmosphere", "brick", "weathering"],
+				["dust", "dust", "dust storm"],
+				["wind", "fire", "firestorm"],
+				["smoke", "brick", "chimney"],
+				["bubble", "bubble", "bubble bath"],
+				["brick", "puddle", "splash"],
+				["hot", "hot", "heat wave"],
+				["air", "dust", "air pollution"],
+				["air", "smoke", "air pollution"],
+				["earth", "puddle", "mud"],
+				["fire", "brick", "oven"],
+				["fire", "mud", "brick"],
+				["dust", "book", "The Book of Dust"],
+				["broom", "idea", "tool"],
+				["tool", "wizard", "wand"],
+				["small", "child", "baby"],
+				["baby", "sound", "cry"],
+				["phone", "example", "Google Pixel 4a"],
+				["fire", "human", "cook"],
+				["broom", "thinking", "clean"],
+				["wand", "idea", "tool"],
+				["wand", "thinking", "magic"],
+				["broom", "invention", "vacuum"],
+				["rock", "puddle", "splash"],
+				["hot", "rock", "lava"],
+				["soil", "water", "mud"],
+				["soil", "puddle", "mud"],
+				["planet", "life", "plant"],
+				["plant", "big", "tree"],
+				["tree", "tree", "forest"],
+				["forest", "fire", "wildfire"],
+				["ocean", "continent", "planet"],
+				["water", "contamination", "pollution"],
+				["air", "contamination", "air pollution"],
+				["soil", "contamination", "pollution"],
+				["mud", "contamination", "pollution"],
+				["earth", "contamination", "pollution"],
+				["pond", "contamination", "pollution"],
+				["river", "contamination", "pollution"],
+				["lake", "contamination", "pollution"],
+				["sea", "contamination", "pollution"],
+				["ocean", "contamination", "pollution"],
+				["river", "example", "The Nile"],
+				["lake", "example", "Lake Louise"],
+				["sea", "example", "Baltic Sea"],
+				["ocean", "example", "Pacific Ocean"],
+				["university", "idea", "school"],
+				["university", "thinking", "class"],
+				["university", "food", "pizza"],
+				["soil", "synonym", "earth"],
+				["big", "computer", "supercomputer"],
+				["computer", "computer", "supercomputer"],
+				["cloud", "computer", "server"],
+				["baby", "seal", "pup"],
+				["baby", "dog", "puppy"],
+				["baby", "cat", "kitten"],
+				["baby", "cow", "calf"],
+				["baby", "duck", "duckling"],
+				["baby", "bird", "chick"],
+				["baby", "raccoon", "kit"],
+				["baby", "whale", "calf"],
+				["baby", "frog", "tadpole"],
+				["baby", "otter", "pup"],
+				["space", "darkness", "black hole"],
+				["black hole", "opposite", "white hole"],
+				["black hole", "white hole", "inverse"],
+				["black hole", "inverse", "white hole"],
+				["white hole", "inverse", "black hole"],
+				["death", "property", "cemetery"],
+				["death", "space", "cemetery"],
+				["idea", "sound", "vibration"],
+				["earth", "vibration", "earthquake"],
+				["house", "earthquake", "collapse"],
+				["building", "earthquake", "collapse"],
+				["tower", "earthquake", "collapse"],
+				["collapse", "supernova", "black hole"],
+				["supernova", "universe", "The Big Bang"],
+				["supernova", "singer", "aespa"],
+				["aespa", "song", "whiplash"],
+				["song", "example", "whiplash"],
+				["song", "song", "album"],
+				["album", "example", "Unreal Unearth: Unending"],
+				["baby", "goose", "gosling"],
+				["engineer", "school", "university"],
 			];
 
 			// associate items with their Font Awesome style, icon, and colour
@@ -1281,14 +1366,14 @@
 				"building": ["solid", "arrow-right-to-city", "blue-violet"],
 				"city": ["solid", "city", "violet"],
 				"tower": ["solid", "hotel", "blue"],
-				"bird": ["solid", "feather-pointed", "cyan"], // thanks Gemini for telling me to make bird "light blue"
+				"bird": ["solid", "feather-pointed", "blue"],
 				"bug": ["solid", "bug", "yellow-orange"],
 				"ant": ["solid", "bugs", "magenta-red"],
 				"death": ["solid", "skull", "dark-grey"],
 				"human": ["solid", "person", "yellow"],
 				"fish": ["solid", "fish", "cyan"],
 				"animal": ["solid", "paw", "yellow"],
-				"raccoon": ["solid", "paw", "brown"],
+				"raccoon": ["solid", "raccoon", "dark-grey"],
 				"seal": ["solid", "otter", "green-cyan"],
 				"whale": ["solid", "whale", "blue-violet"],
 				"love": ["solid", "heart", "red"],
@@ -1503,6 +1588,56 @@
 				"song": ["solid", "list-music", "yellow"],
 				"xylophone": ["regular", "piano-keyboard", "blue"],
 				"singer": ["solid", "microphone-stand", "magenta"],
+				"weathering": ["solid", "hill-rockslide", "tan"],
+				"dust storm": ["solid", "wind-warning", "tan"],
+				"firestorm": ["solid", "fire-smoke", "red-orange"],
+				"chimney": ["solid", "chimney", "red"],
+				"splash": ["solid", "splotch", "cyan"],
+				"heat wave": ["solid", "temperature-sun", "red"],
+				"oven": ["solid", "oven", "yellow-orange"],
+				"soil": ["solid", "grip-dots", "tan"],
+				"The Book of Dust": ["solid", "book-sparkles", "blue-violet"],
+				"tool": ["solid", "screwdriver-wrench", "magenta-red"],
+				"wand": ["solid", "wand", "tan"],
+				"baby": ["solid", "baby", "green"],
+				"cry": ["solid", "face-sad-cry", "cyan"],
+				"Google Pixel 4a": ["solid", "mobile-screen", "cyan-blue"],
+				"clean": ["solid", "hand-sparkles", "violet"],
+				"vacuum": ["solid", "vacuum", "violet-magenta"],
+				"lava": ["solid", "volcano", "red-orange"],
+				"plant": ["solid", "leaf", "yellow-green"],
+				"tree": ["solid", "tree", "yellow-green"],
+				"forest": ["solid", "trees", "green"],
+				"wildfire": ["solid", "tower-observation", "red-orange"],
+				"The Nile": ["solid", "earth-africa", "cyan"],
+				"Lake Louise": ["solid", "earth-americas", "cyan"],
+				"Baltic Sea": ["solid", "earth-europe", "cyan"],
+				"Pacific Ocean": ["solid", "earth-asia", "cyan"],
+				"school": ["solid", "school", "light-grey"],
+				"class": ["solid", "chalkboard", "light-grey"],
+				"supercomputer": ["solid", "microchip-ai", "magenta-red"],
+				"server": ["solid", "server", "magenta"],
+				"pup": ["solid", "otter", "cyan"],
+				"puppy": ["solid", "paw-simple", "tan"],
+				"kitten": ["solid", "cat", "light-grey"],
+				"calf": ["solid", "drumstick", "tan"],
+				"duckling": ["solid", "duck", "pea-green"],
+				"chick": ["solid", "feather", "cyan-blue"],
+				"kit": ["solid", "raccoon", "brown"],
+				"tadpole": ["solid", "worm", "green"],
+				"black hole": ["solid", "circle", "dark-grey"],
+				"white hole": ["regular", "circle", "light-grey"],
+				"inverse": ["solid", "reflect-vertical", "cyan-blue"],
+				"cemetery": ["solid", "tombstone-blank", "dark-grey"],
+				"vibration": ["solid", "water", "yellow"],
+				"earthquake": ["solid", "hill-rockslide", "brown"],
+				"collapse": ["solid", "arrows-minimize", "yellow-orange"],
+				"The Big Bang": ["solid", "solar-system", "red-orange"],
+				"aespa": ["solid", "icons", "magenta"],
+				"whiplash": ["solid", "exclamation", "magenta"],
+				"album": ["solid", "album", "blue-violet"],
+				"Unreal Unearth: Unending": ["solid", "album-collection-circle-user", "brown"],
+				"gosling": ["solid", "feather", "yellow"],
 			};
 
 			// version #
@@ -1533,6 +1668,75 @@
 			// version & info message
 			console.log(`Finite Craft\n${version}\n(${totalItems} total items, ${totalRecipes} total recipes)`);
 			versionElement.innerHTML = version;
+
+			// find number of ways to get an item
+			function findRecipes(item) {
+				let count = 0;
+
+				for (let i = 0; i < recipes.length; i++) {
+					if (recipes[i][2] == item) count++;
+				}
+
+				return count;
+			}
+
+			// find number of uses for an item
+			function findUses(item) {
+				let count = 0;
+
+				for (let i = 0; i < recipes.length; i++) {
+					if (recipes[i][0] == item || recipes[i][1] == item) count++;
+				}
+
+				return count;
+			}
+
+			// book of items: add entry
+			let entries = 0;
+			function addBookEntry(item) {
+				entries++;
+
+				let entry = document.createElement("div");
+				entry.classList.add("item-info");
+
+				let entryNumber = document.createElement("span");
+				entryNumber.classList.add("item-number");
+				entryNumber.innerHTML = `#&hairsp;${String(entries).padStart(3, "0")}`;
+				entry.appendChild(entryNumber);
+
+				let entryTitle = document.createElement("h2");
+				entryTitle.classList.add(iconAssociations[item][2]);
+				let entryTitleIcon = document.createElement("i");
+				entryTitleIcon.classList.add(`fa-${iconAssociations[item][0]}`, `fa-${iconAssociations[item][1]}`);
+				let entryTitleText = document.createElement("span");
+				entryTitleText.innerHTML = item.replaceAll(/[^ ]/g, "?");
+				entryTitle.appendChild(entryTitleIcon);
+				entryTitle.appendChild(entryTitleText);
+				entry.appendChild(entryTitle);
+
+				let entryRecipeInfo = document.createElement("span");
+				entryRecipeInfo.classList.add("recipe-info");
+				entryRecipeInfo.innerHTML = `${findRecipes(item)}<i class="fa-solid fa-arrow-right-long"></i>${findUses(item)}`;
+				entry.appendChild(entryRecipeInfo);
+
+				document.querySelector(".book-of-items").appendChild(entry);
+			}
+
+			// must be done early on
+			for (let thing in iconAssociations) {
+				addBookEntry(thing);
+			}
+
+			// un-obfuscate discoveries in book
+			function discoverBookEntry(item) {
+				let i = 0;
+				for (let thing in iconAssociations) {
+					i++;
+					if (thing == item) break;
+				}
+
+				document.querySelector(`.item-info:nth-child(${i}) h2 span`).innerHTML = item;
+			}
 
 			// add item to list of discoveries
 			function discover(item) {
@@ -2162,79 +2366,12 @@
 				search();
 			});
 
-			// find number of ways to get an item
-			function findRecipes(item) {
-				let count = 0;
-
-				for (let i = 0; i < recipes.length; i++) {
-					if (recipes[i][2] == item) count++;
-				}
-
-				return count;
-			}
-
-			// find number of uses for an item
-			function findUses(item) {
-				let count = 0;
-
-				for (let i = 0; i < recipes.length; i++) {
-					if (recipes[i][0] == item || recipes[i][1] == item) count++;
-				}
-
-				return count;
-			}
-
-			// book of items: add entry
-			let entries = 0;
-			function addBookEntry(item) {
-				entries++;
-
-				let entry = document.createElement("div");
-				entry.classList.add("item-info");
-
-				let entryNumber = document.createElement("span");
-				entryNumber.classList.add("item-number");
-				entryNumber.innerHTML = `#&hairsp;${String(entries).padStart(3, "0")}`;
-				entry.appendChild(entryNumber);
-
-				let entryTitle = document.createElement("h2");
-				entryTitle.classList.add(iconAssociations[item][2]);
-				let entryTitleIcon = document.createElement("i");
-				entryTitleIcon.classList.add(`fa-${iconAssociations[item][0]}`, `fa-${iconAssociations[item][1]}`);
-				let entryTitleText = document.createElement("span");
-				entryTitleText.innerHTML = item.replaceAll(/[^ ]/g, "?");
-				entryTitle.appendChild(entryTitleIcon);
-				entryTitle.appendChild(entryTitleText);
-				entry.appendChild(entryTitle);
-
-				let entryRecipeInfo = document.createElement("span");
-				entryRecipeInfo.classList.add("recipe-info");
-				entryRecipeInfo.innerHTML = `${findRecipes(item)}<i class="fa-solid fa-arrow-right-long"></i>${findUses(item)}`;
-				entry.appendChild(entryRecipeInfo);
-
-				document.querySelector(".book-of-items").appendChild(entry);
-			}
-			for (let thing in iconAssociations) {
-				addBookEntry(thing);
-			}
-
-			// un-obfuscate discoveries in book
-			function discoverBookEntry(item) {
-				let i = 0;
-				for (let thing in iconAssociations) {
-					i++;
-					if (thing == item) break;
-				}
-
-				document.querySelector(`.item-info:nth-child(${i}) h2 span`).innerHTML = item;
-			}
-
 			// click on the 'discovered fraction'
 			document.querySelector(".discovered-fraction").addEventListener("click", (e) => {
 				document.querySelector(".book-of-items-container").classList.remove("hide");
 			});
 
-			// click on the boom of item's close button to close it
+			// click on the book of item's close button to close it
 			document.querySelector(".tab-close").addEventListener("click", (e) => {
 				document.querySelector(".book-of-items-container").classList.add("hide");
 			});
