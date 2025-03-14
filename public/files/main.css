@@ -785,23 +785,28 @@ ul {
 	text-decoration-color: #4ecdc4;
 }
 
-.light-grey a:hover {
+.light-grey a:hover,
+.light-grey a:focus {
 	background-color: #ffffee;
 }
 
-.dark-grey a:hover {
+.dark-grey a:hover,
+.dark-grey a:focus {
 	background-color: #d7d8cb;
 }
 
-.red a:hover {
+.red a:hover,
+.red a:focus {
 	background-color: #ff6b6b;
 }
 
-.yellow a:hover {
+.yellow a:hover,
+.yellow a:focus {
 	background-color: #ffe66d;
 }
 
-.blue a:hover {
+.blue a:hover,
+.blue a:focus {
 	background-color: #4ecdc4;
 }
 
