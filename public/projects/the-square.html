@@ -2,28 +2,29 @@
 
 <html lang="en">
 	<head>
-		<title>Omega Seal / The Square</title>
+		<title>The Square</title>
 
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
 
 		<link rel="icon" href="../images/icon.png" />
 
-		<meta name="theme-color" content="#4ecdc4" />
+		<meta property="og:url" content="https://pinniped.page/projects/the-square" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="The Square" />
+		<meta property="og:description" content="Interactive LEGO map; watch the YouTube video first." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Interactive LEGO map; watch the YouTube video first." />
+		<meta name="keywords" content="Obsidian_Seal, pinniped.page, LEGO, interactive, YouTube, video, map, Discord, bot" />
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<link rel="stylesheet" href="../files/main.css" />
 		<link rel="stylesheet" href="../files/scrollbar.css" />
 
 		<script src="../files/menu.js"></script>
-
-		<meta property="og:url" content="https://pinniped.page/graphs" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Omega Seal / The Square" />
-		<meta property="og:description" content="Discord bot; watch the YouTube video first." />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
 		<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js" defer></script>
@@ -240,10 +241,10 @@
 				.ref("/omega-seal")
 				.on("value", (snapshot) => {
 					if (snapshot.val().status == "online") {
-						document.getElementById("status").innerHTML = `&nbsp;BOT STATUS: <span style="color: #4ecdc4">online</span>&nbsp;`;
-					} else if (snapshot.val().status == "offline") {
-						document.getElementById("status").innerHTML = `&nbsp;BOT STATUS: <span style="color: #ff6b6b">offline</span>&nbsp;`;
-					} else {
+						// document.getElementById("status").innerHTML = `&nbsp;BOT STATUS: <span style="color: #4ecdc4">online</span>&nbsp;`;
+						// } else if (snapshot.val().status == "offline") {
+						// document.getElementById("status").innerHTML = `&nbsp;BOT STATUS: <span style="color: #ff6b6b">offline</span>&nbsp;`;
+						// } else {
 						document.getElementById("status").innerHTML = `&nbsp;BOT STATUS: <span style="color: #ffe66d">unknown</span>&nbsp;`;
 					}
 				});

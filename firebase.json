@@ -16,11 +16,6 @@
 				"source": "/projects/brb",
 				"destination": "../yikes.html?s=503",
 				"type": 302
-			},
-			{
-				"source": "/projects/the-square",
-				"destination": "../yikes.html?s=503",
-				"type": 302
 			}
 		],
 
