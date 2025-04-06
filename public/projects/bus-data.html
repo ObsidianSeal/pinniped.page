@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>BUS DATA</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/bus-data" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="BUS DATA" />
+		<meta property="og:description" content="Where are London Transit&rsquo;s articulated buses?" />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Where are London Transit&rsquo;s articulated buses?" />
+		<meta name="keywords" content="obsidian_seal, pinniped.page, bus, data, London, London Transit" />
+
+		<style>
+			/* FONTS */
+			@import url(https://use.typekit.net/rzo4wst.css);
+
+			/* COLOURS */
+			:root {
+				--base00: #1b2b34;
+				--base01: #343d46;
+				--base02: #4f5b66;
+				--base03: #65737e;
+				--base04: #a7adba;
+				--base05: #c0c5ce;
+				--base06: #cdd3de;
+				--base07: #d8dee9;
+				--base08: #ec5f67;
+				--base09: #f99157;
+				--base0A: #fac863;
+				--base0B: #99c794;
+				--base0C: #5fb3b3;
+				--base0D: #6699cc;
+				--base0E: #c594c5;
+				--base0F: #ab7967;
+			}
+
+			/* MAIN STYLES */
+			* {
+				font-family: "degular";
+
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				line-height: 1.15;
+
+				color: var(--base00);
+			}
+
+			body {
+				background-color: white;
+				padding: 50px;
+			}
+
+			h1 {
+				font-weight: 700;
+				font-size: 120px;
+			}
+
+			p {
+				font-weight: 400;
+				font-size: 20px;
+			}
+
+			a {
+				text-decoration-style: dashed;
+				text-decoration-color: var(--base04);
+				text-decoration-skip-ink: none;
+			}
+
+			a:hover {
+				text-decoration-color: var(--base09);
+			}
+
+			#test-show-data {
+				color: var(--base02);
+			}
+
+			/* SCROLLBAR(S) */
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-track {
+				background-color: var(--base05);
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: var(--base03);
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--base02);
+			}
+
+			/* SELECTION */
+			::selection {
+				background-color: var(--base00);
+				color: white;
+			}
+		</style>
+
+		<script type="module">
+			let busData = [];
+
+			async function fetchData() {
+				try {
+					const requestURL = "https://corsproxy.io/?url=http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json";
+					const request = new Request(requestURL);
+					const response = await fetch(request);
+					const responseJSON = await response.json();
+					busData = responseJSON.entity;
+					console.log(busData);
+				} catch (error) {
+					console.log(error);
+				}
+			}
+			await fetchData();
+
+			document.querySelector("#test-show-data").innerHTML = JSON.stringify(busData);
+		</script>
+	</head>
+
+	<body>
+		<h1><i class="fa-sharp fa-solid fa-bus"></i> BUS DATA</h1>
+
+		<br />
+
+		<p>v0.0.3 — April 6th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
+
+		<p>a project by <a href="../about.html" target="_blank">Obsidian_Seal</a> — not affiliated with <a href="https://londontransit.ca/" target="_blank">London Transit</a></p>
+
+		<br />
+
+		<p>Here is the data....</p>
+
+		<p id="test-show-data"></p>
+
+		<script></script>
+	</body>
+</html>
