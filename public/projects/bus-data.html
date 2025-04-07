@@ -65,6 +65,11 @@
 				font-weight: 700;
 				font-size: 120px;
 				width: fit-content;
+
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
 			}
 
 			p,
@@ -235,52 +240,170 @@
 		</style>
 
 		<script type="module">
+			// important variables
+			let busDataHeader = {};
 			let busData = [];
 
 			// get the data
 			async function fetchData() {
 				try {
+					// make the request, receive the data
 					const requestURL = "https://corsproxy.io/?url=http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json";
 					const request = new Request(requestURL);
 					const response = await fetch(request);
 					const responseJSON = await response.json();
+
+					// set the data
+					busDataHeader = responseJSON.header;
 					busData = responseJSON.entity;
-					console.log(busData);
 				} catch (error) {
-					console.log(error);
+					console.log(error); // hopefully this is not needed
 				}
 			}
 			await fetchData();
 
-			// random placeholder data !!
-			document.querySelector("#bus-total").innerHTML = `${Math.floor(Math.random() * 100)}`;
-			document.querySelector("#bus-total-percent").innerHTML = `${Math.floor(Math.random() * 100)}.${Math.floor(Math.random() * 100)}%`;
-			document.querySelector("#bus-total-articulated").innerHTML = `${Math.floor(Math.random() * 100)}`;
-			document.querySelector("#bus-total-articulated-partial-percent").innerHTML = `${Math.floor(Math.random() * 100)}.${Math.floor(Math.random() * 100)}%`;
-			document.querySelector("#bus-total-articulated-percent").innerHTML = `${Math.floor(Math.random() * 100)}.${Math.floor(Math.random() * 100)}%`;
+			// date
+			let busDataDate = new Date(busDataHeader.timestamp * 1000);
+			let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][busDataDate.getMonth()];
+			let day = busDataDate.getDate();
+			let ordinal = [
+				"st",
+				"nd",
+				"rd",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"st",
+				"nd",
+				"rd",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"th",
+				"st",
+			][busDataDate.getDate()];
+			let year = busDataDate.getFullYear();
+			let hour = busDataDate.getHours();
+			let minute = busDataDate.getMinutes();
+			let second = busDataDate.getSeconds();
+			document.querySelector("#data-time").innerHTML = `${month} ${day}${ordinal}, ${year} @ ${hour}:${minute.toString().padStart(2, "0")}:${second
+				.toString()
+				.padStart(2, "0")}`;
+
+			// bus totals
+			const fleet = 227;
+			const fleetArticulated = 13;
+			let totalBuses = busData.length;
+			let articulatedBuses = 0;
+			let busDistribution = {
+				1: 0,
+				2: 0,
+				3: 0,
+				4: 0,
+				5: 0,
+				6: 0,
+				7: 0,
+				9: 0,
+				10: 0,
+				12: 0,
+				13: 0,
+				15: 0,
+				16: 0,
+				17: 0,
+				19: 0,
+				20: 0,
+				24: 0,
+				25: 0,
+				27: 0,
+				28: 0,
+				30: 0,
+				31: 0,
+				33: 0,
+				34: 0,
+				35: 0,
+				36: 0,
+				37: 0,
+				38: 0,
+				90: 0,
+				91: 0,
+				92: 0,
+				93: 0,
+				94: 0,
+				95: 0,
+				102: 0,
+				104: 0,
+				106: 0,
+			};
+
+			for (let i = 0; i < totalBuses; i++) {
+				let busID = parseInt(busData[i].id);
+				let routeNumber = parseInt(busData[i].vehicle.trip.route_id);
+				let latitude = busData[i].vehicle.position.latitude;
+				let longitude = busData[i].vehicle.position.longitude;
+
+				if (busID < 100) articulatedBuses++;
+				busDistribution[routeNumber]++;
+			}
+
+			document.querySelector("#bus-total").innerHTML = `${totalBuses}`;
+			document.querySelector("#bus-total-articulated").innerHTML = `${articulatedBuses}`;
+
+			let totalBusesPercent = new Intl.NumberFormat("en", {
+				style: "percent",
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).format(totalBuses / fleet);
+
+			let articulatedBusesPartialPercent = new Intl.NumberFormat("en", {
+				style: "percent",
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).format(articulatedBuses / totalBuses);
+
+			let articulatedBusesPercent = new Intl.NumberFormat("en", {
+				style: "percent",
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).format(articulatedBuses / fleetArticulated);
+
+			document.querySelector("#bus-total-percent").innerHTML = totalBusesPercent;
+			document.querySelector("#bus-total-articulated-partial-percent").innerHTML = articulatedBusesPartialPercent;
+			document.querySelector("#bus-total-articulated-percent").innerHTML = articulatedBusesPercent;
 
 			// random placeholder data !!
-			const numberOfRoutes = 42;
-			for (let i = 1; i <= numberOfRoutes; i++) {
+			for (let route in busDistribution) {
 				let routeEntry = document.createElement("div");
 				routeEntry.classList.add("route");
+
 				let routeNumber = document.createElement("div");
-				routeNumber.innerHTML = `${i.toString().padStart(2, "0")}:`;
-				routeEntry.appendChild(routeNumber);
+				if (route < 100) routeNumber.innerHTML = `${route.toString().padStart(2, "0")}:`;
+				else routeNumber.innerHTML = `${route}*:`;
+
 				let busQuantity = document.createElement("div");
-				let randomNumber = Math.floor(Math.random() * 11);
-				busQuantity.innerHTML = `<span style="width: ${randomNumber * 100}px">&nbsp;</span> ${randomNumber}`;
+				busQuantity.innerHTML = `<span style="width: ${busDistribution[route] * 50}px">&nbsp;</span> ${busDistribution[route]}`;
+
+				routeEntry.appendChild(routeNumber);
 				routeEntry.appendChild(busQuantity);
+
 				document.querySelector(".route-container").appendChild(routeEntry);
 			}
-			// this should animate!
-
-			// links NEED titles
-
-			// random placeholder data !!
-			document.querySelector("#data-time").innerHTML = `April 7th, 2025 @ ${Math.floor(Math.random() * 13)}:${Math.floor(Math.random() * 60)}:${Math.floor(
-				Math.random() * 60
-			)}.${Math.floor(Math.random() * 1000)}`;
 		</script>
 	</head>
 
@@ -292,7 +415,7 @@
 
 		<br />
 
-		<p>v0.0.4 — April 7th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.5 — April 7th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
 
 		<p>a project by <a href="../about.html" target="_blank">Obsidian_Seal</a> — not affiliated with <a href="https://londontransit.ca/" target="_blank">London Transit</a></p>
 
@@ -332,11 +455,13 @@
 				<div><br />BUSES</div>
 			</div>
 		</div>
+		<br />
+		<p style="color: var(--base03)">*the 100-series (short turn) routes only run from September to April (for university/college students)</p>
 
 		<br />
 
 		<b>BUS POSITIONS & MODELS</b>
-		<p>...</p>
+		<p>coming soon&trade;</p>
 
 		<br />
 		<hr />
@@ -345,6 +470,14 @@
 		<b>ATTRIBUTION</b>
 		<ul>
 			<li>bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank">Open Data — London Transit Commission</a>&rdquo;</li>
+			<li>
+				additional information from <a href="https://cptdb.ca/wiki/index.php/Main_Page" target="_blank">the CPTDB wiki</a>,
+				<a href="https://londontransit.ca/" target="_blank">London Transit&rsquo;s website</a>, and &ldquo;<a
+					href="https://realtime.londontransit.ca/#/app/nextdepartures"
+					target="_blank"
+					>LTC realtime</a
+				>&rdquo;
+			</li>
 			<li>CORS proxy through <a href="https://corsproxy.io/" target="_blank">CorsProxy</a></li>
 			<li>
 				<a href="https://fonts.adobe.com/fonts/degular" target="_blank">Degular (typeface)</a> by <a href="https://ohnotype.co/" target="_blank">OH no Type Co.</a> on
