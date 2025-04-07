@@ -53,8 +53,6 @@
 				border: 0;
 				padding: 0;
 
-				line-height: 1.15;
-
 				color: var(--base00);
 			}
 
@@ -66,11 +64,31 @@
 			h1 {
 				font-weight: 700;
 				font-size: 120px;
+				width: fit-content;
 			}
 
-			p {
+			p,
+			ul,
+			div {
 				font-weight: 400;
 				font-size: 20px;
+			}
+
+			ul {
+				margin-left: 35px;
+			}
+
+			li:not(li:last-child) {
+				margin-bottom: 2px;
+			}
+
+			::marker {
+				color: var(--base04);
+			}
+
+			b {
+				font-weight: 700;
+				font-size: 40px;
 			}
 
 			a {
@@ -79,12 +97,96 @@
 				text-decoration-skip-ink: none;
 			}
 
-			a:hover {
+			a:hover,
+			a:focus {
 				text-decoration-color: var(--base09);
 			}
 
-			#test-show-data {
-				color: var(--base02);
+			h2 a:hover,
+			h2 a:focus {
+				text-decoration-color: var(--base0C);
+			}
+
+			#to-top-button {
+				width: 60px;
+				height: 60px;
+
+				font-size: 50px;
+
+				position: fixed;
+				right: 50px;
+				bottom: 50px;
+
+				display: none;
+				align-items: center;
+				justify-content: center;
+
+				background-color: var(--base00);
+			}
+
+			#to-top-button i {
+				color: white;
+			}
+
+			#to-top-button:hover {
+				cursor: pointer;
+				background-color: var(--base08);
+			}
+
+			.colours {
+				display: flex;
+				gap: 20px;
+			}
+
+			.colours div {
+				width: 20px;
+				height: 20px;
+			}
+
+			hr {
+				border-top: 2px solid var(--base04);
+			}
+
+			h2 {
+				font-weight: 400;
+				font-size: 30px;
+			}
+
+			h2 span {
+				background-color: var(--base0E);
+				color: var(--base00);
+				font-weight: 700;
+				padding: 0 5px;
+			}
+
+			.route {
+				display: grid;
+				grid-template-columns: 90px auto;
+				gap: 20px;
+				margin-top: 5px;
+			}
+
+			.route:first-child div:first-child {
+				color: var(--base00);
+			}
+
+			.route div {
+				font-size: 20px;
+			}
+
+			.route div:first-child {
+				text-align: right;
+				color: var(--base03);
+			}
+
+			.route div:last-child span {
+				display: inline-block;
+				background-color: var(--base0D);
+				height: 100%;
+			}
+
+			.route:first-child div {
+				font-weight: 700;
 			}
 
 			/* SCROLLBAR(S) */
@@ -109,11 +211,33 @@
 				background-color: var(--base00);
 				color: white;
 			}
+
+			/* ANIMATIONS */
+			h1 span {
+				display: inline-block;
+			}
+
+			.dance {
+				animation: dance 1s;
+			}
+
+			@keyframes dance {
+				0% {
+					transform: translateY(0);
+				}
+				50% {
+					transform: translateY(-10px);
+				}
+				100% {
+					transform: translateY(0);
+				}
+			}
 		</style>
 
 		<script type="module">
 			let busData = [];
 
+			// get the data
 			async function fetchData() {
 				try {
 					const requestURL = "https://corsproxy.io/?url=http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json";
@@ -128,25 +252,155 @@
 			}
 			await fetchData();
 
-			document.querySelector("#test-show-data").innerHTML = JSON.stringify(busData);
+			// random placeholder data !!
+			document.querySelector("#bus-total").innerHTML = `${Math.floor(Math.random() * 100)}`;
+			document.querySelector("#bus-total-percent").innerHTML = `${Math.floor(Math.random() * 100)}.${Math.floor(Math.random() * 100)}%`;
+			document.querySelector("#bus-total-articulated").innerHTML = `${Math.floor(Math.random() * 100)}`;
+			document.querySelector("#bus-total-articulated-partial-percent").innerHTML = `${Math.floor(Math.random() * 100)}.${Math.floor(Math.random() * 100)}%`;
+			document.querySelector("#bus-total-articulated-percent").innerHTML = `${Math.floor(Math.random() * 100)}.${Math.floor(Math.random() * 100)}%`;
+
+			// random placeholder data !!
+			const numberOfRoutes = 42;
+			for (let i = 1; i <= numberOfRoutes; i++) {
+				let routeEntry = document.createElement("div");
+				routeEntry.classList.add("route");
+				let routeNumber = document.createElement("div");
+				routeNumber.innerHTML = `${i.toString().padStart(2, "0")}:`;
+				routeEntry.appendChild(routeNumber);
+				let busQuantity = document.createElement("div");
+				let randomNumber = Math.floor(Math.random() * 11);
+				busQuantity.innerHTML = `<span style="width: ${randomNumber * 100}px">&nbsp;</span> ${randomNumber}`;
+				routeEntry.appendChild(busQuantity);
+				document.querySelector(".route-container").appendChild(routeEntry);
+			}
+			// this should animate!
+
+			// links NEED titles
+
+			// random placeholder data !!
+			document.querySelector("#data-time").innerHTML = `April 7th, 2025 @ ${Math.floor(Math.random() * 13)}:${Math.floor(Math.random() * 60)}:${Math.floor(
+				Math.random() * 60
+			)}.${Math.floor(Math.random() * 1000)}`;
 		</script>
 	</head>
 
 	<body>
-		<h1><i class="fa-sharp fa-solid fa-bus"></i> BUS DATA</h1>
+		<h1>
+			<i class="fa-sharp fa-solid fa-bus"></i> <span>B</span><span>U</span><span>S</span> <span>D</span><span style="translate: -5px 0">A</span
+			><span style="translate: -15px 0">T</span><span style="translate: -25px 0">A</span>
+		</h1>
 
 		<br />
 
-		<p>v0.0.3 — April 6th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.4 — April 7th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
 
 		<p>a project by <a href="../about.html" target="_blank">Obsidian_Seal</a> — not affiliated with <a href="https://londontransit.ca/" target="_blank">London Transit</a></p>
 
 		<br />
 
-		<p>Here is the data....</p>
+		<b>QUICK LINKS</b>
+		<ul>
+			<li><a href="https://realtime.londontransit.ca/#/app/nextdepartures" target="_blank">LTC realtime</a></li>
+			<li><a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank">CPTDB wiki — London Transit Commission</a></li>
+		</ul>
 
-		<p id="test-show-data"></p>
+		<br />
+		<hr />
+		<br />
 
-		<script></script>
+		<b>THE DATA</b>
+		<h2>
+			<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" target="_blank">VehiclePositions.json</a> from
+			<span style="background-color: var(--base0C)" id="data-time">April 7th, 2025 @ 2:34:00.000</span>
+		</h2>
+
+		<br />
+
+		<b>BUS TOTALS</b>
+		<h2>There are <span id="bus-total">#</span> buses in service, making up <span id="bus-total-percent">%</span> of London Transit&rsquo;s known fleet.</h2>
+		<h2>
+			<span id="bus-total-articulated">#</span> of those buses are articulated, <span id="bus-total-articulated-partial-percent">%</span> of in-service buses and
+			<span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet of articulated buses.
+		</h2>
+
+		<br />
+
+		<b>BUS DISTRIBUTION</b>
+		<div class="route-container">
+			<div class="route">
+				<div>ROUTE NUMBER</div>
+				<div><br />BUSES</div>
+			</div>
+		</div>
+
+		<br />
+
+		<b>BUS POSITIONS & MODELS</b>
+		<p>...</p>
+
+		<br />
+		<hr />
+		<br />
+
+		<b>ATTRIBUTION</b>
+		<ul>
+			<li>bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank">Open Data — London Transit Commission</a>&rdquo;</li>
+			<li>CORS proxy through <a href="https://corsproxy.io/" target="_blank">CorsProxy</a></li>
+			<li>
+				<a href="https://fonts.adobe.com/fonts/degular" target="_blank">Degular (typeface)</a> by <a href="https://ohnotype.co/" target="_blank">OH no Type Co.</a> on
+				<a href="" target="_blank">Adobe Fonts</a>
+			</li>
+			<li>icons from <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></li>
+			<li><a href="https://github.com/voronianski/oceanic-next-color-scheme" target="_blank">Oceanic Next</a> colour scheme</li>
+			<li>and help from some awesome people!</li>
+		</ul>
+
+		<br />
+		<br />
+		<br />
+
+		<div class="colours">
+			<div style="background-color: var(--base08)"></div>
+			<div style="background-color: var(--base09)"></div>
+			<div style="background-color: var(--base0A)"></div>
+			<div style="background-color: var(--base0B)"></div>
+			<div style="background-color: var(--base0C)"></div>
+			<div style="background-color: var(--base0D)"></div>
+			<div style="background-color: var(--base0E)"></div>
+			<div style="background-color: var(--base0F)"></div>
+		</div>
+
+		<div id="to-top-button"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
+
+		<script>
+			// animate the title (make it DANCE!!)
+			lastDance = 0;
+			document.querySelector("h1").addEventListener("mouseover", () => {
+				if (new Date().getTime() - lastDance > 1600) {
+					for (let i = 0; i < 7; i++) {
+						setTimeout(() => {
+							document.querySelector(`h1 span:nth-child(${i + 2})`).classList.add("dance");
+						}, 100 * i);
+					}
+					setTimeout(() => {
+						document.querySelectorAll("h1 span").forEach((span) => {
+							span.classList.remove("dance");
+						});
+					}, 1600);
+					lastDance = new Date().getTime();
+				}
+			});
+
+			// show "to-top-button" on scroll
+			document.addEventListener("scroll", (e) => {
+				if (window.scrollY > 300) document.querySelector("#to-top-button").style = "display: flex";
+				else document.querySelector("#to-top-button").style = "display: none";
+			});
+
+			// click on "to-top-button"
+			document.querySelector("#to-top-button").addEventListener("click", (e) => {
+				window.scroll(0, 0);
+			});
+		</script>
 	</body>
 </html>
