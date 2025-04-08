@@ -157,7 +157,7 @@
 				font-size: 30px;
 			}
 
-			h2 span {
+			h2 span:not(.grammar, #time-to-update) {
 				background-color: var(--base0E);
 				color: var(--base00);
 				font-weight: 700;
@@ -186,8 +186,15 @@
 
 			.route div:last-child span {
 				display: inline-block;
-				background-color: var(--base0D);
 				height: 100%;
+			}
+
+			.route div:last-child span:nth-child(1) {
+				background-color: var(--base0D);
+			}
+
+			.route div:last-child span:nth-child(2) {
+				background-color: var(--base0C);
 			}
 
 			.route:first-child div {
@@ -351,6 +358,45 @@
 				104: 0,
 				106: 0,
 			};
+			let articulatedDistribution = {
+				1: 0,
+				2: 0,
+				3: 0,
+				4: 0,
+				5: 0,
+				6: 0,
+				7: 0,
+				9: 0,
+				10: 0,
+				12: 0,
+				13: 0,
+				15: 0,
+				16: 0,
+				17: 0,
+				19: 0,
+				20: 0,
+				24: 0,
+				25: 0,
+				27: 0,
+				28: 0,
+				30: 0,
+				31: 0,
+				33: 0,
+				34: 0,
+				35: 0,
+				36: 0,
+				37: 0,
+				38: 0,
+				90: 0,
+				91: 0,
+				92: 0,
+				93: 0,
+				94: 0,
+				95: 0,
+				102: 0,
+				104: 0,
+				106: 0,
+			};
 
 			for (let i = 0; i < totalBuses; i++) {
 				let busID = parseInt(busData[i].id);
@@ -358,8 +404,11 @@
 				let latitude = busData[i].vehicle.position.latitude;
 				let longitude = busData[i].vehicle.position.longitude;
 
-				if (busID < 100) articulatedBuses++;
 				busDistribution[routeNumber]++;
+				if (busID < 100) {
+					articulatedBuses++;
+					articulatedDistribution[routeNumber]++;
+				}
 			}
 
 			document.querySelector("#bus-total").innerHTML = `${totalBuses}`;
@@ -387,6 +436,18 @@
 			document.querySelector("#bus-total-articulated-partial-percent").innerHTML = articulatedBusesPartialPercent;
 			document.querySelector("#bus-total-articulated-percent").innerHTML = articulatedBusesPercent;
 
+			if (articulatedBuses == 1) document.querySelector("#articulated-grammar-1").innerHTML = "is";
+			if (articulatedBuses == 0) document.querySelector("#articulated-info").innerHTML = "None of them are articulated.";
+
+			if (totalBuses == 1) {
+				document.querySelector("#total-grammar-1").innerHTML = "is";
+				document.querySelector("#total-grammar-2").innerHTML = "bus";
+			}
+			if (totalBuses == 0) {
+				document.querySelector("#total-info").innerHTML = "London Transit is not currently running any buses.";
+				document.querySelector("#articulated-info").remove();
+			}
+
 			// random placeholder data !!
 			for (let route in busDistribution) {
 				let routeEntry = document.createElement("div");
@@ -397,12 +458,34 @@
 				else routeNumber.innerHTML = `${route}*:`;
 
 				let busQuantity = document.createElement("div");
-				busQuantity.innerHTML = `<span style="width: ${busDistribution[route] * 50}px">&nbsp;</span> ${busDistribution[route]}`;
+				let articulatedIndicator = "";
+				if (articulatedDistribution[route] > 0) articulatedIndicator = ` (${articulatedDistribution[route]})`;
+				busQuantity.innerHTML = `<span style="width: ${(busDistribution[route] - articulatedDistribution[route]) * 50}px">&nbsp;</span><span style="width: ${
+					articulatedDistribution[route] * 50
+				}px">&nbsp;</span> ${busDistribution[route]}${articulatedIndicator}`;
 
 				routeEntry.appendChild(routeNumber);
 				routeEntry.appendChild(busQuantity);
 
 				document.querySelector(".route-container").appendChild(routeEntry);
+			}
+
+			// automatic update timer
+			let timer = 30;
+			setInterval(() => {
+				if (timer == 0) {
+					update();
+					timer = 30;
+				}
+				document.querySelector("#time-to-update").innerHTML = timer;
+				if (timer == 1) document.querySelector("#update-grammar").innerHTML = "";
+				else document.querySelector("#update-grammar").innerHTML = "s";
+				timer--;
+			}, 1000);
+
+			// the actual update
+			function update() {
+				console.log("update");
 			}
 		</script>
 	</head>
@@ -415,7 +498,7 @@
 
 		<br />
 
-		<p>v0.0.5 — April 7th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.7 — April 8th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
 
 		<p>a project by <a href="../about.html" target="_blank">Obsidian_Seal</a> — not affiliated with <a href="https://londontransit.ca/" target="_blank">London Transit</a></p>
 
@@ -428,35 +511,57 @@
 		</ul>
 
 		<br />
+		<br />
 		<hr />
+		<br />
 		<br />
 
 		<b>THE DATA</b>
 		<h2>
 			<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" target="_blank">VehiclePositions.json</a> from
-			<span style="background-color: var(--base0C)" id="data-time">April 7th, 2025 @ 2:34:00.000</span>
+			<span style="background-color: var(--base0C)" id="data-time">???</span>
 		</h2>
+		<p style="margin-top: 5px; color: var(--base03)">
+			automatically updating in <span id="time-to-update" style="color: var(--base03)">#</span> second<span
+				class="grammar"
+				id="update-grammar"
+				style="color: var(--base03)"
+				>s</span
+			>...
+		</p>
 
 		<br />
 
 		<b>BUS TOTALS</b>
-		<h2>There are <span id="bus-total">#</span> buses in service, making up <span id="bus-total-percent">%</span> of London Transit&rsquo;s known fleet.</h2>
-		<h2>
-			<span id="bus-total-articulated">#</span> of those buses are articulated, <span id="bus-total-articulated-partial-percent">%</span> of in-service buses and
-			<span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet of articulated buses.
+		<h2 id="total-info">
+			There <span class="grammar" id="total-grammar-1">are</span> <span id="bus-total">#</span> <span class="grammar" id="total-grammar-2">buses</span> in service, making
+			up <span id="bus-total-percent">%</span> of London Transit&rsquo;s known fleet.
+		</h2>
+		<h2 id="articulated-info">
+			<span id="bus-total-articulated">#</span> of those buses <span class="grammar" id="articulated-grammar-1">are</span> articulated,
+			<span id="bus-total-articulated-partial-percent">%</span> of in-service buses and <span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet
+			of articulated buses.
 		</h2>
 
 		<br />
 
 		<b>BUS DISTRIBUTION</b>
+		<p>
+			The number of buses on each route, shown as a bar graph.<br />If a route has at least one articulated bus running on it, the number of said buses is shown next to
+			the total and reflected in a separate, teal segment of the corresponding bar.
+		</p>
+		<br />
 		<div class="route-container">
 			<div class="route">
 				<div>ROUTE NUMBER</div>
-				<div><br />BUSES</div>
+				<div><br />BUSES (ARTICULATED, IF ANY)</div>
 			</div>
 		</div>
 		<br />
-		<p style="color: var(--base03)">*the 100-series (short turn) routes only run from September to April (for university/college students)</p>
+		<p style="color: var(--base03)">
+			*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" style="color: var(--base03)">short turn</a>) routes only run from September to
+			April (for university/college students)
+		</p>
 
 		<br />
 
@@ -464,7 +569,9 @@
 		<p>coming soon&trade;</p>
 
 		<br />
+		<br />
 		<hr />
+		<br />
 		<br />
 
 		<b>ATTRIBUTION</b>
