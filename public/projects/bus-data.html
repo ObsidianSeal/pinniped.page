@@ -186,7 +186,10 @@
 
 			.route div:last-child span {
 				display: inline-block;
-				height: 100%;
+			}
+
+			.route div:last-child span:not(:last-child) {
+				transition: width 250ms;
 			}
 
 			.route div:last-child span:nth-child(1) {
@@ -199,6 +202,10 @@
 
 			.route:first-child div {
 				font-weight: 700;
+			}
+
+			.hide {
+				display: none;
 			}
 
 			/* SCROLLBAR(S) */
@@ -247,9 +254,13 @@
 		</style>
 
 		<script type="module">
-			// important variables
+			// big and important variables
 			let busDataHeader = {};
 			let busData = [];
+
+			// set manually; count from the CPTDB wiki
+			const fleet = 227;
+			const fleetArticulated = 13;
 
 			// get the data
 			async function fetchData() {
@@ -270,222 +281,277 @@
 			await fetchData();
 
 			// date
-			let busDataDate = new Date(busDataHeader.timestamp * 1000);
-			let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][busDataDate.getMonth()];
-			let day = busDataDate.getDate();
-			let ordinal = [
-				"st",
-				"nd",
-				"rd",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"st",
-				"nd",
-				"rd",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"th",
-				"st",
-			][busDataDate.getDate()];
-			let year = busDataDate.getFullYear();
-			let hour = busDataDate.getHours();
-			let minute = busDataDate.getMinutes();
-			let second = busDataDate.getSeconds();
-			document.querySelector("#data-time").innerHTML = `${month} ${day}${ordinal}, ${year} @ ${hour}:${minute.toString().padStart(2, "0")}:${second
-				.toString()
-				.padStart(2, "0")}`;
+			function updateDate() {
+				let busDataDate = new Date(busDataHeader.timestamp * 1000);
+				let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][busDataDate.getMonth()];
+				let day = busDataDate.getDate();
+				let ordinal = [
+					"st",
+					"nd",
+					"rd",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"st",
+					"nd",
+					"rd",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"st",
+				][busDataDate.getDate()];
+				let year = busDataDate.getFullYear();
+				let hour = busDataDate.getHours();
+				let minute = busDataDate.getMinutes();
+				let second = busDataDate.getSeconds();
+				document.querySelector("#data-time").innerHTML = `${month} ${day}${ordinal}, ${year} @ ${hour}:${minute.toString().padStart(2, "0")}:${second
+					.toString()
+					.padStart(2, "0")}`;
+			}
+			updateDate();
 
-			// bus totals
-			const fleet = 227;
-			const fleetArticulated = 13;
-			let totalBuses = busData.length;
-			let articulatedBuses = 0;
-			let busDistribution = {
-				1: 0,
-				2: 0,
-				3: 0,
-				4: 0,
-				5: 0,
-				6: 0,
-				7: 0,
-				9: 0,
-				10: 0,
-				12: 0,
-				13: 0,
-				15: 0,
-				16: 0,
-				17: 0,
-				19: 0,
-				20: 0,
-				24: 0,
-				25: 0,
-				27: 0,
-				28: 0,
-				30: 0,
-				31: 0,
-				33: 0,
-				34: 0,
-				35: 0,
-				36: 0,
-				37: 0,
-				38: 0,
-				90: 0,
-				91: 0,
-				92: 0,
-				93: 0,
-				94: 0,
-				95: 0,
-				102: 0,
-				104: 0,
-				106: 0,
-			};
-			let articulatedDistribution = {
-				1: 0,
-				2: 0,
-				3: 0,
-				4: 0,
-				5: 0,
-				6: 0,
-				7: 0,
-				9: 0,
-				10: 0,
-				12: 0,
-				13: 0,
-				15: 0,
-				16: 0,
-				17: 0,
-				19: 0,
-				20: 0,
-				24: 0,
-				25: 0,
-				27: 0,
-				28: 0,
-				30: 0,
-				31: 0,
-				33: 0,
-				34: 0,
-				35: 0,
-				36: 0,
-				37: 0,
-				38: 0,
-				90: 0,
-				91: 0,
-				92: 0,
-				93: 0,
-				94: 0,
-				95: 0,
-				102: 0,
-				104: 0,
-				106: 0,
-			};
+			// where the cool stuff happens
+			let firstRun = true;
+			function updateBusData() {
+				// variables
+				let totalBuses = busData.length;
+				let articulatedBuses = 0;
+				let busDistribution = {
+					1: 0,
+					2: 0,
+					3: 0,
+					4: 0,
+					5: 0,
+					6: 0,
+					7: 0,
+					9: 0,
+					10: 0,
+					12: 0,
+					13: 0,
+					15: 0,
+					16: 0,
+					17: 0,
+					19: 0,
+					20: 0,
+					24: 0,
+					25: 0,
+					27: 0,
+					28: 0,
+					30: 0,
+					31: 0,
+					33: 0,
+					34: 0,
+					35: 0,
+					36: 0,
+					37: 0,
+					38: 0,
+					90: 0,
+					91: 0,
+					92: 0,
+					93: 0,
+					94: 0,
+					95: 0,
+					102: 0,
+					104: 0,
+					106: 0,
+				};
+				let articulatedDistribution = {
+					1: 0,
+					2: 0,
+					3: 0,
+					4: 0,
+					5: 0,
+					6: 0,
+					7: 0,
+					9: 0,
+					10: 0,
+					12: 0,
+					13: 0,
+					15: 0,
+					16: 0,
+					17: 0,
+					19: 0,
+					20: 0,
+					24: 0,
+					25: 0,
+					27: 0,
+					28: 0,
+					30: 0,
+					31: 0,
+					33: 0,
+					34: 0,
+					35: 0,
+					36: 0,
+					37: 0,
+					38: 0,
+					90: 0,
+					91: 0,
+					92: 0,
+					93: 0,
+					94: 0,
+					95: 0,
+					102: 0,
+					104: 0,
+					106: 0,
+				};
 
-			for (let i = 0; i < totalBuses; i++) {
-				let busID = parseInt(busData[i].id);
-				let routeNumber = parseInt(busData[i].vehicle.trip.route_id);
-				let latitude = busData[i].vehicle.position.latitude;
-				let longitude = busData[i].vehicle.position.longitude;
+				// create bar graph
+				if (firstRun) {
+					for (let route in busDistribution) {
+						// for each route, create an entry (row)
+						let routeEntry = document.createElement("div");
+						routeEntry.classList.add("route");
 
-				busDistribution[routeNumber]++;
-				if (busID < 100) {
-					articulatedBuses++;
-					articulatedDistribution[routeNumber]++;
+						// create label, 100-series have an asterisk
+						let routeNumber = document.createElement("div");
+						if (route < 100) routeNumber.innerHTML = `${route.toString().padStart(2, "0")}:`;
+						else routeNumber.innerHTML = `${route}*:`;
+
+						// create bars and number
+						let busQuantity = document.createElement("div");
+						busQuantity.id = `route-${route}`;
+						busQuantity.innerHTML = `<span id="non-articulated-${route}">&nbsp;</span><span id="articulated-${route}">&nbsp;</span><span id="value-${route}">&nbsp;# (#)</span>`;
+
+						// add to entry (row)
+						routeEntry.appendChild(routeNumber);
+						routeEntry.appendChild(busQuantity);
+
+						// add entry (row) to container
+						document.querySelector(".route-container").appendChild(routeEntry);
+					}
+
+					firstRun = false;
+				}
+
+				// iterate through each bus
+				for (let i = 0; i < totalBuses; i++) {
+					// information to put in the table that is coming soon™
+					let busID = parseInt(busData[i].id);
+					let routeNumber = parseInt(busData[i].vehicle.trip.route_id);
+					let latitude = busData[i].vehicle.position.latitude;
+					let longitude = busData[i].vehicle.position.longitude;
+
+					// calculate distributions and count the number of articulated buses
+					busDistribution[routeNumber]++;
+					if (busID < 100) {
+						articulatedBuses++;
+						articulatedDistribution[routeNumber]++;
+					}
+				}
+
+				// show totals
+				document.querySelector("#bus-total").innerHTML = `${totalBuses}`;
+				document.querySelector("#bus-total-articulated").innerHTML = `${articulatedBuses}`;
+
+				// format percentages
+				let totalBusesPercent = new Intl.NumberFormat("en", {
+					style: "percent",
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				}).format(totalBuses / fleet);
+
+				let articulatedBusesPartialPercent = new Intl.NumberFormat("en", {
+					style: "percent",
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				}).format(articulatedBuses / totalBuses);
+
+				let articulatedBusesPercent = new Intl.NumberFormat("en", {
+					style: "percent",
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				}).format(articulatedBuses / fleetArticulated);
+
+				// show percentages
+				document.querySelector("#bus-total-percent").innerHTML = totalBusesPercent;
+				document.querySelector("#bus-total-articulated-partial-percent").innerHTML = articulatedBusesPartialPercent;
+				document.querySelector("#bus-total-articulated-percent").innerHTML = articulatedBusesPercent;
+
+				// DYNAMIC GRAMMAR
+				if (articulatedBuses == 0) {
+					document.querySelector("#articulated-info").classList.add("hide");
+					document.querySelector("#articulated-none").classList.remove("hide");
+				} else {
+					document.querySelector("#articulated-info").classList.remove("hide");
+					document.querySelector("#articulated-none").classList.add("hide");
+				}
+
+				if (articulatedBuses == 1) document.querySelector("#articulated-grammar-1").innerHTML = "is";
+				else document.querySelector("#articulated-grammar-1").innerHTML = "are";
+
+				if (totalBuses == 0) {
+					document.querySelector("#total-info").classList.add("hide");
+					document.querySelector("#total-none").classList.remove("hide");
+				} else {
+					document.querySelector("#total-info").classList.remove("hide");
+					document.querySelector("#total-none").classList.add("hide");
+				}
+
+				if (totalBuses == 1) {
+					document.querySelector("#total-grammar-1").innerHTML = "is";
+					document.querySelector("#total-grammar-2").innerHTML = "bus";
+				} else {
+					document.querySelector("#total-grammar-1").innerHTML = "are";
+					document.querySelector("#total-grammar-2").innerHTML = "buses";
+				}
+
+				// update bar graph
+				if (!firstRun) {
+					for (let route in busDistribution) {
+						// include a number in parentheses?
+						let articulatedIndicator = "";
+						if (articulatedDistribution[route] > 0) articulatedIndicator = ` (${articulatedDistribution[route]})`;
+
+						// set values
+						document.querySelector(`#non-articulated-${route}`).style = `width: ${(busDistribution[route] - articulatedDistribution[route]) * 50}px`;
+						document.querySelector(`#articulated-${route}`).style = `width: ${articulatedDistribution[route] * 50}px`;
+						document.querySelector(`#value-${route}`).innerHTML = `&nbsp;${busDistribution[route]}${articulatedIndicator}`;
+					}
 				}
 			}
-
-			document.querySelector("#bus-total").innerHTML = `${totalBuses}`;
-			document.querySelector("#bus-total-articulated").innerHTML = `${articulatedBuses}`;
-
-			let totalBusesPercent = new Intl.NumberFormat("en", {
-				style: "percent",
-				minimumFractionDigits: 2,
-				maximumFractionDigits: 2,
-			}).format(totalBuses / fleet);
-
-			let articulatedBusesPartialPercent = new Intl.NumberFormat("en", {
-				style: "percent",
-				minimumFractionDigits: 2,
-				maximumFractionDigits: 2,
-			}).format(articulatedBuses / totalBuses);
-
-			let articulatedBusesPercent = new Intl.NumberFormat("en", {
-				style: "percent",
-				minimumFractionDigits: 2,
-				maximumFractionDigits: 2,
-			}).format(articulatedBuses / fleetArticulated);
-
-			document.querySelector("#bus-total-percent").innerHTML = totalBusesPercent;
-			document.querySelector("#bus-total-articulated-partial-percent").innerHTML = articulatedBusesPartialPercent;
-			document.querySelector("#bus-total-articulated-percent").innerHTML = articulatedBusesPercent;
-
-			if (articulatedBuses == 1) document.querySelector("#articulated-grammar-1").innerHTML = "is";
-			if (articulatedBuses == 0) document.querySelector("#articulated-info").innerHTML = "None of them are articulated.";
-
-			if (totalBuses == 1) {
-				document.querySelector("#total-grammar-1").innerHTML = "is";
-				document.querySelector("#total-grammar-2").innerHTML = "bus";
-			}
-			if (totalBuses == 0) {
-				document.querySelector("#total-info").innerHTML = "London Transit is not currently running any buses.";
-				document.querySelector("#articulated-info").remove();
-			}
-
-			// random placeholder data !!
-			for (let route in busDistribution) {
-				let routeEntry = document.createElement("div");
-				routeEntry.classList.add("route");
-
-				let routeNumber = document.createElement("div");
-				if (route < 100) routeNumber.innerHTML = `${route.toString().padStart(2, "0")}:`;
-				else routeNumber.innerHTML = `${route}*:`;
-
-				let busQuantity = document.createElement("div");
-				let articulatedIndicator = "";
-				if (articulatedDistribution[route] > 0) articulatedIndicator = ` (${articulatedDistribution[route]})`;
-				busQuantity.innerHTML = `<span style="width: ${(busDistribution[route] - articulatedDistribution[route]) * 50}px">&nbsp;</span><span style="width: ${
-					articulatedDistribution[route] * 50
-				}px">&nbsp;</span> ${busDistribution[route]}${articulatedIndicator}`;
-
-				routeEntry.appendChild(routeNumber);
-				routeEntry.appendChild(busQuantity);
-
-				document.querySelector(".route-container").appendChild(routeEntry);
-			}
+			updateBusData();
 
 			// automatic update timer
-			let timer = 30;
+			let timer = 30 - 1;
 			setInterval(() => {
+				// update, reset at 0
 				if (timer == 0) {
 					update();
 					timer = 30;
 				}
 				document.querySelector("#time-to-update").innerHTML = timer;
+
+				// DYNAMIC GRAMMAR
 				if (timer == 1) document.querySelector("#update-grammar").innerHTML = "";
 				else document.querySelector("#update-grammar").innerHTML = "s";
+
+				// tick
 				timer--;
 			}, 1000);
 
 			// the actual update
-			function update() {
-				console.log("update");
+			async function update() {
+				await fetchData();
+				updateDate();
+				updateBusData();
 			}
 		</script>
 	</head>
@@ -498,16 +564,30 @@
 
 		<br />
 
-		<p>v0.0.7 — April 8th, 2025 — <a href="">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.8 — April 9th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
-		<p>a project by <a href="../about.html" target="_blank">Obsidian_Seal</a> — not affiliated with <a href="https://londontransit.ca/" target="_blank">London Transit</a></p>
+		<p>
+			a project by <a href="../about.html" target="_blank" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
+			<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
+		</p>
 
 		<br />
 
 		<b>QUICK LINKS</b>
 		<ul>
-			<li><a href="https://realtime.londontransit.ca/#/app/nextdepartures" target="_blank">LTC realtime</a></li>
-			<li><a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank">CPTDB wiki — London Transit Commission</a></li>
+			<li>
+				<a
+					href="https://realtime.londontransit.ca/#/app/nextdepartures"
+					target="_blank"
+					title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
+					>LTC realtime</a
+				>
+			</li>
+			<li>
+				<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank" title="CPTDB wiki — London Transit Commission [EXTERNAL]"
+					>CPTDB wiki — London Transit Commission</a
+				>
+			</li>
 		</ul>
 
 		<br />
@@ -518,11 +598,14 @@
 
 		<b>THE DATA</b>
 		<h2>
-			<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" target="_blank">VehiclePositions.json</a> from
+			<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" target="_blank" title="LTC Open Data > VehiclePositions.json [FILE; EXTERNAL]"
+				>VehiclePositions.json</a
+			>
+			from
 			<span style="background-color: var(--base0C)" id="data-time">???</span>
 		</h2>
 		<p style="margin-top: 5px; color: var(--base03)">
-			automatically updating in <span id="time-to-update" style="color: var(--base03)">#</span> second<span
+			automatically updating in <span id="time-to-update" style="color: var(--base03)">30</span> second<span
 				class="grammar"
 				id="update-grammar"
 				style="color: var(--base03)"
@@ -537,11 +620,13 @@
 			There <span class="grammar" id="total-grammar-1">are</span> <span id="bus-total">#</span> <span class="grammar" id="total-grammar-2">buses</span> in service, making
 			up <span id="bus-total-percent">%</span> of London Transit&rsquo;s known fleet.
 		</h2>
+		<h2 id="total-none" class="hide">London Transit it not currently running any buses.</h2>
 		<h2 id="articulated-info">
 			<span id="bus-total-articulated">#</span> of those buses <span class="grammar" id="articulated-grammar-1">are</span> articulated,
 			<span id="bus-total-articulated-partial-percent">%</span> of in-service buses and <span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet
 			of articulated buses.
 		</h2>
+		<h2 id="articulated-none" class="hide">None of them are articulated.</h2>
 
 		<br />
 
@@ -559,8 +644,9 @@
 		</div>
 		<br />
 		<p style="color: var(--base03)">
-			*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" style="color: var(--base03)">short turn</a>) routes only run from September to
-			April (for university/college students)
+			*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" style="color: var(--base03)" title="Wikipedia > Short turn [EXTERNAL]"
+				>short turn</a
+			>) routes only run from September to April (for university/college students)
 		</p>
 
 		<br />
@@ -576,22 +662,36 @@
 
 		<b>ATTRIBUTION</b>
 		<ul>
-			<li>bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank">Open Data — London Transit Commission</a>&rdquo;</li>
 			<li>
-				additional information from <a href="https://cptdb.ca/wiki/index.php/Main_Page" target="_blank">the CPTDB wiki</a>,
-				<a href="https://londontransit.ca/" target="_blank">London Transit&rsquo;s website</a>, and &ldquo;<a
+				bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank" title="Open Data — London Transit Commission [EXTERNAL]"
+					>Open Data — London Transit Commission</a
+				>&rdquo;
+			</li>
+			<li>
+				additional information from <a href="https://cptdb.ca/wiki/index.php/Main_Page" target="_blank" title="CPTDB wiki [EXTERNAL]">the CPTDB wiki</a>,
+				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit&rsquo;s website</a>, and &ldquo;<a
 					href="https://realtime.londontransit.ca/#/app/nextdepartures"
 					target="_blank"
+					title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
 					>LTC realtime</a
 				>&rdquo;
 			</li>
-			<li>CORS proxy through <a href="https://corsproxy.io/" target="_blank">CorsProxy</a></li>
+			<li>CORS proxy through <a href="https://corsproxy.io/" target="_blank" title="CorsProxy [EXTERNAL]">CorsProxy</a></li>
 			<li>
-				<a href="https://fonts.adobe.com/fonts/degular" target="_blank">Degular (typeface)</a> by <a href="https://ohnotype.co/" target="_blank">OH no Type Co.</a> on
-				<a href="" target="_blank">Adobe Fonts</a>
+				<a href="https://fonts.adobe.com/fonts/degular" target="_blank" title="Adobe Fonts > Degular [EXTERNAL]">Degular (typeface)</a> by
+				<a href="https://ohnotype.co/" target="_blank" title="OH no Type Co. [EXTERNAL]">OH no Type Co.</a> on
+				<a href="" target="_blank" title="Adobe Fonts [EXTERNAL]">Adobe Fonts</a>
 			</li>
-			<li>icons from <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></li>
-			<li><a href="https://github.com/voronianski/oceanic-next-color-scheme" target="_blank">Oceanic Next</a> colour scheme</li>
+			<li>icons from <a href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a></li>
+			<li>
+				<a
+					href="https://github.com/voronianski/oceanic-next-color-scheme"
+					target="_blank"
+					title="GitHub > voronianski > &ldquo;oceanic-next-color-scheme&rdquo; [EXTERNAL]"
+					>Oceanic Next</a
+				>
+				colour scheme
+			</li>
 			<li>and help from some awesome people!</li>
 		</ul>
 
