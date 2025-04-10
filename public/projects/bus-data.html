@@ -58,7 +58,9 @@
 
 			body {
 				background-color: white;
+				margin: auto;
 				padding: 50px;
+				max-width: 1500px;
 			}
 
 			h1 {
@@ -126,7 +128,7 @@
 				align-items: center;
 				justify-content: center;
 
-				background-color: var(--base00);
+				background-color: var(--base03);
 			}
 
 			#to-top-button i {
@@ -208,6 +210,44 @@
 				display: none;
 			}
 
+			table {
+				border-collapse: collapse;
+				font-size: 20px;
+			}
+
+			td {
+				border: 2px solid var(--base04);
+				padding: 5px 30px 5px 10px;
+			}
+
+			tr:first-child td {
+				font-size: 30px;
+				font-weight: 700;
+			}
+
+			.not-in-service {
+				/* background-color: var(--base06); */
+				color: var(--base08);
+			}
+
+			i.fa-check,
+			i.fa-xmark,
+			i.fa-triangle-exclamation {
+				translate: 0 1px;
+			}
+
+			i.fa-check {
+				color: var(--base0B);
+			}
+
+			i.fa-xmark {
+				color: var(--base0A);
+			}
+
+			i.fa-triangle-exclamation {
+				color: var(--base08);
+			}
+
 			/* SCROLLBAR(S) */
 			::-webkit-scrollbar {
 				width: 20px;
@@ -258,9 +298,245 @@
 			let busDataHeader = {};
 			let busData = [];
 
-			// set manually; count from the CPTDB wiki
-			const fleet = 227;
-			const fleetArticulated = 13;
+			// list of buses, set manually
+			const fleetObject = {
+				// D60LFR
+				24: ["D60LFR", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_D60LFR", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_24-27"],
+				25: ["D60LFR", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_D60LFR", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_24-27"],
+				27: ["D60LFR", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_D60LFR", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_24-27"],
+				// XD60
+				28: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_28-29"],
+				29: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_28-29"],
+				30: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_30-31"],
+				31: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_30-31"],
+				32: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_32"],
+				33: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_33"],
+				34: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_34"],
+				35: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_35-36"],
+				36: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_35-36"],
+				37: ["XD60", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD60", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_37"],
+				// XDE40
+				175: ["XDE40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XDE40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_175-176"],
+				176: ["XDE40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XDE40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_175-176"],
+				177: ["XDE40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XDE40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_177-178"],
+				178: ["XDE40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XDE40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_177-178"],
+				// XD40
+				301: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				302: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				303: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				304: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				305: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				306: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				307: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				308: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				310: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				311: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_301-311"],
+				312: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				313: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				314: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				316: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				317: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				318: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				319: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				320: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_312-320"],
+				321: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				322: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				323: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				324: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				325: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				326: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				327: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				328: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				329: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				330: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				331: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				332: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_321-332"],
+				333: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				334: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				335: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				336: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				337: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				338: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				339: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				340: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				341: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				342: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				343: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				344: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				345: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				346: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				347: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_333-347"],
+				348: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				349: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				350: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				351: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				352: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				353: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				354: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				355: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				356: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				357: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				358: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				359: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				360: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				361: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				362: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				363: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				364: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_348-364"],
+				365: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				366: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				367: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				368: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				369: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				370: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				371: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				372: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				373: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				374: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				375: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				376: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				377: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				378: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_365-378"],
+				501: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				502: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				503: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				504: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				505: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				506: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				507: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				508: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				509: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				510: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				511: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				512: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				513: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				514: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				515: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				516: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				517: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				518: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				519: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				520: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				521: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				522: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				523: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				524: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				525: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				526: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				527: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_501-527"],
+				528: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				529: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				530: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				531: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				532: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				533: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				534: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				535: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				536: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				537: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				538: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				539: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				540: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				541: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				542: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				543: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				544: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				545: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				546: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_528-546"],
+				547: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				548: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				549: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				550: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				551: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				552: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				553: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				554: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				555: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_547-555"],
+				556: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				557: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				558: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				559: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				560: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				561: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				562: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				563: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				564: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				565: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				566: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				567: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				568: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				569: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				570: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				571: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_556-571"],
+				572: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				573: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				574: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				575: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				576: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				577: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				578: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				579: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				580: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				581: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				582: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				503: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				584: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				585: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				586: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				587: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				588: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				589: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				590: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_572-590"],
+				591: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				592: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				593: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				594: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				595: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				596: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				597: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				598: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				599: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				600: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				601: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				602: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				603: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				604: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				605: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				606: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				607: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				608: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				609: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				610: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_591-610"],
+				611: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				612: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				613: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				614: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				615: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				616: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				617: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				618: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				619: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				610: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				621: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				622: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				623: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				624: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_611-624"],
+				625: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				626: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				627: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				628: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				629: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				630: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				631: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				632: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				633: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+				634: ["XD40", "https://cptdb.ca/wiki/index.php/New_Flyer_Industries_XD40", "https://cptdb.ca/wiki/index.php/London_Transit_Commission_625-634"],
+			};
+			const fleet = Object.keys(fleetObject).length;
+			const fleetArticulated = 13; // manual count
+
+			document.querySelector("#fleet-total").innerHTML = fleet;
+			document.querySelector("#articulated-total").innerHTML = fleetArticulated;
 
 			// get the data
 			async function fetchData() {
@@ -413,7 +689,7 @@
 					106: 0,
 				};
 
-				// create bar graph
+				// create bar graph and table
 				if (firstRun) {
 					for (let route in busDistribution) {
 						// for each route, create an entry (row)
@@ -438,16 +714,30 @@
 						document.querySelector(".route-container").appendChild(routeEntry);
 					}
 
+					for (let bus in fleetObject) {
+						// for each bus, add a row to the table
+						let row = document.createElement("tr");
+						row.id = `bus-${bus}`;
+						let icon = "xmark";
+						if (fleetObject[bus][0] == "D60LFR" || fleetObject[bus][0] == "XD60") icon = "check";
+						row.innerHTML = `<td><a href="${fleetObject[bus][2]}" target="_blank" title="CPTDB wiki > London Transit Commission > ${bus} [GENERATED LINK; EXTERNAL]">${bus}</a></td><td><a href="${fleetObject[bus][1]}" target="_blank" title="CPTDB wiki > ${fleetObject[bus][0]} [GENERATED LINK; EXTERNAL]">${fleetObject[bus][0]}</a></td><td><i class="fa-sharp fa-solid fa-${icon}"></i></td><td>???</td><td>???</td>`;
+						document.querySelector("table").appendChild(row);
+					}
+
 					firstRun = false;
 				}
 
 				// iterate through each bus
+				let simpleBusData = {};
 				for (let i = 0; i < totalBuses; i++) {
-					// information to put in the table that is coming soon™
+					// general information, also in the table
 					let busID = parseInt(busData[i].id);
 					let routeNumber = parseInt(busData[i].vehicle.trip.route_id);
 					let latitude = busData[i].vehicle.position.latitude;
 					let longitude = busData[i].vehicle.position.longitude;
+
+					// remember the information
+					simpleBusData[busID] = [routeNumber, latitude, longitude];
 
 					// calculate distributions and count the number of articulated buses
 					busDistribution[routeNumber]++;
@@ -526,6 +816,36 @@
 						document.querySelector(`#value-${route}`).innerHTML = `&nbsp;${busDistribution[route]}${articulatedIndicator}`;
 					}
 				}
+
+				// update table
+				if (!firstRun) {
+					for (let bus in fleetObject) {
+						let row = document.querySelector(`#bus-${bus}`);
+
+						row.children[3].classList.remove("not-in-service");
+						row.children[3].removeAttribute("colspan");
+
+						row.children[4].classList.remove("not-in-service");
+						row.children[4].classList.remove("hide");
+
+						if (simpleBusData.hasOwnProperty(bus)) {
+							row.children[3].innerHTML = simpleBusData[bus][0].toString().padStart(2, "0");
+							row.children[4].innerHTML = `<a href="https://www.google.ca/maps/search/${simpleBusData[bus][1]},${
+								simpleBusData[bus][2]
+							}" target="_blank" title="Google Maps > ${simpleBusData[bus][1]}, ${simpleBusData[bus][2]} [GENERATED LINK; EXTERNAL]">${simpleBusData[bus][1]
+								.toString()
+								.padEnd(8, "0")}, ${simpleBusData[bus][2].toString().padEnd(9, "0")}</a>`;
+						} else {
+							row.children[3].classList.add("not-in-service");
+							row.children[3].innerHTML = `<i class="fa-sharp fa-solid fa-triangle-exclamation"></i> this bus is not in service`;
+							row.children[3].setAttribute("colspan", 2);
+
+							row.children[4].classList.add("not-in-service");
+							row.children[4].innerHTML = "";
+							row.children[4].classList.add("hide");
+						}
+					}
+				}
 			}
 			updateBusData();
 
@@ -564,7 +884,7 @@
 
 		<br />
 
-		<p>v0.0.8 — April 9th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.9 — April 10th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
 		<p>
 			a project by <a href="../about.html" target="_blank" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
@@ -632,8 +952,11 @@
 
 		<b>BUS DISTRIBUTION</b>
 		<p>
-			The number of buses on each route, shown as a bar graph.<br />If a route has at least one articulated bus running on it, the number of said buses is shown next to
-			the total and reflected in a separate, teal segment of the corresponding bar.
+			The number of buses on each
+			<a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">route</a>, shown as a bar
+			graph.<br />If a <a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">route</a> has
+			at least one <a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated bus</a> running on
+			it, the number of said buses is shown next to the total and reflected in a separate, teal segment of the corresponding bar.
 		</p>
 		<br />
 		<div class="route-container">
@@ -652,7 +975,41 @@
 		<br />
 
 		<b>BUS POSITIONS & MODELS</b>
-		<p>coming soon&trade;</p>
+		<p>
+			Below is a table of all <span id="fleet-total" style="font-weight: 700">#</span> buses in
+			<a
+				href="https://cptdb.ca/wiki/index.php/London_Transit_Commission#Fleet_roster"
+				target="_blank"
+				title="CPTDB wiki > London Transit Commission (Fleet roster) [EXTERNAL]"
+				>London Transit&rsquo;s fleet</a
+			>.
+		</p>
+		<p>
+			Every bus has a unique ID. If it seems like some IDs are missing, that&rsquo;s because the bus with that ID has been retired. Click on each ID for more information
+			about the bus.
+		</p>
+		<p>
+			London Transit currently operates five unique bus models, all of which are produced in Canada by
+			<a href="https://www.newflyer.com/" target="_blank" title="New Flyer [EXTERNAL]">New Flyer</a>. Click on a model to learn more.
+		</p>
+		<p>
+			<span id="articulated-total" style="font-weight: 700">#</span> of London Transit&rsquo;s buses are
+			<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>.
+		</p>
+		<p>
+			For buses that are currently running, their route and position (latitude and longitude) are given. Click on a position to view it on
+			<a href="https://www.google.ca/maps" target="_blank" title="Google Maps [EXTERNAL]">Google Maps</a>.
+		</p>
+		<br />
+		<table>
+			<tr>
+				<td>ID</td>
+				<td>model</td>
+				<td>articulated?</td>
+				<td>route</td>
+				<td>position</td>
+			</tr>
+		</table>
 
 		<br />
 		<br />
