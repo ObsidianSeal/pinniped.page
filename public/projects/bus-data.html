@@ -232,7 +232,7 @@
 
 			i.fa-check,
 			i.fa-xmark,
-			i.fa-triangle-exclamation {
+			i.fa-circle-info {
 				translate: 0 1px;
 			}
 
@@ -244,8 +244,9 @@
 				color: var(--base0A);
 			}
 
-			i.fa-triangle-exclamation {
+			i.fa-circle-info {
 				color: var(--base08);
+				margin-right: 10px;
 			}
 
 			/* SCROLLBAR(S) */
@@ -837,7 +838,7 @@
 								.padEnd(8, "0")}, ${simpleBusData[bus][2].toString().padEnd(9, "0")}</a>`;
 						} else {
 							row.children[3].classList.add("not-in-service");
-							row.children[3].innerHTML = `<i class="fa-sharp fa-solid fa-triangle-exclamation"></i> this bus is not in service`;
+							row.children[3].innerHTML = `<i class="fa-sharp fa-solid fa-circle-info"></i>this bus is not in service`;
 							row.children[3].setAttribute("colspan", 2);
 
 							row.children[4].classList.add("not-in-service");
@@ -884,7 +885,7 @@
 
 		<br />
 
-		<p>v0.0.10 — April 10th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.11 — April 11th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
 		<p>
 			a project by <a href="../about.html" target="_blank" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
