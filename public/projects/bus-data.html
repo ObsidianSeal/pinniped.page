@@ -60,7 +60,7 @@
 				background-color: white;
 				margin: auto;
 				padding: 50px;
-				max-width: 1500px;
+				max-width: 1600px;
 			}
 
 			h1 {
@@ -98,7 +98,9 @@
 				font-size: 40px;
 			}
 
-			a {
+			a,
+			#map-open {
+				text-decoration-line: underline;
 				text-decoration-style: dashed;
 				text-decoration-color: var(--base04);
 				text-decoration-skip-ink: none;
@@ -247,6 +249,27 @@
 			i.fa-circle-info {
 				color: var(--base08);
 				margin-right: 10px;
+			}
+
+			canvas {
+				position: fixed;
+				top: 0;
+				left: 0;
+
+				background-color: white;
+			}
+
+			#map-open {
+				width: fit-content;
+			}
+
+			#map-open:hover {
+				cursor: pointer;
+				text-decoration-color: var(--base0F);
+			}
+
+			.no-scroll {
+				overflow: hidden;
 			}
 
 			/* SCROLLBAR(S) */
@@ -539,6 +562,47 @@
 			document.querySelector("#fleet-total").innerHTML = fleet;
 			document.querySelector("#articulated-total").innerHTML = fleetArticulated;
 
+			// colours
+			const officialColours = {
+				1: "#70c2da",
+				2: "#0080c0",
+				3: "#c28585",
+				4: "#7373b9",
+				5: "#00ff00",
+				6: "#008080",
+				7: "#9d3cff",
+				9: "#b36666",
+				10: "#96befa",
+				12: "#ca95ff",
+				13: "#927ec2",
+				15: "#00d5d5",
+				16: "#00aa55",
+				17: "#ff2828",
+				19: "#71d0ff",
+				20: "#58abab",
+				24: "#ff9bcd",
+				25: "#dfdf00",
+				27: "#fe9ca4",
+				28: "#5555ff",
+				30: "#cf2985",
+				31: "#00b700",
+				33: "#bb77ff",
+				34: "#5959ff",
+				35: "#dbc004",
+				36: "#b43d61",
+				37: "#0098e1",
+				38: "#ff00ff",
+				90: "#ff8000",
+				91: "#ff8000",
+				92: "#ff8000",
+				93: "#ff8000",
+				94: "#ff8000",
+				95: "#ff8000",
+				102: "#c58aff",
+				104: "#c58aff",
+				106: "#c58aff",
+			};
+
 			// get the data
 			async function fetchData() {
 				try {
@@ -747,10 +811,13 @@
 						articulatedDistribution[routeNumber]++;
 					}
 				}
+				if (!document.querySelector("canvas").classList.contains("hide")) updateMap(simpleBusData);
 
 				// show totals
 				document.querySelector("#bus-total").innerHTML = `${totalBuses}`;
 				document.querySelector("#bus-total-articulated").innerHTML = `${articulatedBuses}`;
+
+				document.querySelector("#bus-total-articulated-2").innerHTML = `${articulatedBuses}`;
 
 				// format percentages
 				let totalBusesPercent = new Intl.NumberFormat("en", {
@@ -776,32 +843,64 @@
 				document.querySelector("#bus-total-articulated-partial-percent").innerHTML = articulatedBusesPartialPercent;
 				document.querySelector("#bus-total-articulated-percent").innerHTML = articulatedBusesPercent;
 
-				// DYNAMIC GRAMMAR
-				if (articulatedBuses == 0) {
-					document.querySelector("#articulated-info").classList.add("hide");
-					document.querySelector("#articulated-none").classList.remove("hide");
-				} else {
-					document.querySelector("#articulated-info").classList.remove("hide");
-					document.querySelector("#articulated-none").classList.add("hide");
-				}
+				document.querySelector("#bus-total-articulated-partial-percent-2").innerHTML = articulatedBusesPartialPercent;
+				document.querySelector("#bus-total-articulated-percent-2").innerHTML = articulatedBusesPercent;
 
-				if (articulatedBuses == 1) document.querySelector("#articulated-grammar-1").innerHTML = "is";
-				else document.querySelector("#articulated-grammar-1").innerHTML = "are";
+				// DYNAMIC GRAMMAR
+				document.querySelector("#total-info").classList.add("hide");
+				document.querySelector("#total-none").classList.add("hide");
+				document.querySelector("#articulated-info").classList.add("hide");
+				document.querySelector("#articulated-none").classList.add("hide");
+				document.querySelector("#articulated-none-one").classList.add("hide");
+				document.querySelector("#articulated-one-one").classList.add("hide");
+
+				document.querySelector("#articulated-grammar-1").innerHTML = "";
 
 				if (totalBuses == 0) {
-					document.querySelector("#total-info").classList.add("hide");
+					// 0 buses
 					document.querySelector("#total-none").classList.remove("hide");
 				} else {
+					// at least 1 bus
 					document.querySelector("#total-info").classList.remove("hide");
-					document.querySelector("#total-none").classList.add("hide");
-				}
 
-				if (totalBuses == 1) {
-					document.querySelector("#total-grammar-1").innerHTML = "is";
-					document.querySelector("#total-grammar-2").innerHTML = "bus";
-				} else {
-					document.querySelector("#total-grammar-1").innerHTML = "are";
-					document.querySelector("#total-grammar-2").innerHTML = "buses";
+					if (totalBuses == 1) {
+						// exactly 1 bus
+						document.querySelector("#total-grammar-1").innerHTML = "is";
+						document.querySelector("#total-grammar-2").innerHTML = "bus";
+
+						if (articulatedBuses == 0) {
+							// 0 articulated buses
+							document.querySelector("#articulated-none-one").classList.remove("hide");
+						} else {
+							// 1 articulated bus
+							document.querySelector("#articulated-one-one").classList.remove("hide");
+						}
+					} else {
+						// more than 1 bus
+						document.querySelector("#total-grammar-1").innerHTML = "are";
+						document.querySelector("#total-grammar-2").innerHTML = "buses";
+
+						if (articulatedBuses == 0) {
+							// 0 articulated buses
+							document.querySelector("#articulated-none").classList.remove("hide");
+						} else {
+							// 1 or more articulated buses
+							document.querySelector("#articulated-info").classList.remove("hide");
+
+							if (articulatedBuses == 1) {
+								// 1 articulated bus
+								document.querySelector("#articulated-grammar-2").innerHTML = "is";
+							} else {
+								// more than 1 articulated bus
+								document.querySelector("#articulated-grammar-2").innerHTML = "are";
+
+								if (articulatedBuses == totalBuses) {
+									// all buses are articulated (when there are at least 2 buses in total)
+									document.querySelector("#articulated-grammar-1").innerHTML = "All ";
+								}
+							}
+						}
+					}
 				}
 
 				// update bar graph
@@ -850,6 +949,43 @@
 			}
 			updateBusData();
 
+			// update map
+			function updateMap(simpleBusData) {
+				// important map variables
+				let canvas = document.querySelector("canvas");
+				let context = canvas.getContext("2d");
+
+				let drawOffset = 50;
+				let busSize = 10;
+
+				let width = canvas.getBoundingClientRect().width;
+				let height = canvas.getBoundingClientRect().height;
+				let effectiveWidth = canvas.getBoundingClientRect().width - drawOffset * 2;
+				let effectiveHeight = canvas.getBoundingClientRect().height - drawOffset * 2;
+
+				let latitudeStart = 43.05214;
+				let latitudeEnd = 42.90381;
+				let longitudeStart = -81.36855;
+				let longitudeEnd = -81.12978;
+
+				let scaleFactor = Math.floor(Math.min(effectiveWidth / Math.abs(longitudeStart - longitudeEnd), effectiveHeight / Math.abs(latitudeStart - latitudeEnd)));
+
+				// draw on map
+				for (let busID in simpleBusData) {
+					let routeNumber = simpleBusData[busID][0];
+					let colour = officialColours[routeNumber];
+
+					let latitude = simpleBusData[busID][1];
+					let longitude = simpleBusData[busID][2];
+
+					let x = drawOffset + Math.round(Math.abs(longitudeStart - longitude) * scaleFactor);
+					let y = drawOffset + Math.round(Math.abs(latitudeStart - latitude) * scaleFactor);
+
+					context.fillStyle = colour;
+					context.fillRect(x - busSize / 2, y - busSize / 2, busSize, busSize);
+				}
+			}
+
 			// automatic update timer
 			let timer = 30 - 1;
 			setInterval(() => {
@@ -874,6 +1010,68 @@
 				updateDate();
 				updateBusData();
 			}
+
+			// animate the title (make it DANCE!!)
+			let lastDance = 0;
+			document.querySelector("h1").addEventListener("mouseover", () => {
+				if (new Date().getTime() - lastDance > 1600) {
+					for (let i = 0; i < 7; i++) {
+						setTimeout(() => {
+							document.querySelector(`h1 span:nth-child(${i + 2})`).classList.add("dance");
+						}, 100 * i);
+					}
+					setTimeout(() => {
+						document.querySelectorAll("h1 span").forEach((span) => {
+							span.classList.remove("dance");
+						});
+					}, 1600);
+					lastDance = new Date().getTime();
+				}
+			});
+
+			// show "to-top-button" on scroll
+			document.addEventListener("scroll", (e) => {
+				if (window.scrollY > 300) document.querySelector("#to-top-button").style = "display: flex";
+				else document.querySelector("#to-top-button").style = "display: none";
+			});
+
+			// click on "to-top-button"
+			document.querySelector("#to-top-button").addEventListener("click", (e) => {
+				window.scroll(0, 0);
+			});
+
+			// map, open
+			document.querySelector("#map-open").addEventListener("click", () => {
+				openMap();
+			});
+
+			// map, open (for real)
+			function openMap() {
+				document.querySelector("body").classList.add("no-scroll");
+
+				document.querySelector("canvas").classList.remove("hide");
+				document.querySelector("canvas").width = window.innerWidth;
+				document.querySelector("canvas").height = window.innerHeight;
+
+				update();
+			}
+
+			// resize map to fit window changes
+			let lastResize = 0;
+			window.addEventListener("resize", () => {
+				if (new Date().getTime() - lastResize > 1000 && !document.querySelector("canvas").classList.contains("hide")) {
+					openMap();
+					lastResize = new Date().getTime();
+				}
+			});
+
+			// press 'escape' to close the map
+			window.addEventListener("keydown", (e) => {
+				if (e.key == "Escape") {
+					document.querySelector("body").classList.remove("no-scroll");
+					document.querySelector("canvas").classList.add("hide");
+				}
+			});
 		</script>
 	</head>
 
@@ -885,7 +1083,7 @@
 
 		<br />
 
-		<p>v0.0.11 — April 11th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.12 — April 12th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
 		<p>
 			a project by <a href="../about.html" target="_blank" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
@@ -943,11 +1141,16 @@
 		</h2>
 		<h2 id="total-none" class="hide">London Transit it not currently running any buses.</h2>
 		<h2 id="articulated-info">
-			<span id="bus-total-articulated">#</span> of those buses <span class="grammar" id="articulated-grammar-1">are</span> articulated,
-			<span id="bus-total-articulated-partial-percent">%</span> of in-service buses and <span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet
-			of articulated buses.
+			<span class="grammar" id="articulated-grammar-1"></span> <span id="bus-total-articulated">#</span> of those buses
+			<span class="grammar" id="articulated-grammar-2">are</span> articulated, <span id="bus-total-articulated-partial-percent">%</span> of in-service buses and
+			<span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet of articulated buses.
 		</h2>
 		<h2 id="articulated-none" class="hide">None of them are articulated.</h2>
+		<h2 id="articulated-none-one" class="hide">It is not articulated.</h2>
+		<h2 id="articulated-one-one" class="hide">
+			That <span id="bus-total-articulated-2">#</span> bus is articulated, <span id="bus-total-articulated-partial-percent-2">%</span> of in-service buses and
+			<span id="bus-total-articulated-percent-2">%</span> of London Transit&rsquo;s fleet of articulated buses.
+		</h2>
 
 		<br />
 
@@ -1013,6 +1216,11 @@
 		</table>
 
 		<br />
+
+		<b>BUS MAP</b>
+		<h2 id="map-open">CLICK TO OPEN THE MAP</h2>
+
+		<br />
 		<br />
 		<hr />
 		<br />
@@ -1070,35 +1278,6 @@
 
 		<div id="to-top-button"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
 
-		<script>
-			// animate the title (make it DANCE!!)
-			lastDance = 0;
-			document.querySelector("h1").addEventListener("mouseover", () => {
-				if (new Date().getTime() - lastDance > 1600) {
-					for (let i = 0; i < 7; i++) {
-						setTimeout(() => {
-							document.querySelector(`h1 span:nth-child(${i + 2})`).classList.add("dance");
-						}, 100 * i);
-					}
-					setTimeout(() => {
-						document.querySelectorAll("h1 span").forEach((span) => {
-							span.classList.remove("dance");
-						});
-					}, 1600);
-					lastDance = new Date().getTime();
-				}
-			});
-
-			// show "to-top-button" on scroll
-			document.addEventListener("scroll", (e) => {
-				if (window.scrollY > 300) document.querySelector("#to-top-button").style = "display: flex";
-				else document.querySelector("#to-top-button").style = "display: none";
-			});
-
-			// click on "to-top-button"
-			document.querySelector("#to-top-button").addEventListener("click", (e) => {
-				window.scroll(0, 0);
-			});
-		</script>
+		<canvas class="hide"></canvas>
 	</body>
 </html>
