@@ -99,7 +99,7 @@
 			}
 
 			a,
-			#map-open {
+			#map-open, #to-top-text {
 				text-decoration-line: underline;
 				text-decoration-style: dashed;
 				text-decoration-color: var(--base04);
@@ -107,8 +107,9 @@
 			}
 
 			a:hover,
-			a:focus {
+			a:focus, #to-top-text:hover {
 				text-decoration-color: var(--base09);
+				cursor: pointer;
 			}
 
 			h2 a:hover,
@@ -3104,6 +3105,11 @@
 				window.scroll(0, 0);
 			});
 
+// click on "to-top-text"
+document.querySelector("#to-top-text").addEventListener("click", (e) => {
+	window.scroll(0, 0);
+});
+
 			// map, open
 			document.querySelector("#map-open").addEventListener("click", () => {
 				openMap();
@@ -3148,10 +3154,10 @@
 
 		<br />
 
-		<p>v0.0.14 — April 12th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.15 — April 13th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
 		<p>
-			a project by <a href="../about.html" target="_blank" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
+			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 			<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
 		</p>
 
@@ -3172,6 +3178,7 @@
 					>CPTDB wiki — London Transit Commission</a
 				>
 			</li>
+			<li><a href="../projects+.html" title="pinniped.page — Projects+">return to the Projects+ page</a></li>
 		</ul>
 
 		<br />
@@ -3283,12 +3290,22 @@
 		<br />
 
 		<b>BUS MAP</b>
-		<h2 id="map-open">CLICK TO OPEN THE MAP</h2>
+		<h2 id="map-open" title="CLICK TO OPEN THE MAP">CLICK TO OPEN THE MAP</h2>
 
 		<br />
 		<br />
 		<hr />
 		<br />
+		<br />
+
+		<b>DISCLAIMER</b>
+		<p>The information provided on this page should not be used as a substitute for official information provided by the <a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit Commission</a>.</p>
+		<p>The data processed by and shown on this page may not be 100% correct, as stated in the data&rsquo;s <a href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/" target="_blank" title="Open Data — London Transit Commission — Terms of Use [EXTERNAL]">Terms of Use</a>.</p>
+		<br>
+
+		<b>LIMITATIONS</b>
+		<p>Some information is entered manually, so be sure to check the date that this page was last updated (it&rsquo;s shown at the <span id="to-top-text" title="click to scroll to the top of the page">top of the page</span>) or the <a href="https://github.com/ObsidianSeal/pinniped.page/commits/main/public/projects/bus-data.html" target="_blank" title="GitHub / ObsidianSeal / pinniped.page > bus-data.html history">GitHub commit history</a> to see how up-to-date it is.</p>
+		<p>This page assumes the <a href="https://www.londontransit.ca/wp-content/uploads/2024/08/Route-51-55-Community-Bus.pdf" target="_blank" title="LTC — Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]">Community Bus routes</a> do not exist.</p>
 		<br />
 
 		<b>ATTRIBUTION</b>
@@ -3341,8 +3358,8 @@
 			<div style="background-color: var(--base0F)"></div>
 		</div>
 
-		<div id="to-top-button"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
+		<div id="to-top-button" title="click to scroll to the top of the page"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
 
 		<canvas class="hide"></canvas>
 	</body>
-</html>
+</htm
