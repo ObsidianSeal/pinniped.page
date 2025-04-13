@@ -2991,43 +2991,41 @@
 				context.fillStyle = "#ffffff";
 				context.fillRect(0, 0, width, height);
 
-				let lineMode = true;
+				context.fillStyle = "#000000";
+				for (let i = 0; i < stops.length; i++) {
+					let x = drawOffset + Math.round(Math.abs(longitudeStart - stops[i][1]) * scaleFactor);
+					let y = drawOffset + Math.round(Math.abs(latitudeStart - stops[i][0]) * scaleFactor);
 
-				if (lineMode) {
-					for (let bus in fleetObject) {
-						for (let i = 3; i < fleetObject[bus].length - 1; i++) {
-							let routeNumber = fleetObject[bus][i][0];
+					context.fillRect(x, y, 1, 1);
+				}
 
-							let latitude1 = fleetObject[bus][i][1];
-							let longitude1 = fleetObject[bus][i][2];
+				let trailLength = 3;
 
-							let latitude2 = fleetObject[bus][i + 1][1];
-							let longitude2 = fleetObject[bus][i + 1][2];
+				for (let bus in fleetObject) {
+					for (let i = Math.max(3, fleetObject[bus].length - (trailLength + 1)); i < fleetObject[bus].length - 1; i++) {
+						let routeNumber = fleetObject[bus][i][0];
 
-							if (longitude1 != 0 && latitude1 != 0 && longitude2 != 0 && latitude2 != 0) {
-								let colour = officialColours[routeNumber];
+						let latitude1 = fleetObject[bus][i][1];
+						let longitude1 = fleetObject[bus][i][2];
 
-								let x1 = drawOffset + Math.round(Math.abs(longitudeStart - longitude1) * scaleFactor);
-								let y1 = drawOffset + Math.round(Math.abs(latitudeStart - latitude1) * scaleFactor);
+						let latitude2 = fleetObject[bus][i + 1][1];
+						let longitude2 = fleetObject[bus][i + 1][2];
 
-								let x2 = drawOffset + Math.round(Math.abs(longitudeStart - longitude2) * scaleFactor);
-								let y2 = drawOffset + Math.round(Math.abs(latitudeStart - latitude2) * scaleFactor);
+						if (longitude1 != 0 && latitude1 != 0 && longitude2 != 0 && latitude2 != 0) {
+							let colour = officialColours[routeNumber];
 
-								context.strokeStyle = colour;
-								context.beginPath();
-								context.moveTo(x1, y1);
-								context.lineTo(x2, y2);
-								context.stroke();
-							}
+							let x1 = drawOffset + Math.round(Math.abs(longitudeStart - longitude1) * scaleFactor);
+							let y1 = drawOffset + Math.round(Math.abs(latitudeStart - latitude1) * scaleFactor);
+
+							let x2 = drawOffset + Math.round(Math.abs(longitudeStart - longitude2) * scaleFactor);
+							let y2 = drawOffset + Math.round(Math.abs(latitudeStart - latitude2) * scaleFactor);
+
+							context.strokeStyle = colour;
+							context.beginPath();
+							context.moveTo(x1, y1);
+							context.lineTo(x2, y2);
+							context.stroke();
 						}
-					}
-				} else {
-					context.fillStyle = "#000000";
-					for (let i = 0; i < stops.length; i++) {
-						let x = drawOffset + Math.round(Math.abs(longitudeStart - stops[i][1]) * scaleFactor);
-						let y = drawOffset + Math.round(Math.abs(latitudeStart - stops[i][0]) * scaleFactor);
-
-						context.fillRect(x, y, 1, 1);
 					}
 				}
 
@@ -3150,7 +3148,7 @@
 
 		<br />
 
-		<p>v0.0.13 — April 12th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.14 — April 12th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
 		<p>
 			a project by <a href="../about.html" target="_blank" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
