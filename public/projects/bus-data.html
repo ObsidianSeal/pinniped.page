@@ -99,7 +99,8 @@
 			}
 
 			a,
-			#map-open, #to-top-text {
+			#map-open,
+			#to-top-text {
 				text-decoration-line: underline;
 				text-decoration-style: dashed;
 				text-decoration-color: var(--base04);
@@ -107,7 +108,8 @@
 			}
 
 			a:hover,
-			a:focus, #to-top-text:hover {
+			a:focus,
+			#to-top-text:hover {
 				text-decoration-color: var(--base09);
 				cursor: pointer;
 			}
@@ -229,30 +231,31 @@
 			}
 
 			.not-in-service {
-				/* background-color: var(--base06); */
 				color: var(--base08);
 			}
 
-			i.fa-check,
-			i.fa-xmark,
-			i.fa-circle-info {
+			table i.fa-check,
+			table i.fa-xmark,
+			table i.fa-circle-info,
+			.map-tooltip i.fa-check,
+			.map-tooltip i.fa-xmark {
 				translate: 0 1px;
 			}
 
-			i.fa-check {
+			table i.fa-check {
 				color: var(--base0B);
 			}
 
-			i.fa-xmark {
+			table i.fa-xmark {
 				color: var(--base0A);
 			}
 
-			i.fa-circle-info {
+			table i.fa-circle-info {
 				color: var(--base08);
 				margin-right: 10px;
 			}
 
-			canvas {
+			.map {
 				position: fixed;
 				top: 0;
 				left: 0;
@@ -271,6 +274,97 @@
 
 			.no-scroll {
 				overflow: hidden;
+			}
+
+			.map {
+				width: 100%;
+				height: 100%;
+
+				background-color: white;
+			}
+
+			.map-menu {
+				position: fixed;
+
+				width: calc(100% - 100px);
+				height: 50px;
+
+				display: flex;
+
+				font-size: 20px;
+
+				padding: 0 50px;
+			}
+
+			.map-menu-top {
+				top: 0;
+
+				justify-content: space-between;
+			}
+
+			.map-menu-bottom {
+				bottom: 0;
+			}
+
+			.map-menu-top-left,
+			.map-menu-top-right {
+				display: flex;
+			}
+
+			.map-menu-bottom-left,
+			.map-menu-bottom-right {
+				display: flex;
+			}
+
+			.map-menu-top-right {
+				flex-direction: row-reverse;
+			}
+
+			.map-menu-icon {
+				width: 50px;
+				height: 50px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.map-menu-button:hover {
+				cursor: pointer;
+			}
+
+			.map-menu-button:hover i {
+				color: var(--base08);
+			}
+
+			.map-menu p {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				margin-right: 50px;
+			}
+
+			.map-tooltip {
+				position: fixed;
+				background-color: var(--base07);
+				padding: 0 5px 2px 5px;
+			}
+
+			.map-tooltip span {
+				font-weight: 700;
+			}
+
+			canvas {
+				position: fixed;
+				top: 50px;
+				left: 50px;
+
+				border: 2px solid var(--base04);
+			}
+
+			canvas:hover {
+				cursor: crosshair;
 			}
 
 			/* SCROLLBAR(S) */
@@ -720,7 +814,6 @@
 				[42.938413, -81.204312],
 				[42.938244, -81.2043],
 				[43.016179, -81.232],
-				[42.9578075, -81.2785173],
 				[42.959601, -81.25735],
 				[42.962147, -81.226993],
 				[42.962039, -81.226664],
@@ -840,7 +933,6 @@
 				[43.005588, -81.242502],
 				[42.99116, -81.277868],
 				[42.990935, -81.277884],
-				[42.991687, -81.276465],
 				[42.99177, -81.275942],
 				[42.991975, -81.275413],
 				[42.989354, -81.276458],
@@ -2054,11 +2146,6 @@
 				[42.985372, -81.233601],
 				[42.985708, -81.232685],
 				[43.027719, -81.148702],
-				[42.9919, -81.27598],
-				[42.98675, -81.281532],
-				[42.984932, -81.280134],
-				[42.987088, -81.296552],
-				[42.98771, -81.295516],
 				[42.965978, -81.221654],
 				[43.02927, -81.251929],
 				[43.014303, -81.321415],
@@ -2074,7 +2161,6 @@
 				[42.991416, -81.192435],
 				[42.992032, -81.191809],
 				[43.007531, -81.235149],
-				[42.9900896, -81.2746911],
 				[43.002719, -81.174882],
 				[42.959432, -81.332109],
 				[42.963507, -81.18508],
@@ -2104,13 +2190,11 @@
 				[43.000438, -81.302044],
 				[43.00473, -81.211838],
 				[43.002639, -81.213763],
-				[42.97614, -81.322355],
 				[43.016714, -81.180353],
 				[43.021158, -81.299333],
 				[42.937239, -81.191571],
 				[42.955404, -81.198939],
 				[42.996169, -81.153002],
-				[42.974398, -81.321493],
 				[42.967875, -81.280991],
 				[42.976705, -81.235546],
 				[42.990638, -81.175968],
@@ -2151,37 +2235,6 @@
 				[42.983285, -81.28431],
 				[43.005918, -81.307592],
 				[43.035213, -81.26481],
-				[42.989136, -81.276445],
-				[42.989649, -81.276948],
-				[42.991044, -81.277942],
-				[42.992026, -81.2737],
-				[42.992269, -81.275049],
-				[42.991873, -81.276802],
-				[42.992259, -81.278323],
-				[42.991638, -81.278776],
-				[42.991962, -81.279316],
-				[42.983638, -81.268731],
-				[42.991557, -81.279389],
-				[42.988669, -81.276016],
-				[42.98838, -81.276997],
-				[42.986696, -81.281692],
-				[42.984608, -81.2812],
-				[42.98431, -81.282169],
-				[42.983755, -81.284193],
-				[42.98248, -81.285187],
-				[42.981743, -81.284082],
-				[42.981063, -81.284925],
-				[42.983813, -81.285278],
-				[42.981875, -81.286034],
-				[42.987679, -81.29059],
-				[42.985847, -81.294708],
-				[42.985647, -81.295641],
-				[42.989477, -81.290969],
-				[42.985327, -81.296751],
-				[42.986867, -81.295136],
-				[42.988771, -81.28885],
-				[42.989422, -81.288479],
-				[42.982517, -81.268101],
 				[42.986876, -81.3057],
 				[42.990416, -81.316309],
 				[42.9881771, -81.3150898],
@@ -2201,7 +2254,6 @@
 				[42.977781, -81.321509],
 				[42.995536, -81.330459],
 				[42.995037, -81.330379],
-				[43.02535, -81.28002],
 				[42.99122, -81.30749],
 				[42.98871, -81.30543],
 				[42.9907284, -81.3116218],
@@ -2230,7 +2282,6 @@
 				[42.96255, -81.19923],
 				[42.963056, -81.188761],
 				[42.975214, -81.305469],
-				[42.956137, -81.276837],
 				[42.955804, -81.278701],
 				[42.955854, -81.279878],
 				[42.954813, -81.287851],
@@ -2292,7 +2343,6 @@
 				[42.96848, -81.36103],
 				[43.022923, -81.260715],
 				[42.987393, -81.311797],
-				[43.00929, -81.332594],
 				[42.945862, -81.26784],
 				[42.942767, -81.266955],
 				[42.940578, -81.266504],
@@ -2305,9 +2355,6 @@
 				[42.925985, -81.229217],
 				[43.01016, -81.18933],
 				[43.018166, -81.22686],
-				[42.981889, -81.281579],
-				[42.982015, -81.281971],
-				[42.98323, -81.283161],
 				[42.958416, -81.27099],
 				[42.926019, -81.278341],
 				[42.932795, -81.1603568],
@@ -2376,11 +2423,7 @@
 				[42.941826, -81.225455],
 				[42.9915083, -81.2329501],
 				[42.905571, -81.294421],
-				[42.983536, -81.283051],
 				[43.044659, -81.259913],
-				[42.987151, -81.293144],
-				[42.989687, -81.298284],
-				[42.985613, -81.290961],
 				[43.046477, -81.26173],
 				[43.045234, -81.26551],
 				[43.047611, -81.257938],
@@ -2411,7 +2454,6 @@
 				[42.980336, -81.252865],
 				[42.98422, -81.24188],
 				[43.022779, -81.15913],
-				[43.00464, -81.304524],
 				[42.939259, -81.27664],
 				[42.939714, -81.270057],
 				[43.043604, -81.271192],
@@ -2437,8 +2479,6 @@
 				[43.015039, -81.276075],
 				[43.035214, -81.286993],
 				[43.035062, -81.287222],
-				[42.956216, -81.278276],
-				[42.961617, -81.283152],
 				[43.028772, -81.251725],
 				[43.016003, -81.285717],
 				[43.016308, -81.290829],
@@ -2496,8 +2536,6 @@
 				[43.038004, -81.243949],
 				[43.038011, -81.24474],
 				[43.018259, -81.310615],
-				[42.955849, -81.28977],
-				[42.942079, -81.227576],
 				[43.039197, -81.238956],
 				[43.031786, -81.243307],
 				[43.036837, -81.236716],
@@ -2811,7 +2849,7 @@
 					let longitude = busData[i].vehicle.position.longitude;
 
 					// remember the information
-					simpleBusData[busID] = [routeNumber, latitude, longitude];
+					simpleBusData[busID] = [routeNumber, latitude, longitude, busDataHeader.timestamp, 0, 0];
 
 					// calculate distributions and count the number of articulated buses
 					busDistribution[routeNumber]++;
@@ -2825,7 +2863,7 @@
 					if (simpleBusData.hasOwnProperty(bus)) {
 						fleetObject[bus].push(simpleBusData[bus]);
 					} else {
-						fleetObject[bus].push([0, 0, 0]);
+						fleetObject[bus].push([0, 0, 0, 0, 0, 0]);
 					}
 				}
 
@@ -2967,26 +3005,28 @@
 			}
 			updateBusData();
 
+			// important GLOBAL map variables
+			let scaleFactor = 0;
+			let drawOffset = 10;
+			let busSize = 10;
+
+			let latitudeStart = 43.05214;
+			let latitudeEnd = 42.90381;
+			let longitudeStart = -81.36855;
+			let longitudeEnd = -81.12978;
+
 			// update map
 			function updateMap() {
 				// important map variables
 				let canvas = document.querySelector("canvas");
 				let context = canvas.getContext("2d");
 
-				let drawOffset = 50;
-				let busSize = 10;
-
 				let width = canvas.getBoundingClientRect().width;
 				let height = canvas.getBoundingClientRect().height;
 				let effectiveWidth = canvas.getBoundingClientRect().width - drawOffset * 2;
 				let effectiveHeight = canvas.getBoundingClientRect().height - drawOffset * 2;
 
-				let latitudeStart = 43.05214;
-				let latitudeEnd = 42.90381;
-				let longitudeStart = -81.36855;
-				let longitudeEnd = -81.12978;
-
-				let scaleFactor = Math.floor(Math.min(effectiveWidth / Math.abs(longitudeStart - longitudeEnd), effectiveHeight / Math.abs(latitudeStart - latitudeEnd)));
+				scaleFactor = Math.min(effectiveWidth / (longitudeEnd - longitudeStart), effectiveHeight / (latitudeStart - latitudeEnd));
 
 				// draw on map
 				context.fillStyle = "#ffffff";
@@ -2994,8 +3034,8 @@
 
 				context.fillStyle = "#000000";
 				for (let i = 0; i < stops.length; i++) {
-					let x = drawOffset + Math.round(Math.abs(longitudeStart - stops[i][1]) * scaleFactor);
-					let y = drawOffset + Math.round(Math.abs(latitudeStart - stops[i][0]) * scaleFactor);
+					let x = drawOffset + Math.round((stops[i][1] - longitudeStart) * scaleFactor);
+					let y = drawOffset + Math.round((latitudeStart - stops[i][0]) * scaleFactor);
 
 					context.fillRect(x, y, 1, 1);
 				}
@@ -3012,14 +3052,14 @@
 						let latitude2 = fleetObject[bus][i + 1][1];
 						let longitude2 = fleetObject[bus][i + 1][2];
 
-						if (longitude1 != 0 && latitude1 != 0 && longitude2 != 0 && latitude2 != 0) {
+						if (longitude1 != 0 && latitude1 != 0 && longitude2 != 0 && latitude2 != 0 && fleetObject[bus][i + 1][3] - fleetObject[bus][i][3] < 40) {
 							let colour = officialColours[routeNumber];
 
-							let x1 = drawOffset + Math.round(Math.abs(longitudeStart - longitude1) * scaleFactor);
-							let y1 = drawOffset + Math.round(Math.abs(latitudeStart - latitude1) * scaleFactor);
+							let x1 = drawOffset + Math.round((longitude1 - longitudeStart) * scaleFactor);
+							let y1 = drawOffset + Math.round((latitudeStart - latitude1) * scaleFactor);
 
-							let x2 = drawOffset + Math.round(Math.abs(longitudeStart - longitude2) * scaleFactor);
-							let y2 = drawOffset + Math.round(Math.abs(latitudeStart - latitude2) * scaleFactor);
+							let x2 = drawOffset + Math.round((longitude2 - longitudeStart) * scaleFactor);
+							let y2 = drawOffset + Math.round((latitudeStart - latitude2) * scaleFactor);
 
 							context.strokeStyle = colour;
 							context.beginPath();
@@ -3041,11 +3081,19 @@
 					if (longitude != 0 && latitude != 0) {
 						let colour = officialColours[routeNumber];
 
-						let x = drawOffset + Math.round(Math.abs(longitudeStart - longitude) * scaleFactor);
-						let y = drawOffset + Math.round(Math.abs(latitudeStart - latitude) * scaleFactor);
+						let x = drawOffset + Math.round((longitude - longitudeStart) * scaleFactor);
+						let y = drawOffset + Math.round((latitudeStart - latitude) * scaleFactor);
+
+						fleetObject[bus][i][4] = x;
+						fleetObject[bus][i][5] = y;
 
 						context.fillStyle = colour;
-						context.fillRect(x - busSize / 2, y - busSize / 2, busSize, busSize);
+						if (bus < 100) {
+							context.ellipse(x, y, busSize - 3, busSize - 3, 0, 2 * Math.PI, 0);
+							context.fill();
+						} else {
+							context.fillRect(x - busSize / 2, y - busSize / 2, busSize, busSize);
+						}
 					}
 				}
 			}
@@ -3105,10 +3153,10 @@
 				window.scroll(0, 0);
 			});
 
-// click on "to-top-text"
-document.querySelector("#to-top-text").addEventListener("click", (e) => {
-	window.scroll(0, 0);
-});
+			// click on "to-top-text"
+			document.querySelector("#to-top-text").addEventListener("click", (e) => {
+				window.scroll(0, 0);
+			});
 
 			// map, open
 			document.querySelector("#map-open").addEventListener("click", () => {
@@ -3119,28 +3167,75 @@ document.querySelector("#to-top-text").addEventListener("click", (e) => {
 			function openMap() {
 				document.querySelector("body").classList.add("no-scroll");
 
-				document.querySelector("canvas").classList.remove("hide");
-				document.querySelector("canvas").width = window.innerWidth;
-				document.querySelector("canvas").height = window.innerHeight;
+				document.querySelector(".map").classList.remove("hide");
+				document.querySelector("canvas").width = window.innerWidth - 104;
+				document.querySelector("canvas").height = window.innerHeight - 104;
 
 				updateMap();
 			}
 
+			// map, close
+			document.querySelector("#map-menu-button-close").addEventListener("click", () => {
+				closeMap();
+			});
+
+			// map, close (for real)
+			function closeMap() {
+				document.querySelector("body").classList.remove("no-scroll");
+				document.querySelector(".map").classList.add("hide");
+			}
+
+			// press 'escape' to open/close the map
+			window.addEventListener("keydown", (e) => {
+				if (e.key == "Escape") {
+					if (document.querySelector(".map").classList.contains("hide")) openMap();
+					else closeMap();
+				}
+			});
+
 			// resize map to fit window changes
 			let lastResize = 0;
 			window.addEventListener("resize", () => {
-				if (new Date().getTime() - lastResize > 1000 && !document.querySelector("canvas").classList.contains("hide")) {
+				if (new Date().getTime() - lastResize > 1000 && !document.querySelector(".map").classList.contains("hide")) {
 					openMap();
 
 					lastResize = new Date().getTime();
 				}
 			});
 
-			// press 'escape' to close the map
-			window.addEventListener("keydown", (e) => {
-				if (e.key == "Escape") {
-					document.querySelector("body").classList.remove("no-scroll");
-					document.querySelector("canvas").classList.add("hide");
+			// map tooltips
+			document.addEventListener("mousemove", (e) => {
+				let mouseX = e.x;
+				let mouseY = e.y;
+
+				document.querySelector(".map-tooltip").classList.add("hide");
+
+				if (mouseX > 52 && mouseY > 52 && mouseX < window.innerWidth - 52 && mouseY < window.innerHeight - 52) {
+					document.querySelector(".map-tooltip").style = `top: ${mouseY + 5}px; left: ${mouseX + 5}px`;
+
+					let latitude = Math.round(((e.offsetY - drawOffset) / scaleFactor - latitudeStart) * -100000) / 100000;
+					let longitude = Math.round(((e.offsetX - drawOffset) / scaleFactor + longitudeStart) * 100000) / 100000;
+					document.querySelector("#map-coordinates").innerHTML = `${latitude.toString().padEnd(8, "0")}, ${longitude.toString().padEnd(9, "0")}`;
+
+					for (let bus in fleetObject) {
+						let array = fleetObject[bus][fleetObject[bus].length - 1];
+						if (Math.abs(array[4] + 52 - mouseX) <= 5 && Math.abs(array[5] + 52 - mouseY) <= 5) {
+							document.querySelector(".map-tooltip").classList.remove("hide");
+
+							let icon = "xmark";
+							if (fleetObject[bus][0] == "D60LFR" || fleetObject[bus][0] == "XD60") icon = "check";
+
+							document.querySelector(".map-tooltip").innerHTML = `<span>${array[0].toString().padStart(2, "0")}</span> @ ${array[1]
+								.toString()
+								.padEnd(8, "0")}, ${array[2].toString().padEnd(9, "0")}<br />#${bus} — ${
+								fleetObject[bus][0]
+							}&nbsp;&nbsp;<i class="fa-sharp fa-regular fa-${icon}"></i>`;
+						}
+					}
+				} else {
+					document.querySelector(".map-tooltip").classList.add("hide");
+
+					document.querySelector("#map-coordinates").innerHTML = "";
 				}
 			});
 		</script>
@@ -3154,7 +3249,7 @@ document.querySelector("#to-top-text").addEventListener("click", (e) => {
 
 		<br />
 
-		<p>v0.0.15 — April 13th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.16 — April 15th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
 		<p>
 			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
@@ -3290,7 +3385,7 @@ document.querySelector("#to-top-text").addEventListener("click", (e) => {
 		<br />
 
 		<b>BUS MAP</b>
-		<h2 id="map-open" title="CLICK TO OPEN THE MAP">CLICK TO OPEN THE MAP</h2>
+		<h2 id="map-open" title="click to open the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">CLICK TO OPEN THE MAP</h2>
 
 		<br />
 		<br />
@@ -3299,13 +3394,50 @@ document.querySelector("#to-top-text").addEventListener("click", (e) => {
 		<br />
 
 		<b>DISCLAIMER</b>
-		<p>The information provided on this page should not be used as a substitute for official information provided by the <a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit Commission</a>.</p>
-		<p>The data processed by and shown on this page may not be 100% correct, as stated in the data&rsquo;s <a href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/" target="_blank" title="Open Data — London Transit Commission — Terms of Use [EXTERNAL]">Terms of Use</a>.</p>
-		<br>
+		<ul>
+			<li>
+				the information provided on this page should not be used as a substitute for official information provided by the
+				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit Commission</a>
+			</li>
+			<li>
+				the data processed by and shown on this page may not be 100% correct, as stated in the data&rsquo;s
+				<a
+					href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/"
+					target="_blank"
+					title="Open Data — London Transit Commission — Terms of Use [EXTERNAL]"
+					>Terms of Use</a
+				>
+			</li>
+		</ul>
+
+		<br />
 
 		<b>LIMITATIONS</b>
-		<p>Some information is entered manually, so be sure to check the date that this page was last updated (it&rsquo;s shown at the <span id="to-top-text" title="click to scroll to the top of the page">top of the page</span>) or the <a href="https://github.com/ObsidianSeal/pinniped.page/commits/main/public/projects/bus-data.html" target="_blank" title="GitHub / ObsidianSeal / pinniped.page > bus-data.html history">GitHub commit history</a> to see how up-to-date it is.</p>
-		<p>This page assumes the <a href="https://www.londontransit.ca/wp-content/uploads/2024/08/Route-51-55-Community-Bus.pdf" target="_blank" title="LTC — Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]">Community Bus routes</a> do not exist.</p>
+		<ul>
+			<li>
+				some data is entered manually, so be sure to check the date that this page was last updated (it&rsquo;s shown at the
+				<span id="to-top-text" title="click to scroll to the top of the page">top of the page</span>) or the
+				<a
+					href="https://github.com/ObsidianSeal/pinniped.page/commits/main/public/projects/bus-data.html"
+					target="_blank"
+					title="GitHub / ObsidianSeal / pinniped.page > bus-data.html history"
+					>GitHub commit history</a
+				>
+				to see how up-to-date it is
+			</li>
+			<li>
+				this page assumes the
+				<a
+					href="https://www.londontransit.ca/wp-content/uploads/2024/08/Route-51-55-Community-Bus.pdf"
+					target="_blank"
+					title="LTC — Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]"
+					>Community Bus routes</a
+				>
+				do not exist.
+			</li>
+			<li>rounding errors are almost certainly present</li>
+		</ul>
+
 		<br />
 
 		<b>ATTRIBUTION</b>
@@ -3340,7 +3472,7 @@ document.querySelector("#to-top-text").addEventListener("click", (e) => {
 				>
 				colour scheme
 			</li>
-			<li>and help from some awesome people!</li>
+			<li>and feedback/suggestions from some awesome people!</li>
 		</ul>
 
 		<br />
@@ -3360,6 +3492,26 @@ document.querySelector("#to-top-text").addEventListener("click", (e) => {
 
 		<div id="to-top-button" title="click to scroll to the top of the page"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
 
-		<canvas class="hide"></canvas>
+		<div class="map hide">
+			<canvas></canvas>
+
+			<div class="map-menu map-menu-top">
+				<div class="map-menu-top-left">
+					<p style="font-weight: 700">BUS MAP</p>
+				</div>
+				<div class="map-menu-top-right">
+					<div class="map-menu-icon map-menu-button" id="map-menu-button-close" title="click to close the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">
+						<i class="fa-sharp fa-solid fa-xmark"></i>
+					</div>
+				</div>
+			</div>
+			<div class="map-menu map-menu-bottom">
+				<div class="map-menu-bottom-left">
+					<p id="map-coordinates"></p>
+				</div>
+			</div>
+
+			<div class="map-tooltip hide"></div>
+		</div>
 	</body>
-</htm
+</html>
