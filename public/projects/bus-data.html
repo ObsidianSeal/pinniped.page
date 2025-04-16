@@ -3211,7 +3211,7 @@
 
 				document.querySelector(".map-tooltip").classList.add("hide");
 
-				if (mouseX > 52 && mouseY > 52 && mouseX < window.innerWidth - 52 && mouseY < window.innerHeight - 52) {
+				if (mouseX > 52 && mouseY > 52 && mouseX < window.innerWidth - 52 && mouseY < window.innerHeight - 52 && scaleFactor != 0) {
 					document.querySelector(".map-tooltip").style = `top: ${mouseY + 5}px; left: ${mouseX + 5}px`;
 
 					let latitude = Math.round(((e.offsetY - drawOffset) / scaleFactor - latitudeStart) * -100000) / 100000;
@@ -3250,7 +3250,7 @@
 
 		<br />
 
-		<p>v0.0.17 — April 15th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.18 — April 16th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 
 		<p>
 			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
