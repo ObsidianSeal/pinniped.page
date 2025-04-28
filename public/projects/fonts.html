@@ -80,6 +80,14 @@
 				src: url("../files/ComputerModern-SerifItalic.woff2");
 			}
 			@font-face {
+				font-family: "Departure Mono";
+				src: url("../files/DepartureMono-Regular.woff2");
+			}
+			@font-face {
+				font-family: "Editorial Old";
+				src: url("../files/PPEditorialOld-Bold.woff2");
+			}
+			@font-face {
 				font-family: "JetBrains Mono";
 				src: url("../files/JetBrainsMono-Regular.woff2");
 			}
@@ -412,7 +420,9 @@
 			"Courier Prime",
 			"cubano",
 			"degular",
+			"Departure Mono",
 			"Didact Gothic",
+			"Editorial Old",
 			"Fira Sans",
 			"Fira Sans Condensed",
 			"Fira Sans Extra Condensed",
@@ -449,17 +459,15 @@
 			"Roboto Mono",
 			"Roboto Serif",
 			"Roboto Slab",
-			"roca",
 			"Select Mono",
 			"Sniglet",
 			"Space Grotesk",
 			"Space Mono",
-			"swear-display",
 			"Writer",
 			"Writer Italic",
 		];
 
-		const version = "1.0.4";
+		const version = "1.0.5";
 		console.log(`fonts v${version} - ${fonts.length} fonts, ${texts.length} texts`);
 
 		function getRandomFont() {
@@ -480,7 +488,6 @@
 			}
 
 			// this font has a capital in the middle
-			console.log(fontName);
 			if (fontName == "Gooddog New") return "GoodDog New";
 
 			// done!

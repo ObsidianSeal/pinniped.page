@@ -24,8 +24,6 @@
 		<style>
 			/* TYPEFACES */
 
-			@import url(https://use.typekit.net/rzo4wst.css);
-
 			@font-face {
 				font-family: "PP Neue Montreal";
 				font-weight: normal;
@@ -35,6 +33,11 @@
 				font-family: "PP Neue Montreal";
 				font-weight: bold;
 				src: url("../files/PPNeueMontreal-Bold.woff2");
+			}
+
+			@font-face {
+				font-family: "PP Editorial Old";
+				src: url("../files/PPEditorialOld-Bold.woff2");
 			}
 
 			/* VARIABLES */
@@ -90,9 +93,13 @@
 				margin-bottom: 10px;
 			}
 
+			h1 i {
+				margin-right: 30px;
+			}
+
 			h2 {
-				font-family: roca, sans-serif;
-				font-weight: 800;
+				font-family: "PP Editorial Old", sans-serif;
+				font-weight: bold;
 				font-style: normal;
 				font-size: 48px;
 			}
@@ -103,6 +110,8 @@
 				transition: background-position 0.5s;
 
 				width: fit-content;
+
+				background-position: 0 26px;
 			}
 
 			a:hover,
@@ -110,9 +119,17 @@
 				background-position: 0 0;
 			}
 
+			span {
+				background-position: 0 28px;
+			}
+
 			hr {
 				border-bottom: 2px solid var(--g);
 				margin: 20px 0;
+			}
+
+			p {
+				text-align: justify;
 			}
 
 			/* COMPONENT STYLES */
@@ -140,7 +157,6 @@
 
 			.highlight-underline {
 				background-repeat: repeat-x;
-				background-position: 0 26px;
 				display: inline;
 			}
 
@@ -162,7 +178,6 @@
 
 			.playlist-title > :first-child {
 				margin-right: 50px;
-				line-height: 1.2;
 			}
 
 			.playlist-title a {
@@ -262,6 +277,68 @@
 				color: var(--c2);
 			}
 
+			.note {
+				margin: 30px;
+				color: var(--g);
+			}
+
+			.note i {
+				margin-right: 20px;
+			}
+
+			.news {
+				font-size: 36px;
+				border: 2px solid var(--g);
+				padding: 20px 20px 10px 20px;
+				position: relative;
+			}
+
+			.news div {
+				font-family: "PP Neue Montreal";
+				font-weight: bold;
+				font-size: 16px;
+
+				background-color: white;
+
+				padding: 0 10px;
+
+				position: absolute;
+				top: -10px;
+				right: 10px;
+			}
+
+			.red {
+				color: #ce7da5;
+			}
+
+			#to_top_button {
+				width: 50px;
+				height: 50px;
+
+				border-radius: 25px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				position: fixed;
+				right: 50px;
+				bottom: 80px;
+
+				font-size: 24px;
+
+				background-color: var(--g);
+			}
+
+			#to_top_button:hover {
+				background-color: var(--c2);
+				cursor: pointer;
+			}
+
+			#to_top_button i {
+				color: #ffffff;
+			}
+
 			/* SPECIFIC COLOURS */
 
 			.highlight-underline.c1 {
@@ -310,6 +387,19 @@
 					font-size: 36px;
 				}
 
+				a {
+					background-position: 0 20px;
+				}
+
+				a:hover,
+				a:focus {
+					background-position: 0 0;
+				}
+
+				span {
+					background-position: 0 22px;
+				}
+
 				.playlist-title {
 					flex-direction: column;
 				}
@@ -344,15 +434,12 @@
 					align-items: center;
 				}
 
-				span.highlight-underline,
-				a.highlight-underline {
-					background-position: 0 19px;
-					transition: background-position 0.5s;
+				.news {
+					font-size: 24px;
 				}
 
-				a.highlight-underline:hover,
-				a.highlight-underline:focus {
-					background-position: 0 0;
+				.news div {
+					font-size: 14px;
 				}
 			}
 
@@ -361,41 +448,13 @@
 					font-size: 54px;
 				}
 
+				span {
+					background-position: 0 15px;
+				}
+
 				.playlist-title h2 {
 					font-size: 24px;
 				}
-
-				span.highlight-underline {
-					background-position: 0 13px;
-				}
-			}
-
-			#to_top_button {
-				width: 50px;
-				height: 50px;
-
-				border-radius: 25px;
-
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
-				position: fixed;
-				right: 50px;
-				bottom: 80px;
-
-				font-size: 24px;
-
-				background-color: var(--g);
-			}
-
-			#to_top_button:hover {
-				background-color: var(--c2);
-				cursor: pointer;
-			}
-
-			#to_top_button i {
-				color: #ffffff;
 			}
 		</style>
 	</head>
@@ -404,18 +463,28 @@
 		<div class="exit-button" title="click to return to the Projects+ page" tabindex="0"><i class="fa-solid fa-arrow-left-long"></i></div>
 
 		<div class="main-area">
-			<h1><i class="fa-solid fa-folder-music" style="margin-right: 30px"></i> Playlists</h1>
+			<h1><i class="fa-solid fa-folder-music"></i> Playlists</h1>
 			<p>
 				All of the
 				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a>
 				playlists I&rsquo;ve created, in one convenient place. I use this page to share music with friends and family, to avoid using a song in more than one monthly
-				playlist, and to remind myself of music I may have forgotten. Enjoy! <i class="fa-regular fa-face-smile"></i>
+				playlist, to investigate my playlist data, and to remind myself of music I may have forgotten. Enjoy! <i class="fa-regular fa-face-smile"></i>
 			</p>
 
-			<h2 style="margin: 30px; line-height: 1.2; color: var(--g)">
-				<i class="fa-regular fa-music-magnifying-glass" style="margin-right: 20px"></i> search all expanded playlists with your browser&rsquo;s built-in search
-				function!
+			<h2 class="note news">
+				<i class="fa-regular fa-bullhorn"></i> I&rsquo;m testing a new font — Adobe ruined Roca so I&rsquo;ve switched to Pangram Pangram&rsquo;s Editorial Old — tell
+				me what you think!
+				<div>ANNOUNCEMENT</div>
 			</h2>
+
+			<p>
+				Listed below each playlist&rsquo;s title is the playlist&rsquo;s number of tracks, length, and the date at which it was last updated on this page. Click on a
+				playlist&rsquo;s &ldquo;listen&rdquo; button to open it in
+				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a>. Click on the arrow to
+				the left of a playlist&rsquo;s title to view its list of tracks, including titles, artists, and albums.
+			</p>
+
+			<h2 class="note"><i class="fa-regular fa-music-magnifying-glass"></i> search all expanded playlists with your browser&rsquo;s built-in search function!</h2>
 
 			<div class="buttons">
 				<div tabindex="0" class="expand-all-button" title="click to expand ALL playlists">EXPAND ALL<i class="fa-solid fa-angles-down"></i></div>
@@ -443,9 +512,17 @@
 					title="Pangram Pangram Foundry / Neue Montreal [EXTERNAL]"
 					>Neue Montreal</a
 				>
-				by Mat Desjardins from Pangram Pangram Foundry and
-				<a class="highlight-underline c3" href="https://fonts.adobe.com/fonts/roca" target="_blank" title="Adobe Fonts / Roca [EXTERNAL]">Roca</a> by Elena Genova from
-				My Creative Land. <i class="fa-regular fa-leaf-maple"></i><br /><br />This page also makes use of
+				by Mat Desjardins and
+				<a
+					class="highlight-underline c3"
+					href="https://pangrampangram.com/products/editorial-old"
+					target="_blank"
+					title="Pangram Pangram Foundry / Editorial Old [EXTERNAL]"
+					>Editorial Old</a
+				>
+				by Mat Desjardins, Fred Wiltshire, and Francesca Bolognini. Both typefaces come from
+				<a class="highlight-underline c3" href="https://pangrampangram.com/" target="_blank" title="Pangram Pangram Foundry [EXTERNAL]">Pangram Pangram Foundry</a>.
+				<i class="fa-regular fa-leaf-maple"></i><br /><br />This page also makes use of
 				<a class="highlight-underline c3" href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a> icons.
 				<i class="fa-regular fa-font-awesome"></i><br /><br />Found an issue with this page? Report it on the
 				<a class="highlight-underline c3" href="../contact.html" title="Contact">Contact page</a>. <i class="fa-regular fa-comment"></i>
@@ -526,7 +603,7 @@
 						["Touchy Feely Fool", "AJR", "The Maybe Man"],
 						["sail away", "lovelytheband", "sail away"],
 						["Money", "Jazz Emu", "Technically, Probably More Of The Same, I Suppose, In Theory"],
-						["Hallo aus Berlin - Was ist dein Lieblingsfach? HQ audio 50fps", "GenesisFan64YT", '<span style="color: #ce7da5">YouTube video</span>'],
+						["Hallo aus Berlin - Was ist dein Lieblingsfach? HQ audio 50fps", "GenesisFan64YT", '<span class="red">YouTube video</span>'],
 						["Sucker Punch", "Sigrid", "Sucker Punch"],
 						["Purple Zone", "Soft Cell & Pet Shop Boys", "Purple Zone"],
 						["Shooting Stars", "Bag Raiders", "Bag Raiders (Deluxe)"],
@@ -698,7 +775,7 @@
 						["This Girl (Kungs Vs. Cookin&rsquo; On 3 Burners) (Kungs Vs. Cookin&rsquo; On 3 Burners)", "Kungs & Cookin&rsquo; On 3 Burners", "Layers"],
 						["となりのトトロ - My Neighbor Totoro", "Azumi Inoue", "My Neighbor Totoro Image Song Collection"],
 						["Higher Love", "Kygo & Whitney Houston", "Golden Hour"],
-						["Die For You ft. Grabbitz // Official Music Video // VALORANT Champions 2021", "VALORANT", '<span style="color: #ce7da5">YouTube video</span>'],
+						["Die For You ft. Grabbitz // Official Music Video // VALORANT Champions 2021", "VALORANT", '<span class="red">YouTube video</span>'],
 						["Ticking Away", "VALORANT & Grabbitz & bbno$", "Ticking Away"],
 						["Mess", "Noah Kahan", "Busyhead"],
 						["Sunshine", "OneRepublic", "Sunshine"],
@@ -959,6 +1036,33 @@
 						["Get It At Home", "Saint Motel", "Saint Motel & the Symphony in the Sky"],
 					],
 				},
+				"🎵 - May 2025": {
+					link: "PLTKwBiSgGBshwYhENcEDyXyyZRePGNsJU",
+					length: [20, "1:00:51"],
+					updated: "2025/04/28",
+					tracks: [
+						["unendlichkeit (rework)", "Robin Schulz & OSWALD", "unendlichkeit (rework)"],
+						["LIFE", "Jon Bellion", "Translations Through Speakers"],
+						["WASH", "Jon Bellion", "WASH"],
+						["KID AGAIN", "Jon Bellion", "WASH"],
+						["Rain On Me", "Lady Gaga & Ariana Grande", "Chromatica"],
+						["Body (feat. brando)", "Loud Luxury", "Body"],
+						["i&rsquo;m so tired...", "Lauv & Troye Sivan", "~how i&rsquo;m feeling~"],
+						["Little Omens", "Alfie Jukes", "Little Omens"],
+						["Do I Wanna Know?", "Arctic Monkeys", "AM"],
+						["two", "bbno$", "two"],
+						["Grenadine", "The Unlikely Candidates", "Panther Island"],
+						["Mauvaise journée", "Stromae", "Multitude"],
+						["Blink Twice", "Shaboozey & Myles Smith", "Blink Twice"],
+						["Villain (Take the Shot) (feat. Eytan Peled)", "VALORANT & Barns Courtney & ARB4", "Villain (Take the Shot)"],
+						["Coming Home", "Sheppard", "Watching The Sky"],
+						["Hold On Tight", "aespa", "Tetris (Motion Picture Soundtrack)"],
+						["Natural", "Valley", "Lost In Translation"],
+						["Like 1999", "Valley", "Last Birthday"],
+						["Automatic", "Roosevelt", "Automatic"],
+						["Tonight I Might", "KATSEYE", "SIS (Soft Is Strong)"],
+					],
+				},
 				"oops all Conan Gray": {
 					link: "PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG",
 					length: [28, "1:26:54"],
@@ -1121,7 +1225,7 @@
 							"Nick Fury (Main Title Theme) (From &ldquo;Secret Invasion&rdquo;)",
 						],
 						["The Avengers", "Alan Silvestri", "The Avengers (Original Motion Picture Soundtrack)"],
-						["Mission: Impossible Fallout Theme [Extended] by Lorne Balfe", "GPH Music", '<span style="color: #ce7da5">YouTube video</span>'],
+						["Mission: Impossible Fallout Theme [Extended] by Lorne Balfe", "GPH Music", '<span class="red">YouTube video</span>'],
 						["Moon Knight", "Hesham Nazih", "Moon Knight (Original Soundtrack)"],
 						["Death By Glamour", "Toby Fox", "UNDERTALE Soundtrack"],
 						["Loki Green Theme", "Natalie Holt", "Loki, Vol. 1 (Episodes 1-3) [Original Soundtrack]"],
@@ -1141,14 +1245,14 @@
 						["Sun Mother", "Melodysheep", "The Arrow of Time: Soundtrack to &ldquo;Timelapse of the Future&rdquo;"],
 						["Across the Spider-Verse (Start a Band)", "Daniel Pemberton", "Spider-Man: Across the Spider-Verse (Original Score)"],
 						["No Time for Caution", "Hans Zimmer", "Interstellar (Original Motion Picture Soundtrack) [Expanded Edition]"],
-						["NF - The Search (Official Instrumental)", "NF Instrumentals", '<span style="color: #ce7da5">YouTube video</span>'],
-						["Main Theme", "Gabe Castro", '<span style="color: #ce7da5">YouTube video</span>'],
-						["NF - HOPE (Official Instrumental)", "NF Instrumentals", '<span style="color: #ce7da5">YouTube video</span>'],
+						["NF - The Search (Official Instrumental)", "NF Instrumentals", '<span class="red">YouTube video</span>'],
+						["Main Theme", "Gabe Castro", '<span class="red">YouTube video</span>'],
+						["NF - HOPE (Official Instrumental)", "NF Instrumentals", '<span class="red">YouTube video</span>'],
 						["Vibing in the 20s", "Context Sensitive", "Vibing in the 20s"],
 						["Ascension", "Natalie Holt", "Loki: Season 2 - Vol. 2 (Episodes 4-6) (Original Soundtrack)"],
 						["Challengers: Match Point", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
 						["Indiana Jones Theme", "Unknown Artist", "Cine Gold, Vol. 3"],
-						["BBC Sherlock&rsquo;s Theme Melody", "BBCSherlockMusic", '<span style="color: #ce7da5">YouTube video</span>'],
+						["BBC Sherlock&rsquo;s Theme Melody", "BBCSherlockMusic", '<span class="red">YouTube video</span>'],
 					],
 				},
 				"LETHAL COMPANY": {
@@ -1202,9 +1306,9 @@
 					updated: "2025/04/21",
 					tracks: [
 						[
-							'<span style="color: #ce7da5">300 TRACKS</span>',
-							'<span style="color: #ce7da5">would take up way too much space here</span>',
-							'<span style="color: #ce7da5">and would take forever to write</span>',
+							'<span class="red">300 TRACKS</span>',
+							'<span class="red">would take up way too much space here</span>',
+							'<span class="red">and would take forever to write</span>',
 						],
 					],
 				},
@@ -1230,6 +1334,19 @@
 						["Deep Water", "American Authors", "Seasons"],
 					],
 				},
+				"doubles": {
+					link: "PLTKwBiSgGBsjofbKCHYoTG-RcvDDeG4vr",
+					length: [6, "0:19:36"],
+					updated: "2025/04/23",
+					tracks: [
+						["Automatic", "half·alive", "Automatic"],
+						["Automatic", "Roosevelt", "Automatic"],
+						["Overture", "AJR", "Living Room"],
+						["Overture", "AJR", "The Click"],
+						["The Other Side", "Conan Gray", "The Other Side"],
+						["The Other Side", "Hugh Jackman & Zac Efron", "The Greatest Showman (Original Motion Picture Soundtrack)"],
+					],
+				},
 			};
 
 			// add all the data to the page
@@ -1237,7 +1354,7 @@
 				let playlistContainer = document.createElement("div");
 				playlistContainer.id = title;
 				playlistContainer.classList.add("playlist");
-				playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" aria-hidden="false" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
+				playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
 				document.querySelector(".playlists").appendChild(playlistContainer);
 			}
 
