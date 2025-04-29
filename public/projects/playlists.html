@@ -207,7 +207,6 @@
 			}
 
 			.tracks {
-				display: none;
 				margin-top: 25px;
 				border: 2px dashed var(--g);
 				padding: 15px 15px 0 0;
@@ -247,10 +246,12 @@
 				display: flex;
 				justify-content: center;
 				gap: 20px 50px;
+				flex-wrap: wrap;
 			}
 
 			.buttons div {
-				width: 200px;
+				width: fit-content;
+				padding: 0 20px;
 				height: 40px;
 				border: 2px solid var(--g);
 				font-size: 18px;
@@ -311,6 +312,14 @@
 				color: #ce7da5;
 			}
 
+			.rotate {
+				transform: rotate(90deg);
+			}
+
+			.hide {
+				display: none !important;
+			}
+
 			#to_top_button {
 				width: 50px;
 				height: 50px;
@@ -340,6 +349,38 @@
 			}
 
 			/* SPECIFIC COLOURS */
+
+			.c1:not(.highlight, .highlight-underline) {
+				color: var(--c1);
+			}
+			.c2:not(.highlight, .highlight-underline) {
+				color: var(--c2);
+			}
+			.c3:not(.highlight, .highlight-underline) {
+				color: var(--c3);
+			}
+			.c4:not(.highlight, .highlight-underline) {
+				color: var(--c4);
+			}
+			.c5:not(.highlight, .highlight-underline) {
+				color: var(--c5);
+			}
+
+			.highlight.c1 {
+				background-color: var(--c1);
+			}
+			.highlight.c2 {
+				background-color: var(--c2);
+			}
+			.highlight.c3 {
+				background-color: var(--c3);
+			}
+			.highlight.c4 {
+				background-color: var(--c4);
+			}
+			.highlight.c5 {
+				background-color: var(--c5);
+			}
 
 			.highlight-underline.c1 {
 				background-image: linear-gradient(90deg, var(--c1), var(--c1));
@@ -481,7 +522,8 @@
 				Listed below each playlist&rsquo;s title is the playlist&rsquo;s number of tracks, length, and the date at which it was last updated on this page. Click on a
 				playlist&rsquo;s &ldquo;listen&rdquo; button to open it in
 				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a>. Click on the arrow to
-				the left of a playlist&rsquo;s title to view its list of tracks, including titles, artists, and albums.
+				the left of a playlist&rsquo;s title to view its list of tracks, including titles, artists, and albums. Hover over buttons and links to see what they do or
+				where they lead. <i class="fa-regular fa-arrow-pointer"></i>
 			</p>
 
 			<h2 class="note"><i class="fa-regular fa-music-magnifying-glass"></i> search all expanded playlists with your browser&rsquo;s built-in search function!</h2>
@@ -489,6 +531,14 @@
 			<div class="buttons">
 				<div tabindex="0" class="expand-all-button" title="click to expand ALL playlists">EXPAND ALL<i class="fa-solid fa-angles-down"></i></div>
 				<div tabindex="0" class="collapse-all-button" title="click to collapse ALL playlists">COLLAPSE ALL<i class="fa-solid fa-angles-up"></i></div>
+				<div tabindex="0" class="random-song-button" title="click to highlight a random song (monthly playlists only)">
+					RANDOM SONG<i class="fa-solid fa-arrows-rotate"></i>
+				</div>
+				<div tabindex="0" class="collapse-all-button" title="click to show duplicate tracks (monthly playlists only)">
+					CHECK FOR CONFLICTS<i class="fa-regular fa-diagram-venn"></i>
+				</div>
+				<div tabindex="0" class="collapse-all-button" title="click to reset track highlighting">RESET HIGHLIGHTS<i class="fa-regular fa-highlighter-line"></i></div>
+				<div tabindex="0" class="collapse-all-button" title="click to scroll to the data section">DATA<i class="fa-regular fa-database"></i></div>
 			</div>
 
 			<div class="playlists"></div>
@@ -542,7 +592,7 @@
 			});
 
 			// click on things
-			document.querySelector(".exit-button").addEventListener("click", (e) => {
+			document.querySelector(".exit-button").addEventListener("click", () => {
 				window.location.href = "../projects+.html";
 			});
 
@@ -1362,6 +1412,7 @@
 			function addTracks(playlistTitle) {
 				let trackContainer = document.createElement("div");
 				trackContainer.classList.add("tracks");
+				trackContainer.classList.add("hide");
 
 				let trackList = playlists[playlistTitle].tracks;
 
@@ -1383,6 +1434,20 @@
 			}
 
 			// expand
+			function expand(playlistIndex, button) {
+				if (!(button instanceof HTMLElement)) button = document.querySelectorAll(".expand-button")[playlistIndex];
+
+				if (rotated[playlistIndex]) {
+					button.classList.remove("rotate");
+					document.querySelectorAll(".tracks")[playlistIndex].classList.add("hide");
+					button.title = "click to expand playlist";
+				} else {
+					button.classList.add("rotate");
+					document.querySelectorAll(".tracks")[playlistIndex].classList.remove("hide");
+					button.title = "click to collapse playlist";
+				}
+				rotated[playlistIndex] = !rotated[playlistIndex];
+			}
 
 			let index = 0;
 			let rotated = [];
@@ -1390,27 +1455,13 @@
 				let playlistIndex = index;
 				rotated[playlistIndex] = false;
 
-				function expand() {
-					document.querySelector;
-					if (rotated[playlistIndex]) {
-						button.style = "";
-						document.querySelectorAll(".tracks")[playlistIndex].style.display = "none";
-						button.title = "click to expand playlist";
-					} else {
-						button.style = "transform: rotate(90deg)";
-						document.querySelectorAll(".tracks")[playlistIndex].style.display = "block";
-						button.title = "click to collapse playlist";
-					}
-					rotated[playlistIndex] = !rotated[playlistIndex];
-				}
-
-				button.addEventListener("click", (e) => {
-					expand();
+				button.addEventListener("click", () => {
+					expand(playlistIndex, button);
 				});
 
 				button.addEventListener("keydown", (e) => {
 					if (e.key === "Enter") {
-						expand();
+						expand(playlistIndex, button);
 					}
 				});
 
@@ -1420,8 +1471,8 @@
 			function expandAll() {
 				let index = 0;
 				document.querySelectorAll(".tracks").forEach((trackList) => {
-					trackList.style.display = "block";
-					document.querySelectorAll(".expand-button")[index].style = "transform: rotate(90deg)";
+					trackList.classList.remove("hide");
+					document.querySelectorAll(".expand-button")[index].classList.add("rotate");
 					document.querySelectorAll(".expand-button")[index].title = "click to collapse playlist";
 					rotated[index] = true;
 					index++;
@@ -1430,18 +1481,18 @@
 			function collapseAll() {
 				let index = 0;
 				document.querySelectorAll(".tracks").forEach((trackList) => {
-					trackList.style.display = "none";
-					document.querySelectorAll(".expand-button")[index].style = "";
+					trackList.classList.add("hide");
+					document.querySelectorAll(".expand-button")[index].classList.remove("rotate");
 					document.querySelectorAll(".expand-button")[index].title = "click to expand playlist";
 					rotated[index] = false;
 					index++;
 				});
 			}
 
-			document.querySelector(".expand-all-button").addEventListener("click", (e) => {
+			document.querySelector(".expand-all-button").addEventListener("click", () => {
 				expandAll();
 			});
-			document.querySelector(".collapse-all-button").addEventListener("click", (e) => {
+			document.querySelector(".collapse-all-button").addEventListener("click", () => {
 				collapseAll();
 			});
 
@@ -1489,9 +1540,8 @@
 			}
 			addUpArtists();
 
+			let songNumbers = {};
 			function addUpSongs() {
-				let songNumbers = {};
-
 				for (let playlist of monthlyPlaylistNames) {
 					for (let track in playlists[playlist].tracks) {
 						let title = playlists[playlist].tracks[track][0];
@@ -1512,27 +1562,48 @@
 				console.log(Object.keys(songNumbers)[Math.floor(Object.keys(songNumbers).length * Math.random())]);
 			}
 			addUpSongs();
+
+			// random song highlight
+			document.querySelector(".random-song-button").addEventListener("click", () => {
+				highlightRandom();
+			});
+			document.querySelector(".random-song-button").addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					highlightRandom();
+				}
+			});
+			function highlightRandom() {
+				let randomIndex = Math.floor(Math.random() * monthlyPlaylistNames.length);
+				if (document.querySelectorAll(".tracks")[randomIndex].classList.contains("hide")) expand(randomIndex);
+
+				let randomSongIndex = Math.floor(Math.random() * 20);
+				let randomSongElement = document.querySelectorAll(".tracks")[randomIndex].children[randomSongIndex].children[1];
+				randomSongElement.classList.add("highlight");
+				randomSongElement.classList.add("c4");
+				randomSongElement.scrollIntoView({ behavior: "smooth", block: "center" });
+			}
 		</script>
 
 		<script>
-			// adapted from to-top.js
+			// ** adapted from to-top.js **
 
+			// make element
 			const toTopButton = document.createElement("div");
 			toTopButton.id = "to_top_button";
-			toTopButton.style = "display: none";
+			toTopButton.classList.add("hide");
 			toTopButton.innerHTML = '<i class="fa-solid fa-arrow-up-long"></i>';
 			toTopButton.title = "click to scroll to the top of the page";
 			document.querySelector("body").appendChild(toTopButton);
 
 			// to-top button scroll
 			toTopButton.addEventListener("click", () => {
-				window.scroll(0, 0);
+				window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 			});
 
 			// show/hide to-top button
 			document.addEventListener("scroll", () => {
-				if (window.scrollY > 300) toTopButton.style = "display: flex";
-				else toTopButton.style = "display: none";
+				if (window.scrollY > 300) toTopButton.classList.remove("hide");
+				else toTopButton.classList.add("hide");
 			});
 		</script>
 	</body>

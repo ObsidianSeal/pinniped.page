@@ -1,9 +1,9 @@
-/* Google Fonts */
+/* TYPEFACES */
 
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700");
 
-/* Styles */
+/* MAIN STYLES */
 
 body {
 	background: #ffffee;
@@ -866,10 +866,12 @@ ul {
 	position: fixed;
 	right: 50px;
 	bottom: 80px;
+	z-index: 2;
 
 	font-size: 24px;
 
 	background-color: #292f367f;
+	transition: background-color 0.5s, opacity 250ms;
 }
 
 #to_top_button:hover {
@@ -885,7 +887,15 @@ ul {
 	margin-top: 20px;
 }
 
-/* Conditional Styles */
+.appear {
+	animation: appear 250ms;
+}
+
+.disappear {
+	animation: disappear 250ms;
+}
+
+/* CONDITIONAL STYLES */
 
 @media all and (max-width: 1650px) {
 	.search {
@@ -1208,5 +1218,25 @@ ul {
 	.navbar,
 	.navbar-space {
 		display: none;
+	}
+}
+
+/* ANIMATIONS */
+
+@keyframes appear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes disappear {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
 	}
 }
