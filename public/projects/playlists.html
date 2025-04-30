@@ -69,6 +69,10 @@
 				background-color: var(--c2);
 			}
 
+			::selection {
+				background-color: var(--g);
+			}
+
 			/* GENERAL STYLES */
 
 			* {
@@ -117,6 +121,7 @@
 			a:hover,
 			a:focus {
 				background-position: 0 0;
+				cursor: pointer;
 			}
 
 			span {
@@ -128,8 +133,28 @@
 				margin: 20px 0;
 			}
 
+			hr + h1 {
+				margin-top: 50px;
+			}
+
 			p {
 				text-align: justify;
+			}
+
+			b {
+				font-weight: bold;
+			}
+
+			b i {
+				margin-right: 5px;
+			}
+
+			b + p {
+				text-align: left;
+			}
+
+			p:has(.chart-bar) {
+				overflow: hidden;
 			}
 
 			/* COMPONENT STYLES */
@@ -216,6 +241,10 @@
 				display: grid;
 				grid-template-columns: 100px auto;
 				margin-bottom: 15px;
+			}
+
+			.track div:hover {
+				cursor: pointer;
 			}
 
 			.track div div:first-child {
@@ -314,6 +343,17 @@
 
 			.rotate {
 				transform: rotate(90deg);
+			}
+
+			.chart-bar {
+				display: inline-block;
+				margin-top: 5px;
+				padding: 0 5px;
+
+				text-wrap: nowrap;
+
+				background-color: var(--c1);
+				color: var(--background);
 			}
 
 			.hide {
@@ -513,6 +553,12 @@
 			</p>
 
 			<h2 class="note news">
+				<i class="fa-regular fa-bullhorn"></i> There are lots of new features! Make sure to read everything I&rsquo;ve written, paying particular attention to the new
+				buttons.
+				<div>ANNOUNCEMENT</div>
+			</h2>
+
+			<h2 class="note news">
 				<i class="fa-regular fa-bullhorn"></i> I&rsquo;m testing a new font — Adobe ruined Roca so I&rsquo;ve switched to Pangram Pangram&rsquo;s Editorial Old — tell
 				me what you think!
 				<div>ANNOUNCEMENT</div>
@@ -534,11 +580,11 @@
 				<div tabindex="0" class="random-song-button" title="click to highlight a random song (monthly playlists only)">
 					RANDOM SONG<i class="fa-solid fa-arrows-rotate"></i>
 				</div>
-				<div tabindex="0" class="collapse-all-button" title="click to show duplicate tracks (monthly playlists only)">
-					CHECK FOR CONFLICTS<i class="fa-regular fa-diagram-venn"></i>
+				<div tabindex="0" class="check-for-conflicts-button" title="click to show duplicate tracks (monthly playlists only)">
+					POSSIBLE CONFLICTS<i class="fa-regular fa-diagram-venn"></i>
 				</div>
-				<div tabindex="0" class="collapse-all-button" title="click to reset track highlighting">RESET HIGHLIGHTS<i class="fa-regular fa-highlighter-line"></i></div>
-				<div tabindex="0" class="collapse-all-button" title="click to scroll to the data section">DATA<i class="fa-regular fa-database"></i></div>
+				<div tabindex="0" class="reset-highlights-button" title="click to reset track highlighting">RESET HIGHLIGHTS<i class="fa-regular fa-highlighter-line"></i></div>
+				<div tabindex="0" class="data-button" title="click to scroll to the data section">DATA<i class="fa-regular fa-database"></i></div>
 			</div>
 
 			<div class="playlists"></div>
@@ -577,6 +623,59 @@
 				<i class="fa-regular fa-font-awesome"></i><br /><br />Found an issue with this page? Report it on the
 				<a class="highlight-underline c3" href="../contact.html" title="Contact">Contact page</a>. <i class="fa-regular fa-comment"></i>
 			</p>
+
+			<hr />
+
+			<h1><i class="fa-solid fa-folder-music"></i> Data</h1>
+			<p>Interesting playlist statistics. <i class="fa-regular fa-chart-simple"></i></p>
+			<br />
+			<b class="highlight c5">PART 1: THE MONTHLY PLAYLISTS</b>
+			<br /><br />
+			<b><i class="fa-solid fa-stopwatch fa-fw"></i> average length (runtime)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-stopwatch fa-fw"></i> longest length (runtime)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-stopwatch fa-fw"></i> shortest length (runtime)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists; must have at least one)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists; must have at least one)</b>
+			<p></p>
+			<br />
+			<b class="highlight c5">PART 2: THE OTHER PLAYLISTS</b>
+			<br /><br />
+			<b><i class="fa-solid fa-stopwatch fa-fw"></i> average length (runtime)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-stopwatch fa-fw"></i> longest length (runtime)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-stopwatch fa-fw"></i> shortest length (runtime)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-list-music fa-fw"></i> average number of tracks</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-list-music fa-fw"></i> greatest number of tracks</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-list-music fa-fw"></i> least number of tracks</b>
+			<p></p>
+			<br />
+			<b class="highlight c5">PART 3: GENERAL DATA</b>
+			<br /><br />
+			<b><i class="fa-solid fa-radio fa-fw"></i> number of playlists</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-sparkles fa-fw"></i> most recently added</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-fire fa-fw"></i> most recently updated</b>
+			<p></p>
 		</div>
 
 		<script>
@@ -1400,6 +1499,40 @@
 				},
 			};
 
+			let monthlyPlaylistNames = [
+				"🎵 - January 2024",
+				"🎵 - February 2024",
+				"🎵 - March 2024",
+				"🎵 - April 2024",
+				"🎵 - May 2024",
+				"🎵 - June 2024",
+				"🎵 - July 2024",
+				"🎵 - August 2024",
+				"🎵 - September 2024",
+				"🎵 - October 2024",
+				"🎵 - November 2024",
+				"🎵 - December 2024",
+				"🎵 - January 2025",
+				"🎵 - February 2025",
+				"🎵 - March 2025",
+				"🎵 - April 2025",
+				"🎵 - May 2025",
+			];
+
+			let otherPlaylistNames = [
+				"oops all Conan Gray",
+				"oops all Noah Kahan",
+				"oops all Hozier",
+				"oops all Exyl",
+				"oops all Jazz Emu",
+				"⚡ Epic Music",
+				"LETHAL COMPANY",
+				"guess the song from the first second",
+				"Beat Saber Maps (by me)",
+				"songs I&rsquo;ve sung over large bodies of water",
+				"doubles",
+			];
+
 			// add all the data to the page
 			function addPlaylist(title, link, totalTracks, totalTime, lastUpdated) {
 				let playlistContainer = document.createElement("div");
@@ -1411,17 +1544,16 @@
 
 			function addTracks(playlistTitle) {
 				let trackContainer = document.createElement("div");
-				trackContainer.classList.add("tracks");
-				trackContainer.classList.add("hide");
+				trackContainer.classList.add("tracks", "hide");
 
 				let trackList = playlists[playlistTitle].tracks;
 
 				for (let i = 0; i < trackList.length; i++) {
 					let track = document.createElement("div");
 					track.classList.add("track");
-					track.innerHTML = `<h2>${i + 1}</h2><div><div>${trackList[i][0]}</div><div>${trackList[i][1]}<i class="fa-solid fa-circle"></i>${
-						trackList[i][2]
-					}</div></div>`;
+					track.innerHTML = `<h2>${i + 1}</h2><div title="click to toggle highlight"><div>${trackList[i][0]}</div><div>${
+						trackList[i][1]
+					}<i class="fa-solid fa-circle"></i>${trackList[i][2]}</div></div>`;
 					trackContainer.appendChild(track);
 				}
 
@@ -1496,73 +1628,6 @@
 				collapseAll();
 			});
 
-			let monthlyPlaylistNames = [
-				"🎵 - January 2024",
-				"🎵 - February 2024",
-				"🎵 - March 2024",
-				"🎵 - April 2024",
-				"🎵 - May 2024",
-				"🎵 - June 2024",
-				"🎵 - July 2024",
-				"🎵 - August 2024",
-				"🎵 - September 2024",
-				"🎵 - October 2024",
-				"🎵 - November 2024",
-				"🎵 - December 2024",
-				"🎵 - January 2025",
-				"🎵 - February 2025",
-				"🎵 - March 2025",
-				"🎵 - April 2025",
-			];
-
-			function addUpArtists() {
-				let artistNumbers = {};
-
-				for (let playlist of monthlyPlaylistNames) {
-					for (let track in playlists[playlist].tracks) {
-						for (let artist of playlists[playlist].tracks[track][1].split(" & ")) {
-							if (artist in artistNumbers) artistNumbers[artist]++;
-							else artistNumbers[artist] = 1;
-						}
-					}
-				}
-
-				console.log(`%c'artist numbers'`, "background: #000000; color: #ffffff");
-				console.log(artistNumbers);
-
-				let repeatArtists = {};
-				for (let artist in artistNumbers) {
-					if (artistNumbers[artist] > 1) repeatArtists[artist] = artistNumbers[artist];
-				}
-
-				console.log(`%c'repeat artists'`, "background: #000000; color: #ffffff");
-				console.log(repeatArtists);
-			}
-			addUpArtists();
-
-			let songNumbers = {};
-			function addUpSongs() {
-				for (let playlist of monthlyPlaylistNames) {
-					for (let track in playlists[playlist].tracks) {
-						let title = playlists[playlist].tracks[track][0];
-						if (title in songNumbers) songNumbers[title]++;
-						else songNumbers[title] = 1;
-					}
-				}
-
-				let repeatSongs = {};
-				for (let title in songNumbers) {
-					if (songNumbers[title] > 1) repeatSongs[title] = songNumbers[title];
-				}
-
-				console.log(`%c'possible song conflicts'`, "background: #000000; color: #ffffff");
-				console.log(repeatSongs);
-
-				console.log(`%c'random song for you'`, "background: #000000; color: #ffffff");
-				console.log(Object.keys(songNumbers)[Math.floor(Object.keys(songNumbers).length * Math.random())]);
-			}
-			addUpSongs();
-
 			// random song highlight
 			document.querySelector(".random-song-button").addEventListener("click", () => {
 				highlightRandom();
@@ -1578,10 +1643,381 @@
 
 				let randomSongIndex = Math.floor(Math.random() * 20);
 				let randomSongElement = document.querySelectorAll(".tracks")[randomIndex].children[randomSongIndex].children[1];
-				randomSongElement.classList.add("highlight");
-				randomSongElement.classList.add("c4");
+				randomSongElement.classList.add("highlight", "c4");
 				randomSongElement.scrollIntoView({ behavior: "smooth", block: "center" });
 			}
+
+			// highlight things yourself!
+			document.querySelectorAll(".track > div:last-child").forEach((track) => {
+				function toggleHighlight() {
+					if (!track.classList.contains("highlight")) {
+						track.classList.add("highlight", "c4");
+					} else {
+						track.classList.remove("highlight", "c2", "c4");
+					}
+				}
+
+				track.addEventListener("click", () => {
+					toggleHighlight();
+				});
+
+				track.addEventListener("keydown", (e) => {
+					if (e.key === "Enter") {
+						toggleHighlight();
+					}
+				});
+			});
+
+			// clear highlights
+			function clearHighlights() {
+				document.querySelectorAll(".track > div:last-child").forEach((track) => {
+					track.classList.remove("highlight", "c2", "c4");
+				});
+			}
+			document.querySelector(".reset-highlights-button").addEventListener("click", () => {
+				clearHighlights();
+			});
+			document.querySelector(".reset-highlights-button").addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					clearHighlights();
+				}
+			});
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Escape") {
+					collapseAll();
+					clearHighlights();
+				}
+			});
+
+			// detect and show conflicts
+			let conflicts = [];
+			let conflictIndex = 0;
+			function findConflicts() {
+				if (conflicts.length == 0) {
+					let allTracks = [];
+					let uniqueTracks = [];
+					let duplicateTracks = [];
+
+					for (let playlist of monthlyPlaylistNames) {
+						for (let track in playlists[playlist].tracks) {
+							let trackString = JSON.stringify([playlists[playlist].tracks[track][0], playlists[playlist].tracks[track][1]]);
+
+							allTracks.push(trackString);
+							if (uniqueTracks.includes(trackString)) {
+								if (!duplicateTracks.includes(trackString)) duplicateTracks.push(trackString);
+							} else uniqueTracks.push(trackString);
+						}
+					}
+
+					for (let i = 0; i < duplicateTracks.length; i++) {
+						for (let j = 0; j < allTracks.length; j++) {
+							if (duplicateTracks[i] == allTracks[j]) conflicts.push([Math.floor(j / 20), j % 20]);
+						}
+					}
+				}
+
+				for (let i = 0; i < conflicts.length; i++) {
+					let tracksElement = document.querySelectorAll(".tracks")[conflicts[i][0]];
+					if (tracksElement.classList.contains("hide")) expand(conflicts[i][0]);
+
+					let trackElement = tracksElement.children[conflicts[i][1]].children[1];
+					trackElement.classList.remove("highlight", "c4");
+					trackElement.classList.add("highlight", "c2");
+
+					if (i == conflictIndex) trackElement.scrollIntoView({ behavior: "smooth", block: "center" });
+				}
+				conflictIndex++;
+				if (conflictIndex == conflicts.length) conflictIndex = 0;
+			}
+			document.querySelector(".check-for-conflicts-button").addEventListener("click", () => {
+				findConflicts();
+			});
+			document.querySelector(".check-for-conflicts-button").addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					findConflicts();
+				}
+			});
+
+			// scroll to data
+			document.querySelector(".data-button").addEventListener("click", () => {
+				document.querySelector("hr + h1").scrollIntoView({ behavior: "smooth" });
+			});
+			document.querySelector(".data-button").addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					document.querySelector("hr + h1").scrollIntoView({ behavior: "smooth" });
+				}
+			});
+
+			// seconds/string utilities
+			function toSeconds(timeString) {
+				let times = timeString.split(":");
+				return 3600 * parseInt(times[0]) + 60 * parseInt(times[1]) + parseInt(times[2]);
+			}
+			function formatSeconds(seconds) {
+				let hours = Math.floor(seconds / 3600);
+				seconds -= hours * 3600;
+				let minutes = Math.floor(seconds / 60);
+				seconds -= minutes * 60;
+				return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+			}
+
+			// date utility
+			function formatDate(dateString) {
+				let numbers = dateString.split("/");
+
+				let year = parseInt(numbers[0]);
+				let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][parseInt(numbers[1])];
+				let day = parseInt(numbers[2]);
+				let ordinal = [
+					"st",
+					"nd",
+					"rd",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"st",
+					"nd",
+					"rd",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"th",
+					"st",
+				][parseInt(numbers[2])];
+				return `${month} ${day}${ordinal}, ${year}`;
+			}
+
+			// 'data with a link' utility
+			function showDataWithPlaylistLink(container, data, playlistName) {
+				container.innerHTML = `${data} — &ldquo;<a class="highlight-underline c5" tabindex="0" title="click to scroll to &ldquo;${playlistName}&rdquo;">${playlistName}</a>&rdquo;`;
+				container.children[0].addEventListener("click", () => {
+					document.querySelectorAll(".playlist")[Object.keys(playlists).indexOf(playlistName)].scrollIntoView({ behavior: "smooth" });
+				});
+				container.children[0].addEventListener("keydown", (e) => {
+					if (e.key === "Enter") {
+						document.querySelectorAll(".playlist")[Object.keys(playlists).indexOf(playlistName)].scrollIntoView({ behavior: "smooth" });
+					}
+				});
+			}
+
+			// DATA
+			let dataIndex = 0;
+			document.querySelectorAll("b + p").forEach((datum) => {
+				// 1. MONTHLY
+
+				// "average length (runtime)"
+				if (dataIndex == 0) {
+					let sum = 0;
+					for (let playlist of monthlyPlaylistNames) {
+						sum += toSeconds(playlists[playlist].length[1]);
+					}
+					let average = Math.round(sum / monthlyPlaylistNames.length);
+					datum.innerHTML = `~${formatSeconds(average)}`;
+				}
+				// "longest length (runtime)"
+				if (dataIndex == 1) {
+					let maxiumum = 0;
+					let maxiumumName = "";
+					for (let playlist of monthlyPlaylistNames) {
+						if (toSeconds(playlists[playlist].length[1]) > maxiumum) {
+							maxiumum = toSeconds(playlists[playlist].length[1]);
+							maxiumumName = playlist;
+						}
+					}
+					showDataWithPlaylistLink(datum, formatSeconds(maxiumum), maxiumumName);
+				}
+				// "shortest length (runtime)"
+				if (dataIndex == 2) {
+					let minimum = Infinity;
+					let minimumName = "";
+					for (let playlist of monthlyPlaylistNames) {
+						if (toSeconds(playlists[playlist].length[1]) < minimum) {
+							minimum = toSeconds(playlists[playlist].length[1]);
+							minimumName = playlist;
+						}
+					}
+					showDataWithPlaylistLink(datum, formatSeconds(minimum), minimumName);
+				}
+				// "top artists (by number of songs in the playlists)"
+				if (dataIndex == 3) {
+					let artistNumbers = {};
+
+					for (let playlist of monthlyPlaylistNames) {
+						for (let track in playlists[playlist].tracks) {
+							for (let artist of playlists[playlist].tracks[track][1].split(" & ")) {
+								if (artist in artistNumbers) artistNumbers[artist]++;
+								else artistNumbers[artist] = 1;
+							}
+						}
+					}
+
+					for (let artist in artistNumbers) {
+						if (artistNumbers[artist] == 1) delete artistNumbers[artist];
+					}
+
+					let artistNumbersArray = Object.values(artistNumbers).sort(function (a, b) {
+						return b - a;
+					});
+
+					let usedNames = [];
+					for (let i = 0; i < artistNumbersArray.length; i++) {
+						let value = artistNumbersArray[i];
+						let index = Object.values(artistNumbers).indexOf(value);
+
+						while (usedNames.includes(Object.keys(artistNumbers)[index]) || Object.values(artistNumbers)[index] != value) {
+							index++;
+						}
+
+						artistName = Object.keys(artistNumbers)[index];
+						usedNames.push(artistName);
+
+						datum.innerHTML =
+							datum.innerHTML +
+							`<span class="chart-bar" style="width: calc(${(value / artistNumbersArray[0]) * 100}% - 10px)">${artistName} — ${value}</span><br />`;
+					}
+				}
+				// "top albums (by number of songs in the playlists)"
+				if (dataIndex == 4) {
+					let albumNumbers = {};
+
+					for (let playlist of monthlyPlaylistNames) {
+						for (let track in playlists[playlist].tracks) {
+							for (let album of playlists[playlist].tracks[track][2].split(" & ")) {
+								if (album in albumNumbers) albumNumbers[album]++;
+								else albumNumbers[album] = 1;
+							}
+						}
+					}
+
+					for (let album in albumNumbers) {
+						if (albumNumbers[album] == 1) delete albumNumbers[album];
+					}
+					delete albumNumbers['<span class="red">YouTube video</span>'];
+
+					let albumNumbersArray = Object.values(albumNumbers).sort(function (a, b) {
+						return b - a;
+					});
+
+					let usedNames = [];
+					for (let i = 0; i < albumNumbersArray.length; i++) {
+						let value = albumNumbersArray[i];
+						let index = Object.values(albumNumbers).indexOf(value);
+
+						while (usedNames.includes(Object.keys(albumNumbers)[index]) || Object.values(albumNumbers)[index] != value) {
+							index++;
+						}
+
+						albumName = Object.keys(albumNumbers)[index];
+						usedNames.push(albumName);
+
+						datum.innerHTML =
+							datum.innerHTML +
+							`<span class="chart-bar" style="width: calc(${(value / albumNumbersArray[0]) * 100}% - 10px)">${albumName} — ${value}</span><br />`;
+					}
+				}
+
+				// 2. OTHER
+
+				// "average length (runtime)"
+				if (dataIndex == 5) {
+					let sum = 0;
+					for (let playlist of otherPlaylistNames) {
+						sum += toSeconds(playlists[playlist].length[1]);
+					}
+					let average = Math.round(sum / otherPlaylistNames.length);
+					datum.innerHTML = `~${formatSeconds(average)}`;
+				}
+				// "longest length (runtime)"
+				if (dataIndex == 6) {
+					let maxiumum = 0;
+					let maxiumumName = "";
+					for (let playlist of otherPlaylistNames) {
+						if (toSeconds(playlists[playlist].length[1]) > maxiumum) {
+							maxiumum = toSeconds(playlists[playlist].length[1]);
+							maxiumumName = playlist;
+						}
+					}
+					showDataWithPlaylistLink(datum, formatSeconds(maxiumum), maxiumumName);
+				}
+				// "shortest length (runtime)"
+				if (dataIndex == 7) {
+					let minimum = Infinity;
+					let minimumName = "";
+					for (let playlist of otherPlaylistNames) {
+						if (toSeconds(playlists[playlist].length[1]) < minimum) {
+							minimum = toSeconds(playlists[playlist].length[1]);
+							minimumName = playlist;
+						}
+					}
+					showDataWithPlaylistLink(datum, formatSeconds(minimum), minimumName);
+				}
+				// "average number of tracks"
+				if (dataIndex == 8) {
+					let sum = 0;
+					for (let playlist of otherPlaylistNames) {
+						sum += playlists[playlist].length[0];
+					}
+					datum.innerHTML = `~${Math.round(sum / otherPlaylistNames.length)}`;
+				}
+				// "greatest number of tracks"
+				if (dataIndex == 9) {
+					let maxiumum = 0;
+					let maxiumumName = "";
+					for (let playlist of otherPlaylistNames) {
+						if (playlists[playlist].length[0] > maxiumum) {
+							maxiumum = playlists[playlist].length[0];
+							maxiumumName = playlist;
+						}
+					}
+					showDataWithPlaylistLink(datum, formatSeconds(maxiumum), maxiumumName);
+				}
+				// "least number of tracks"
+				if (dataIndex == 10) {
+					let minimum = Infinity;
+					let minimumName = "";
+					for (let playlist of otherPlaylistNames) {
+						if (playlists[playlist].length[0] < minimum) {
+							minimum = playlists[playlist].length[0];
+							minimumName = playlist;
+						}
+					}
+					showDataWithPlaylistLink(datum, formatSeconds(minimum), minimumName);
+				}
+
+				// 3. GENERAL
+
+				// "number of playlists"
+				if (dataIndex == 11) {
+					datum.innerHTML = Object.keys(playlists).length;
+				}
+				// "most recently added"
+				if (dataIndex == 12) {
+					showDataWithPlaylistLink(datum, formatDate("2025/04/29"), "🎵 - May 2025");
+				}
+				// "most recently updated"
+				if (dataIndex == 13) {
+					showDataWithPlaylistLink(datum, formatDate("2025/04/29"), "🎵 - May 2025");
+				}
+
+				dataIndex++;
+			});
 		</script>
 
 		<script>

@@ -75,7 +75,7 @@
 
 		<div class="box-area">
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#1</h2>
+				<h2 class="box-thing invert">?</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/bus-data.html">BUS DATA</a>
@@ -89,7 +89,31 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#2</h2>
+				<h2 class="box-thing invert">?</h2>
+
+				<div>
+					<a class="title title-alt hoverable-title" href="projects/playlists.html">Playlists</a>
+
+					<p class="box-subtitle-alt">
+						<span
+							><span class="updated"><span class="tooltip">April 30th — SO MANY COOL NEW FEATURES!!</span>&nbsp;UPDATED&nbsp;</span></span
+						>Music, yum!
+					</p>
+				</div>
+			</div>
+
+			<div class="box box-alt">
+				<h2 class="box-thing invert">?</h2>
+
+				<div>
+					<a class="title title-alt hoverable-title" href="projects/icons.html">fa-random</a>
+
+					<p class="box-subtitle-alt">Random Font Awesome icon generator with icon info.</p>
+				</div>
+			</div>
+
+			<div class="box box-alt">
+				<h2 class="box-thing invert">?</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/craft.html">Finite Craft</a>
@@ -103,7 +127,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#3</h2>
+				<h2 class="box-thing invert">?</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/think-four.html">Think Four</a>
@@ -119,7 +143,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#4</h2>
+				<h2 class="box-thing invert">?</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/w.html">wordlelele</a>
@@ -129,27 +153,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#5</h2>
-
-				<div>
-					<a class="title title-alt hoverable-title" href="projects/icons.html">fa-random</a>
-
-					<p class="box-subtitle-alt">Random Font Awesome icon generator with icon info.</p>
-				</div>
-			</div>
-
-			<div class="box box-alt">
-				<h2 class="box-thing invert">#6</h2>
-
-				<div>
-					<a class="title title-alt hoverable-title" href="projects/tictactoe.html">TicTacToe</a>
-
-					<p class="box-subtitle-alt">The classic game of Xs and Os, but it’s an online 1v1.</p>
-				</div>
-			</div>
-
-			<div class="box box-alt">
-				<h2 class="box-thing invert">#7</h2>
+				<h2 class="box-thing invert">?</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/v.html">v</a>
@@ -159,7 +163,7 @@
 			</div>
 
 			<div class="box box-alt">
-				<h2 class="box-thing invert">#8</h2>
+				<h2 class="box-thing invert">?</h2>
 
 				<div>
 					<a class="title title-alt hoverable-title" href="projects/rate.html" target="_blank">10/10 would recommend</a>
@@ -376,6 +380,13 @@
 				if (e.key == "Enter") {
 					randomSearch();
 				}
+			});
+
+			// -----
+
+			let featureIndex = 0;
+			document.querySelectorAll(".box-thing").forEach((thing) => {
+				thing.innerHTML = `#${++featureIndex}`;
 			});
 		</script>
 	</body>
