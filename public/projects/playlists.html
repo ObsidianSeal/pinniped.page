@@ -1766,7 +1766,9 @@
 				let numbers = dateString.split("/");
 
 				let year = parseInt(numbers[0]);
-				let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][parseInt(numbers[1])];
+				let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][
+					parseInt(numbers[1]) - 1
+				];
 				let day = parseInt(numbers[2]);
 				let ordinal = [
 					"st",
@@ -1800,7 +1802,7 @@
 					"th",
 					"th",
 					"st",
-				][parseInt(numbers[2])];
+				][parseInt(numbers[2]) - 1];
 				return `${month} ${day}${ordinal}, ${year}`;
 			}
 
