@@ -375,6 +375,14 @@
 				margin-top: 2px;
 			}
 
+			.bold {
+				font-weight: 700;
+			}
+
+			.grey {
+				color: var(--base03);
+			}
+
 			/* SCROLLBAR(S) */
 			::-webkit-scrollbar {
 				width: 20px;
@@ -668,12 +676,12 @@
 			// colours
 			const officialColours = {
 				1: "#70c2da",
-				2: "#0080c0",
+				2: "#008080",
 				3: "#c28585",
 				4: "#7373b9",
 				5: "#00ff00",
-				6: "#008080",
-				7: "#9d3cff",
+				6: "#ffff00",
+				7: "#008000",
 				9: "#b36666",
 				10: "#96befa",
 				12: "#ca95ff",
@@ -685,25 +693,25 @@
 				20: "#58abab",
 				24: "#ff9bcd",
 				25: "#dfdf00",
-				27: "#fe9ca4",
+				27: "#8022fd",
 				28: "#5555ff",
 				30: "#cf2985",
 				31: "#00b700",
 				33: "#bb77ff",
-				34: "#5959ff",
+				34: "#ff0000",
 				35: "#dbc004",
 				36: "#b43d61",
 				37: "#0098e1",
-				38: "#ff00ff",
+				38: "#ff0000",
 				90: "#ff8000",
 				91: "#ff8000",
 				92: "#ff8000",
 				93: "#ff8000",
 				94: "#ff8000",
 				95: "#ff8000",
-				102: "#c58aff",
-				104: "#c58aff",
-				106: "#c58aff",
+				102: "#008080",
+				104: "#7373b9",
+				106: "#ffff00",
 			};
 
 			// stops
@@ -3258,7 +3266,7 @@
 
 		<br />
 
-		<p>v0.0.21 — April 30th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.22 — April 30th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 		<p>
 			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 			<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3298,14 +3306,7 @@
 			from
 			<span style="background-color: var(--base0C)" id="data-time">???</span>
 		</h2>
-		<p style="color: var(--base03)">
-			automatically updating in <span id="time-to-update" style="color: var(--base03)">30</span> second<span
-				class="grammar"
-				id="update-grammar"
-				style="color: var(--base03)"
-				>s</span
-			>...
-		</p>
+		<p class="grey">automatically updating in <span id="time-to-update" class="grey">30</span> second<span class="grammar grey" id="update-grammar">s</span>...</p>
 
 		<br />
 
@@ -3347,17 +3348,16 @@
 			</div>
 		</div>
 		<br />
-		<p style="color: var(--base03)">
-			*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" style="color: var(--base03)" title="Wikipedia > Short turn [EXTERNAL]"
-				>short turn</a
-			>) routes only run from September to April (for university/college students)
+		<p class="grey">
+			*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" class="grey" title="Wikipedia > Short turn [EXTERNAL]">short turn</a>) routes
+			only run from September to April (for university/college students)
 		</p>
 
 		<br />
 
 		<b>BUS POSITIONS & MODELS</b>
 		<p>
-			Below is a table of all <span id="fleet-total" style="font-weight: 700">#</span> buses in
+			Below is a table of all <span id="fleet-total" class="bold">#</span> buses in
 			<a
 				href="https://cptdb.ca/wiki/index.php/London_Transit_Commission#Fleet_roster"
 				target="_blank"
@@ -3374,7 +3374,7 @@
 			<a href="https://www.newflyer.com/" target="_blank" title="New Flyer [EXTERNAL]">New Flyer</a>. Click on a model to learn more.
 		</p>
 		<p>
-			<span id="articulated-total" style="font-weight: 700">#</span> of London Transit&rsquo;s buses are
+			<span id="articulated-total" class="bold">#</span> of London Transit&rsquo;s buses are
 			<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>.
 		</p>
 		<p>
@@ -3396,7 +3396,7 @@
 
 		<b>BUS MAP</b>
 		<h2 id="map-open" title="click to open the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">CLICK TO OPEN THE MAP</h2>
-		<p style="color: var(--base03)">or press &ldquo;ESCAPE&rdquo; to open/close the map</p>
+		<p class="grey">or press &ldquo;ESCAPE&rdquo; to open/close the map</p>
 
 		<br />
 		<br />
@@ -3516,7 +3516,7 @@
 
 			<div class="map-menu map-menu-top">
 				<div class="map-menu-top-left">
-					<p style="font-weight: 700">BUS MAP</p>
+					<p class="bold">BUS MAP</p>
 				</div>
 				<div class="map-menu-top-right">
 					<div class="map-menu-icon map-menu-button" id="map-menu-button-close" title="click to close the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">
