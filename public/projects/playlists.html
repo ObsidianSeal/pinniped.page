@@ -356,6 +356,11 @@
 				color: var(--background);
 			}
 
+			.playlist-title-link-container {
+				text-align: right;
+				text-wrap: nowrap;
+			}
+
 			.hide {
 				display: none !important;
 			}
@@ -522,6 +527,10 @@
 				.news div {
 					font-size: 14px;
 				}
+
+				.playlist-title-link-container {
+					text-align: left;
+				}
 			}
 
 			@media all and (max-width: 400px) {
@@ -567,9 +576,10 @@
 			<p>
 				Listed below each playlist&rsquo;s title is the playlist&rsquo;s number of tracks, length, and the date at which it was last updated on this page. Click on a
 				playlist&rsquo;s &ldquo;listen&rdquo; button to open it in
-				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a>. Click on the arrow to
-				the left of a playlist&rsquo;s title to view its list of tracks, including titles, artists, and albums. Hover over buttons and links to see what they do or
-				where they lead. <i class="fa-regular fa-arrow-pointer"></i>
+				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a> or &ldquo;rate&rdquo;
+				button to rate all the tracks in the playlist out of five stars! Click on the arrow to the left of a playlist&rsquo;s title to view its list of tracks,
+				including titles, artists, and albums. As for everything else, you can hover over buttons and links to see what they do or where they lead.
+				<i class="fa-regular fa-arrow-pointer"></i>
 			</p>
 
 			<h2 class="note"><i class="fa-regular fa-music-magnifying-glass"></i> search all expanded playlists with your browser&rsquo;s built-in search function!</h2>
@@ -1538,7 +1548,30 @@
 				let playlistContainer = document.createElement("div");
 				playlistContainer.id = title;
 				playlistContainer.classList.add("playlist");
-				playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
+				rateLink = "rate.html?";
+				for (let i = 0; i < playlists[title].tracks.length; i++) {
+					ampersand = "";
+					if (i != 0) ampersand = "&";
+					rateLink =
+						rateLink +
+						`${ampersand}${i}=0${encodeURIComponent(
+							playlists[title].tracks[i][1]
+								.replaceAll(/&lsquo;/g, "‘")
+								.replaceAll(/&rsquo;/g, "’")
+								.replaceAll(/&ldquo;/g, "“")
+								.replaceAll(/&rdquo;/g, "”")
+						)}%20-%20${encodeURIComponent(
+							playlists[title].tracks[i][0]
+								.replaceAll(/&lsquo;/g, "‘")
+								.replaceAll(/&rsquo;/g, "’")
+								.replaceAll(/&ldquo;/g, "“")
+								.replaceAll(/&rdquo;/g, "”")
+						)}`;
+				}
+				if (title != "guess the song from the first second")
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}" target="_blank" title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
+				else
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
 				document.querySelector(".playlists").appendChild(playlistContainer);
 			}
 
