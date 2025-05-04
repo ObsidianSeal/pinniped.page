@@ -347,10 +347,14 @@
 
 			.chart-bar {
 				display: inline-block;
-				margin-top: 5px;
+				/* margin-top: 5px; */
 				padding: 0 5px;
 
-				text-wrap: nowrap;
+				/* text-wrap: nowrap; */
+
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
 
 				background-color: var(--c1);
 				color: var(--background);
@@ -689,6 +693,8 @@
 		</div>
 
 		<script>
+			"use strict";
+
 			// let's START with keyboard shortcuts for once
 			addEventListener("keydown", (e) => {
 				const focus = document.activeElement;
@@ -1548,9 +1554,9 @@
 				let playlistContainer = document.createElement("div");
 				playlistContainer.id = title;
 				playlistContainer.classList.add("playlist");
-				rateLink = "rate.html?";
+				let rateLink = "rate.html?";
 				for (let i = 0; i < playlists[title].tracks.length; i++) {
-					ampersand = "";
+					let ampersand = "";
 					if (i != 0) ampersand = "&";
 					rateLink =
 						rateLink +
@@ -1897,35 +1903,30 @@
 					for (let playlist of monthlyPlaylistNames) {
 						for (let track in playlists[playlist].tracks) {
 							for (let artist of playlists[playlist].tracks[track][1].split(" & ")) {
-								if (artist in artistNumbers) artistNumbers[artist]++;
-								else artistNumbers[artist] = 1;
+								if (artist in artistNumbers) artistNumbers[artist][0]++;
+								else artistNumbers[artist] = [1, artist];
 							}
 						}
 					}
 
 					for (let artist in artistNumbers) {
-						if (artistNumbers[artist] == 1) delete artistNumbers[artist];
+						if (artistNumbers[artist][0] == 1) delete artistNumbers[artist];
 					}
 
 					let artistNumbersArray = Object.values(artistNumbers).sort(function (a, b) {
-						return b - a;
+						return b[0] - a[0];
 					});
 
 					let usedNames = [];
 					for (let i = 0; i < artistNumbersArray.length; i++) {
-						let value = artistNumbersArray[i];
-						let index = Object.values(artistNumbers).indexOf(value);
-
-						while (usedNames.includes(Object.keys(artistNumbers)[index]) || Object.values(artistNumbers)[index] != value) {
-							index++;
-						}
-
-						artistName = Object.keys(artistNumbers)[index];
-						usedNames.push(artistName);
+						let value = artistNumbersArray[i][0];
+						let artistName = artistNumbersArray[i][1];
 
 						datum.innerHTML =
 							datum.innerHTML +
-							`<span class="chart-bar" style="width: calc(${(value / artistNumbersArray[0]) * 100}% - 10px)">${artistName} — ${value}</span><br />`;
+							`<span class="chart-bar" style="width: calc(${
+								(value / artistNumbersArray[0][0]) * 100
+							}% - 10px)" title="${artistName} — ${value}">${artistName} — ${value}</span><br />`;
 					}
 				}
 				// "top albums (by number of songs in the playlists)"
@@ -1934,38 +1935,36 @@
 
 					for (let playlist of monthlyPlaylistNames) {
 						for (let track in playlists[playlist].tracks) {
-							for (let album of playlists[playlist].tracks[track][2].split(" & ")) {
-								if (album in albumNumbers) albumNumbers[album]++;
-								else albumNumbers[album] = 1;
-							}
+							let album = playlists[playlist].tracks[track][2];
+							let artist = playlists[playlist].tracks[track][1].split(" & ")[0];
+							if (album in albumNumbers) albumNumbers[album][0]++;
+							else albumNumbers[album] = [1, artist, album];
 						}
 					}
 
 					for (let album in albumNumbers) {
-						if (albumNumbers[album] == 1) delete albumNumbers[album];
+						if (albumNumbers[album][0] == 1) delete albumNumbers[album];
 					}
 					delete albumNumbers['<span class="red">YouTube video</span>'];
+					delete albumNumbers["Automatic"]; // two artists have a single by the same name
 
 					let albumNumbersArray = Object.values(albumNumbers).sort(function (a, b) {
-						return b - a;
+						return b[0] - a[0];
 					});
 
-					let usedNames = [];
 					for (let i = 0; i < albumNumbersArray.length; i++) {
-						let value = albumNumbersArray[i];
-						let index = Object.values(albumNumbers).indexOf(value);
-
-						while (usedNames.includes(Object.keys(albumNumbers)[index]) || Object.values(albumNumbers)[index] != value) {
-							index++;
-						}
-
-						albumName = Object.keys(albumNumbers)[index];
-						usedNames.push(albumName);
+						let value = albumNumbersArray[i][0];
+						let artistName = albumNumbersArray[i][1];
+						let albumName = albumNumbersArray[i][2];
 
 						datum.innerHTML =
 							datum.innerHTML +
-							`<span class="chart-bar" style="width: calc(${(value / albumNumbersArray[0]) * 100}% - 10px)">${albumName} — ${value}</span><br />`;
+							`<span class="chart-bar" style="width: calc(${
+								(value / albumNumbersArray[0][0]) * 100
+							}% - 10px)" title="${artistName} - ${albumName} — ${value}">${albumName} — ${value}</span><br />`;
 					}
+
+					console.log(albumNumbersArray.length);
 				}
 
 				// 2. OTHER
@@ -2056,6 +2055,8 @@
 		</script>
 
 		<script>
+			"use strict";
+
 			// ** adapted from to-top.js **
 
 			// make element
