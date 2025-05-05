@@ -360,6 +360,10 @@
 				color: var(--background);
 			}
 
+			.chart-bar:hover {
+				min-width: fit-content;
+			}
+
 			.playlist-title-link-container {
 				text-align: right;
 				text-wrap: nowrap;
@@ -1936,9 +1940,8 @@
 					for (let playlist of monthlyPlaylistNames) {
 						for (let track in playlists[playlist].tracks) {
 							let album = playlists[playlist].tracks[track][2];
-							let artist = playlists[playlist].tracks[track][1].split(" & ")[0];
 							if (album in albumNumbers) albumNumbers[album][0]++;
-							else albumNumbers[album] = [1, artist, album];
+							else albumNumbers[album] = [1, album];
 						}
 					}
 
@@ -1946,6 +1949,8 @@
 						if (albumNumbers[album][0] == 1) delete albumNumbers[album];
 					}
 					delete albumNumbers['<span class="red">YouTube video</span>'];
+
+					// ** MANUAL EDITING **
 					delete albumNumbers["Automatic"]; // two artists have a single by the same name
 
 					let albumNumbersArray = Object.values(albumNumbers).sort(function (a, b) {
@@ -1954,14 +1959,13 @@
 
 					for (let i = 0; i < albumNumbersArray.length; i++) {
 						let value = albumNumbersArray[i][0];
-						let artistName = albumNumbersArray[i][1];
-						let albumName = albumNumbersArray[i][2];
+						let albumName = albumNumbersArray[i][1];
 
 						datum.innerHTML =
 							datum.innerHTML +
 							`<span class="chart-bar" style="width: calc(${
 								(value / albumNumbersArray[0][0]) * 100
-							}% - 10px)" title="${artistName} - ${albumName} — ${value}">${albumName} — ${value}</span><br />`;
+							}% - 10px)" title="${albumName} — ${value}">${albumName} — ${value}</span><br />`;
 					}
 
 					console.log(albumNumbersArray.length);
