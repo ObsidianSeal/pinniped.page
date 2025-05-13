@@ -241,6 +241,8 @@
 			table i.fa-check,
 			table i.fa-xmark,
 			table i.fa-circle-info,
+			table i.fa-triangle-exclamation,
+			table i.fa-badge-check,
 			.map-tooltip i.fa-check,
 			.map-tooltip i.fa-xmark {
 				translate: 0 1px;
@@ -257,6 +259,32 @@
 			table i.fa-circle-info {
 				color: var(--base08);
 				margin-right: 10px;
+			}
+
+			td[colspan="3"],
+			td[colspan="3"] i {
+				color: var(--base0E);
+			}
+
+			td[colspan="3"] i,
+			td:has(.fa-badge-check) i {
+				margin-right: 10px;
+			}
+
+			td:has(.fa-badge-check),
+			td:has(.fa-badge-check) i,
+			td:has(.fa-badge-check) span.bold {
+				color: var(--base0D);
+			}
+
+			td:has(.fa-badge-check) ~ td a:hover {
+				text-decoration-color: var(--base0B);
+			}
+
+			td span.grey {
+				font-size: 20px;
+				font-weight: 400;
+				position: absolute;
 			}
 
 			.map {
@@ -3373,7 +3401,7 @@
 
 		<br />
 
-		<p>v0.0.23 — May 12th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.24 — May 13th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 		<p>
 			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 			<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3389,6 +3417,14 @@
 					target="_blank"
 					title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
 					>LTC realtime</a
+				>
+			</li>
+			<li>
+				<a
+					href="https://www.londontransit.ca/wp-content/uploads/2024/09/LT_SystemMap_September2024_Final_Web.pdf"
+					target="_blank"
+					title="LTC > Routes & Schedules > LT_SystemMap_September2024_Final_Web.pdf [FILE; EXTERNAL]"
+					>LTC Ride Guide</a
 				>
 			</li>
 			<li>
@@ -3505,6 +3541,196 @@
 		<b>BUS MAP</b>
 		<h2 id="map-open" title="click to open the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">CLICK TO OPEN THE MAP</h2>
 		<p class="grey">or press &ldquo;ESCAPE&rdquo; to open/close the map</p>
+
+		<br />
+		<br />
+		<hr />
+		<br />
+		<br />
+
+		<b>ROUTE MAPS</b>
+		<p>
+			For ease of navigation, these maps simplify the routes into straight lines. This makes it very clear where certain routes diverge into lettered branches, have
+			different termini at certain times, or exhibit other quirks, making it easy to identify your destination and see the stops that lead up to it. Each direction has its
+			own map.
+		</p>
+		<p>
+			These maps are made manually in <a href="https://affinity.serif.com/designer/" target="_blank" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so they
+			will be added/updated very slowly.
+		</p>
+		<br />
+		<table>
+			<tr>
+				<td>route</td>
+				<td>status</td>
+				<td>.PDF<span class="grey">*</span></td>
+				<td>.PNG<span class="grey">*</span></td>
+			</tr>
+			<!-- <tr>
+				<td>template - basic</td>
+				<td><i class="fa-solid fa-badge-check"></i>complete — last updated: <span class="bold">May 13th, 2025</span></td>
+				<td><a href="../download.html?x=bus-data-route-maps/pdf/template-basic.pdf" target="_blank" title="template-basic.pdf">template-basic.pdf</a></td>
+				<td><a href="../download.html?x=bus-data-route-maps/png/template-basic.png" target="_blank" title="template-basic.png">template-basic.png</a></td>
+			</tr>
+			<tr>
+				<td>template - split</td>
+				<td><i class="fa-solid fa-badge-check"></i>complete — last updated: <span class="bold">May 13th, 2025</span></td>
+				<td><a href="../download.html?x=bus-data-route-maps/pdf/template-split.pdf" target="_blank" title="template-split.pdf">template-split.pdf</a></td>
+				<td><a href="../download.html?x=bus-data-route-maps/png/template-split.png" target="_blank" title="template-split.png">template-split.png</a></td>
+			</tr> -->
+			<tr>
+				<td>01</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>02</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>03</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>04</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>05</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>06</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>07</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>09</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>12</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>13</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>15</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>16</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>17</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>19</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>20</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>24</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>25</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>27</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>28</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>30</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>31</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>33</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>34</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>35</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>36</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>37</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>38</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>90</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>91</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>92</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>93</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>94</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>95</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>102</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>104</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+			<tr>
+				<td>106</td>
+				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+			</tr>
+		</table>
+		<br />
+		<p class="grey">
+			*you can avoid downloading the files by right-clicking the &ldquo;DOWNLOAD&rdquo; button on the Download page and then clicking &ldquo;Open link in new tab&rdquo;
+		</p>
 
 		<br />
 		<br />
