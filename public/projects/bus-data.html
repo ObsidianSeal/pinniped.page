@@ -169,10 +169,13 @@
 			}
 
 			h2 span:not(.grammar, #time-to-update) {
-				background-color: var(--base0E);
 				color: var(--base00);
 				font-weight: 700;
 				padding: 0 5px;
+			}
+
+			h2 span:not(.grammar, #time-to-update, #data-time) {
+				background-color: var(--base0E);
 			}
 
 			.route {
@@ -207,16 +210,13 @@
 				background-color: var(--base0D);
 			}
 
-			.route div:last-child span:nth-child(2) {
+			.route div:last-child span:nth-child(2),
+			#data-time {
 				background-color: var(--base0C);
 			}
 
 			.route:first-child div {
 				font-weight: 700;
-			}
-
-			.hide {
-				display: none;
 			}
 
 			table {
@@ -296,10 +296,13 @@
 				padding: 0 50px;
 			}
 
+			.map-menu-top,
+			.map-menu-bottom {
+				justify-content: space-between;
+			}
+
 			.map-menu-top {
 				top: 0;
-
-				justify-content: space-between;
 			}
 
 			.map-menu-bottom {
@@ -307,10 +310,7 @@
 			}
 
 			.map-menu-top-left,
-			.map-menu-top-right {
-				display: flex;
-			}
-
+			.map-menu-top-right,
 			.map-menu-bottom-left,
 			.map-menu-bottom-right {
 				display: flex;
@@ -329,11 +329,13 @@
 				justify-content: center;
 			}
 
-			.map-menu-button:hover {
+			.map-menu-button:hover,
+			.map-extra-window-close-icon:hover {
 				cursor: pointer;
 			}
 
-			.map-menu-button:hover i {
+			.map-menu-button:hover i,
+			.map-extra-window-close-icon:hover i {
 				color: var(--base08);
 			}
 
@@ -341,8 +343,16 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+			}
 
+			.map-menu-top-left p,
+			.map-menu-bottom-left p {
 				margin-right: 50px;
+			}
+
+			.map-menu-top-right p,
+			.map-menu-bottom-right p {
+				margin-left: 50px;
 			}
 
 			.map-tooltip {
@@ -377,6 +387,49 @@
 
 			.grey {
 				color: var(--base03);
+			}
+
+			.map-extra-window-container {
+				width: calc(100% - 100px);
+				height: calc(100% - 100px);
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				position: relative;
+
+				margin: 50px;
+			}
+
+			.map-extra-window {
+				width: 600px;
+				height: fit-content;
+
+				max-width: calc(100% - 104px);
+				max-height: calc(100% - 104px);
+
+				background-color: white;
+
+				border: 2px solid var(--base04);
+				padding: 50px;
+
+				position: relative;
+
+				overflow-y: auto;
+			}
+
+			.map-extra-window-close-icon {
+				position: absolute;
+				top: 0;
+				right: 0;
+
+				width: 50px;
+				height: 50px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 
 			/* SCROLLBAR(S) */
@@ -421,6 +474,13 @@
 				100% {
 					transform: translateY(0);
 				}
+			}
+
+			/* HIDE */
+
+			.hide {
+				display: none;
+				pointer-events: none;
 			}
 		</style>
 
@@ -699,7 +759,7 @@
 				36: "#b43d61",
 				37: "#0098e1",
 				38: "#ff0000",
-				90: "#ff8000",
+				90: "#ff8a15",
 				91: "#ff8000",
 				92: "#ff8000",
 				93: "#ff8000",
@@ -709,6 +769,13 @@
 				104: "#7373b9",
 				106: "#ffff00",
 			};
+			for (let i = 0; i < Object.keys(officialColours).length; i++) {
+				document.querySelector("#route-colour-list").innerHTML =
+					document.querySelector("#route-colour-list").innerHTML +
+					`<b style="margin-right: 5px; color: ${officialColours[Object.keys(officialColours)[i]]}" title="route ${Object.keys(officialColours)[i]} (${
+						officialColours[Object.keys(officialColours)[i]]
+					})">${Object.keys(officialColours)[i]}</b> `;
+			}
 
 			// stops
 			const stops = [
@@ -2660,6 +2727,7 @@
 				[42.96575, -81.36141],
 				[42.982713, -81.243891],
 			];
+			document.querySelector("#total-stops").innerHTML = stops.length;
 
 			// get the data
 			async function fetchData() {
@@ -2837,6 +2905,7 @@
 						// add entry (row) to container
 						document.querySelector(".route-container").appendChild(routeEntry);
 					}
+					document.querySelector("#route-total").innerHTML = Object.keys(busDistribution).length;
 
 					for (let bus in fleetObject) {
 						// for each bus, add a row to the table
@@ -3119,7 +3188,9 @@
 					update();
 					timer = 30;
 				}
-				document.querySelector("#time-to-update").innerHTML = timer;
+				document.querySelectorAll("#time-to-update").forEach((counter) => {
+					counter.innerHTML = timer;
+				});
 
 				// DYNAMIC GRAMMAR
 				if (timer == 1) document.querySelector("#update-grammar").innerHTML = "";
@@ -3204,7 +3275,45 @@
 					if (document.querySelector(".map").classList.contains("hide")) openMap();
 					else closeMap();
 				}
+				if (e.key == "Shift") toggleMapSettingsWindow();
+				if (e.key == " ") toggleMapInfoWindow();
 			});
+
+			// map settings
+			document.querySelectorAll("#map-menu-button-settings, #map-extra-window-settings .map-extra-window-close-icon").forEach((button) => {
+				button.addEventListener("click", () => {
+					toggleMapSettingsWindow();
+				});
+			});
+			function toggleMapSettingsWindow() {
+				document.querySelector("#map-extra-window-info").classList.add("hide");
+
+				if (document.querySelector("#map-extra-window-settings").classList.contains("hide")) {
+					document.querySelector("#map-extra-window-settings").classList.remove("hide");
+					document.querySelector(".map-extra-window-container").classList.remove("hide");
+				} else {
+					document.querySelector("#map-extra-window-settings").classList.add("hide");
+					document.querySelector(".map-extra-window-container").classList.add("hide");
+				}
+			}
+
+			// map info
+			document.querySelectorAll("#map-menu-button-info, #map-extra-window-info .map-extra-window-close-icon").forEach((button) => {
+				button.addEventListener("click", () => {
+					toggleMapInfoWindow();
+				});
+			});
+			function toggleMapInfoWindow() {
+				document.querySelector("#map-extra-window-settings").classList.add("hide");
+
+				if (document.querySelector("#map-extra-window-info").classList.contains("hide")) {
+					document.querySelector("#map-extra-window-info").classList.remove("hide");
+					document.querySelector(".map-extra-window-container").classList.remove("hide");
+				} else {
+					document.querySelector("#map-extra-window-info").classList.add("hide");
+					document.querySelector(".map-extra-window-container").classList.add("hide");
+				}
+			}
 
 			// resize map to fit window changes
 			let lastResize = 0;
@@ -3218,6 +3327,8 @@
 
 			// map tooltips
 			document.addEventListener("mousemove", (e) => {
+				if (!document.querySelector(".map-extra-window-container").classList.contains("hide")) return;
+
 				let mouseX = e.x;
 				let mouseY = e.y;
 
@@ -3262,7 +3373,7 @@
 
 		<br />
 
-		<p>v0.0.22 — April 30th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.23 — May 12th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 		<p>
 			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 			<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3281,7 +3392,7 @@
 				>
 			</li>
 			<li>
-				<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank" title="CPTDB wiki — London Transit Commission [EXTERNAL]"
+				<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank" title="CPTDB wiki > London Transit Commission [EXTERNAL]"
 					>CPTDB wiki — London Transit Commission</a
 				>
 			</li>
@@ -3300,7 +3411,7 @@
 				>VehiclePositions.json</a
 			>
 			from
-			<span style="background-color: var(--base0C)" id="data-time">???</span>
+			<span id="data-time">???</span>
 		</h2>
 		<p class="grey">automatically updating in <span id="time-to-update" class="grey">30</span> second<span class="grammar grey" id="update-grammar">s</span>...</p>
 
@@ -3328,8 +3439,9 @@
 
 		<b>BUS DISTRIBUTION</b>
 		<p>
-			The number of buses on each
-			<a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">route</a>, shown as a bar graph.
+			The number of buses running on each of London Transit&rsquo;s <span id="route-total" class="bold">#</span>
+			<a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">routes</a>, shown as a bar
+			graph.
 		</p>
 		<p>
 			If a <a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">route</a> has at least one
@@ -3408,12 +3520,7 @@
 			</li>
 			<li>
 				the data processed by and shown on this page may not be 100% correct, as stated in the data&rsquo;s
-				<a
-					href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/"
-					target="_blank"
-					title="Open Data — London Transit Commission — Terms of Use [EXTERNAL]"
-					>Terms of Use</a
-				>
+				<a href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/" target="_blank" title="LTC Open Data > Terms of Use [EXTERNAL]">Terms of Use</a>
 			</li>
 		</ul>
 
@@ -3427,7 +3534,7 @@
 				<a
 					href="https://github.com/ObsidianSeal/pinniped.page/commits/main/public/projects/bus-data.html"
 					target="_blank"
-					title="GitHub / ObsidianSeal / pinniped.page > bus-data.html history"
+					title="GitHub > ObsidianSeal > pinniped.page > bus-data.html history [EXTERNAL]"
 					>GitHub commit history</a
 				>
 				to see how up-to-date it is
@@ -3437,7 +3544,7 @@
 				<a
 					href="https://www.londontransit.ca/wp-content/uploads/2024/08/Route-51-55-Community-Bus.pdf"
 					target="_blank"
-					title="LTC — Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]"
+					title="LTC > Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]"
 					>Community Bus routes</a
 				>
 				do not exist.
@@ -3450,8 +3557,7 @@
 		<b>ATTRIBUTION</b>
 		<ul>
 			<li>
-				bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank" title="Open Data — London Transit Commission [EXTERNAL]"
-					>Open Data — London Transit Commission</a
+				bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank" title="LTC Open Data [EXTERNAL]">Open Data — London Transit Commission</a
 				>&rdquo;
 			</li>
 			<li>
@@ -3471,10 +3577,8 @@
 			</li>
 			<li>icons from <a href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a></li>
 			<li>
-				<a
-					href="https://github.com/voronianski/oceanic-next-color-scheme"
-					target="_blank"
-					title="GitHub > voronianski > &ldquo;oceanic-next-color-scheme&rdquo; [EXTERNAL]"
+				the
+				<a href="https://github.com/voronianski/oceanic-next-color-scheme" target="_blank" title="GitHub > voronianski > oceanic-next-color-scheme [EXTERNAL]"
 					>Oceanic Next</a
 				>
 				colour scheme
@@ -3487,7 +3591,7 @@
 		<b>HELP!</b>
 		<ul>
 			<li><a href="../status.html" title="pinniped.page — Status">website status</a></li>
-			<li><a href="../contact.html" title="pinniped.page — Contact">report a problem</a></li>
+			<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
 		</ul>
 
 		<br />
@@ -3518,15 +3622,84 @@
 					<div class="map-menu-icon map-menu-button" id="map-menu-button-close" title="click to close the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">
 						<i class="fa-sharp fa-solid fa-xmark"></i>
 					</div>
+					<div
+						class="map-menu-icon map-menu-button"
+						id="map-menu-button-settings"
+						title="click to edit the map&rsquo;s settings, click again to close (keyboard shortcut: &ldquo;SHIFT&rdquo;)"
+					>
+						<i class="fa-sharp fa-solid fa-sliders-simple"></i>
+					</div>
+					<div
+						class="map-menu-icon map-menu-button"
+						id="map-menu-button-info"
+						title="click to learn more about the map, click again to close (keyboard shortcut: &ldquo;SPACE&rdquo;)"
+					>
+						<i class="fa-sharp fa-solid fa-info"></i>
+					</div>
 				</div>
 			</div>
 			<div class="map-menu map-menu-bottom">
 				<div class="map-menu-bottom-left">
 					<p id="map-coordinates"></p>
 				</div>
+				<div class="map-menu-bottom-right">
+					<p id="time-to-update">30</p>
+				</div>
 			</div>
 
 			<div class="map-tooltip hide"></div>
+
+			<div class="map-extra-window-container hide">
+				<div class="map-extra-window hide" id="map-extra-window-settings">
+					<div class="map-extra-window-close-icon" title="click to close the &ldquo;MAP SETTINGS&rdquo; panel (keyboard shortcut: &ldquo;SHIFT&rdquo;)">
+						<i class="fa-sharp fa-solid fa-xmark"></i>
+					</div>
+					<b>MAP SETTINGS</b>
+					<p>coming soon&trade;</p>
+				</div>
+				<div class="map-extra-window hide" id="map-extra-window-info">
+					<div class="map-extra-window-close-icon" title="click to close the &ldquo;ABOUT THE MAP&rdquo; panel (keyboard shortcut: &ldquo;SPACE&rdquo;)">
+						<i class="fa-sharp fa-solid fa-xmark"></i>
+					</div>
+					<b>ABOUT THE MAP</b>
+					<ul>
+						<li>
+							you can change how the map looks and edit some of the map&rsquo;s other settings by clicking the &ldquo;sliders&rdquo; icon in the top right or
+							by pressing &ldquo;SHIFT&rdquo;
+						</li>
+						<li>the data still automatically updates every 30 seconds; the countdown is shown in the bottom right</li>
+						<li>
+							hover over the map to see your cursor&rsquo;s approximate
+							<a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system" target="_blank" title="Wikipedia > Geographic coordinate system [EXTERNAL]"
+								>latitude and longitude</a
+							>
+							in the bottom left
+						</li>
+						<li>the tiny dots are bus stops, all <span class="bold" id="total-stops">#</span> of them</li>
+						<li>
+							squares and circles are regular and
+							<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated buses</a>
+							respectively
+						</li>
+						<li>buses have a trail that shows where they have been recently</li>
+						<li>hover over a bus to learn more about it (the information from the main table is shown)</li>
+						<li id="route-colour-list">
+							route colours are specified by
+							<a
+								href="https://realtime.londontransit.ca/#/app/nextdepartures"
+								target="_blank"
+								title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
+								>London Transit</a
+							>
+							as follows:<br />
+						</li>
+						<li>
+							hover over the route numbers above to see their associated colour&rsquo;s
+							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">HEX code</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
