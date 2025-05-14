@@ -244,7 +244,8 @@
 			table i.fa-triangle-exclamation,
 			table i.fa-badge-check,
 			.map-tooltip i.fa-check,
-			.map-tooltip i.fa-xmark {
+			.map-tooltip i.fa-xmark,
+			.error-panel i {
 				translate: 0 1px;
 			}
 
@@ -277,7 +278,8 @@
 				color: var(--base0D);
 			}
 
-			td:has(.fa-badge-check) ~ td a:hover {
+			td:has(.fa-badge-check) ~ td a:hover,
+			td:has(.fa-badge-check) ~ td a:focus {
 				text-decoration-color: var(--base0B);
 			}
 
@@ -460,6 +462,84 @@
 				justify-content: center;
 			}
 
+			span.settings-option {
+				padding: 0 5px;
+			}
+
+			span.settings-option:not(.selected-setting):hover {
+				cursor: pointer;
+				background-color: var(--base06);
+			}
+
+			span.selected-setting:hover {
+				cursor: not-allowed;
+			}
+
+			#map-extra-window-settings p {
+				display: grid;
+				grid-template-columns: max-content auto;
+				gap: 10px;
+			}
+
+			#map-extra-window-settings p > span:first-child {
+				text-decoration-line: underline;
+				text-decoration-style: solid;
+				text-decoration-color: var(--base04);
+				text-decoration-skip-ink: none;
+			}
+
+			#map-extra-window-settings p span:last-child {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 5px 10px;
+			}
+
+			.selected-setting {
+				background-color: var(--base00);
+				color: white;
+			}
+
+			.loading-panel {
+				position: fixed;
+				top: 0;
+				left: 0;
+
+				width: 100%;
+				height: 100%;
+
+				background-color: white;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.loading-panel div {
+				text-align: center;
+			}
+
+			.loading-panel div p {
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+			}
+
+			.error-panel {
+				position: fixed;
+				top: 45px;
+				left: 45px;
+
+				background-color: var(--base08);
+
+				font-weight: 700;
+
+				padding: 5px 10px;
+			}
+
+			.error-panel i {
+				margin-right: 10px;
+			}
+
 			/* SCROLLBAR(S) */
 			::-webkit-scrollbar {
 				width: 20px;
@@ -501,6 +581,87 @@
 				}
 				100% {
 					transform: translateY(0);
+				}
+			}
+
+			#d1,
+			#d2,
+			#d3 {
+				opacity: 0%;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 0.5s;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 0.5s;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 0.5s;
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
 				}
 			}
 
@@ -2769,11 +2930,24 @@
 					// set the data
 					busDataHeader = responseJSON.header;
 					busData = responseJSON.entity;
+
+					// stop loading
+					if (!document.querySelector(".loading-panel").classList.contains("hide")) {
+						document.querySelector(".loading-panel").classList.add("hide");
+						document.body.classList.remove("no-scroll");
+					}
+
+					document.querySelector("#error-data-fetch").classList.add("hide");
 				} catch (error) {
 					console.log(error); // hopefully this is not needed
+					document.querySelector("#error-data-fetch").classList.remove("hide");
+
+					// try again every 3 seconds...
+					setTimeout(() => {
+						update();
+					}, 3000);
 				}
 			}
-			await fetchData();
 
 			// date
 			function updateDate() {
@@ -2821,11 +2995,9 @@
 					.toString()
 					.padStart(2, "0")}`;
 			}
-			updateDate();
 
 			// where the cool stuff happens
 			let firstRun = true;
-			let runCount = 0;
 			function updateBusData() {
 				// variables
 				let totalBuses = busData.length;
@@ -3109,10 +3281,7 @@
 						}
 					}
 				}
-
-				runCount++;
 			}
-			updateBusData();
 
 			// important GLOBAL map variables
 			let scaleFactor = 0;
@@ -3125,6 +3294,7 @@
 			let longitudeEnd = -81.12978;
 
 			// update map
+			let mapOptions = [true, true, "", true, 3];
 			function updateMap() {
 				// important map variables
 				let canvas = document.querySelector("canvas");
@@ -3141,18 +3311,21 @@
 				context.fillStyle = "#ffffff";
 				context.fillRect(0, 0, width, height);
 
-				context.fillStyle = "#000000";
-				for (let i = 0; i < stops.length; i++) {
-					let x = drawOffset + Math.round((stops[i][1] - longitudeStart) * scaleFactor);
-					let y = drawOffset + Math.round((latitudeStart - stops[i][0]) * scaleFactor);
+				if (mapOptions[0]) {
+					context.fillStyle = "#000000";
+					for (let i = 0; i < stops.length; i++) {
+						let x = drawOffset + Math.round((stops[i][1] - longitudeStart) * scaleFactor);
+						let y = drawOffset + Math.round((latitudeStart - stops[i][0]) * scaleFactor);
 
-					context.fillRect(x, y, 1, 1);
+						context.fillRect(x, y, 1, 1);
+					}
 				}
 
-				let trailLength = 3;
+				let trailStart = fleetObject[Object.keys(fleetObject)[0]].length - (mapOptions[4] + 1);
+				if (!mapOptions[3]) trailStart = 3;
 
 				for (let bus in fleetObject) {
-					for (let i = Math.max(3, fleetObject[bus].length - (trailLength + 1)); i < fleetObject[bus].length - 1; i++) {
+					for (let i = trailStart; i < fleetObject[bus].length - 1; i++) {
 						let routeNumber = fleetObject[bus][i][0];
 
 						let latitude1 = fleetObject[bus][i][1];
@@ -3170,7 +3343,8 @@
 							let x2 = drawOffset + Math.round((longitude2 - longitudeStart) * scaleFactor);
 							let y2 = drawOffset + Math.round((latitudeStart - latitude2) * scaleFactor);
 
-							context.strokeStyle = colour;
+							if (mapOptions[1]) context.strokeStyle = colour;
+							else context.strokeStyle = mapOptions[2];
 							context.beginPath();
 							context.moveTo(x1, y1);
 							context.lineTo(x2, y2);
@@ -3196,7 +3370,8 @@
 						fleetObject[bus][i][4] = x;
 						fleetObject[bus][i][5] = y;
 
-						context.fillStyle = colour;
+						if (mapOptions[1]) context.fillStyle = colour;
+						else context.fillStyle = mapOptions[2];
 						context.beginPath();
 						if (bus < 100) {
 							context.ellipse(x, y, busSize - 3, busSize - 3, 0, 2 * Math.PI, 0);
@@ -3390,10 +3565,59 @@
 					document.querySelector("#map-coordinates").innerHTML = "";
 				}
 			});
+
+			// map settings
+			let mapSettings = [
+				// SETTINGS (0)
+				["show stop dots:", "bus colours:", "trail segments:"],
+				// OPTIONS (1+)
+				["YES", "NO"],
+				["LONDON TRANSIT", "RED", "ORANGE", "YELLOW", "GREEN", "TEAL", "BLUE", "PURPLE"],
+				["1", "3", "5", "ALL"],
+			];
+			document.querySelectorAll(".settings-option").forEach((button) => {
+				button.addEventListener("click", () => {
+					button.parentNode.querySelector(".selected-setting").classList.remove("selected-setting");
+					button.classList.add("selected-setting");
+
+					let setting = mapSettings[0].indexOf(button.parentNode.parentNode.children[0].innerHTML);
+					let option = mapSettings[setting + 1].indexOf(button.innerHTML);
+
+					if (setting == 0) {
+						if (option == 0) mapOptions[0] = true;
+						else mapOptions[0] = false;
+					}
+					if (setting == 1) {
+						if (option == 0) mapOptions[1] = true;
+						else mapOptions[1] = false;
+
+						if (option == 1) mapOptions[2] = "#ec5f67";
+						if (option == 2) mapOptions[2] = "#f99157";
+						if (option == 3) mapOptions[2] = "#fac863";
+						if (option == 4) mapOptions[2] = "#99c794";
+						if (option == 5) mapOptions[2] = "#5fb3b3";
+						if (option == 6) mapOptions[2] = "#6699cc";
+						if (option == 7) mapOptions[2] = "#c594c5";
+					}
+					if (setting == 2) {
+						if (option == 0) mapOptions[4] = 1;
+						if (option == 1) mapOptions[4] = 3;
+						if (option == 2) mapOptions[4] = 5;
+						if (option == 3) mapOptions[3] = false;
+						else mapOptions[3] = true;
+					}
+
+					updateMap();
+				});
+			});
+
+			addEventListener("load", () => {
+				update();
+			});
 		</script>
 	</head>
 
-	<body>
+	<body class="no-scroll">
 		<h1>
 			<i class="fa-sharp fa-solid fa-bus"></i> <span>B</span><span>U</span><span>S</span> <span>D</span><span style="translate: -5px 0">A</span
 			><span style="translate: -15px 0">T</span><span style="translate: -25px 0">A</span>
@@ -3401,7 +3625,7 @@
 
 		<br />
 
-		<p>v0.0.24 — May 13th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+		<p>v0.0.25 — May 14th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 		<p>
 			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 			<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3552,7 +3776,7 @@
 		<p>
 			For ease of navigation, these maps simplify the routes into straight lines. This makes it very clear where certain routes diverge into lettered branches, have
 			different termini at certain times, or exhibit other quirks, making it easy to identify your destination and see the stops that lead up to it. Each direction has its
-			own map.
+			own map, so please pay attention to the file names.
 		</p>
 		<p>
 			These maps are made manually in <a href="https://affinity.serif.com/designer/" target="_blank" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so they
@@ -3566,18 +3790,6 @@
 				<td>.PDF<span class="grey">*</span></td>
 				<td>.PNG<span class="grey">*</span></td>
 			</tr>
-			<!-- <tr>
-				<td>template - basic</td>
-				<td><i class="fa-solid fa-badge-check"></i>complete — last updated: <span class="bold">May 13th, 2025</span></td>
-				<td><a href="../download.html?x=bus-data-route-maps/pdf/template-basic.pdf" target="_blank" title="template-basic.pdf">template-basic.pdf</a></td>
-				<td><a href="../download.html?x=bus-data-route-maps/png/template-basic.png" target="_blank" title="template-basic.png">template-basic.png</a></td>
-			</tr>
-			<tr>
-				<td>template - split</td>
-				<td><i class="fa-solid fa-badge-check"></i>complete — last updated: <span class="bold">May 13th, 2025</span></td>
-				<td><a href="../download.html?x=bus-data-route-maps/pdf/template-split.pdf" target="_blank" title="template-split.pdf">template-split.pdf</a></td>
-				<td><a href="../download.html?x=bus-data-route-maps/png/template-split.png" target="_blank" title="template-split.png">template-split.png</a></td>
-			</tr> -->
 			<tr>
 				<td>01</td>
 				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
@@ -3691,8 +3903,17 @@
 				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
 			</tr>
 			<tr>
-				<td>90</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+				<td rowspan="2">90</td>
+				<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 13th, 2025</span></td>
+				<td>
+					<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
+				</td>
+				<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
+			</tr>
+			<tr>
+				<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 14th, 2025</span></td>
+				<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
+				<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
 			</tr>
 			<tr>
 				<td>91</td>
@@ -3881,7 +4102,27 @@
 						<i class="fa-sharp fa-solid fa-xmark"></i>
 					</div>
 					<b>MAP SETTINGS</b>
-					<p>coming soon&trade;</p>
+					<br /><br />
+					<p>
+						<span>show stop dots:</span><span><span class="settings-option selected-setting">YES</span><span class="settings-option">NO</span></span>
+					</p>
+					<br />
+					<p>
+						<span>bus colours:</span
+						><span
+							><span class="settings-option selected-setting">LONDON TRANSIT</span><span class="settings-option">RED</span
+							><span class="settings-option">ORANGE</span><span class="settings-option">YELLOW</span><span class="settings-option">GREEN</span
+							><span class="settings-option">TEAL</span><span class="settings-option">BLUE</span><span class="settings-option">PURPLE</span></span
+						>
+					</p>
+					<br />
+					<p>
+						<span>trail segments:</span
+						><span
+							><span class="settings-option">1</span><span class="settings-option selected-setting">3</span><span class="settings-option">5</span
+							><span class="settings-option">ALL</span></span
+						>
+					</p>
 				</div>
 				<div class="map-extra-window hide" id="map-extra-window-info">
 					<div class="map-extra-window-close-icon" title="click to close the &ldquo;ABOUT THE MAP&rdquo; panel (keyboard shortcut: &ldquo;SPACE&rdquo;)">
@@ -3893,7 +4134,7 @@
 							you can change how the map looks and edit some of the map&rsquo;s other settings by clicking the &ldquo;sliders&rdquo; icon in the top right or
 							by pressing &ldquo;SHIFT&rdquo;
 						</li>
-						<li>the data still automatically updates every 30 seconds; the countdown is shown in the bottom right</li>
+						<li>the data still automatically updates every 30 seconds, here the countdown is shown in the bottom right</li>
 						<li>
 							hover over the map to see your cursor&rsquo;s approximate
 							<a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system" target="_blank" title="Wikipedia > Geographic coordinate system [EXTERNAL]"
@@ -3923,9 +4164,27 @@
 							hover over the route numbers above to see their associated colour&rsquo;s
 							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">HEX code</a>
 						</li>
+						<li>this page does not update if you leave, so there will be gaps in the bus trails if you leave and then return after more than 30 seconds</li>
+						<li>the bus map is technically an image, so you can save and/or copy it like you would any other</li>
 					</ul>
 				</div>
 			</div>
+		</div>
+
+		<div class="loading-panel">
+			<div>
+				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
+				<br />
+				<p>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v0.0.25</span>
+				</p>
+				<br />
+				<p><a href="../status.html" title="pinniped.page — Status">website status</a>/<a href="../contact.html" title="pinniped.page — Contact">report a problem</a></p>
+			</div>
+		</div>
+
+		<div class="error-panel hide" id="error-data-fetch">
+			<i class="fa-sharp fa-solid fa-triangle-exclamation"></i>ERROR FETCHING DATA — RETRYING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d>
 		</div>
 	</body>
 </html>
