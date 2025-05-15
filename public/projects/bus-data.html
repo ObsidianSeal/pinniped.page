@@ -152,6 +152,7 @@
 			.colours {
 				display: flex;
 				gap: 20px;
+				flex-wrap: wrap;
 			}
 
 			.colours div {
@@ -196,6 +197,10 @@
 			.route div:first-child {
 				text-align: right;
 				color: var(--base03);
+			}
+
+			.route:not(:first-child) div:last-child {
+				white-space: nowrap;
 			}
 
 			.route div:last-child span {
@@ -283,10 +288,11 @@
 				text-decoration-color: var(--base0B);
 			}
 
-			td span.grey {
+			.special-star {
 				font-size: 20px;
 				font-weight: 400;
-				position: absolute;
+				display: inline-block;
+				translate: 2px -12px;
 			}
 
 			.map {
@@ -375,10 +381,10 @@
 				justify-content: center;
 			}
 
-			.map-menu-top-left p,
+			/* .map-menu-top-left p,
 			.map-menu-bottom-left p {
 				margin-right: 50px;
-			}
+			} */
 
 			.map-menu-top-right p,
 			.map-menu-bottom-right p {
@@ -464,6 +470,7 @@
 
 			span.settings-option {
 				padding: 0 5px;
+				text-align: center;
 			}
 
 			span.settings-option:not(.selected-setting):hover {
@@ -540,9 +547,15 @@
 				margin-right: 10px;
 			}
 
+			.table-scroll {
+				white-space: nowrap;
+				overflow-x: auto;
+			}
+
 			/* SCROLLBAR(S) */
 			::-webkit-scrollbar {
 				width: 20px;
+				height: 20px;
 			}
 
 			::-webkit-scrollbar-track {
@@ -662,6 +675,25 @@
 				}
 				100% {
 					opacity: 0%;
+				}
+			}
+
+			/* MEDIA QUERIES */
+
+			@media all and (max-width: 600px) {
+				.loading-panel h1 {
+					font-size: 60px;
+				}
+			}
+
+			@media all and (max-width: 450px) {
+				body {
+					padding: 25px;
+				}
+
+				.map-extra-window {
+					max-width: calc(100% - 54px);
+					padding: 50px 25px;
 				}
 			}
 
@@ -2934,7 +2966,7 @@
 					// stop loading
 					if (!document.querySelector(".loading-panel").classList.contains("hide")) {
 						document.querySelector(".loading-panel").classList.add("hide");
-						document.body.classList.remove("no-scroll");
+						document.querySelector(".main-panel").classList.remove("hide");
 					}
 
 					document.querySelector("#error-data-fetch").classList.add("hide");
@@ -3246,8 +3278,10 @@
 						if (articulatedDistribution[route] > 0) articulatedIndicator = ` (${articulatedDistribution[route]})`;
 
 						// set values
-						document.querySelector(`#non-articulated-${route}`).style = `width: ${(busDistribution[route] - articulatedDistribution[route]) * 50}px`;
-						document.querySelector(`#articulated-${route}`).style = `width: ${articulatedDistribution[route] * 50}px`;
+						// document.querySelector(`#non-articulated-${route}`).style = `width: ${(busDistribution[route] - articulatedDistribution[route]) * 50}px`;
+						// document.querySelector(`#articulated-${route}`).style = `width: ${articulatedDistribution[route] * 50}px`;
+						document.querySelector(`#non-articulated-${route}`).style = `width: ${(busDistribution[route] - articulatedDistribution[route]) * 5}%`;
+						document.querySelector(`#articulated-${route}`).style = `width: ${articulatedDistribution[route] * 5}%`;
 						document.querySelector(`#value-${route}`).innerHTML = `&nbsp;${busDistribution[route]}${articulatedIndicator}`;
 					}
 				}
@@ -3294,7 +3328,7 @@
 			let longitudeEnd = -81.12978;
 
 			// update map
-			let mapOptions = [true, true, "", true, 3];
+			let mapOptions = [true, true, "", true, 3, true, 0];
 			function updateMap() {
 				// important map variables
 				let canvas = document.querySelector("canvas");
@@ -3321,12 +3355,13 @@
 					}
 				}
 
-				let trailStart = fleetObject[Object.keys(fleetObject)[0]].length - (mapOptions[4] + 1);
+				let trailStart = Math.max(fleetObject[Object.keys(fleetObject)[0]].length - (mapOptions[4] + 1), 3);
 				if (!mapOptions[3]) trailStart = 3;
 
 				for (let bus in fleetObject) {
 					for (let i = trailStart; i < fleetObject[bus].length - 1; i++) {
 						let routeNumber = fleetObject[bus][i][0];
+						if (!mapOptions[5] && routeNumber != mapOptions[6]) continue;
 
 						let latitude1 = fleetObject[bus][i][1];
 						let longitude1 = fleetObject[bus][i][2];
@@ -3357,6 +3392,7 @@
 					let i = fleetObject[bus].length - 1;
 
 					let routeNumber = fleetObject[bus][i][0];
+					if (!mapOptions[5] && routeNumber != mapOptions[6]) continue;
 
 					let latitude = fleetObject[bus][i][1];
 					let longitude = fleetObject[bus][i][2];
@@ -3451,8 +3487,10 @@
 			});
 
 			// map, open (for real)
+			let lastScroll;
 			function openMap() {
-				document.querySelector("body").classList.add("no-scroll");
+				lastScroll = Math.round(document.documentElement.scrollTop);
+				document.querySelector(".main-panel").classList.add("hide");
 
 				document.querySelector(".map").classList.remove("hide");
 				document.querySelector("canvas").width = window.innerWidth - 104;
@@ -3468,7 +3506,8 @@
 
 			// map, close (for real)
 			function closeMap() {
-				document.querySelector("body").classList.remove("no-scroll");
+				document.querySelector(".main-panel").classList.remove("hide");
+				document.documentElement.scroll(0, lastScroll);
 				document.querySelector(".map").classList.add("hide");
 			}
 
@@ -3494,9 +3533,13 @@
 				if (document.querySelector("#map-extra-window-settings").classList.contains("hide")) {
 					document.querySelector("#map-extra-window-settings").classList.remove("hide");
 					document.querySelector(".map-extra-window-container").classList.remove("hide");
+
+					document.querySelector(".map-tooltip").classList.add("hide");
 				} else {
 					document.querySelector("#map-extra-window-settings").classList.add("hide");
 					document.querySelector(".map-extra-window-container").classList.add("hide");
+
+					checkForBusOverlap(lastMouseEvent);
 				}
 			}
 
@@ -3512,9 +3555,13 @@
 				if (document.querySelector("#map-extra-window-info").classList.contains("hide")) {
 					document.querySelector("#map-extra-window-info").classList.remove("hide");
 					document.querySelector(".map-extra-window-container").classList.remove("hide");
+
+					document.querySelector(".map-tooltip").classList.add("hide");
 				} else {
 					document.querySelector("#map-extra-window-info").classList.add("hide");
 					document.querySelector(".map-extra-window-container").classList.add("hide");
+
+					checkForBusOverlap(lastMouseEvent);
 				}
 			}
 
@@ -3529,23 +3576,29 @@
 			});
 
 			// map tooltips
+			let lastMouseEvent;
 			document.addEventListener("mousemove", (e) => {
+				lastMouseEvent = e;
+				checkForBusOverlap(lastMouseEvent);
+			});
+			function checkForBusOverlap(event) {
 				if (!document.querySelector(".map-extra-window-container").classList.contains("hide")) return;
 
-				let mouseX = e.x;
-				let mouseY = e.y;
+				let mouseX = event.x;
+				let mouseY = event.y;
 
 				document.querySelector(".map-tooltip").classList.add("hide");
 
 				if (mouseX > 52 && mouseY > 52 && mouseX < window.innerWidth - 52 && mouseY < window.innerHeight - 52 && scaleFactor != 0) {
 					document.querySelector(".map-tooltip").style = `top: ${mouseY + 5}px; left: ${mouseX + 5}px`;
 
-					let latitude = Math.round(((e.offsetY - drawOffset) / scaleFactor - latitudeStart) * -100000) / 100000;
-					let longitude = Math.round(((e.offsetX - drawOffset) / scaleFactor + longitudeStart) * 100000) / 100000;
+					let latitude = Math.round(((event.offsetY - drawOffset) / scaleFactor - latitudeStart) * -100000) / 100000;
+					let longitude = Math.round(((event.offsetX - drawOffset) / scaleFactor + longitudeStart) * 100000) / 100000;
 					document.querySelector("#map-coordinates").innerHTML = `${latitude.toString().padEnd(8, "0")}, ${longitude.toString().padEnd(9, "0")}`;
 
 					for (let bus in fleetObject) {
 						let array = fleetObject[bus][fleetObject[bus].length - 1];
+						if (!mapOptions[5] && array[0] != mapOptions[6]) continue;
 						if (Math.abs(array[4] + 52 - mouseX) <= 5 && Math.abs(array[5] + 52 - mouseY) <= 5) {
 							document.querySelector(".map-tooltip").classList.remove("hide");
 
@@ -3564,16 +3617,56 @@
 
 					document.querySelector("#map-coordinates").innerHTML = "";
 				}
-			});
+			}
 
 			// map settings
 			let mapSettings = [
 				// SETTINGS (0)
-				["show stop dots:", "bus colours:", "trail segments:"],
+				["show stop dots:", "bus colours:", "trail segments:", "routes:"],
 				// OPTIONS (1+)
 				["YES", "NO"],
 				["LONDON TRANSIT", "RED", "ORANGE", "YELLOW", "GREEN", "TEAL", "BLUE", "PURPLE"],
 				["1", "3", "5", "ALL"],
+				[
+					"01",
+					"02",
+					"03",
+					"04",
+					"05",
+					"06",
+					"07",
+					"09",
+					"10",
+					"12",
+					"13",
+					"15",
+					"16",
+					"17",
+					"19",
+					"20",
+					"24",
+					"25",
+					"27",
+					"28",
+					"30",
+					"31",
+					"33",
+					"34",
+					"35",
+					"36",
+					"37",
+					"38",
+					"90",
+					"91",
+					"92",
+					"93",
+					"94",
+					"95",
+					"102",
+					"104",
+					"106",
+					"ALL",
+				],
 			];
 			document.querySelectorAll(".settings-option").forEach((button) => {
 				button.addEventListener("click", () => {
@@ -3606,457 +3699,495 @@
 						if (option == 3) mapOptions[3] = false;
 						else mapOptions[3] = true;
 					}
+					if (setting == 3) {
+						if (option == 37) mapOptions[5] = true;
+						else {
+							mapOptions[5] = false;
+							mapOptions[6] = parseInt(mapSettings[setting + 1][option]);
+						}
+					}
 
 					updateMap();
 				});
 			});
 
+			// when page elements have loaded, begin updating (get the data) - this way the page is fully ready when the loading panel goes away
 			addEventListener("load", () => {
 				update();
 			});
 		</script>
 	</head>
 
-	<body class="no-scroll">
-		<h1>
-			<i class="fa-sharp fa-solid fa-bus"></i> <span>B</span><span>U</span><span>S</span> <span>D</span><span style="translate: -5px 0">A</span
-			><span style="translate: -15px 0">T</span><span style="translate: -25px 0">A</span>
-		</h1>
+	<body>
+		<div class="main-panel hide">
+			<h1>
+				<i class="fa-sharp fa-solid fa-bus"></i> <span>B</span><span>U</span><span>S</span> <span>D</span><span style="translate: -5px 0">A</span
+				><span style="translate: -15px 0">T</span><span style="translate: -25px 0">A</span>
+			</h1>
 
-		<br />
+			<br />
 
-		<p>v0.0.25 — May 14th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
-		<p>
-			a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
-			<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
-		</p>
+			<p>v1.0.0 — May 14th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>
+				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
+				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
+			</p>
 
-		<br />
+			<br />
 
-		<b>QUICK LINKS</b>
-		<ul>
-			<li>
-				<a
-					href="https://realtime.londontransit.ca/#/app/nextdepartures"
-					target="_blank"
-					title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
-					>LTC realtime</a
+			<b>QUICK LINKS</b>
+			<ul>
+				<li>
+					<a
+						href="https://realtime.londontransit.ca/#/app/nextdepartures"
+						target="_blank"
+						title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
+						>LTC realtime</a
+					>
+				</li>
+				<li>
+					<a
+						href="https://www.londontransit.ca/wp-content/uploads/2024/09/LT_SystemMap_September2024_Final_Web.pdf"
+						target="_blank"
+						title="LTC > Routes & Schedules > LT_SystemMap_September2024_Final_Web.pdf [FILE; EXTERNAL]"
+						>LTC Ride Guide</a
+					>
+				</li>
+				<li>
+					<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank" title="CPTDB wiki > London Transit Commission [EXTERNAL]"
+						>CPTDB wiki — London Transit Commission</a
+					>
+				</li>
+				<li><a href="../projects+.html" title="pinniped.page — Projects+">return to the Projects+ page</a></li>
+			</ul>
+
+			<br />
+			<br />
+			<hr />
+			<br />
+			<br />
+
+			<b>ON THIS PAGE</b>
+			<ul>
+				<li><a href="#THE-DATA" title="click to move to &ldquo;THE DATA&rdquo;">THE DATA</a></li>
+				<li><a href="#BUS-TOTALS" title="click to move to &ldquo;BUS TOTALS&rdquo;">BUS TOTALS</a></li>
+				<li><a href="#BUS-DISTRIBUTION" title="click to move to &ldquo;BUS DISTRIBUTION&rdquo;">BUS DISTRIBUTION</a></li>
+				<li><a href="#BUS-POSITIONS-AND-MODELS" title="click to move to &ldquo;BUS POSITIONS & MODELS&rdquo;">BUS POSITIONS & MODELS</a></li>
+				<li><a href="#BUS-MAP" title="click to move to &ldquo;BUS MAP&rdquo;">BUS MAP</a></li>
+				<li><a href="#ROUTE-MAPS" title="click to move to &ldquo;ROUTE MAPS&rdquo;">ROUTE MAPS</a></li>
+				<li><a href="#DISCLAIMER" title="click to move to &ldquo;DISCLAIMER&rdquo;">DISCLAIMER</a></li>
+				<li><a href="#LIMITATIONS" title="click to move to &ldquo;LIMITATIONS&rdquo;">LIMITATIONS</a></li>
+				<li><a href="#ATTRIBUTION" title="click to move to &ldquo;ATTRIBUTION&rdquo;">ATTRIBUTION</a></li>
+				<li><a href="#HELP" title="click to move to &ldquo;HELP!&rdquo;">HELP!</a></li>
+			</ul>
+
+			<br />
+			<br />
+			<hr />
+			<br />
+			<br />
+
+			<b id="THE-DATA">THE DATA</b>
+			<h2>
+				<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" target="_blank" title="LTC Open Data > VehiclePositions.json [FILE; EXTERNAL]"
+					>VehiclePositions.json</a
 				>
-			</li>
-			<li>
-				<a
-					href="https://www.londontransit.ca/wp-content/uploads/2024/09/LT_SystemMap_September2024_Final_Web.pdf"
-					target="_blank"
-					title="LTC > Routes & Schedules > LT_SystemMap_September2024_Final_Web.pdf [FILE; EXTERNAL]"
-					>LTC Ride Guide</a
-				>
-			</li>
-			<li>
-				<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank" title="CPTDB wiki > London Transit Commission [EXTERNAL]"
-					>CPTDB wiki — London Transit Commission</a
-				>
-			</li>
-			<li><a href="../projects+.html" title="pinniped.page — Projects+">return to the Projects+ page</a></li>
-		</ul>
+				from
+				<span id="data-time">???</span>
+			</h2>
+			<p class="grey">automatically updating in <span id="time-to-update" class="grey">30</span> second<span class="grammar grey" id="update-grammar">s</span>...</p>
 
-		<br />
-		<br />
-		<hr />
-		<br />
-		<br />
+			<br />
 
-		<b>THE DATA</b>
-		<h2>
-			<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" target="_blank" title="LTC Open Data > VehiclePositions.json [FILE; EXTERNAL]"
-				>VehiclePositions.json</a
-			>
-			from
-			<span id="data-time">???</span>
-		</h2>
-		<p class="grey">automatically updating in <span id="time-to-update" class="grey">30</span> second<span class="grammar grey" id="update-grammar">s</span>...</p>
+			<b id="BUS-TOTALS">BUS TOTALS</b>
+			<h2 id="total-info">
+				There <span class="grammar" id="total-grammar-1">are</span> <span id="bus-total">#</span> <span class="grammar" id="total-grammar-2">buses</span> in service,
+				making up <span id="bus-total-percent">%</span> of London Transit&rsquo;s fleet.
+			</h2>
+			<h2 id="total-none" class="hide">London Transit it not currently running any buses.</h2>
+			<h2 id="articulated-info">
+				<span class="grammar" id="articulated-grammar-1"></span> <span id="bus-total-articulated">#</span> of those buses
+				<span class="grammar" id="articulated-grammar-2">are</span> articulated, <span id="bus-total-articulated-partial-percent">%</span> of in-service buses and
+				<span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet of articulated buses.
+			</h2>
+			<h2 id="articulated-none" class="hide">None of them are articulated.</h2>
+			<h2 id="articulated-none-one" class="hide">It is not articulated.</h2>
+			<h2 id="articulated-one-one" class="hide">
+				That <span id="bus-total-articulated-2">#</span> bus is articulated, <span id="bus-total-articulated-partial-percent-2">%</span> of in-service buses and
+				<span id="bus-total-articulated-percent-2">%</span> of London Transit&rsquo;s fleet of articulated buses.
+			</h2>
 
-		<br />
+			<br />
 
-		<b>BUS TOTALS</b>
-		<h2 id="total-info">
-			There <span class="grammar" id="total-grammar-1">are</span> <span id="bus-total">#</span> <span class="grammar" id="total-grammar-2">buses</span> in service, making
-			up <span id="bus-total-percent">%</span> of London Transit&rsquo;s fleet.
-		</h2>
-		<h2 id="total-none" class="hide">London Transit it not currently running any buses.</h2>
-		<h2 id="articulated-info">
-			<span class="grammar" id="articulated-grammar-1"></span> <span id="bus-total-articulated">#</span> of those buses
-			<span class="grammar" id="articulated-grammar-2">are</span> articulated, <span id="bus-total-articulated-partial-percent">%</span> of in-service buses and
-			<span id="bus-total-articulated-percent">%</span> of London Transit&rsquo;s fleet of articulated buses.
-		</h2>
-		<h2 id="articulated-none" class="hide">None of them are articulated.</h2>
-		<h2 id="articulated-none-one" class="hide">It is not articulated.</h2>
-		<h2 id="articulated-one-one" class="hide">
-			That <span id="bus-total-articulated-2">#</span> bus is articulated, <span id="bus-total-articulated-partial-percent-2">%</span> of in-service buses and
-			<span id="bus-total-articulated-percent-2">%</span> of London Transit&rsquo;s fleet of articulated buses.
-		</h2>
-
-		<br />
-
-		<b>BUS DISTRIBUTION</b>
-		<p>
-			The number of buses running on each of London Transit&rsquo;s <span id="route-total" class="bold">#</span>
-			<a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">routes</a>, shown as a bar
-			graph.
-		</p>
-		<p>
-			If a <a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">route</a> has at least one
-			<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated bus</a> running on it, the number
-			of said buses is shown next to the total and reflected in a separate, teal segment of the corresponding bar.
-		</p>
-		<br />
-		<div class="route-container">
-			<div class="route">
-				<div>ROUTE NUMBER</div>
-				<div><br />BUSES (ARTICULATED, IF ANY)</div>
+			<b id="BUS-DISTRIBUTION">BUS DISTRIBUTION</b>
+			<p>
+				The number of buses running on each of London Transit&rsquo;s <span id="route-total" class="bold">#</span>
+				<a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">routes</a>, shown as a bar
+				graph.
+			</p>
+			<p>
+				If a <a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">route</a> has at least
+				one <a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated bus</a> running on it,
+				the number of said buses is shown next to the total and reflected in a separate, teal segment of the corresponding bar.
+			</p>
+			<br />
+			<div class="route-container">
+				<div class="route">
+					<div>ROUTE NUMBER</div>
+					<div><br />BUSES (ARTICULATED, IF ANY)</div>
+				</div>
 			</div>
-		</div>
-		<br />
-		<p class="grey">
-			*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" class="grey" title="Wikipedia > Short turn [EXTERNAL]">short turn</a>) routes
-			only run from September to April (for university/college students)
-		</p>
+			<br />
+			<p class="grey">
+				*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" class="grey" title="Wikipedia > Short turn [EXTERNAL]">short turn</a>)
+				routes only run from September to April (for university/college students)
+			</p>
 
-		<br />
+			<br />
 
-		<b>BUS POSITIONS & MODELS</b>
-		<p>
-			Below is a table of all <span id="fleet-total" class="bold">#</span> buses in
-			<a
-				href="https://cptdb.ca/wiki/index.php/London_Transit_Commission#Fleet_roster"
-				target="_blank"
-				title="CPTDB wiki > London Transit Commission (Fleet roster) [EXTERNAL]"
-				>London Transit&rsquo;s fleet</a
-			>.
-		</p>
-		<p>
-			Every bus has a unique ID. If it seems like some IDs are missing, that&rsquo;s because the bus with that ID has been retired. Click on each ID for more information
-			about the bus.
-		</p>
-		<p>
-			London Transit currently operates five unique bus models, all of which are produced in Canada by
-			<a href="https://www.newflyer.com/" target="_blank" title="New Flyer [EXTERNAL]">New Flyer</a>. Click on a model to learn more.
-		</p>
-		<p>
-			<span id="articulated-total" class="bold">#</span> of London Transit&rsquo;s buses are
-			<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>.
-		</p>
-		<p>
-			For buses that are currently running, their route and position (latitude and longitude) are given. Click on a position to view it on
-			<a href="https://www.google.ca/maps" target="_blank" title="Google Maps [EXTERNAL]">Google Maps</a>.
-		</p>
-		<br />
-		<table>
-			<tr>
-				<td>ID</td>
-				<td>model</td>
-				<td>articulated?</td>
-				<td>route</td>
-				<td>position</td>
-			</tr>
-		</table>
-
-		<br />
-
-		<b>BUS MAP</b>
-		<h2 id="map-open" title="click to open the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">CLICK TO OPEN THE MAP</h2>
-		<p class="grey">or press &ldquo;ESCAPE&rdquo; to open/close the map</p>
-
-		<br />
-		<br />
-		<hr />
-		<br />
-		<br />
-
-		<b>ROUTE MAPS</b>
-		<p>
-			For ease of navigation, these maps simplify the routes into straight lines. This makes it very clear where certain routes diverge into lettered branches, have
-			different termini at certain times, or exhibit other quirks, making it easy to identify your destination and see the stops that lead up to it. Each direction has its
-			own map, so please pay attention to the file names.
-		</p>
-		<p>
-			These maps are made manually in <a href="https://affinity.serif.com/designer/" target="_blank" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so they
-			will be added/updated very slowly.
-		</p>
-		<br />
-		<table>
-			<tr>
-				<td>route</td>
-				<td>status</td>
-				<td>.PDF<span class="grey">*</span></td>
-				<td>.PNG<span class="grey">*</span></td>
-			</tr>
-			<tr>
-				<td>01</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>02</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>03</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>04</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>05</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>06</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>07</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>09</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>10</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>12</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>13</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>15</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>16</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>17</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>19</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>20</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>24</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>25</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>27</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>28</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>30</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>31</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>33</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>34</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>35</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>36</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>37</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>38</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td rowspan="2">90</td>
-				<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 13th, 2025</span></td>
-				<td>
-					<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
-				</td>
-				<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
-			</tr>
-			<tr>
-				<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 14th, 2025</span></td>
-				<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
-				<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
-			</tr>
-			<tr>
-				<td>91</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>92</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>93</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>94</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>95</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>102</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>104</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-			<tr>
-				<td>106</td>
-				<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-			</tr>
-		</table>
-		<br />
-		<p class="grey">
-			*you can avoid downloading the files by right-clicking the &ldquo;DOWNLOAD&rdquo; button on the Download page and then clicking &ldquo;Open link in new tab&rdquo;
-		</p>
-
-		<br />
-		<br />
-		<hr />
-		<br />
-		<br />
-
-		<b>DISCLAIMER</b>
-		<ul>
-			<li>
-				the information provided on this page should not be used as a substitute for official information provided by the
-				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit Commission</a>
-			</li>
-			<li>
-				the data processed by and shown on this page may not be 100% correct, as stated in the data&rsquo;s
-				<a href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/" target="_blank" title="LTC Open Data > Terms of Use [EXTERNAL]">Terms of Use</a>
-			</li>
-		</ul>
-
-		<br />
-
-		<b>LIMITATIONS</b>
-		<ul>
-			<li>
-				some data is entered manually, so be sure to check the date that this page was last updated (it&rsquo;s shown at the
-				<span id="to-top-text" title="click to scroll to the top of the page">top of the page</span>) or the
+			<b id="BUS-POSITIONS-AND-MODELS">BUS POSITIONS & MODELS</b>
+			<p>
+				Below is a table of all <span id="fleet-total" class="bold">#</span> buses in
 				<a
-					href="https://github.com/ObsidianSeal/pinniped.page/commits/main/public/projects/bus-data.html"
+					href="https://cptdb.ca/wiki/index.php/London_Transit_Commission#Fleet_roster"
 					target="_blank"
-					title="GitHub > ObsidianSeal > pinniped.page > bus-data.html history [EXTERNAL]"
-					>GitHub commit history</a
-				>
-				to see how up-to-date it is
-			</li>
-			<li>
-				this page assumes the
-				<a
-					href="https://www.londontransit.ca/wp-content/uploads/2024/08/Route-51-55-Community-Bus.pdf"
-					target="_blank"
-					title="LTC > Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]"
-					>Community Bus routes</a
-				>
-				do not exist.
-			</li>
-			<li>rounding errors are almost certainly present</li>
-		</ul>
+					title="CPTDB wiki > London Transit Commission (Fleet roster) [EXTERNAL]"
+					>London Transit&rsquo;s fleet</a
+				>.
+			</p>
+			<p>
+				Every bus has a unique ID. If it seems like some IDs are missing, that&rsquo;s because the bus with that ID has been retired. Click on each ID for more
+				information about the bus.
+			</p>
+			<p>
+				London Transit currently operates five unique bus models, all of which are produced in Canada by
+				<a href="https://www.newflyer.com/" target="_blank" title="New Flyer [EXTERNAL]">New Flyer</a>. Click on a model to learn more.
+			</p>
+			<p>
+				<span id="articulated-total" class="bold">#</span> of London Transit&rsquo;s buses are
+				<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>.
+			</p>
+			<p>
+				For buses that are currently running, their route and position (latitude and longitude) are given. Click on a position to view it on
+				<a href="https://www.google.ca/maps" target="_blank" title="Google Maps [EXTERNAL]">Google Maps</a>.
+			</p>
+			<br />
+			<div class="table-scroll">
+				<table>
+					<tr>
+						<td>ID</td>
+						<td>model</td>
+						<td>articulated?</td>
+						<td>route</td>
+						<td>position</td>
+					</tr>
+				</table>
+			</div>
 
-		<br />
+			<br />
 
-		<b>ATTRIBUTION</b>
-		<ul>
-			<li>
-				bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank" title="LTC Open Data [EXTERNAL]">Open Data — London Transit Commission</a
-				>&rdquo;
-			</li>
-			<li>
-				additional information from <a href="https://cptdb.ca/wiki/index.php/Main_Page" target="_blank" title="CPTDB wiki [EXTERNAL]">the CPTDB wiki</a>,
-				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit&rsquo;s website</a>, and &ldquo;<a
-					href="https://realtime.londontransit.ca/#/app/nextdepartures"
-					target="_blank"
-					title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
-					>LTC realtime</a
-				>&rdquo;
-			</li>
-			<li>CORS proxy through <a href="https://corsproxy.io/" target="_blank" title="CorsProxy [EXTERNAL]">CorsProxy</a></li>
-			<li>
-				<a href="https://fonts.adobe.com/fonts/degular" target="_blank" title="Adobe Fonts > Degular [EXTERNAL]">Degular (typeface)</a> by
-				<a href="https://ohnotype.co/" target="_blank" title="OH no Type Co. [EXTERNAL]">OH no Type Co.</a> on
-				<a href="" target="_blank" title="Adobe Fonts [EXTERNAL]">Adobe Fonts</a>
-			</li>
-			<li>icons from <a href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a></li>
-			<li>
-				the
-				<a href="https://github.com/voronianski/oceanic-next-color-scheme" target="_blank" title="GitHub > voronianski > oceanic-next-color-scheme [EXTERNAL]"
-					>Oceanic Next</a
-				>
-				colour scheme
-			</li>
-			<li>and feedback/suggestions from some awesome people!</li>
-		</ul>
+			<b id="BUS-MAP">BUS MAP</b>
+			<h2 id="map-open" title="click to open the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">CLICK TO OPEN THE MAP</h2>
+			<p class="grey">or press &ldquo;ESCAPE&rdquo; to open/close the map</p>
 
-		<br />
+			<br />
+			<br />
+			<hr />
+			<br />
+			<br />
 
-		<b>HELP!</b>
-		<ul>
-			<li><a href="../status.html" title="pinniped.page — Status">website status</a></li>
-			<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
-		</ul>
+			<b id="ROUTE-MAPS">ROUTE MAPS</b>
+			<p>
+				For ease of navigation, these maps simplify the routes into straight lines. This makes it very clear where certain routes diverge into lettered branches, have
+				different termini at certain times, or exhibit other quirks, making it easy to identify your destination and see the stops that lead up to it. Each direction
+				has its own map, so please pay attention to the file names.
+			</p>
+			<p>
+				These maps are made manually in <a href="https://affinity.serif.com/designer/" target="_blank" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so
+				they will be added/updated very slowly.
+			</p>
+			<br />
+			<div class="table-scroll">
+				<table>
+					<tr>
+						<td>route</td>
+						<td>status</td>
+						<td>.PDF<span class="grey special-star">*</span></td>
+						<td>.PNG<span class="grey special-star">*</span></td>
+					</tr>
+					<tr>
+						<td>01</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>02</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>03</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>04</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>05</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>06</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>07</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>09</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>12</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>13</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>15</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>16</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>17</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>19</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>20</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>24</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>25</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>27</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>28</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>30</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>31</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>33</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>34</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>35</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>36</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>37</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>38</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td rowspan="2">90</td>
+						<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 13th, 2025</span></td>
+						<td>
+							<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
+						</td>
+						<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
+					</tr>
+					<tr>
+						<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 14th, 2025</span></td>
+						<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
+						<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
+					</tr>
+					<tr>
+						<td>91</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>92</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>93</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>94</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>95</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>102</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>104</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+					<tr>
+						<td>106</td>
+						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<p class="grey">
+				*you can avoid downloading the files by right-clicking the &ldquo;DOWNLOAD&rdquo; button on the Download page and then clicking &ldquo;Open link in new
+				tab&rdquo;
+			</p>
 
-		<br />
-		<br />
-		<br />
+			<br />
+			<br />
+			<hr />
+			<br />
+			<br />
 
-		<div class="colours">
-			<div style="background-color: var(--base08)"></div>
-			<div style="background-color: var(--base09)"></div>
-			<div style="background-color: var(--base0A)"></div>
-			<div style="background-color: var(--base0B)"></div>
-			<div style="background-color: var(--base0C)"></div>
-			<div style="background-color: var(--base0D)"></div>
-			<div style="background-color: var(--base0E)"></div>
-			<div style="background-color: var(--base0F)"></div>
+			<b id="DISCLAIMER">DISCLAIMER</b>
+			<ul>
+				<li>
+					the information provided on this page should not be used as a substitute for official information provided by the
+					<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit Commission</a>
+				</li>
+				<li>
+					the data processed by and shown on this page may not be 100% correct, as stated in the data&rsquo;s
+					<a href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/" target="_blank" title="LTC Open Data > Terms of Use [EXTERNAL]"
+						>Terms of Use</a
+					>
+				</li>
+			</ul>
+
+			<br />
+
+			<b id="LIMITATIONS">LIMITATIONS</b>
+			<ul>
+				<li>
+					some data is entered manually, so be sure to check the date that this page was last updated (it&rsquo;s shown at the
+					<span id="to-top-text" title="click to scroll to the top of the page">top of the page</span>) or the
+					<a
+						href="https://github.com/ObsidianSeal/pinniped.page/commits/main/public/projects/bus-data.html"
+						target="_blank"
+						title="GitHub > ObsidianSeal > pinniped.page > bus-data.html history [EXTERNAL]"
+						>GitHub commit history</a
+					>
+					to see how up-to-date it is
+				</li>
+				<li>
+					this page assumes the
+					<a
+						href="https://www.londontransit.ca/wp-content/uploads/2024/08/Route-51-55-Community-Bus.pdf"
+						target="_blank"
+						title="LTC > Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]"
+						>Community Bus routes</a
+					>
+					do not exist
+				</li>
+				<li>rounding errors are almost certainly present</li>
+			</ul>
+
+			<br />
+
+			<b id="ATTRIBUTION">ATTRIBUTION</b>
+			<ul>
+				<li>
+					bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank" title="LTC Open Data [EXTERNAL]"
+						>Open Data — London Transit Commission</a
+					>&rdquo;
+				</li>
+				<li>
+					additional information from <a href="https://cptdb.ca/wiki/index.php/Main_Page" target="_blank" title="CPTDB wiki [EXTERNAL]">the CPTDB wiki</a>,
+					<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit&rsquo;s website</a>, and &ldquo;<a
+						href="https://realtime.londontransit.ca/#/app/nextdepartures"
+						target="_blank"
+						title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
+						>LTC realtime</a
+					>&rdquo;
+				</li>
+				<li>CORS proxy through <a href="https://corsproxy.io/" target="_blank" title="CorsProxy [EXTERNAL]">CorsProxy</a></li>
+				<li>
+					<a href="https://fonts.adobe.com/fonts/degular" target="_blank" title="Adobe Fonts > Degular [EXTERNAL]">Degular (typeface)</a> by
+					<a href="https://ohnotype.co/" target="_blank" title="OH no Type Co. [EXTERNAL]">OH no Type Co.</a> on
+					<a href="" target="_blank" title="Adobe Fonts [EXTERNAL]">Adobe Fonts</a>
+				</li>
+				<li>icons from <a href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a></li>
+				<li>
+					the
+					<a href="https://github.com/voronianski/oceanic-next-color-scheme" target="_blank" title="GitHub > voronianski > oceanic-next-color-scheme [EXTERNAL]"
+						>Oceanic Next</a
+					>
+					colour scheme
+				</li>
+				<li>and feedback/suggestions from some awesome people!</li>
+			</ul>
+
+			<br />
+
+			<b id="HELP">HELP!</b>
+			<ul>
+				<li><a href="../status.html" title="pinniped.page — Status">website status</a></li>
+				<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
+			</ul>
+
+			<br />
+			<br />
+			<br />
+
+			<div class="colours">
+				<div style="background-color: var(--base08)"></div>
+				<div style="background-color: var(--base09)"></div>
+				<div style="background-color: var(--base0A)"></div>
+				<div style="background-color: var(--base0B)"></div>
+				<div style="background-color: var(--base0C)"></div>
+				<div style="background-color: var(--base0D)"></div>
+				<div style="background-color: var(--base0E)"></div>
+				<div style="background-color: var(--base0F)"></div>
+			</div>
+
+			<div id="to-top-button" title="click to scroll to the top of the page"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
 		</div>
-
-		<div id="to-top-button" title="click to scroll to the top of the page"><i class="fa-sharp fa-solid fa-arrow-up"></i></div>
 
 		<div class="map hide">
 			<canvas></canvas>
@@ -4123,6 +4254,25 @@
 							><span class="settings-option">ALL</span></span
 						>
 					</p>
+					<br />
+					<p>
+						<span>routes:</span
+						><span
+							><span class="settings-option">01</span><span class="settings-option">02</span><span class="settings-option">03</span
+							><span class="settings-option">04</span><span class="settings-option">05</span><span class="settings-option">06</span
+							><span class="settings-option">07</span><span class="settings-option">09</span><span class="settings-option">10</span
+							><span class="settings-option">12</span><span class="settings-option">13</span><span class="settings-option">15</span
+							><span class="settings-option">16</span><span class="settings-option">17</span><span class="settings-option">19</span
+							><span class="settings-option">20</span><span class="settings-option">24</span><span class="settings-option">25</span
+							><span class="settings-option">27</span><span class="settings-option">28</span><span class="settings-option">30</span
+							><span class="settings-option">31</span><span class="settings-option">33</span><span class="settings-option">34</span
+							><span class="settings-option">35</span><span class="settings-option">36</span><span class="settings-option">37</span
+							><span class="settings-option">38</span><span class="settings-option">90</span><span class="settings-option">91</span
+							><span class="settings-option">92</span><span class="settings-option">93</span><span class="settings-option">94</span
+							><span class="settings-option">95</span><span class="settings-option">102</span><span class="settings-option">104</span
+							><span class="settings-option">106</span><span class="settings-option selected-setting">ALL</span></span
+						>
+					</p>
 				</div>
 				<div class="map-extra-window hide" id="map-extra-window-info">
 					<div class="map-extra-window-close-icon" title="click to close the &ldquo;ABOUT THE MAP&rdquo; panel (keyboard shortcut: &ldquo;SPACE&rdquo;)">
@@ -4176,7 +4326,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v0.0.25</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.0</span>
 				</p>
 				<br />
 				<p><a href="../status.html" title="pinniped.page — Status">website status</a>/<a href="../contact.html" title="pinniped.page — Contact">report a problem</a></p>

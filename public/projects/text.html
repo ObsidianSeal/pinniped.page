@@ -17,7 +17,7 @@
 		<meta property="og:url" content="https://pinniped.page/projects/text" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="text" />
-		<meta property="og:description" content="I'm trying to learn Firebase Realtime Database" />
+		<meta property="og:description" content="Chat anonymously, but publicly; messages are only saved for 30 minutes." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" defer></script>
@@ -82,7 +82,7 @@
 
 			input {
 				width: calc(100% - 128px);
-				max-width: 500px;
+				max-width: 750px;
 				height: 36px;
 				background-color: #edf2f4;
 				border: 3px solid #2b2d42;
@@ -91,6 +91,10 @@
 				font-family: "Roboto Mono";
 				font-size: 20px;
 				caret-color: #ef233c;
+			}
+
+			input::placeholder {
+				color: #8d99ae;
 			}
 
 			input:focus {
@@ -131,7 +135,7 @@
 
 	<body>
 		<form autocomplete="off" name="textForm" id="textForm">
-			<input name="textInput" id="textInput" maxlength="120" />
+			<input name="textInput" id="textInput" maxlength="120" placeholder="send an anonymous, public message of at most 120 characters" />
 			<div id="textButton"><i class="fa-solid fa-share"></i></div>
 		</form>
 
