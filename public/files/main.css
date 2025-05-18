@@ -184,7 +184,7 @@ ul {
 	background: #292f36;
 	position: fixed;
 	top: 0;
-	box-shadow: 0 0 10px 5px #ffffee;
+	/* box-shadow: 0 0 10px 5px #ffffee; */
 	z-index: 2;
 	display: flex;
 	flex-direction: row;
@@ -503,7 +503,7 @@ ul {
 	padding: 0 30px;
 }
 
-.notice {
+/* .notice {
 	display: flex;
 	align-items: center;
 
@@ -530,7 +530,7 @@ ul {
 .notice-x:focus {
 	color: #ffffee;
 	cursor: pointer;
-}
+} */
 
 .new,
 .updated,
