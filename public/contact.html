@@ -110,8 +110,13 @@
 				<i class="fa-solid fa-i-cursor"></i>
 			</h3>
 
-			<div class="search" style="margin-bottom: 20px">
-				<div class="search-tags">
+			<p>
+				If you want to send an anonymous message, fill out the form below. If the message necessitates a response, I will address it in an announcement on
+				<a href="https://pinniped.page/discord" class="link-3" target="_blank" title="join Seal Squad [EXTERNAL]">my Discord server, linked above</a>.
+			</p>
+
+			<div class="contact-form" style="margin-top: 20px">
+				<div class="search-tags" id="type-select">
 					<b>TYPE:</b>
 					<p tabindex="0">ISSUES</p>
 					<p tabindex="0">COMMENTS</p>
@@ -120,30 +125,76 @@
 					<p tabindex="0">HELP</p>
 					<p tabindex="0" class="search-tag-active">OTHER</p>
 				</div>
-				<div class="search-tags">
+				<div class="search-tags" id="priority-select">
 					<b>PRIORITY:</b>
 					<p tabindex="0" class="search-tag-active">LOW</p>
 					<p tabindex="0">MEDIUM</p>
 					<p tabindex="0">HIGH</p>
 				</div>
-				<div class="search-main">
+				<div class="contact-form-subject">
 					<b>SUBJECT:</b>
-					<div>
-						<input type="text" autocapitalize="off" autocomplete="off" id="contact-form-subject" />
-					</div>
+					<input type="text" autocomplete="off" id="contact-form-subject" placeholder="What&rsquo;s your message about?" />
 				</div>
-				<textarea id="contact-form-body"></textarea>
+				<textarea id="contact-form-body" placeholder="Write your message here!"></textarea>
 			</div>
 
-			<div class="download-button small-text" style="margin: 0">
-				<a class="invert" id="download-link" title="submit the form">
+			<p>
+				Please do not include any personal information in your message and make sure to
+				<a href="about.html" title="pinniped.page — About" class="link-3">review the website&rsquo;s privacy policy</a> before sending.
+			</p>
+
+			<div class="download-button small-text" id="contact-form-submit-button" style="margin-top: 20px">
+				<a class="invert" href="" id="download-link" title="submit the form">
 					SEND &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+				</a>
+			</div>
+
+			<hr />
+
+			<h3 class="subheading">
+				<div><span class="title title-3">if all else fails...</span></div>
+				<i class="fa-solid fa-seal-exclamation"></i>
+			</h3>
+
+			<p class="text">
+				If the contact form doesn&rsquo;t work for some reason, you could try opening a <b>GitHub issue</b>. These posts are public, however, and require a
+				<a href="https://github.com/" class="link-3" target="_blank" title="GitHub [EXTERNAL]">GitHub</a>
+				account to create.
+			</p>
+
+			<div class="download-button download-button-long small-text">
+				<a
+					class="invert"
+					id="download-link"
+					href="https://github.com/ObsidianSeal/pinniped.page/issues"
+					title="GitHub / ObsidianSeal / pinniped.page (issues) [EXTERNAL]"
+					target="_blank"
+				>
+					PINNIPED.PAGE ISSUES &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
+				</a>
+			</div>
+
+			<hr />
+
+			<h3 class="subheading">
+				<div><span class="title title-3">please note</span></div>
+				<i class="fa-solid fa-person-sign"></i>
+			</h3>
+
+			<p class="text">
+				Working on the <span class="highlighted">pinniped.page</span> is my passion, but don&rsquo;t expect perfection. There will always be things that I don&rsquo;t
+				have the time or energy to fix or create. I am but one person.
+			</p>
+
+			<div class="download-button small-text">
+				<a class="invert" id="download-link" href="about.html" title="pinniped.page — About">
+					<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>&nbsp; WHO IS THIS GUY
 				</a>
 			</div>
 
 			<div class="content-end"></div>
 
-			<b class="small-text half-opacity">LAST UPDATED: April 29th, 2025</b>
+			<b class="small-text half-opacity">LAST UPDATED: May 18th, 2025</b>
 		</div>
 
 		<div class="footer" style="background: #ffffee"></div>
@@ -154,6 +205,47 @@
 		<script src="files/footer.js"></script>
 		<script src="files/to-top.js"></script>
 
-		<script></script>
+		<script>
+			// OPTIONS
+			let types = ["ISSUES", "COMMENTS", "SUGGESTIONS", "QUESTIONS", "HELP", "OTHER"];
+			let priorities = ["LOW", "MEDIUM", "HIGH"];
+
+			// DEFAULT OPTIONS
+			let typeSelected = types[5];
+			let prioritySelected = priorities[0];
+
+			// OPTION ELEMENTS
+			let selectElements = document.querySelectorAll("#type-select p, #priority-select p");
+
+			// SET OPTIONS
+			function select(element) {
+				for (let otherElement of element.parentNode.children) otherElement.classList.remove("search-tag-active");
+				element.classList.add("search-tag-active");
+				if (types.includes(element.innerHTML)) typeSelected = element.innerHTML;
+				if (priorities.includes(element.innerHTML)) prioritySelected = element.innerHTML;
+			}
+
+			// OPTION CHANGE LISTENERS
+			for (let element of selectElements) {
+				element.addEventListener("click", () => select(element));
+				element.addEventListener("keydown", (e) => {
+					if (e.key === "Enter") select(element);
+				});
+			}
+
+			// SUBMIT FORM
+			function submit(e) {
+				console.log(typeSelected, prioritySelected, document.querySelector("#contact-form-subject").value, document.querySelector("#contact-form-body").value);
+				e.preventDefault();
+			}
+
+			// SUBMIT FORM ("click")
+			document.querySelector("#contact-form-submit-button").addEventListener("click", (e) => submit(e));
+
+			// SUBMIT FORM ("keydown")
+			document.querySelector("#contact-form-submit-button").addEventListener("keydown", (e) => {
+				if (e.key === "Enter") submit(e);
+			});
+		</script>
 	</body>
 </html>
