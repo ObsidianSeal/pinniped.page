@@ -33,6 +33,16 @@
 				background-color: #ff6b6b;
 			}
 
+			.new-button {
+				margin-left: 40px;
+			}
+
+			@media all and (max-width: 950px) {
+				.new-button {
+					margin-left: 0;
+				}
+			}
+
 			@media all and (max-width: 240px) {
 				.page-title i {
 					display: block;
@@ -167,11 +177,12 @@
 				</div>
 			</div>
 
-			<div class="download-button small-text">
-				<a class="invert" id="download-link" href="blog+.html">
-					OLDER POSTS &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
-				</a>
-			</div>
+			<a class="new-button small-text" href="blog+.html" title="pinniped.page — Blog+">
+				<div>
+					<span>OLDER POSTS</span>
+					<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+				</div>
+			</a>
 
 			<div id="to_top_button" style="display: none"><i class="fa-solid fa-arrow-up-long"></i></div>
 		</div>

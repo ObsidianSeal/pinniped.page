@@ -72,10 +72,10 @@ a.link-3:focus {
 	background-color: #ffe66d7f;
 }
 
-a#download-link {
+/* a#download-link {
 	font-family: "Roboto Slab";
 	letter-spacing: 0.025em;
-}
+} */
 
 h1,
 h2,
@@ -116,7 +116,8 @@ h6 {
 }
 
 p,
-b {
+b,
+.new-button {
 	font-family: "Roboto Slab";
 	font-size: 24px;
 	margin-top: 0;
@@ -383,15 +384,14 @@ ul {
 	font-weight: 700;
 }
 
-.download-button {
-	user-select: none;
+/* .download-button {
 	height: 40px;
 	width: 250px;
 	background-color: #292f36;
 	margin-top: 40px;
-}
+} */
 
-.download-button,
+/* .download-button, */
 .navbar {
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -467,9 +467,9 @@ ul {
 	opacity: 50%;
 }
 
-.box-area .download-button {
+/* .box-area .download-button {
 	margin-left: 40px;
-}
+} */
 
 .icon-30 {
 	margin-right: calc(50px - 30px);
@@ -701,7 +701,7 @@ ul {
 	padding: 2px 10px;
 }
 
-.download-button-group {
+/* .download-button-group {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px 40px;
@@ -713,7 +713,7 @@ ul {
 
 .download-button-group .download-button:not(:first-child) {
 	margin-left: 0;
-}
+} */
 
 .small-text {
 	font-size: 16px;
@@ -828,7 +828,42 @@ ul {
 	text-decoration-skip-ink: none;
 }
 
-#download-link {
+.new-button {
+	width: fit-content;
+	height: 40px;
+
+	display: flex;
+	align-items: center;
+	padding: 0 40px;
+
+	letter-spacing: 0.025em;
+
+	background-color: #292f36;
+	color: #ffffee;
+}
+
+.new-button > div {
+	display: flex;
+	gap: 10px;
+
+	border-top: 3px solid transparent;
+	border-bottom: 3px solid transparent;
+
+	transition: border-bottom-color 0.5s;
+}
+
+.new-button:hover > div,
+.new-button:focus > div {
+	border-bottom-color: #ffffee;
+}
+
+.new-button-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px 40px;
+}
+
+/* #download-link {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -844,7 +879,7 @@ ul {
 #download-link:hover,
 #download-link:focus {
 	text-decoration-color: #ffffee;
-}
+} */
 
 #navbar-mobile {
 	width: 100%;
@@ -1052,9 +1087,9 @@ ul {
 		margin: 10px 10px 10px 0;
 	}
 
-	.box-area .download-button {
+	/* .box-area .download-button {
 		margin-left: 0;
-	}
+	} */
 
 	.box-icon {
 		font-size: 80px;
@@ -1203,9 +1238,9 @@ ul {
 		translate: 0 -5px;
 	}
 
-	.download-button:not(.download-button-long) {
+	/* .download-button:not(.download-button-long) {
 		width: 200px;
-	}
+	} */
 
 	.download-space {
 		height: calc(100vh - 348px);

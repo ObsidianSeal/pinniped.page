@@ -30,6 +30,10 @@
 				margin: 40px 0 0 40px;
 			}
 
+			.new-button-group {
+				margin-left: 40px;
+			}
+
 			@media all and (max-width: 1750px) {
 				.search {
 					position: relative;
@@ -41,6 +45,10 @@
 			@media all and (max-width: 950px) {
 				.search {
 					margin: 40px 0 0;
+				}
+
+				.new-button-group {
+					margin-left: 0;
 				}
 			}
 
@@ -177,18 +185,20 @@
 				</div>
 			</div>
 
-			<div class="download-button-group small-text">
-				<div class="download-button">
-					<a class="invert" id="download-link" href="projects+.html">
-						ALL PROJECTS &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
-					</a>
-				</div>
+			<div class="new-button-group">
+				<a class="new-button small-text" href="projects+.html" title="pinniped.page — Projects+">
+					<div>
+						<span>ALL PROJECTS</span>
+						<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+					</div>
+				</a>
 
-				<div class="download-button download-button-long" id="randomProjectButton">
-					<a class="invert" id="download-link" href="">
-						RANDOM PROJECT &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
-					</a>
-				</div>
+				<a class="new-button small-text" href="yikes.html?s=400" title="click to search for a random project" id="randomProjectButton">
+					<div>
+						<span>RANDOM PROJECT</span>
+						<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+					</div>
+				</a>
 			</div>
 
 			<div class="search">
@@ -376,15 +386,15 @@
 
 			function randomSearch() {
 				document
-					.querySelector("#randomProjectButton a")
+					.querySelector("#randomProjectButton")
 					.setAttribute("href", `projects+.html?search=%5E${encodeURIComponent(projects[Math.floor(Math.random() * projects.length)])}%24&r=t`);
 			}
 
-			document.querySelector("#randomProjectButton a").addEventListener("click", (e) => {
+			document.querySelector("#randomProjectButton").addEventListener("click", (e) => {
 				randomSearch();
 			});
 
-			document.querySelector("#randomProjectButton a").addEventListener("keydown", (e) => {
+			document.querySelector("#randomProjectButton").addEventListener("keydown", (e) => {
 				if (e.key == "Enter") {
 					randomSearch();
 				}

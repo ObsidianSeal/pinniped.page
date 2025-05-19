@@ -47,13 +47,14 @@
 
 			<div class="break"></div>
 
-			<p class="bold" id="download-name" style="background-color: transparent">Loading...</p>
+			<p class="bold" id="download-name">Loading...</p>
 
-			<div class="download-button small-text">
-				<a class="invert" id="download-link" href="404.html" download
-					>DOWNLOAD &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i
-				></a>
-			</div>
+			<a class="new-button small-text" id="download-link" href="yikes.html?s=404" title="click to download the specified file" download style="margin-top: 40px">
+				<div>
+					<span>DOWNLOAD</span>
+					<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+				</div>
+			</a>
 
 			<div class="content-end"></div>
 		</div>
@@ -68,17 +69,11 @@
 			const item = new URLSearchParams(query);
 			const download = item.get("x");
 
-			if (download == null) {
-				document.getElementById("download-name").innerHTML = `ERROR!`;
-			} else if (download == "") {
-				document.getElementById("download-name").innerHTML = `ERROR!`;
+			if (download == null || download == "" || download.indexOf(">") > -1 || download.indexOf("<") > -1 || download.indexOf(">") > -1 || download.indexOf("<") > -1) {
+				window.location.href = "yikes.html?s=406";
 			} else {
-				if (download.indexOf(">") > -1 || download.indexOf("<") > -1 || download.indexOf(">") > -1 || download.indexOf("<") > -1) {
-					document.getElementById("download-name").innerHTML = `ERROR!`;
-				} else {
-					document.getElementById("download-name").innerHTML = `${download}`;
-					document.getElementById("download-link").href = `files/${download}`;
-				}
+				document.getElementById("download-name").innerHTML = `${download}`;
+				document.getElementById("download-link").href = `files/${download}`;
 			}
 		</script>
 

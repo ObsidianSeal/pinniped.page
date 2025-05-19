@@ -78,30 +78,33 @@
 
 			<p class="text">If you have general website questions, the <b>About page</b> may have the answers you seek.</p>
 
-			<div class="download-button small-text">
-				<a class="invert" id="download-link" href="about.html" title="pinniped.page — About">
-					<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>&nbsp; LEARN MORE
-				</a>
-			</div>
+			<a class="new-button small-text" href="about.html" title="pinniped.page — About" style="margin: 10px 0 30px">
+				<div>
+					<span><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i></span>
+					<span>LEARN MORE</span>
+				</div>
+			</a>
 
 			<p class="text">
 				If you&rsquo;ve discovered an issue and want to report it, make sure I&rsquo;m not already aware of it by checking the <b>Status page</b>. You can also go there
 				to see what&rsquo;s currently being developed, unavailable, or full of bugs.
 			</p>
 
-			<div class="download-button small-text">
-				<a class="invert" id="download-link" href="status.html" title="pinniped.page — Status">
-					WEBSITE STATUS &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
-				</a>
-			</div>
+			<a class="new-button small-text" href="status.html" title="pinniped.page — Status" style="margin: 10px 0 30px">
+				<div>
+					<span>WEBSITE STATUS</span>
+					<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+				</div>
+			</a>
 
 			<p class="text">If you just want to chat, my <b>Discord server</b> is a great place to start.</p>
 
-			<div class="download-button small-text">
-				<a class="invert" id="download-link" href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">
-					SEAL SQUAD &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
-				</a>
-			</div>
+			<a class="new-button small-text" href="https://pinniped.page/discord" title="join Seal Squad [EXTERNAL]" target="_blank" style="margin: 10px 0 30px">
+				<div>
+					<span>SEAL SQUAD</span>
+					<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+				</div>
+			</a>
 
 			<hr />
 
@@ -110,7 +113,7 @@
 				<i class="fa-solid fa-i-cursor"></i>
 			</h3>
 
-			<p>
+			<p class="text">
 				If you want to send an anonymous message, fill out the form below. If the message necessitates a response, I will address it in an announcement on
 				<a href="https://pinniped.page/discord" class="link-3" target="_blank" title="join Seal Squad [EXTERNAL]">my Discord server, linked above</a>.
 			</p>
@@ -133,21 +136,29 @@
 				</div>
 				<div class="contact-form-subject">
 					<b>SUBJECT:</b>
-					<input type="text" autocomplete="off" id="contact-form-subject" placeholder="What&rsquo;s your message about?" />
+					<input type="text" autocomplete="off" id="contact-form-subject" placeholder="What&rsquo;s your message about? [MAX.: 100 CHARACTERS]" />
 				</div>
-				<textarea id="contact-form-body" placeholder="Write your message here!"></textarea>
+				<textarea
+					id="contact-form-body"
+					placeholder="Write your message here!
+					
+[MAX.: 1500 CHARACTERS]
+
+Markdown formatting is partially supported."
+				></textarea>
 			</div>
 
-			<p>
+			<p class="text">
 				Please do not include any personal information in your message and make sure to
 				<a href="about.html" title="pinniped.page — About" class="link-3">review the website&rsquo;s privacy policy</a> before sending.
 			</p>
 
-			<div class="download-button small-text" id="contact-form-submit-button" style="margin-top: 20px">
-				<a class="invert" href="" id="download-link" title="submit the form">
-					SEND &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
-				</a>
-			</div>
+			<a class="new-button small-text" id="contact-form-submit-button" href="yikes.html?s=400" title="click to submit the form" style="margin: 20px 0 30px">
+				<div>
+					<span>SEND</span>
+					<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+				</div>
+			</a>
 
 			<hr />
 
@@ -162,17 +173,19 @@
 				account to create.
 			</p>
 
-			<div class="download-button download-button-long small-text">
-				<a
-					class="invert"
-					id="download-link"
-					href="https://github.com/ObsidianSeal/pinniped.page/issues"
-					title="GitHub / ObsidianSeal / pinniped.page (issues) [EXTERNAL]"
-					target="_blank"
-				>
-					PINNIPED.PAGE ISSUES &nbsp;<i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i>
-				</a>
-			</div>
+			<a
+				class="new-button small-text"
+				id="contact-form-submit-button"
+				href="https://github.com/ObsidianSeal/pinniped.page/issues"
+				title="GitHub > Obsidian_Seal/pinniped.page > issues [EXTERNAL]"
+				target="_blank"
+				style="margin: 10px 0 30px"
+			>
+				<div>
+					<span>PINNIPED.PAGE ISSUES</span>
+					<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+				</div>
+			</a>
 
 			<hr />
 
@@ -186,11 +199,12 @@
 				have the time or energy to fix or create. I am but one person.
 			</p>
 
-			<div class="download-button small-text">
-				<a class="invert" id="download-link" href="about.html" title="pinniped.page — About">
-					<i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i>&nbsp; WHO IS THIS GUY
-				</a>
-			</div>
+			<a class="new-button small-text" href="about.html" title="pinniped.page — About" style="margin: 10px 0 30px">
+				<div>
+					<span><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i></span>
+					<span>WHO IS THIS GUY?</span>
+				</div>
+			</a>
 
 			<div class="content-end"></div>
 
@@ -236,6 +250,7 @@
 			// SUBMIT FORM
 			function submit(e) {
 				console.log(typeSelected, prioritySelected, document.querySelector("#contact-form-subject").value, document.querySelector("#contact-form-body").value);
+				window.location.href = "yikes.html?s=202";
 				e.preventDefault();
 			}
 
