@@ -670,15 +670,15 @@
 
 		function randomSearch() {
 			document
-				.querySelector("#randomProjectButton a")
+				.querySelector("#randomProjectButton")
 				.setAttribute("href", `projects+.html?search=%5E${encodeURIComponent(projects[Math.floor(Math.random() * projects.length)])}%24&r=t`);
 		}
 
-		document.querySelector("#randomProjectButton a").addEventListener("click", (e) => {
+		document.querySelector("#randomProjectButton").addEventListener("click", (e) => {
 			randomSearch();
 		});
 
-		document.querySelector("#randomProjectButton a").addEventListener("keydown", (e) => {
+		document.querySelector("#randomProjectButton").addEventListener("keydown", (e) => {
 			if (e.key == "Enter") {
 				randomSearch();
 			}
