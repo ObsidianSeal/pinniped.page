@@ -28,11 +28,13 @@ function addView(views) {
 	if (!alreadyViewed) {
 		alreadyViewed = true;
 
-		firebase
-			.database()
-			.ref("/post-views/" + postName)
-			.set({
-				views: views + 1,
-			});
+		if (!window.location.href.includes("://localhost:")) {
+			firebase
+				.database()
+				.ref("/post-views/" + postName)
+				.set({
+					views: views + 1,
+				});
+		}
 	}
 }

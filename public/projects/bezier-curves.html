@@ -5,82 +5,92 @@
 		<title>BezierCurves</title>
 
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
 
 		<link rel="icon" href="../images/icon.png" />
 
-		<meta name="theme-color" content="#4ecdc4" />
-
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-		<link rel="stylesheet" href="../files/main.css" />
-
-		<script src="../files/menu.js"></script>
 
 		<meta property="og:url" content="https://pinniped.page/bezier-curves" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="BezierCurves" />
-		<meta property="og:description" content="Play around with bezier curves." />
+		<meta property="og:description" content="Play with bezier curves." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<style>
-			body {
+			body,
+			iframe {
 				margin: 0;
 				border: 0;
 				padding: 0;
 			}
 
 			iframe {
-				margin: 0;
-				border: 0;
-				padding: 0;
+				display: block;
 
 				width: 100vw;
 				height: 100vh;
+			}
+
+			::-webkit-scrollbar {
+				width: 0;
+				height: 0;
+			}
+
+			.links {
+				position: fixed;
+				top: 3px;
+				right: 70px;
+			}
+
+			.links a {
+				width: 35px;
+				height: 35px;
+
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+
+				border-radius: 3px;
+
+				font-size: 24px;
+
+				background-color: lightgrey;
+				color: black;
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: steelblue;
 			}
 		</style>
 	</head>
 
 	<body>
-		<iframe src="https://editor.p5js.org/Obsidian_Seal/full/RP7cIIn2R"></iframe>
-
-		<p class="middle" style="margin-top: 17px">
-			<b>
-				<a class="link" href="../posts/2022-09-02.html" target="_blank">instructions</a> •
-				<a class="link" href="https://github.com/ObsidianSeal/BezierCurves" target="_blank">code</a> •
-				<a class="link" href="https://processing.org/" target="_blank">processing</a> •
-				<a class="link" href="https://p5js.org/" target="_blank">p5.js</a>
-			</b>
-		</p>
-
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
+		<div class="links">
+			<a href="../posts/2022-09-02.html" target="_blank" title="blog post — “BezierCurves”"><i class="fa-solid fa-circle-question"></i></a>
+			<a href="https://github.com/ObsidianSeal/BezierCurves" target="_blank" title="GitHub > ObsidianSeal/BezierCurves [EXTERNAL]"><i class="fa-brands fa-github"></i></a>
+			<a href="https://processing.org/" target="_blank" title="Processing [EXTERNAL]"><i class="fa-solid fa-p"></i></a>
+			<a href="https://p5js.org/" target="_blank" title="p5.js [EXTERNAL]"><i class="fa-brands fa-square-js"></i></a>
+		</div>
 
 		<script>
-			document.addEventListener("keydown", (e) => {
-				if (e.key === "f") {
-					// toggle fullscreen
-					if (document.fullscreenElement) {
-						document.exitFullscreen();
-					} else {
-						document.documentElement.requestFullscreen();
-					}
+			function updateSizes() {
+				document.body.style = `height: ${window.innerHeight}px`;
 
-					// remove original iframe
-					document.querySelector("iframe").remove();
+				document.querySelectorAll("iframe").forEach((frame) => frame.remove());
 
-					// create new iframe, add it to the page
-					const frame = document.createElement("iframe");
-					const body = document.querySelector("body");
-					const p = document.querySelector("p");
-					body.insertBefore(frame, p);
+				let newFrame = document.createElement("iframe");
+				newFrame.setAttribute("src", "https://editor.p5js.org/Obsidian_Seal/full/RP7cIIn2R");
+				document.body.appendChild(newFrame);
+			}
+			updateSizes();
 
-					// make the iframe BezierCurves
-					document.querySelector("iframe").setAttribute("src", "https://editor.p5js.org/Obsidian_Seal/full/RP7cIIn2R");
-				}
+			addEventListener("resize", () => {
+				setTimeout(() => {
+					updateSizes();
+				}, 700);
 			});
 		</script>
 	</body>
