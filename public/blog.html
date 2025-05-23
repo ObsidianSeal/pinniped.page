@@ -214,6 +214,25 @@
 			});
 		</script>
 
+		<script>
+			// copied from projects.html
+
+			const content = document.querySelector(".box-area"); // footer.js but with .box-area
+			const contentBottom = content.getBoundingClientRect().bottom;
+			const screenHeight = window.innerHeight;
+
+			// console.log(screenHeight, contentBottom);
+			// console.log(screenHeight - 100 > contentBottom);
+
+			if (screenHeight - 100 > contentBottom) {
+				const space = document.createElement("div");
+				const height = screenHeight - 100 - contentBottom;
+				console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
+				space.setAttribute("style", `height: ${height}px`);
+				content.appendChild(space);
+			}
+		</script>
+
 		<script type="module">
 			const firebaseConfig = {
 				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
