@@ -2,7 +2,7 @@
 
 <html lang="en">
 	<head>
-		<title>Blog+ (archive)</title>
+		<title>Blog+</title>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,11 +21,11 @@
 
 		<meta property="og:url" content="https://pinniped.page/blog+" />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="pinniped.page — Blog (archive)" />
-		<meta property="og:description" content="Old blog posts." />
+		<meta property="og:title" content="pinniped.page — Blog+" />
+		<meta property="og:description" content="All blog posts." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
-		<meta name="description" content="Old blog posts." />
+		<meta name="description" content="All blog posts." />
 		<meta name="keywords" content="pinniped, page, obsidian_seal, seal, blog, updates" />
 
 		<style>
@@ -70,6 +70,63 @@
 				</div>
 			</a>
 
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-code-commit fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2025-05-14.html">500 commits & BUS DATA</a>
+					<span>— May 14th, 2025&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-party-horn fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2024-11-28.html">four years of the pinniped.page</a>
+					<span>— November 28th, 2024&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-font-case fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2024-07-16.html">I bought 780+ fonts.</a>
+					<span>— July 16th, 2024&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-chart-pie fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2024-07-08.html">Costs & Limitations</a>
+					<span>— July 8th, 2024&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-trowel-bricks fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2024-05-12.html">some LEGO</a>
+					<span>— May 12th, 2024&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-magnifying-glass fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2024-04-28.html">Even More (Super Cool) Changes</a>
+					<span>— April 28th, 2023&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-hurricane fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2024-04-21.html">So. Many. Projects.</a>
+					<span>— April 21st, 2024&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<p class="blog-archive">
+				<span class="blog-archive-list-marker"><i class="fa-solid fa-diagram-project fa-fw"></i></span>
+				<span class="blog-archive-list-item">
+					<a class="link link-2" href="posts/2024-03-08.html">Finite Craft & NYT Games Notation</a>
+					<span>— March 8th, 2024&nbsp;</span><i class="fa-solid fa-circle"></i><span class="view-count">&nbsp;0 views</span>
+				</span>
+			</p>
+			<hr />
 			<p class="blog-archive">
 				<span class="blog-archive-list-marker"><i class="fa-solid fa-face-smile-wink fa-fw"></i></span>
 				<span class="blog-archive-list-item">
@@ -373,37 +430,6 @@
 				});
 		</script>
 
-		<script>
-			// copied from projects+.html
-
-			// --- PART THREE: MODIFIED FOOTER.JS TO PLACE FOOTER AT BOTTOM AFTER FONT AWESOME HAS LOADED ---
-			const content = document.querySelector(".content");
-			const icon = document.querySelector(".page-title i");
-
-			function setFooterSpace() {
-				let contentBottom = document.querySelector(".content-end").getBoundingClientRect().bottom;
-				let screenHeight = window.innerHeight;
-
-				if (screenHeight - 80 > contentBottom) {
-					const space = document.createElement("div");
-					const height = screenHeight - 80 - contentBottom;
-					console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
-					space.setAttribute("style", `height: ${height}px`);
-					content.appendChild(space);
-				}
-			}
-
-			const iconSizeCheck = setInterval(() => {
-				let iconWidth = icon.getBoundingClientRect().width;
-				let iconHeight = icon.getBoundingClientRect().height;
-
-				console.log(iconWidth, iconHeight);
-
-				if (iconWidth != 0 && iconHeight != 0) {
-					setFooterSpace();
-					clearInterval(iconSizeCheck);
-				}
-			}, 20);
-		</script>
+		<script src="files/footer.js"></script>
 	</body>
 </html>

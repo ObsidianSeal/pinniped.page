@@ -246,20 +246,21 @@
 		</script>
 
 		<script>
-			const content = document.querySelector(".box-area"); // footer.js but with .box-area
+			// modified footer.js
+
+			const content = document.querySelector(".box-area"); // .box-area instead of .content
 			const contentBottom = content.getBoundingClientRect().bottom;
 			const screenHeight = window.innerHeight;
 
-			// console.log(screenHeight, contentBottom);
-			// console.log(screenHeight - 100 > contentBottom);
-
-			if (screenHeight - 100 > contentBottom) {
-				const space = document.createElement("div");
-				const height = screenHeight - 100 - contentBottom;
-				console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
-				space.setAttribute("style", `height: ${height}px`);
-				content.appendChild(space);
-			}
+			// 100 instead of 80
+			window.addEventListener("load", () => {
+				if (screenHeight - 100 > contentBottom) {
+					const space = document.createElement("div");
+					const height = screenHeight - 100 - contentBottom;
+					space.setAttribute("style", `height: ${height}px`);
+					content.appendChild(space);
+				}
+			});
 
 			// -----
 

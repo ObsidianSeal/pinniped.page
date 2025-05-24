@@ -2,7 +2,7 @@
 
 <html lang="en">
 	<head>
-		<title>Projects+ (a-z)</title>
+		<title>Projects+</title>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +18,7 @@
 
 		<meta property="og:url" content="https://pinniped.page/projects+" />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="pinniped.page — Projects (a-z)" />
+		<meta property="og:title" content="pinniped.page — Projects+" />
 		<meta property="og:description" content="Obsidian_Seal&rsquo;s projects, listed alphabetically." />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
@@ -583,33 +583,33 @@
 		});
 
 		// --- PART THREE: MODIFIED FOOTER.JS TO PLACE FOOTER AT BOTTOM AFTER FONT AWESOME HAS LOADED ---
-		const content = document.querySelector(".content");
-		const icon = document.querySelector(".page-title i");
+		// const content = document.querySelector(".content");
+		// const icon = document.querySelector(".page-title i");
 
-		function setFooterSpace() {
-			let contentBottom = document.querySelector(".content-end").getBoundingClientRect().bottom;
-			let screenHeight = window.innerHeight;
+		// function setFooterSpace() {
+		// 	let contentBottom = document.querySelector(".content-end").getBoundingClientRect().bottom;
+		// 	let screenHeight = window.innerHeight;
 
-			if (screenHeight - 80 > contentBottom) {
-				const space = document.createElement("div");
-				const height = screenHeight - 80 - contentBottom;
-				console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
-				space.setAttribute("style", `height: ${height}px`);
-				content.appendChild(space);
-			}
-		}
+		// 	if (screenHeight - 80 > contentBottom) {
+		// 		const space = document.createElement("div");
+		// 		const height = screenHeight - 80 - contentBottom;
+		// 		console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
+		// 		space.setAttribute("style", `height: ${height}px`);
+		// 		content.appendChild(space);
+		// 	}
+		// }
 
-		const iconSizeCheck = setInterval(() => {
-			let iconWidth = icon.getBoundingClientRect().width;
-			let iconHeight = icon.getBoundingClientRect().height;
+		// const iconSizeCheck = setInterval(() => {
+		// 	let iconWidth = icon.getBoundingClientRect().width;
+		// 	let iconHeight = icon.getBoundingClientRect().height;
 
-			console.log(iconWidth, iconHeight);
+		// 	console.log(iconWidth, iconHeight);
 
-			if (iconWidth != 0 && iconHeight != 0) {
-				setFooterSpace();
-				clearInterval(iconSizeCheck);
-			}
-		}, 20);
+		// 	if (iconWidth != 0 && iconHeight != 0) {
+		// 		setFooterSpace();
+		// 		clearInterval(iconSizeCheck);
+		// 	}
+		// }, 20);
 
 		// --- PART FOUR: TOOLTIPS! ---
 		document.querySelectorAll(".new, .updated, .beta, .tag").forEach((tooltipZone) => {
@@ -685,4 +685,6 @@
 			}
 		});
 	</script>
+
+	<script src="files/footer.js"></script>
 </html>
