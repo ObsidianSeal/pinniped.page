@@ -296,8 +296,12 @@ ul {
 }
 
 .box-thing {
-	background: #292f36;
-	padding: 15px 5px 5px 15px;
+	display: flex;
+	align-items: center;
+
+	background-color: #292f36;
+
+	padding-left: 15px;
 }
 
 .title {
@@ -1085,7 +1089,8 @@ ul {
 
 	.box-thing {
 		background: #292f367f;
-		padding: 0 0 0 15px;
+		/* padding: 0 0 0 15px; */
+		padding-left: 20px;
 	}
 
 	div.box p {
