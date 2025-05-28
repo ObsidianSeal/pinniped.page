@@ -121,6 +121,38 @@
 				margin-top: 40px;
 			}
 
+			.mini-summary {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 5px;
+			}
+
+			.mini-summary div {
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+			}
+
+			.mini-summary div.status-upcoming {
+				background-color: #d7d8cb;
+			}
+
+			.mini-summary div.status-maintenance {
+				background-color: #949792;
+			}
+
+			.mini-summary div.status-critical {
+				background-color: #ff6b6b;
+			}
+
+			.mini-summary div.status-minor {
+				background-color: #ffe66d;
+			}
+
+			.mini-summary div.status-operational {
+				background-color: #4ecdc4;
+			}
+
 			@media all and (max-width: 830px) {
 				.status-bar {
 					display: none;
@@ -161,6 +193,8 @@
 				<i class="fa-solid fa-percent"></i>
 			</h3>
 			<h1 id="percentage"></h1>
+
+			<div class="mini-summary"></div>
 
 			<a
 				class="new-button small-text"
@@ -980,6 +1014,7 @@
 				statusBox.querySelector("p").classList.add(classes[statuses[i]]);
 				statusBox.querySelector("p").innerHTML = messages[statuses[i]];
 				statusBox.querySelector(".fa-triangle").style = `left: ${positions[statuses[i]]}px`;
+				document.querySelector(".mini-summary").innerHTML = document.querySelector(".mini-summary").innerHTML + `<div class="${classes[statuses[i]]}"></div>`;
 				i++;
 			});
 
