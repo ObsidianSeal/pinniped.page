@@ -90,7 +90,8 @@
 
 					<p class="box-subtitle-alt">
 						<span
-							><span class="new"><span class="tooltip">May 14th — VERSION 1.0.0 RELEASE AFTER 38 DAYS OF DEVELOPMENT</span>&nbsp;NEW&nbsp;</span></span
+							><span class="new"><span class="tooltip">May 14th — VERSION 1.0.0 RELEASE AFTER 38 DAYS OF DEVELOPMENT</span>&nbsp;NEW&nbsp;</span><span class="updated"><span class="tooltip">May 30th — PROPER CANVAS DISPLAY SCALING + scroll to headers from the URL (v1.0.1)</span>&nbsp;UPDATED&nbsp;</span></span
+						></span
 						>Where are London Transit&rsquo;s articulated buses?
 					</p>
 				</div>
@@ -104,12 +105,7 @@
 
 					<p class="box-subtitle-alt">
 						<span
-							><span class="updated"
-								><span class="tooltip"
-									>April 30th — SO MANY COOL NEW FEATURES!!<br />May 1st — fixed automatic date formatting<br />May 1st — new &ldquo;rate&rdquo;
-									buttons!<br />May 4th — small changes to the charts</span
-								>&nbsp;UPDATED&nbsp;</span
-							></span
+							><span class="updated"><span class="tooltip">May 30th — hover over the bar graph bars for a nice animation</span>&nbsp;UPDATED&nbsp;</span></span
 						>Music, yum!
 					</p>
 				</div>
@@ -332,7 +328,9 @@
 				const tooltip = tooltipZone.children[0];
 
 				tooltipZone.addEventListener("mousemove", (e) => {
-					tooltip.style = tooltip.style = `display: block; top: ${e.clientY + 10}px; left: ${e.clientX + 20}px`;
+					let bodyWidth = document.body.getBoundingClientRect().width;
+					if (bodyWidth - e.clientX < 300) tooltip.style = tooltip.style = `display: block; top: ${e.clientY + 10}px; right: ${bodyWidth - (e.clientX - 20)}px`;
+					else tooltip.style = tooltip.style = `display: block; top: ${e.clientY + 10}px; left: ${e.clientX + 20}px`;
 				});
 				tooltipZone.addEventListener("mouseout", (e) => {
 					tooltip.style = "";

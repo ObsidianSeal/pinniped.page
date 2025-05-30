@@ -358,10 +358,8 @@
 
 				background-color: var(--c1);
 				color: var(--background);
-			}
 
-			.chart-bar:hover {
-				min-width: fit-content;
+				transition: min-width 1s;
 			}
 
 			.playlist-title-link-container {
@@ -658,10 +656,10 @@
 			<b><i class="fa-solid fa-stopwatch fa-fw"></i> shortest length (runtime)</b>
 			<p></p>
 			<br />
-			<b><i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists; must have at least one)</b>
+			<b><i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists; must have at least three)</b>
 			<p></p>
 			<br />
-			<b><i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists; must have at least one)</b>
+			<b><i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists; must have at least three)</b>
 			<p></p>
 			<br />
 			<b class="highlight c5">PART 2: THE OTHER PLAYLISTS</b>
@@ -1232,6 +1230,33 @@
 						["Tonight I Might", "KATSEYE", "SIS (Soft Is Strong)"],
 					],
 				},
+				"🎵 - June 2025": {
+					link: "PLTKwBiSgGBsiOPFv_jSF0U3Rb2O57bH91",
+					length: [20, "1:07:20"],
+					updated: "2025/05/30",
+					tracks: [
+						["Amen", "Shaboozey & Jelly Roll", "Amen"],
+						["Long Long Long Journey", "Bill Wurtz", "Long Long Long Journey"],
+						["Like A Flower", "IRENE", "Like A Flower - The 1st Mini Album"],
+						["LMLY", "Jackson Wang", "LMLY"],
+						["Dandelion Eyes", "Patrick Martin", "Dandelion Eyes"],
+						["SOCIETY", "Valley", "SOCIETY"],
+						["Bailey", "Valley", "MAYBE"],
+						["Doubt (demo)", "twenty one pilots", "Doubt (demo)"],
+						["French Girls", "Dove Cameron", "French Girls"],
+						["Karanlığın", "VALORANT & HELIN & ARB4", "Karanlığın"],
+						["omg (guess I had it coming)", "Arden Jones", "age tape 14"],
+						["Robbery", "Lime Cordiale", "14 Steps To A Better You"],
+						["Pink Lemonade", "The Wombats", "Glitterbug"],
+						["broken people", "almost monday", "broken people"],
+						["boom", "bbno$", "boom"],
+						["Baby Blue Shades", "Bad Suns", "Apocalypse Whenever"],
+						["Girl", "Jukebox the Ghost", "Jukebox the Ghost"],
+						["Do Your Worst", "The Happy Fits", "Do Your Worst"],
+						["Oak & Ash & Thorn", "The Longest Johns", "Cures What Ails Ya"],
+						["A Sweet Song", "St. Arnaud", "A Sweet Song"],
+					],
+				},
 				"oops all Conan Gray": {
 					link: "PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG",
 					length: [28, "1:26:54"],
@@ -1539,6 +1564,7 @@
 				"🎵 - March 2025",
 				"🎵 - April 2025",
 				"🎵 - May 2025",
+				"🎵 - June 2025",
 			];
 
 			let otherPlaylistNames = [
@@ -1554,6 +1580,10 @@
 				"songs I&rsquo;ve sung over large bodies of water",
 				"doubles",
 			];
+
+			// shhhh
+			let secretNumber = 2;
+			if (window.location.href.includes("#")) secretNumber = 0;
 
 			// add all the data to the page
 			function addPlaylist(title, link, totalTracks, totalTime, lastUpdated) {
@@ -1916,7 +1946,7 @@
 					}
 
 					for (let artist in artistNumbers) {
-						if (artistNumbers[artist][0] == 1) delete artistNumbers[artist];
+						if (artistNumbers[artist][0] <= secretNumber) delete artistNumbers[artist];
 					}
 
 					let artistNumbersArray = Object.values(artistNumbers).sort(function (a, b) {
@@ -1930,7 +1960,7 @@
 
 						datum.innerHTML =
 							datum.innerHTML +
-							`<span class="chart-bar" style="width: calc(${
+							`<span class="chart-bar" style="width: calc(${(value / artistNumbersArray[0][0]) * 100}% - 10px); min-width: calc(${
 								(value / artistNumbersArray[0][0]) * 100
 							}% - 10px)" title="${artistName} — ${value}">${artistName} — ${value}</span><br />`;
 					}
@@ -1948,12 +1978,9 @@
 					}
 
 					for (let album in albumNumbers) {
-						if (albumNumbers[album][0] == 1) delete albumNumbers[album];
+						if (albumNumbers[album][0] <= secretNumber) delete albumNumbers[album];
 					}
 					delete albumNumbers['<span class="red">YouTube video</span>'];
-
-					// ** MANUAL EDITING **
-					delete albumNumbers["Automatic"]; // two artists have a single by the same name
 
 					let albumNumbersArray = Object.values(albumNumbers).sort(function (a, b) {
 						return b[0] - a[0];
@@ -1965,7 +1992,7 @@
 
 						datum.innerHTML =
 							datum.innerHTML +
-							`<span class="chart-bar" style="width: calc(${
+							`<span class="chart-bar" style="width: calc(${(value / albumNumbersArray[0][0]) * 100}% - 10px); min-width: calc(${
 								(value / albumNumbersArray[0][0]) * 100
 							}% - 10px)" title="${albumName} — ${value}">${albumName} — ${value}</span><br />`;
 					}
@@ -2049,14 +2076,28 @@
 				}
 				// "most recently added"
 				if (dataIndex == 12) {
-					showDataWithPlaylistLink(datum, formatDate("2025/04/29"), "🎵 - May 2025");
+					showDataWithPlaylistLink(datum, formatDate("2025/05/30"), "🎵 - June 2025");
 				}
 				// "most recently updated"
 				if (dataIndex == 13) {
-					showDataWithPlaylistLink(datum, formatDate("2025/05/28"), "oops all Hozier");
+					showDataWithPlaylistLink(datum, formatDate("2025/05/30"), "🎵 - June 2025");
 				}
 
 				dataIndex++;
+			});
+
+			// attempt at getting min-width to animate, only shrinking works, decided that was actually best
+			document.querySelectorAll(".chart-bar").forEach((bar) => {
+				let originalStyle;
+				bar.addEventListener("mouseover", () => {
+					originalStyle = bar.style.cssText;
+					bar.style = bar.style.cssText.replace(/min-width: .+/, "min-width: fit-content");
+					let newWidth = bar.getBoundingClientRect().width;
+					bar.style = bar.style.cssText.replace("min-width: fit-content", `min-width: ${newWidth - 10}px`);
+				});
+				bar.addEventListener("mouseout", () => {
+					bar.style = originalStyle;
+				});
 			});
 		</script>
 

@@ -2967,6 +2967,9 @@
 					if (!document.querySelector(".loading-panel").classList.contains("hide")) {
 						document.querySelector(".loading-panel").classList.add("hide");
 						document.querySelector(".main-panel").classList.remove("hide");
+
+						// scroll to URL-specified heading
+						if (window.location.href.includes("#")) document.querySelector(window.location.href.replace(/.+#/, "#")).scrollIntoView();
 					}
 
 					document.querySelector("#error-data-fetch").classList.add("hide");
@@ -3341,6 +3344,10 @@
 
 				scaleFactor = Math.min(effectiveWidth / (longitudeEnd - longitudeStart), effectiveHeight / (latitudeStart - latitudeEnd));
 
+				// PROPER SCALING (draw-side)
+				context.setTransform(1, 0, 0, 1, 0, 0);
+				context.scale(devicePixelRatio, devicePixelRatio);
+
 				// draw on map
 				context.fillStyle = "#ffffff";
 				context.fillRect(0, 0, width, height);
@@ -3483,18 +3490,21 @@
 
 			// map, open
 			document.querySelector("#map-open").addEventListener("click", () => {
-				openMap();
+				openMap(true);
 			});
 
 			// map, open (for real)
 			let lastScroll;
-			function openMap() {
-				lastScroll = Math.round(document.documentElement.scrollTop);
-				document.querySelector(".main-panel").classList.add("hide");
+			function openMap(fromMain) {
+				if (fromMain) lastScroll = Math.round(document.documentElement.scrollTop);
 
+				document.querySelector(".main-panel").classList.add("hide");
 				document.querySelector(".map").classList.remove("hide");
-				document.querySelector("canvas").width = window.innerWidth - 104;
-				document.querySelector("canvas").height = window.innerHeight - 104;
+
+				// PROPER SCALING (element-side)
+				document.querySelector("canvas").width = (window.innerWidth - 104) * devicePixelRatio;
+				document.querySelector("canvas").height = (window.innerHeight - 104) * devicePixelRatio;
+				document.querySelector("canvas").style = `width: ${window.innerWidth - 104}px; height ${window.innerHeight - 104}px`;
 
 				updateMap();
 			}
@@ -3514,7 +3524,7 @@
 			// press 'escape' to open/close the map
 			window.addEventListener("keydown", (e) => {
 				if (e.key == "Escape") {
-					if (document.querySelector(".map").classList.contains("hide")) openMap();
+					if (document.querySelector(".map").classList.contains("hide")) openMap(true);
 					else closeMap();
 				}
 				if (e.key == "Shift") toggleMapSettingsWindow();
@@ -3569,7 +3579,7 @@
 			let lastResize = 0;
 			window.addEventListener("resize", () => {
 				if (new Date().getTime() - lastResize > 1000 && !document.querySelector(".map").classList.contains("hide")) {
-					openMap();
+					openMap(false);
 
 					lastResize = new Date().getTime();
 				}
@@ -3727,7 +3737,7 @@
 
 			<br />
 
-			<p>v1.0.0 — May 14th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.0.1 — May 30th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -4326,7 +4336,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.0</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.1</span>
 				</p>
 				<br />
 				<p><a href="../status.html" title="pinniped.page — Status">website status</a>/<a href="../contact.html" title="pinniped.page — Contact">report a problem</a></p>
