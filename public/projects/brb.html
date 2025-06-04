@@ -307,13 +307,12 @@
 			const squares = [
 				"detour 🚧",
 				"see or be on an articulated bus 🚍",
-				"pass a bus on the same route and direction 🚎",
+				"near bus on the same route and direction 🚎",
 				"driver speaks (not about fare or directions) 👨‍🦰",
 				"driver speaks (about fare or direction) 🤷‍♂️",
 				"wheelchair or similar is on the bus 👨‍🦼",
 				"driver leaves bus... 🦶",
-				"bus honk! 🔊",
-				"car honk! 🚙",
+				"honk! 🔊",
 				"someone&rsquo;s stop is missed 🛑",
 				"arrive at your stop (last chance for bingo!) 🚏",
 				"someone is standing (for more than one stop) 🧍‍♀️",
@@ -351,20 +350,21 @@
 				"someone goes out the front door 👠",
 				"see/pass a school 🏫",
 				"dirty seat / someone coughs 🙁",
-				"see a non-transit bus 🎒",
+				"see a non-transit bus (school, intercity, etc.) 🎒",
 				"see a city bus that isn&rsquo;t on a route 👁‍🗨",
 				"see an emergency vehicle 🚑",
 				"pass scanner difficulties 👾",
 				"someone tries too hard to open the rear door 😡",
-				"see a school bus! 🚐",
 				"someone gives up their seat ❤️",
 				"someone pays with coins 🪙",
 				"rain begins or ends while on the bus 🌧️",
-				"bus is more than 5 minutes late ⌚",
-				"driver receives a message 📻",
-				"significant turbulence 🫨",
+				"driver receives a [radio] message 📻",
+				"bus shakes violently (significant turbulence) 🫨",
 				"someone opens or closes a window 🪟",
 				"pass a library 📚",
+				"8+ people board or exit",
+				"new passenger was offered transfer but they declined 🎫",
+				"someone uses a transfer 🎟️",
 			];
 
 			// mix array for random bingo card; from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -384,7 +384,7 @@
 
 			// do the mix!
 			shuffle(squares);
-			console.log(`BRB v1.11.6 (broken but available; v2 coming soon)`); // UPDATE VERSION EVERY COMMIT
+			console.log(`BRB v1.x.x (version numbers paused - project broken but available; v2 coming soon)`); // UPDATE VERSION EVERY COMMIT
 			console.log(`Shuffled list of all ${squares.length} possible squares:`);
 			// console.log(squares); // so I can see how many elements there are
 
