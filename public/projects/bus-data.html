@@ -543,6 +543,14 @@
 				padding: 5px 10px;
 			}
 
+			.error-panel:not(.hide) + .error-panel:not(.hide) {
+				top: 90px;
+			}
+
+			.warning {
+				background-color: var(--base09);
+			}
+
 			.error-panel i {
 				margin-right: 10px;
 			}
@@ -2963,6 +2971,10 @@
 					busDataHeader = responseJSON.header;
 					busData = responseJSON.entity;
 
+					// check that the data is from the last minute
+					if (Date.now() - busDataHeader.timestamp * 1000 > 60000) document.querySelector("#error-data-old").classList.remove("hide");
+					else document.querySelector("#error-data-old").classList.add("hide");
+
 					// stop loading
 					if (!document.querySelector(".loading-panel").classList.contains("hide")) {
 						document.querySelector(".loading-panel").classList.add("hide");
@@ -3021,7 +3033,7 @@
 					"th",
 					"th",
 					"st",
-				][busDataDate.getDate()];
+				][busDataDate.getDate() - 1];
 				let year = busDataDate.getFullYear();
 				let hour = busDataDate.getHours();
 				let minute = busDataDate.getMinutes();
@@ -3737,7 +3749,7 @@
 
 			<br />
 
-			<p>v1.0.1 — May 30th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.0.2 — June 4th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -4336,7 +4348,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.1</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.2</span>
 				</p>
 				<br />
 				<p><a href="../status.html" title="pinniped.page — Status">website status</a>/<a href="../contact.html" title="pinniped.page — Contact">report a problem</a></p>
@@ -4344,7 +4356,10 @@
 		</div>
 
 		<div class="error-panel hide" id="error-data-fetch">
-			<i class="fa-sharp fa-solid fa-triangle-exclamation"></i>ERROR FETCHING DATA — RETRYING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d>
+			<i class="fa-sharp fa-solid fa-triangle-exclamation"></i>ERROR: COULD NOT FETCH DATA — RETRYING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d>
+		</div>
+		<div class="error-panel warning hide" id="error-data-old">
+			<i class="fa-sharp fa-solid fa-triangle-exclamation"></i>WARNING: DATA IS OVER A MINUTE OLD</d>
 		</div>
 	</body>
 </html>
