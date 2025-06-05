@@ -10,6 +10,134 @@
 
 		<link rel="icon" href="../images/icon.png" />
 
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/brb" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Bus Ride Bingo" />
+		<meta property="og:description" content="Play bus-related bingo with friends while on the bus." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Play bus-related bingo with friends while on the bus." />
+		<meta name="keywords" content="pinniped.page, obsidian_seal, bus, bingo, game, transit, friends, fun" />
+
+		<style>
+			/* TYPE */
+			@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800");
+
+			/* GENERAL STYLES */
+			body {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-family: "Dosis", "Roboto", sans-serif;
+				font-style: normal;
+				font-weight: 400;
+				font-size: 36px;
+			}
+
+			b {
+				font-weight: 700;
+			}
+		</style>
+	</head>
+
+	<body></body>
+
+	<script>
+		// LIST OF ALL POSSIBLE BINGO BOARD SQUARES
+		let squares = [
+			"detour 🚧",
+			"see or be on an articulated bus 🚍",
+			"near bus on the same route and direction 🚎",
+			"driver says something 👨‍🦰",
+			"front seats raised or lowered 📈",
+			"wheelchair or similar is on the bus 👨‍🦼",
+			"driver leaves bus... 🦶",
+			"honk! 🔊",
+			"someone&rsquo;s stop is missed 🛑",
+			"arrive at your stop (last chance for bingo!) 🚏",
+			"someone is standing (for more than one stop) 🧍‍♀️",
+			"go under a bridge (or through a tunnel) 🚇",
+			"go on a bridge 🌉",
+			"stroller 👶",
+			"crying 😭",
+			"someone gets on/off where people normally can&rsquo;t 👨‍🦯",
+			"bus goes up onto the curb 😯",
+			"something falls on the floor 😬",
+			"sitting at a stop... (no one getting on/off) 🪑",
+			"someone is running for the bus! (waiting) 🏃‍♀️",
+			"go over or under railroad tracks 🚆",
+			"bus only lane! 🚋",
+			"pass a stop with a shelter 🏠",
+			"someone speaks in a language you don&rsquo;t 💬",
+			"skip a stop 🚫",
+			"unnecessary stop, accidental stop request, or cord/button doesn&rsquo;t work 🧈",
+			"door doesn&rsquo;t open or can&rsquo;t close 🚪",
+			"5+ people board 🚶‍♂️",
+			"5+ people get off 🚶‍♀️",
+			"people at a stop are waiting for a different bus 🖐",
+			"driver waves at other bus driver 👋",
+			"another bus is in the next lane (same direction) 🛴",
+			"someone is sitting next to you 😐",
+			"see an express bus 🚌",
+			"travel on a road with 4+ lanes 🧠",
+			"travel on a one-way road ⏩",
+			"hear music 🎶",
+			"someone&rsquo;s on the phone or talking loudly 🦜",
+			"see a taxi or mail, garbage, or recycling truck 🚕",
+			"someone uses the bike rack 🚲",
+			"bus kneels 🧎‍♂️",
+			"another bus driver/transit staff is on the bus 👨‍✈️",
+			"someone goes out the front door 👠",
+			"see/pass a school 🏫",
+			"someone coughs or sneezes 🙁",
+			"see a non-transit bus (school, intercity, etc.) 🎒",
+			"see a city bus that isn&rsquo;t on a route 👁‍🗨",
+			"see an emergency vehicle 🚑",
+			"pass scanner difficulties 👾",
+			"someone tries too hard to open the rear door 😡",
+			"someone gives up their seat ❤️",
+			"someone pays with coins 🪙",
+			"rain begins or ends while on the bus 🌧️",
+			"stop in a bus bay 🛣️",
+			"bus shakes violently (significant turbulence) 🫨",
+			"someone opens or closes a window 🪟",
+			"see/pass a library 📚",
+			"8+ people board or exit",
+			"new passenger was offered transfer but they declined 🎫",
+			"someone uses a transfer 🎟️",
+		];
+
+		// ARRAY MIXING ALGORITHM
+		function mixArray(array) {
+			for (let i = 0; i < array.length; i++) {
+				let randomIndex = Math.floor(Math.random() * (array.length - i)) + i;
+				[array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+			}
+			return array;
+		}
+
+		squares = mixArray(squares);
+		for (let i = 0; i < squares.length; i++) {
+			document.body.innerHTML = `${document.body.innerHTML}<b>${i + 1}.</b> ${squares[i]}<br />`;
+		}
+	</script>
+</html>
+
+<!-- <!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Bus Ride Bingo</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
 		<meta property="og:url" content="https://pinniped.page/projects/brb" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="Bus Ride Bingo" />
@@ -219,7 +347,7 @@
 						document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: 670px; max-height: 670px; }`;
 					}
 
-					//console.log(`autoStyle(); --> ${screenWidth}x${screenHeight}`);
+					//console.log(`autoStyle(); -/-> ${screenWidth}x${screenHeight}`);
 				}
 
 				pScreenWidth = screenWidth;
@@ -504,4 +632,4 @@
 			});
 		</script>
 	</body>
-</html>
+</html> -->
