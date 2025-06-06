@@ -59,32 +59,34 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
 
-		<div class="h60"></div>
+		<div class="main">
+			<div class="h60"></div>
 
-		<div class="centre more-wrap">
-			<h2 id="message"></h2>
+			<div class="centre more-wrap content-container">
+				<h2 id="message"></h2>
 
-			<div class="new-button-group">
-				<a class="new-button small-text" href="status.html" title="pinniped.page — Status">
-					<div>
-						<span>WEBSITE STATUS</span>
-						<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
-					</div>
-				</a>
+				<div class="new-button-group">
+					<a class="new-button small-text" href="status.html" title="pinniped.page — Status">
+						<div>
+							<span>WEBSITE STATUS</span>
+							<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+						</div>
+					</a>
 
-				<a class="new-button small-text" href="contact.html" title="pinniped.page — Contact">
-					<div>
-						<span>REPORT A PROBLEM</span>
-						<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
-					</div>
-				</a>
+					<a class="new-button small-text" href="contact.html" title="pinniped.page — Contact">
+						<div>
+							<span>REPORT A PROBLEM</span>
+							<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+						</div>
+					</a>
+				</div>
 			</div>
-		</div>
 
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
+			<div class="footer" style="background: #ffffee"></div>
+			<div class="footer" style="background: #ff6b6b"></div>
+			<div class="footer" style="background: #ffe66d"></div>
+			<div class="footer" style="background: #4ecdc4"></div>
+		</div>
 
 		<script>
 			let codes = {
@@ -168,12 +170,6 @@
 			} else {
 				document.getElementById("message").innerHTML = "???";
 			}
-
-			// --- footer position ---
-
-			const screenHeight = window.innerHeight;
-			const height = screenHeight - 140;
-			document.querySelector("div.centre").style = `height: ${height}px`;
 		</script>
 	</body>
 </html>

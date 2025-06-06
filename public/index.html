@@ -54,6 +54,13 @@
 					font-size: 32px;
 				}
 			}
+
+			@media all and (max-height: 450px) {
+				#subtitle,
+				.h50 {
+					display: none;
+				}
+			}
 		</style>
 	</head>
 
@@ -75,22 +82,24 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
 
-		<div class="h60"></div>
+		<div class="main">
+			<div class="h60"></div>
 
-		<div class="centre more-wrap">
-			<div>
-				<h1>pinniped.page</h1>
+			<div class="centre more-wrap content-container">
+				<div>
+					<h1>pinniped.page</h1>
 
-				<div class="h50"></div>
+					<div class="h50"></div>
 
-				<h3 id="subtitle"></h3>
+					<h3 id="subtitle"></h3>
+				</div>
 			</div>
-		</div>
 
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
+			<div class="footer" style="background: #ffffee"></div>
+			<div class="footer" style="background: #ff6b6b"></div>
+			<div class="footer" style="background: #ffe66d"></div>
+			<div class="footer" style="background: #4ecdc4"></div>
+		</div>
 
 		<script>
 			// ------- random subtitle -------
@@ -179,24 +188,6 @@
 
 			let x = Math.floor(Math.random() * subtitles.length);
 			document.getElementById("subtitle").innerHTML = subtitles[x];
-
-			// ------- footer position, subtitle visibility -------
-
-			function perfectPosition() {
-				const screenHeight = window.innerHeight;
-				const height = screenHeight - 140;
-				document.querySelector("div.centre").style = `height: ${height}px`;
-
-				if (screenHeight < 450) document.getElementById("subtitle").style = "display: none";
-				else document.getElementById("subtitle").style = "display: block";
-			}
-			perfectPosition();
-
-			addEventListener("resize", (e) => {
-				setTimeout(() => {
-					perfectPosition();
-				}, 500);
-			});
 
 			// ------- quick navigate to project -------
 

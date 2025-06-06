@@ -40,29 +40,33 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
 
-		<div class="navbar-space"></div>
+		<div class="main">
+			<div class="navbar-space"></div>
 
-		<div class="content">
-			<p>You&rsquo;re about to download:</p>
+			<div class="content-container">
+				<div class="content">
+					<p>You&rsquo;re about to download:</p>
 
-			<div class="break"></div>
+					<div class="break"></div>
 
-			<p class="bold" id="download-name">Loading...</p>
+					<p class="bold" id="download-name">Loading...</p>
 
-			<a class="new-button small-text" id="download-link" href="yikes.html?s=404" title="click to download the specified file" download style="margin-top: 40px">
-				<div>
-					<span>DOWNLOAD</span>
-					<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+					<a class="new-button small-text" id="download-link" href="yikes.html?s=404" title="click to download the specified file" download style="margin-top: 40px">
+						<div>
+							<span>DOWNLOAD</span>
+							<span><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i><i class="fa-solid fa-angle-right"></i></span>
+						</div>
+					</a>
+
+					<div class="content-end"></div>
 				</div>
-			</a>
+			</div>
 
-			<div class="content-end"></div>
+			<div class="footer" style="background: #ffffee"></div>
+			<div class="footer" style="background: #ff6b6b"></div>
+			<div class="footer" style="background: #ffe66d"></div>
+			<div class="footer" style="background: #4ecdc4"></div>
 		</div>
-
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
 
 		<script>
 			const query = window.location.search;
@@ -76,7 +80,5 @@
 				document.getElementById("download-link").href = `files/${download}`;
 			}
 		</script>
-
-		<script src="files/footer.js"></script>
 	</body>
 </html>

@@ -186,7 +186,7 @@ ul {
 	position: fixed;
 	top: 0;
 	/* box-shadow: 0 0 10px 5px #ffffee; */
-	z-index: 2;
+	z-index: 3;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -874,7 +874,7 @@ ul {
 .main {
 	display: flex;
 	flex-direction: column;
-	min-height: 100vh;
+	min-height: 100dvh;
 }
 
 .content-container {
@@ -906,7 +906,7 @@ ul {
 	position: fixed;
 	top: 60px;
 	padding: 40px;
-	z-index: 2;
+	z-index: 3;
 	display: none;
 }
 

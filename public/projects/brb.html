@@ -26,6 +26,17 @@
 			@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800");
 
 			/* GENERAL STYLES */
+			* {
+				user-select: none;
+				-ms-user-select: none;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+
+				-webkit-tap-highlight-color: transparent;
+
+				touch-action: manipulation;
+			}
+
 			body {
 				margin: 0;
 				border: 0;
@@ -34,18 +45,132 @@
 				font-family: "Dosis", "Roboto", sans-serif;
 				font-style: normal;
 				font-weight: 400;
-				font-size: 36px;
+				font-size: 20px;
 			}
 
 			b {
 				font-weight: 700;
 			}
+
+			/* SPECIFIC STYLES */
+
+			.board {
+				display: grid;
+				grid-template-columns: repeat(5, 20%);
+				grid-template-rows: repeat(5, 20%);
+
+				margin: 50px;
+				border: 2px solid black;
+			}
+
+			.square {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				aspect-ratio: 1;
+				overflow: hidden;
+
+				border: 2px solid black;
+				padding: 10px;
+
+				font-size: 40px;
+				text-align: center;
+				text-wrap-mode: wrap;
+				text-wrap-style: pretty;
+			}
+
+			.square:hover {
+				cursor: pointer;
+			}
+
+			.square.filled {
+				background-color: yellowgreen;
+			}
+
+			.square-emoji {
+				font-size: 200%;
+			}
+
+			@media all and (max-width: 800px) {
+				.board {
+					margin: 10px;
+				}
+			}
+
+			@media all and (max-width: 600px) {
+				.board {
+					border-width: 1px;
+				}
+
+				.square {
+					border-width: 1px;
+					padding: 2px;
+				}
+			}
 		</style>
 	</head>
 
-	<body></body>
+	<body>
+		<div class="main-panel">
+			<div class="board">
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+				<div class="square"><div class="inner-square"></div></div>
+			</div>
+
+			<div onclick="shrinkToFit()">click to shrink-to-fit</div>
+		</div>
+	</body>
 
 	<script>
+		"use strict";
+
+		// DEBUG STYLES
+		const blueStyle = "background: #4ecdc4; color: black; padding: 0 5px";
+		const yellowStyle = "background: #ffe66d; color: black; padding: 0 5px";
+		const redStyle = "background: #ff6b6b; color: black; padding: 0 5px";
+		const darkGreyStyle = "background: #949792; color: black; padding: 0 5px";
+		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
+
+		console.log(`%cBRB v2-beta`, darkGreyStyle);
+
+		// ARRAY MIXING ALGORITHM
+		function mixArray(array) {
+			for (let i = 0; i < array.length; i++) {
+				let randomIndex = Math.floor(Math.random() * (array.length - i)) + i;
+				[array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+			}
+			return array;
+		}
+
+		// EMOJI ISOLATING ALGORITHM
+		function isolateEmoji(string) {
+			return string.substring(0, string.lastIndexOf(" ")) + `<br /><span class="square-emoji">` + string.substring(string.lastIndexOf(" ") + 1) + `</span>`;
+		}
+
 		// LIST OF ALL POSSIBLE BINGO BOARD SQUARES
 		let squares = [
 			"detour 🚧",
@@ -105,23 +230,46 @@
 			"bus shakes violently (significant turbulence) 🫨",
 			"someone opens or closes a window 🪟",
 			"see/pass a library 📚",
-			"8+ people board or exit",
+			"8+ people board or exit 👨‍👩‍👧‍👦",
 			"new passenger was offered transfer but they declined 🎫",
 			"someone uses a transfer 🎟️",
 		];
-
-		// ARRAY MIXING ALGORITHM
-		function mixArray(array) {
-			for (let i = 0; i < array.length; i++) {
-				let randomIndex = Math.floor(Math.random() * (array.length - i)) + i;
-				[array[i], array[randomIndex]] = [array[randomIndex], array[i]];
-			}
-			return array;
-		}
-
 		squares = mixArray(squares);
-		for (let i = 0; i < squares.length; i++) {
-			document.body.innerHTML = `${document.body.innerHTML}<b>${i + 1}.</b> ${squares[i]}<br />`;
+		for (let i = 0; i < squares.length; i++) squares[i] = isolateEmoji(squares[i]);
+		console.log(`%c${squares.length}+1 possible squares`, lightGreyStyle);
+
+		// PUT TEXT IN THE SQUARES
+		window.addEventListener("load", () => {
+			let squareIndex = 0;
+			document.querySelectorAll(".inner-square").forEach((square) => {
+				if (squareIndex == 12) square.innerHTML = isolateEmoji(`bus moves (free space?) 👀`);
+				else square.innerHTML = squares[squareIndex];
+				squareIndex++;
+
+				square.parentElement.addEventListener("click", () => {
+					square.parentElement.classList.toggle("filled");
+				});
+			});
+		});
+
+		// SHRINK TO FIT
+		function shrinkToFit() {
+			let sizeDifference = 10 * 2 + 2 * 2;
+			if (window.innerWidth <= 600) sizeDifference = 2 * 2 + 1 * 2;
+
+			document.querySelectorAll(".inner-square").forEach((square) => {
+				let outerRect = square.parentElement.getBoundingClientRect();
+				let innerRect = square.getBoundingClientRect();
+
+				let fontSize = 40;
+				square.style = `font-size: ${fontSize}px`;
+				if (innerRect.width > outerRect.width - sizeDifference || innerRect.height > outerRect.height - sizeDifference) {
+					square.style = `font-size: ${--fontSize}px`;
+
+					outerRect = square.parentElement.getBoundingClientRect();
+					innerRect = square.getBoundingClientRect();
+				}
+			});
 		}
 	</script>
 </html>
