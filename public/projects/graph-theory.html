@@ -41,828 +41,854 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
 		</div>
 
-		<div class="navbar-space"></div>
+		<div class="main">
+			<div class="navbar-space"></div>
+
+			<div class="content-container">
+				<div class="content">
+					<h2 class="title">Graph Theory EXPLAINED</h2>
+
+					<div class="break"></div>
+
+					<p class="project-top-link">
+						<span class="blog-archive-list-marker"><i class="fa-solid fa-diagram-project fa-fw"></i></span>
+						<span class="blog-archive-list-item"><a class="link" href="craft.html">Graph theory in the wild — a crafting game</a></span>
+					</p>
+					<p class="project-top-link">
+						<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
+						<span class="blog-archive-list-item"
+							><a class="link" href="https://www.youtube.com/watch?v=MwRbr-MjwII" target="_blank"
+								>&ldquo;RoadTrip, MathsJam 2023&rdquo; — cool video; contains elements of graph theory</a
+							></span
+						>
+					</p>
+					<p class="project-top-link">
+						<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
+						<span class="blog-archive-list-item"
+							><a class="link" href="https://www.youtube.com/watch?v=JheGL6uSF-4" target="_blank"
+								>&ldquo;I Made a Graph of Wikipedia... This Is What I Found&rdquo; — cool video; very graph theory</a
+							></span
+						>
+					</p>
+					<p class="project-top-link">
+						<span class="blog-archive-list-marker"><i class="fa-solid fa-list-ol fa-fw"></i></span>
+						<span class="blog-archive-list-item"><a class="link same-page-link" href="#contents">Table of Contents</a></span>
+					</p>
+					<p class="project-top-link">
+						<span class="blog-archive-list-marker"><i class="fa-solid fa-spell-check fa-fw"></i></span>
+						<span class="blog-archive-list-item"><a class="link same-page-link" href="#glossary">Glossary of Bolded Terms</a></span>
+					</p>
+					<p class="project-top-link">
+						<span class="blog-archive-list-marker"><i class="fa-solid fa-list-ul fa-fw"></i></span>
+						<span class="blog-archive-list-item"><a class="link same-page-link" href="#sources">List of Sources</a></span>
+					</p>
+
+					<div class="break"></div>
 
-		<div class="content">
-			<h2 class="title">Graph Theory EXPLAINED</h2>
-
-			<div class="break"></div>
-
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-solid fa-diagram-project fa-fw"></i></span>
-				<span class="blog-archive-list-item"><a class="link" href="craft.html">Graph theory in the wild — a crafting game</a></span>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://www.youtube.com/watch?v=MwRbr-MjwII" target="_blank"
-						>&ldquo;RoadTrip, MathsJam 2023&rdquo; — cool video; contains elements of graph theory</a
-					></span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-				<span class="blog-archive-list-item"
-					><a class="link" href="https://www.youtube.com/watch?v=JheGL6uSF-4" target="_blank"
-						>&ldquo;I Made a Graph of Wikipedia... This Is What I Found&rdquo; — cool video; very graph theory</a
-					></span
-				>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-solid fa-list-ol fa-fw"></i></span>
-				<span class="blog-archive-list-item"><a class="link same-page-link" href="#contents">Table of Contents</a></span>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-solid fa-spell-check fa-fw"></i></span>
-				<span class="blog-archive-list-item"><a class="link same-page-link" href="#glossary">Glossary of Bolded Terms</a></span>
-			</p>
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-solid fa-list-ul fa-fw"></i></span>
-				<span class="blog-archive-list-item"><a class="link same-page-link" href="#sources">List of Sources</a></span>
-			</p>
-
-			<div class="break"></div>
-
-			<img class="blog-image" src="../images/graph-theory-title.png" alt='"Graph Theory" title and an example graph' title='"Graph Theory" title and an example graph' />
-
-			<hr />
-
-			<h4 class="title" id="contents">Contents</h4>
-
-			<ol>
-				<li><a class="link same-page-link" href="#basics">THE BASICS — WHAT IS GRAPH THEORY?</a></li>
-				<ul style="list-style-type: none">
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-nodes">NODES...</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-edges">CONNECTED BY EDGES...</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-graph">FORM A GRAPH!</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-trees">REMEMBER TREES?</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-math">THE MATH</a></li>
-				</ul>
-				<li><a class="link same-page-link" href="#in-programming">GRAPH THEORY IN PROGRAMMING</a></li>
-				<ul style="list-style-type: none">
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#in-programming-matrix">ADJACENCY MATRIX</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#in-programming-list">ADJACENCY LIST</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#in-programming-array-and-object">AN ARRAY AND AN OBJECT</a></li>
-				</ul>
-				<li><a class="link same-page-link" href="#history">HISTORY</a></li>
-				<li><a class="link same-page-link" href="#uses">USES</a></li>
-				<ul style="list-style-type: none">
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-flow">AIRLINE SCHEDULING (FLOW PROBLEMS)</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-pathfinding">DIRECTIONS (PATHFINDING)</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-colouring">MAP COLOURING</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-search-engines">SEARCH ENGINES</a></li>
-					<li>
-						<span class="half-opacity">- </span><a class="link same-page-link" href="#uses-community-detection">SOCIAL MEDIA MARKETING (COMMUNITY DETECTION)</a>
-					</li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-linguistics">LINGUISTICS</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-chemistry-biology">CHEMISTRY/BIOLOGY</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-network-security">NETWORK SECURITY</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-social-sciences">SOCIAL SCIENCES</a></li>
-					<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-transit">TRANSIT NETWORKS</a></li>
-				</ul>
-				<li><a class="link same-page-link" href="#related-fields">RELATED FIELDS</a></li>
-				<li><a class="link same-page-link" href="#impact-on-society">IMPACT ON SOCIETY</a></li>
-				<li><a class="link same-page-link" href="#ethics">ETHICS?</a></li>
-				<li><a class="link same-page-link" href="#careers">CAREERS</a></li>
-				<li><a class="link same-page-link" href="#finite-craft">HOW I USED GRAPH THEORY — FINITE CRAFT</a></li>
-			</ol>
-
-			<hr />
-
-			<h4 class="title" id="basics">1. THE BASICS — WHAT IS GRAPH THEORY?</h4>
-
-			<div class="break"></div>
-
-			<p class="text">
-				Graph theory is a field of <b>discrete mathematics</b> that deals with the ideas of <b>graphs</b>. In their simplest form, graphs are networks of
-				<b>nodes</b> (also known as vertices) connected by <b>edges</b>. Anything that can be drawn as dots connected by lines can also be represented by a graph.
-				Examples of this include road networks, friend groups, electrical circuits, subway systems, and molecular structures.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.1 — example graph: a road network</p>
-				<img class="blog-image" src="../images/graph-theory-example-1.png" alt="example graph: a road network" title="example graph: a road network" />
-			</div>
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.2 — example graph: friends</p>
-				<img class="blog-image" src="../images/graph-theory-example-2.png" alt="example graph: friends" title="example graph: friends" />
-			</div>
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.3 — example graph: a subway system</p>
-				<img class="blog-image" src="../images/graph-theory-example-3.png" alt="example graph: a subway system" title="example graph: a subway system" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="basics-nodes">NODES...</h5>
-			<p class="text">Nodes can be connected to any number of other nodes, or none at all. The <b>degree</b> of a node refers to the number of connected edges.</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.4 — a graph showing the degree of two nodes</p>
-				<img class="blog-image" src="../images/graph-theory-degree.png" alt="a graph showing the degree of two nodes" title="a graph showing the degree of two nodes" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="basics-edges">CONNECTED BY EDGES...</h5>
-			<p class="text">
-				Two nodes can be connected by more than one edge, each called a <b>multiple edge</b>. This can represent, say, a multi-lane road or a molecule&rsquo;s double
-				bond. Nodes can also be connected to themselves with a special type of edge called a <b>loop</b>. The ends of the subway lines in
-				<span class="highlighted">fig. 1.3</span> could be considered loops, as trains turn around when they reach them.<br /><br />Edges can have a set direction. They
-				can be one-way, like a one-way street or a link from one website to another, or two-way. Edges with a specified direction are called <b>directed edges</b>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.5 — a graph with one loop and some multiple edges</p>
-				<img
-					class="blog-image"
-					src="../images/graph-theory-multiple-edge-loop.png"
-					alt="a graph with one loop and some multiple edges"
-					title="a graph with one loop and some multiple edges"
-				/>
-			</div>
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.6 — one-way edges</p>
-				<img class="blog-image" src="../images/graph-theory-directed-graph-1.png" alt="one-way edges" title="one-way edges" />
-			</div>
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.7 — one-way and two-way edges</p>
-				<img class="blog-image" src="../images/graph-theory-directed-graph-2.png" alt="one-way and two-way edges" title="one-way and two-way edges" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="basics-graph">FORM A GRAPH!</h5>
-			<p class="text">
-				Graphs without loops or multiple edges (like <span class="highlighted">fig. 1.7</span>) are called <b>simple graphs</b>. Simple graphs that have every possible
-				edge are called <b>complete graphs</b>. Graphs that consist of directed edges are called <b>directed graphs</b>. Both
-				<span class="highlighted">fig. 1.6</span> and <span class="highlighted">fig. 1.7</span> are directed graphs. A route from one node to another is called a
-				<b>walk</b>. A walk without repeated edges is called a <b>trail</b>, and a walk without repeated nodes is called a <b>path</b>. A walk that ends at the same
-				node where it began is called a <b>cycle</b>. Any loop or pair of multiple edges is a cycle. Trails and paths that are also cycles are considered <b>closed</b>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image" style="max-width: 300px">
-				<p class="half-opacity">fig. 1.8 — a complete graph</p>
-				<img class="blog-image" src="../images/graph-theory-complete.png" alt="a complete graph" title="a complete graph" style="max-width: 300px" />
-			</div>
-			<div class="big-picture">
-				<p class="half-opacity">fig. 1.9 — some walks</p>
-				<img class="big-picture" src="../images/graph-theory-walks.png" alt="some walks" title="some walks" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<p class="text">
-				If a graph contains a closed trail that travels across every edge, that graph is <b>Eulerian</b>. And if a graph contains a closed path that visits every node,
-				that graph is <b>Hamiltonian</b>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="big-picture">
-				<p class="half-opacity">fig. 1.10 — an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so</p>
-				<img
-					class="big-picture"
-					src="../images/graph-theory-eulerian-hamiltonian.png"
-					alt="an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so"
-					title="an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so"
-				/>
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<p class="text">
-				Most graphs are <b>connected</b>, meaning every node has a degree of at least one, but they can be <b>disconnected</b>, like
-				<span class="highlighted">fig. 1.4</span> and <span class="highlighted">fig. 1.11</span>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="big-picture">
-				<p class="half-opacity">fig. 1.11 — an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)</p>
-				<img
-					class="big-picture"
-					src="../images/graph-theory-notes.png"
-					alt="an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)"
-					title="an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)"
-				/>
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<p class="text">
-				Other than in <span class="highlighted">fig. 1.8</span> and <span class="highlighted">fig. 1.11</span>, none of the edges in any of the above diagrams cross.
-				Because graphs aren&rsquo;t physical objects, but rather representations of networks, it doesn&rsquo;t matter if edges cross. However, if a graph can be drawn
-				without any edges crossing, it is called a <b>planar graph</b>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.12 — a non-planar graph redrawn as a planar graph</p>
-				<img
-					class="blog-image"
-					src="../images/graph-theory-planar.png"
-					alt="a non-planar graph redrawn as a planar graph"
-					title="a non-planar graph redrawn as a planar graph"
-				/>
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="basics-trees">REMEMBER TREES?</h5>
-			<p class="text">
-				If you&rsquo;ve ever programmed or learned about probability, you&rsquo;ve probably come across an example of a <b>tree</b>. Trees are a restricted type of
-				graph in which all nodes stem from one, meaning there is only one path between any two nodes. All trees are graphs, but not all graphs are trees.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 1.13 — a tree</p>
-				<img class="blog-image" src="../images/graph-theory-tree.png" alt="a tree" title="a tree" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="basics-math">THE MATH</h5>
-			<p class="text">
-				In math, graphs are defined as a set of nodes and a set of edges. The set of edges in an undirected graph contains <b>unordered pairs</b> of nodes, and the set
-				of edges in a directed graph contains <b>ordered pairs</b> of nodes. Proper notation is shown in <span class="highlighted">fig. 1.14</span>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="big-picture">
-				<p class="half-opacity">fig. 1.14 — graph notation</p>
-				<img class="big-picture" src="../images/graph-theory-graph-notation.png" alt="graph notation" title="graph notation" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<p class="text">The above notation is very easy to convert into code.</p>
-
-			<div class="break"></div>
-
-			<h4 class="title" id="in-programming">2. GRAPH THEORY IN PROGRAMMING</h4>
-
-			<div class="break"></div>
-
-			<p class="text">There are a few common ways to represent a graph in code.</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="in-programming-matrix">ADJACENCY MATRIX</h5>
-			<p class="text">
-				Starting with zero, each node is assigned an <b>index</b>. Create a two-dimensional <b>Boolean</b> array of size <span class="highlighted">n&times;n</span>,
-				where <span class="highlighted">n</span> is the number of nodes. Edges are represented as <span class="highlighted">true</span> values at the intersections
-				between the two connected nodes. In an undirected graph, this results in two <span class="highlighted">true</span> values for each edge, but in a directed graph
-				there might only be one <span class="highlighted">true</span> intersection. Two nodes are connected if <span class="highlighted">edges[node1][node2]</span> is
-				<span class="highlighted">true</span>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="big-picture">
-				<p class="half-opacity">fig. 2.1 — an adjacency matrix (undirected graph)</p>
-				<img
-					class="big-picture"
-					src="../images/graph-theory-adjacency-matrix.png"
-					alt="an adjacency matrix (undirected graph)"
-					title="an adjacency matrix (undirected graph)"
-				/>
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="in-programming-list">ADJACENCY LIST</h5>
-			<p class="text">
-				This is very similar to an adjacency matrix: each node has an index and edges are stored in a two-dimensional array. The difference is that, while the array
-				still has a row for each node, each row only contains the indices of the connected nodes. Two nodes are connected if
-				<span class="highlighted">edges[node1]</span> contains <span class="highlighted">node2</span>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="big-picture">
-				<p class="half-opacity">fig. 2.2 — an adjacency list (same graph as before)</p>
-				<img
-					class="big-picture"
-					src="../images/graph-theory-adjacency-list.png"
-					alt="an adjacency list (same graph as before)"
-					title="an adjacency list (same graph as before)"
-				/>
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<p class="text">An adjacency list is much easier to write manually, and a lot easier to read.</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="in-programming-array-and-object">AN ARRAY AND AN OBJECT</h5>
-			<p class="text">
-				When I was making <a class="link" href="craft.html">Finite Craft</a> (see
-				<a class="link same-page-link" href="#finite-craft">9. HOW I USED GRAPH THEORY — FINITE CRAFT</a>), I needed an array of recipes and an object with item data.
-				The structure in <span class="highlighted">fig. 2.3</span> is what I ended up using. This structure makes determining if two nodes are connected more difficult,
-				but because the nodes retain their name, it&rsquo;s very easy to read and write.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="big-picture">
-				<p class="half-opacity">fig. 2.3 — my method</p>
-				<img class="big-picture" src="../images/graph-theory-array-and-object.png" alt="my method" title="my method" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h4 class="title" id="history">3. HISTORY</h4>
-
-			<div class="break"></div>
-
-			<p class="text">
-				In 1736, Leonhard Euler wrote the first paper on what is now considered graph theory to prove that the Seven Bridges of Königsberg problem has no solution.<br /><br />At
-				some point, the city of Königsberg (now <a class="link" href="https://www.openstreetmap.org/#map=16/54.7065/20.5108" target="_blank">Kaliningrad, Russia</a>)
-				had seven bridges in close proximity, as shown in <span class="highlighted">fig. 3.1</span>. Supposedly, the people of Königsberg used to entertain themselves
-				by attempting to find a route around the city that used each bridge exactly once. None of them were successful because, as Euler would prove mathematically, the
-				Seven Bridges of Königsberg is an impossible puzzle.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 3.1 — Königsberg, 1736</p>
-				<img class="blog-image" src="../images/graph-theory-Königsberg.png" alt="Königsberg, 1736" title="Königsberg, 1736" />
-			</div>
-			<div class="blog-image">
-				<p class="half-opacity">fig. 3.2 — Königsberg in graph form</p>
-				<img class="blog-image" src="../images/graph-theory-Königsberg-graph.png" alt="Königsberg in graph form" title="Königsberg in graph form" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<p class="text">
-				If we consider each section of land to be a node, and each bridge to be an edge, then we get the graph in <span class="highlighted">fig. 3.2</span>. If the
-				graph is Eulerian (you have one guess as to where we get that term from), then there is a route that uses every bridge only once.
-				<span class="highlighted">fig. 3.2</span> is not an Eulerian graph. What Euler essentially said in his paper was that a connected graph is Eulerian if the
-				degree of every node is even. You can see an example of this if you refer back to <span class="highlighted">fig. 1.10</span>. In
-				<span class="highlighted">fig. 3.2</span>, every node is of odd degree, much to the people of Königsberg&rsquo;s disappointment.<br /><br />Almost 150 years
-				later, the first use of the term &ldquo;graph&rdquo; appeared in the
-				<a class="link" href="https://archive.org/details/nature15unkngoog/page/284/mode/1up?view=theater" target="_blank"
-					>February 7th, 1878 edition of <i>Nature</i></a
-				>. The article, written by J. J. Sylvester, looked at similarities between chemistry and algebra.<br /><br />Over 50 years after that, around 1931, the first
-				textbook on graph theory, written by Dénes Kőnig, was published. Since then, many more books on graph theory have been written, providing mathematicians,
-				chemists, electrical engineers, social scientists, and many more professions with ways of communicating their ideas.<br /><br />In 2004, the Academy of Discrete
-				Mathematics and Applications declared June 10th to be Graph Theory Day.
-			</p>
-
-			<div class="break"></div>
-
-			<h4 class="title" id="uses">4. USES</h4>
-
-			<div class="break"></div>
-
-			<p class="text">Graph theory has an endless number of applications.</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-flow">AIRLINE SCHEDULING (FLOW PROBLEMS)</h5>
-			<p class="text">
-				Graph theory helps airlines optimize their flights and operate with the fewest number of crew members. This could allow them to offer more flights and better
-				use their fleet of aircraft. Here, the graph&rsquo;s nodes are cities and the edges are flights.
-			</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-pathfinding">DIRECTIONS (PATHFINDING)</h5>
-			<p class="text">
-				<b>Weighted graphs</b> and <b>pathfinding algorithms</b> find the best or shortest route between two points. Google Maps, maze solvers, and entities in some
-				video games all make use of <b>Dijkstra&rsquo;s algorithm</b>, <b>A*</b>, or some other shortest path algorithm. Typically, these algorithms look for the path
-				between two given points with the lowest cost, where the total cost is equal to the total of the weights of each edge in the path.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 4.1 — a graph of a hypothetical road network weighted based on distance and speed limit</p>
-				<img class="blog-image" src="../images/graph-theory-weighted.png" alt="" title="" />
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-colouring">MAP COLOURING</h5>
-			<p class="text">
-				Have you ever wondered how maps (with solid colours) get their colours? Any plane separated into regions can be coloured with just four colours, and no two
-				regions with the same colour will touch. This is called the four colour theorem. The theorem states that any planar graph with no loops can be coloured with
-				four (or fewer) colours.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">
-					fig. 4.2 — the world, with just four colours [external;
-					<a href="https://commons.wikimedia.org/wiki/File:World_map_with_four_colours.svg" target="_blank">click to view source</a>]
-				</p>
-				<a class="link" href="https://commons.wikimedia.org/wiki/File:World_map_with_four_colours.svg" target="_blank">
 					<img
 						class="blog-image"
-						src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/World_map_with_four_colours.svg/2543px-World_map_with_four_colours.svg.png"
-						alt="the world, with just four colours [external; click to view source]"
-						title="the world, with just four colours [external; click to view source]"
+						src="../images/graph-theory-title.png"
+						alt='"Graph Theory" title and an example graph'
+						title='"Graph Theory" title and an example graph'
 					/>
-				</a>
+
+					<hr />
+
+					<h4 class="title" id="contents">Contents</h4>
+
+					<ol>
+						<li><a class="link same-page-link" href="#basics">THE BASICS — WHAT IS GRAPH THEORY?</a></li>
+						<ul style="list-style-type: none">
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-nodes">NODES...</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-edges">CONNECTED BY EDGES...</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-graph">FORM A GRAPH!</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-trees">REMEMBER TREES?</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#basics-math">THE MATH</a></li>
+						</ul>
+						<li><a class="link same-page-link" href="#in-programming">GRAPH THEORY IN PROGRAMMING</a></li>
+						<ul style="list-style-type: none">
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#in-programming-matrix">ADJACENCY MATRIX</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#in-programming-list">ADJACENCY LIST</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#in-programming-array-and-object">AN ARRAY AND AN OBJECT</a></li>
+						</ul>
+						<li><a class="link same-page-link" href="#history">HISTORY</a></li>
+						<li><a class="link same-page-link" href="#uses">USES</a></li>
+						<ul style="list-style-type: none">
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-flow">AIRLINE SCHEDULING (FLOW PROBLEMS)</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-pathfinding">DIRECTIONS (PATHFINDING)</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-colouring">MAP COLOURING</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-search-engines">SEARCH ENGINES</a></li>
+							<li>
+								<span class="half-opacity">- </span
+								><a class="link same-page-link" href="#uses-community-detection">SOCIAL MEDIA MARKETING (COMMUNITY DETECTION)</a>
+							</li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-linguistics">LINGUISTICS</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-chemistry-biology">CHEMISTRY/BIOLOGY</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-network-security">NETWORK SECURITY</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-social-sciences">SOCIAL SCIENCES</a></li>
+							<li><span class="half-opacity">- </span><a class="link same-page-link" href="#uses-transit">TRANSIT NETWORKS</a></li>
+						</ul>
+						<li><a class="link same-page-link" href="#related-fields">RELATED FIELDS</a></li>
+						<li><a class="link same-page-link" href="#impact-on-society">IMPACT ON SOCIETY</a></li>
+						<li><a class="link same-page-link" href="#ethics">ETHICS?</a></li>
+						<li><a class="link same-page-link" href="#careers">CAREERS</a></li>
+						<li><a class="link same-page-link" href="#finite-craft">HOW I USED GRAPH THEORY — FINITE CRAFT</a></li>
+					</ol>
+
+					<hr />
+
+					<h4 class="title" id="basics">1. THE BASICS — WHAT IS GRAPH THEORY?</h4>
+
+					<div class="break"></div>
+
+					<p class="text">
+						Graph theory is a field of <b>discrete mathematics</b> that deals with the ideas of <b>graphs</b>. In their simplest form, graphs are networks of
+						<b>nodes</b> (also known as vertices) connected by <b>edges</b>. Anything that can be drawn as dots connected by lines can also be represented by a
+						graph. Examples of this include road networks, friend groups, electrical circuits, subway systems, and molecular structures.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.1 — example graph: a road network</p>
+						<img class="blog-image" src="../images/graph-theory-example-1.png" alt="example graph: a road network" title="example graph: a road network" />
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.2 — example graph: friends</p>
+						<img class="blog-image" src="../images/graph-theory-example-2.png" alt="example graph: friends" title="example graph: friends" />
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.3 — example graph: a subway system</p>
+						<img class="blog-image" src="../images/graph-theory-example-3.png" alt="example graph: a subway system" title="example graph: a subway system" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="basics-nodes">NODES...</h5>
+					<p class="text">
+						Nodes can be connected to any number of other nodes, or none at all. The <b>degree</b> of a node refers to the number of connected edges.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.4 — a graph showing the degree of two nodes</p>
+						<img
+							class="blog-image"
+							src="../images/graph-theory-degree.png"
+							alt="a graph showing the degree of two nodes"
+							title="a graph showing the degree of two nodes"
+						/>
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="basics-edges">CONNECTED BY EDGES...</h5>
+					<p class="text">
+						Two nodes can be connected by more than one edge, each called a <b>multiple edge</b>. This can represent, say, a multi-lane road or a molecule&rsquo;s
+						double bond. Nodes can also be connected to themselves with a special type of edge called a <b>loop</b>. The ends of the subway lines in
+						<span class="highlighted">fig. 1.3</span> could be considered loops, as trains turn around when they reach them.<br /><br />Edges can have a set
+						direction. They can be one-way, like a one-way street or a link from one website to another, or two-way. Edges with a specified direction are called
+						<b>directed edges</b>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.5 — a graph with one loop and some multiple edges</p>
+						<img
+							class="blog-image"
+							src="../images/graph-theory-multiple-edge-loop.png"
+							alt="a graph with one loop and some multiple edges"
+							title="a graph with one loop and some multiple edges"
+						/>
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.6 — one-way edges</p>
+						<img class="blog-image" src="../images/graph-theory-directed-graph-1.png" alt="one-way edges" title="one-way edges" />
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.7 — one-way and two-way edges</p>
+						<img class="blog-image" src="../images/graph-theory-directed-graph-2.png" alt="one-way and two-way edges" title="one-way and two-way edges" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="basics-graph">FORM A GRAPH!</h5>
+					<p class="text">
+						Graphs without loops or multiple edges (like <span class="highlighted">fig. 1.7</span>) are called <b>simple graphs</b>. Simple graphs that have every
+						possible edge are called <b>complete graphs</b>. Graphs that consist of directed edges are called <b>directed graphs</b>. Both
+						<span class="highlighted">fig. 1.6</span> and <span class="highlighted">fig. 1.7</span> are directed graphs. A route from one node to another is
+						called a <b>walk</b>. A walk without repeated edges is called a <b>trail</b>, and a walk without repeated nodes is called a <b>path</b>. A walk that
+						ends at the same node where it began is called a <b>cycle</b>. Any loop or pair of multiple edges is a cycle. Trails and paths that are also cycles
+						are considered <b>closed</b>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image" style="max-width: 300px">
+						<p class="half-opacity">fig. 1.8 — a complete graph</p>
+						<img class="blog-image" src="../images/graph-theory-complete.png" alt="a complete graph" title="a complete graph" style="max-width: 300px" />
+					</div>
+					<div class="big-picture">
+						<p class="half-opacity">fig. 1.9 — some walks</p>
+						<img class="big-picture" src="../images/graph-theory-walks.png" alt="some walks" title="some walks" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<p class="text">
+						If a graph contains a closed trail that travels across every edge, that graph is <b>Eulerian</b>. And if a graph contains a closed path that visits
+						every node, that graph is <b>Hamiltonian</b>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="big-picture">
+						<p class="half-opacity">fig. 1.10 — an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so</p>
+						<img
+							class="big-picture"
+							src="../images/graph-theory-eulerian-hamiltonian.png"
+							alt="an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so"
+							title="an Eulerian graph and a Hamiltonian graph, both labeled with the walk that makes them so"
+						/>
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<p class="text">
+						Most graphs are <b>connected</b>, meaning every node has a degree of at least one, but they can be <b>disconnected</b>, like
+						<span class="highlighted">fig. 1.4</span> and <span class="highlighted">fig. 1.11</span>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="big-picture">
+						<p class="half-opacity">fig. 1.11 — an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)</p>
+						<img
+							class="big-picture"
+							src="../images/graph-theory-notes.png"
+							alt="an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)"
+							title="an example of a disconnected graph: my Obsidian notes (the directed edges are links from one note to another)"
+						/>
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<p class="text">
+						Other than in <span class="highlighted">fig. 1.8</span> and <span class="highlighted">fig. 1.11</span>, none of the edges in any of the above diagrams
+						cross. Because graphs aren&rsquo;t physical objects, but rather representations of networks, it doesn&rsquo;t matter if edges cross. However, if a
+						graph can be drawn without any edges crossing, it is called a <b>planar graph</b>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.12 — a non-planar graph redrawn as a planar graph</p>
+						<img
+							class="blog-image"
+							src="../images/graph-theory-planar.png"
+							alt="a non-planar graph redrawn as a planar graph"
+							title="a non-planar graph redrawn as a planar graph"
+						/>
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="basics-trees">REMEMBER TREES?</h5>
+					<p class="text">
+						If you&rsquo;ve ever programmed or learned about probability, you&rsquo;ve probably come across an example of a <b>tree</b>. Trees are a restricted
+						type of graph in which all nodes stem from one, meaning there is only one path between any two nodes. All trees are graphs, but not all graphs are
+						trees.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 1.13 — a tree</p>
+						<img class="blog-image" src="../images/graph-theory-tree.png" alt="a tree" title="a tree" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="basics-math">THE MATH</h5>
+					<p class="text">
+						In math, graphs are defined as a set of nodes and a set of edges. The set of edges in an undirected graph contains <b>unordered pairs</b> of nodes,
+						and the set of edges in a directed graph contains <b>ordered pairs</b> of nodes. Proper notation is shown in
+						<span class="highlighted">fig. 1.14</span>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="big-picture">
+						<p class="half-opacity">fig. 1.14 — graph notation</p>
+						<img class="big-picture" src="../images/graph-theory-graph-notation.png" alt="graph notation" title="graph notation" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<p class="text">The above notation is very easy to convert into code.</p>
+
+					<div class="break"></div>
+
+					<h4 class="title" id="in-programming">2. GRAPH THEORY IN PROGRAMMING</h4>
+
+					<div class="break"></div>
+
+					<p class="text">There are a few common ways to represent a graph in code.</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="in-programming-matrix">ADJACENCY MATRIX</h5>
+					<p class="text">
+						Starting with zero, each node is assigned an <b>index</b>. Create a two-dimensional <b>Boolean</b> array of size
+						<span class="highlighted">n&times;n</span>, where <span class="highlighted">n</span> is the number of nodes. Edges are represented as
+						<span class="highlighted">true</span> values at the intersections between the two connected nodes. In an undirected graph, this results in two
+						<span class="highlighted">true</span> values for each edge, but in a directed graph there might only be one
+						<span class="highlighted">true</span> intersection. Two nodes are connected if <span class="highlighted">edges[node1][node2]</span> is
+						<span class="highlighted">true</span>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="big-picture">
+						<p class="half-opacity">fig. 2.1 — an adjacency matrix (undirected graph)</p>
+						<img
+							class="big-picture"
+							src="../images/graph-theory-adjacency-matrix.png"
+							alt="an adjacency matrix (undirected graph)"
+							title="an adjacency matrix (undirected graph)"
+						/>
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="in-programming-list">ADJACENCY LIST</h5>
+					<p class="text">
+						This is very similar to an adjacency matrix: each node has an index and edges are stored in a two-dimensional array. The difference is that, while the
+						array still has a row for each node, each row only contains the indices of the connected nodes. Two nodes are connected if
+						<span class="highlighted">edges[node1]</span> contains <span class="highlighted">node2</span>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="big-picture">
+						<p class="half-opacity">fig. 2.2 — an adjacency list (same graph as before)</p>
+						<img
+							class="big-picture"
+							src="../images/graph-theory-adjacency-list.png"
+							alt="an adjacency list (same graph as before)"
+							title="an adjacency list (same graph as before)"
+						/>
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<p class="text">An adjacency list is much easier to write manually, and a lot easier to read.</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="in-programming-array-and-object">AN ARRAY AND AN OBJECT</h5>
+					<p class="text">
+						When I was making <a class="link" href="craft.html">Finite Craft</a> (see
+						<a class="link same-page-link" href="#finite-craft">9. HOW I USED GRAPH THEORY — FINITE CRAFT</a>), I needed an array of recipes and an object with
+						item data. The structure in <span class="highlighted">fig. 2.3</span> is what I ended up using. This structure makes determining if two nodes are
+						connected more difficult, but because the nodes retain their name, it&rsquo;s very easy to read and write.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="big-picture">
+						<p class="half-opacity">fig. 2.3 — my method</p>
+						<img class="big-picture" src="../images/graph-theory-array-and-object.png" alt="my method" title="my method" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h4 class="title" id="history">3. HISTORY</h4>
+
+					<div class="break"></div>
+
+					<p class="text">
+						In 1736, Leonhard Euler wrote the first paper on what is now considered graph theory to prove that the Seven Bridges of Königsberg problem has no
+						solution.<br /><br />At some point, the city of Königsberg (now
+						<a class="link" href="https://www.openstreetmap.org/#map=16/54.7065/20.5108" target="_blank">Kaliningrad, Russia</a>) had seven bridges in close
+						proximity, as shown in <span class="highlighted">fig. 3.1</span>. Supposedly, the people of Königsberg used to entertain themselves by attempting to
+						find a route around the city that used each bridge exactly once. None of them were successful because, as Euler would prove mathematically, the Seven
+						Bridges of Königsberg is an impossible puzzle.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 3.1 — Königsberg, 1736</p>
+						<img class="blog-image" src="../images/graph-theory-Königsberg.png" alt="Königsberg, 1736" title="Königsberg, 1736" />
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">fig. 3.2 — Königsberg in graph form</p>
+						<img class="blog-image" src="../images/graph-theory-Königsberg-graph.png" alt="Königsberg in graph form" title="Königsberg in graph form" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<p class="text">
+						If we consider each section of land to be a node, and each bridge to be an edge, then we get the graph in <span class="highlighted">fig. 3.2</span>.
+						If the graph is Eulerian (you have one guess as to where we get that term from), then there is a route that uses every bridge only once.
+						<span class="highlighted">fig. 3.2</span> is not an Eulerian graph. What Euler essentially said in his paper was that a connected graph is Eulerian if
+						the degree of every node is even. You can see an example of this if you refer back to <span class="highlighted">fig. 1.10</span>. In
+						<span class="highlighted">fig. 3.2</span>, every node is of odd degree, much to the people of Königsberg&rsquo;s disappointment.<br /><br />Almost 150
+						years later, the first use of the term &ldquo;graph&rdquo; appeared in the
+						<a class="link" href="https://archive.org/details/nature15unkngoog/page/284/mode/1up?view=theater" target="_blank"
+							>February 7th, 1878 edition of <i>Nature</i></a
+						>. The article, written by J. J. Sylvester, looked at similarities between chemistry and algebra.<br /><br />Over 50 years after that, around 1931,
+						the first textbook on graph theory, written by Dénes Kőnig, was published. Since then, many more books on graph theory have been written, providing
+						mathematicians, chemists, electrical engineers, social scientists, and many more professions with ways of communicating their ideas.<br /><br />In
+						2004, the Academy of Discrete Mathematics and Applications declared June 10th to be Graph Theory Day.
+					</p>
+
+					<div class="break"></div>
+
+					<h4 class="title" id="uses">4. USES</h4>
+
+					<div class="break"></div>
+
+					<p class="text">Graph theory has an endless number of applications.</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-flow">AIRLINE SCHEDULING (FLOW PROBLEMS)</h5>
+					<p class="text">
+						Graph theory helps airlines optimize their flights and operate with the fewest number of crew members. This could allow them to offer more flights and
+						better use their fleet of aircraft. Here, the graph&rsquo;s nodes are cities and the edges are flights.
+					</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-pathfinding">DIRECTIONS (PATHFINDING)</h5>
+					<p class="text">
+						<b>Weighted graphs</b> and <b>pathfinding algorithms</b> find the best or shortest route between two points. Google Maps, maze solvers, and entities
+						in some video games all make use of <b>Dijkstra&rsquo;s algorithm</b>, <b>A*</b>, or some other shortest path algorithm. Typically, these algorithms
+						look for the path between two given points with the lowest cost, where the total cost is equal to the total of the weights of each edge in the path.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 4.1 — a graph of a hypothetical road network weighted based on distance and speed limit</p>
+						<img class="blog-image" src="../images/graph-theory-weighted.png" alt="" title="" />
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-colouring">MAP COLOURING</h5>
+					<p class="text">
+						Have you ever wondered how maps (with solid colours) get their colours? Any plane separated into regions can be coloured with just four colours, and
+						no two regions with the same colour will touch. This is called the four colour theorem. The theorem states that any planar graph with no loops can be
+						coloured with four (or fewer) colours.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">
+							fig. 4.2 — the world, with just four colours [external;
+							<a href="https://commons.wikimedia.org/wiki/File:World_map_with_four_colours.svg" target="_blank">click to view source</a>]
+						</p>
+						<a class="link" href="https://commons.wikimedia.org/wiki/File:World_map_with_four_colours.svg" target="_blank">
+							<img
+								class="blog-image"
+								src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/World_map_with_four_colours.svg/2543px-World_map_with_four_colours.svg.png"
+								alt="the world, with just four colours [external; click to view source]"
+								title="the world, with just four colours [external; click to view source]"
+							/>
+						</a>
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">
+							fig. 4.3 — the USA, with just four colours [external;
+							<a href="https://commons.wikimedia.org/wiki/File:Map_of_United_States_accessible_colors_shown.svg" target="_blank">click to view source</a>]
+						</p>
+						<a class="link" href="https://commons.wikimedia.org/wiki/File:Map_of_United_States_accessible_colors_shown.svg" target="_blank">
+							<img
+								class="blog-image"
+								src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Map_of_United_States_accessible_colors_shown.svg/1920px-Map_of_United_States_accessible_colors_shown.svg.png"
+								alt="the USA, with just four colours [external; click to view source]"
+								title="the USA, with just four colours [external; click to view source]"
+						/></a>
+					</div>
+				</div>
+
+				<div class="content">
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-search-engines">SEARCH ENGINES</h5>
+					<p class="text">
+						Search engines like Google create a directed graph of websites (the nodes) and hyperlinks (the edges). This helps them determine the pages that a
+						series of links eventually lead to and which are the most popular, making for more relevant search results.
+					</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-community-detection">SOCIAL MEDIA MARKETING (COMMUNITY DETECTION)</h5>
+					<p class="text">
+						Graphs of social networks, where individual people are nodes and friends are edges, can be grouped (by an algorithm) into clusters of people who are
+						more connected to each other than to people in another cluster. This helps advertisers since people in the same cluster are likely to have similar
+						interests, characteristics, ideas, and desires.
+					</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-linguistics">LINGUISTICS</h5>
+					<p class="text">Here, graphs may represent similarities between words or languages, or show where words or languages originated from.</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-chemistry-biology">CHEMISTRY/BIOLOGY</h5>
+					<p class="text">Graphs of molecular structures and whole lattices can be used to investigate different atoms and molecules in terms of bonds and shape.</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-network-security">NETWORK SECURITY</h5>
+					<p class="text">Graphs can be used to determine the number of redundancies or the weakest link in a system.</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-social-sciences">SOCIAL SCIENCES</h5>
+					<p class="text">Graphs have been used to study the spreading of rumors, friendship, influence, behavior, and collaboration.</p>
+
+					<div class="break"></div>
+
+					<h5 class="title" id="uses-transit">TRANSIT NETWORKS</h5>
+					<p class="text">
+						Transit maps are essentially graphs to begin with, and a graph of a transit system could be used to determine why certain areas are busier and where
+						more service would be useful.
+					</p>
+
+					<div class="break"></div>
+
+					<h4 class="title" id="related-fields">5. RELATED FIELDS</h4>
+
+					<div class="break"></div>
+
+					<p class="text">
+						As you saw above, there are so many fields, other than computer science, that can make use of graph theory. Pretty much any field that deals with
+						things that are at all related or connected to other things could use graph theory—and probably already do.
+					</p>
+
+					<div class="break"></div>
+
+					<h4 class="title" id="impact-on-society">6. IMPACT ON SOCIETY</h4>
+
+					<div class="break"></div>
+
+					<p class="text">
+						Another takeaway from the above list of uses is that graph theory is all around us. Probably the most prominent example of graph theory in everyday
+						life is Google Maps, an app that tells millions of people the best way to get to where they need/want to go. And the reduced travel times that come
+						from knowing the best route means lower travel-related expenses, like gas.<br /><br />Pathfinding is also very useful to companies like Amazon, who
+						have giant warehouses and robots that have to find things. Graph theory is therefore one of the reasons why Amazon is so successful and why they can
+						ship things so fast.<br /><br />Some of the other examples, such as search engines and social media marketing have become very prevalent in the last
+						couple of decades, due in no small part to graphs and their properties.
+					</p>
+
+					<div class="break"></div>
+
+					<h4 class="title" id="ethics">7. ETHICS?</h4>
+
+					<div class="break"></div>
+
+					<p class="text">
+						Graph theory is a mathematical concept, so using it is neither moral nor immoral. Where ethics come into play is what you do with it. The
+						<b><a class="link" href="https://www.acm.org/code-of-ethics" target="_blank">ACM</a></b> and
+						<b><a class="link" href="https://www.ieee.org/about/corporate/governance/p7-8.html" target="_blank">IEEE</a></b> both have very detailed codes of
+						ethics that you can refer to. Essentially, don&rsquo;t use graph theory for anything illegal or anything that could cause harm or discriminate against
+						certain people or groups. Make sure to have a positive impact on society, be honest and trustworthy, and respect people&rsquo;s privacy.
+					</p>
+
+					<div class="break"></div>
+
+					<h4 class="title" id="careers">8. CAREERS</h4>
+
+					<div class="break"></div>
+
+					<p class="text">
+						As I&rsquo;ve said before (see <a class="link same-page-link" href="#related-fields">5. RELATED FIELDS</a> and
+						<a class="link same-page-link" href="#uses">4. USES</a>), graph theory is hard to avoid. All manner of fields outside computer science and mathematics
+						use graphs and the like for all manner of purposes. However, to use graphs to their full potential, it would be useful for one to have a background in
+						mathematics. This explainer barely scratches the surface of the massive iceberg that is graph theory, and the deeper down the rabbit hole you go, the
+						more intense the math becomes.<br /><br />With all that said, software engineering still remains the most common example of a career that could make
+						use of graph theory. Graph theory just lends itself really well to the problems programmers encounter. Becoming a software engineer generally requires
+						a degree in software engineering or computer science. Once you&rsquo;ve got one of those, if you don&rsquo;t already know most of what there is to
+						know about graph theory, you can learn a great deal from some very good books that can be found for free online.
+					</p>
+
+					<div class="break"></div>
+
+					<h4 class="title" id="finite-craft">9. HOW I USED GRAPH THEORY — FINITE CRAFT</h4>
+
+					<div class="break"></div>
+
+					<p class="text">
+						Inspired by <a class="link" href="https://neal.fun/infinite-craft/" target="_blank">Neal Agarwal&rsquo;s Infinite Craft</a>, a game where you can
+						combine the four elements into whatever you can imagine, I made <a class="link" href="craft.html">Finite Craft</a>. Each item can be considered a node
+						in a graph, and each edge a combination, or recipe, that makes a new item. The code contains a large array of recipes and results, and although new
+						items aren&rsquo;t AI generated like they are in Infinite Craft, it&rsquo;s still pretty fun. Thinking about the items in terms of graph theory let me
+						make sure I added every combination of the first four items. The number of possible combinations between any number of items is a
+						<b>triangular number</b>, and can be found with the formula in <span class="highlighted">fig. 9.3</span>.
+					</p>
+
+					<div class="break"></div>
+				</div>
+
+				<div class="blog-image-container">
+					<div class="blog-image">
+						<p class="half-opacity">fig. 9.1 — connections between the initial elements in Finite Craft</p>
+						<img
+							class="blog-image"
+							src="../images/graph-theory-elements.png"
+							alt="connections between the initial elements in Finite Craft"
+							title="connections between the initial elements in Finite Craft"
+						/>
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">fig. 9.2 — the first dozen recipes in Finite Craft</p>
+						<img
+							class="blog-image"
+							src="../images/graph-theory-elements-array.png"
+							alt="the first dozen recipes in Finite Craft"
+							title="the first dozen recipes in Finite Craft"
+						/>
+					</div>
+					<div class="blog-image">
+						<p class="half-opacity">fig. 9.3 — the triangular number formula</p>
+						<img
+							class="blog-image"
+							src="../images/graph-theory-triangle-number-formula.png"
+							alt="the triangular number formula"
+							title="the triangular number formula"
+							style="max-width: 100px"
+						/>
+					</div>
+				</div>
+
+				<div class="content">
+					<hr />
+
+					<h4 class="title" id="glossary">Glossary</h4>
+
+					<ul>
+						<li><b>discrete mathematics</b> — an area of mathematics that deals with countable or separable structures</li>
+						<li><b>graphs</b> — diagrams that show relation or connection between things</li>
+						<li><b>nodes</b> — also known as vertices; the points in a graph</li>
+						<li><b>edges</b> — connect nodes</li>
+						<li><b>node degree</b> — the number of edges connected to a given node</li>
+						<li><b>multiple edges</b> — an edge that is not the only one connecting two nodes</li>
+						<li><b>loops</b> — edges that connect a node to itself</li>
+						<li><b>directed edges</b> — edges with direction, be it one-way or two-way</li>
+						<li><b>simple graphs</b> — graphs without loops or multiple edges</li>
+						<li><b>complete graphs</b> — graphs in which every node is connected to every other node</li>
+						<li><b>directed graphs</b> — graphs that contain directed edges</li>
+						<li><b>walks</b> — a route from one node to another</li>
+						<li><b>trails</b> — a walk without repeated edges</li>
+						<li><b>paths</b> — a walk without repeated nodes</li>
+						<li><b>cycles</b> — a walk that ends at the same node where it began</li>
+						<li><b>closed trails/paths</b> — trails or paths that are also cycles</li>
+						<li><b>Eulerian graphs</b> — graphs with a closed trail that travel across every edge</li>
+						<li><b>Hamiltonian graphs</b> — graphs with a closed path that visits every node</li>
+						<li><b>connected graphs</b> — graphs in which every node has a degree of at least one; the graph is one big piece</li>
+						<li><b>disconnected graphs</b> — graphs that have multiple, non-connected sections</li>
+						<li><b>planar graphs</b> — graphs in which none of the edges cross</li>
+						<li><b>trees</b> — graphs in which all nodes can be traced back to one original node; there is only one path between any two nodes</li>
+						<li><b>unordered pairs</b> — pairs of numbers for which their order does not matter</li>
+						<li><b>ordered pairs</b> — pairs of numbers for which their order does matter</li>
+						<li><b>indices</b> — numbers that define an element&rsquo;s position in an array</li>
+						<li><b>Booleans</b> — true or false values</li>
+						<li><b>weighted graphs</b> — graphs with nodes, edges, or both with weights applied to them</li>
+						<li><b>pathfinding algorithms</b> — algorithms that find the shortest or best path between two points</li>
+						<li><b>Dijkstra&rsquo;s algorithm</b> — a pathfinding algorithm</li>
+						<li><b>A*</b> — read &ldquo;a-star&rdquo;; a more efficient version of Dijkstra&rsquo;s algorithm</li>
+						<li><b>the ACM</b> — the Association for Computing Machinery</li>
+						<li><b>the IEEE</b> — the Institute of Electrical and Electronics Engineers</li>
+						<li>
+							<b>triangular numbers</b> — a number such that, if that many objects were placed in a triangle shape, they would form an equilateral triangle
+							(example: bowling pins)
+						</li>
+					</ul>
+
+					<hr />
+
+					<h4 class="title" id="sources">Sources</h4>
+
+					<ul>
+						<li>
+							Abiy, Thaddeus, et al. &ldquo;A* Search.&rdquo; <i>Brilliant.org</i>, 2024,
+							<a class="link" href="https://brilliant.org/wiki/a-star-search/" target="_blank">https://brilliant.org/wiki/a-star-search/</a>. Accessed 3 March
+							2024.
+						</li>
+						<li>
+							Association for Computing Machinery. &ldquo;ACM Code of Ethics and Professional Conduct.&rdquo; <i>Association for Computing Machinery</i>, 2024,
+							<a class="link" href="https://www.acm.org/code-of-ethics" target="_blank">https://www.acm.org/code-of-ethics</a>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Biggs, Norman, et al. <i>Graph theory, 1736-1936</i>. Clarendon Press, 1986. <i>Google Books</i>,
+							<a class="link" href="https://books.google.ca/books?id=XqYTk0sXmpoC&lpg=PP1&pg=PA1#v=onepage&q&f=false" target="_blank"
+								>https://books.google.ca/books?id=XqYTk0sXmpoC&lpg=PP1&pg=PA1#v=onepage&q&f=false</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							GeeksforGeeks. &ldquo;Graph and its representations.&rdquo; <i>GeeksforGeeks</i>, 13 November 2012,
+							<a class="link" href="https://www.geeksforgeeks.org/graph-and-its-representations/" target="_blank"
+								>https://www.geeksforgeeks.org/graph-and-its-representations/</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Hayes, Andy, et al. &ldquo;Discrete Mathematics.&rdquo; <i>Brilliant.org</i>, 2024,
+							<a class="link" href="https://brilliant.org/wiki/discrete-mathematics/" target="_blank">https://brilliant.org/wiki/discrete-mathematics/</a>.
+							Accessed 3 March 2024.
+						</li>
+						<li>
+							IEEE Information Theory Society. &ldquo;14th ANNUAL ADMA CONFERENCE & GRAPH THEORY DAY.&rdquo; <i>IEEE Information Theory Society</i>, 2018,
+							<a class="link" href="https://www.itsoc.org/conferences/submit/14th-annual-adma-conference-graph-theory-day" target="_blank"
+								>https://www.itsoc.org/conferences/submit/14th-annual-adma-conference-graph-theory-day</a
+							>. Accessed 1 March 2024.
+						</li>
+						<li>
+							Iñiguez, Agustín. &ldquo;Graph theory and its uses with 5 examples of real life problems.&rdquo; <i>Xomnia</i>, 11 April 2022,
+							<a class="link" href="https://www.xomnia.com/post/graph-theory-and-its-uses-with-examples-of-real-life-problems/" target="_blank"
+								>https://www.xomnia.com/post/graph-theory-and-its-uses-with-examples-of-real-life-problems/</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Institute of Electrical and Electronics Engineers. &ldquo;IEEE Code of Ethics.&rdquo; <i>Institute of Electrical and Electronics Engineers</i>,
+							2024,
+							<a class="link" href="https://www.ieee.org/about/corporate/governance/p7-8.html" target="_blank"
+								>https://www.ieee.org/about/corporate/governance/p7-8.html</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Javatpoint. &ldquo;Applications of Graph Theory.&rdquo; <i>Javatpoint</i>, 2021,
+							<a class="link" href="https://www.javatpoint.com/graph-theory-applications" target="_blank"
+								>https://www.javatpoint.com/graph-theory-applications</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Joshi, Vaidehi. &ldquo;A Gentle Introduction To Graph Theory.&rdquo; <i>Medium</i>, 20 March 2017,
+							<a class="link" href="https://medium.com/basecs/a-gentle-introduction-to-graph-theory-77969829ead8" target="_blank"
+								>https://medium.com/basecs/a-gentle-introduction-to-graph-theory-77969829ead8</a
+							>. Accessed 21 February 2024.
+						</li>
+						<li>
+							Sylvester, J. J. &ldquo;Chemistry and Algebra.&rdquo; <i>Nature</i>, vol. 17, no. 432, 1878, p. 284. <i>Internet Archive</i>,
+							<a class="link" href="https://archive.org/details/nature15unkngoog/page/n15/mode/1up" target="_blank"
+								>https://archive.org/details/nature15unkngoog/page/n15/mode/1up</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Tutte, W. T. <i>Graph Theory</i>. Cambridge University Press, 2001. <i>Google Books</i>,
+							<a class="link" href="https://books.google.ca/books?id=uTGhooU37h4C&pg=PA30&redir_esc=y#v=onepage&q&f=false" target="_blank"
+								>https://books.google.ca/books?id=uTGhooU37h4C&pg=PA30&redir_esc=y#v=onepage&q&f=false</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Wikipedia contributors. &ldquo;Four color theorem.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 20 February 2024,
+							<a class="link" href="https://en.wikipedia.org/w/index.php?title=Four_color_theorem&oldid=1209115256" target="_blank"
+								>https://en.wikipedia.org/w/index.php?title=Four_color_theorem&oldid=1209115256</a
+							>. Accessed 21 February 2024.
+						</li>
+						<li>
+							Wikipedia contributors. &ldquo;Graph theory.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 14 February 2024,
+							<a class="link" href="https://en.wikipedia.org/w/index.php?title=Graph_theory&oldid=1207303495" target="_blank"
+								>https://en.wikipedia.org/w/index.php?title=Graph_theory&oldid=1207303495</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Wikipedia contributors. &ldquo;Seven Bridges of Königsberg.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 19 February 2024,
+							<a class="link" href="https://en.wikipedia.org/w/index.php?title=Seven_Bridges_of_K%C3%B6nigsberg&oldid=1208924413" target="_blank"
+								>https://en.wikipedia.org/w/index.php?title=Seven_Bridges_of_K%C3%B6nigsberg&oldid=1208924413</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Wikipedia contributors. &ldquo;Triangular number.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 13 January 2024,
+							<a class="link" href="https://en.wikipedia.org/w/index.php?title=Triangular_number&oldid=1195279122" target="_blank"
+								>https://en.wikipedia.org/w/index.php?title=Triangular_number&oldid=1195279122</a
+							>. Accessed 2 March 2024.
+						</li>
+						<li>
+							Wilson, Robin J. <i>Introduction to Graph Theory</i>. 4 ed., Longman, 1996,
+							<a class="link" href="https://www.maths.ed.ac.uk/~v1ranick/papers/wilsongraph.pdf" target="_blank"
+								>https://www.maths.ed.ac.uk/~v1ranick/papers/wilsongraph.pdf</a
+							>. Accessed 21February 2024.
+						</li>
+					</ul>
+
+					<div class="content-end"></div>
+
+					<b class="small-text half-opacity">LAST UPDATED: April 6th, 2024</b>
+				</div>
 			</div>
-			<div class="blog-image">
-				<p class="half-opacity">
-					fig. 4.3 — the USA, with just four colours [external;
-					<a href="https://commons.wikimedia.org/wiki/File:Map_of_United_States_accessible_colors_shown.svg" target="_blank">click to view source</a>]
-				</p>
-				<a class="link" href="https://commons.wikimedia.org/wiki/File:Map_of_United_States_accessible_colors_shown.svg" target="_blank">
-					<img
-						class="blog-image"
-						src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Map_of_United_States_accessible_colors_shown.svg/1920px-Map_of_United_States_accessible_colors_shown.svg.png"
-						alt="the USA, with just four colours [external; click to view source]"
-						title="the USA, with just four colours [external; click to view source]"
-				/></a>
-			</div>
+
+			<div class="footer" style="background: #ffffee"></div>
+			<div class="footer" style="background: #ff6b6b"></div>
+			<div class="footer" style="background: #ffe66d"></div>
+			<div class="footer" style="background: #4ecdc4"></div>
 		</div>
-
-		<div class="content">
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-search-engines">SEARCH ENGINES</h5>
-			<p class="text">
-				Search engines like Google create a directed graph of websites (the nodes) and hyperlinks (the edges). This helps them determine the pages that a series of
-				links eventually lead to and which are the most popular, making for more relevant search results.
-			</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-community-detection">SOCIAL MEDIA MARKETING (COMMUNITY DETECTION)</h5>
-			<p class="text">
-				Graphs of social networks, where individual people are nodes and friends are edges, can be grouped (by an algorithm) into clusters of people who are more
-				connected to each other than to people in another cluster. This helps advertisers since people in the same cluster are likely to have similar interests,
-				characteristics, ideas, and desires.
-			</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-linguistics">LINGUISTICS</h5>
-			<p class="text">Here, graphs may represent similarities between words or languages, or show where words or languages originated from.</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-chemistry-biology">CHEMISTRY/BIOLOGY</h5>
-			<p class="text">Graphs of molecular structures and whole lattices can be used to investigate different atoms and molecules in terms of bonds and shape.</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-network-security">NETWORK SECURITY</h5>
-			<p class="text">Graphs can be used to determine the number of redundancies or the weakest link in a system.</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-social-sciences">SOCIAL SCIENCES</h5>
-			<p class="text">Graphs have been used to study the spreading of rumors, friendship, influence, behavior, and collaboration.</p>
-
-			<div class="break"></div>
-
-			<h5 class="title" id="uses-transit">TRANSIT NETWORKS</h5>
-			<p class="text">
-				Transit maps are essentially graphs to begin with, and a graph of a transit system could be used to determine why certain areas are busier and where more
-				service would be useful.
-			</p>
-
-			<div class="break"></div>
-
-			<h4 class="title" id="related-fields">5. RELATED FIELDS</h4>
-
-			<div class="break"></div>
-
-			<p class="text">
-				As you saw above, there are so many fields, other than computer science, that can make use of graph theory. Pretty much any field that deals with things that
-				are at all related or connected to other things could use graph theory—and probably already do.
-			</p>
-
-			<div class="break"></div>
-
-			<h4 class="title" id="impact-on-society">6. IMPACT ON SOCIETY</h4>
-
-			<div class="break"></div>
-
-			<p class="text">
-				Another takeaway from the above list of uses is that graph theory is all around us. Probably the most prominent example of graph theory in everyday life is
-				Google Maps, an app that tells millions of people the best way to get to where they need/want to go. And the reduced travel times that come from knowing the
-				best route means lower travel-related expenses, like gas.<br /><br />Pathfinding is also very useful to companies like Amazon, who have giant warehouses and
-				robots that have to find things. Graph theory is therefore one of the reasons why Amazon is so successful and why they can ship things so fast.<br /><br />Some
-				of the other examples, such as search engines and social media marketing have become very prevalent in the last couple of decades, due in no small part to
-				graphs and their properties.
-			</p>
-
-			<div class="break"></div>
-
-			<h4 class="title" id="ethics">7. ETHICS?</h4>
-
-			<div class="break"></div>
-
-			<p class="text">
-				Graph theory is a mathematical concept, so using it is neither moral nor immoral. Where ethics come into play is what you do with it. The
-				<b><a class="link" href="https://www.acm.org/code-of-ethics" target="_blank">ACM</a></b> and
-				<b><a class="link" href="https://www.ieee.org/about/corporate/governance/p7-8.html" target="_blank">IEEE</a></b> both have very detailed codes of ethics that
-				you can refer to. Essentially, don&rsquo;t use graph theory for anything illegal or anything that could cause harm or discriminate against certain people or
-				groups. Make sure to have a positive impact on society, be honest and trustworthy, and respect people&rsquo;s privacy.
-			</p>
-
-			<div class="break"></div>
-
-			<h4 class="title" id="careers">8. CAREERS</h4>
-
-			<div class="break"></div>
-
-			<p class="text">
-				As I&rsquo;ve said before (see <a class="link same-page-link" href="#related-fields">5. RELATED FIELDS</a> and
-				<a class="link same-page-link" href="#uses">4. USES</a>), graph theory is hard to avoid. All manner of fields outside computer science and mathematics use
-				graphs and the like for all manner of purposes. However, to use graphs to their full potential, it would be useful for one to have a background in mathematics.
-				This explainer barely scratches the surface of the massive iceberg that is graph theory, and the deeper down the rabbit hole you go, the more intense the math
-				becomes.<br /><br />With all that said, software engineering still remains the most common example of a career that could make use of graph theory. Graph theory
-				just lends itself really well to the problems programmers encounter. Becoming a software engineer generally requires a degree in software engineering or
-				computer science. Once you&rsquo;ve got one of those, if you don&rsquo;t already know most of what there is to know about graph theory, you can learn a great
-				deal from some very good books that can be found for free online.
-			</p>
-
-			<div class="break"></div>
-
-			<h4 class="title" id="finite-craft">9. HOW I USED GRAPH THEORY — FINITE CRAFT</h4>
-
-			<div class="break"></div>
-
-			<p class="text">
-				Inspired by <a class="link" href="https://neal.fun/infinite-craft/" target="_blank">Neal Agarwal&rsquo;s Infinite Craft</a>, a game where you can combine the
-				four elements into whatever you can imagine, I made <a class="link" href="craft.html">Finite Craft</a>. Each item can be considered a node in a graph, and each
-				edge a combination, or recipe, that makes a new item. The code contains a large array of recipes and results, and although new items aren&rsquo;t AI generated
-				like they are in Infinite Craft, it&rsquo;s still pretty fun. Thinking about the items in terms of graph theory let me make sure I added every combination of
-				the first four items. The number of possible combinations between any number of items is a <b>triangular number</b>, and can be found with the formula in
-				<span class="highlighted">fig. 9.3</span>.
-			</p>
-
-			<div class="break"></div>
-		</div>
-
-		<div class="blog-image-container">
-			<div class="blog-image">
-				<p class="half-opacity">fig. 9.1 — connections between the initial elements in Finite Craft</p>
-				<img
-					class="blog-image"
-					src="../images/graph-theory-elements.png"
-					alt="connections between the initial elements in Finite Craft"
-					title="connections between the initial elements in Finite Craft"
-				/>
-			</div>
-			<div class="blog-image">
-				<p class="half-opacity">fig. 9.2 — the first dozen recipes in Finite Craft</p>
-				<img
-					class="blog-image"
-					src="../images/graph-theory-elements-array.png"
-					alt="the first dozen recipes in Finite Craft"
-					title="the first dozen recipes in Finite Craft"
-				/>
-			</div>
-			<div class="blog-image">
-				<p class="half-opacity">fig. 9.3 — the triangular number formula</p>
-				<img
-					class="blog-image"
-					src="../images/graph-theory-triangle-number-formula.png"
-					alt="the triangular number formula"
-					title="the triangular number formula"
-					style="max-width: 100px"
-				/>
-			</div>
-		</div>
-
-		<div class="content">
-			<hr />
-
-			<h4 class="title" id="glossary">Glossary</h4>
-
-			<ul>
-				<li><b>discrete mathematics</b> — an area of mathematics that deals with countable or separable structures</li>
-				<li><b>graphs</b> — diagrams that show relation or connection between things</li>
-				<li><b>nodes</b> — also known as vertices; the points in a graph</li>
-				<li><b>edges</b> — connect nodes</li>
-				<li><b>node degree</b> — the number of edges connected to a given node</li>
-				<li><b>multiple edges</b> — an edge that is not the only one connecting two nodes</li>
-				<li><b>loops</b> — edges that connect a node to itself</li>
-				<li><b>directed edges</b> — edges with direction, be it one-way or two-way</li>
-				<li><b>simple graphs</b> — graphs without loops or multiple edges</li>
-				<li><b>complete graphs</b> — graphs in which every node is connected to every other node</li>
-				<li><b>directed graphs</b> — graphs that contain directed edges</li>
-				<li><b>walks</b> — a route from one node to another</li>
-				<li><b>trails</b> — a walk without repeated edges</li>
-				<li><b>paths</b> — a walk without repeated nodes</li>
-				<li><b>cycles</b> — a walk that ends at the same node where it began</li>
-				<li><b>closed trails/paths</b> — trails or paths that are also cycles</li>
-				<li><b>Eulerian graphs</b> — graphs with a closed trail that travel across every edge</li>
-				<li><b>Hamiltonian graphs</b> — graphs with a closed path that visits every node</li>
-				<li><b>connected graphs</b> — graphs in which every node has a degree of at least one; the graph is one big piece</li>
-				<li><b>disconnected graphs</b> — graphs that have multiple, non-connected sections</li>
-				<li><b>planar graphs</b> — graphs in which none of the edges cross</li>
-				<li><b>trees</b> — graphs in which all nodes can be traced back to one original node; there is only one path between any two nodes</li>
-				<li><b>unordered pairs</b> — pairs of numbers for which their order does not matter</li>
-				<li><b>ordered pairs</b> — pairs of numbers for which their order does matter</li>
-				<li><b>indices</b> — numbers that define an element&rsquo;s position in an array</li>
-				<li><b>Booleans</b> — true or false values</li>
-				<li><b>weighted graphs</b> — graphs with nodes, edges, or both with weights applied to them</li>
-				<li><b>pathfinding algorithms</b> — algorithms that find the shortest or best path between two points</li>
-				<li><b>Dijkstra&rsquo;s algorithm</b> — a pathfinding algorithm</li>
-				<li><b>A*</b> — read &ldquo;a-star&rdquo;; a more efficient version of Dijkstra&rsquo;s algorithm</li>
-				<li><b>the ACM</b> — the Association for Computing Machinery</li>
-				<li><b>the IEEE</b> — the Institute of Electrical and Electronics Engineers</li>
-				<li>
-					<b>triangular numbers</b> — a number such that, if that many objects were placed in a triangle shape, they would form an equilateral triangle (example:
-					bowling pins)
-				</li>
-			</ul>
-
-			<hr />
-
-			<h4 class="title" id="sources">Sources</h4>
-
-			<ul>
-				<li>
-					Abiy, Thaddeus, et al. &ldquo;A* Search.&rdquo; <i>Brilliant.org</i>, 2024,
-					<a class="link" href="https://brilliant.org/wiki/a-star-search/" target="_blank">https://brilliant.org/wiki/a-star-search/</a>. Accessed 3 March 2024.
-				</li>
-				<li>
-					Association for Computing Machinery. &ldquo;ACM Code of Ethics and Professional Conduct.&rdquo; <i>Association for Computing Machinery</i>, 2024,
-					<a class="link" href="https://www.acm.org/code-of-ethics" target="_blank">https://www.acm.org/code-of-ethics</a>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Biggs, Norman, et al. <i>Graph theory, 1736-1936</i>. Clarendon Press, 1986. <i>Google Books</i>,
-					<a class="link" href="https://books.google.ca/books?id=XqYTk0sXmpoC&lpg=PP1&pg=PA1#v=onepage&q&f=false" target="_blank"
-						>https://books.google.ca/books?id=XqYTk0sXmpoC&lpg=PP1&pg=PA1#v=onepage&q&f=false</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					GeeksforGeeks. &ldquo;Graph and its representations.&rdquo; <i>GeeksforGeeks</i>, 13 November 2012,
-					<a class="link" href="https://www.geeksforgeeks.org/graph-and-its-representations/" target="_blank"
-						>https://www.geeksforgeeks.org/graph-and-its-representations/</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Hayes, Andy, et al. &ldquo;Discrete Mathematics.&rdquo; <i>Brilliant.org</i>, 2024,
-					<a class="link" href="https://brilliant.org/wiki/discrete-mathematics/" target="_blank">https://brilliant.org/wiki/discrete-mathematics/</a>. Accessed 3
-					March 2024.
-				</li>
-				<li>
-					IEEE Information Theory Society. &ldquo;14th ANNUAL ADMA CONFERENCE & GRAPH THEORY DAY.&rdquo; <i>IEEE Information Theory Society</i>, 2018,
-					<a class="link" href="https://www.itsoc.org/conferences/submit/14th-annual-adma-conference-graph-theory-day" target="_blank"
-						>https://www.itsoc.org/conferences/submit/14th-annual-adma-conference-graph-theory-day</a
-					>. Accessed 1 March 2024.
-				</li>
-				<li>
-					Iñiguez, Agustín. &ldquo;Graph theory and its uses with 5 examples of real life problems.&rdquo; <i>Xomnia</i>, 11 April 2022,
-					<a class="link" href="https://www.xomnia.com/post/graph-theory-and-its-uses-with-examples-of-real-life-problems/" target="_blank"
-						>https://www.xomnia.com/post/graph-theory-and-its-uses-with-examples-of-real-life-problems/</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Institute of Electrical and Electronics Engineers. &ldquo;IEEE Code of Ethics.&rdquo; <i>Institute of Electrical and Electronics Engineers</i>, 2024,
-					<a class="link" href="https://www.ieee.org/about/corporate/governance/p7-8.html" target="_blank"
-						>https://www.ieee.org/about/corporate/governance/p7-8.html</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Javatpoint. &ldquo;Applications of Graph Theory.&rdquo; <i>Javatpoint</i>, 2021,
-					<a class="link" href="https://www.javatpoint.com/graph-theory-applications" target="_blank">https://www.javatpoint.com/graph-theory-applications</a>.
-					Accessed 2 March 2024.
-				</li>
-				<li>
-					Joshi, Vaidehi. &ldquo;A Gentle Introduction To Graph Theory.&rdquo; <i>Medium</i>, 20 March 2017,
-					<a class="link" href="https://medium.com/basecs/a-gentle-introduction-to-graph-theory-77969829ead8" target="_blank"
-						>https://medium.com/basecs/a-gentle-introduction-to-graph-theory-77969829ead8</a
-					>. Accessed 21 February 2024.
-				</li>
-				<li>
-					Sylvester, J. J. &ldquo;Chemistry and Algebra.&rdquo; <i>Nature</i>, vol. 17, no. 432, 1878, p. 284. <i>Internet Archive</i>,
-					<a class="link" href="https://archive.org/details/nature15unkngoog/page/n15/mode/1up" target="_blank"
-						>https://archive.org/details/nature15unkngoog/page/n15/mode/1up</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Tutte, W. T. <i>Graph Theory</i>. Cambridge University Press, 2001. <i>Google Books</i>,
-					<a class="link" href="https://books.google.ca/books?id=uTGhooU37h4C&pg=PA30&redir_esc=y#v=onepage&q&f=false" target="_blank"
-						>https://books.google.ca/books?id=uTGhooU37h4C&pg=PA30&redir_esc=y#v=onepage&q&f=false</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Wikipedia contributors. &ldquo;Four color theorem.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 20 February 2024,
-					<a class="link" href="https://en.wikipedia.org/w/index.php?title=Four_color_theorem&oldid=1209115256" target="_blank"
-						>https://en.wikipedia.org/w/index.php?title=Four_color_theorem&oldid=1209115256</a
-					>. Accessed 21 February 2024.
-				</li>
-				<li>
-					Wikipedia contributors. &ldquo;Graph theory.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 14 February 2024,
-					<a class="link" href="https://en.wikipedia.org/w/index.php?title=Graph_theory&oldid=1207303495" target="_blank"
-						>https://en.wikipedia.org/w/index.php?title=Graph_theory&oldid=1207303495</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Wikipedia contributors. &ldquo;Seven Bridges of Königsberg.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 19 February 2024,
-					<a class="link" href="https://en.wikipedia.org/w/index.php?title=Seven_Bridges_of_K%C3%B6nigsberg&oldid=1208924413" target="_blank"
-						>https://en.wikipedia.org/w/index.php?title=Seven_Bridges_of_K%C3%B6nigsberg&oldid=1208924413</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Wikipedia contributors. &ldquo;Triangular number.&rdquo; <i>Wikipedia</i>, Wikipedia, The Free Encyclopedia, 13 January 2024,
-					<a class="link" href="https://en.wikipedia.org/w/index.php?title=Triangular_number&oldid=1195279122" target="_blank"
-						>https://en.wikipedia.org/w/index.php?title=Triangular_number&oldid=1195279122</a
-					>. Accessed 2 March 2024.
-				</li>
-				<li>
-					Wilson, Robin J. <i>Introduction to Graph Theory</i>. 4 ed., Longman, 1996,
-					<a class="link" href="https://www.maths.ed.ac.uk/~v1ranick/papers/wilsongraph.pdf" target="_blank"
-						>https://www.maths.ed.ac.uk/~v1ranick/papers/wilsongraph.pdf</a
-					>. Accessed 21February 2024.
-				</li>
-			</ul>
-
-			<div class="content-end"></div>
-
-			<b class="small-text half-opacity">LAST UPDATED: April 6th, 2024</b>
-		</div>
-
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
 
 		<script src="../files/to-top.js"></script>
 

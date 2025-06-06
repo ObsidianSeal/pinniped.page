@@ -44,42 +44,44 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
 		</div>
 
-		<div class="navbar-space"></div>
+		<div class="main">
+			<div class="navbar-space"></div>
 
-		<div class="content">
-			<h2 class="title">title</h2>
+			<div class="content-container">
+				<div class="content">
+					<h2 class="title">title</h2>
 
-			<div class="break"></div>
+					<div class="break"></div>
 
-			<p class="project-top-link">
-				<span class="blog-archive-list-marker"><i class="fa-solid fa-circle-question fa-fw"></i></span>
-				<span class="blog-archive-list-item"><a class="link" href="../yikes.html" target="_blank">link</a></span>
-			</p>
+					<p class="project-top-link">
+						<span class="blog-archive-list-marker"><i class="fa-solid fa-circle-question fa-fw"></i></span>
+						<span class="blog-archive-list-item"><a class="link" href="../yikes.html" target="_blank">link</a></span>
+					</p>
 
-			<div class="break"></div>
+					<div class="break"></div>
 
-			<img class="blog-image" src="../images/icon.png" style="max-width: 480px" alt="image" title="image" />
+					<img class="blog-image" src="../images/icon.png" style="max-width: 480px" alt="image" title="image" />
 
-			<div class="break"></div>
+					<div class="break"></div>
 
-			<h4 class="title">subtitle</h4>
+					<h4 class="title">subtitle</h4>
 
-			<div class="break"></div>
+					<div class="break"></div>
 
-			<p class="text">text</p>
+					<p class="text">text</p>
 
-			<div class="content-end"></div>
-						
-			<b class="small-text half-opacity">LAST UPDATED: date</b>
+					<div class="content-end"></div>
+								
+					<b class="small-text half-opacity">LAST UPDATED: date</b>
+				</div>
+			</div>
+
+			<div class="footer" style="background: #ffffee"></div>
+			<div class="footer" style="background: #ff6b6b"></div>
+			<div class="footer" style="background: #ffe66d"></div>
+			<div class="footer" style="background: #4ecdc4"></div>
 		</div>
 
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
-
 		<script src="../files/to-top.js"></script>
-
-		<script src="../files/footer.js"></script>
 	</body>
 </html>

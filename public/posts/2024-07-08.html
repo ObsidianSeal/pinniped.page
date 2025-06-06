@@ -51,161 +51,170 @@
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
 		</div>
 
-		<div class="navbar-space"></div>
+		<div class="main">
+			<div class="navbar-space"></div>
 
-		<div class="content">
-			<h5 class="post-header">
-				<span>July 8th, 2024</span>
-				<span
-					><a href="2024-05-12.html" class="title title-2 hoverable-title">Previous</a> /
-					<a href="2024-07-16.html" class="title title-2 hoverable-title">Next</a></span
-				>
-			</h5>
+			<div class="content-container">
+				<div class="content">
+					<h5 class="post-header">
+						<span>July 8th, 2024</span>
+						<span
+							><a href="2024-05-12.html" class="title title-2 hoverable-title">Previous</a> /
+							<a href="2024-07-16.html" class="title title-2 hoverable-title">Next</a></span
+						>
+					</h5>
 
-			<div class="blog-line"></div>
+					<div class="blog-line"></div>
 
-			<h3 class="title title-2">Costs &amp; Limitations</h3>
+					<h3 class="title title-2">Costs &amp; Limitations</h3>
 
-			<div class="break"></div>
+					<div class="break"></div>
 
-			<p class="text">
-				A list of the <b>major</b> services behind the <span class="highlighted">pinniped.page</span>, what they provide at what price, and what I think of them.
-			</p>
+					<p class="text">
+						A list of the <b>major</b> services behind the <span class="highlighted">pinniped.page</span>, what they provide at what price, and what I think of
+						them.
+					</p>
 
-			<div class="double-break"></div>
+					<div class="double-break"></div>
 
-			<b id="domain">1 — DOMAIN — Google Domains (now <a href="https://domains.squarespace.com/" class="link-2" target="_blank">Squarespace Domains</a>)</b>
+					<b id="domain">1 — DOMAIN — Google Domains (now <a href="https://domains.squarespace.com/" class="link-2" target="_blank">Squarespace Domains</a>)</b>
 
-			<p class="text">
-				This is where the &ldquo;pinniped.page&rdquo; in the URL comes from. All this does is make it so you don&rsquo;t have to go to
-				<span class="highlighted">the-pinniped-page.web.app</span> or <span class="highlighted">the-pinniped-page.firebaseapp.com</span> to access my website. It also
-				provides some other management features.
-			</p>
-			<div class="highlighted-box red">
-				<i class="fa-solid fa-circle-dollar"></i>
+					<p class="text">
+						This is where the &ldquo;pinniped.page&rdquo; in the URL comes from. All this does is make it so you don&rsquo;t have to go to
+						<span class="highlighted">the-pinniped-page.web.app</span> or <span class="highlighted">the-pinniped-page.firebaseapp.com</span> to access my website.
+						It also provides some other management features.
+					</p>
+					<div class="highlighted-box red">
+						<i class="fa-solid fa-circle-dollar"></i>
 
-				<p class="text">
-					<b>Google <i class="fa-solid fa-arrow-right-long fa-fw"></i> Squarespace .page domain: </b>CAD$14 + tax / year
-				</p>
+						<p class="text">
+							<b>Google <i class="fa-solid fa-arrow-right-long fa-fw"></i> Squarespace .page domain: </b>CAD$14 + tax / year
+						</p>
+					</div>
+					<p class="text">
+						Although I was not happy that Google Domains was acquired by Squarespace, the migration was seamless and I actually think the Squarespace dashboard
+						looks nicer. I don&rsquo;t think I have ever had any problems with my domain, the service does what it&rsquo;s supposed to.
+					</p>
+
+					<div class="double-break"></div>
+
+					<b id="hosting">2 — HOSTING — <a href="https://firebase.google.com/products/app-hosting" class="link-2" target="_blank">Firebase Hosting</a></b>
+
+					<p class="text">
+						This is the most important service used by my website, as it would not exist without it. Firebase Hosting stores my code and serves it to people who
+						want to view it.
+					</p>
+					<div class="highlighted-box yellow">
+						<i class="fa-solid fa-circle-dollar"></i>
+
+						<p class="text"><b>Firebase Spark plan:</b> free!</p>
+					</div>
+					<p class="text">
+						I am limited to <span class="highlighted">10 GB</span> of storage and <span class="highlighted">360 MB/day</span> of data transfer, which I still
+						cannot believe is free, because that&rsquo;s more than enough (for now at least). I recently had a major issue with this service (that turned out to
+						be a bug in their code), and even as a non-paying customer I was able to access wonderful human customer service. Just phenomenal.
+					</p>
+
+					<div class="double-break"></div>
+
+					<b id="database"
+						>3 — DATABASE — <a href="https://firebase.google.com/products/realtime-database" class="link-2" target="_blank">Firebase Realtime Database</a></b
+					>
+
+					<p class="text">
+						This provides an easily accessible database to store information in. At the moment, it saves the current
+						<a href="../projects/w.html" class="link-2">wordlelele</a> word, ratings for
+						<a href="../projects/think-four.html" class="link-2">Think Four</a> puzzles, games of
+						<a href="../projects/tictactoe.html" class="link-2">TicTacToe</a>, <a href="../posts/2023-01-21.html" class="link-2">blog post view counts</a>, and
+						more!
+					</p>
+					<div class="highlighted-box yellow">
+						<i class="fa-solid fa-circle-dollar"></i>
+
+						<p class="text"><b>Firebase Spark plan:</b> free!</p>
+					</div>
+					<p class="text">
+						As with the previous, even though I am limited to <span class="highlighted">100 simultaneous connections</span>,
+						<span class="highlighted">1 GB</span> of storage, <span class="highlighted">10 GB/month</span> of downloaded data, and only one database, this is
+						fantastic for a free service.
+					</p>
+
+					<div class="double-break"></div>
+
+					<b id="icons">4 — ICONS — <a href="https://fontawesome.com/" class="link-2" target="_blank">Font Awesome</a></b>
+
+					<p class="text">Beautiful icons. That&rsquo;s it. I use them as decorations, buttons, arrows, dots, rating indicators, and all kinds of other things.</p>
+					<div class="highlighted-box red">
+						<i class="fa-solid fa-circle-dollar"></i>
+
+						<p class="text"><b>WA FA Backer Plan:</b> USD$68 / year (then currency conversion and probably some taxes)</p>
+					</div>
+					<p class="text">
+						I got a discounted plan from one of the tiers in the Web Awesome Kickstarter (hence the WA in the plan name), but I think I will cancel my
+						subscription before it renews because the perpetual pro license will let me keep all the icons I had when I was subscribed. So I consider this to be
+						more of a one-time purchase. As for what I think of Font Awesome, well, the fact that I purchased the pro version should tell you all you need to
+						know.
+					</p>
+
+					<div class="double-break"></div>
+
+					<b id="fonts-google">5 — FONTS — <a href="https://fonts.google.com/" class="link-2" target="_blank">Google Fonts</a></b>
+
+					<p class="text">
+						You do not want to look at your computer&rsquo;s default fonts all day, or ever really. Trust me. At the time of writing, the Google Fonts library
+						contains 1705 font families, all of which can be imported at no cost.
+					</p>
+					<div class="highlighted-box yellow">
+						<i class="fa-solid fa-circle-dollar"></i>
+
+						<p class="text">totally free!</p>
+					</div>
+					<p class="text">
+						Another example of Google doing something that really makes you wonder where they get all their money and resources. It&rsquo;s amazing that all of
+						these fonts are 100% free.
+					</p>
+
+					<div class="double-break"></div>
+
+					<b id="fonts-adobe">6 — FONTS — <a href="https://fonts.adobe.com/" class="link-2" target="_blank">Adobe Fonts</a></b>
+
+					<p class="text">
+						However vast the Google Fonts library may appear, there are some more...unique fonts that can be only found elsewhere. Adobe Fonts has, at the time of
+						writing, 4353 font families. These can be imported into a website very easily.
+					</p>
+					<div class="highlighted-box blue">
+						<i class="fa-solid fa-circle-dollar"></i>
+
+						<p class="text">
+							<b>Adobe Fonts &ldquo;Web Projects&rdquo; included in an Adobe Creative Cloud subscription:</b> I don&rsquo;t know, because I&rsquo;m not the one
+							paying for it.
+						</p>
+					</div>
+					<p class="text">It&rsquo;s a good service, but if I had to pay for it, I wouldn&rsquo;t. If fonts suddenly disappear from my website, blame Adobe.</p>
+
+					<div class="double-break"></div>
+
+					<p class="text">
+						Well, there you go. All the services that, combined, provide the complete <span class="highlighted">pinniped.page</span> experience. Hopefully I
+						didn&rsquo;t forget anything.
+					</p>
+
+					<div class="break"></div>
+
+					<p class="text">You know, this might be the first blog post of actual substance. Wow!</p>
+
+					<div class="content-end"></div>
+
+					<b class="small-text half-opacity">LAST UPDATED: May 30th, 2025</b>
+				</div>
 			</div>
-			<p class="text">
-				Although I was not happy that Google Domains was acquired by Squarespace, the migration was seamless and I actually think the Squarespace dashboard looks nicer.
-				I don&rsquo;t think I have ever had any problems with my domain, the service does what it&rsquo;s supposed to.
-			</p>
 
-			<div class="double-break"></div>
-
-			<b id="hosting">2 — HOSTING — <a href="https://firebase.google.com/products/app-hosting" class="link-2" target="_blank">Firebase Hosting</a></b>
-
-			<p class="text">
-				This is the most important service used by my website, as it would not exist without it. Firebase Hosting stores my code and serves it to people who want to
-				view it.
-			</p>
-			<div class="highlighted-box yellow">
-				<i class="fa-solid fa-circle-dollar"></i>
-
-				<p class="text"><b>Firebase Spark plan:</b> free!</p>
-			</div>
-			<p class="text">
-				I am limited to <span class="highlighted">10 GB</span> of storage and <span class="highlighted">360 MB/day</span> of data transfer, which I still cannot believe
-				is free, because that&rsquo;s more than enough (for now at least). I recently had a major issue with this service (that turned out to be a bug in their code),
-				and even as a non-paying customer I was able to access wonderful human customer service. Just phenomenal.
-			</p>
-
-			<div class="double-break"></div>
-
-			<b id="database">3 — DATABASE — <a href="https://firebase.google.com/products/realtime-database" class="link-2" target="_blank">Firebase Realtime Database</a></b>
-
-			<p class="text">
-				This provides an easily accessible database to store information in. At the moment, it saves the current
-				<a href="../projects/w.html" class="link-2">wordlelele</a> word, ratings for <a href="../projects/think-four.html" class="link-2">Think Four</a> puzzles, games
-				of <a href="../projects/tictactoe.html" class="link-2">TicTacToe</a>, <a href="../posts/2023-01-21.html" class="link-2">blog post view counts</a>, and more!
-			</p>
-			<div class="highlighted-box yellow">
-				<i class="fa-solid fa-circle-dollar"></i>
-
-				<p class="text"><b>Firebase Spark plan:</b> free!</p>
-			</div>
-			<p class="text">
-				As with the previous, even though I am limited to <span class="highlighted">100 simultaneous connections</span>, <span class="highlighted">1 GB</span> of
-				storage, <span class="highlighted">10 GB/month</span> of downloaded data, and only one database, this is fantastic for a free service.
-			</p>
-
-			<div class="double-break"></div>
-
-			<b id="icons">4 — ICONS — <a href="https://fontawesome.com/" class="link-2" target="_blank">Font Awesome</a></b>
-
-			<p class="text">Beautiful icons. That&rsquo;s it. I use them as decorations, buttons, arrows, dots, rating indicators, and all kinds of other things.</p>
-			<div class="highlighted-box red">
-				<i class="fa-solid fa-circle-dollar"></i>
-
-				<p class="text"><b>WA FA Backer Plan:</b> USD$68 / year (then currency conversion and probably some taxes)</p>
-			</div>
-			<p class="text">
-				I got a discounted plan from one of the tiers in the Web Awesome Kickstarter (hence the WA in the plan name), but I think I will cancel my subscription before
-				it renews because the perpetual pro license will let me keep all the icons I had when I was subscribed. So I consider this to be more of a one-time purchase. As
-				for what I think of Font Awesome, well, the fact that I purchased the pro version should tell you all you need to know.
-			</p>
-
-			<div class="double-break"></div>
-
-			<b id="fonts-google">5 — FONTS — <a href="https://fonts.google.com/" class="link-2" target="_blank">Google Fonts</a></b>
-
-			<p class="text">
-				You do not want to look at your computer&rsquo;s default fonts all day, or ever really. Trust me. At the time of writing, the Google Fonts library contains 1705
-				font families, all of which can be imported at no cost.
-			</p>
-			<div class="highlighted-box yellow">
-				<i class="fa-solid fa-circle-dollar"></i>
-
-				<p class="text">totally free!</p>
-			</div>
-			<p class="text">
-				Another example of Google doing something that really makes you wonder where they get all their money and resources. It&rsquo;s amazing that all of these fonts
-				are 100% free.
-			</p>
-
-			<div class="double-break"></div>
-
-			<b id="fonts-adobe">6 — FONTS — <a href="https://fonts.adobe.com/" class="link-2" target="_blank">Adobe Fonts</a></b>
-
-			<p class="text">
-				However vast the Google Fonts library may appear, there are some more...unique fonts that can be only found elsewhere. Adobe Fonts has, at the time of writing,
-				4353 font families. These can be imported into a website very easily.
-			</p>
-			<div class="highlighted-box blue">
-				<i class="fa-solid fa-circle-dollar"></i>
-
-				<p class="text">
-					<b>Adobe Fonts &ldquo;Web Projects&rdquo; included in an Adobe Creative Cloud subscription:</b> I don&rsquo;t know, because I&rsquo;m not the one paying
-					for it.
-				</p>
-			</div>
-			<p class="text">It&rsquo;s a good service, but if I had to pay for it, I wouldn&rsquo;t. If fonts suddenly disappear from my website, blame Adobe.</p>
-
-			<div class="double-break"></div>
-
-			<p class="text">
-				Well, there you go. All the services that, combined, provide the complete <span class="highlighted">pinniped.page</span> experience. Hopefully I didn&rsquo;t
-				forget anything.
-			</p>
-
-			<div class="break"></div>
-
-			<p class="text">You know, this might be the first blog post of actual substance. Wow!</p>
-
-			<div class="content-end"></div>
-
-			<b class="small-text half-opacity">LAST UPDATED: May 30th, 2025</b>
+			<div class="footer" style="background: #ffffee"></div>
+			<div class="footer" style="background: #ff6b6b"></div>
+			<div class="footer" style="background: #ffe66d"></div>
+			<div class="footer" style="background: #4ecdc4"></div>
 		</div>
 
-		<div class="footer" style="background: #ffffee"></div>
-		<div class="footer" style="background: #ff6b6b"></div>
-		<div class="footer" style="background: #ffe66d"></div>
-		<div class="footer" style="background: #4ecdc4"></div>
-
 		<script src="../files/to-top.js"></script>
-
-		<script src="../files/footer.js"></script>
 	</body>
 </html>
