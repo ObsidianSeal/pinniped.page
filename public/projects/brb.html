@@ -26,16 +26,6 @@
 			@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800");
 
 			/* GENERAL STYLES */
-			* {
-				user-select: none;
-				-ms-user-select: none;
-				-moz-user-select: none;
-				-webkit-user-select: none;
-
-				-webkit-tap-highlight-color: transparent;
-
-				touch-action: manipulation;
-			}
 
 			body {
 				margin: 0;
@@ -54,13 +44,31 @@
 
 			/* SPECIFIC STYLES */
 
+			.board-container {
+				display: flex;
+				justify-content: center;
+
+				user-select: none;
+				-ms-user-select: none;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+
+				-webkit-tap-highlight-color: transparent;
+
+				touch-action: manipulation;
+			}
+
 			.board {
+				max-width: 1000px;
+
 				display: grid;
 				grid-template-columns: repeat(5, 20%);
 				grid-template-rows: repeat(5, 20%);
 
 				margin: 50px;
 				border: 2px solid black;
+
+				background-color: black;
 			}
 
 			.square {
@@ -78,6 +86,8 @@
 				text-align: center;
 				text-wrap-mode: wrap;
 				text-wrap-style: pretty;
+
+				background-color: white;
 			}
 
 			.square:hover {
@@ -113,35 +123,36 @@
 
 	<body>
 		<div class="main-panel">
-			<div class="board">
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
-				<div class="square"><div class="inner-square"></div></div>
+			<div class="board-container">
+				<div class="board">
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+					<div class="square"><div class="inner-square"></div></div>
+				</div>
 			</div>
-
-			<div onclick="shrinkToFit()">click to shrink-to-fit</div>
+			<div>this is not done yet; instructions will go here</div>
 		</div>
 	</body>
 
@@ -155,6 +166,7 @@
 		const darkGreyStyle = "background: #949792; color: black; padding: 0 5px";
 		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
 
+		// VERSION
 		console.log(`%cBRB v2-beta`, darkGreyStyle);
 
 		// ARRAY MIXING ALGORITHM
@@ -166,9 +178,15 @@
 			return array;
 		}
 
-		// EMOJI ISOLATING ALGORITHM
-		function isolateEmoji(string) {
-			return string.substring(0, string.lastIndexOf(" ")) + `<br /><span class="square-emoji">` + string.substring(string.lastIndexOf(" ") + 1) + `</span>`;
+		// EMOJI ISOLATING & SQUARE TEXT FORMATTING ALGORITHM
+		function formatSquareText(string) {
+			string =
+				`<span>` +
+				string.substring(0, string.lastIndexOf(" ")) +
+				`</span><br /><span class="square-emoji">` +
+				string.substring(string.lastIndexOf(" ") + 1) +
+				`</span>`;
+			return string;
 		}
 
 		// LIST OF ALL POSSIBLE BINGO BOARD SQUARES
@@ -235,14 +253,14 @@
 			"someone uses a transfer 🎟️",
 		];
 		squares = mixArray(squares);
-		for (let i = 0; i < squares.length; i++) squares[i] = isolateEmoji(squares[i]);
+		for (let i = 0; i < squares.length; i++) squares[i] = formatSquareText(squares[i]);
 		console.log(`%c${squares.length}+1 possible squares`, lightGreyStyle);
 
 		// PUT TEXT IN THE SQUARES
 		window.addEventListener("load", () => {
 			let squareIndex = 0;
 			document.querySelectorAll(".inner-square").forEach((square) => {
-				if (squareIndex == 12) square.innerHTML = isolateEmoji(`bus moves (free space?) 👀`);
+				if (squareIndex == 12) square.innerHTML = formatSquareText(`bus moves (free space?) 👀`);
 				else square.innerHTML = squares[squareIndex];
 				squareIndex++;
 
@@ -252,18 +270,25 @@
 			});
 		});
 
+		// CONSTANT SIZES
+		const BORDER_BIG = 2;
+		const BORDER_SMALL = 1;
+		const PADDING_BIG = 10;
+		const PADDING_SMALL = 2;
+		const MAXIMUM_FONT_SIZE = 40;
+
 		// SHRINK TO FIT
 		function shrinkToFit() {
-			let sizeDifference = 10 * 2 + 2 * 2;
-			if (window.innerWidth <= 600) sizeDifference = 2 * 2 + 1 * 2;
+			let sizeDifference = PADDING_BIG * 2 + BORDER_BIG * 2;
+			if (window.innerWidth <= 600) sizeDifference = PADDING_SMALL * 2 + BORDER_SMALL * 2;
 
 			document.querySelectorAll(".inner-square").forEach((square) => {
 				let outerRect = square.parentElement.getBoundingClientRect();
 				let innerRect = square.getBoundingClientRect();
 
-				let fontSize = 40;
+				let fontSize = MAXIMUM_FONT_SIZE;
 				square.style = `font-size: ${fontSize}px`;
-				if (innerRect.width > outerRect.width - sizeDifference || innerRect.height > outerRect.height - sizeDifference) {
+				while (innerRect.height > outerRect.height - sizeDifference) {
 					square.style = `font-size: ${--fontSize}px`;
 
 					outerRect = square.parentElement.getBoundingClientRect();
@@ -271,6 +296,18 @@
 				}
 			});
 		}
+
+		window.addEventListener("load", () => {
+			shrinkToFit();
+		});
+
+		let lastResize = 0;
+		window.addEventListener("resize", () => {
+			if (new Date().getTime() - lastResize > 1000) {
+				shrinkToFit();
+				lastResize = new Date().getTime();
+			}
+		});
 	</script>
 </html>
 

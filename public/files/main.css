@@ -192,6 +192,13 @@ ul {
 	align-items: center;
 	gap: 20px;
 	padding-left: 40px;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	-webkit-tap-highlight-color: transparent;
 }
 
 .navbar > i {
@@ -399,13 +406,13 @@ ul {
 	margin-top: 40px;
 } */
 
-/* .download-button, */
+/* .download-button,
 .navbar {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-}
+} */
 
 .download-space {
 	height: calc(100vh - 364px);
