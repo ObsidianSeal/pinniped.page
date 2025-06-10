@@ -15,3 +15,23 @@ function menu() {
 		icon2.style.display = "block";
 	}
 }
+
+// additional functionality I am just going to throw in here HEHEHHAHAHEHAHEHAH
+window.addEventListener("load", () => {
+	document.querySelectorAll("a").forEach((link) => {
+		if (!link.hasAttribute("title")) {
+			link.setAttribute("title", `“${link.innerHTML}”\n(${link.href})\n***AUTO-GENERATED TOOLTIP`);
+		}
+	});
+	document.querySelectorAll("img").forEach((image) => {
+		if (!image.hasAttribute("alt")) {
+			image.setAttribute("alt", `${image.src.substring(image.src.lastIndexOf("/") + 1)} [AUTO-GENERATED ALT TEXT]`);
+
+			if (!image.hasAttribute("title")) {
+				image.setAttribute("title", `${image.src.substring(image.src.lastIndexOf("/") + 1)}\n***AUTO-GENERATED TOOLTIP`);
+			}
+		} else if (!image.hasAttribute("title")) {
+			image.setAttribute("title", image.alt);
+		}
+	});
+});

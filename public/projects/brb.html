@@ -11,6 +11,7 @@
 		<link rel="icon" href="../images/icon.png" />
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
 
 		<meta property="og:url" content="https://pinniped.page/projects/brb" />
 		<meta property="og:type" content="website" />
@@ -23,6 +24,7 @@
 
 		<style>
 			/* TYPE */
+
 			@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800");
 
 			/* GENERAL STYLES */
@@ -42,6 +44,28 @@
 				font-weight: 700;
 			}
 
+			ul {
+				margin: 0 0 25px;
+			}
+
+			li::marker {
+				color: grey;
+			}
+
+			a {
+				color: black;
+
+				text-decoration-line: underline;
+				text-decoration-style: dashed;
+				text-decoration-color: grey;
+				text-decoration-skip-ink: none;
+			}
+
+			a:hover,
+			a:focus {
+				text-decoration-color: deeppink;
+			}
+
 			/* SPECIFIC STYLES */
 
 			.board-container {
@@ -59,7 +83,7 @@
 			}
 
 			.board {
-				max-width: 1000px;
+				max-width: 754px;
 
 				display: grid;
 				grid-template-columns: repeat(5, 20%);
@@ -102,6 +126,29 @@
 				font-size: 200%;
 			}
 
+			.text {
+				margin: 50px;
+				max-width: 850px;
+			}
+
+			.text b:first-child {
+				background-color: black;
+				color: white;
+
+				user-select: none;
+				-ms-user-select: none;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+
+				-webkit-tap-highlight-color: transparent;
+			}
+
+			.text b:first-child:hover {
+				cursor: pointer;
+			}
+
+			/* CONDITIONAL STYLES */
+
 			@media all and (max-width: 800px) {
 				.board {
 					margin: 10px;
@@ -116,6 +163,29 @@
 				.square {
 					border-width: 1px;
 					padding: 2px;
+				}
+			}
+
+			@media all and (max-width: 500px) {
+				.text {
+					margin: 50px 20px;
+				}
+			}
+
+			@media all and (prefers-reduced-motion: reduce) {
+				canvas {
+					display: none;
+				}
+			}
+			@media all and (prefers-reduced-motion) {
+				canvas {
+					display: none;
+				}
+			}
+
+			@media print {
+				* {
+					display: none;
 				}
 			}
 		</style>
@@ -152,7 +222,48 @@
 					<div class="square"><div class="inner-square"></div></div>
 				</div>
 			</div>
-			<div>this is not done yet; instructions will go here</div>
+			<div class="text">
+				<b onclick="shrinkToFit();">&nbsp;&gt; CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT &lt;&nbsp;</b><br /><br />
+				<b>Bus Ride Bingo</b>
+				<ul>
+					<li>24 of 60 possible events are randomly selected (plus the free square in the centre) and used to populate this 5-by-5 bingo card</li>
+					<li>click or tap on square to highlight it</li>
+					<li>getting 5 in a row triggers confetti!</li>
+				</ul>
+				<b>Extras</b>
+				<ul>
+					<li>
+						confetti is disabled for those who
+						<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion" title="MDN > prefers-reduced-motion" target="_blank"
+							>prefer reduced motion</a
+						>
+					</li>
+					<li>confetti only appears after the first bingo</li>
+					<li>reloading will generate a new board</li>
+					<li>
+						if you change the size of your window or your screen&rsquo;s orientation, press the &ldquo;CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT&rdquo; button to
+						automatically shrink the text in the bingo squares to fit in the squares
+					</li>
+				</ul>
+				<b>Attribution</b>
+				<ul>
+					<li>confetti from <a href="https://confetti.js.org/more.html" title="tsParticles > More Examples" target="_blank">tsParticles</a></li>
+					<li>
+						typeset in
+						<a href="https://fonts.google.com/specimen/Dosis?preview.text=hello%20from%20the%20pinniped.page" title="Google Fonts > Dosis" target="_blank"
+							>Dosis</a
+						>
+					</li>
+				</ul>
+				<b>Links</b>
+				<ul>
+					<li><a href="../projects+.html" title="pinniped.page — Projects+">return to the Projects+ page</a></li>
+					<li><a href="bus-data.html" title="BUS DATA">BUS DATA</a></li>
+					<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
+				</ul>
+				—<br />BRB v2.0.0 (June 9th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
+				<a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a>
+			</div>
 		</div>
 	</body>
 
@@ -167,7 +278,7 @@
 		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
 
 		// VERSION
-		console.log(`%cBRB v2-beta`, darkGreyStyle);
+		console.log(`%cBRB v2.0.0 (June 9th, 2025)`, darkGreyStyle);
 
 		// ARRAY MIXING ALGORITHM
 		function mixArray(array) {
@@ -209,7 +320,7 @@
 			"someone gets on/off where people normally can&rsquo;t 👨‍🦯",
 			"bus goes up onto the curb 😯",
 			"something falls on the floor 😬",
-			"sitting at a stop... (no one getting on/off) 🪑",
+			"sitting at a stop... (no one getting on/off) ⏳",
 			"someone is running for the bus! (waiting) 🏃‍♀️",
 			"go over or under railroad tracks 🚆",
 			"bus only lane! 🚋",
@@ -241,15 +352,15 @@
 			"see an emergency vehicle 🚑",
 			"pass scanner difficulties 👾",
 			"someone tries too hard to open the rear door 😡",
-			"someone gives up their seat ❤️",
+			"someone gives up their seat 🪑",
 			"someone pays with coins 🪙",
 			"rain begins or ends while on the bus 🌧️",
 			"stop in a bus bay 🛣️",
 			"bus shakes violently (significant turbulence) 🫨",
 			"someone opens or closes a window 🪟",
 			"see/pass a library 📚",
-			"8+ people board or exit 👨‍👩‍👧‍👦",
-			"new passenger was offered transfer but they declined 🎫",
+			"bus driver is thanked ❤️",
+			"transfer offered or accepted 🎫",
 			"someone uses a transfer 🎟️",
 		];
 		squares = mixArray(squares);
@@ -262,12 +373,21 @@
 			document.querySelectorAll(".inner-square").forEach((square) => {
 				if (squareIndex == 12) square.innerHTML = formatSquareText(`bus moves (free space?) 👀`);
 				else square.innerHTML = squares[squareIndex];
-				squareIndex++;
+
+				square.id = `${Math.floor(squareIndex / 5)},${squareIndex % 5}`;
 
 				square.parentElement.addEventListener("click", () => {
 					square.parentElement.classList.toggle("filled");
+
+					let indices = square.id.split(",");
+					board[indices[0]][indices[1]] = !board[indices[0]][indices[1]];
+
+					checkBingo(indices);
 				});
+
+				squareIndex++;
 			});
+			shrinkToFit();
 		});
 
 		// CONSTANT SIZES
@@ -287,534 +407,70 @@
 				let innerRect = square.getBoundingClientRect();
 
 				let fontSize = MAXIMUM_FONT_SIZE;
-				square.style = `font-size: ${fontSize}px`;
-				while (innerRect.height > outerRect.height - sizeDifference) {
-					square.style = `font-size: ${--fontSize}px`;
+				do {
+					square.style = `font-size: ${fontSize--}px`;
 
 					outerRect = square.parentElement.getBoundingClientRect();
 					innerRect = square.getBoundingClientRect();
-				}
+				} while (innerRect.height > outerRect.height - sizeDifference);
 			});
 		}
 
-		window.addEventListener("load", () => {
-			shrinkToFit();
-		});
+		// DETECT BINGO, CONFETTI
+		let board = [
+			[false, false, false, false, false],
+			[false, false, false, false, false],
+			[false, false, false, false, false],
+			[false, false, false, false, false],
+			[false, false, false, false, false],
+		];
+		let bingo = false;
+		function checkBingo(indices) {
+			if (bingo) return;
 
-		let lastResize = 0;
-		window.addEventListener("resize", () => {
-			if (new Date().getTime() - lastResize > 1000) {
-				shrinkToFit();
-				lastResize = new Date().getTime();
+			if (
+				(board[indices[0]][0] && board[indices[0]][1] && board[indices[0]][2] && board[indices[0]][3] && board[indices[0]][4]) ||
+				(board[0][indices[1]] && board[1][indices[1]] && board[2][indices[1]] && board[3][indices[1]] && board[4][indices[1]]) ||
+				(board[0][0] && board[1][1] && board[2][2] && board[3][3] && board[4][4]) ||
+				(board[0][4] && board[1][3] && board[2][2] && board[3][1] && board[4][0])
+			) {
+				bingo = true;
+
+				// thank you tsParticles (https://confetti.js.org/more.html)
+				// --- BEGIN COPY ---
+				const duration = 15 * 1000,
+					animationEnd = Date.now() + duration,
+					defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+				function randomInRange(min, max) {
+					return Math.random() * (max - min) + min;
+				}
+
+				const interval = setInterval(function () {
+					const timeLeft = animationEnd - Date.now();
+
+					if (timeLeft <= 0) {
+						return clearInterval(interval);
+					}
+
+					const particleCount = 50 * (timeLeft / duration);
+
+					// since particles fall down, start a bit higher than random
+					confetti(
+						Object.assign({}, defaults, {
+							particleCount,
+							origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+						})
+					);
+					confetti(
+						Object.assign({}, defaults, {
+							particleCount,
+							origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+						})
+					);
+				}, 250);
+				// --- END COPY ---
 			}
-		});
+		}
 	</script>
 </html>
-
-<!-- <!DOCTYPE html>
-
-<html lang="en">
-	<head>
-		<title>Bus Ride Bingo</title>
-
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="theme-color" content="#4ecdc4" />
-
-		<link rel="icon" href="../images/icon.png" />
-
-		<meta property="og:url" content="https://pinniped.page/projects/brb" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Bus Ride Bingo" />
-		<meta property="og:description" content="Play bus-related bingo with friends on the bus." />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
-
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto" as="style" rel="stylesheet" />
-
-		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
-
-		<style>
-			/* TESTING PRELOAD @import url("https://fonts.googleapis.com/css2?family=Roboto"); */
-
-			:root {
-				--background: #f4f1de;
-				--foreground: #3d405b;
-				--accent1: #e07a5f;
-				--accent2: #f2cc8f;
-				--accent3: #81b29a;
-			}
-
-			::selection {
-				background-color: var(--foreground);
-				color: var(--background);
-			}
-
-			* {
-				font-family: "Roboto";
-			}
-
-			body {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
-				background-color: var(--background);
-				color: var(--foreground);
-
-				margin: 0;
-				border: 0;
-				padding: 20px;
-			}
-
-			table {
-				aspect-ratio: 1 / 1;
-
-				margin: 0;
-				border: 3px solid var(--foreground);
-				border-collapse: collapse;
-				padding: 0;
-			}
-
-			td {
-				width: 20%;
-				height: 20%;
-
-				aspect-ratio: 1 / 1;
-
-				margin: 0;
-				border: 3px solid var(--foreground);
-				padding: 10px;
-
-				text-align: center;
-			}
-
-			td:hover {
-				cursor: pointer;
-			}
-
-			i {
-				position: fixed;
-				bottom: 30px;
-
-				font-size: 30px;
-			}
-
-			i:hover {
-				color: var(--accent1);
-				cursor: pointer;
-			}
-
-			.filled {
-				background-color: var(--accent3);
-			}
-
-			.filled::selection {
-				background-color: var(--foreground);
-				color: var(--accent3);
-			}
-
-			@media all and (max-width: 500px), (max-height: 500px) {
-				body {
-					padding: 10px;
-				}
-
-				td {
-					padding: 5px;
-				}
-			}
-		</style>
-
-		<style id="autoStyles">
-			table {
-				width: 100%;
-				max-width: 670px;
-				max-height: 670px;
-			}
-		</style>
-
-		<style id="autoStyles2"></style>
-	</head>
-
-	<body>
-		<table>
-			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-			</tr>
-			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-			</tr>
-			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-			</tr>
-			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-			</tr>
-			<tr>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-				<td><div></div></td>
-			</tr>
-		</table>
-
-		<i class="fa-solid fa-eye" style="right: 80px" id="confetti_toggle" title="show/hide confetti"></i>
-		<i class="fa-solid fa-maximize" style="right: 30px" id="expand_toggle" title="expanded mode on/off"></i>
-
-		<script>
-			// the board && bingo, confetti var
-			var bingo = false;
-			var confettiWin = true;
-			const board = [
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-			];
-
-			// "perfect position on mobile too", and sizing on smaller screens! from https://pinniped.page/projects/chess/board
-			var pScreenWidth;
-			var pScreenHeight;
-			function autoStyle() {
-				const screenWidth = window.innerWidth;
-				const screenHeight = window.innerHeight;
-
-				if (screenWidth != pScreenWidth || screenHeight != pScreenHeight) {
-					if (screenWidth > 500 && screenHeight > 500) {
-						document.querySelector("body").style = `height: ${screenHeight - 40}px`;
-					} else {
-						document.querySelector("body").style = `height: ${screenHeight - 20}px`;
-					}
-
-					if (screenHeight < 720) {
-						document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: ${screenHeight - 40}px; max-height: ${screenHeight - 40}px; }`;
-					} else {
-						document.querySelector("#autoStyles").innerHTML = `table { width: 100%; max-width: 670px; max-height: 670px; }`;
-					}
-
-					//console.log(`autoStyle(); -/-> ${screenWidth}x${screenHeight}`);
-				}
-
-				pScreenWidth = screenWidth;
-				pScreenHeight = screenHeight;
-			}
-			autoStyle();
-
-			// fill screen button
-			const button1 = document.querySelector("#expand_toggle");
-			button1.addEventListener("click", (e) => {
-				if (button1.classList.contains("fa-maximize")) {
-					document.querySelector("#autoStyles2").innerHTML = `body { display: block; } table { width: 100%; height: 100%; max-width: 100%; max-height: 100%; }`;
-					if (confettiWin) window.history.pushState({}, "", "?x=10"); // yes expanded, yes confetti
-					else window.history.pushState({}, "", "?x=11"); // yes expanded, no confetti
-
-					button1.classList.remove("fa-maximize");
-					button1.classList.add("fa-minimize");
-				} else {
-					document.querySelector("#autoStyles2").innerHTML = ``;
-					if (confettiWin) window.history.pushState({}, "", "?x=00"); // no expanded, yes confetti
-					else window.history.pushState({}, "", "?x=01"); // no expanded, no confetti
-
-					button1.classList.remove("fa-minimize");
-					button1.classList.add("fa-maximize");
-				}
-			});
-
-			// toggle confetti button
-			const button2 = document.querySelector("#confetti_toggle");
-			button2.addEventListener("click", (e) => {
-				if (button2.classList.contains("fa-eye")) {
-					confettiWin = false;
-					if (document.querySelector("#autoStyles2").innerHTML == "") window.history.pushState({}, "", "?x=01"); // no expanded, no confetti
-					else window.history.pushState({}, "", "?x=11"); // yes expanded, no confetti
-
-					button2.style = "right: 78px";
-					button2.classList.remove("fa-eye");
-					button2.classList.add("fa-eye-slash");
-				} else {
-					confettiWin = true;
-					if (document.querySelector("#autoStyles2").innerHTML == "") window.history.pushState({}, "", "?x=00"); // no expanded, yes confetti
-					else window.history.pushState({}, "", "?x=10"); // yes expanded, yes confetti
-
-					button2.style = "right: 80px";
-					button2.classList.remove("fa-eye-slash");
-					button2.classList.add("fa-eye");
-				}
-			});
-
-			// get URL data
-			const query = window.location.search;
-			const item = new URLSearchParams(query);
-			const settings = item.get("x");
-
-			// set settings from URL
-			if (/^[01]{2}$/.test(settings)) {
-				const setting1 = settings.charAt(0);
-				const setting2 = settings.charAt(1);
-
-				if (setting1 == 1) {
-					document.querySelector("#autoStyles2").innerHTML = `body { display: block; } table { width: 100%; height: 100%; max-width: 100%; max-height: 100%; }`;
-
-					button1.classList.remove("fa-maximize");
-					button1.classList.add("fa-minimize");
-				} else document.querySelector("#autoStyles2").innerHTML = ``;
-
-				if (setting2 == 1) {
-					confettiWin = false;
-
-					button2.style = "right: 78px";
-					button2.classList.remove("fa-eye");
-					button2.classList.add("fa-eye-slash");
-				} else confettiWin = true;
-			}
-
-			// do it when resize
-			addEventListener("resize", (e) => {
-				setTimeout(() => {
-					autoStyle();
-					setSquares();
-				}, 500);
-			});
-
-			// what goes in the squares
-			const squares = [
-				"detour 🚧",
-				"see or be on an articulated bus 🚍",
-				"near bus on the same route and direction 🚎",
-				"driver speaks (not about fare or directions) 👨‍🦰",
-				"driver speaks (about fare or direction) 🤷‍♂️",
-				"wheelchair or similar is on the bus 👨‍🦼",
-				"driver leaves bus... 🦶",
-				"honk! 🔊",
-				"someone&rsquo;s stop is missed 🛑",
-				"arrive at your stop (last chance for bingo!) 🚏",
-				"someone is standing (for more than one stop) 🧍‍♀️",
-				"go under a bridge (or through a tunnel) 🚇",
-				"go on a bridge 🌉",
-				"stroller 👶",
-				"crying 😭",
-				"someone gets on/off where people normally can&rsquo;t 👨‍🦯",
-				"bus goes up onto the curb 😯",
-				"something falls on the floor 😬",
-				"sitting at a stop... (no one getting on/off) 🪑",
-				"someone is running for the bus! (waiting) 🏃‍♀️",
-				"go over or under railroad tracks 🚆",
-				"bus only lane! 🚋",
-				"pass a stop with a shelter 🏠",
-				"someone speaks in a language you don&rsquo;t 💬",
-				"skip a stop 🚫",
-				"accidental stop request or cord/button doesn&rsquo;t work 🧈",
-				"door doesn&rsquo;t open or can&rsquo;t close 🚪",
-				"5+ people board 🚶‍♂️",
-				"5+ people get off 🚶‍♀️",
-				"people at a stop are waiting for a different bus 🖐",
-				"driver waves at other bus driver 👋",
-				"another bus is in the next lane (same direction) 🛴",
-				"someone is sitting next to you 😐",
-				"see an express bus 🚌",
-				"travel on a road with 4+ lanes 🧠",
-				"travel on a one-way road ⏩",
-				"hear music 🎶",
-				"someone&rsquo;s on the phone or talking loudly 🦜",
-				"see a taxi or mail, garbage, or recycling truck 🚕",
-				"someone uses the bike rack 🚲",
-				"bus kneels 🧎‍♂️",
-				"another bus driver/transit staff is on the bus 👨‍✈️",
-				"someone goes out the front door 👠",
-				"see/pass a school 🏫",
-				"dirty seat / someone coughs 🙁",
-				"see a non-transit bus (school, intercity, etc.) 🎒",
-				"see a city bus that isn&rsquo;t on a route 👁‍🗨",
-				"see an emergency vehicle 🚑",
-				"pass scanner difficulties 👾",
-				"someone tries too hard to open the rear door 😡",
-				"someone gives up their seat ❤️",
-				"someone pays with coins 🪙",
-				"rain begins or ends while on the bus 🌧️",
-				"driver receives a [radio] message 📻",
-				"bus shakes violently (significant turbulence) 🫨",
-				"someone opens or closes a window 🪟",
-				"pass a library 📚",
-				"8+ people board or exit",
-				"new passenger was offered transfer but they declined 🎫",
-				"someone uses a transfer 🎟️",
-			];
-
-			// mix array for random bingo card; from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-			function shuffle(array) {
-				let currentIndex = array.length,
-					randomIndex;
-
-				while (currentIndex != 0) {
-					randomIndex = Math.floor(Math.random() * currentIndex);
-					currentIndex--;
-
-					[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-				}
-
-				return array;
-			}
-
-			// do the mix!
-			shuffle(squares);
-			console.log(`BRB v1.x.x (version numbers paused - project broken but available; v2 coming soon)`); // UPDATE VERSION EVERY COMMIT
-			console.log(`Shuffled list of all ${squares.length} possible squares:`);
-			// console.log(squares); // so I can see how many elements there are
-
-			// detect bingo function
-			function checkForBingo() {
-				// horizontal
-				if (board[0] && board[1] && board[2] && board[3] && board[4]) return true;
-				if (board[5] && board[6] && board[7] && board[8] && board[9]) return true;
-				if (board[10] && board[11] && board[12] && board[13] && board[14]) return true;
-				if (board[15] && board[16] && board[17] && board[18] && board[19]) return true;
-				if (board[20] && board[21] && board[22] && board[23] && board[24]) return true;
-
-				// vertical
-				if (board[0] && board[5] && board[10] && board[15] && board[20]) return true;
-				if (board[1] && board[6] && board[11] && board[16] && board[21]) return true;
-				if (board[2] && board[7] && board[12] && board[17] && board[22]) return true;
-				if (board[3] && board[8] && board[13] && board[18] && board[23]) return true;
-				if (board[4] && board[9] && board[14] && board[19] && board[24]) return true;
-
-				// diagonal
-				if (board[0] && board[6] && board[12] && board[18] && board[24]) return true;
-				if (board[4] && board[8] && board[12] && board[16] && board[20]) return true;
-
-				return false;
-			}
-
-			// shrinkToFit();
-			var boxSize;
-			function shrinkToFit(element) {
-				var fontSize = 36;
-
-				do {
-					element.style = `font-size: ${fontSize}px`;
-					fontSize -= 2;
-				} while (element.clientWidth > boxSize || element.clientHeight > boxSize);
-
-				//console.log(`shrinkToFit();`);
-			}
-
-			// set each square's id, add a click listener (invert square state) + handle bingo
-			function setSquares() {
-				let i = 0;
-
-				document.querySelectorAll("div").forEach((square) => {
-					square.setAttribute("id", i);
-					square.innerHTML = "";
-
-					boxSize = square.clientWidth;
-
-					if (i < 12) square.innerHTML = squares[i];
-					if (i == 12) square.innerHTML = "bus moves (free space?) 👀";
-					if (i > 12 && i < 25) square.innerHTML = squares[i - 1];
-
-					shrinkToFit(square);
-					i++;
-				});
-			}
-			setSquares();
-
-			document.querySelectorAll("td").forEach((square) => {
-				square.addEventListener("click", (e) => {
-					// prevent accidentally generating a new board, triggered by first square press, from https://stackoverflow.com/questions/1119289/how-to-show-the-are-you-sure-you-want-to-navigate-away-from-this-page-when-ch
-					if (!bingo) {
-						window.onbeforeunload = function () {
-							return true;
-						};
-					}
-
-					if (square.classList.contains("filled")) square.classList.remove("filled");
-					else square.classList.add("filled");
-
-					board[square.children[0].id] = !board[square.children[0].id]; // set the square to true or false
-					if (checkForBingo() && !bingo) {
-						bingo = true; // prevent more than one bingo (too much confetti)
-						window.onbeforeunload = null; // now you can leave or reload
-
-						// if there's a bingo, CONFETTI!!! thanks to https://confetti.js.org/ && confetti setting
-						if (confettiWin) {
-							// ----- CTRL+C CTRL+V confetti BEGINS: -----
-
-							const duration = 10 * 1000, // 10 seconds?
-								animationEnd = Date.now() + duration,
-								defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-							function randomInRange(min, max) {
-								return Math.random() * (max - min) + min;
-							}
-
-							const interval = setInterval(function () {
-								const timeLeft = animationEnd - Date.now();
-
-								if (timeLeft <= 0) {
-									return clearInterval(interval);
-								}
-
-								const particleCount = 50 * (timeLeft / duration);
-
-								// since particles fall down, start a bit higher than random
-								confetti(
-									Object.assign({}, defaults, {
-										particleCount,
-										origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-									})
-								);
-								confetti(
-									Object.assign({}, defaults, {
-										particleCount,
-										origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-									})
-								);
-							}, 250);
-
-							// ----- CTRL+C CTRL+V confetti ENDS: -----
-						}
-					}
-				});
-			});
-		</script>
-	</body>
-</html> -->
