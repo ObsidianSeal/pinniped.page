@@ -44,6 +44,10 @@
 				font-weight: 700;
 			}
 
+			b:not(li b, b[onclick]) {
+				font-size: 30px;
+			}
+
 			ul {
 				margin: 0 0 25px;
 			}
@@ -131,7 +135,7 @@
 				max-width: 850px;
 			}
 
-			.text b:first-child {
+			.text b[onclick] {
 				background-color: black;
 				color: white;
 
@@ -145,6 +149,17 @@
 
 			.text b:first-child:hover {
 				cursor: pointer;
+			}
+
+			.stats {
+				box-sizing: border-box;
+
+				width: 100%;
+				height: 200px;
+
+				padding: 50px;
+
+				background-color: lightgrey;
 			}
 
 			/* CONDITIONAL STYLES */
@@ -223,12 +238,17 @@
 				</div>
 			</div>
 			<div class="text">
+				<b onclick="submitBoard();">&nbsp;&gt; CLICK/TAP TO SUBMIT/SHARE BOARD & GENERATE ANOTHER &lt;&nbsp;</b><br /><br />
 				<b onclick="shrinkToFit();">&nbsp;&gt; CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT &lt;&nbsp;</b><br /><br />
 				<b>Bus Ride Bingo</b>
 				<ul>
 					<li>24 of 60 possible events are randomly selected (plus the free square in the centre) and used to populate this 5-by-5 bingo card</li>
-					<li>click or tap on square to highlight it</li>
+					<li>click or tap on a square to highlight it</li>
 					<li>getting 5 in a row triggers confetti!</li>
+					<li>
+						when you&rsquo;re done, whether or not you won, please press the <b>&ldquo;CLICK/TAP TO SUBMIT/SHARE BOARD & GENERATE ANOTHER&rdquo;</b> button to log
+						the events of your ride, copy the text representation of your board, and refresh the page
+					</li>
 				</ul>
 				<b>Extras</b>
 				<ul>
@@ -241,9 +261,10 @@
 					<li>confetti only appears after the first bingo</li>
 					<li>reloading will generate a new board</li>
 					<li>
-						if you change the size of your window or your screen&rsquo;s orientation, press the &ldquo;CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT&rdquo; button to
-						automatically shrink the text in the bingo squares to fit in the squares
+						if you change the size of your window or your screen&rsquo;s orientation, press the
+						<b>&ldquo;CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT&rdquo;</b> button to automatically shrink the text in the bingo squares to fit in the squares
 					</li>
+					<li>scroll down for event statistics</li>
 				</ul>
 				<b>Attribution</b>
 				<ul>
@@ -261,8 +282,12 @@
 					<li><a href="bus-data.html" title="BUS DATA">BUS DATA</a></li>
 					<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
 				</ul>
-				—<br />BRB v2.0.0 (June 9th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
+				—<br />BRB v2.1.0 (June 11th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
 				<a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a>
+			</div>
+
+			<div class="stats">
+				<b>EVENT STATISTICS — COMING SOON&trade;</b>
 			</div>
 		</div>
 	</body>
@@ -278,7 +303,7 @@
 		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
 
 		// VERSION
-		console.log(`%cBRB v2.0.0 (June 9th, 2025)`, darkGreyStyle);
+		console.log(`%cBRB v2.1.0 (June 11th, 2025)`, darkGreyStyle);
 
 		// ARRAY MIXING ALGORITHM
 		function mixArray(array) {
@@ -316,7 +341,7 @@
 			"go under a bridge (or through a tunnel) 🚇",
 			"go on a bridge 🌉",
 			"stroller 👶",
-			"crying 😭",
+			"disruptive baby or young child 😭",
 			"someone gets on/off where people normally can&rsquo;t 👨‍🦯",
 			"bus goes up onto the curb 😯",
 			"something falls on the floor 😬",
@@ -472,5 +497,44 @@
 				// --- END COPY ---
 			}
 		}
+
+		// PREVENT LOSS OF PROGRESS
+		function onBeforeUnload(event) {
+			event.preventDefault();
+		}
+		window.addEventListener("beforeunload", onBeforeUnload);
+
+		// SUBMIT BOARD
+		function submitBoard() {
+			// TIME CALCULATIONS
+			const endTime = Date.now();
+			let totalTime = Math.floor((endTime - startTime) / 1000);
+			let hours = Math.floor(totalTime / 3600).toString();
+			let minutes = Math.floor((totalTime % 3600) / 60);
+			let seconds = Math.floor((totalTime % 3600) % 60);
+
+			// SHARE TEXT
+			let shareText = `Bus Ride Bingo — ${hours.toString()}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}\n`;
+			if (hours == 0) shareText = `Bus Ride Bingo — ${minutes.toString()}:${seconds.toString().padStart(2, "0")}\n`;
+			let count = 0;
+			document.querySelectorAll(".square").forEach((square) => {
+				if (square.classList.contains("filled")) shareText += "🟩";
+				else shareText += "⬛";
+
+				if (++count == 5) {
+					count = 0;
+					shareText += "\n";
+				}
+			});
+			shareText += "https://pinniped.page/brb";
+			navigator.clipboard.writeText(shareText);
+
+			// RELOAD
+			window.removeEventListener("beforeunload", onBeforeUnload);
+			window.location.reload();
+		}
+
+		// CONSIDER LOADING DONE, START TIMER
+		const startTime = Date.now();
 	</script>
 </html>
