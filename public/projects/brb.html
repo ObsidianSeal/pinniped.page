@@ -44,12 +44,12 @@
 				font-weight: 700;
 			}
 
-			b:not(li b, b[onclick]) {
+			b:not(li b, b.button, .stat b) {
 				font-size: 30px;
 			}
 
 			ul {
-				margin: 0 0 25px;
+				margin: 0;
 			}
 
 			li::marker {
@@ -135,7 +135,7 @@
 				max-width: 850px;
 			}
 
-			.text b[onclick] {
+			.text b.button {
 				background-color: black;
 				color: white;
 
@@ -147,7 +147,7 @@
 				-webkit-tap-highlight-color: transparent;
 			}
 
-			.text b:first-child:hover {
+			.text b.button:hover {
 				cursor: pointer;
 			}
 
@@ -155,11 +155,48 @@
 				box-sizing: border-box;
 
 				width: 100%;
-				height: 200px;
 
 				padding: 50px;
 
 				background-color: lightgrey;
+			}
+
+			.stats > div:not(:last-child) {
+				margin-bottom: 50px;
+			}
+
+			.stat {
+				position: relative;
+
+				height: 30px;
+
+				background-color: white;
+			}
+
+			.stat div {
+				overflow-x: scroll;
+				overflow-y: hidden;
+				white-space: nowrap;
+
+				height: 30px;
+
+				display: flex;
+				align-items: center;
+
+				position: absolute;
+
+				padding: 0 5px;
+
+				box-sizing: border-box;
+				width: calc(100dvw - 100px);
+			}
+
+			.stat div::-webkit-scrollbar {
+				height: 0;
+			}
+
+			.stat:not(:last-child) {
+				margin-bottom: 5px;
 			}
 
 			/* CONDITIONAL STYLES */
@@ -185,6 +222,12 @@
 				.text {
 					margin: 50px 20px;
 				}
+				.stats {
+					padding: 50px 20px;
+				}
+				.stat div {
+					width: calc(100dvw - 40px);
+				}
 			}
 
 			@media all and (prefers-reduced-motion: reduce) {
@@ -201,6 +244,89 @@
 			@media print {
 				* {
 					display: none;
+				}
+			}
+
+			/* ANIMATIONS */
+
+			#d1,
+			#d2,
+			#d3 {
+				opacity: 0%;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 0.5s;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 0.5s;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 0.5s;
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
 				}
 			}
 		</style>
@@ -238,8 +364,11 @@
 				</div>
 			</div>
 			<div class="text">
-				<b onclick="submitBoard();">&nbsp;&gt; CLICK/TAP TO SUBMIT/SHARE BOARD & GENERATE ANOTHER &lt;&nbsp;</b><br /><br />
-				<b onclick="shrinkToFit();">&nbsp;&gt; CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT &lt;&nbsp;</b><br /><br />
+				<b class="button" id="submit" title="&gt; CLICK/TAP TO SUBMIT/SHARE BOARD & GENERATE ANOTHER &lt;"
+					>&nbsp;&gt; CLICK/TAP TO SUBMIT/SHARE BOARD & GENERATE ANOTHER &lt;&nbsp;</b
+				><br /><br />
+				<b class="button" id="resize" title="&gt; CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT &lt;">&nbsp;&gt; CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT &lt;&nbsp;</b
+				><br /><br />
 				<b>Bus Ride Bingo</b>
 				<ul>
 					<li>24 of 60 possible events are randomly selected (plus the free square in the centre) and used to populate this 5-by-5 bingo card</li>
@@ -250,6 +379,14 @@
 						the events of your ride, copy the text representation of your board, and refresh the page
 					</li>
 				</ul>
+				<br />
+				<b>Purpose</b>
+				<ul>
+					<li>Make your bus rides more fun</li>
+					<li>Become more observant while gaining an appreciation for bus operations, bus-related events, and your transit system as a whole</li>
+					<li>Determine which events are the most and least likely to occur</li>
+				</ul>
+				<br />
 				<b>Extras</b>
 				<ul>
 					<li>
@@ -262,10 +399,11 @@
 					<li>reloading will generate a new board</li>
 					<li>
 						if you change the size of your window or your screen&rsquo;s orientation, press the
-						<b>&ldquo;CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT&rdquo;</b> button to automatically shrink the text in the bingo squares to fit in the squares
+						<b>&ldquo;CLICK/TAP TO AUTO-RESIZE BINGO BOARD TEXT&rdquo;</b> button to automatically shrink the text in the bingo squares to fit
 					</li>
 					<li>scroll down for event statistics</li>
 				</ul>
+				<br />
 				<b>Attribution</b>
 				<ul>
 					<li>confetti from <a href="https://confetti.js.org/more.html" title="tsParticles > More Examples" target="_blank">tsParticles</a></li>
@@ -276,24 +414,49 @@
 						>
 					</li>
 				</ul>
+				<br />
 				<b>Links</b>
 				<ul>
 					<li><a href="../projects+.html" title="pinniped.page — Projects+">return to the Projects+ page</a></li>
 					<li><a href="bus-data.html" title="BUS DATA">BUS DATA</a></li>
 					<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
 				</ul>
-				—<br />BRB v2.1.0 (June 11th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
+				<br />
+				—<br />BRB v2.2.0 (June 12th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
 				<a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a>
 			</div>
 
 			<div class="stats">
-				<b>EVENT STATISTICS — COMING SOON&trade;</b>
+				<div class="events">
+					<b>Event Statistics</b><br /><br />
+					<b id="events-load">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></b>
+				</div>
+				<div class="games">
+					<b>Game Statistics</b><br /><br />
+					<b id="games-load">COMING SOON<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d><br /></b>
+				</div>
 			</div>
 		</div>
 	</body>
 
-	<script>
+	<script type="module">
 		"use strict";
+
+		// IMPORT FIREBASE v11.9.1 (the latest version when this was written)
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+		import { getDatabase, ref, set, get, push, remove } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+		// CONFIGURE FIREBASE APP & DATABASE
+		const firebaseConfig = {
+			apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+			authDomain: "the-pinniped-page.firebaseapp.com",
+			databaseURL: "https://the-pinniped-page.firebaseio.com",
+			projectId: "the-pinniped-page",
+			storageBucket: "the-pinniped-page.appspot.com",
+			messagingSenderId: "636989973689",
+			appId: "1:636989973689:web:6d938d9588606d803a6768",
+		};
+		const app = initializeApp(firebaseConfig);
 
 		// DEBUG STYLES
 		const blueStyle = "background: #4ecdc4; color: black; padding: 0 5px";
@@ -303,7 +466,7 @@
 		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
 
 		// VERSION
-		console.log(`%cBRB v2.1.0 (June 11th, 2025)`, darkGreyStyle);
+		console.log(`%cBRB v2.2.0 (June 12th, 2025)`, darkGreyStyle);
 
 		// ARRAY MIXING ALGORITHM
 		function mixArray(array) {
@@ -389,15 +552,16 @@
 			"someone uses a transfer 🎟️",
 		];
 		squares = mixArray(squares);
-		for (let i = 0; i < squares.length; i++) squares[i] = formatSquareText(squares[i]);
 		console.log(`%c${squares.length}+1 possible squares`, lightGreyStyle);
 
 		// PUT TEXT IN THE SQUARES
 		window.addEventListener("load", () => {
 			let squareIndex = 0;
 			document.querySelectorAll(".inner-square").forEach((square) => {
-				if (squareIndex == 12) square.innerHTML = formatSquareText(`bus moves (free space?) 👀`);
-				else square.innerHTML = squares[squareIndex];
+				let text = squares[squareIndex].replace(/\&rsquo;/g, "’");
+				if (squareIndex == 12) text = `bus moves (free space?) 👀`;
+				square.innerHTML = formatSquareText(text);
+				square.parentElement.title = text;
 
 				square.id = `${Math.floor(squareIndex / 5)},${squareIndex % 5}`;
 
@@ -460,6 +624,7 @@
 				(board[0][4] && board[1][3] && board[2][2] && board[3][1] && board[4][0])
 			) {
 				bingo = true;
+				endTime = Date.now();
 
 				// thank you tsParticles (https://confetti.js.org/more.html)
 				// --- BEGIN COPY ---
@@ -502,12 +667,13 @@
 		function onBeforeUnload(event) {
 			event.preventDefault();
 		}
-		window.addEventListener("beforeunload", onBeforeUnload);
+		if (!window.location.href.includes("://localhost:")) window.addEventListener("beforeunload", onBeforeUnload);
 
 		// SUBMIT BOARD
-		function submitBoard() {
+		let endTime = 0;
+		async function submitBoard() {
 			// TIME CALCULATIONS
-			const endTime = Date.now();
+			if (endTime == 0) endTime = Date.now();
 			let totalTime = Math.floor((endTime - startTime) / 1000);
 			let hours = Math.floor(totalTime / 3600).toString();
 			let minutes = Math.floor((totalTime % 3600) / 60);
@@ -516,25 +682,164 @@
 			// SHARE TEXT
 			let shareText = `Bus Ride Bingo — ${hours.toString()}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}\n`;
 			if (hours == 0) shareText = `Bus Ride Bingo — ${minutes.toString()}:${seconds.toString().padStart(2, "0")}\n`;
-			let count = 0;
+			let boardText = "|";
+			let rowCount = 0;
 			document.querySelectorAll(".square").forEach((square) => {
-				if (square.classList.contains("filled")) shareText += "🟩";
-				else shareText += "⬛";
+				if (square.classList.contains("filled")) {
+					shareText += "🟩";
+					boardText += "x";
+				} else {
+					shareText += "⬛";
+					boardText += "-";
+				}
 
-				if (++count == 5) {
-					count = 0;
+				if (++rowCount == 5) {
+					rowCount = 0;
 					shareText += "\n";
+					boardText += "|";
 				}
 			});
 			shareText += "https://pinniped.page/brb";
 			navigator.clipboard.writeText(shareText);
 
+			// if (!window.location.href.includes("://localhost:")) await addToDatabase(boardText, startTime, endTime, endTime - startTime);
+			await addToDatabase(boardText, startTime, endTime, endTime - startTime);
+
 			// RELOAD
-			window.removeEventListener("beforeunload", onBeforeUnload);
+			if (!window.location.href.includes("://localhost:")) window.removeEventListener("beforeunload", onBeforeUnload);
 			window.location.reload();
 		}
 
+		// MAKE PHRASES DATABASE-SAFE
+		function formatDatabaseKey(string) {
+			return string
+				.replace(/\//g, "<slash>")
+				.replace(/\./g, "<dot>")
+				.replace(/\#/g, "<hash>")
+				.replace(/\$/g, "<dollar>")
+				.replace(/\[/g, "<leftbrace>")
+				.replace(/\]/g, "<rightbrace>")
+				.replace(/\&rsquo;/g, "’");
+		}
+
+		// DATABASE SEND
+		async function addToDatabase(board, start, end, total) {
+			const database = getDatabase();
+
+			// UPDATE EVENT COUNTS IN DATABASE
+			document.querySelectorAll(".square").forEach(async (square) => {
+				let phrase = formatDatabaseKey(square.title);
+				let nextCount = 0;
+				await get(ref(database, `brb/events/${phrase}`))
+					.then((snapshot) => {
+						if (snapshot.exists()) nextCount = parseInt(snapshot.val());
+						console.log(`%creceived data from database @ “brb/events/${phrase}” (${snapshot.val()})`, blueStyle);
+					})
+					.catch((error) => {
+						console.log(`%cerror fetching from database @ “brb/events/${phrase}”`, redStyle);
+					});
+				if (square.classList.contains("filled")) nextCount++;
+				await set(ref(database, `brb/events/${phrase}`), nextCount)
+					.then((success) => {
+						console.log(`%cset database value @ “brb/events/${phrase}” to ${nextCount}`, blueStyle);
+					})
+					.catch((error) => {
+						console.log(`%cerror setting database value @ “brb/events/${phrase}”`, redStyle);
+					});
+			});
+
+			// GAME-SPECIFIC
+			await push(ref(database, `brb/games`), {
+				board: board,
+				times: {
+					start: start,
+					end: end,
+					total: total,
+				},
+			})
+				.then((success) => {
+					console.log(`%cset database value @ “brb/games/”`, blueStyle);
+				})
+				.catch((error) => {
+					console.log(`%cerror pushing to database @ “brb/games/”`, redStyle);
+				});
+		}
+
+		// DATABASE RECEIVE
+		async function getFromDatabase() {
+			const database = getDatabase();
+
+			let events = [];
+
+			// VALIDATE DATABASE & SAVE NUMBERS
+			squares.push(`bus moves (free space?) 👀`);
+			for (let phrase of squares) {
+				let safePhrase = formatDatabaseKey(phrase);
+				await get(ref(database, `brb/events/${safePhrase}`))
+					.then(async (snapshot) => {
+						if (snapshot.exists()) {
+							if (!/\d+/.test(snapshot.val())) {
+								await set(ref(database, `brb/events/${safePhrase}`), 0)
+									.then((success) => {
+										console.log(`%creplaced bad data from database @ “brb/events/${safePhrase}” with ${0}`, yellowStyle);
+									})
+									.catch((error) => {
+										console.log(`%cerror setting database value @ “brb/events/${safePhrase}”`, redStyle);
+									});
+								events.push([phrase, 0]);
+							} else {
+								console.log(`%ccorrect pattern @ “brb/events/${safePhrase}” (${snapshot.val()})`, blueStyle);
+								events.push([phrase, parseInt(snapshot.val())]);
+							}
+						} else {
+							await set(ref(database, `brb/events/${safePhrase}`), 0)
+								.then((success) => {
+									console.log(`%cset database value @ “brb/events/${safePhrase}” to ${0}`, blueStyle);
+								})
+								.catch((error) => {
+									console.log(`%cerror setting database value @ “brb/events/${safePhrase}”`, redStyle);
+								});
+							events.push([phrase, 0]);
+						}
+					})
+					.catch((error) => {
+						console.log(`%cerror fetching from database @ “brb/events/${safePhrase}”`, redStyle);
+					});
+			}
+			squares.pop(`bus moves (free space?) 👀`);
+			events.pop(`bus moves (free space?) 👀`);
+
+			// SORT
+			events.sort(function (a, b) {
+				return b[1] - a[1];
+			});
+
+			// ADD TO PAGE
+			for (let i = 0; i < events.length; i++) {
+				let number = events[i][1];
+				let percent = (number / events[0][1]) * 100;
+
+				let statElement = document.createElement("div");
+				statElement.classList.add("stat");
+				statElement.innerHTML = `<div>&ldquo;${events[i][0]}&rdquo; — <b>&nbsp;${events[i][1]}</b></div>`;
+				document.querySelector(".stats .events").appendChild(statElement);
+
+				statElement.style = `width: ${percent}%`;
+			}
+			document.querySelector("#events-load").remove();
+		}
+		getFromDatabase();
+
+		// LISTEN FOR BUTTON USE
+		document.querySelector("#submit").addEventListener("click", () => {
+			submitBoard();
+		});
+		document.querySelector("#resize").addEventListener("click", () => {
+			shrinkToFit();
+		});
+
 		// CONSIDER LOADING DONE, START TIMER
 		const startTime = Date.now();
+		console.log(`%ctimer started @ ${startTime}`, blueStyle);
 	</script>
 </html>
