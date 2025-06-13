@@ -44,7 +44,7 @@
 				font-weight: 700;
 			}
 
-			b:not(li b, b.button, .stat b) {
+			b:not(li b, span b, b.button, .stat b) {
 				font-size: 30px;
 			}
 
@@ -422,7 +422,7 @@
 					<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
 				</ul>
 				<br />
-				—<br />BRB v2.2.0 (June 12th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
+				—<br />BRB v2.3.0 (June 13th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
 				<a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a>
 			</div>
 
@@ -433,7 +433,7 @@
 				</div>
 				<div class="games">
 					<b>Game Statistics</b><br /><br />
-					<b id="games-load">COMING SOON<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d><br /></b>
+					<b id="games-load">Loading<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d><br /></b>
 				</div>
 			</div>
 		</div>
@@ -466,7 +466,7 @@
 		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
 
 		// VERSION
-		console.log(`%cBRB v2.2.0 (June 12th, 2025)`, darkGreyStyle);
+		console.log(`%cBRB v2.3.0 (June 13th, 2025)`, darkGreyStyle);
 
 		// ARRAY MIXING ALGORITHM
 		function mixArray(array) {
@@ -669,24 +669,31 @@
 		}
 		if (!window.location.href.includes("://localhost:")) window.addEventListener("beforeunload", onBeforeUnload);
 
+		// TIME FORMATTING UTILITY
+		function formatTimeString(timestamp) {
+			let hours = Math.floor(timestamp / 3600);
+			let minutes = Math.floor((timestamp % 3600) / 60);
+			let seconds = Math.floor((timestamp % 3600) % 60);
+
+			if (hours == 0) return `${minutes.toString()}:${seconds.toString().padStart(2, "0")}`;
+			else return `${hours.toString()}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+		}
+
 		// SUBMIT BOARD
 		let endTime = 0;
 		async function submitBoard() {
 			// TIME CALCULATIONS
 			if (endTime == 0) endTime = Date.now();
 			let totalTime = Math.floor((endTime - startTime) / 1000);
-			let hours = Math.floor(totalTime / 3600).toString();
-			let minutes = Math.floor((totalTime % 3600) / 60);
-			let seconds = Math.floor((totalTime % 3600) % 60);
 
 			// SHARE TEXT
-			let shareText = `Bus Ride Bingo — ${hours.toString()}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}\n`;
-			if (hours == 0) shareText = `Bus Ride Bingo — ${minutes.toString()}:${seconds.toString().padStart(2, "0")}\n`;
+			let shareText = `Bus Ride Bingo — ${formatTimeString(totalTime)}\n`;
 			let boardText = "|";
 			let rowCount = 0;
 			document.querySelectorAll(".square").forEach((square) => {
 				if (square.classList.contains("filled")) {
-					shareText += "🟩";
+					if (bingo) shareText += "🟩";
+					else shareText += "🟧";
 					boardText += "x";
 				} else {
 					shareText += "⬛";
@@ -769,9 +776,10 @@
 		async function getFromDatabase() {
 			const database = getDatabase();
 
+			// EVENTS
 			let events = [];
 
-			// VALIDATE DATABASE & SAVE NUMBERS
+			// VALIDATE DATABASE (EVENTS) & SAVE NUMBERS
 			squares.push(`bus moves (free space?) 👀`);
 			for (let phrase of squares) {
 				let safePhrase = formatDatabaseKey(phrase);
@@ -785,6 +793,7 @@
 									})
 									.catch((error) => {
 										console.log(`%cerror setting database value @ “brb/events/${safePhrase}”`, redStyle);
+										document.querySelector("#events-load").innerHTML = "ERROR";
 									});
 								events.push([phrase, 0]);
 							} else {
@@ -798,12 +807,14 @@
 								})
 								.catch((error) => {
 									console.log(`%cerror setting database value @ “brb/events/${safePhrase}”`, redStyle);
+									document.querySelector("#events-load").innerHTML = "ERROR";
 								});
 							events.push([phrase, 0]);
 						}
 					})
 					.catch((error) => {
 						console.log(`%cerror fetching from database @ “brb/events/${safePhrase}”`, redStyle);
+						document.querySelector("#events-load").innerHTML = "ERROR";
 					});
 			}
 			squares.pop(`bus moves (free space?) 👀`);
@@ -826,7 +837,84 @@
 
 				statElement.style = `width: ${percent}%`;
 			}
-			document.querySelector("#events-load").remove();
+			if (events.length == 60) document.querySelector("#events-load").remove();
+			else document.querySelector("#events-load").innerHTML = "ERROR";
+
+			// GAMES
+			let games = {};
+
+			// VALIDATE DATABASE (GAMES) & SAVE
+			await get(ref(database, `brb/games`))
+				.then(async (snapshot) => {
+					console.log(`%creceived data from database @ “brb/games”`, blueStyle);
+
+					if (snapshot.exists()) {
+						games = snapshot.val();
+
+						for (let game in games) {
+							console.log(games[game]);
+
+							if (Object.keys(games[game]).length == 2 && Object.keys(games[game]).includes("board") && Object.keys(games[game]).includes("times")) {
+								if (/^\|([x-]{5}\|){2}[x-]{2}x[x-]{2}\|([x-]{5}\|){2}$/.test(games[game].board)) {
+									if (
+										Object.keys(games[game].times).length == 3 &&
+										Object.keys(games[game].times).includes("end") &&
+										Object.keys(games[game].times).includes("start") &&
+										Object.keys(games[game].times).includes("total")
+									) {
+										if (!isNaN(games[game].times.end) && !isNaN(games[game].times.start) && !isNaN(games[game].times.total)) {
+											continue;
+										}
+									}
+								}
+							}
+
+							delete games[game];
+						}
+					}
+				})
+				.catch((error) => {
+					console.log(`%cerror fetching from database @ “brb/games”`, redStyle);
+					document.querySelector("#games-load").innerHTML = "ERROR";
+				});
+
+			let total = 0;
+			let longest = 0;
+			let shortest = Infinity;
+			let average = 0;
+			let times = {};
+			for (let game in games) {
+				total++;
+				if (games[game].times.total > longest) longest = games[game].times.total;
+				if (games[game].times.total < shortest) shortest = games[game].times.total;
+				average += games[game].times.total;
+
+				let date = new Date(games[game].times.start);
+				let hours = date.getHours();
+				let half = " AM";
+				if (date.getHours() >= 12) half = " PM";
+				hours = hours % 12;
+				if (hours == 0) hours = 12;
+				let key = `${hours}:${Math.round(date.getMinutes() / 15) * 15}${half}`;
+				if (key in times) times[key]++;
+				else times[key] = 0;
+			}
+
+			let stats = [
+				["games submitted", total.toLocaleString("en-CA")],
+				["longest game length", formatTimeString(Math.floor(longest / 1000))],
+				["shortest game length", formatTimeString(Math.floor(shortest / 1000))],
+				["average game length", formatTimeString(Math.floor(average / 1000 / total))],
+				["most common start time", `~${Object.keys(times)[Object.values(times).indexOf(Math.max(...Object.values(times)))]}`],
+			];
+
+			for (let i = 0; i < stats.length; i++) {
+				let statElement = document.createElement("span");
+				statElement.innerHTML = `${stats[i][0]}: <b>${stats[i][1]}</b><br /><br />`;
+				document.querySelector(".games").appendChild(statElement);
+			}
+
+			document.querySelector("#games-load").remove();
 		}
 		getFromDatabase();
 
