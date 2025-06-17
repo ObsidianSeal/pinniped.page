@@ -422,7 +422,7 @@
 					<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
 				</ul>
 				<br />
-				—<br />BRB v2.3.0 (June 13th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
+				—<br />BRB v2.3.1 (June 17th, 2025)<br /><a href="" title="this page (click to refresh)">pinniped.page/projects/brb</a> by
 				<a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a>
 			</div>
 
@@ -466,7 +466,7 @@
 		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
 
 		// VERSION
-		console.log(`%cBRB v2.3.0 (June 13th, 2025)`, darkGreyStyle);
+		console.log(`%cBRB v2.3.1 (June 17th, 2025)`, darkGreyStyle);
 
 		// ARRAY MIXING ALGORITHM
 		function mixArray(array) {
@@ -509,7 +509,7 @@
 			"bus goes up onto the curb 😯",
 			"something falls on the floor 😬",
 			"sitting at a stop... (no one getting on/off) ⏳",
-			"someone is running for the bus! (waiting) 🏃‍♀️",
+			"someone is running for a bus! 🏃‍♀️",
 			"go over or under railroad tracks 🚆",
 			"bus only lane! 🚋",
 			"pass a stop with a shelter 🏠",
@@ -531,7 +531,7 @@
 			"see a taxi or mail, garbage, or recycling truck 🚕",
 			"someone uses the bike rack 🚲",
 			"bus kneels 🧎‍♂️",
-			"another bus driver/transit staff is on the bus 👨‍✈️",
+			"see another bus driver or transit staff 👨‍✈️",
 			"someone goes out the front door 👠",
 			"see/pass a school 🏫",
 			"someone coughs or sneezes 🙁",
@@ -709,8 +709,11 @@
 			shareText += "https://pinniped.page/brb";
 			navigator.clipboard.writeText(shareText);
 
-			// if (!window.location.href.includes("://localhost:")) await addToDatabase(boardText, startTime, endTime, endTime - startTime);
-			await addToDatabase(boardText, startTime, endTime, endTime - startTime);
+			// TELL PEOPLE SOMETHING WAS COPIED
+			let savedText = document.querySelector("#submit").innerHTML;
+			document.querySelector("#submit").innerHTML = "&nbsp;COPIED!&nbsp;";
+
+			if (!window.location.href.includes("://localhost:")) await addToDatabase(boardText, startTime, endTime, endTime - startTime);
 
 			// RELOAD
 			if (!window.location.href.includes("://localhost:")) window.removeEventListener("beforeunload", onBeforeUnload);
@@ -852,8 +855,6 @@
 						games = snapshot.val();
 
 						for (let game in games) {
-							console.log(games[game]);
-
 							if (Object.keys(games[game]).length == 2 && Object.keys(games[game]).includes("board") && Object.keys(games[game]).includes("times")) {
 								if (/^\|([x-]{5}\|){2}[x-]{2}x[x-]{2}\|([x-]{5}\|){2}$/.test(games[game].board)) {
 									if (
@@ -870,6 +871,14 @@
 							}
 
 							delete games[game];
+							await remove(ref(database, `brb/games/${game}`))
+								.then((success) => {
+									console.log(`%cremoved bad data from database @ “brb/games/${game}”`, yellowStyle);
+								})
+								.catch((error) => {
+									console.log(`%cerror removing database entry @ “brb/games/${game}”`, redStyle);
+									document.querySelector("#games-load").innerHTML = "ERROR";
+								});
 						}
 					}
 				})
@@ -895,9 +904,9 @@
 				if (date.getHours() >= 12) half = " PM";
 				hours = hours % 12;
 				if (hours == 0) hours = 12;
-				let key = `${hours}:${Math.round(date.getMinutes() / 15) * 15}${half}`;
+				let key = `${hours}:${(Math.round(date.getMinutes() / 15) * 15).toString().padStart(2, "0")}${half}`;
 				if (key in times) times[key]++;
-				else times[key] = 0;
+				else times[key] = 1;
 			}
 
 			let stats = [
