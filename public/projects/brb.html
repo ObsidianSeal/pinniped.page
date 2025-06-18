@@ -801,6 +801,7 @@
 								events.push([phrase, 0]);
 							} else {
 								console.log(`%ccorrect pattern @ “brb/events/${safePhrase}” (${snapshot.val()})`, blueStyle);
+								console.log(snapshot.val());
 								events.push([phrase, parseInt(snapshot.val())]);
 							}
 						} else {
@@ -904,7 +905,7 @@
 				if (date.getHours() >= 12) half = " PM";
 				hours = hours % 12;
 				if (hours == 0) hours = 12;
-				let key = `${hours}:${(Math.round(date.getMinutes() / 15) * 15).toString().padStart(2, "0")}${half}`;
+				let key = `${hours}:${date.getMinutes().toString().padStart(2, "0")}${half}`;
 				if (key in times) times[key]++;
 				else times[key] = 1;
 			}
@@ -914,7 +915,7 @@
 				["longest game length", formatTimeString(Math.floor(longest / 1000))],
 				["shortest game length", formatTimeString(Math.floor(shortest / 1000))],
 				["average game length", formatTimeString(Math.floor(average / 1000 / total))],
-				["most common start time", `~${Object.keys(times)[Object.values(times).indexOf(Math.max(...Object.values(times)))]}`],
+				["most common start time", Object.keys(times)[Object.values(times).indexOf(Math.max(...Object.values(times)))]],
 			];
 
 			for (let i = 0; i < stats.length; i++) {
