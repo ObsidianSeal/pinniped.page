@@ -1257,6 +1257,33 @@
 						["A Sweet Song", "St. Arnaud", "A Sweet Song"],
 					],
 				},
+				"🎵 - July 2025": {
+					link: "PLTKwBiSgGBshP9nqLJfRqRvhHhg8A-5fQ",
+					length: [20, "1:03:57"],
+					updated: "2025/06/25",
+					tracks: [
+						["At the Airport Terminal", "Bill Wurtz", "At the Airport Terminal"],
+						["Little Hollywood", "Alle Farbin & Janieck", "Sticker on My Suitcase"],
+						["All My Life", "Myles Smith", "A Minute, A Moment..."],
+						["WHY", "Jon Bellion & Luke Combs", "WHY"],
+						["Sorry I&rsquo;m Here For Someone Else", "Benson Boone", "Sorry I&rsquo;m Here For Someone Else"],
+						["Cry", "Benson Boone", "Fireworks & Rollerblades"],
+						["Manchild", "Sabrina Carpenter", "Manchild"],
+						["Looking at Me", "Sabrina Carpenter", "Singular Act II"],
+						["Vampire", "Dominic Fike", "What Could Possibly Go Wrong"],
+						["Cruel Power", "The Happy Fits", "Cruel Power"],
+						["The Lotto (feat. AJR)", "Ingrid Michaelson", "The Lotto"],
+						["Shivers", "Ed Sheeran", "Shivers"],
+						["Sapphire", "Ed Sheeran", "Sapphire"],
+						["Melatonin", "Birds of Bellwoods", "Melatonin"],
+						["Momma Song", "Benson Boone", "Momma Song"],
+						["AfterHours", "AJR", "I&rsquo;m Ready - EP"],
+						["Ordinary", "Alex Warren", "You&rsquo;ll Be Alright, Kid (Chapter 1)"],
+						["House of Memories", "Panic! At The Disco", "Death of a Bachelor"],
+						["Livin&rsquo; on Love", "AJR", "Living Room"],
+						["My Stick", "Bad Lip Reading", "My Stick"],
+					],
+				},
 				"oops all Conan Gray": {
 					link: "PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG",
 					length: [28, "1:26:54"],
@@ -1567,6 +1594,7 @@
 				"🎵 - April 2025",
 				"🎵 - May 2025",
 				"🎵 - June 2025",
+				"🎵 - July 2025",
 			];
 
 			let otherPlaylistNames = [
@@ -1998,8 +2026,6 @@
 								(value / albumNumbersArray[0][0]) * 100
 							}% - 10px)" title="${albumName} — ${value}">${albumName} — ${value}</span><br />`;
 					}
-
-					console.log(albumNumbersArray.length);
 				}
 
 				// 2. OTHER
@@ -2055,7 +2081,7 @@
 							maxiumumName = playlist;
 						}
 					}
-					showDataWithPlaylistLink(datum, formatSeconds(maxiumum), maxiumumName);
+					showDataWithPlaylistLink(datum, maxiumum, maxiumumName);
 				}
 				// "least number of tracks"
 				if (dataIndex == 10) {
@@ -2067,7 +2093,7 @@
 							minimumName = playlist;
 						}
 					}
-					showDataWithPlaylistLink(datum, formatSeconds(minimum), minimumName);
+					showDataWithPlaylistLink(datum, minimum, minimumName);
 				}
 
 				// 3. GENERAL
@@ -2078,11 +2104,11 @@
 				}
 				// "most recently added"
 				if (dataIndex == 12) {
-					showDataWithPlaylistLink(datum, formatDate("2025/05/30"), "🎵 - June 2025");
+					showDataWithPlaylistLink(datum, formatDate("2025/06/25"), "🎵 - July 2025");
 				}
 				// "most recently updated"
 				if (dataIndex == 13) {
-					showDataWithPlaylistLink(datum, formatDate("2025/06/08"), "guess the song from the first second");
+					showDataWithPlaylistLink(datum, formatDate("2025/06/25"), "🎵 - July 2025");
 				}
 
 				dataIndex++;
