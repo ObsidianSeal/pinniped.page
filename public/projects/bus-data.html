@@ -243,11 +243,7 @@
 				color: var(--base08);
 			}
 
-			table i.fa-check,
-			table i.fa-xmark,
-			table i.fa-circle-info,
-			table i.fa-triangle-exclamation,
-			table i.fa-badge-check,
+			table i.fa-sharp,
 			.map-tooltip i.fa-check,
 			.map-tooltip i.fa-xmark,
 			.error-panel i {
@@ -272,19 +268,18 @@
 				color: var(--base0E);
 			}
 
-			td[colspan="3"] i,
-			td:has(.fa-badge-check) i {
-				margin-right: 10px;
-			}
-
-			td:has(.fa-badge-check),
-			td:has(.fa-badge-check) i,
-			td:has(.fa-badge-check) span.bold {
+			td:has(.fa-sharp):not(td[colspan="3"]),
+			td:has(.fa-sharp):not(td[colspan="3"]) i,
+			td:has(.fa-sharp):not(td[colspan="3"]) span.bold {
 				color: var(--base0D);
 			}
 
-			td:has(.fa-badge-check) ~ td a:hover,
-			td:has(.fa-badge-check) ~ td a:focus {
+			.route-maps-table i {
+				margin-right: 10px;
+			}
+
+			.route-maps-table td a:hover,
+			.route-maps-table td a:focus {
 				text-decoration-color: var(--base0B);
 			}
 
@@ -963,42 +958,42 @@
 			// colours
 			const officialColours = {
 				1: "#70c2da",
-				2: "#008080",
-				3: "#c28585",
-				4: "#7373b9",
-				5: "#00ff00",
-				6: "#ffff00",
-				7: "#008000",
-				9: "#b36666",
-				10: "#96befa",
-				12: "#ca95ff",
-				13: "#927ec2",
-				15: "#00d5d5",
-				16: "#00aa55",
-				17: "#ff2828",
-				19: "#71d0ff",
-				20: "#58abab",
-				24: "#ff9bcd",
-				25: "#dfdf00",
-				27: "#8022fd",
-				28: "#5555ff",
-				30: "#cf2985",
-				31: "#00b700",
-				33: "#bb77ff",
-				34: "#ff0000",
-				35: "#dbc004",
-				36: "#b43d61",
-				37: "#0098e1",
-				38: "#ff0000",
-				90: "#ff8a15",
-				91: "#ff8000",
-				92: "#ff8000",
-				93: "#ff8000",
-				94: "#ff8000",
-				95: "#ff8000",
-				102: "#008080",
-				104: "#7373b9",
-				106: "#ffff00",
+				2: "#75aaae",
+				3: "#bca387",
+				4: "#a685bc",
+				5: "#71bf44",
+				6: "#d6df21",
+				7: "#00ad54",
+				9: "#b98e90",
+				10: "#6e9bcf",
+				12: "#c082aa",
+				13: "#929ebc",
+				15: "#03b9bd",
+				16: "#2bb572",
+				17: "#6bcff6",
+				19: "#b99355",
+				20: "#01a7c1",
+				24: "#f166a7",
+				25: "#ddbd85",
+				27: "#9e91a1",
+				28: "#559fb9",
+				30: "#e26fac",
+				31: "#26ab6b",
+				33: "#c082aa",
+				34: "#cb9e9e",
+				35: "#fed05b",
+				36: "#b6da9b",
+				37: "#2da1d2",
+				38: "#db7dae",
+				90: "#f89d53",
+				91: "#f89d53",
+				92: "#f89d53",
+				93: "#f89d53",
+				94: "#f89d53",
+				95: "#f89d53",
+				102: "#75aaae",
+				104: "#a685bc",
+				106: "#d6df21",
 			};
 			for (let i = 0; i < Object.keys(officialColours).length; i++) {
 				document.querySelector("#route-colour-list").innerHTML =
@@ -3751,7 +3746,7 @@
 
 			<br />
 
-			<p>v1.0.2 — June 4th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.0.3 — June 27th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3931,9 +3926,10 @@
 				These maps are made manually in <a href="https://affinity.serif.com/designer/" target="_blank" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so
 				they will be added/updated very slowly.
 			</p>
+			<p>Please report any inaccuracies!</p>
 			<br />
 			<div class="table-scroll">
-				<table>
+				<table class="route-maps-table">
 					<tr>
 						<td>route</td>
 						<td>status</td>
@@ -4054,14 +4050,14 @@
 					</tr>
 					<tr>
 						<td rowspan="2">90</td>
-						<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 13th, 2025</span></td>
+						<td><i class="fa-sharp fa-solid fa-circle-pause"></i>awaiting update — current version from <span class="bold">May 13th, 2025</span></td>
 						<td>
 							<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
 						</td>
 						<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
 					</tr>
 					<tr>
-						<td><i class="fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">May 14th, 2025</span></td>
+						<td><i class="fa-sharp fa-solid fa-circle-pause"></i>awaiting update — current version from <span class="bold">May 14th, 2025</span></td>
 						<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
 						<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
 					</tr>
@@ -4337,7 +4333,7 @@
 						</li>
 						<li>
 							hover over the route numbers above to see their associated colour&rsquo;s
-							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">HEX code</a>
+							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">hex code</a>
 						</li>
 						<li>this page does not update if you leave, so there will be gaps in the bus trails if you leave and then return after more than 30 seconds</li>
 						<li>the bus map is technically an image, so you can save and/or copy it like you would any other</li>
@@ -4351,7 +4347,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.2</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.3</span>
 				</p>
 				<br />
 				<p><a href="../status.html" title="pinniped.page — Status">website status</a>/<a href="../contact.html" title="pinniped.page — Contact">report a problem</a></p>
