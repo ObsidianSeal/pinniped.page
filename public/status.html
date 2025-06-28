@@ -1266,20 +1266,8 @@
 			if (percentString.indexOf(".") == -1) percentString += ".00";
 			if (percentString.substring(percentString.indexOf(".")).length == 2) percentString += "0";
 			document.querySelector("#percentage").innerHTML = `${percentString}%`;
-
-			document.querySelectorAll(".same-page-link").forEach((link) => {
-				link.addEventListener("click", () => {
-					setTimeout(() => {
-						window.scrollBy({ top: -80, left: 0, behavior: "smooth" });
-					}, 50);
-				});
-			});
-
-			window.addEventListener("load", () => {
-				if (location.href.includes("#")) {
-					window.scrollBy({ top: -80, left: 0, behavior: "smooth" });
-				}
-			});
 		</script>
+
+		<script src="files/id-link-scroll-up.js"></script>
 	</body>
 </html>

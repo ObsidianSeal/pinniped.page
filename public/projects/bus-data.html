@@ -268,9 +268,9 @@
 				color: var(--base0E);
 			}
 
-			td:has(.fa-sharp):not(td[colspan="3"]),
-			td:has(.fa-sharp):not(td[colspan="3"]) i,
-			td:has(.fa-sharp):not(td[colspan="3"]) span.bold {
+			.route-maps-table td:has(.fa-sharp):not(td[colspan="3"]),
+			.route-maps-table td:has(.fa-sharp):not(td[colspan="3"]) i,
+			.route-maps-table td:has(.fa-sharp):not(td[colspan="3"]) span.bold {
 				color: var(--base0D);
 			}
 
@@ -3688,12 +3688,14 @@
 				],
 			];
 			document.querySelectorAll(".settings-option").forEach((button) => {
+				let setting = mapSettings[0].indexOf(button.parentNode.parentNode.children[0].innerHTML);
+				let option = mapSettings[setting + 1].indexOf(button.innerHTML);
+
+				button.title = `select “${button.innerHTML}” (${setting}:${option})`;
+
 				button.addEventListener("click", () => {
 					button.parentNode.querySelector(".selected-setting").classList.remove("selected-setting");
 					button.classList.add("selected-setting");
-
-					let setting = mapSettings[0].indexOf(button.parentNode.parentNode.children[0].innerHTML);
-					let option = mapSettings[setting + 1].indexOf(button.innerHTML);
 
 					if (setting == 0) {
 						if (option == 0) mapOptions[0] = true;
@@ -3746,7 +3748,7 @@
 
 			<br />
 
-			<p>v1.0.3 — June 27th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.0.4 — June 28th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -4050,14 +4052,14 @@
 					</tr>
 					<tr>
 						<td rowspan="2">90</td>
-						<td><i class="fa-sharp fa-solid fa-circle-pause"></i>awaiting update — current version from <span class="bold">May 13th, 2025</span></td>
+						<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
 						<td>
 							<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
 						</td>
 						<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
 					</tr>
 					<tr>
-						<td><i class="fa-sharp fa-solid fa-circle-pause"></i>awaiting update — current version from <span class="bold">May 14th, 2025</span></td>
+						<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
 						<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
 						<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
 					</tr>
@@ -4322,7 +4324,13 @@
 						<li>buses have a trail that shows where they have been recently</li>
 						<li>hover over a bus to learn more about it (the information from the main table is shown)</li>
 						<li id="route-colour-list">
-							route colours are specified by
+							<a
+								href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZRbo7KXGE2Md4nVdKlA89po-ZxmD57EWqCJ8NA6359kSvW0JMf4P-2z4ieUTisAkTsmZ-M3zmJQ7J/pubhtml"
+								target="_blank"
+								title="Google Sheets > LTC Route Colours [EXTERNAL]"
+								>route colours</a
+							>
+							are specified by
 							<a
 								href="https://realtime.londontransit.ca/#/app/nextdepartures"
 								target="_blank"
@@ -4332,8 +4340,15 @@
 							as follows:<br />
 						</li>
 						<li>
-							hover over the route numbers above to see their associated colour&rsquo;s
-							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">hex code</a>
+							to see the routes&rsquo;
+							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">hex codes</a>, hover
+							over the route numbers above or visit
+							<a
+								href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZRbo7KXGE2Md4nVdKlA89po-ZxmD57EWqCJ8NA6359kSvW0JMf4P-2z4ieUTisAkTsmZ-M3zmJQ7J/pubhtml"
+								target="_blank"
+								title="Google Sheets > LTC Route Colours [EXTERNAL]"
+								>my route colours list and route map progress tracker</a
+							>
 						</li>
 						<li>this page does not update if you leave, so there will be gaps in the bus trails if you leave and then return after more than 30 seconds</li>
 						<li>the bus map is technically an image, so you can save and/or copy it like you would any other</li>
@@ -4347,7 +4362,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.3</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.4</span>
 				</p>
 				<br />
 				<p><a href="../status.html" title="pinniped.page — Status">website status</a>/<a href="../contact.html" title="pinniped.page — Contact">report a problem</a></p>
