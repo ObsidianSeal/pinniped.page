@@ -229,14 +229,17 @@
 				font-size: 20px;
 			}
 
-			td {
+			td,
+			th {
 				border: 2px solid var(--base04);
 				padding: 5px 30px 5px 10px;
+				background-color: white;
 			}
 
-			tr:first-child td {
+			th {
 				font-size: 30px;
 				font-weight: 700;
+				text-align: left;
 			}
 
 			.not-in-service {
@@ -688,6 +691,18 @@
 			@media all and (max-width: 600px) {
 				.loading-panel h1 {
 					font-size: 60px;
+				}
+			}
+
+			@media all and (max-width: 500px) {
+				#map-extra-window-settings p {
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+				}
+
+				#map-extra-window-settings p > span:last-child {
+					padding-left: 15px;
 				}
 			}
 
@@ -3158,7 +3173,7 @@
 						let icon = "xmark";
 						if (fleetObject[bus][0] == "D60LFR" || fleetObject[bus][0] == "XD60") icon = "check";
 						row.innerHTML = `<td><a href="${fleetObject[bus][2]}" target="_blank" title="CPTDB wiki > London Transit Commission > ${bus} [GENERATED LINK; EXTERNAL]">${bus}</a></td><td><a href="${fleetObject[bus][1]}" target="_blank" title="CPTDB wiki > ${fleetObject[bus][0]} [GENERATED LINK; EXTERNAL]">${fleetObject[bus][0]}</a></td><td><i class="fa-sharp fa-solid fa-${icon}"></i></td><td>???</td><td>???</td>`;
-						document.querySelector("table").appendChild(row);
+						document.querySelector("tbody").appendChild(row);
 					}
 
 					firstRun = false;
@@ -3340,7 +3355,7 @@
 			let longitudeEnd = -81.12978;
 
 			// update map
-			let mapOptions = [true, true, "", true, 3, true, 0];
+			let mapOptions = [false, true, true, "", true, 3, true, 0];
 			function updateMap() {
 				// important map variables
 				let canvas = document.querySelector("canvas");
@@ -3361,7 +3376,7 @@
 				context.fillStyle = "#ffffff";
 				context.fillRect(0, 0, width, height);
 
-				if (mapOptions[0]) {
+				if (mapOptions[1]) {
 					context.fillStyle = "#000000";
 					for (let i = 0; i < stops.length; i++) {
 						let x = drawOffset + Math.round((stops[i][1] - longitudeStart) * scaleFactor);
@@ -3371,13 +3386,13 @@
 					}
 				}
 
-				let trailStart = Math.max(fleetObject[Object.keys(fleetObject)[0]].length - (mapOptions[4] + 1), 3);
-				if (!mapOptions[3]) trailStart = 3;
+				let trailStart = Math.max(fleetObject[Object.keys(fleetObject)[0]].length - (mapOptions[5] + 1), 3);
+				if (!mapOptions[4]) trailStart = 3;
 
 				for (let bus in fleetObject) {
 					for (let i = trailStart; i < fleetObject[bus].length - 1; i++) {
 						let routeNumber = fleetObject[bus][i][0];
-						if (!mapOptions[5] && routeNumber != mapOptions[6]) continue;
+						if ((!mapOptions[6] && routeNumber != mapOptions[7]) || (mapOptions[0] && bus >= 100)) continue;
 
 						let latitude1 = fleetObject[bus][i][1];
 						let longitude1 = fleetObject[bus][i][2];
@@ -3394,8 +3409,8 @@
 							let x2 = drawOffset + Math.round((longitude2 - longitudeStart) * scaleFactor);
 							let y2 = drawOffset + Math.round((latitudeStart - latitude2) * scaleFactor);
 
-							if (mapOptions[1]) context.strokeStyle = colour;
-							else context.strokeStyle = mapOptions[2];
+							if (mapOptions[2]) context.strokeStyle = colour;
+							else context.strokeStyle = mapOptions[3];
 							context.beginPath();
 							context.moveTo(x1, y1);
 							context.lineTo(x2, y2);
@@ -3408,7 +3423,7 @@
 					let i = fleetObject[bus].length - 1;
 
 					let routeNumber = fleetObject[bus][i][0];
-					if (!mapOptions[5] && routeNumber != mapOptions[6]) continue;
+					if ((!mapOptions[6] && routeNumber != mapOptions[7]) || (mapOptions[0] && bus >= 100)) continue;
 
 					let latitude = fleetObject[bus][i][1];
 					let longitude = fleetObject[bus][i][2];
@@ -3422,8 +3437,8 @@
 						fleetObject[bus][i][4] = x;
 						fleetObject[bus][i][5] = y;
 
-						if (mapOptions[1]) context.fillStyle = colour;
-						else context.fillStyle = mapOptions[2];
+						if (mapOptions[2]) context.fillStyle = colour;
+						else context.fillStyle = mapOptions[3];
 						context.beginPath();
 						if (bus < 100) {
 							context.ellipse(x, y, busSize - 3, busSize - 3, 0, 2 * Math.PI, 0);
@@ -3617,7 +3632,7 @@
 
 					for (let bus in fleetObject) {
 						let array = fleetObject[bus][fleetObject[bus].length - 1];
-						if (!mapOptions[5] && array[0] != mapOptions[6]) continue;
+						if (!mapOptions[6] && array[0] != mapOptions[7]) continue;
 						if (Math.abs(array[4] + 52 - mouseX) <= 5 && Math.abs(array[5] + 52 - mouseY) <= 5) {
 							document.querySelector(".map-tooltip").classList.remove("hide");
 
@@ -3641,9 +3656,10 @@
 			// map settings
 			let mapSettings = [
 				// SETTINGS (0)
-				["show stop dots:", "bus colours:", "trail segments:", "routes:"],
+				["bus types:", "stop dots:", "bus colours:", "trail segments:", "routes:"],
 				// OPTIONS (1+)
-				["YES", "NO"],
+				["ARTICULATED ONLY", "ALL"],
+				["SHOW", "HIDE"],
 				["LONDON TRANSIT", "RED", "ORANGE", "YELLOW", "GREEN", "TEAL", "BLUE", "PURPLE"],
 				["1", "3", "5", "ALL"],
 				[
@@ -3704,27 +3720,31 @@
 					if (setting == 1) {
 						if (option == 0) mapOptions[1] = true;
 						else mapOptions[1] = false;
-
-						if (option == 1) mapOptions[2] = "#ec5f67";
-						if (option == 2) mapOptions[2] = "#f99157";
-						if (option == 3) mapOptions[2] = "#fac863";
-						if (option == 4) mapOptions[2] = "#99c794";
-						if (option == 5) mapOptions[2] = "#5fb3b3";
-						if (option == 6) mapOptions[2] = "#6699cc";
-						if (option == 7) mapOptions[2] = "#c594c5";
 					}
 					if (setting == 2) {
-						if (option == 0) mapOptions[4] = 1;
-						if (option == 1) mapOptions[4] = 3;
-						if (option == 2) mapOptions[4] = 5;
-						if (option == 3) mapOptions[3] = false;
-						else mapOptions[3] = true;
+						if (option == 0) mapOptions[2] = true;
+						else mapOptions[2] = false;
+
+						if (option == 1) mapOptions[3] = "#ec5f67";
+						if (option == 2) mapOptions[3] = "#f99157";
+						if (option == 3) mapOptions[3] = "#fac863";
+						if (option == 4) mapOptions[3] = "#99c794";
+						if (option == 5) mapOptions[3] = "#5fb3b3";
+						if (option == 6) mapOptions[3] = "#6699cc";
+						if (option == 7) mapOptions[3] = "#c594c5";
 					}
 					if (setting == 3) {
-						if (option == 37) mapOptions[5] = true;
+						if (option == 0) mapOptions[5] = 1;
+						if (option == 1) mapOptions[5] = 3;
+						if (option == 2) mapOptions[5] = 5;
+						if (option == 3) mapOptions[4] = false;
+						else mapOptions[4] = true;
+					}
+					if (setting == 4) {
+						if (option == 37) mapOptions[6] = true;
 						else {
-							mapOptions[5] = false;
-							mapOptions[6] = parseInt(mapSettings[setting + 1][option]);
+							mapOptions[6] = false;
+							mapOptions[7] = parseInt(mapSettings[setting + 1][option]);
 						}
 					}
 
@@ -3748,7 +3768,7 @@
 
 			<br />
 
-			<p>v1.0.4 — June 28th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.1.0 — June 29th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3896,13 +3916,16 @@
 			<br />
 			<div class="table-scroll">
 				<table>
-					<tr>
-						<td>ID</td>
-						<td>model</td>
-						<td>articulated?</td>
-						<td>route</td>
-						<td>position</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>model</th>
+							<th>articulated?</th>
+							<th>route</th>
+							<th>position</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
 				</table>
 			</div>
 
@@ -3932,169 +3955,173 @@
 			<br />
 			<div class="table-scroll">
 				<table class="route-maps-table">
-					<tr>
-						<td>route</td>
-						<td>status</td>
-						<td>.PDF<span class="grey special-star">*</span></td>
-						<td>.PNG<span class="grey special-star">*</span></td>
-					</tr>
-					<tr>
-						<td>01</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>02</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>03</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>04</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>05</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>06</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>07</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>09</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>10</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>12</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>13</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>15</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>16</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>17</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>19</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>20</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>24</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>25</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>27</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>28</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>30</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>31</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>33</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>34</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>35</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>36</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>37</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>38</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td rowspan="2">90</td>
-						<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
-						<td>
-							<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
-						</td>
-						<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
-					</tr>
-					<tr>
-						<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
-						<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
-						<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
-					</tr>
-					<tr>
-						<td>91</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>92</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>93</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>94</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>95</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>102</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>104</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
-					<tr>
-						<td>106</td>
-						<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>route</th>
+							<th>status</th>
+							<th>.PDF<span class="grey special-star">*</span></th>
+							<th>.PNG<span class="grey special-star">*</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>01</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>02</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>03</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>04</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>05</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>06</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>07</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>09</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>12</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>13</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>15</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>16</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>17</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>19</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>20</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>24</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>25</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>27</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>28</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>30</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>31</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>33</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>34</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>35</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>36</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>37</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>38</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td rowspan="2">90</td>
+							<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
+							<td>
+								<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
+							</td>
+							<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
+						</tr>
+						<tr>
+							<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
+							<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
+							<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
+						</tr>
+						<tr>
+							<td>91</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>92</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>93</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>94</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>95</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>102</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>104</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
+							<td>106</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 			<br />
@@ -4258,7 +4285,11 @@
 					<b>MAP SETTINGS</b>
 					<br /><br />
 					<p>
-						<span>show stop dots:</span><span><span class="settings-option selected-setting">YES</span><span class="settings-option">NO</span></span>
+						<span>bus types:</span><span><span class="settings-option">ARTICULATED ONLY</span><span class="settings-option selected-setting">ALL</span></span>
+					</p>
+					<br />
+					<p>
+						<span>stop dots:</span><span><span class="settings-option selected-setting">SHOW</span><span class="settings-option">HIDE</span></span>
 					</p>
 					<br />
 					<p>
@@ -4362,7 +4393,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.0.4</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.1.0</span>
 				</p>
 				<br />
 				<p><a href="../status.html" title="pinniped.page — Status">website status</a>/<a href="../contact.html" title="pinniped.page — Contact">report a problem</a></p>
