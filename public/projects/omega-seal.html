@@ -2,96 +2,359 @@
 
 <html lang="en">
 	<head>
-		<title>title</title>
+		<title>Omega Seal</title>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#4ecdc4" />
 
-		<link rel="stylesheet" href="../files/main.css" />
-		<link rel="stylesheet" href="../files/scrollbar.css" />
 		<link rel="icon" href="../images/icon.png" />
-
-		<script src="../files/menu.js"></script>
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
-		<meta property="og:url" content="https://pinniped.page/projects/???" />
+		<meta property="og:url" content="https://pinniped.page/projects/omega-seal" />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="title" />
-		<meta property="og:description" content="description" />
+		<meta property="og:title" content="Omega Seal" />
+		<meta property="og:description" content="Obsidian_Seal&rsquo;s personal Discord bot!" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
+		<meta name="description" content="Obsidian_Seal&rsquo;s personal Discord bot!" />
+		<meta name="keywords" content="obsidian_seal, Discord, bot, info, documentation, help, commands, features" />
+
+		<style>
+			/* FONTS */
+
+			@font-face {
+				src: url("../files/JetBrainsMono-Light.woff2");
+				font-family: "JetBrains Mono";
+				font-style: normal;
+				font-weight: 300;
+			}
+			@font-face {
+				src: url("../files/JetBrainsMono-LightItalic.woff2");
+				font-family: "JetBrains Mono";
+				font-style: italic;
+				font-weight: 300;
+			}
+			@font-face {
+				src: url("../files/JetBrainsMono-Bold.woff2");
+				font-family: "JetBrains Mono";
+				font-style: normal;
+				font-weight: 700;
+			}
+			@font-face {
+				src: url("../files/JetBrainsMono-BoldItalic.woff2");
+				font-family: "JetBrains Mono";
+				font-style: italic;
+				font-weight: 700;
+			}
+
+			/* COLOURS */
+
+			:root {
+				--red: #d91f38;
+				--orange: #e6843e;
+				--yellow: #d9d91f;
+				--green: #36c731;
+				--teal: #28aa99;
+				--blue: #1f54d9;
+				--purple: #731fd9;
+				--magenta: #b61a8f;
+			}
+
+			.red {
+				color: var(--red);
+			}
+			.orange {
+				color: var(--orange);
+			}
+			.yellow {
+				color: var(--yellow);
+			}
+			.green {
+				color: var(--green);
+			}
+			.teal {
+				color: var(--teal);
+			}
+			.blue {
+				color: var(--blue);
+			}
+			.purple {
+				color: var(--purple);
+			}
+			.magenta {
+				color: var(--magenta);
+			}
+
+			.red-bg,
+			.orange-bg,
+			.yellow-bg,
+			.green-bg,
+			.teal-bg,
+			.blue-bg,
+			.purple-bg,
+			.magenta-bg {
+				color: black;
+			}
+
+			.red-bg {
+				background-color: var(--red);
+			}
+			.orange-bg {
+				background-color: var(--orange);
+			}
+			.yellow-bg {
+				background-color: var(--yellow);
+			}
+			.green-bg {
+				background-color: var(--green);
+			}
+			.teal-bg {
+				background-color: var(--teal);
+			}
+			.blue-bg {
+				background-color: var(--blue);
+			}
+			.purple-bg {
+				background-color: var(--purple);
+			}
+			.magenta-bg {
+				background-color: var(--magenta);
+			}
+
+			/* MAIN STYLES */
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			body {
+				background-color: black;
+				color: white;
+
+				font-family: "JetBrains Mono";
+				font-style: normal;
+				font-weight: 300;
+				font-size: 20px;
+			}
+
+			h1 {
+				font-size: 64px;
+			}
+
+			h2 {
+				font-size: 32px;
+			}
+
+			h3 {
+				font-size: 24px;
+			}
+
+			h4 {
+				font-size: 20px;
+			}
+
+			h5,
+			p,
+			li {
+				font-size: 16px;
+			}
+
+			h6 {
+				font-size: 12px;
+			}
+
+			b {
+				font-weight: 700;
+			}
+
+			i {
+				font-style: italic;
+			}
+
+			ul {
+				padding-left: 30px;
+			}
+
+			li::marker {
+				color: #909090;
+			}
+
+			.box {
+				width: 800px;
+
+				margin: 50px auto 0;
+				border: 1px solid white;
+				padding: 30px;
+
+				background-color: black;
+			}
+
+			.type-tag {
+				width: fit-content;
+
+				margin-bottom: 5px;
+				padding: 0 5px;
+			}
+
+			#background-text {
+				width: 100%;
+
+				padding: 10px;
+
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 10px;
+
+				color: #101010;
+
+				box-sizing: border-box;
+				white-space: nowrap;
+				overflow: hidden;
+				z-index: -1;
+
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			#background-text h1 {
+				transition: transform 1s;
+			}
+
+			/* SELECTION STYLES */
+
+			::selection {
+				background-color: #181818;
+			}
+
+			/* SCROLLBAR STYLES */
+
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: white;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--blue);
+			}
+		</style>
 	</head>
 
 	<body>
-		<div class="navbar">
-			<a class="invert navbar-item" href="../index.html"><img class="navbar-icon" src="../images/icon.png" alt="pinniped.page logo" /></a>
-			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
-			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
-			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
+		<div class="main-panel">
+			<div id="background-text"></div>
 
-			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
-			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
-		</div>
-
-		<div id="navbar-mobile">
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
-		</div>
-
-		<div class="main">
-			<div class="navbar-space"></div>
-
-			<div class="content-container">
-				<div class="content">
-					<div class="highlighted-box red">
-						<i class="fa-solid fa-building-flag"></i>
-
-						<p class="text">
-							In case it&rsquo;s not obvious, this page is under construction. It&rsquo;s being separated from
-							<a href="the-square.html" class="link">The Square</a> (previously &ldquo;Omega Seal / The Square&rdquo;). Check
-							<a href="../status.html" class="link">the status page</a> for progress.
-						</p>
-					</div>
-
-					<h2 class="title">title</h2>
-
-					<div class="break"></div>
-
-					<p class="project-top-link">
-						<span class="blog-archive-list-marker"><i class="fa-solid fa-circle-question fa-fw"></i></span>
-						<span class="blog-archive-list-item"><a class="link" href="../yikes.html" target="_blank">link</a></span>
-					</p>
-
-					<div class="break"></div>
-
-					<img class="blog-image" src="../images/icon.png" style="max-width: 480px" alt="image" title="image" />
-
-					<div class="break"></div>
-
-					<h4 class="title">subtitle</h4>
-
-					<div class="break"></div>
-
-					<p class="text">text</p>
-
-					<div class="content-end"></div>
-
-					<b class="small-text half-opacity">LAST UPDATED: date</b>
-				</div>
+			<div class="box">
+				<h1>Omega Seal</h1>
+				<br />
+				<p><i class="fa-sharp fa-solid fa-circle green"></i> online?</p>
 			</div>
 
-			<div class="footer" style="background: #ffffee"></div>
-			<div class="footer" style="background: #ff6b6b"></div>
-			<div class="footer" style="background: #ffe66d"></div>
-			<div class="footer" style="background: #4ecdc4"></div>
-		</div>
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/ping</h2>
+				<p>desc.</p>
+				<p>usage:</p>
+				<p>examples:</p>
+				<ul>
+					<li>;)</li>
+				</ul>
+			</div>
 
-		<script src="../files/to-top.js"></script>
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/join</h2>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/leave</h2>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/text</h2>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/text-space</h2>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/embed</h2>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/help</h2>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag magenta-bg">WEBPAGE</h5>
+				<h2>Attribution</h2>
+				<ul>
+					<li>typeface: JetBrains Mono</li>
+					<li>icons: Font Awesome</li>
+				</ul>
+			</div>
+		</div>
 	</body>
+
+	<script type="module">
+		"use strict";
+
+		// IMPORT FIREBASE v11.9.1 (the latest version when this was written)
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+		import { getDatabase, ref, set, get, push, remove } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+
+		// CONFIGURE FIREBASE APP & DATABASE
+		const firebaseConfig = {
+			apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+			authDomain: "the-pinniped-page.firebaseapp.com",
+			databaseURL: "https://the-pinniped-page.firebaseio.com",
+			projectId: "the-pinniped-page",
+			storageBucket: "the-pinniped-page.appspot.com",
+			messagingSenderId: "636989973689",
+			appId: "1:636989973689:web:6d938d9588606d803a6768",
+		};
+		const app = initializeApp(firebaseConfig);
+		const database = getDatabase();
+
+		// DEBUG STYLES
+		const blueStyle = "background: #4ecdc4; color: black; padding: 0 5px";
+		const yellowStyle = "background: #ffe66d; color: black; padding: 0 5px";
+		const redStyle = "background: #ff6b6b; color: black; padding: 0 5px";
+		const darkGreyStyle = "background: #949792; color: black; padding: 0 5px";
+		const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
+
+		// BACKGROUND TEXT
+		window.addEventListener("load", () => {
+			while (document.querySelector("#background-text").getBoundingClientRect().height <= document.body.getBoundingClientRect().height + 50) {
+				document.querySelector("#background-text").innerHTML =
+					document.querySelector("#background-text").innerHTML +
+					`<h1 style="transform: translateX(${(Math.floor(Math.random() * 21) - 10) * 10}px)">Omega Seal Omega Seal Omega Seal Omega Seal</h1>`;
+			}
+		});
+
+		setInterval(() => {
+			document.querySelectorAll("#background-text h1")[
+				Math.floor(Math.random() * document.querySelectorAll("#background-text h1").length)
+			].style = `transform: translateX(${(Math.floor(Math.random() * 21) - 10) * 10}px)`;
+		}, 10000);
+	</script>
 </html>
