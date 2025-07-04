@@ -13,11 +13,6 @@
 				"type": 301
 			},
 			{
-				"source": "/projects/omega-seal",
-				"destination": "../yikes.html?s=503",
-				"type": 302
-			},
-			{
 				"source": "/projects/the-square",
 				"destination": "../yikes.html?s=503",
 				"type": 302
