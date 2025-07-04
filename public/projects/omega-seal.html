@@ -87,6 +87,13 @@
 				color: var(--magenta);
 			}
 
+			.light-grey {
+				color: #909090;
+			}
+			.dark-grey {
+				color: #282828;
+			}
+
 			.red-bg,
 			.orange-bg,
 			.yellow-bg,
@@ -121,6 +128,13 @@
 			}
 			.magenta-bg {
 				background-color: var(--magenta);
+			}
+
+			.light-grey-bg {
+				background-color: #909090;
+			}
+			.dark-grey-bg {
+				background-color: #282828;
 			}
 
 			/* MAIN STYLES */
@@ -179,6 +193,11 @@
 				padding-left: 30px;
 			}
 
+			li {
+				list-style-type: disc;
+				width: fit-content;
+			}
+
 			li::marker {
 				color: #909090;
 			}
@@ -191,6 +210,7 @@
 			a:hover,
 			a:focus {
 				text-decoration-color: white;
+				font-weight: 700;
 			}
 
 			.box {
@@ -201,6 +221,10 @@
 				padding: 30px;
 
 				background-color: black;
+			}
+
+			.box:last-child {
+				margin-bottom: 200px;
 			}
 
 			.type-tag {
@@ -283,54 +307,200 @@
 			<div class="box">
 				<h1>Omega Seal</h1>
 				<br />
-				<p><i class="fa-sharp fa-solid fa-circle green"></i> online?</p>
+				<p>
+					v1.2.0 —
+					<a
+						href="https://github.com/ObsidianSeal/Omega-Seal-The-Square/commit/d80a03619509158c50acda1e920af9cd4cb10889"
+						target="_blank"
+						title="GitHub > ObsidianSeal/Omega-Seal-The-Square > Commit d80a036"
+						>July 4th, 2025</a
+					>
+				</p>
+				<br />
+				<p id="bot-status">?</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/ping</h2>
-				<p>desc.</p>
-				<p>usage:</p>
-				<p>examples:</p>
+				<p>
+					description: <span class="dark-grey-bg">Latency information.</span><br />usage: <span class="dark-grey-bg">/ping</span><br />availability: everywhere<br /><br />Returns
+					the following:
+				</p>
 				<ul>
-					<li>;)</li>
+					<li>the time between when the command was sent and when it was received by the bot</li>
+					<li>the latency of the bot&rsquo;s WebSocket</li>
 				</ul>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/join</h2>
+				<p>
+					description: <span class="dark-grey-bg">Join one of The Square&rsquo;s regions and change the colour of your name.</span><br />usage:
+					<span class="dark-grey-bg">/join &lt;region&gt;</span><br />parameters:
+				</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">region</b><br />description:
+						<span class="dark-grey-bg">The region you want to move to and the colour you want your name to be.</span><br />options:<br />
+						<ul>
+							<li class="dark-grey-bg">dark-red</li>
+							<li class="dark-grey-bg">red</li>
+							<li class="dark-grey-bg">orange</li>
+							<li class="dark-grey-bg">dark-yellow</li>
+							<li class="dark-grey-bg">yellow</li>
+							<li class="dark-grey-bg">gold</li>
+							<li class="dark-grey-bg">lime</li>
+							<li class="dark-grey-bg">green</li>
+							<li class="dark-grey-bg">dark-green</li>
+							<li class="dark-grey-bg">olive</li>
+							<li class="dark-grey-bg">teal</li>
+							<li class="dark-grey-bg">turquoise</li>
+							<li class="dark-grey-bg">light-blue</li>
+							<li class="dark-grey-bg">cyan</li>
+							<li class="dark-grey-bg">blue</li>
+							<li class="dark-grey-bg">dark-blue</li>
+							<li class="dark-grey-bg">magenta</li>
+							<li class="dark-grey-bg">fuchsia</li>
+							<li class="dark-grey-bg">pink</li>
+							<li class="dark-grey-bg">lavender</li>
+							<li class="dark-grey-bg">violet</li>
+							<li class="dark-grey-bg">purple</li>
+						</ul>
+					</li>
+				</ul>
+				<p>
+					availability: <a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">Seal Squad</a><br /><br />Gives you the role
+					associated with whichever region you selected. Your name will turn that colour. If you already have a region role, it is removed and replaced by the new
+					one. Getting a region role constitutes joining a region of <a href="the-square.html" title="The Square">The Square</a>, so choose wisely.
+				</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/leave</h2>
+				<p>
+					description: <span class="dark-grey-bg">Leave The Square and reset the colour of your name.</span><br />usage: <span class="dark-grey-bg">/leave</span
+					><br />availability: <a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">Seal Squad</a><br /><br />Removes your
+					region role — if you have one — effectively removing you from <a href="the-square.html" title="The Square">The Square</a>. Remember, you don&rsquo;t have
+					to do this if you want to change regions! The <span class="dark-grey-bg">/join</span> command automatically removes your existing region role.
+				</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/text</h2>
+				<p>
+					description: <span class="dark-grey-bg">Send a message on my website&rsquo;s chat page.</span><br />usage:
+					<span class="dark-grey-bg">/text &lt;message&gt;</span><br />parameters:
+				</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">message</b><br />description: <span class="dark-grey-bg">The text you want to send.</span><br />pattern:
+						<span class="dark-grey-bg">/^.{1,120}$/</span>
+					</li>
+				</ul>
+				<p>
+					availability: everywhere<br /><br />Sends a message of up to 120 characters to <a href="text.html" title="text">my website&rsquo;s chat page</a>,
+					anonymously and publicly. Keep in mind, however, that if you use the command in a server it will probably be pretty clear it was you. Messages are deleted
+					after 30 minutes. Please review the privacy policy at the bottom of this page before using this command.
+				</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/text-space</h2>
+				<p>
+					description: <span class="dark-grey-bg">Put a space between every character in some text.</span><br />usage:<span class="dark-grey-bg"
+						>/text-space &lt;text&gt;</span
+					><br />parameters:
+				</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">text</b><br />description: <span class="dark-grey-bg">The text you want to add spaces to.</span><br />pattern:
+						<span class="dark-grey-bg">/^.+$/</span>
+					</li>
+				</ul>
+				<p>availability: everywhere<br /><br />Very simple automation tool.</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/embed</h2>
+				<p>
+					description: <span class="dark-grey-bg">Send a custom embed.</span><br />usage:<span class="dark-grey-bg"
+						>/embed &lt;title&gt; &lt;description&gt; [colour]</span
+					><br />parameters:
+				</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">title</b><br />description: <span class="dark-grey-bg">The embed&rsquo;s title.</span><br />pattern:
+						<span class="dark-grey-bg">/^.+$/</span>
+					</li>
+					<li>
+						<b class="dark-grey-bg">description</b><br />description: <span class="dark-grey-bg">The embed&rsquo;s description.</span><br />pattern:
+						<span class="dark-grey-bg">/^.+$/</span>
+					</li>
+					<li>
+						<b class="dark-grey-bg">colour</b><br />description: <span class="dark-grey-bg">The embed&rsquo;s accent colour.</span><br />pattern:
+						<span class="dark-grey-bg">/^#?[0-9A-Fa-f]{6}$/</span>
+					</li>
+				</ul>
+				<p>availability: everywhere<br /><br />Creates a simple embed, like those generated from links.</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/help</h2>
+				<p>
+					description: <span class="dark-grey-bg">Send this command if you don&rsquo;t know how to use the bot or if you just want to learn more about it.</span
+					><br />usage: <span class="dark-grey-bg">/help</span><br />availability: everywhere<br /><br />Provides some useful links. Perhaps that&rsquo;s how you got
+					here?
+				</p>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag orange-bg">FEATURE</h5>
+				<h2>Welcome Message on Server Join</h2>
+				<p>
+					When someone joins <a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">one of my servers</a>, a message is sent to
+					welcome them and provide a list of things that new members should do. The message also says how many members are in the server.
+				</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag magenta-bg">EXTRAS</h5>
 				<h2>Privacy Policy</h2>
-				<p>heheheha</p>
+				<p>When a command is executed, the following is logged:</p>
+				<ul>
+					<li>the name of the command</li>
+					<li>any input/output</li>
+					<li>if the command was executed in a DM</li>
+					<li>the display name and username of whoever executed the command</li>
+					<li>when the command was executed</li>
+				</ul>
+				<p>
+					<br />Omega Seal has access to
+					<a
+						href="https://support-dev.discord.com/hc/en-us/articles/6207308062871-What-are-Privileged-Intents"
+						target="_blank"
+						title="Discord Support > What are Privileged Intents? [EXTERNAL]"
+						>server-related information</a
+					>
+					in addition to
+					<a
+						href="https://support.discord.com/hc/en-us/articles/7933951485975-Visibility-of-Bot-Data-Access"
+						target="_blank"
+						title="Discord Support > Visibility of Bot Data Access [EXTERNAL]"
+						>the information available to all Discord bots</a
+					>.<br /><br />
+					For features that connect to my website, please review
+					<a href="../about.html" title="pinniped.page — About">my website&rsquo;s privacy policy</a>.<br /><br />If you&rsquo;re still concerned, just go look at
+					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square" target="_blank" title="GitHub > ObsidianSeal/Omega-Seal-The-Square [EXTERNAL]"
+						>the source code</a
+					>!
+				</p>
 			</div>
 
 			<div class="box">
@@ -350,8 +520,17 @@
 						<a href="https://discord.js.org/" target="_blank" title="discord.js [EXTERNAL]">discord.js</a> (a
 						<a href="https://nodejs.org/" target="_blank" title="Node.js [EXTERNAL]">Node.js</a> package)
 					</li>
+					<li>
+						this page uses command syntax notation based on
+						<a href="https://minecraft.wiki/w/Commands#Syntax" target="_blank" title="Minecraft Wiki > Commands"
+							>the Minecraft (Java Edition) command syntax notation</a
+						>
+					</li>
 				</ul>
-				<br />
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag magenta-bg">EXTRAS</h5>
 				<h2>Other Links</h2>
 				<ul>
 					<li>
@@ -360,7 +539,7 @@
 						>
 					</li>
 					<li><a href="the-square.html" title="The Square">The Square</a></li>
-					<li><a href="../status.html" title="pinniped.page — Status">website status</a></li>
+					<li><a href="../status.html" title="pinniped.page — Status">website and bot status</a></li>
 					<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
 					<li><a href="../projects+.html" title="pinniped.page — Projects+">more projects</a></li>
 				</ul>
@@ -397,17 +576,85 @@
 
 		// BACKGROUND TEXT
 		window.addEventListener("load", () => {
-			while (document.querySelector("#background-text").getBoundingClientRect().height <= document.body.getBoundingClientRect().height + 50) {
+			while (document.querySelector("#background-text").getBoundingClientRect().height <= document.body.getBoundingClientRect().height + 300) {
 				document.querySelector("#background-text").innerHTML =
 					document.querySelector("#background-text").innerHTML +
 					`<h1 style="transform: translateX(${(Math.floor(Math.random() * 21) - 10) * 10}px)">Omega Seal Omega Seal Omega Seal Omega Seal</h1>`;
 			}
+			document.querySelector("#background-text").style = `height: ${document.body.getBoundingClientRect().height + 250}px`;
 		});
 
 		setInterval(() => {
-			document.querySelectorAll("#background-text h1")[
-				Math.floor(Math.random() * document.querySelectorAll("#background-text h1").length)
-			].style = `transform: translateX(${(Math.floor(Math.random() * 21) - 10) * 10}px)`;
+			if (Math.floor(Math.random() * 2) == 0) {
+				document.querySelectorAll("#background-text h1")[
+					Math.floor(Math.random() * document.querySelectorAll("#background-text h1").length)
+				].style = `transform: translateX(${(Math.floor(Math.random() * 21) - 10) * 10}px)`;
+			}
 		}, 10000);
+
+		// BOT STATUS
+		async function pingBot() {
+			document.querySelector("#bot-status").innerHTML = `<i class="fa-solid fa-spinner fa-spin-pulse purple"></i> Pinging...`;
+
+			await set(ref(database, "omega-seal/status"), "offline")
+				.then((success) => {
+					setTimeout(async () => {
+						await get(ref(database, "omega-seal/status"))
+							.then((snapshot) => {
+								if (snapshot.val() == "offline") {
+									document.querySelector("#bot-status").innerHTML = `<i class="fa-sharp fa-solid fa-ban red"></i> <b>offline</b>`;
+								} else {
+									let startTime = snapshot.val().startTime;
+									let date = new Date(startTime);
+
+									let year = date.getFullYear().toString();
+									let month = (date.getMonth() + 1).toString().padStart(2, "0");
+									let day = date.getDate().toString().padStart(2, "0");
+
+									let hour = date.getHours().toString();
+									let minute = date.getMinutes().toString().padStart(2, "0");
+
+									let half = "AM";
+									if (hour >= 12) half = "PM";
+									hour = hour % 12;
+
+									let now = new Date(Date.now()); // seems to be working for other timezones...?
+									let difference = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+									let days = Math.floor(difference / 86400);
+									let hours = Math.floor(difference / 3600);
+									let minutes = Math.floor(difference / 60);
+									let seconds = difference;
+
+									let relative = `the future`;
+
+									if (days > 1) relative = `${days} days ago`;
+									else if (days == 1) relative = `1 day ago`;
+									else if (hours > 1) relative = `${hours} hours ago`;
+									else if (hours == 1) relative = `1 hour ago`;
+									else if (minutes > 1) relative = `${minutes} minutes ago`;
+									else if (minutes == 1) relative = `1 minute ago`;
+									else if (seconds > 1) relative = `${seconds} seconds ago`;
+									else if (seconds == 1) relative = `1 second ago`;
+									else if (seconds == 0) relative = `now`;
+
+									document.querySelector(
+										"#bot-status"
+									).innerHTML = `<i class="fa-sharp fa-solid fa-circle green"></i> <b>online</b> — since ${year}/${month}/${day} @ ${hour}:${minute} ${half} (${relative})`;
+								}
+							})
+							.catch((error) => {
+								console.error(error);
+							});
+					}, 1000);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
+		pingBot();
+		setInterval(() => {
+			pingBot();
+		}, 60000);
 	</script>
 </html>
