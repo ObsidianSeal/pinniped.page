@@ -1365,10 +1365,6 @@ ul {
 	animation: appear 250ms;
 }
 
-.disappear {
-	animation: disappear 250ms;
-}
-
 @keyframes appear {
 	0% {
 		opacity: 0;
@@ -1378,11 +1374,96 @@ ul {
 	}
 }
 
+.disappear {
+	animation: disappear 250ms;
+}
+
 @keyframes disappear {
 	0% {
 		opacity: 1;
 	}
 	100% {
 		opacity: 0;
+	}
+}
+
+#loading-dot-1,
+#loading-dot-2,
+#loading-dot-3 {
+	opacity: 0%;
+}
+
+#loading-dot-1 {
+	animation: loading-dot-1 2.5s infinite 0.5s;
+}
+
+@keyframes loading-dot-1 {
+	0% {
+		opacity: 0%;
+	}
+	20% {
+		opacity: 100%;
+	}
+	40% {
+		opacity: 100%;
+	}
+	60% {
+		opacity: 100%;
+	}
+	80% {
+		opacity: 100%;
+	}
+	100% {
+		opacity: 0%;
+	}
+}
+
+#loading-dot-2 {
+	animation: loading-dot-2 2.5s infinite 0.5s;
+}
+
+@keyframes loading-dot-2 {
+	0% {
+		opacity: 0%;
+	}
+	20% {
+		opacity: 0%;
+	}
+	40% {
+		opacity: 100%;
+	}
+	60% {
+		opacity: 100%;
+	}
+	80% {
+		opacity: 100%;
+	}
+	100% {
+		opacity: 0%;
+	}
+}
+
+#loading-dot-3 {
+	animation: loading-dot-3 2.5s infinite 0.5s;
+}
+
+@keyframes loading-dot-3 {
+	0% {
+		opacity: 0%;
+	}
+	20% {
+		opacity: 0%;
+	}
+	40% {
+		opacity: 0%;
+	}
+	60% {
+		opacity: 100%;
+	}
+	80% {
+		opacity: 100%;
+	}
+	100% {
+		opacity: 0%;
 	}
 }

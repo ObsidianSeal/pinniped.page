@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="en-CA">
+	<head>
+		<title>Days Since</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/days-since" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Days Since" />
+		<meta property="og:description" content="The opposite of a countdown, made to be embedded." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="The opposite of a countdown, made to be embedded." />
+		<meta name="keywords" content="obsidian_seal, pinniped.page, counter, days, embed, custom, clean" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800");
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-weight: normal;
+			}
+
+			body {
+				background-color: #16262c;
+				color: #dddddd;
+
+				font-family: "Manrope";
+
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				padding: 10px;
+
+				text-align: center;
+			}
+
+			h1 {
+				color: #77b728;
+				font-size: 64px;
+				font-weight: 800;
+			}
+
+			h2 {
+				font-size: 32px;
+			}
+
+			span:last-child {
+				color: #ffffff7f;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h2><span>days</span> since <span>ERROR</span></h2>
+		<h1>ERROR</h1>
+
+		<script>
+			const query = window.location.search;
+			const item = new URLSearchParams(query);
+			const topic = item.get("topic");
+			const dateString = item.get("date");
+			const period = item.get("period");
+			const decimal = item.get("decimal");
+			const title = item.get("title");
+
+			if (topic != null) {
+				if (/^.+$/.test(topic)) {
+					document.querySelector("span:last-child").innerHTML = topic;
+				} else {
+					document.querySelector("h2").innerHTML = "ERROR - topic could not be parsed";
+				}
+			} else {
+				if (/^.+$/.test(title)) {
+					document.querySelector("h2").innerHTML = title;
+				} else {
+					document.querySelector("h2").innerHTML = "ERROR - please specify a topic";
+				}
+			}
+
+			if (dateString != null) {
+				if (/^\d{4}\/\d{2}\/\d{2}$/.test(dateString)) {
+					let then = new Date(dateString.split("/")[0], dateString.split("/")[1] - 1, dateString.split("/")[2]);
+					let now = new Date(Date.now());
+
+					let divisor = 86400000;
+					if (period == "seconds") {
+						divisor = 1000;
+						document.querySelector("span:first-child").innerHTML = "seconds";
+					}
+					if (period == "minutes") {
+						divisor = 60000;
+						document.querySelector("span:first-child").innerHTML = "minutes";
+					}
+					if (period == "hours") {
+						divisor = 3600000;
+						document.querySelector("span:first-child").innerHTML = "hours";
+					}
+
+					if (decimal != null)
+						document.querySelector("h1").innerHTML = Intl.NumberFormat("en-CA", { style: "decimal", minimumFractionDigits: 2 }).format(
+							Math.floor(((now - then) / divisor) * 100) / 100
+						);
+					else document.querySelector("h1").innerHTML = Intl.NumberFormat("en-CA", { style: "decimal" }).format(Math.floor((now - then) / divisor));
+				} else {
+					document.querySelector("h1").innerHTML = "ERROR - date should be of the form YYYY/MM/DD (ex. 2025/07/10)";
+				}
+			} else {
+				document.querySelector("h1").innerHTML = "ERROR - please specify a date of the form YYYY/MM/DD (ex. 2025/07/10)";
+			}
+		</script>
+	</body>
+</html>

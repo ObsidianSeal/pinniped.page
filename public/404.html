@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-CA">
 	<head>
 		<title>???</title>
 
@@ -63,7 +63,7 @@
 			<div class="h60"></div>
 
 			<div class="centre more-wrap content-container">
-				<h2>ERROR 404 / Not Found</h2>
+				<h2 id="main-message">Loading<span id="loading-dot-1">.</span><span id="loading-dot-2">.</span><span id="loading-dot-3">.</span></h2>
 
 				<div class="new-button-group">
 					<a class="new-button small-text" href="https://status.pinniped.page/" title="pinniped.page — Status">
@@ -214,6 +214,8 @@
 			for (let i = 0; i < projects.length; i++) {
 				if (project == projects[i]) window.location.href = "https://pinniped.page/projects/" + query;
 			}
+
+			document.querySelector("#main-message").innerHTML = "ERROR 404 / Not Found";
 		</script>
 	</body>
 </html>

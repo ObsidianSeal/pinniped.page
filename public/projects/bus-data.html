@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-CA">
 	<head>
 		<title>BUS DATA</title>
 
@@ -3251,19 +3251,19 @@
 				document.querySelector("#bus-total-articulated-2").innerHTML = `${articulatedBuses}`;
 
 				// format percentages
-				let totalBusesPercent = new Intl.NumberFormat("en", {
+				let totalBusesPercent = new Intl.NumberFormat("en-CA", {
 					style: "percent",
 					minimumFractionDigits: 2,
 					maximumFractionDigits: 2,
 				}).format(totalBuses / fleet);
 
-				let articulatedBusesPartialPercent = new Intl.NumberFormat("en", {
+				let articulatedBusesPartialPercent = new Intl.NumberFormat("en-CA", {
 					style: "percent",
 					minimumFractionDigits: 2,
 					maximumFractionDigits: 2,
 				}).format(articulatedBuses / totalBuses);
 
-				let articulatedBusesPercent = new Intl.NumberFormat("en", {
+				let articulatedBusesPercent = new Intl.NumberFormat("en-CA", {
 					style: "percent",
 					minimumFractionDigits: 2,
 					maximumFractionDigits: 2,

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-CA">
 	<head>
 		<title>pinniped.page</title>
 
@@ -200,7 +200,9 @@
 				"contact me through the new form!",
 				"the only vibes in my code are my STRAIGHT FIRE playlists",
 			];
-			subtitles.push(`over ${(Math.floor(Date.now() / 1000) - 1606597500).toLocaleString("en-CA")} seconds old`);
+			let then = new Date(2020, 10, 28, 16, 5);
+			let now = new Date();
+			subtitles.push(`over ${Math.floor((now - then) / 1000).toLocaleString("en-CA")} seconds old`);
 			let x = Math.floor(Math.random() * subtitles.length);
 			document.getElementById("subtitle").innerHTML = subtitles[x];
 

@@ -1,8 +1,10 @@
 {
 	"10/10 would recommend": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "star",
+		"path": "projects/rate",
+		"connected": false,
+		"description": "Rate anything out of five stars.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -10,51 +12,59 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"BezierCurves": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "bezier-curve",
+		"path": "projects/bezier-curves",
+		"connected": true,
+		"description": "Play with bézier curves.",
+		"flag": "!",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["May 29th", "a couple more buttons"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"BUS DATA": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "bus",
+		"path": "projects/bus-data",
+		"connected": true,
+		"description": "Where are London Transit’s articulated buses?",
 		"flag": "",
 		"tags": {
-			"new": ["", ""],
-			"updated": ["", ""],
+			"new": ["May 14th", "VERSION 1.0.0 RELEASE AFTER 38 DAYS OF DEVELOPMENT"],
+			"updated": ["June 29th", "option to only show articulated buses on map, etc. (v1.1.0)"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 2
 	},
 	"Bus Ride Bingo": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "game-board",
+		"path": "projects/brb",
+		"connected": true,
+		"description": "Play bus-related bingo with friends while on the bus.",
 		"flag": "",
 		"tags": {
-			"new": ["", ""],
-			"updated": ["", ""],
+			"new": ["June 9th", "v2.0.0"],
+			"updated": ["June 25th", "version validation"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 3
 	},
 	"Chess": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": true,
+		"icon": "chess-pawn",
+		"path": "projects/chess",
+		"connected": true,
+		"description": "Perhaps you’ve heard of it.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -62,12 +72,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Chess — FEN preview": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "chess-board",
+		"path": "projects/chess/board",
+		"connected": true,
+		"description": "Drag and drop chess pieces, view FEN notation, and more!",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -75,25 +87,29 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Clock": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "clock",
+		"path": "files/Clock.jar",
+		"connected": true,
+		"description": "Tells the time.",
+		"flag": "download",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"countdown": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "calendar-check",
+		"path": "projects/countdown",
+		"connected": false,
+		"description": "Create countdown timers.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -101,51 +117,74 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"crossword": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "table-cells",
+		"path": "files/crossword.pdf",
+		"connected": true,
+		"description": "With over seventy carefully connected words.",
+		"flag": "download",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"crossword2": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "table-cells-large",
+		"path": "files/crossword2.pdf",
+		"connected": true,
+		"description": "Bigger and better than the first one!",
+		"flag": "download",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"crosswords": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "border-all",
+		"path": "projects/crosswords",
+		"connected": false,
+		"description": "Solve crosswords by me and others, timed and online.",
+		"flag": "!",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
+	},
+	"Days Since": {
+		"basic": false,
+		"icon": "calendar-star",
+		"path": "projects/days-since",
+		"connected": false,
+		"description": "The opposite of a countdown, made to be embedded.",
+		"flag": "",
+		"tags": {
+			"new": ["July 10th", "yes"],
+			"updated": ["", ""],
+			"beta": ["", ""],
+			"tag": ["", ""]
+		},
+		"featured": 0
 	},
 	"Deathrun+": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": true,
+		"icon": "person-running",
+		"path": "projects/deathrun",
+		"connected": true,
+		"description": "Minecraft map and plugin; race your friends while avoiding traps.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -153,12 +192,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"fa-random": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "kiwi-bird",
+		"path": "projects/icons",
+		"connected": true,
+		"description": "Random Font Awesome icon generator with icon info.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -166,25 +207,29 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Finite Craft": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "diagram-project",
+		"path": "projects/craft",
+		"connected": true,
+		"description": "Infinite Craft, but just the crafting part.",
+		"flag": "!",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"fOnT mAsHeR": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "scroll",
+		"path": "projects/font-mash",
+		"connected": false,
+		"description": "Each letter of the text you enter is a random font.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -192,12 +237,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Graph Theory EXPLAINED": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": true,
+		"icon": "circle-nodes",
+		"path": "projects/graph-theory",
+		"connected": true,
+		"description": "Exactly what the title says.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -205,25 +252,29 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Guess the Font": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "font",
+		"path": "projects/fonts",
+		"connected": true,
+		"description": "Endless multiple choice font guessing challenge.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["April 28th", "2 fonts removed, 2 fonts added (v1.0.5)"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Hues+Cues": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "palette",
+		"path": "projects/hues+cues",
+		"connected": false,
+		"description": "Number and letter generator for Hues and Cues.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -231,38 +282,44 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Lethal Company Mods": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "radio",
+		"path": "files/LethalCompanyMods.zip",
+		"connected": true,
+		"description": "Lethal Company modpack.",
+		"flag": "download",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Minecraft & Motion": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "chart-line",
+		"path": "files/Motion.jar",
+		"connected": true,
+		"description": "Plugin; record Minecraft motion and export to Desmos lists.",
+		"flag": "download",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Mjölnir": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": true,
+		"icon": "gavel",
+		"path": "projects/mjolnir",
+		"connected": true,
+		"description": "Plugin; adds Thor’s mythical hammer to Minecraft.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -270,12 +327,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"MouseMaze": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": true,
+		"icon": "arrow-pointer",
+		"path": "projects/mouse-maze",
+		"connected": true,
+		"description": "It’s a maze...for the mouse!",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -283,12 +342,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"numbers": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "hashtag",
+		"path": "projects/numbers",
+		"connected": true,
+		"description": "Various number-related utilities, including hexadecimal conversion.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -296,25 +357,29 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Omega Seal": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "robot",
+		"path": "projects/omega-seal",
+		"connected": true,
+		"description": "Obsidian_Seal’s personal Discord bot!",
 		"flag": "",
 		"tags": {
-			"new": ["", ""],
+			"new": ["July 4th", "epic documentation is complete"],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 1
 	},
 	"PlainPlanes": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": true,
+		"icon": "plane",
+		"path": "projects/plain-planes",
+		"connected": true,
+		"description": "2D, top-down, very scuffed plane simulator.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -322,25 +387,29 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Playlists": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "music",
+		"path": "projects/playlists",
+		"connected": true,
+		"description": "Music, yum!",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["June 25th", "fixed a couple numbers that were showing as times (and, of course, there’s a new playlist)"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 4
 	},
 	"progress": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "bars-progress",
+		"path": "projects/progress",
+		"connected": true,
+		"description": "Visualize fractions with progress bars.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -348,12 +417,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Rubik’s Cube Scrambler": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "cubes",
+		"path": "projects/cube",
+		"connected": false,
+		"description": "Scramble generator for 1x1 to 5x5 cubes, pyraminx, and more!",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -361,12 +432,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Shrink to Fit": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "text-height",
+		"path": "projects/stf",
+		"connected": false,
+		"description": "For Bus Ride Bingo: optimized font size to fit phrase in box.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -374,12 +447,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Small Subways": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": true,
+		"icon": "train-subway",
+		"path": "projects/small-subways",
+		"connected": true,
+		"description": "Mini Metro: scuffed edition.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -387,12 +462,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Subject/Course Colour Graphs": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "chart-pie",
+		"path": "projects/graphs",
+		"connected": false,
+		"description": "What colours are associated with school subjects?",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -400,38 +477,44 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"text": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "quote-left",
+		"path": "projects/text",
+		"connected": false,
+		"description": "Chat anonymously, but publicly; messages are only saved for 30 minutes.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["May 14th", "input field placeholder"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"The Square": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "square-user",
+		"path": "projects/the-square",
+		"connected": true,
+		"description": "Interactive LEGO map; watch the YouTube video first.",
+		"flag": "triangle-exclamation",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
-			"beta": ["", ""],
+			"beta": ["March 13th", "redesign incoming"],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Think Four": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "layer-group",
+		"path": "projects/think-four",
+		"connected": true,
+		"description": "Determine the topics, group the words.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -439,12 +522,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"TicTacToe": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "xmark",
+		"path": "projects/tictactoe",
+		"connected": true,
+		"description": "The classic game of Xs and Os, but it’s an online 1v1.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -452,12 +537,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Type": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": null,
+		"icon": "keyboard",
+		"path": "projects/type",
+		"connected": true,
+		"description": "Determine JavaScript keyCodes, among other things.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -465,12 +552,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Typewriter Simulator": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "typewriter",
+		"path": "projects/write",
+		"connected": false,
+		"description": "A place to write simply, like it’s 1921.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -478,12 +567,14 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"v": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "dollar-sign",
+		"path": "projects/v",
+		"connected": true,
+		"description": "VALORANT Points calculator: spend as little as possible.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -491,25 +582,29 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"WandStuff": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "wand-magic-sparkles",
+		"path": "files/WandStuff_2023-02-04.jar",
+		"connected": true,
+		"description": "Really bad Minecraft plugin?",
+		"flag": "download",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"wordlelele": {
-		"icon": "",
-		"link": "",
-		"description": "",
+		"basic": false,
+		"icon": "face-smile-wink",
+		"path": "projects/w",
+		"connected": true,
+		"description": "Weird Wordle: longer words, choose the next word.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
@@ -517,19 +612,21 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	},
 	"Words": {
-		"icon": "",
-		"link": "",
-		"description": "",
-		"flag": "",
+		"basic": false,
+		"icon": "spell-check",
+		"path": "files/Words.jar",
+		"connected": true,
+		"description": "Offline Java Wordle with some weird differences.",
+		"flag": "download",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": false
+		"featured": 0
 	}
 }
