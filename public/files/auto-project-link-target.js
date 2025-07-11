@@ -36,6 +36,7 @@ document.querySelectorAll("a").forEach((link) => {
 				if (projectsJSON[project].path == path) {
 					if (projectsJSON[project].connected) link.removeAttribute("target");
 					else link.setAttribute("target", "_blank");
+					return;
 				}
 			}
 		}

@@ -177,7 +177,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 5
 	},
 	"Deathrun+": {
 		"basic": true,
