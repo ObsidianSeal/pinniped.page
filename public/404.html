@@ -88,8 +88,13 @@
 			<div class="footer" style="background: #4ecdc4"></div>
 		</div>
 
-		<script>
-			// HTTP response codes, from "yikes"
+		<script type="module">
+			"use strict";
+
+			let message = "ERROR 404 / Not Found";
+			let redirected = false;
+
+			// HTTP response status codes (from "yikes")
 			let codes = {
 				// info codes
 				100: "INFO 100 / Continue",
@@ -161,61 +166,47 @@
 				511: "ERROR 511 / Network Authentication Required",
 			};
 
-			// project redirects
-			const url = window.location.href;
-			const query = url.substring(22);
-			var project = query;
+			// get query
+			const URL = window.location.href;
+			const query = URL.substring(22);
+			let project = query; // don't look past "#" or "?" when validating path
 			if (query.includes("?")) project = query.substring(0, query.indexOf("?"));
 			else if (query.includes("#")) project = query.substring(0, query.indexOf("#"));
 
 			// detour: "yikes"
 			if (Object.keys(codes).includes(query)) {
+				redirected = true;
 				window.location.href = "https://pinniped.page/yikes?s=" + query;
 			}
 
-			const projects = [
-				"bezier-curves",
-				"brb",
-				"bus-data",
-				"chess",
-				"chess/board",
-				"countdown",
-				"craft",
-				"craft/how-to",
-				"crosswords",
-				"cube",
-				"deathrun",
-				"font-mash",
-				"fonts",
-				"graph-theory",
-				"graphs",
-				"hues+cues",
-				"icons",
-				"mjolnir",
-				"mouse-maze",
-				"numbers",
-				"omega-seal",
-				"plain-planes",
-				"playlists",
-				"progress",
-				"rate",
-				"small-subways",
-				"stf",
-				"text",
-				"the-square",
-				"think-four",
-				"tictactoe",
-				"type",
-				"v",
-				"w",
-				"write",
-			];
+			// NEW: get list of paths from .JSON file
+			let paths = [];
+			try {
+				const requestURL = "https://pinniped.page/files/projects.json";
+				const request = new Request(requestURL);
+				const response = await fetch(request);
+				const responseJSON = await response.json();
 
-			for (let i = 0; i < projects.length; i++) {
-				if (project == projects[i]) window.location.href = "https://pinniped.page/projects/" + query;
+				// ignore "files/"
+				for (let project in responseJSON) {
+					let path = responseJSON[project].path;
+					if (path.startsWith("projects/")) paths.push(path.substring(9));
+				}
+			} catch (error) {
+				console.error(error);
+				message = "ERROR: could not fetch project paths";
 			}
 
-			document.querySelector("#main-message").innerHTML = "ERROR 404 / Not Found";
+			// go to a project if path is valid
+			for (let path of paths) {
+				if (project == path) {
+					redirected = true;
+					window.location.href = "https://pinniped.page/projects/" + query;
+				}
+			}
+
+			// else...404
+			if (!redirected) document.querySelector("#main-message").innerHTML = message;
 		</script>
 	</body>
 </html>
