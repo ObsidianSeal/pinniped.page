@@ -177,7 +177,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 5
+		"featured": 0
 	},
 	"Deathrun+": {
 		"basic": true,
@@ -283,6 +283,21 @@
 			"tag": ["", ""]
 		},
 		"featured": 0
+	},
+	"KC": {
+		"basic": null,
+		"icon": "keyboard",
+		"path": "projects/kc",
+		"connected": false,
+		"description": "Determine JavaScript keyCodes.",
+		"flag": "",
+		"tags": {
+			"new": ["", ""],
+			"updated": ["", ""],
+			"beta": ["", ""],
+			"tag": ["", ""]
+		},
+		"featured": 5
 	},
 	"Lethal Company Mods": {
 		"basic": false,
@@ -530,21 +545,6 @@
 		"path": "projects/tictactoe",
 		"connected": true,
 		"description": "The classic game of Xs and Os, but it’s an online 1v1.",
-		"flag": "",
-		"tags": {
-			"new": ["", ""],
-			"updated": ["", ""],
-			"beta": ["", ""],
-			"tag": ["", ""]
-		},
-		"featured": 0
-	},
-	"Type": {
-		"basic": null,
-		"icon": "keyboard",
-		"path": "projects/type",
-		"connected": true,
-		"description": "Determine JavaScript keyCodes, among other things.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],

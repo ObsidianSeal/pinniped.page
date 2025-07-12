@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en-CA">
+	<head>
+		<title>KC</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<meta property="og:url" content="https://pinniped.page/projects/kc" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="KC" />
+		<meta property="og:description" content="Determine JavaScript keyCodes." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="Determine JavaScript keyCodes." />
+		<meta name="keywords" content="obsidian_seal, pinniped.page, JavaScript, keyCodes, debug, test, tool" />
+
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800");
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-weight: normal;
+			}
+
+			body {
+				width: 100dvw;
+				height: 100dvh;
+
+				box-sizing: border-box;
+
+				background-color: #16262c;
+				color: #dddddd;
+
+				font-family: "Manrope";
+
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				padding: 10px;
+			}
+
+			h1 {
+				color: #77b728;
+				font-size: 64px;
+				font-weight: 800;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1></h1>
+		<h2></h2>
+
+		<script>
+			document.addEventListener("keydown", (event) => {
+				document.querySelector("h1").innerHTML = event.key;
+				document.querySelector("h2").innerHTML = event.keyCode;
+			});
+		</script>
+
+		<script src="../files/auto-project-link-target.js" type="module"></script>
+	</body>
+</html>
