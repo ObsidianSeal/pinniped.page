@@ -11,11 +11,6 @@
 				"source": "/discord",
 				"destination": "https://discord.gg/yswDu7kywv",
 				"type": 301
-			},
-			{
-				"source": "/projects/the-square",
-				"destination": "../yikes.html?s=503",
-				"type": 302
 			}
 		],
 

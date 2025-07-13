@@ -513,7 +513,7 @@
 		"basic": false,
 		"icon": "square-user",
 		"path": "projects/the-square",
-		"connected": true,
+		"connected": false,
 		"description": "Interactive LEGO map; watch the YouTube video first.",
 		"flag": "triangle-exclamation",
 		"tags": {

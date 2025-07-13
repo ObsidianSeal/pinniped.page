@@ -10,6 +10,8 @@
 
 		<link rel="icon" href="../images/icon.png" />
 
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
 		<meta property="og:url" content="https://pinniped.page/projects/the-square" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="The Square" />
@@ -17,212 +19,46 @@
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
 		<meta name="description" content="Interactive LEGO map; watch the YouTube video first." />
-		<meta name="keywords" content="Obsidian_Seal, pinniped.page, LEGO, interactive, YouTube, video, map, Discord, bot" />
+		<meta name="keywords" content="obsidian_seal, pinniped.page, interactive, LEGO, map, YouTube, video, Discord, bot, fun" />
 
-		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+		<style>
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
 
-		<link rel="stylesheet" href="../files/main.css" />
-		<link rel="stylesheet" href="../files/scrollbar.css" />
+			img {
+				position: absolute;
+			}
 
-		<script src="../files/menu.js"></script>
+			.space {
+				width: 100dvw;
+				height: 100dvh;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				background-image: url(../images/space.png);
+				background-position: center;
+			}
+
+			#the-square {
+				width: auto;
+				height: min(100dvh, calc(100dvw * 9 / 16));
+				aspect-ratio: 16 / 9;
+			}
+		</style>
 	</head>
 
 	<body>
-		<div class="navbar">
-			<a class="invert navbar-item" href="../index.html"><img class="navbar-icon" src="../images/icon.png" alt="pinniped.page logo" /></a>
-			<a class="invert navbar-item item1" href="../projects.html"><p>Projects</p></a>
-			<a class="invert navbar-item item2" href="../blog.html"><p>Blog</p></a>
-			<a class="invert navbar-item item3" href="../about.html"><p>About</p></a>
-
-			<i id="menu-open" class="fas fa-bars invert navbar-item-mobile" onclick="menu()"></i>
-			<i id="menu-close" class="fas fa-times invert navbar-item-mobile" onclick="menu()"></i>
+		<div class="space">
+			<img src="../images/the-square.png" alt="the square" title="the square" id="the-square" />
 		</div>
 
-		<div id="navbar-mobile">
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../index.html">Home</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../projects.html">Projects</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../blog.html">Blog</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="../about.html">About</a></h2>
-		</div>
+		<script></script>
 
-		<div class="main">
-			<div class="navbar-space"></div>
-
-			<div class="content-container">
-				<div class="content">
-					<div class="highlighted-box red">
-						<i class="fa-solid fa-triangle-person-digging"></i>
-
-						<p class="text">
-							This page is currently under renovation and may have incorrect information. Check <a href="../status.html" class="link">the status page</a> for
-							more information.
-						</p>
-					</div>
-
-					<div class="break"></div>
-
-					<h2 class="title">Omega Seal / The Square</h2>
-
-					<div class="break"></div>
-
-					<p class="project-top-link">
-						<span class="blog-archive-list-marker"><i class="fa-brands fa-youtube fa-fw"></i></span>
-						<span class="blog-archive-list-item"><a class="link" href="https://youtu.be/4Mbx4FVfqug" target="_blank">YouTube video</a></span>
-					</p>
-					<p class="project-top-link">
-						<span class="blog-archive-list-marker"><i class="fa-brands fa-discord fa-fw"></i></span>
-						<span class="blog-archive-list-item"><a class="link" href="https://discord.gg/yswDu7kywv" target="_blank">Discord server</a></span>
-					</p>
-					<p class="project-top-link">
-						<span class="blog-archive-list-marker"><i class="fa-brands fa-github fa-fw"></i></span>
-						<span class="blog-archive-list-item"
-							><a class="link" href="https://github.com/ObsidianSeal/Omega-Seal-The-Square" target="_blank">GitHub repository</a></span
-						>
-					</p>
-
-					<div class="break"></div>
-
-					<a href="https://youtu.be/4Mbx4FVfqug" target="_blank"
-						><img class="big-picture" src="../images/the-square.png" alt="The Square (still image)" title="The Square (still image) — click for YouTube video"
-					/></a>
-
-					<div class="break"></div>
-
-					<h4 class="title">Part 1: The Actual Square</h4>
-
-					<div class="break"></div>
-
-					<p class="text">There are 22 regions, each with a different size and colour.</p>
-
-					<div class="break"></div>
-
-					<a href="https://youtu.be/4Mbx4FVfqug" target="_blank"
-						><img
-							class="big-picture"
-							src="../images/the-square.gif"
-							alt="The Square (building animation)"
-							title="The Square (building animation) — click for YouTube video"
-					/></a>
-
-					<div class="break"></div>
-
-					<h4 class="title" id="commands">Part 2: The Discord Bot</h4>
-
-					<div class="break"></div>
-
-					<p id="status" class="text" style="background-color: #292f36; color: #ffffee; width: fit-content; user-select: none">
-						&nbsp;BOT STATUS: <span style="color: #ffe66d">unknown</span>&nbsp;
-					</p>
-
-					<div class="break"></div>
-
-					<div class="highlighted-box red">
-						<i class="fa-solid fa-sensor-triangle-exclamation"></i>
-
-						<p class="text">
-							I&rsquo;m not sure when the bot will come back online. Learn more on the <a href="../status.html" class="link">status page</a> or provide
-							feedback through the <a href="../contact.html" class="link">contact page</a>.
-						</p>
-					</div>
-
-					<div class="break"></div>
-
-					<p class="text">
-						You can join one of those regions by going to my <a class="link" href="https://discord.gg/yswDu7kywv">Discord server (Seal Squad)</a> and using Omega
-						Seal&rsquo;s slash commands.
-					</p>
-
-					<div class="break"></div>
-
-					<p class="text"><b>/join &lt;region&gt;</b> — Join one of The Square&rsquo;s regions and change the colour of your name</p>
-					<img class="blog-image" src="../images/omega-seal-join.png" alt="use of /join" title="use of /join" style="max-width: 285px" />
-
-					<div class="break"></div>
-
-					<p class="text">Regions:</p>
-					<ul>
-						<li>dark-red</li>
-						<li>red</li>
-						<li>orange</li>
-						<li>dark-yellow</li>
-						<li>yellow</li>
-						<li>gold</li>
-						<li>lime</li>
-						<li>green</li>
-						<li>dark-green</li>
-						<li>olive</li>
-						<li>teal</li>
-						<li>turquoise</li>
-						<li>light-blue</li>
-						<li>cyan</li>
-						<li>blue</li>
-						<li>dark-blue</li>
-						<li>magenta</li>
-						<li>fuchsia</li>
-						<li>pink</li>
-						<li>lavender</li>
-						<li>violet</li>
-						<li>purple</li>
-					</ul>
-
-					<div class="break"></div>
-
-					<p class="text">You can only be in one region at a time.</p>
-
-					<div class="break"></div>
-
-					<p class="text"><b>/leave</b> — Leave The Square and reset the colour of your name</p>
-					<img class="blog-image" src="../images/omega-seal-leave.png" alt="use of /leave" title="use of /leave" style="max-width: 305px" />
-
-					<hr />
-
-					<p class="text">Additional bot commands, unrelated to The Square:</p>
-
-					<div class="break"></div>
-
-					<p class="text"><b>/ping</b> — See Omega Seal&rsquo;s ping</p>
-					<img class="blog-image" src="../images/omega-seal-ping.png" alt="use of /ping" title="use of /ping" style="max-width: 282px" />
-
-					<div class="break"></div>
-
-					<p class="text"><b>/stop</b> — Stop the bot <span style="color: #ff6b6b">(Obsidian_Seal only!)</span></p>
-					<img class="blog-image" src="../images/omega-seal-stop.png" alt="use of /stop" title="use of /stop" style="max-width: 288px" />
-
-					<div class="break"></div>
-
-					<p class="text">
-						<b>/text &lt;message&gt;</b> — Send a message on my <a class="link" href="text.html" target="_blank">website: pinniped.page/projects/text</a>
-					</p>
-					<img class="blog-image" src="../images/omega-seal-text.png" alt="use of /text" title="use of /text" style="max-width: 279px" />
-
-					<div class="break"></div>
-
-					<p class="text"><b>/text-space &lt;text&gt;</b> — Give your text some s p a c e</p>
-					<img class="blog-image" src="../images/omega-seal-text-space.png" alt="use of /text-space" title="use of /text-space" style="max-width: 291px" />
-
-					<div class="break"></div>
-
-					<p class="text"><b>/embed &lt;title&gt; &lt;description&gt; [colour hex code]</b> — Send a custom embed</p>
-					<img class="blog-image" src="../images/omega-seal-embed.png" alt="use of /embed" title="use of /embed" style="max-width: 284px" />
-
-					<div class="break"></div>
-
-					<p class="text"><b>/help</b> — Get the URL to Omega Seal&rsquo;s list of commands and other information (this page)</p>
-					<img class="blog-image" src="../images/omega-seal-help.png" alt="use of /help" title="use of /help" style="max-width: 459px" />
-
-					<div class="content-end"></div>
-
-					<b class="small-text half-opacity">LAST UPDATED: August 22nd, 2024</b>
-				</div>
-			</div>
-
-			<div class="footer" style="background: #ffffee"></div>
-			<div class="footer" style="background: #ff6b6b"></div>
-			<div class="footer" style="background: #ffe66d"></div>
-			<div class="footer" style="background: #4ecdc4"></div>
-		</div>
-
-		<script src="../files/to-top.js"></script>
 		<script src="../files/auto-project-link-target.js" type="module"></script>
 	</body>
 </html>
