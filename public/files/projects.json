@@ -263,7 +263,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["April 28th", "2 fonts removed, 2 fonts added (v1.0.5)"],
+			"updated": ["July 13th", "1 font removed, 1 font added (v1.0.6)"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -513,13 +513,13 @@
 		"basic": false,
 		"icon": "square-user",
 		"path": "projects/the-square",
-		"connected": false,
+		"connected": true,
 		"description": "Interactive LEGO map; watch the YouTube video first.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
-			"beta": ["March 13th", "redesign incoming"],
+			"beta": ["July 13th", "PROGRESS HAS BEEN MADE"],
 			"tag": ["", ""]
 		},
 		"featured": 0

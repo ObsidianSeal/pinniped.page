@@ -39,7 +39,6 @@
 			@import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed");
 			@import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed");
 			@import url("https://fonts.googleapis.com/css2?family=Fira+Mono");
-			@import url("https://fonts.googleapis.com/css2?family=Forum");
 			@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great");
 			@import url("https://fonts.googleapis.com/css2?family=Fredoka");
 			@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono");
@@ -102,6 +101,10 @@
 			@font-face {
 				font-family: "Pangram Sans Rounded";
 				src: url("../files/PPPangramSansRounded-Regular.woff2");
+			}
+			@font-face {
+				font-family: "Right Slab";
+				src: url("../files/PPRightSlab-Medium.woff2");
 			}
 			@font-face {
 				font-family: "Select Mono";
@@ -427,7 +430,6 @@
 			"Fira Sans Condensed",
 			"Fira Sans Extra Condensed",
 			"Fira Mono",
-			"Forum",
 			"Fredericka the Great",
 			"Fredoka",
 			"gooddog-new",
@@ -452,6 +454,7 @@
 			"Playfair Display",
 			"Press Start 2P",
 			"PT Serif",
+			"Right Slab",
 			"rig-solid-medium-fill",
 			"Roboto",
 			"Roboto Condensed",
@@ -467,7 +470,7 @@
 			"Writer Italic",
 		];
 
-		const version = "1.0.5";
+		const version = "1.0.6";
 		console.log(`fonts v${version} - ${fonts.length} fonts, ${texts.length} texts`);
 
 		function getRandomFont() {

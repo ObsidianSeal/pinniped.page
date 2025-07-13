@@ -22,43 +22,325 @@
 		<meta name="keywords" content="obsidian_seal, pinniped.page, interactive, LEGO, map, YouTube, video, Discord, bot, fun" />
 
 		<style>
+			/* FONTS */
+
+			@font-face {
+				font-family: "PP Right Slab";
+				font-weight: 300;
+				src: url(../files/PPRightSlab-Light.woff2);
+			}
+			@font-face {
+				font-family: "PP Right Slab";
+				font-weight: 500;
+				src: url(../files/PPRightSlab-Medium.woff2);
+			}
+			@font-face {
+				font-family: "PP Right Slab";
+				font-weight: 700;
+				src: url(../files/PPRightSlab-Bold.woff2);
+			}
+
+			/* SELECTION */
+
+			::selection {
+				background-color: #303030;
+				color: white;
+			}
+
+			/* SCROLLBAR STYLES */
+
+			::-webkit-scrollbar {
+				background-color: black;
+				width: 10px;
+			}
+
+			::-webkit-scrollbar-thumb {
+				background-color: #505050;
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background-color: #a0a0a0;
+			}
+
+			/* GENERAL STYLES */
+
 			* {
 				margin: 0;
 				border: 0;
 				padding: 0;
+
+				font-family: "PP Right Slab";
+				font-weight: 300;
+				font-size: 20px;
 			}
 
-			img {
-				position: absolute;
+			body {
+				overflow: hidden;
 			}
 
 			.space {
 				width: 100dvw;
 				height: 100dvh;
 
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
 				background-image: url(../images/space.png);
 				background-position: center;
 				background-size: cover;
+
+				display: flex;
+			}
+
+			.square-container {
+				width: max(70%, calc(100% - 550px));
+				height: 100dvh;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 
 			#the-square {
-				width: auto;
-				height: min(100dvh, calc(100dvw * 9 / 16));
+				width: min(100%, calc(100dvh * 16 / 9));
+				height: auto;
 				aspect-ratio: 16 / 9;
+			}
+
+			.sidebar-container {
+				width: 30%;
+				max-width: 550px;
+				height: 100dvh;
+				box-sizing: border-box;
+
+				padding: 50px 50px 50px 0;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.sidebar {
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+
+				border: 1px solid white;
+				padding: 20px;
+
+				background-color: black;
+				color: white;
+
+				overflow-y: auto;
+
+				z-index: 2;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				font-weight: 700;
+				letter-spacing: 2pt;
+			}
+
+			h1 {
+				font-size: 64px;
+			}
+
+			h2 {
+				font-size: 32px;
+			}
+
+			h3 {
+				font-size: 24px;
+			}
+
+			h4 {
+				font-size: 20px;
+			}
+
+			h5,
+			p,
+			li,
+			a {
+				font-size: 16px;
+			}
+
+			h6 {
+				font-size: 12px;
+			}
+
+			b {
+				font-weight: 700;
+			}
+
+			a {
+				text-decoration-color: #505050;
+				text-decoration-skip-ink: none;
+				color: white;
+			}
+
+			a:hover,
+			a:focus {
+				text-decoration-color: #a0a0a0;
+			}
+
+			ul {
+				padding-left: 30px;
+			}
+
+			li {
+				list-style-type: disc;
+				width: fit-content;
+			}
+
+			li::marker {
+				color: #a0a0a0;
+			}
+
+			img {
+				display: block;
+			}
+
+			.photo {
+				width: 100%;
+				margin-top: 5px;
 			}
 		</style>
 	</head>
 
 	<body>
 		<div class="space">
-			<img src="../images/the-square.png" alt="the square" title="the square" id="the-square" />
+			<div class="square-container">
+				<img src="../images/the-square.png" alt="the square" title="the square" id="the-square" />
+			</div>
+			<div class="sidebar-container">
+				<div class="sidebar">
+					<h1>The Square</h1>
+					<br />
+					<h6>VERY IMPORTANT LINKS</h6>
+					<ul>
+						<li>
+							<a
+								href="https://youtu.be/4Mbx4FVfqug"
+								target="_blank"
+								title="YouTube / &ldquo;The Square: a LEGO map you can interact with — pinniped.page/the-square&rdquo; [EXTERNAL]"
+								>YouTube video</a
+							>
+						</li>
+						<li><a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">Discord server</a></li>
+					</ul>
+					<br />
+					<h6>WHAT IS THIS?</h6>
+					<p>
+						The Square is a LEGO map that I felt like building one day. What you see on this page is its digital recreation. There are 22 uniquely coloured
+						regions, each with a minifigure leader.
+					</p>
+					<br />
+					<h6>HOW TO PARTICIPATE</h6>
+					<p>
+						You can &ldquo;join&rdquo; a region on
+						<a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">my Discord server (Seal Squad)</a> using
+						<a href="omega-seal.html" title="Omega Seal">my Discord bot (Omega Seal)</a>. More information can be found on
+						<a href="omega-seal.html" title="Omega Seal">the Omega Seal page</a>.
+					</p>
+					<br />
+					<h6>HOW TO USE THIS PAGE</h6>
+					<p>Click on the dot in the centre of a region or one of the region names in the list below to learn more about it.</p>
+					<br />
+					<h6>REGIONS</h6>
+					<p id="region-list">I tried my best to match these colours to the official LEGO colours.</p>
+					<br />
+					<h6>ATTRIBUTION</h6>
+					<ul>
+						<li>
+							typeface:
+							<a href="https://pangrampangram.com/products/right-slab" target="_blank" title="Pangram Pangram Foundry > Right Slab [EXTERNAL]"
+								>PP Right Slab</a
+							>
+						</li>
+						<li>icons from <a href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a></li>
+						<li>
+							LEGO models created in and rendered with
+							<a href="https://www.bricklink.com/v3/studio/main.page" target="_blank" title="BrickLink > Studio [EXTERNAL]">BrickLink Studio</a>
+						</li>
+						<li>I don&rsquo;t remember where I got the LEGO colours from</li>
+						<li>
+							<a href="https://firebase.google.com/products/realtime-database" target="_blank" title="Firebase Realtime Database [EXTERNAL]"
+								>Firebase Realtime Database</a
+							>, <a href="../posts/2024-07-08.html" title="blog post — &ldquo;Costs & Limitations&rdquo;">etc.</a>
+						</li>
+					</ul>
+					<br />
+					<h6>AND AS ALWAYS...</h6>
+					<ul>
+						<li><a href="../projects+.html" title="pinniped.page — Projects+">more projects</a></li>
+						<li><a href="../status.html" title="pinniped.page — Status">website and bot status</a></li>
+						<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
+					</ul>
+					<br />
+					<h6>SOME PHOTOS OF THE REAL THING</h6>
+					<img
+						src="../images/the-square-real-01.jpg"
+						alt="the real square, without any minifigures"
+						title="the real square, without any minifigures"
+						class="photo"
+					/>
+					<img src="../images/the-square-real-02.jpg" alt="the real square" title="the real square" class="photo" />
+					<img src="../images/the-square-real-03.jpg" alt="the real square, front left focus" title="the real square, front left focus" class="photo" />
+					<img src="../images/the-square-real-04.jpg" alt="the real square, back right focus" title="the real square, back right focus" class="photo" />
+					<img src="../images/the-square-real-05.jpg" alt="the real square, front right focus" title="the real square, front right focus" class="photo" />
+					<img
+						src="../images/the-square-real-06.jpg"
+						alt="the real square, closer back right focus"
+						title="the real square, closer back right focus"
+						class="photo"
+					/>
+					<img src="../images/the-square-real-07.jpg" alt="the real square, middle focus" title="the real square, middle focus" class="photo" />
+					<img src="../images/the-square-real-08.jpg" alt="the real square, lower middle focus" title="the real square, lower middle focus" class="photo" />
+					<img src="../images/the-square-real-09.jpg" alt="the real square, lower back right focus" title="the real square, lower back right focus" class="photo" />
+					<img
+						src="../images/the-square-real-10.jpg"
+						alt="the real square, very close middle focus"
+						title="the real square, very close middle focus"
+						class="photo"
+					/>
+				</div>
+			</div>
 		</div>
 
-		<script></script>
+		<script>
+			const regions = {
+				"dark-red": ["Dark Red", "#7f131b"],
+				"red": ["Red", "#dd1a21"],
+				"orange": ["Orange", "#f57d20"],
+				"dark-yellow": ["Dark Yellow", "#fbab18"],
+				"yellow": ["Yellow", "#ffcd03"],
+				"gold": ["Gold", "#d2a12a"],
+				"lime": ["Lime", "#9aca3a"],
+				"green": ["Green", "#009247"],
+				"dark-green": ["Dark Green", "#004a2d"],
+				"olive": ["Olive", "#6f947a"],
+				"teal": ["Teal", "#189e9f"],
+				"turquoise": ["Turquoise", "#00a3da"],
+				"light-blue": ["Light Blue", "#78bfea"],
+				"cyan": ["Cyan", "#00bed3"],
+				"blue": ["Blue", "#006cb7"],
+				"dark-blue": ["Dark Blue", "#00395e"],
+				"magenta": ["Magenta", "#e95da2"],
+				"fuchsia": ["Fuchsia", "#b51c7d"],
+				"pink": ["Pink", "#f6adcd"],
+				"lavender": ["Lavender", "#bca6d0"],
+				"violet": ["Violet", "#9675b4"],
+				"purple": ["Purple", "#4c2f92"],
+			};
+
+			for (let region in regions) {
+				document.querySelector("#region-list").innerHTML =
+					document.querySelector("#region-list").innerHTML +
+					`<br /><i class="fa-sharp fa-solid fa-circle fa-sm" style="color: ${regions[region][1]}"></i> <a href="#${region}" title="learn more about ${regions[region][0]}">${regions[region][0]}</a>`;
+			}
+		</script>
 
 		<script src="../files/auto-project-link-target.js" type="module"></script>
 	</body>

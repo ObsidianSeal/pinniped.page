@@ -35,7 +35,13 @@ document.querySelectorAll("a").forEach((link) => {
 			for (let project in projectsJSON) {
 				if (projectsJSON[project].path == path) {
 					if (projectsJSON[project].connected) link.removeAttribute("target");
-					else link.setAttribute("target", "_blank");
+					else {
+						// prevent opening in new tab if already there (link is to same page)
+						if (location.href.includes(".")) {
+							if (path != location.href.substring(location.href.lastIndexOf("projects/"), location.href.lastIndexOf(".")))
+								link.setAttribute("target", "_blank");
+						} else if (path != location.href.substring(location.href.lastIndexOf("projects/"))) link.setAttribute("target", "_blank");
+					}
 					return;
 				}
 			}
