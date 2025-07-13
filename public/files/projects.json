@@ -515,7 +515,7 @@
 		"path": "projects/the-square",
 		"connected": false,
 		"description": "Interactive LEGO map; watch the YouTube video first.",
-		"flag": "triangle-exclamation",
+		"flag": "",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
