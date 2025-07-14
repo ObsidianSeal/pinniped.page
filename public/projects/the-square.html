@@ -74,7 +74,8 @@
 				font-size: 20px;
 			}
 
-			body {
+			body,
+			.space {
 				overflow: hidden;
 			}
 
@@ -86,11 +87,11 @@
 				background-position: center;
 				background-size: cover;
 
-				display: flex;
+				display: grid;
+				grid-template-columns: auto clamp(300px, 30%, 550px);
 			}
 
 			.square-container {
-				width: max(70%, calc(100% - 550px));
 				height: 100dvh;
 
 				display: flex;
@@ -98,15 +99,20 @@
 				justify-content: center;
 			}
 
+			.square-container-inner,
 			#the-square {
 				width: min(100%, calc(100dvh * 16 / 9));
 				height: auto;
 				aspect-ratio: 16 / 9;
+
+				position: relative;
+			}
+
+			#the-square {
+				transition: transform 3s;
 			}
 
 			.sidebar-container {
-				width: 30%;
-				max-width: 550px;
 				height: 100dvh;
 				box-sizing: border-box;
 
@@ -206,16 +212,117 @@
 				width: 100%;
 				margin-top: 5px;
 			}
+
+			.region-circle {
+				width: 20px;
+				height: 20px;
+				box-sizing: border-box;
+
+				position: absolute;
+
+				border: 2px solid black;
+				border-radius: 10px;
+			}
+
+			.region-circle:hover {
+				cursor: pointer;
+			}
+
+			.hide,
+			.square-container-inner.zoomed .region-circle {
+				display: none;
+			}
+
+			.region-arrow {
+				width: 200px;
+				height: 200px;
+
+				position: absolute;
+				top: calc(50% - 100px);
+				left: calc(50% - 100px);
+
+				color: white;
+			}
+
+			.region-arrow i {
+				position: absolute;
+				top: 0;
+				right: 0;
+
+				font-size: 100px;
+			}
+
+			hr {
+				border-bottom: 1px solid white;
+			}
+
+			/* CONDITIONAL STYLES */
+
+			@media print {
+				* {
+					display: none;
+				}
+			}
+
+			@media all and (prefers-reduced-motion: reduce) {
+				#the-square {
+					transition: none;
+				}
+			}
+			@media all and (prefers-reduced-motion) {
+				#the-square {
+					transition: none;
+				}
+			}
+
+			@media all and (max-width: 1000px) {
+				.sidebar-container {
+					padding: 20px 20px 20px 0;
+				}
+			}
+
+			@media all and (max-width: 800px) {
+				.space {
+					display: flex;
+					flex-direction: column;
+				}
+
+				.sidebar-container {
+					padding: 0;
+					height: calc(100dvh - 100dvw * 9 / 16);
+				}
+
+				.sidebar {
+					border: 0;
+					border-top: 1px solid white;
+				}
+			}
+
+			@media all and (max-width: 300px) {
+				h1 {
+					font-size: 48px;
+				}
+			}
+
+			@media all and (max-width: 200px) {
+				* {
+					display: none;
+				}
+			}
 		</style>
 	</head>
 
 	<body>
 		<div class="space">
 			<div class="square-container">
-				<img src="../images/the-square.png" alt="the square" title="the square" id="the-square" />
+				<div class="square-container-inner">
+					<img src="../images/the-square.png" alt="the square" title="the square" id="the-square" />
+					<div class="region-arrow hide"><i class="fa-sharp fa-solid fa-arrow-down-left"></i></div>
+				</div>
 			</div>
 			<div class="sidebar-container">
 				<div class="sidebar">
+					<p><a href="../projects+.html">← exit</a></p>
 					<h1>The Square</h1>
 					<br />
 					<h6>VERY IMPORTANT LINKS</h6>
@@ -253,6 +360,7 @@
 					<br />
 					<h6>ATTRIBUTION</h6>
 					<ul>
+						<li><a href="https://www.lego.com/" target="_blank" title="LEGO [EXTERNAL]">LEGO</a></li>
 						<li>
 							typeface:
 							<a href="https://pangrampangram.com/products/right-slab" target="_blank" title="Pangram Pangram Foundry > Right Slab [EXTERNAL]"
@@ -311,34 +419,127 @@
 
 		<script>
 			const regions = {
-				"dark-red": ["Dark Red", "#7f131b"],
-				"red": ["Red", "#dd1a21"],
-				"orange": ["Orange", "#f57d20"],
-				"dark-yellow": ["Dark Yellow", "#fbab18"],
-				"yellow": ["Yellow", "#ffcd03"],
-				"gold": ["Gold", "#d2a12a"],
-				"lime": ["Lime", "#9aca3a"],
-				"green": ["Green", "#009247"],
-				"dark-green": ["Dark Green", "#004a2d"],
-				"olive": ["Olive", "#6f947a"],
-				"teal": ["Teal", "#189e9f"],
-				"turquoise": ["Turquoise", "#00a3da"],
-				"light-blue": ["Light Blue", "#78bfea"],
-				"cyan": ["Cyan", "#00bed3"],
-				"blue": ["Blue", "#006cb7"],
-				"dark-blue": ["Dark Blue", "#00395e"],
-				"magenta": ["Magenta", "#e95da2"],
-				"fuchsia": ["Fuchsia", "#b51c7d"],
-				"pink": ["Pink", "#f6adcd"],
-				"lavender": ["Lavender", "#bca6d0"],
-				"violet": ["Violet", "#9675b4"],
-				"purple": ["Purple", "#4c2f92"],
+				"dark-red": ["Dark Red", "#7f131b", 4540, 1570, 71, "UNKNOWN"],
+				"red": ["Red", "#dd1a21", 4980, 1170, 189, "UNKNOWN"],
+				"orange": ["Orange", "#f57d20", 2210, 950, 450, "UNKNOWN"],
+				"dark-yellow": ["Dark Yellow", "#fbab18", 3840, 1120, 24, "UNKNOWN"],
+				"yellow": ["Yellow", "#ffcd03", 3420, 1250, 241, "UNKNOWN"],
+				"gold": ["Gold", "#d2a12a", 4180, 2530, 8, "UNKNOWN"],
+				"lime": ["Lime", "#9aca3a", 5630, 2130, 398, "UNKNOWN"],
+				"green": ["Green", "#009247", 5380, 3200, 488, "UNKNOWN"],
+				"dark-green": ["Dark Green", "#004a2d", 3840, 3150, 232, "UNKNOWN"],
+				"olive": ["Olive", "#6f947a", 5920, 1410, 128, "UNKNOWN"],
+				"teal": ["Teal", "#189e9f", 4660, 2490, 12, "UNKNOWN"],
+				"turquoise": ["Turquoise", "#00a3da", 4790, 2230, 23, "UNKNOWN"],
+				"light-blue": ["Light Blue", "#78bfea", 3400, 1790, 54, "UNKNOWN"],
+				"cyan": ["Cyan", "#00bed3", 4110, 2080, 132, "UNKNOWN"],
+				"blue": ["Blue", "#006cb7", 2250, 2500, 1077, "UNKNOWN"],
+				"dark-blue": ["Dark Blue", "#00395e", 4380, 2440, 28, "UNKNOWN"],
+				"magenta": ["Magenta", "#e95da2", 3260, 840, 22, "UNKNOWN"],
+				"fuchsia": ["Fuchsia", "#b51c7d", 3390, 620, 142, "UNKNOWN"],
+				"pink": ["Pink", "#f6adcd", 4330, 770, 47, "UNKNOWN"],
+				"lavender": ["Lavender", "#bca6d0", 4180, 620, 26, "UNKNOWN"],
+				"violet": ["Violet", "#9675b4", 4990, 600, 86, "UNKNOWN"],
+				"purple": ["Purple", "#4c2f92", 5760, 710, 174, "UNKNOWN"],
 			};
 
+			let totalArea = 0;
 			for (let region in regions) {
+				totalArea += regions[region][4];
+
 				document.querySelector("#region-list").innerHTML =
 					document.querySelector("#region-list").innerHTML +
-					`<br /><i class="fa-sharp fa-solid fa-circle fa-sm" style="color: ${regions[region][1]}"></i> <a href="#${region}" title="learn more about ${regions[region][0]}">${regions[region][0]}</a>`;
+					`<br /><i class="fa-sharp fa-solid fa-circle fa-sm" style="color: ${regions[region][1]}"></i> <a class="region-link" href="#${region}" title="learn more about ${regions[region][0]}">${regions[region][0]}</a>`;
+
+				document.querySelector(".square-container-inner").innerHTML =
+					document.querySelector(".square-container-inner").innerHTML +
+					`<div class="region-circle" id="region-circle-${region}" style="top: calc(${(regions[region][3] / 4320) * 100}% - 10px); left: calc(${
+						(regions[region][2] / 7680) * 100
+					}% - 10px); background-color: ${regions[region][1]}" title="learn more about ${regions[region][0]}"></div>`;
+			}
+			// console.log(totalArea); we're 44 studs short...
+
+			document.querySelectorAll(".region-link").forEach((link) => {
+				link.addEventListener("click", () => {
+					showRegionInfo(link.href.substring(link.href.indexOf("#") + 1));
+				});
+			});
+			document.querySelectorAll(".region-circle").forEach((circle) => {
+				circle.addEventListener("click", () => {
+					history.replaceState(null, null, `#${circle.id.substring(14)}`);
+					showRegionInfo(circle.id.substring(14));
+				});
+			});
+
+			let lastScroll;
+			let zoomDirection = true;
+			let zoomCounts = [0, 0];
+			const initialSidebarContent = document.querySelector(".sidebar").innerHTML;
+
+			function showRegionInfo(region) {
+				zoomCounts[0]++;
+				let zoomNumber = zoomCounts[0];
+
+				lastScroll = Math.round(document.querySelector(".sidebar").scrollTop);
+				zoomDirection = true;
+
+				document.querySelector(".square-container-inner").classList.add("zoomed");
+				document.querySelector("#the-square").style = `transform: translateX(${((regions[region][2] - 3840) / devicePixelRatio) * -1}px) translateY(${
+					((regions[region][3] - 2160) / devicePixelRatio) * -1
+				}px) scale(${7680 / (document.querySelector(".square-container-inner").getBoundingClientRect().width * devicePixelRatio)})`;
+				setTimeout(() => {
+					if (zoomDirection && zoomCounts[0] == zoomNumber) {
+						document.querySelector(".region-arrow").classList.remove("hide");
+						document.querySelector(".square-container-inner").classList.add("zoomed");
+					}
+				}, 3000);
+
+				document.querySelector(".sidebar").innerHTML = `<p><a id="exit" href="#" title="close region information">← back</a></p><h1>${
+					regions[region][0]
+				}</h1><br /><h6>COLOUR</h6><p><i class="fa-sharp fa-solid fa-circle fa-sm" style="color: ${regions[region][1]}"></i> ${
+					regions[region][1]
+				}</p><br /><h6>POPULATION</h6><p>${regions[region][5]}</p><br /><h6>AREA</h6><p>${regions[region][4].toLocaleString("en-CA")}±${Math.ceil(
+					regions[region][4] / 100
+				)} sq. studs</p><br /><h6>LEADER</h6><img src="../images/the-square-leader-${region}.jpg" alt="the leader of ${regions[region][0]}" title="the leader of ${
+					regions[region][0]
+				}" class="photo" /><br /><h6>JOIN COMMAND</h6><p>/join ${region}</p><br /><hr /><br /><p>Please note that commands related to The Square can only be used in <a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">Seal Squad</a>. For more information and to make sure the bot is online, visit <a href="omega-seal.html" title="Omega Seal">the Omega Seal page</a>.</p>`;
+
+				document.querySelector("#exit").addEventListener("click", () => {
+					zoomOut();
+				});
+			}
+
+			document.addEventListener("keydown", (event) => {
+				if (event.key == "Escape") {
+					zoomOut();
+				}
+			});
+
+			function zoomOut() {
+				zoomCounts[1]++;
+				let zoomNumber = zoomCounts[1];
+				zoomDirection = false;
+
+				document.querySelector(".region-arrow").classList.add("hide");
+				document.querySelector("#the-square").style = "";
+				setTimeout(() => {
+					if (!zoomDirection && zoomCounts[1] == zoomNumber) {
+						document.querySelector(".square-container-inner").classList.remove("zoomed");
+						document.querySelector(".region-arrow").classList.add("hide");
+					}
+				}, 3000);
+				document.querySelector(".sidebar").innerHTML = initialSidebarContent;
+				document.querySelector(".sidebar").scroll(0, lastScroll);
+
+				document.querySelectorAll(".region-link").forEach((link) => {
+					link.addEventListener("click", () => {
+						showRegionInfo(link.href.substring(link.href.indexOf("#") + 1));
+					});
+				});
+			}
+
+			if (Object.keys(regions).includes(window.location.href.substring(window.location.href.lastIndexOf("#") + 1))) {
+				showRegionInfo(window.location.href.substring(window.location.href.lastIndexOf("#") + 1));
 			}
 		</script>
 
