@@ -340,8 +340,8 @@
 					<br />
 					<h6>WHAT IS THIS?</h6>
 					<p>
-						The Square is a LEGO map that I felt like building one day. What you see on this page is its digital recreation. There are 22 uniquely coloured
-						regions, each with a minifigure leader.
+						The Square is a LEGO map that I felt like building one day. What you see on this page is its digital recreation. The 64-by-64-stud area is divided
+						into 22 uniquely coloured regions, each with a minifigure leader.
 					</p>
 					<br />
 					<h6>HOW TO PARTICIPATE</h6>
@@ -419,28 +419,226 @@
 
 		<script>
 			const regions = {
-				"dark-red": ["Dark Red", "#7f131b", 4540, 1570, 71, "UNKNOWN"],
-				"red": ["Red", "#dd1a21", 4980, 1170, 189, "UNKNOWN"],
-				"orange": ["Orange", "#f57d20", 2210, 950, 450, "UNKNOWN"],
-				"dark-yellow": ["Dark Yellow", "#fbab18", 3840, 1120, 24, "UNKNOWN"],
-				"yellow": ["Yellow", "#ffcd03", 3420, 1250, 241, "UNKNOWN"],
-				"gold": ["Gold", "#d2a12a", 4180, 2530, 8, "UNKNOWN"],
-				"lime": ["Lime", "#9aca3a", 5630, 2130, 398, "UNKNOWN"],
-				"green": ["Green", "#009247", 5380, 3200, 488, "UNKNOWN"],
-				"dark-green": ["Dark Green", "#004a2d", 3840, 3150, 232, "UNKNOWN"],
-				"olive": ["Olive", "#6f947a", 5920, 1410, 128, "UNKNOWN"],
-				"teal": ["Teal", "#189e9f", 4660, 2490, 12, "UNKNOWN"],
-				"turquoise": ["Turquoise", "#00a3da", 4790, 2230, 23, "UNKNOWN"],
-				"light-blue": ["Light Blue", "#78bfea", 3400, 1790, 54, "UNKNOWN"],
-				"cyan": ["Cyan", "#00bed3", 4110, 2080, 132, "UNKNOWN"],
-				"blue": ["Blue", "#006cb7", 2250, 2500, 1077, "UNKNOWN"],
-				"dark-blue": ["Dark Blue", "#00395e", 4380, 2440, 28, "UNKNOWN"],
-				"magenta": ["Magenta", "#e95da2", 3260, 840, 22, "UNKNOWN"],
-				"fuchsia": ["Fuchsia", "#b51c7d", 3390, 620, 142, "UNKNOWN"],
-				"pink": ["Pink", "#f6adcd", 4330, 770, 47, "UNKNOWN"],
-				"lavender": ["Lavender", "#bca6d0", 4180, 620, 26, "UNKNOWN"],
-				"violet": ["Violet", "#9675b4", 4990, 600, 86, "UNKNOWN"],
-				"purple": ["Purple", "#4c2f92", 5760, 710, 174, "UNKNOWN"],
+				"dark-red": [
+					"Dark Red",
+					"#7f131b",
+					4540,
+					1570,
+					71,
+					4,
+					"This region is in darkness for most of the day, but they&rsquo;ve adapted well and are second only to Cyan in technological advancement. Dark Red&rsquo;s capital city takes up the vast majority of the region and is full of dark and incredibly tall skyscrapers. It&rsquo;s best to stay off the streets at night.",
+					"UNKNOWN",
+				],
+				"red": [
+					"Red",
+					"#dd1a21",
+					4980,
+					1170,
+					189,
+					7,
+					"In stark contrast to Dark Red, which this region borders, Red is stuck in medieval times. Their king, pictured below, doesn&rsquo;t take his role very seriously. The citizens don&rsquo;t seem to mind, however, and a landscape dotted with cottages, farms, and castles is perfect for those wishing for a simpler life.",
+					"UNKNOWN",
+				],
+				"orange": [
+					"Orange",
+					"#f57d20",
+					2210,
+					950,
+					450,
+					5,
+					"Orange would love to have you visit and for you to go on a safari across their savanna. Many of the animals present in Orange cannot be found anywhere else in The Square. The towns of Orange are known for their rich culture, music, and parades.",
+					"UNKNOWN",
+				],
+				"dark-yellow": [
+					"Dark Yellow",
+					"#fbab18",
+					3840,
+					1120,
+					24,
+					1,
+					"Dark Yellow is completely surrounded by Yellow, but that&rsquo;s not a bad thing. The crops harvested by Yellow are sent to Dark Yellow for processing. People come from all over The Square to trade with the people of Dark Yellow, making the region a major centre for commerce and distribution.",
+					"UNKNOWN",
+				],
+				"yellow": [
+					"Yellow",
+					"#ffcd03",
+					3420,
+					1250,
+					241,
+					9,
+					"Yellow is the region of farming. Nobody does it like them&hairsp;—&hairsp;if it can grow, they can grow it. Most of their farming is fairly traditional, but they&rsquo;ve been experimenting with new technologies thanks to investment from neighbouring regions.",
+					"UNKNOWN",
+				],
+				"gold": [
+					"Gold",
+					"#d2a12a",
+					4180,
+					2530,
+					8,
+					4,
+					"The smallest of the regions, but in no way the least. Gold makes up for its small size in great wealth&hairsp;—&hairsp;they have an enormous store of gold, hence the region&rsquo;s name. Gold is also known for its magic, and there are many magicians who call it home.",
+					"UNKNOWN",
+				],
+				"lime": [
+					"Lime",
+					"#9aca3a",
+					5630,
+					2130,
+					398,
+					7,
+					"Not much is known about Lime, they keep their mouths shut and their borders secure. There are rumours of a nuclear disaster decades ago, but no citizen of Lime is willing to set the record straight. Seeing a citizen of Lime outside Lime is exceedingly rare.",
+					"UNKNOWN",
+				],
+				"green": [
+					"Green",
+					"#009247",
+					5380,
+					3200,
+					488,
+					5,
+					"People come to visit the sprawling plains of Green from far and wide. Known for their creativity, citizens of Green create beautiful artwork, sculptures, and structures. They are also committed to maintaining the natural beauty of their region.",
+					"UNKNOWN",
+				],
+				"dark-green": [
+					"Dark Green",
+					"#004a2d",
+					3840,
+					3150,
+					232,
+					4,
+					"Dark Green is a very sparsely populated region. From the forests in the west where it borders Blue to the desert in the east where it borders Green, there aren&rsquo;t many attractive places to live.",
+					"UNKNOWN",
+				],
+				"olive": [
+					"Olive",
+					"#6f947a",
+					5920,
+					1410,
+					128,
+					3,
+					"With a cold, harsh climate and exclusively mountainous terrain, it was long thought that Olive was uninhabitable. But there are some who brave its snowstorms. And if you do want to live there, or even just visit, it&rsquo;s quite difficult of a region to reach, since you can&rsquo;t enter from Lime, transportation through Purple is very expensive, and the fastest transportation through Red is horse and carriage.",
+					"UNKNOWN",
+				],
+				"teal": [
+					"Teal",
+					"#189e9f",
+					4660,
+					2490,
+					12,
+					4,
+					"The fashion district of The Square, Teal is known for its garments and other handmade specialty products. They collaborate extensively with Turquoise, since the leaders of Teal and Turquoise are brothers.",
+					"UNKNOWN",
+				],
+				"turquoise": [
+					"Turquoise",
+					"#00a3da",
+					4790,
+					2230,
+					23,
+					4,
+					"Turquoise is very similar to Teal, which makes sense seeing as the leaders of the two regions are brothers. But where Teal is focused on clothing and the handmade, Turquoise is focused on clean, simple, and geometric forms. Brilliant graphic design flourishes here.",
+					"UNKNOWN",
+				],
+				"light-blue": [
+					"Light Blue",
+					"#78bfea",
+					3400,
+					1790,
+					54,
+					4,
+					"This region has two very large industries that couldn&rsquo;t be more different. The half of Light Blue that borders Blue is part of an ocean, and thus Light Blue is a giant in the fish business. The other half of the region is dedicated to manufacturing, especially of the transportation and farming equipment in high demand by Cyan and Yellow respectively.",
+					"UNKNOWN",
+				],
+				"cyan": [
+					"Cyan",
+					"#00bed3",
+					4110,
+					2080,
+					132,
+					9,
+					`Cyan is both the technological centre of The Square and literally the centre of The Square. <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> and his <a href="omega-seal.html" title="Omega Seal">Discord bot</a> live here. Cyan is also the home of The Square&rsquo;s largest transportation hub, since it borders the most regions. The photo below is of me when I was younger.`,
+					"UNKNOWN",
+				],
+				"blue": [
+					"Blue",
+					"#006cb7",
+					2250,
+					2500,
+					1077,
+					4,
+					"Blue is the largest region in The Square, so large that it&rsquo;s mostly unexplored. The parts that have been charted are either large bodies of water or dense coniferous forests. Forestry and construction are therefore Blue&rsquo;s largest industries.",
+					"UNKNOWN",
+				],
+				"dark-blue": [
+					"Dark Blue",
+					"#00395e",
+					4380,
+					2440,
+					28,
+					5,
+					"Whether you have an enormous sum of money or mere cents to your name, Dark Blue is the place to manage those funds. Nowhere else has as many banks&hairsp;—&hairsp;and they&rsquo;re well-run too. Even the leader of Dark Blue is a banker. This is where the rest of The Square keeps their money and goes for financial advice.",
+					"UNKNOWN",
+				],
+				"magenta": [
+					"Magenta",
+					"#e95da2",
+					3260,
+					840,
+					22,
+					3,
+					"This strip of land just north of Yellow is a paradise for families. There&rsquo;s so much fun stuff to do, and kids can do it all without supervision. Not many permanent residents here though.",
+					"UNKNOWN",
+				],
+				"fuchsia": [
+					"Fuchsia",
+					"#b51c7d",
+					3390,
+					620,
+					142,
+					6,
+					"A reasonably sized region on the north edge of The Square, Fuchsia is the only region with fully fledged prisons. Yes, more than one. Criminals aren&rsquo;t that common in The Square, but there is still a fairly steady stream of them into the the jails of Fuchsia. The rest of the judicial process also takes places here.",
+					"UNKNOWN",
+				],
+				"pink": [
+					"Pink",
+					"#f6adcd",
+					4330,
+					770,
+					47,
+					5,
+					"This region makes comfort and sleep a priority, which can take a while to get used to&hairsp;—&hairsp;their schedules are quite different than those in other regions. Even if you&rsquo;re just passing through, be ready for your train to make a lengthy rest stop here.",
+					"UNKNOWN",
+				],
+				"lavender": [
+					"Lavender",
+					"#bca6d0",
+					4180,
+					620,
+					26,
+					3,
+					"Lavender, along with Gold, is one of only two regions to have magic as part of daily life. But where Gold&rsquo;s magic is more utilitarian, Lavender&rsquo;s is more whimsical. Fantastical beasts of all kinds are found in this region.",
+					"UNKNOWN",
+				],
+				"violet": [
+					"Violet",
+					"#9675b4",
+					4990,
+					600,
+					86,
+					5,
+					"If you like food, this is the region for you. The best chefs in The Square live in Violet, and therefore the best food in The Square comes out of Violet.",
+					"UNKNOWN",
+				],
+				"purple": [
+					"Purple",
+					"#4c2f92",
+					5760,
+					710,
+					174,
+					3,
+					"Purple is a very regal region full of beauty and wealth. Many cannot afford to visit here, let alone live here. Keep that in mind when passing through&hairsp;—&hairsp;transit fare is expensive. And more importantly, the language spoken in Purple is not the same as what&rsquo;s spoken in every other region.",
+					"UNKNOWN",
+				],
 			};
 
 			let totalArea = 0;
@@ -481,6 +679,7 @@
 				let zoomNumber = zoomCounts[0];
 
 				lastScroll = Math.round(document.querySelector(".sidebar").scrollTop);
+				document.querySelector(".sidebar").scroll(0, lastScroll);
 				zoomDirection = true;
 
 				document.querySelector(".square-container-inner").classList.add("zoomed");
@@ -498,9 +697,11 @@
 					regions[region][0]
 				}</h1><br /><h6>COLOUR</h6><p><i class="fa-sharp fa-solid fa-circle fa-sm" style="color: ${regions[region][1]}"></i> ${
 					regions[region][1]
-				}</p><br /><h6>POPULATION</h6><p>${regions[region][5]}</p><br /><h6>AREA</h6><p>${regions[region][4].toLocaleString("en-CA")}±${Math.ceil(
+				}</p><br /><h6>AREA</h6><p>${regions[region][4].toLocaleString("en-CA")}±${Math.ceil(
 					regions[region][4] / 100
-				)} sq. studs</p><br /><h6>LEADER</h6><img src="../images/the-square-leader-${region}.jpg" alt="the leader of ${regions[region][0]}" title="the leader of ${
+				)} sq. studs</p><br /><h6>POPULATION</h6><p>${regions[region][7].toLocaleString()}</p><br /><h6>DESCRIPTION</h6><p>${
+					regions[region][6]
+				}</p><br /><h6>LEADER</h6><img src="../images/the-square-leader-${region}.jpg" alt="the leader of ${regions[region][0]}" title="the leader of ${
 					regions[region][0]
 				}" class="photo" /><br /><h6>JOIN COMMAND</h6><p>/join ${region}</p><br /><hr /><br /><p>Please note that commands related to The Square can only be used in <a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">Seal Squad</a>. For more information and to make sure the bot is online, visit <a href="omega-seal.html" title="Omega Seal">the Omega Seal page</a>.</p>`;
 
