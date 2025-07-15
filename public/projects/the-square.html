@@ -134,6 +134,7 @@
 				background-color: black;
 				color: white;
 
+				overflow-x: hidden;
 				overflow-y: auto;
 
 				z-index: 2;
@@ -417,7 +418,33 @@
 			</div>
 		</div>
 
-		<script>
+		<script type="module">
+			"use strict";
+
+			// IMPORT FIREBASE v11.9.1 (the latest version when this was written)
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+			import { getDatabase, ref, set, get, push, remove } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+
+			// CONFIGURE FIREBASE APP & DATABASE
+			const firebaseConfig = {
+				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+				authDomain: "the-pinniped-page.firebaseapp.com",
+				databaseURL: "https://the-pinniped-page.firebaseio.com",
+				projectId: "the-pinniped-page",
+				storageBucket: "the-pinniped-page.appspot.com",
+				messagingSenderId: "636989973689",
+				appId: "1:636989973689:web:6d938d9588606d803a6768",
+			};
+			const app = initializeApp(firebaseConfig);
+			const database = getDatabase();
+
+			// DEBUG STYLES
+			const blueStyle = "background: #4ecdc4; color: black; padding: 0 5px";
+			const yellowStyle = "background: #ffe66d; color: black; padding: 0 5px";
+			const redStyle = "background: #ff6b6b; color: black; padding: 0 5px";
+			const darkGreyStyle = "background: #949792; color: black; padding: 0 5px";
+			const lightGreyStyle = "background: #d7d8cb; color: black; padding: 0 5px";
+
 			const regions = {
 				"dark-red": [
 					"Dark Red",
@@ -536,7 +563,7 @@
 					2230,
 					23,
 					4,
-					"Turquoise is very similar to Teal, which makes sense seeing as the leaders of the two regions are brothers. But where Teal is focused on clothing and the handmade, Turquoise is focused on clean, simple, and geometric forms. Brilliant graphic design flourishes here.",
+					"Turquoise is very similar to Teal, which makes sense seeing as the leaders of the two regions are brothers. But where Teal is focused on clothing and the handmade, Turquoise is focused on clean, simple, and geometric forms in their art, furniture, and architecture. Brilliant graphic design flourishes here.",
 					"UNKNOWN",
 				],
 				"light-blue": [
@@ -672,14 +699,16 @@
 			let lastScroll;
 			let zoomDirection = true;
 			let zoomCounts = [0, 0];
+			let openRegion = "the-square";
 			const initialSidebarContent = document.querySelector(".sidebar").innerHTML;
 
 			function showRegionInfo(region) {
 				zoomCounts[0]++;
+				openRegion = region;
 				let zoomNumber = zoomCounts[0];
 
 				lastScroll = Math.round(document.querySelector(".sidebar").scrollTop);
-				document.querySelector(".sidebar").scroll(0, lastScroll);
+				document.querySelector(".sidebar").scroll(0, 0);
 				zoomDirection = true;
 
 				document.querySelector(".square-container-inner").classList.add("zoomed");
@@ -693,13 +722,13 @@
 					}
 				}, 3000);
 
-				document.querySelector(".sidebar").innerHTML = `<p><a id="exit" href="#" title="close region information">← back</a></p><h1>${
+				document.querySelector(".sidebar").innerHTML = `<p><a id="exit" href="#the-square" title="close region information">← back</a></p><h1>${
 					regions[region][0]
 				}</h1><br /><h6>COLOUR</h6><p><i class="fa-sharp fa-solid fa-circle fa-sm" style="color: ${regions[region][1]}"></i> ${
 					regions[region][1]
 				}</p><br /><h6>AREA</h6><p>${regions[region][4].toLocaleString("en-CA")}±${Math.ceil(
 					regions[region][4] / 100
-				)} sq. studs</p><br /><h6>POPULATION</h6><p>${regions[region][7].toLocaleString()}</p><br /><h6>DESCRIPTION</h6><p>${
+				)} sq. studs</p><br /><h6>POPULATION</h6><p id="population">${regions[region][7].toLocaleString("en-CA")}</p><br /><h6>DESCRIPTION</h6><p>${
 					regions[region][6]
 				}</p><br /><h6>LEADER</h6><img src="../images/the-square-leader-${region}.jpg" alt="the leader of ${regions[region][0]}" title="the leader of ${
 					regions[region][0]
@@ -717,9 +746,10 @@
 			});
 
 			function zoomOut() {
-				zoomCounts[1]++;
-				let zoomNumber = zoomCounts[1];
 				zoomDirection = false;
+				zoomCounts[1]++;
+				openRegion = "the-square";
+				let zoomNumber = zoomCounts[1];
 
 				document.querySelector(".region-arrow").classList.add("hide");
 				document.querySelector("#the-square").style = "";
@@ -742,6 +772,38 @@
 			if (Object.keys(regions).includes(window.location.href.substring(window.location.href.lastIndexOf("#") + 1))) {
 				showRegionInfo(window.location.href.substring(window.location.href.lastIndexOf("#") + 1));
 			}
+
+			await set(ref(database, "omega-seal/status"), "populations")
+				.then((success) => {
+					console.log(`%crequested population data`, blueStyle);
+					setTimeout(async () => {
+						await get(ref(database, "omega-seal/the-square"))
+							.then((snapshot) => {
+								console.log(`%creceived population data`, blueStyle);
+								let populations = snapshot.val();
+
+								for (let region in populations) {
+									if (Object.keys(regions).includes(region) && !isNaN(populations[region])) {
+										regions[region][7] = populations[region];
+
+										if (region == openRegion) {
+											document.querySelectorAll("#population").forEach((field) => {
+												field.innerHTML = populations[region];
+											});
+										}
+									}
+								}
+							})
+							.catch((error) => {
+								console.log(`%csomething went wrong`, redStyle);
+								console.error(error);
+							});
+					}, 1000);
+				})
+				.catch((error) => {
+					console.log(`%csomething went wrong`, redStyle);
+					console.error(error);
+				});
 		</script>
 
 		<script src="../files/auto-project-link-target.js" type="module"></script>

@@ -42,7 +42,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 2
+		"featured": 4
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -387,7 +387,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 1
+		"featured": 2
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -417,7 +417,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 4
+		"featured": 5
 	},
 	"progress": {
 		"basic": false,
@@ -517,12 +517,12 @@
 		"description": "Interactive LEGO map; watch the YouTube video first.",
 		"flag": "",
 		"tags": {
-			"new": ["", ""],
+			"new": ["July 15th", "now with population data!"],
 			"updated": ["", ""],
-			"beta": ["July 14th", "EVERYTHING BUT POPULATIONS"],
+			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 1
 	},
 	"Think Four": {
 		"basic": false,

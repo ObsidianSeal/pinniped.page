@@ -308,9 +308,9 @@
 				<h1>Omega Seal</h1>
 				<br />
 				<p>
-					v1.2.0 —
+					v1.3.0 —
 					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square/commits/main/" target="_blank" title="GitHub > ObsidianSeal/Omega-Seal-The-Square > Commits"
-						>July 4th, 2025</a
+						>July 15th, 2025</a
 					>
 				</p>
 				<br />
@@ -387,6 +387,18 @@
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/populations</h2>
+				<p>
+					description: <span class="dark-grey-bg">Check the population of each of The Square&rsquo;s regions.</span><br />usage:
+					<span class="dark-grey-bg">/populations</span><br />availability:
+					<a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">Seal Squad</a><br /><br />Provides what is essentially a
+					leaderboard of how many people have joined each region of <a href="the-square.html" title="The Square">The Square</a>. It just counts how many people have
+					each of the &ldquo;Citizen of ...&rdquo; roles and sorts them from most to least popular.
+				</p>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/text</h2>
 				<p>
 					description: <span class="dark-grey-bg">Send a message on my website&rsquo;s chat page.</span><br />usage:
@@ -447,6 +459,33 @@
 				<p>
 					availability: everywhere<br /><br />Creates a simple embed, like those generated from links. The colour, if you include it, must be a valid
 					<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">hex code</a>.
+				</p>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/metar</h2>
+				<p>
+					description: <span class="dark-grey-bg">Prepare for flight with this quick weather report.</span><br />usage:<span class="dark-grey-bg"
+						>/metar &lt;airport&gt;</span
+					><br />parameters:
+				</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">airport</b><br />description:
+						<span class="dark-grey-bg">The ICAO airport code for the location you want a weather report from.</span><br />pattern:
+						<span class="dark-grey-bg">/^[A-Z]{4}$/</span>
+					</li>
+				</ul>
+				<p>
+					availability: everywhere<br /><br />Fetches the latest
+					<a href="https://en.wikipedia.org/wiki/METAR" target="_blank" title="Wikipedia > METAR [EXTERNAL]">METAR</a> report for an airport of your choice. Just
+					make sure you know the
+					<a href="https://en.wikipedia.org/wiki/ICAO_airport_code" target="_blank" title="Wikipedia > ICAO airport code [EXTERNAL]">ICAO airport code</a> for the
+					airport! At this time Omega Seal does not decipher the METAR data, so if you aren&rsquo;t familiar with the notation you&rsquo;ll have to use an online
+					tool in order to understand it. Thanks to the
+					<a href="https://aviationweather.gov/" target="_blank" title="Aviation Weather Center [EXTERNAL]">Aviation Weather Center</a> for having a free and easy to
+					use <a href="https://aviationweather.gov/data/api/" target="_blank" title="Aviation Weather Center > Data API [EXTERNAL]">METAR API</a>.
 				</p>
 			</div>
 
@@ -656,6 +695,11 @@
 		setInterval(() => {
 			pingBot();
 		}, 60000);
+		document.addEventListener("scroll", () => {
+			if (window.scrollY == 0) {
+				pingBot();
+			}
+		});
 	</script>
 
 	<script src="../files/auto-project-link-target.js" type="module"></script>
