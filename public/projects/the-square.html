@@ -168,8 +168,9 @@
 
 			h5,
 			p,
-			li,
-			a {
+			p span,
+			a,
+			li {
 				font-size: 16px;
 			}
 
@@ -350,7 +351,7 @@
 						You can &ldquo;join&rdquo; a region on
 						<a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">my Discord server (Seal Squad)</a> using
 						<a href="omega-seal.html" title="Omega Seal">my Discord bot (Omega Seal)</a>. More information can be found on
-						<a href="omega-seal.html" title="Omega Seal">the Omega Seal page</a>.
+						<a href="omega-seal.html" title="Omega Seal">the Omega Seal page</a>. <span id="the-square-population"></span>
 					</p>
 					<br />
 					<h6>HOW TO USE THIS PAGE</h6>
@@ -700,7 +701,7 @@
 			let zoomDirection = true;
 			let zoomCounts = [0, 0];
 			let openRegion = "the-square";
-			const initialSidebarContent = document.querySelector(".sidebar").innerHTML;
+			let initialSidebarContent = document.querySelector(".sidebar").innerHTML;
 
 			function showRegionInfo(region) {
 				zoomCounts[0]++;
@@ -767,12 +768,18 @@
 						showRegionInfo(link.href.substring(link.href.indexOf("#") + 1));
 					});
 				});
+
+				if (document.querySelector("#the-square-population").innerHTML == "") {
+					document.querySelector("#the-square-population").innerHTML = `${totalPopulation.toLocaleString("en-CA")} people have joined so far.`;
+					initialSidebarContent = document.querySelector(".sidebar").innerHTML;
+				}
 			}
 
 			if (Object.keys(regions).includes(window.location.href.substring(window.location.href.lastIndexOf("#") + 1))) {
 				showRegionInfo(window.location.href.substring(window.location.href.lastIndexOf("#") + 1));
 			}
 
+			let totalPopulation = 0;
 			await set(ref(database, "omega-seal/status"), "populations")
 				.then((success) => {
 					console.log(`%crequested population data`, blueStyle);
@@ -785,6 +792,7 @@
 								for (let region in populations) {
 									if (Object.keys(regions).includes(region) && !isNaN(populations[region])) {
 										regions[region][7] = populations[region];
+										totalPopulation += populations[region];
 
 										if (region == openRegion) {
 											document.querySelectorAll("#population").forEach((field) => {
@@ -793,6 +801,11 @@
 										}
 									}
 								}
+
+								document.querySelectorAll("#the-square-population").forEach((field) => {
+									field.innerHTML = `${totalPopulation.toLocaleString("en-CA")} people have joined so far.`;
+									initialSidebarContent = document.querySelector(".sidebar").innerHTML;
+								});
 							})
 							.catch((error) => {
 								console.log(`%csomething went wrong`, redStyle);
