@@ -308,9 +308,9 @@
 				<h1>Omega Seal</h1>
 				<br />
 				<p>
-					v1.3.0 —
+					v1.3.1 —
 					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square/commits/main/" target="_blank" title="GitHub > ObsidianSeal/Omega-Seal-The-Square > Commits"
-						>July 15th, 2025</a
+						>July 18th, 2025</a
 					>
 				</p>
 				<br />
@@ -393,7 +393,8 @@
 					<span class="dark-grey-bg">/populations</span><br />availability:
 					<a href="https://pinniped.page/discord" target="_blank" title="join Seal Squad [EXTERNAL]">Seal Squad</a><br /><br />Provides what is essentially a
 					leaderboard of how many people have joined each region of <a href="the-square.html" title="The Square">The Square</a>. It just counts how many people have
-					each of the &ldquo;Citizen of ...&rdquo; roles and sorts them from most to least popular.
+					each of the &ldquo;Citizen of ...&rdquo; roles and sorts them from most to least popular. It also tells you the total number of people who have joined
+					<a href="the-square.html" title="The Square">The Square</a>.
 				</p>
 			</div>
 
@@ -656,7 +657,8 @@
 
 									let half = "AM";
 									if (hour >= 12) half = "PM";
-									hour = hour % 12;
+									if (hour == 0) hour = 12;
+									if (hour > 12) hour = hour % 12;
 
 									let now = new Date(Date.now()); // seems to be working for other timezones...?
 									let difference = Math.floor((now.getTime() - date.getTime()) / 1000);

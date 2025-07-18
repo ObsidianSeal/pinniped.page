@@ -116,8 +116,11 @@
 					</h3>
 
 					<p class="text">
-						If you want to send an anonymous message, fill out the form below. If the message necessitates a response, I will address it in an announcement on
-						<a href="https://pinniped.page/discord" class="link-3" target="_blank" title="join Seal Squad [EXTERNAL]">my Discord server, linked above</a>.
+						Fill out the form below to send me an anonymous message. If the message necessitates a response, I will address it on
+						<a href="status.html" class="link-3" title="pinniped.page — Status">the Status page</a>, in a
+						<a href="blog.html" class="link-3" title="pinniped.page — Blog">Blog</a> post, through an announcement on
+						<a href="https://pinniped.page/discord" class="link-3" target="_blank" title="join Seal Squad [EXTERNAL]">my Discord server</a>, or by some other
+						means.
 					</p>
 
 					<div class="contact-form" style="margin-top: 20px">
@@ -245,6 +248,7 @@ Markdown formatting is partially supported."
 				appId: "1:636989973689:web:6d938d9588606d803a6768",
 			};
 			const app = initializeApp(firebaseConfig);
+			const database = getDatabase();
 
 			// OPTIONS
 			let types = ["ISSUES", "COMMENTS", "SUGGESTIONS", "QUESTIONS", "HELP", "OTHER"];
@@ -274,36 +278,37 @@ Markdown formatting is partially supported."
 			}
 
 			// SUBMIT FORM
-			function submit(e) {
-				let messageSubject = document.querySelector("#contact-form-subject").value;
-				let messageBody = document.querySelector("#contact-form-body").value;
+			async function submit(event) {
+				event.preventDefault();
 
-				if (messageSubject == "" || messageBody == "") window.location.href = "yikes.html?s=406";
-				else {
-					try {
-						const db = getDatabase();
-						get(ref(db, "omega-seal/status")).then(async (snapshot) => {
-							if (snapshot.exists()) {
-								if (snapshot.val().online) {
-									const newMessageRef = await push(ref(db, "omega-seal/contact-form-messages"));
-									await set(newMessageRef, {
-										typeSelected: typeSelected,
-										prioritySelected: prioritySelected,
-										messageSubject: messageSubject,
-										messageBody: messageBody,
-									});
-									window.location.href = "yikes.html?s=202";
-								} else window.location.href = "yikes.html?s=503";
-							} else {
-								window.location.href = "yikes.html?s=503";
-							}
+				let messageSubject = document.querySelector("#contact-form-subject").value.replaceAll(/`/g, "<backtick>");
+				let messageBody = document.querySelector("#contact-form-body").value.replaceAll(/```/g, "<backticks>");
+
+				if (
+					messageSubject == "" ||
+					messageBody == "" ||
+					messageSubject.length > 100 ||
+					messageBody.length > 1500 ||
+					!types.includes(typeSelected) ||
+					!priorities.includes(prioritySelected)
+				) {
+					window.location.href = "yikes.html?s=406"; // "ERROR 406 / Not Acceptable"
+				} else {
+					await push(ref(database, "omega-seal/contact-form-messages"), {
+						typeSelected: typeSelected,
+						prioritySelected: prioritySelected,
+						messageSubject: messageSubject,
+						messageBody: messageBody,
+						timestamp: Date.now(),
+					})
+						.then((success) => {
+							window.location.href = "yikes.html?s=202"; // "SUCCESS 202 / Accepted"
+						})
+						.catch((error) => {
+							console.error(error);
+							window.location.href = "yikes.html?s=500"; // "ERROR 500 / Internal Server Error"
 						});
-					} catch (error) {
-						window.location.href = "yikes.html?s=500";
-					}
 				}
-
-				e.preventDefault();
 			}
 
 			// SUBMIT FORM ("click")
