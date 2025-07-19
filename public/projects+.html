@@ -186,7 +186,7 @@
 						<p class="blog-archive">
 							<span class="blog-archive-list-marker"><i class="fa-solid fa-table-cells fa-fw"></i></span>
 							<span class="blog-archive-list-item"
-								><a class="link" href="download.html?x=crossword.pdf">Crossword</a>
+								><a class="link" href="download.html?x=crossword.pdf">crossword</a>
 								<span class="blog-archive">— With over seventy carefully connected words.</span>
 								<i class="fa-solid fa-download"></i>
 							</span>
@@ -452,7 +452,12 @@
 
 	<script src="files/to-top.js"></script>
 
-	<script>
+	<script type="module">
+		const requestURL = "files/projects.json";
+		const request = new Request(requestURL);
+		const response = await fetch(request);
+		const responseJSON = await response.json();
+
 		// --- PART ONE: FILTER RESULTS ---
 		try {
 			// get things from URL
@@ -613,35 +618,6 @@
 			}
 		});
 
-		// --- PART THREE: MODIFIED FOOTER.JS TO PLACE FOOTER AT BOTTOM AFTER FONT AWESOME HAS LOADED ---
-		// const content = document.querySelector(".content");
-		// const icon = document.querySelector(".page-title i");
-
-		// function setFooterSpace() {
-		// 	let contentBottom = document.querySelector(".content-end").getBoundingClientRect().bottom;
-		// 	let screenHeight = window.innerHeight;
-
-		// 	if (screenHeight - 80 > contentBottom) {
-		// 		const space = document.createElement("div");
-		// 		const height = screenHeight - 80 - contentBottom;
-		// 		console.log(`DEBUG: added a ${height}px tall space to the bottom of this page.`);
-		// 		space.setAttribute("style", `height: ${height}px`);
-		// 		content.appendChild(space);
-		// 	}
-		// }
-
-		// const iconSizeCheck = setInterval(() => {
-		// 	let iconWidth = icon.getBoundingClientRect().width;
-		// 	let iconHeight = icon.getBoundingClientRect().height;
-
-		// 	console.log(iconWidth, iconHeight);
-
-		// 	if (iconWidth != 0 && iconHeight != 0) {
-		// 		setFooterSpace();
-		// 		clearInterval(iconSizeCheck);
-		// 	}
-		// }, 20);
-
 		// --- PART FOUR: TOOLTIPS! ---
 		document.querySelectorAll(".new, .updated, .beta, .tag").forEach((tooltipZone) => {
 			const tooltip = tooltipZone.children[0];
@@ -658,55 +634,18 @@
 		});
 
 		// --- PART FIVE: RANDOM PROJECT! ---
-
-		const projects = [
-			"10\\/10 would recommend",
-			"BezierCurves",
-			"BUS DATA",
-			"Bus Ride Bingo",
-			"Chess",
-			"Chess — FEN preview",
-			"Clock",
-			"countdown",
-			"crosswords",
-			"Crossword",
-			"crossword2",
-			"Deathrun\\+",
-			"fa\\-random",
-			"Finite Craft",
-			"fOnT mAsHeR",
-			"Graph Theory EXPLAINED",
-			"Guess the Font",
-			"Hues\\+Cues",
-			"Lethal Company Mods",
-			"Minecraft &amp; Motion",
-			"Mjölnir",
-			"MouseMaze",
-			"numbers",
-			"Omega Seal",
-			"PlainPlanes",
-			"Playlists",
-			"progress",
-			"Rubik’s Cube Scrambler",
-			"Shrink to Fit",
-			"Small Subways",
-			"Subject\\/Course Colour Graphs",
-			"text",
-			"The Square",
-			"Think Four",
-			"TicTacToe",
-			"Type",
-			"Typewriter Simulator",
-			"v",
-			"WandStuff",
-			"wordlelele",
-			"Words",
-		];
-
 		function randomSearch() {
+			let projectNames = [];
+			for (let project in responseJSON) projectNames.push(project);
+
 			document
 				.querySelector("#randomProjectButton")
-				.setAttribute("href", `projects+.html?search=%5E${encodeURIComponent(projects[Math.floor(Math.random() * projects.length)])}%24&r=t`);
+				.setAttribute(
+					"href",
+					`projects+.html?search=%5E${encodeURIComponent(
+						projectNames[Math.floor(Math.random() * projectNames.length)].replace(/\//g, "\\/").replace(/\+/g, "\\+").replace(/\-/g, "\\-").replace(/&/g, "&amp;")
+					)}%24&r=t`
+				);
 		}
 
 		document.querySelector("#randomProjectButton").addEventListener("click", (e) => {
