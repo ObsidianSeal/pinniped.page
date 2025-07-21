@@ -478,7 +478,7 @@
 					}</span>&nbsp;${thing.toUpperCase()}&nbsp;</span>&nbsp;`;
 			}
 
-			projectElement.innerHTML = `<span class="blog-archive-list-marker"><i class="fa-solid fa-${responseJSON[project].icon} fa-fw"></i></span><span class="blog-archive-list-item"><a class="link" href="${link}" target="_blank">${project}</a>&nbsp;${tags}<span class="blog-archive">— ${responseJSON[project].description}</span>${flag}</span>`;
+			projectElement.innerHTML = `<span class="blog-archive-list-marker"><i class="fa-solid fa-${responseJSON[project].icon} fa-fw"></i></span><span class="blog-archive-list-item"><a class="link" href="${link}" title="${project}">${project}</a>&nbsp;${tags}<span class="blog-archive">— ${responseJSON[project].description}</span>${flag}</span>`;
 			document.querySelector("#searchable").appendChild(projectElement);
 		}
 

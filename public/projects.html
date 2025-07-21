@@ -193,7 +193,7 @@
 
 				let projectContainer = document.createElement("div");
 				projectContainer.classList.add("box", "box-alt");
-				projectContainer.innerHTML = `<h2 class="box-thing invert">#${project.featured}</h2><div><a class="title title-alt hoverable-title" href="${link}">${projectName}</a><p class="box-subtitle-alt">${tags}${project.description}${flag}</p></div>`;
+				projectContainer.innerHTML = `<h2 class="box-thing invert">#${project.featured}</h2><div><a class="title title-alt hoverable-title" href="${link}" title="${projectName}">${projectName}</a><p class="box-subtitle-alt">${tags}${project.description}${flag}</p></div>`;
 				document.querySelector(".box-area.content-container").prepend(projectContainer);
 			}
 

@@ -888,6 +888,10 @@ ul {
 	flex: 1 0 auto;
 }
 
+.box-area.content-container:has(.box-alt) {
+	margin-top: 30px;
+}
+
 /* #download-link {
 	display: flex;
 	align-items: center;
@@ -1321,7 +1325,7 @@ ul {
 		top: -26px;
 	}
 
-	.box-alt {
+	.box-alt:not(:first-child) {
 		margin-top: 60px;
 	}
 }
