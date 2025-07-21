@@ -123,8 +123,8 @@
 			}
 
 			h4 {
+				right: 50px;
 				bottom: 50px;
-				left: 50px;
 			}
 
 			/* classes */
@@ -792,8 +792,8 @@
 				}
 
 				h4 {
+					right: 30px;
 					bottom: 30px;
-					left: 30px;
 				}
 
 				.titles {
@@ -893,8 +893,8 @@
 				}
 
 				h4 {
+					right: 20px;
 					bottom: 20px;
-					left: 20px;
 				}
 
 				.solved div {
@@ -1334,7 +1334,7 @@
 						if (puzzle == lastPuzzle) break;
 					}
 					randomPuzzle = possibleRandomPuzzleDates[Math.floor(Math.random() * possibleRandomPuzzleDates.length)];
-					document.querySelector("#notice-panel-random-link").href = `?puzzle=${randomPuzzle}`;
+					if (!window.location.href.includes("?")) document.querySelector("#notice-panel-random-link").href = `?puzzle=${randomPuzzle}`;
 
 					// disable same
 					if (firstPuzzle == date) document.querySelector(".puzzle-select-buttons span:nth-child(1)").classList.add("disabled");

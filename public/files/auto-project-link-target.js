@@ -3,6 +3,10 @@ let depth = location.href.replaceAll(/[^\/]+/g, "").length;
 if (location.href.includes("pinniped.page")) depth -= 2;
 else depth -= 3;
 
+// sometimes there are slashes in URL arguments
+if (location.href.includes("?")) depth -= location.href.substring(location.href.indexOf("?")).replaceAll(/[^\/]+/g, "").length;
+else if (location.href.includes("#")) depth -= location.href.substring(location.href.indexOf("#")).replaceAll(/[^\/]+/g, "").length;
+
 // set backLinkString
 let backLinkString = "";
 for (let i = 0; i < depth - 1; i++) backLinkString += "../";
