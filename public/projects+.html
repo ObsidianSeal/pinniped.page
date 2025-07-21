@@ -114,7 +114,7 @@
 						<span class="blog-archive-list-item"> <i class="fa-solid fa-triangle-exclamation"></i> <span class="blog-archive">= service unavailable</span> </span>
 					</p>
 					<div id="searchable">
-						<p class="blog-archive">
+						<!-- <p class="blog-archive">
 							<span class="blog-archive-list-marker"><i class="fa-solid fa-star fa-fw"></i></span>
 							<span class="blog-archive-list-item">
 								<a class="link" href="projects/rate.html" target="_blank">10/10 would recommend</a>&nbsp;<span class="blog-archive"
@@ -436,7 +436,7 @@
 								<span class="blog-archive">— Offline Java Wordle with some weird differences.</span>
 								<i class="fa-solid fa-download"></i>
 							</span>
-						</p>
+						</p> -->
 					</div>
 
 					<div class="content-end"></div>
@@ -457,6 +457,30 @@
 		const request = new Request(requestURL);
 		const response = await fetch(request);
 		const responseJSON = await response.json();
+
+		for (let project in responseJSON) {
+			let projectElement = document.createElement("p");
+			projectElement.classList.add("blog-archive");
+
+			let link = "";
+			if (responseJSON[project].path.startsWith("projects/")) link = responseJSON[project].path + ".html";
+			else link = "download.html?x=" + responseJSON[project].path.substring(6);
+
+			let flag = "";
+			if (responseJSON[project].flag == "!") flag = ` <i class="fa-kit fa-solid-mobile-screen-slash"></i>`;
+			else if (responseJSON[project].flag != "") flag = ` <i class="fa-solid fa-${responseJSON[project].flag}"></i>`;
+
+			let tags = "";
+			for (let thing in responseJSON[project].tags) {
+				if (responseJSON[project].tags[thing][0] != "")
+					tags += `<span class="${thing}"><span class="tooltip">${responseJSON[project].tags[thing][0]} — ${
+						responseJSON[project].tags[thing][1]
+					}</span>&nbsp;${thing.toUpperCase()}&nbsp;</span>&nbsp;`;
+			}
+
+			projectElement.innerHTML = `<span class="blog-archive-list-marker"><i class="fa-solid fa-${responseJSON[project].icon} fa-fw"></i></span><span class="blog-archive-list-item"><a class="link" href="${link}" target="_blank">${project}</a>&nbsp;${tags}<span class="blog-archive">— ${responseJSON[project].description}</span>${flag}</span>`;
+			document.querySelector("#searchable").appendChild(projectElement);
+		}
 
 		// --- PART ONE: FILTER RESULTS ---
 		try {

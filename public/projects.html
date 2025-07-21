@@ -83,87 +83,6 @@
 			<h2 class="page-title"><span class="half-opacity">pinniped.page/</span><span class="title">projects</span><i class="fa-solid fa-code"></i></h2>
 
 			<div class="box-area content-container">
-				<div class="box box-alt">
-					<h2 class="box-thing invert">?</h2>
-
-					<div>
-						<a class="title title-alt hoverable-title" href="projects/the-square.html">The Square</a>
-
-						<p class="box-subtitle-alt">
-							<span
-								><span class="new"><span class="tooltip">July 15th — now with population data!</span>&nbsp;NEW&nbsp;</span></span
-							>Interactive LEGO map; watch the YouTube video first.
-						</p>
-					</div>
-				</div>
-
-				<div class="box box-alt">
-					<h2 class="box-thing invert">?</h2>
-
-					<div>
-						<a class="title title-alt hoverable-title" href="projects/omega-seal.html">Omega Seal</a>
-
-						<p class="box-subtitle-alt">
-							<span
-								><span class="new"><span class="tooltip">July 4th — epic documentation is complete</span>&nbsp;NEW&nbsp;</span></span
-							>Obsidian_Seal&rsquo;s personal Discord bot!
-						</p>
-					</div>
-				</div>
-
-				<div class="box box-alt">
-					<h2 class="box-thing invert">?</h2>
-
-					<div>
-						<a class="title title-alt hoverable-title" href="projects/brb.html">Bus Ride Bingo</a>
-
-						<p class="box-subtitle-alt">
-							<span
-								><span class="new"><span class="tooltip">June 9th — v2.0.0</span>&nbsp;NEW&nbsp;</span
-								><span class="updated"><span class="tooltip">June 25th — version validation</span>&nbsp;UPDATED&nbsp;</span></span
-							>Play bus-related bingo with friends while on the bus.
-						</p>
-					</div>
-				</div>
-
-				<div class="box box-alt">
-					<h2 class="box-thing invert">?</h2>
-
-					<div>
-						<a class="title title-alt hoverable-title" href="projects/bus-data.html">BUS DATA</a>
-
-						<p class="box-subtitle-alt">
-							<span
-								><span class="new"><span class="tooltip">May 14th — VERSION 1.0.0 RELEASE AFTER 38 DAYS OF DEVELOPMENT</span>&nbsp;NEW&nbsp;</span
-								><span class="updated"
-									><span class="tooltip"
-										>June 27th — route colours have all changed, etc. (v1.0.3)<br />June 29th — option to only show articulated buses on map, etc.
-										(v1.1.0)</span
-									>&nbsp;UPDATED&nbsp;</span
-								></span
-							>Where are London Transit&rsquo;s articulated buses?
-						</p>
-					</div>
-				</div>
-
-				<div class="box box-alt">
-					<h2 class="box-thing invert">?</h2>
-
-					<div>
-						<a class="title title-alt hoverable-title" href="projects/playlists.html">Playlists</a>
-
-						<p class="box-subtitle-alt">
-							<span
-								><span class="updated"
-									><span class="tooltip"
-										>June 25th — fixed a couple numbers that were showing as times (and, of course, there&rsquo;s a new playlist)</span
-									>&nbsp;UPDATED&nbsp;</span
-								></span
-							>Music, yum!
-						</p>
-					</div>
-				</div>
-
 				<div class="new-button-group">
 					<a class="new-button small-text" href="projects+.html" title="pinniped.page — Projects+">
 						<div>
@@ -226,10 +145,57 @@
 		</script>
 
 		<script type="module">
+			/*
+			 * hello and welcome to the updated Projects page script - now with "externally-sourced" project data! YIPPEE
+			 * yes it is disgusting
+			 * no I will not be improving it
+			 */
+
 			const requestURL = "files/projects.json";
 			const request = new Request(requestURL);
 			const response = await fetch(request);
 			const responseJSON = await response.json();
+
+			let featuredProjectData = [];
+
+			for (let project in responseJSON) {
+				if (responseJSON[project].featured > 0) {
+					featuredProjectData.push([project, responseJSON[project]]);
+				}
+			}
+
+			featuredProjectData.sort(function (a, b) {
+				return b[1].featured - a[1].featured;
+			});
+
+			for (let entry of featuredProjectData) {
+				let projectName = entry[0];
+				let project = entry[1];
+
+				let link = "";
+				if (project.path.startsWith("projects/")) link = project.path + ".html";
+				else link = "download.html?x=" + project.path.substring(6);
+
+				let flag = "";
+				if (project.flag == "!") flag = ` <i class="fa-kit fa-solid-mobile-screen-slash half-opacity"></i>`;
+				else if (project.flag != "") flag = ` <i class="fa-solid fa-${project.flag} half-opacity"></i>`;
+
+				let tags = "";
+				if (project.tags.new[0] != "" || project.tags.updated[1] != "" || project.tags.beta[2] != "" || project.tags.tag[3] != "") {
+					for (let thing in project.tags) {
+						if (project.tags[thing][0] != "")
+							tags += `<span class="${thing}"><span class="tooltip">${project.tags[thing][0]} — ${
+								project.tags[thing][1]
+							}</span>&nbsp;${thing.toUpperCase()}&nbsp;</span>`;
+					}
+					tags = "<span>" + tags + "</span>";
+				}
+
+				let projectContainer = document.createElement("div");
+				projectContainer.classList.add("box", "box-alt");
+				projectContainer.innerHTML = `<h2 class="box-thing invert">#${project.featured}</h2><div><a class="title title-alt hoverable-title" href="${link}">${projectName}</a><p class="box-subtitle-alt">${tags}${project.description}${flag}</p></div>`;
+				document.querySelector(".box-area.content-container").prepend(projectContainer);
+			}
 
 			var selectedTag = "null";
 
@@ -336,13 +302,6 @@
 				if (e.key == "Enter") {
 					randomSearch();
 				}
-			});
-
-			// -----
-
-			let featureIndex = 0;
-			document.querySelectorAll(".box-thing").forEach((thing) => {
-				thing.innerHTML = `#${++featureIndex}`;
 			});
 		</script>
 

@@ -285,19 +285,19 @@
 		"featured": 0
 	},
 	"KC": {
-		"basic": null,
+		"basic": false,
 		"icon": "keyboard",
 		"path": "projects/kc",
 		"connected": false,
 		"description": "Determine JavaScript keyCodes.",
 		"flag": "",
 		"tags": {
-			"new": ["", ""],
+			"new": ["July 12th", "&ldquo;Type&rdquo; has been renamed to KC; see the Status page for more details."],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 5
+		"featured": 0
 	},
 	"Lethal Company Mods": {
 		"basic": false,
