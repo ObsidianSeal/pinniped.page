@@ -47,6 +47,7 @@
 				--main: black;
 
 				--g: #00000030;
+				--gg: #00000015;
 
 				--c1: #4936577f;
 				--c2: #ce7da57f;
@@ -371,6 +372,35 @@
 				display: none !important;
 			}
 
+			.badges {
+				display: grid;
+				grid-template-columns: 40% 40% 20%;
+			}
+
+			.badge-info-column p {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+
+			.badge-info-column p:nth-child(2n) {
+				background-color: var(--gg);
+			}
+
+			.badge-info-column p:first-child {
+				font-size: 18px;
+				font-weight: bold;
+				letter-spacing: 0.025rem;
+			}
+
+			.badge-info-column:nth-child(2) p {
+				text-align: center;
+			}
+
+			.badge-info-column:last-child p {
+				text-align: right;
+			}
+
 			#to_top_button {
 				width: 50px;
 				height: 50px;
@@ -500,7 +530,8 @@
 					margin-right: 0;
 				}
 
-				.playlist-info {
+				.playlist-info,
+				.badge-info-column p:first-child {
 					font-size: 14px;
 				}
 
@@ -564,23 +595,8 @@
 				All of the
 				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a>
 				playlists I&rsquo;ve created, in one convenient place. I use this page to share music with friends and family, to avoid using a song in more than one monthly
-				playlist, to investigate my playlist data, and to remind myself of music I may have forgotten. Enjoy! <i class="fa-regular fa-face-smile"></i>
-			</p>
-
-			<h2 class="note news">
-				<i class="fa-regular fa-bullhorn"></i> There are lots of new features! Make sure to read everything I&rsquo;ve written, paying particular attention to the new
-				buttons.
-				<div>ANNOUNCEMENT</div>
-			</h2>
-
-			<h2 class="note news">
-				<i class="fa-regular fa-bullhorn"></i> I&rsquo;m testing a new font — Adobe ruined Roca so I&rsquo;ve switched to Pangram Pangram&rsquo;s Editorial Old — tell
-				me what you think!
-				<div>ANNOUNCEMENT</div>
-			</h2>
-
-			<p>
-				Listed below each playlist&rsquo;s title is the playlist&rsquo;s number of tracks, length, and the date at which it was last updated on this page. Click on a
+				playlist, to investigate my playlist data, and to remind myself of music I may have forgotten. Enjoy! <i class="fa-regular fa-face-smile"></i><br /><br />Listed
+				below each playlist&rsquo;s title is the playlist&rsquo;s number of tracks, length, and the date at which it was last updated on this page. Click on a
 				playlist&rsquo;s &ldquo;listen&rdquo; button to open it in
 				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a> or &ldquo;rate&rdquo;
 				button to rate all the tracks in the playlist out of five stars! Click on the arrow to the left of a playlist&rsquo;s title to view its list of tracks,
@@ -656,10 +672,10 @@
 			<b><i class="fa-solid fa-stopwatch fa-fw"></i> shortest length (runtime)</b>
 			<p></p>
 			<br />
-			<b><i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists; must have at least three)</b>
+			<b id="top-artists"><i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists; must have at least three)</b>
 			<p></p>
 			<br />
-			<b><i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists; must have at least three)</b>
+			<b id="top-albums"><i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists; must have at least three)</b>
 			<p></p>
 			<br />
 			<b class="highlight c5">PART 2: THE OTHER PLAYLISTS</b>
@@ -692,6 +708,54 @@
 			<br />
 			<b><i class="fa-solid fa-fire fa-fw"></i> most recently updated</b>
 			<p></p>
+			<br />
+			<b class="highlight c5">PART 4: BADGES</b>
+			<br /><br />
+			<b><i class="fa-solid fa-badge-percent"></i> &ldquo;Top Listener&rdquo; Badges</b>
+			<div class="badges">
+				<div class="badge-info-column">
+					<p>MONTH</p>
+					<p>June 2025</p>
+					<p>May 2025</p>
+					<p>April 2025</p>
+					<p>March 2025</p>
+					<p>February 2025</p>
+					<p>January 2025</p>
+					<p>December 2024</p>
+					<p>November 2024</p>
+					<p>October 2024</p>
+					<p>September 2024</p>
+					<p>August 2024</p>
+				</div>
+				<div class="badge-info-column">
+					<p>ARTIST</p>
+					<p>Benson Boone</p>
+					<p>Hozier</p>
+					<p>Jon Bellion</p>
+					<p>Djo</p>
+					<p>Hozier</p>
+					<p>Hozier</p>
+					<p>Hozier</p>
+					<p>Hozier</p>
+					<p>Hozier</p>
+					<p>Conan Gray</p>
+					<p>OneRepublic</p>
+				</div>
+				<div class="badge-info-column">
+					<p>PERCENTAGE</p>
+					<p>0.1%</p>
+					<p>0.08%</p>
+					<p>0.07%</p>
+					<p>0.02%</p>
+					<p>0.02%</p>
+					<p>0.04%</p>
+					<p>0.03%</p>
+					<p>0.02%</p>
+					<p>0.25%</p>
+					<p>0.1%</p>
+					<p>0.08%</p>
+				</div>
+			</div>
 		</div>
 
 		<script>
@@ -807,7 +871,7 @@
 						],
 						["Crystal Dolphin", "Engelwood", "Crust FM"],
 						["Axel F", "Crazy Frog", "Crazy Hits"],
-						["September", "Earth, Wind & Fire", "The Best Of Earth, Wind & Fire Vol. 1"],
+						["September", "Earth, Wind &amp; Fire", "The Best Of Earth, Wind & Fire Vol. 1"],
 						["Part Of Me", "Katy Perry", "Teenage Dream: The Complete Confection"],
 						["Summer of Luv (feat. Unknown Mortal Orchestra)", "Portugal. The Man", "Chris Black Changed My Life"],
 						["Crab Rave", "Noisestorm", "Crab Rave"],
@@ -1517,7 +1581,7 @@
 						],
 						["Rasputin", "Boney M.", "Nightflight to Venus"],
 						["Free Bird", "Lynyrd Skynyrd", "The Essential Lynyrd Skynyrd"],
-						["September", "Earth, Wind & Fire", "The Best Of Earth, Wind & Fire Vol. 1"],
+						["September", "Earth, Wind &amp; Fire", "The Best Of Earth, Wind & Fire Vol. 1"],
 						["Challengers", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
 						["Don&rsquo;t Stop Me Now", "Queen", "Jazz (Deluxe Remastered Version)"],
 						["VYSE", "VALORANT & Kordhell", "VYSE"],
@@ -1619,7 +1683,11 @@
 
 			// shhhh
 			let secretNumber = 2;
-			if (window.location.href.includes("?")) secretNumber = 0;
+			if (window.location.href.includes("?")) {
+				secretNumber = 0;
+				document.querySelector("#top-artists").innerHTML = '<i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists)';
+				document.querySelector("#top-albums").innerHTML = '<i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists)';
+			}
 
 			// add all the data to the page
 			function addPlaylist(title, link, totalTracks, totalTime, lastUpdated) {
@@ -1984,6 +2052,7 @@
 					for (let artist in artistNumbers) {
 						if (artistNumbers[artist][0] <= secretNumber) delete artistNumbers[artist];
 					}
+					delete artistNumbers["GenesisFan64YT"]; // the only YouTube video by someone other than the original artist (presumably) (in the monthly playlists)
 
 					let artistNumbersArray = Object.values(artistNumbers).sort(function (a, b) {
 						return b[0] - a[0];

@@ -413,7 +413,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["June 25th", "fixed a couple numbers that were showing as times (and, of course, there’s a new playlist)"],
+			"updated": ["July 22nd", "removed announcements, added badge details, etc."],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -533,7 +533,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["July 22nd", "rating system is working again"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
