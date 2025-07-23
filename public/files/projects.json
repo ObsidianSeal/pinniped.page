@@ -20,7 +20,7 @@
 		"path": "projects/bezier-curves",
 		"connected": true,
 		"description": "Play with bézier curves.",
-		"flag": "!",
+		"flag": "",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["May 29th", "a couple more buttons"],
@@ -155,10 +155,10 @@
 		"path": "projects/crosswords",
 		"connected": false,
 		"description": "Solve crosswords by me and others, timed and online.",
-		"flag": "!",
+		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["July 23rd", "IMPORTANT: new screen size requirement: at least 1000 CSS pixels wide"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -215,14 +215,29 @@
 		"path": "projects/craft",
 		"connected": true,
 		"description": "Infinite Craft, but just the crafting part.",
-		"flag": "!",
+		"flag": "",
+		"tags": {
+			"new": ["", ""],
+			"updated": ["July 23rd", "IMPORTANT: new screen size requirement: at least 1150 CSS pixels wide"],
+			"beta": ["", ""],
+			"tag": ["", ""]
+		},
+		"featured": 0
+	},
+	"Finite Craft - help!": {
+		"basic": true,
+		"icon": "question",
+		"path": "projects/craft/how-to",
+		"connected": true,
+		"description": "Finite Craft information, instructions, ideas, and more.",
+		"flag": "",
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 7
 	},
 	"fOnT mAsHeR": {
 		"basic": false,

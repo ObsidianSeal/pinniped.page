@@ -538,7 +538,7 @@
 		</style>
 	</head>
 
-	<body>
+	<body class="fa-width-auto">
 		<h1>
 			&ldquo;<span class="puzzle-title"></span>&rdquo; <span class="material-symbols-outlined">arrow_drop_down</span>
 			<div class="choose-puzzle-menu hide"></div>
@@ -2740,6 +2740,8 @@
 					window.location.href = "../yikes.html?s=400";
 				}
 			}
+
+			if (window.innerWidth < 1000) window.location.href = "../yikes.html?s=701";
 		</script>
 
 		<script src="../files/auto-project-link-target.js" type="module"></script>

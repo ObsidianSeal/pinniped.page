@@ -61,10 +61,10 @@
 		</style>
 	</head>
 
-	<body>
+	<body class="fa-width-auto">
 		<div class="navbar">
 			<a class="invert navbar-item" href="index.html"><img class="navbar-icon" src="images/icon.png" alt="pinniped.page logo" /></a>
-			<a class="invert navbar-item item1" href="projects.html"><p>Projects</p></a>
+			<a class="invert navbar-item item1" href="projects+.html"><p>Projects+</p></a>
 			<a class="invert navbar-item item2" href="blog.html"><p>Blog</p></a>
 			<a class="invert navbar-item item3" href="about.html"><p>About</p></a>
 
@@ -74,7 +74,7 @@
 
 		<div id="navbar-mobile">
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="index.html">Home</a></h2>
-			<h2 class="navbar-item-mobile-2"><a class="invert" href="projects.html">Projects</a></h2>
+			<h2 class="navbar-item-mobile-2"><a class="invert" href="projects+.html">Projects+</a></h2>
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="blog.html">Blog</a></h2>
 			<h2 class="navbar-item-mobile-2"><a class="invert" href="about.html">About</a></h2>
 		</div>
@@ -177,8 +177,8 @@
 				else link = "download.html?x=" + project.path.substring(6);
 
 				let flag = "";
-				if (project.flag == "!") flag = ` <i class="fa-kit fa-solid-mobile-screen-slash half-opacity"></i>`;
-				else if (project.flag != "") flag = ` <i class="fa-solid fa-${project.flag} half-opacity"></i>`;
+				if (project.flag != "") flag = ` <i class="fa-solid fa-${project.flag} half-opacity"></i>`;
+				else if (project.basic) flag = ` <i class="fa-solid fa-newspaper half-opacity"></i>`;
 
 				let tags = "";
 				if (project.tags.new[0] != "" || project.tags.updated[1] != "" || project.tags.beta[2] != "" || project.tags.tag[3] != "") {

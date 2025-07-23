@@ -688,7 +688,7 @@
 		</style>
 	</head>
 
-	<body>
+	<body class="fa-width-auto">
 		<div class="discoveries-sidebar" tabindex="-1">
 			<div class="discovered-items" tabindex="-1"></div>
 			<div class="sorting-options">
@@ -2396,6 +2396,8 @@
 			sortByTimeButton.classList.add("active");
 
 			// getAll();
+
+			if (window.innerWidth < 1150) window.location.href = "../yikes.html?s=701";
 		</script>
 
 		<script src="../files/auto-project-link-target.js" type="module"></script>
