@@ -286,9 +286,6 @@
 					updateURL();
 				});
 
-				textbox.style.height = "0px";
-				textbox.style.height = textbox.scrollHeight + "px";
-
 				if (update != null) {
 					if (update) updateURL();
 				}
@@ -381,6 +378,13 @@
 						false
 					);
 				}
+
+			window.addEventListener("load", () => {
+				document.querySelectorAll("textarea").forEach((textbox) => {
+					textbox.style.height = "0px";
+					textbox.style.height = textbox.scrollHeight + "px";
+				});
+			});
 		</script>
 
 		<script src="../files/auto-project-link-target.js" type="module"></script>

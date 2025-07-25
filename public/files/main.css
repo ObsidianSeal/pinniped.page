@@ -300,6 +300,7 @@ ul {
 .box-icon {
 	margin: auto 0 auto 10px;
 	font-size: 80px;
+	width: fit-content !important;
 }
 
 .box-thing {
@@ -771,6 +772,7 @@ ul {
 
 .highlighted-box > :first-child {
 	font-size: 32px;
+	width: fit-content !important;
 }
 
 .light-grey {

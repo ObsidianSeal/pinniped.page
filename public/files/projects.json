@@ -8,11 +8,11 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["July 25th", "I think I fixed the textarea size on URL load issue"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 10
 	},
 	"BezierCurves": {
 		"basic": false,
@@ -237,7 +237,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 7
+		"featured": 0
 	},
 	"fOnT mAsHeR": {
 		"basic": false,
@@ -428,7 +428,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 22nd", "removed announcements, added badge details, etc."],
+			"updated": ["July 25th", "bbno$"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -627,7 +627,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 6
+		"featured": 0
 	},
 	"Words": {
 		"basic": false,
