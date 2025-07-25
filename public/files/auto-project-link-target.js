@@ -51,4 +51,8 @@ document.querySelectorAll("a").forEach((link) => {
 			}
 		}
 	}
+
+	if (!(link.href.startsWith("https://pinniped.page") || link.href.includes("localhost:5500/public/")) || link.href == "https://pinniped.page/discord")
+		link.setAttribute("target", "_blank");
+	else link.removeAttribute("target");
 });

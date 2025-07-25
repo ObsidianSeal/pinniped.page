@@ -594,14 +594,14 @@
 			<h1><i class="fa-solid fa-folder-music"></i> Playlists</h1>
 			<p>
 				All of the
-				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a>
+				<a class="highlight-underline c2" href="https://music.youtube.com/" title="YouTube Music [EXTERNAL]">YouTube Music</a>
 				playlists I&rsquo;ve created, in one convenient place. I use this page to share music with friends and family, to avoid using a song in more than one monthly
 				playlist, to investigate my playlist data, and to remind myself of music I may have forgotten. Enjoy! <i class="fa-regular fa-face-smile"></i><br /><br />Listed
 				below each playlist&rsquo;s title is the playlist&rsquo;s number of tracks, length, and the date at which it was last updated on this page. Click on a
 				playlist&rsquo;s &ldquo;listen&rdquo; button to open it in
-				<a class="highlight-underline c2" href="https://music.youtube.com/" target="_blank" title="YouTube Music [EXTERNAL]">YouTube Music</a> or &ldquo;rate&rdquo;
-				button to rate all the tracks in the playlist out of five stars! Click on the arrow to the left of a playlist&rsquo;s title to view its list of tracks,
-				including titles, artists, and albums. As for everything else, you can hover over buttons and links to see what they do or where they lead.
+				<a class="highlight-underline c2" href="https://music.youtube.com/" title="YouTube Music [EXTERNAL]">YouTube Music</a> or &ldquo;rate&rdquo; button to rate all
+				the tracks in the playlist out of five stars! Click on the arrow to the left of a playlist&rsquo;s title to view its list of tracks, including titles, artists,
+				and albums. As for everything else, you can hover over buttons and links to see what they do or where they lead.
 				<i class="fa-regular fa-arrow-pointer"></i>
 			</p>
 
@@ -627,32 +627,23 @@
 			<p>
 				If you&rsquo;d rather listen on another music streaming service, you might be able to find a converter or transferring service if you look. Happy listening.
 				<i class="fa-regular fa-list-music"></i><br /><br />Exact playlist lengths were determined with Srijan Sharma&rsquo;s
-				<a class="highlight-underline c3" href="https://ypc.vercel.app/" target="_blank" title="YouTube Playlist Calculator [EXTERNAL]">YouTube Playlist Calculator</a>.
-				If that doesn&rsquo;t work, try Sharat Sachin&rsquo;s
-				<a class="highlight-underline c3" href="https://ytplaylist-len.sharats.dev/" target="_blank" title="YouTube Playlist Length [EXTERNAL]"
-					>YouTube Playlist Length</a
-				>. <i class="fa-regular fa-music"></i><br /><br />I&rsquo;m always open to music recommendations. Send me yours through the
+				<a class="highlight-underline c3" href="https://ypc.vercel.app/" title="YouTube Playlist Calculator [EXTERNAL]">YouTube Playlist Calculator</a>. If that
+				doesn&rsquo;t work, try Sharat Sachin&rsquo;s
+				<a class="highlight-underline c3" href="https://ytplaylist-len.sharats.dev/" title="YouTube Playlist Length [EXTERNAL]">YouTube Playlist Length</a>.
+				<i class="fa-regular fa-music"></i><br /><br />I&rsquo;m always open to music recommendations. Send me yours through the
 				<a class="highlight-underline c3" href="../contact.html" title="Contact">Contact page</a>! Connection through music is a wonderful thing.
 				<i class="fa-regular fa-heart"></i><br /><br />This page is typeset in
-				<a
-					class="highlight-underline c3"
-					href="https://pangrampangram.com/products/neue-montreal"
-					target="_blank"
-					title="Pangram Pangram Foundry / Neue Montreal [EXTERNAL]"
+				<a class="highlight-underline c3" href="https://pangrampangram.com/products/neue-montreal" title="Pangram Pangram Foundry / Neue Montreal [EXTERNAL]"
 					>Neue Montreal</a
 				>
 				by Mat Desjardins and
-				<a
-					class="highlight-underline c3"
-					href="https://pangrampangram.com/products/editorial-old"
-					target="_blank"
-					title="Pangram Pangram Foundry / Editorial Old [EXTERNAL]"
+				<a class="highlight-underline c3" href="https://pangrampangram.com/products/editorial-old" title="Pangram Pangram Foundry / Editorial Old [EXTERNAL]"
 					>Editorial Old</a
 				>
 				by Mat Desjardins, Fred Wiltshire, and Francesca Bolognini. Both typefaces come from
-				<a class="highlight-underline c3" href="https://pangrampangram.com/" target="_blank" title="Pangram Pangram Foundry [EXTERNAL]">Pangram Pangram Foundry</a>.
+				<a class="highlight-underline c3" href="https://pangrampangram.com/" title="Pangram Pangram Foundry [EXTERNAL]">Pangram Pangram Foundry</a>.
 				<i class="fa-regular fa-leaf-maple"></i><br /><br />This page also makes use of
-				<a class="highlight-underline c3" href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a> icons.
+				<a class="highlight-underline c3" href="https://fontawesome.com/" title="Font Awesome [EXTERNAL]">Font Awesome</a> icons.
 				<i class="fa-regular fa-font-awesome"></i><br /><br />Found an issue with this page? Report it on the
 				<a class="highlight-underline c3" href="../contact.html" title="Contact">Contact page</a>. <i class="fa-regular fa-comment"></i>
 			</p>
@@ -1716,9 +1707,9 @@
 						)}`;
 				}
 				if (title != "guess the song from the first second")
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}" target="_blank" title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
 				else
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}" target="_blank" title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
 				document.querySelector(".playlists").appendChild(playlistContainer);
 			}
 

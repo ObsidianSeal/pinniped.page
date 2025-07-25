@@ -55,7 +55,7 @@
 
 					<p class="project-top-link">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-circle-question fa-fw"></i></span>
-						<span class="blog-archive-list-item"><a class="link" href="../yikes.html" target="_blank">link</a></span>
+						<span class="blog-archive-list-item"><a class="link" href="../yikes.html" >link</a></span>
 					</p>
 
 					<div class="break"></div>

@@ -3209,7 +3209,7 @@
 						row.id = `bus-${bus}`;
 						let icon = "xmark";
 						if (fleetObject[bus][0] == "D60LFR" || fleetObject[bus][0] == "XD60") icon = "check";
-						row.innerHTML = `<td><a href="${fleetObject[bus][2]}" target="_blank" title="CPTDB wiki > London Transit Commission > ${bus} [GENERATED LINK; EXTERNAL]">${bus}</a></td><td><a href="${fleetObject[bus][1]}" target="_blank" title="CPTDB wiki > ${fleetObject[bus][0]} [GENERATED LINK; EXTERNAL]">${fleetObject[bus][0]}</a></td><td><i class="fa-sharp fa-solid fa-${icon}"></i></td><td>???</td><td>???</td>`;
+						row.innerHTML = `<td><a href="${fleetObject[bus][2]}"  title="CPTDB wiki > London Transit Commission > ${bus} [GENERATED LINK; EXTERNAL]">${bus}</a></td><td><a href="${fleetObject[bus][1]}"  title="CPTDB wiki > ${fleetObject[bus][0]} [GENERATED LINK; EXTERNAL]">${fleetObject[bus][0]}</a></td><td><i class="fa-sharp fa-solid fa-${icon}"></i></td><td>???</td><td>???</td>`;
 						document.querySelector("tbody").appendChild(row);
 					}
 
@@ -3365,7 +3365,7 @@
 							row.children[3].innerHTML = simpleBusData[bus][0].toString().padStart(2, "0");
 							row.children[4].innerHTML = `<a href="https://www.google.ca/maps/search/${simpleBusData[bus][1]},${
 								simpleBusData[bus][2]
-							}" target="_blank" title="Google Maps > ${simpleBusData[bus][1]}, ${simpleBusData[bus][2]} [GENERATED LINK; EXTERNAL]">${simpleBusData[bus][1]
+							}"  title="Google Maps > ${simpleBusData[bus][1]}, ${simpleBusData[bus][2]} [GENERATED LINK; EXTERNAL]">${simpleBusData[bus][1]
 								.toString()
 								.padEnd(8, "0")}, ${simpleBusData[bus][2].toString().padEnd(9, "0")}</a>`;
 						} else {
@@ -3808,7 +3808,7 @@
 			<p>v1.1.0 — June 29th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
-				<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
+				<a href="https://londontransit.ca/" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
 			</p>
 
 			<br />
@@ -3818,7 +3818,6 @@
 				<li>
 					<a
 						href="https://realtime.londontransit.ca/#/app/nextdepartures"
-						target="_blank"
 						title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
 						>LTC realtime</a
 					>
@@ -3826,13 +3825,12 @@
 				<li>
 					<a
 						href="https://www.londontransit.ca/wp-content/uploads/2024/09/LT_SystemMap_September2024_Final_Web.pdf"
-						target="_blank"
 						title="LTC > Routes & Schedules > LT_SystemMap_September2024_Final_Web.pdf [FILE; EXTERNAL]"
 						>LTC Ride Guide</a
 					>
 				</li>
 				<li>
-					<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" target="_blank" title="CPTDB wiki > London Transit Commission [EXTERNAL]"
+					<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" title="CPTDB wiki > London Transit Commission [EXTERNAL]"
 						>CPTDB wiki — London Transit Commission</a
 					>
 				</li>
@@ -3868,9 +3866,7 @@
 
 			<b id="THE-DATA">THE DATA</b>
 			<h2>
-				<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" target="_blank" title="LTC Open Data > VehiclePositions.json [FILE; EXTERNAL]"
-					>VehiclePositions.json</a
-				>
+				<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" title="LTC Open Data > VehiclePositions.json [FILE; EXTERNAL]">VehiclePositions.json</a>
 				from
 				<span id="data-time">???</span>
 			</h2>
@@ -3901,13 +3897,12 @@
 			<b id="BUS-DISTRIBUTION">BUS DISTRIBUTION</b>
 			<p>
 				The number of buses running on each of London Transit&rsquo;s <span id="route-total" class="bold">#</span>
-				<a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">routes</a>, shown as a bar
-				graph.
+				<a href="https://www.londontransit.ca/plan-a-trip/schedules/" title="London Transit > Routes & Schedules [EXTERNAL]">routes</a>, shown as a bar graph.
 			</p>
 			<p>
-				If a <a href="https://www.londontransit.ca/plan-a-trip/schedules/" target="_blank" title="London Transit > Routes & Schedules [EXTERNAL]">route</a> has at least
-				one <a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated bus</a> running on it,
-				the number of said buses is shown next to the total and reflected in a separate, teal segment of the corresponding bar.
+				If a <a href="https://www.londontransit.ca/plan-a-trip/schedules/" title="London Transit > Routes & Schedules [EXTERNAL]">route</a> has at least one
+				<a href="https://en.wikipedia.org/wiki/Articulated_bus" title="Wikipedia > Articulated bus [EXTERNAL]">articulated bus</a> running on it, the number of said
+				buses is shown next to the total and reflected in a separate, teal segment of the corresponding bar.
 			</p>
 			<br />
 			<div class="route-container">
@@ -3918,8 +3913,8 @@
 			</div>
 			<br />
 			<p class="grey">
-				*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" target="_blank" class="grey" title="Wikipedia > Short turn [EXTERNAL]">short turn</a>)
-				routes only run from September to April (for university/college students)
+				*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" class="grey" title="Wikipedia > Short turn [EXTERNAL]">short turn</a>) routes only run from
+				September to April (for university/college students)
 			</p>
 
 			<br />
@@ -3927,10 +3922,7 @@
 			<b id="BUS-POSITIONS-AND-MODELS">BUS POSITIONS & MODELS</b>
 			<p>
 				Below is a table of all <span id="fleet-total" class="bold">#</span> buses in
-				<a
-					href="https://cptdb.ca/wiki/index.php/London_Transit_Commission#Fleet_roster"
-					target="_blank"
-					title="CPTDB wiki > London Transit Commission (Fleet roster) [EXTERNAL]"
+				<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission#Fleet_roster" title="CPTDB wiki > London Transit Commission (Fleet roster) [EXTERNAL]"
 					>London Transit&rsquo;s fleet</a
 				>.
 			</p>
@@ -3940,15 +3932,15 @@
 			</p>
 			<p>
 				London Transit currently operates five unique bus models, all of which are produced in Canada by
-				<a href="https://www.newflyer.com/" target="_blank" title="New Flyer [EXTERNAL]">New Flyer</a>. Click on a model to learn more.
+				<a href="https://www.newflyer.com/" title="New Flyer [EXTERNAL]">New Flyer</a>. Click on a model to learn more.
 			</p>
 			<p>
 				<span id="articulated-total" class="bold">#</span> of London Transit&rsquo;s buses are
-				<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>.
+				<a href="https://en.wikipedia.org/wiki/Articulated_bus" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>.
 			</p>
 			<p>
 				For buses that are currently running, their route and position (latitude and longitude) are given. Click on a position to view it on
-				<a href="https://www.google.ca/maps" target="_blank" title="Google Maps [EXTERNAL]">Google Maps</a>.
+				<a href="https://www.google.ca/maps" title="Google Maps [EXTERNAL]">Google Maps</a>.
 			</p>
 			<br />
 			<div class="table-scroll">
@@ -3985,8 +3977,8 @@
 				has its own map, so please pay attention to the file names.
 			</p>
 			<p>
-				These maps are made manually in <a href="https://affinity.serif.com/designer/" target="_blank" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so
-				they will be added/updated very slowly.
+				These maps are made manually in <a href="https://affinity.serif.com/designer/" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so they will be
+				added/updated very slowly.
 			</p>
 			<p>Please report any inaccuracies!</p>
 			<br />
@@ -4117,14 +4109,14 @@
 							<td rowspan="2">90</td>
 							<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
 							<td>
-								<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" target="_blank" title="90-northbound.pdf">90-northbound.pdf</a>
+								<a href="../download.html?x=bus-data-route-maps/pdf/90-northbound.pdf" title="90-northbound.pdf">90-northbound.pdf</a>
 							</td>
-							<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" target="_blank" title="90-northbound.png">90-northbound.png</a></td>
+							<td><a href="../download.html?x=bus-data-route-maps/png/90-northbound.png" title="90-northbound.png">90-northbound.png</a></td>
 						</tr>
 						<tr>
 							<td><i class="fa-sharp fa-solid fa-badge-check"></i>completed — last updated: <span class="bold">June 28th, 2025</span></td>
-							<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" target="_blank" title="90-southbound.pdf">90-southbound.pdf</a></td>
-							<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" target="_blank" title="90-southbound.png">90-southbound.png</a></td>
+							<td><a href="../download.html?x=bus-data-route-maps/pdf/90-southbound.pdf" title="90-southbound.pdf">90-southbound.pdf</a></td>
+							<td><a href="../download.html?x=bus-data-route-maps/png/90-southbound.png" title="90-southbound.png">90-southbound.png</a></td>
 						</tr>
 						<tr>
 							<td>91</td>
@@ -4177,13 +4169,11 @@
 			<ul>
 				<li>
 					the information provided on this page should not be used as a substitute for official information provided by the
-					<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit Commission</a>
+					<a href="https://londontransit.ca/" title="London Transit&rsquo;s website [EXTERNAL]">London Transit Commission</a>
 				</li>
 				<li>
 					the data processed by and shown on this page may not be 100% correct, as stated in the data&rsquo;s
-					<a href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/" target="_blank" title="LTC Open Data > Terms of Use [EXTERNAL]"
-						>Terms of Use</a
-					>
+					<a href="https://www.londontransit.ca/open-data/ltcs-open-data-terms-of-use/" title="LTC Open Data > Terms of Use [EXTERNAL]">Terms of Use</a>
 				</li>
 			</ul>
 
@@ -4196,7 +4186,6 @@
 					<span id="to-top-text" title="click to scroll to the top of the page">top of the page</span>) or the
 					<a
 						href="https://github.com/ObsidianSeal/pinniped.page/commits/main/public/projects/bus-data.html"
-						target="_blank"
 						title="GitHub > ObsidianSeal > pinniped.page > bus-data.html history [EXTERNAL]"
 						>GitHub commit history</a
 					>
@@ -4206,7 +4195,6 @@
 					this page assumes the
 					<a
 						href="https://www.londontransit.ca/wp-content/uploads/2024/08/Route-51-55-Community-Bus.pdf"
-						target="_blank"
 						title="LTC > Routes & Schedules > Route-51-55-Community-Bus.pdf [FILE; EXTERNAL]"
 						>Community Bus routes</a
 					>
@@ -4220,31 +4208,26 @@
 			<b id="ATTRIBUTION">ATTRIBUTION</b>
 			<ul>
 				<li>
-					bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" target="_blank" title="LTC Open Data [EXTERNAL]"
-						>Open Data — London Transit Commission</a
-					>&rdquo;
+					bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" title="LTC Open Data [EXTERNAL]">Open Data — London Transit Commission</a>&rdquo;
 				</li>
 				<li>
-					additional information from <a href="https://cptdb.ca/wiki/index.php/Main_Page" target="_blank" title="CPTDB wiki [EXTERNAL]">the CPTDB wiki</a>,
-					<a href="https://londontransit.ca/" target="_blank" title="London Transit&rsquo;s website [EXTERNAL]">London Transit&rsquo;s website</a>, and &ldquo;<a
+					additional information from <a href="https://cptdb.ca/wiki/index.php/Main_Page" title="CPTDB wiki [EXTERNAL]">the CPTDB wiki</a>,
+					<a href="https://londontransit.ca/" title="London Transit&rsquo;s website [EXTERNAL]">London Transit&rsquo;s website</a>, and &ldquo;<a
 						href="https://realtime.londontransit.ca/#/app/nextdepartures"
-						target="_blank"
 						title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
 						>LTC realtime</a
 					>&rdquo;
 				</li>
-				<li>CORS proxy through <a href="https://corsproxy.io/" target="_blank" title="CorsProxy [EXTERNAL]">CorsProxy</a></li>
+				<li>CORS proxy through <a href="https://corsproxy.io/" title="CorsProxy [EXTERNAL]">CorsProxy</a></li>
 				<li>
-					<a href="https://fonts.adobe.com/fonts/degular" target="_blank" title="Adobe Fonts > Degular [EXTERNAL]">Degular (typeface)</a> by
-					<a href="https://ohnotype.co/" target="_blank" title="OH no Type Co. [EXTERNAL]">OH no Type Co.</a> on
-					<a href="" target="_blank" title="Adobe Fonts [EXTERNAL]">Adobe Fonts</a>
+					<a href="https://fonts.adobe.com/fonts/degular" title="Adobe Fonts > Degular [EXTERNAL]">Degular (typeface)</a> by
+					<a href="https://ohnotype.co/" title="OH no Type Co. [EXTERNAL]">OH no Type Co.</a> on
+					<a href="" title="Adobe Fonts [EXTERNAL]">Adobe Fonts</a>
 				</li>
-				<li>icons from <a href="https://fontawesome.com/" target="_blank" title="Font Awesome [EXTERNAL]">Font Awesome</a></li>
+				<li>icons from <a href="https://fontawesome.com/" title="Font Awesome [EXTERNAL]">Font Awesome</a></li>
 				<li>
 					the
-					<a href="https://github.com/voronianski/oceanic-next-color-scheme" target="_blank" title="GitHub > voronianski > oceanic-next-color-scheme [EXTERNAL]"
-						>Oceanic Next</a
-					>
+					<a href="https://github.com/voronianski/oceanic-next-color-scheme" title="GitHub > voronianski > oceanic-next-color-scheme [EXTERNAL]">Oceanic Next</a>
 					colour scheme
 				</li>
 				<li>and feedback/suggestions from some awesome people!</li>
@@ -4378,7 +4361,7 @@
 						<li>the data still automatically updates every 30 seconds, here the countdown is shown in the bottom right</li>
 						<li>
 							hover over the map to see your cursor&rsquo;s approximate
-							<a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system" target="_blank" title="Wikipedia > Geographic coordinate system [EXTERNAL]"
+							<a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system" title="Wikipedia > Geographic coordinate system [EXTERNAL]"
 								>latitude and longitude</a
 							>
 							in the bottom left
@@ -4386,7 +4369,7 @@
 						<li>the tiny dots are bus stops, all <span class="bold" id="total-stops">#</span> of them</li>
 						<li>
 							squares and circles are regular and
-							<a href="https://en.wikipedia.org/wiki/Articulated_bus" target="_blank" title="Wikipedia > Articulated bus [EXTERNAL]">articulated buses</a>
+							<a href="https://en.wikipedia.org/wiki/Articulated_bus" title="Wikipedia > Articulated bus [EXTERNAL]">articulated buses</a>
 							respectively
 						</li>
 						<li>buses have a trail that shows where they have been recently</li>
@@ -4394,14 +4377,12 @@
 						<li id="route-colour-list">
 							<a
 								href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZRbo7KXGE2Md4nVdKlA89po-ZxmD57EWqCJ8NA6359kSvW0JMf4P-2z4ieUTisAkTsmZ-M3zmJQ7J/pubhtml"
-								target="_blank"
 								title="Google Sheets > LTC Route Colours [EXTERNAL]"
 								>route colours</a
 							>
 							are specified by
 							<a
 								href="https://realtime.londontransit.ca/#/app/nextdepartures"
-								target="_blank"
 								title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]"
 								>London Transit</a
 							>
@@ -4409,11 +4390,10 @@
 						</li>
 						<li>
 							to see the routes&rsquo;
-							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" target="_blank" title="Wikipedia > Web colors > Hex triplet">hex codes</a>, hover
-							over the route numbers above or visit
+							<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" title="Wikipedia > Web colors > Hex triplet">hex codes</a>, hover over the route
+							numbers above or visit
 							<a
 								href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZRbo7KXGE2Md4nVdKlA89po-ZxmD57EWqCJ8NA6359kSvW0JMf4P-2z4ieUTisAkTsmZ-M3zmJQ7J/pubhtml"
-								target="_blank"
 								title="Google Sheets > LTC Route Colours [EXTERNAL]"
 								>my route colours list and route map progress tracker</a
 							>
