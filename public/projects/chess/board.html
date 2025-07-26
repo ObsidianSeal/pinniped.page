@@ -318,7 +318,7 @@
 			<div onclick="clickBack()"><i class="fa-solid fa-reply-all"></i>back</div>
 			<div onclick="clickReset()"><i class="fa-solid fa-clock-rotate-left"></i>reset board</div>
 			<div onclick="clickCopy()" id="copy2"><i class="fa-solid fa-link"></i>copy link</div>
-			<div onclick="clickExport()" id="copy"><i class="fa-regular fa-clone"></i>copy FEN</div>
+			<div onclick="clickExport()" id="copy"><i class="fa-solid fa-clone"></i>copy FEN</div>
 			<div onclick="clickImport()" id="import"><i class="fa-solid fa-terminal"></i>import FEN</div>
 			<div onclick="clickHelp()" id="help"><i class="fa-solid fa-question"></i>help & shortcuts</div>
 		</button-container>
@@ -427,7 +427,7 @@
 			function setPieceClasses(pieceNumber, pieceType, pieceColour) {
 				const pieceIcon = document.createElement("i");
 				pieceIcon.setAttribute("id", pieceNumber);
-				pieceIcon.setAttribute("class", `fa-solid ${pieceType} ${pieceColour}`);
+				pieceIcon.setAttribute("class", `fa-duotone ${pieceType} ${pieceColour} fa-light`);
 				pieceIcon.setAttribute("draggable", "true");
 				document.getElementById(`square-${pieceNumber}`).appendChild(pieceIcon);
 
@@ -620,9 +620,9 @@
 
 			function clickExport() {
 				navigator.clipboard.writeText(getFEN(false));
-				document.getElementById("copy").innerHTML = '<i class="fa-regular fa-clone"></i>copied!';
+				document.getElementById("copy").innerHTML = '<i class="fa-solid fa-clone"></i>copied!';
 				setTimeout(function () {
-					document.getElementById("copy").innerHTML = '<i class="fa-regular fa-clone"></i>copy FEN';
+					document.getElementById("copy").innerHTML = '<i class="fa-solid fa-clone"></i>copy FEN';
 				}, 2000);
 			}
 
