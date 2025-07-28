@@ -814,7 +814,7 @@
 			<div class="main-panel no-select">
 				<div class="top">
 					<div class="info">
-						<div class="button" tabindex="0" title="copy icon flavour (?)" id="button-flavour">loading...</div>
+						<div class="button" tabindex="0" title="copy icon family" id="button-family">loading...</div>
 						<div class="button" tabindex="0" title="copy icon style" id="button-style">loading...</div>
 						<div class="button" tabindex="0" title="copy icon name" id="button-name">loading...</div>
 						<div class="button" tabindex="0" title="view Font Awesome plans [EXTERNAL]" id="button-plan">loading...</div>
@@ -19873,7 +19873,7 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			const version = "v2.1.0 (2025/07/25)";
+			const version = "v2.1.0 (2025/07/28)";
 			document.querySelector("#version").innerHTML = version;
 			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
 			console.log(`%cINFO:`, infoStyle, `fa-random ${version}`);
@@ -19901,68 +19901,71 @@
 
 			const randomIconElement = document.querySelector("#random-icon");
 
-			var flavourMemory = [];
-			var styleMemory = [];
-			var iconMemory = [];
-			var index = 0;
+			let familyMemory = [];
+			let styleMemory = [];
+			let iconMemory = [];
+			let index = 0;
 
-			var selectedFlavour = "classic";
-			var selectedStyle = "solid";
+			let selectedFamily = "classic";
+			let selectedStyle = "solid";
 
 			const item = new URLSearchParams(window.location.search);
 
 			const urlIconName = item.get("x");
-			const urlIconFlavour = item.get("f");
+			const urlIconFamily = item.get("f");
 			const urlIconStyle = item.get("s");
 
 			function loadIconFromURL() {
-				var goodURL = false;
+				let goodURL = false;
 
-				if (urlIconFlavour == "classic" || urlIconFlavour == "sharp" || urlIconFlavour == "duotone" || urlIconFlavour == "sharp-duotone") {
+				if (urlIconFamily == "classic" || urlIconFamily == "sharp" || urlIconFamily == "duotone" || urlIconFamily == "sharp-duotone") {
 					if (urlIconStyle == "solid" || urlIconStyle == "regular" || urlIconStyle == "light" || urlIconStyle == "thin") {
-						if (allIcons.includes(urlIconName)) {
+						if (icons[selectedFamily].includes(urlIconName)) {
 							goodURL = true;
 						}
 					}
 				}
 
 				if (goodURL) {
-					flavourMemory.push(urlIconFlavour);
+					familyMemory.push(urlIconFamily);
 					styleMemory.push(urlIconStyle);
 					iconMemory.push(urlIconName);
 
-					selectedFlavour = urlIconFlavour;
+					selectedFamily = urlIconFamily;
 					selectedStyle = urlIconStyle;
 
-					setStyles(document.getElementById(`${selectedFlavour}.${selectedStyle}`));
+					setStyles(document.getElementById(`${selectedFamily}.${selectedStyle}`));
 
-					setIcon(flavourMemory[0], styleMemory[0], iconMemory[0]);
+					setIcon(familyMemory[0], styleMemory[0], iconMemory[0]);
 					sendAlert("badge-check", "icon loaded from URL!");
 				} else {
 					generate();
-					if (!(urlIconFlavour == null && urlIconStyle == null && urlIconName == null)) sendAlert("hexagon-exclamation", "invalid URL, random icon loaded");
+					if (!(urlIconFamily == null && urlIconStyle == null && urlIconName == null)) sendAlert("hexagon-exclamation", "invalid URL, random icon loaded");
 				}
 			}
 			loadIconFromURL();
 
-			function setIcon(flavour, style, name) {
+			function setIcon(family, style, name) {
 				randomIconElement.className = "";
-				randomIconElement.classList.add(`fa-${flavour}`);
+				randomIconElement.classList.add(`fa-${family}`);
 				randomIconElement.classList.add(`fa-${style}`);
 				randomIconElement.classList.add(`fa-${name}`);
 
-				document.querySelector("title").innerHTML = `${name} (${flavour}, ${style})`;
-				document.querySelector("#button-flavour").innerHTML = `<i class="fa-${flavour} fa-${style} fa-icons"></i>${flavour}`;
-				document.querySelector("#button-style").innerHTML = `<i class="fa-${flavour} fa-${style} fa-icons"></i>${style}`;
-				document.querySelector("#button-name").innerHTML = `<i class="fa-${flavour} fa-${style} fa-${name}"></i>${name}`;
+				document.querySelector("title").innerHTML = `${name} (${family}, ${style})`;
+				document.querySelector("#button-family").innerHTML = `<i class="fa-${family} fa-${style} fa-icons"></i>${family}`;
+				document.querySelector("#button-style").innerHTML = `<i class="fa-${family} fa-${style} fa-icons"></i>${style}`;
+				document.querySelector("#button-name").innerHTML = `<i class="fa-${family} fa-${style} fa-${name}"></i>${name}`;
 
 				document.querySelector("#button-plan").className = "";
-				if (flavour == "classic" && ((style == "solid" && freeSolidIcons.includes(name)) || (style == "regular" && freeRegularIcons.includes(name)))) {
+				if (selectedFamily == "classic" && freeIcons[selectedStyle].includes(name)) {
 					document.querySelector("#button-plan").classList.add("free-alert", "button");
-					document.querySelector("#button-plan").innerHTML = `<i class="fa-${flavour} fa-${style} fa-bolt"></i>FREE!`;
+					document.querySelector("#button-plan").innerHTML = `<i class="fa-${family} fa-${style} fa-bolt"></i>FREE!`;
+				} else if (selectedFamily == "classic" || selectedFamily == "duotone" || selectedFamily == "sharp" || selectedFamily == "sharp-duotone") {
+					document.querySelector("#button-plan").classList.add("pro-alert", "button");
+					document.querySelector("#button-plan").innerHTML = `<i class="fa-${family} fa-${style} fa-circle-dollar"></i>PRO`;
 				} else {
 					document.querySelector("#button-plan").classList.add("pro-alert", "button");
-					document.querySelector("#button-plan").innerHTML = `<i class="fa-${flavour} fa-${style} fa-circle-dollar"></i>PRO`;
+					document.querySelector("#button-plan").innerHTML = `<i class="fa-${family} fa-${style} fa-circle-dollar"></i>PRO+`;
 				}
 
 				if (index > 0) document.querySelector("#button-previous").classList.add("button");
@@ -19977,24 +19980,24 @@
 				randomIconElement.innerHTML = "";
 			}
 			function generate() {
-				let randomIcon = allIcons[Math.floor(Math.random() * allIconsTotal)];
-				flavourMemory.push(selectedFlavour);
+				let randomIcon = icons[selectedFamily][Math.floor(Math.random() * icons[selectedFamily].length)];
+				familyMemory.push(selectedFamily);
 				styleMemory.push(selectedStyle);
 				iconMemory.push(randomIcon);
 
 				index = iconMemory.length - 1;
-				setIcon(selectedFlavour, selectedStyle, randomIcon);
+				setIcon(selectedFamily, selectedStyle, randomIcon);
 			}
 			document.querySelector("#button-generate").addEventListener("click", () => generate());
 
 			function updateStyles() {
-				selectedFlavour = flavourMemory[index];
+				selectedFamily = familyMemory[index];
 				selectedStyle = styleMemory[index];
-				setStyles(document.getElementById(`${selectedFlavour}.${selectedStyle}`));
+				setStyles(document.getElementById(`${selectedFamily}.${selectedStyle}`));
 			}
 
 			function previousIcon() {
-				if (index > 0) setIcon(flavourMemory[index - 1], styleMemory[index - 1], iconMemory[--index]);
+				if (index > 0) setIcon(familyMemory[index - 1], styleMemory[index - 1], iconMemory[--index]);
 				else sendAlert("left-long-to-line", "first icon in history reached");
 				updateStyles();
 			}
@@ -20002,7 +20005,7 @@
 				previousIcon();
 			});
 			function nextIcon() {
-				if (index < iconMemory.length - 1) setIcon(flavourMemory[index + 1], styleMemory[index + 1], iconMemory[++index]);
+				if (index < iconMemory.length - 1) setIcon(familyMemory[index + 1], styleMemory[index + 1], iconMemory[++index]);
 				else sendAlert("right-long-to-line", "most recent icon in history reached");
 				updateStyles();
 			}
@@ -20010,23 +20013,23 @@
 				nextIcon();
 			});
 
-			var styleSelectOpen = false;
-			var previousFlavour, previousStyle;
+			let styleSelectOpen = false;
+			let previousFamily, previousStyle;
 
 			function styleSelect() {
 				if (styleSelectOpen) {
 					document.querySelector(".main-panel").style.display = "flex";
 					document.querySelector(".style-panel").style.display = "none";
 
-					if (selectedFlavour != previousFlavour || selectedStyle != previousStyle) {
-						sendAlert("paintbrush", `styles have been updated: ${selectedFlavour} + ${selectedStyle}`);
+					if (selectedFamily != previousFamily || selectedStyle != previousStyle) {
+						sendAlert("paintbrush", `styles have been updated: ${selectedFamily} + ${selectedStyle}`);
 
-						flavourMemory.push(selectedFlavour);
+						familyMemory.push(selectedFamily);
 						styleMemory.push(selectedStyle);
 						iconMemory.push(iconMemory[index]);
 
 						index = iconMemory.length - 1;
-						setIcon(flavourMemory[index], styleMemory[index], iconMemory[index]);
+						setIcon(familyMemory[index], styleMemory[index], iconMemory[index]);
 					} else sendAlert("paint-roller", `continuing with previous styles`);
 				} else {
 					document.querySelector(".main-panel").style.display = "none";
@@ -20036,7 +20039,7 @@
 						icon.classList.replace(icon.classList[icon.classList.length - 1], `fa-${iconMemory[index]}`);
 					});
 
-					previousFlavour = selectedFlavour;
+					previousFamily = selectedFamily;
 					previousStyle = selectedStyle;
 				}
 
@@ -20048,8 +20051,8 @@
 
 			function reset() {
 				if (iconMemory.length > 1) {
-					setIcon(flavourMemory[0], styleMemory[0], iconMemory[0]);
-					flavourMemory = [flavourMemory[0]];
+					setIcon(familyMemory[0], styleMemory[0], iconMemory[0]);
+					familyMemory = [familyMemory[0]];
 					styleMemory = [styleMemory[0]];
 					iconMemory = [iconMemory[0]];
 					sendAlert("trash-can-check", "reset to first icon, history cleared");
@@ -20057,7 +20060,7 @@
 					document.querySelector("#button-next").classList.remove("button");
 					document.querySelector("#button-reset").classList.remove("button");
 					index = 0;
-					selectedFlavour = flavourMemory[0];
+					selectedFamily = familyMemory[0];
 					selectedStyle = styleMemory[0];
 				} else {
 					sendAlert("ban", "there is no history to clear");
@@ -20067,14 +20070,14 @@
 				reset();
 			});
 			function copyLink() {
-				navigator.clipboard.writeText(`https://pinniped.page/projects/icons?x=${iconMemory[index]}&f=${flavourMemory[index]}&s=${styleMemory[index]}`);
+				navigator.clipboard.writeText(`https://pinniped.page/projects/icons?x=${iconMemory[index]}&f=${familyMemory[index]}&s=${styleMemory[index]}`);
 				sendAlert("paperclip", "link copied!");
 			}
 			document.querySelector("#button-link").addEventListener("click", () => {
 				copyLink();
 			});
 			function viewOfficial() {
-				window.open(`https://fontawesome.com/icons/${iconMemory[index]}?f=${flavourMemory[index]}&s=${styleMemory[index]}`, "_blank").focus();
+				window.open(`https://fontawesome.com/icons/${iconMemory[index]}?f=${familyMemory[index]}&s=${styleMemory[index]}`, "_blank").focus();
 			}
 			document.querySelector("#button-external").addEventListener("click", () => {
 				viewOfficial();
@@ -20102,8 +20105,8 @@
 				perfectPosition();
 			});
 
-			var infoHidden = false;
-			var menuHidden = false;
+			let infoHidden = false;
+			let menuHidden = false;
 			function toggleMenu() {
 				if (menuHidden) {
 					document.querySelector(".menu").style.display = "flex";
@@ -20140,7 +20143,7 @@
 			document.querySelector("#button-info").addEventListener("click", () => {
 				toggleInfo();
 			});
-			var helpOpen = false;
+			let helpOpen = false;
 			function openHelp() {
 				if (helpOpen) {
 					document.querySelector(".main-panel").style.display = "flex";
@@ -20162,12 +20165,12 @@
 				exit();
 			});
 
-			function copyFlavour() {
-				navigator.clipboard.writeText(flavourMemory[index]);
-				sendAlert("bowl-scoops", "icon flavour (?) copied");
+			function copyFamily() {
+				navigator.clipboard.writeText(familyMemory[index]);
+				sendAlert("bowl-scoops", "icon family copied");
 			}
-			document.querySelector("#button-flavour").addEventListener("click", () => {
-				copyFlavour();
+			document.querySelector("#button-family").addEventListener("click", () => {
+				copyFamily();
 			});
 			function copyStyle() {
 				navigator.clipboard.writeText(styleMemory[index]);
@@ -20193,12 +20196,12 @@
 			function search() {
 				let search = document.querySelector("input").value.toLowerCase().replaceAll(" ", "");
 				if (search != "") {
-					if (allIcons.includes(search)) {
-						flavourMemory.push(selectedFlavour);
+					if (icons[selectedFamily].includes(search)) {
+						familyMemory.push(selectedFamily);
 						styleMemory.push(selectedStyle);
 						iconMemory.push(search);
 						index = iconMemory.length - 1;
-						setIcon(flavourMemory[index], styleMemory[index], iconMemory[index]);
+						setIcon(familyMemory[index], styleMemory[index], iconMemory[index]);
 						sendAlert("face-laugh", "icon found!");
 					} else {
 						sendAlert("face-confused", "icon does not exist");
@@ -20212,8 +20215,12 @@
 				search();
 			});
 			function clearSearch() {
-				document.querySelector("input").value = "";
-				sendAlert("delete-left", "search cleared");
+				if (document.querySelector("input").value == "") {
+					sendAlert("delete-left", "there&rsquo;s nothing to clear...");
+				} else {
+					document.querySelector("input").value = "";
+					sendAlert("delete-left", "search cleared");
+				}
 			}
 			document.querySelector("#search-clear").addEventListener("click", () => {
 				clearSearch();
@@ -20240,7 +20247,7 @@
 					} else if (helpOpen) {
 						if (focus == document.querySelector("#help-panel-exit")) openHelp();
 					} else {
-						if (focus == document.querySelector("#button-flavour")) copyFlavour();
+						if (focus == document.querySelector("#button-family")) copyFamily();
 						else if (focus == document.querySelector("#button-style")) copyStyle();
 						else if (focus == document.querySelector("#button-name")) copyName();
 						else if (focus == document.querySelector("#button-plan")) viewPlans();
@@ -20320,7 +20327,7 @@
 
 			function setStyles(styleOption) {
 				let idParts = styleOption.id.split(".");
-				selectedFlavour = idParts[0];
+				selectedFamily = idParts[0];
 				selectedStyle = idParts[1];
 
 				document.querySelector(".selected-style").classList.remove("selected-style");
@@ -20338,8 +20345,8 @@
 			});
 
 			// swiper [yes] swiping
-			var touchStartX, touchStartY;
-			var touchEndX, touchEndY;
+			let touchStartX, touchStartY;
+			let touchEndX, touchEndY;
 
 			document.querySelector(".icon").addEventListener("touchstart", (e) => {
 				touchStartX = e.touches[0].pageX;
