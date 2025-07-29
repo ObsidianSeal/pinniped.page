@@ -7,6 +7,7 @@ document.querySelector(".content").appendChild(toTopButton);
 // to-top button scroll
 toTopButton.addEventListener("click", () => {
 	window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+	window.history.replaceState("", "", "#");
 });
 
 // show/hide to-top button

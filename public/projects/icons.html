@@ -19956,6 +19956,24 @@
 				],
 			};
 
+			const styles = {
+				"classic": ["solid", "regular", "light", "thin"],
+				"duotone": ["solid", "regular", "light", "thin"],
+				"sharp": ["solid", "regular", "light", "thin"],
+				"sharp-duotone": ["solid", "regular", "light", "thin"],
+				"chisel": ["regular"],
+				"etch": ["solid"],
+				"jelly": ["regular"],
+				"jelly-duo": ["regular"],
+				"jelly-fill": ["regular"],
+				"notdog": ["solid"],
+				"notdog-duo": ["solid"],
+				"slab": ["regular"],
+				"slab-press": ["regular"],
+				"thumbprint": ["light"],
+				"whiteboard": ["semibold"],
+			};
+
 			// version and console logs
 
 			const infoStyle = "background: #a3b18a; color: black; padding: 0 5px; border-radius: 10px";
@@ -20009,9 +20027,9 @@
 			function loadIconFromURL() {
 				let goodURL = false;
 
-				if (urlIconFamily == "classic" || urlIconFamily == "sharp" || urlIconFamily == "duotone" || urlIconFamily == "sharp-duotone") {
-					if (urlIconStyle == "solid" || urlIconStyle == "regular" || urlIconStyle == "light" || urlIconStyle == "thin") {
-						if (icons[selectedFamily].includes(urlIconName)) {
+				if (Object.keys(styles).includes(urlIconFamily)) {
+					if (styles[urlIconFamily].includes(urlIconStyle)) {
+						if (icons[urlIconFamily].includes(urlIconName)) {
 							goodURL = true;
 						}
 					}
@@ -20470,24 +20488,6 @@
 					else nextIcon();
 				}
 			});
-
-			const styles = {
-				"classic": ["solid", "regular", "light", "thin"],
-				"duotone": ["solid", "regular", "light", "thin"],
-				"sharp": ["solid", "regular", "light", "thin"],
-				"sharp-duotone": ["solid", "regular", "light", "thin"],
-				"chisel": ["regular"],
-				"etch": ["solid"],
-				"jelly": ["regular"],
-				"jelly-duo": ["regular"],
-				"jelly-fill": ["regular"],
-				"notdog": ["solid"],
-				"notdog-duo": ["solid"],
-				"slab": ["regular"],
-				"slab-press": ["regular"],
-				"thumbprint": ["light"],
-				"whiteboard": ["semibold"],
-			};
 
 			let viewAllOpen = false;
 			let firstViewAllOpen = true;

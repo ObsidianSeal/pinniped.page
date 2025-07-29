@@ -3542,11 +3542,13 @@
 			// click on "to-top-button"
 			document.querySelector("#to-top-button").addEventListener("click", (e) => {
 				window.scroll(0, 0);
+				window.history.replaceState("", "", "#");
 			});
 
 			// click on "to-top-text"
 			document.querySelector("#to-top-text").addEventListener("click", (e) => {
 				window.scroll(0, 0);
+				window.history.replaceState("", "", "#");
 			});
 
 			// map, open
