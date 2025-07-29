@@ -42,7 +42,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 4
+		"featured": 5
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -57,7 +57,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 3
+		"featured": 4
 	},
 	"Chess": {
 		"basic": true,
@@ -203,11 +203,11 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["July 28th", "Font Awesome 7 completely implemented, added new DANGEROUS &ldquo;view all&rdquo; feature"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 1
 	},
 	"Finite Craft": {
 		"basic": false,
@@ -402,7 +402,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 2
+		"featured": 3
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -432,7 +432,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 5
+		"featured": 6
 	},
 	"progress": {
 		"basic": false,
@@ -537,7 +537,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 1
+		"featured": 2
 	},
 	"Think Four": {
 		"basic": false,
