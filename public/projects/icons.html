@@ -19980,7 +19980,7 @@
 			const warningStyle = "background: #f4a261; color: black; padding: 0 5px; border-radius: 10px";
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
-			const version = "v2.1.0 (2025/07/28)";
+			const version = "v2.1.1 (2025/07/29)";
 			const fontAwesomeVersion = "Font Awesome Pro+ v7.0.0";
 			document.querySelector("#version").innerHTML = version;
 			document.querySelector(".version").innerHTML = `&ldquo;fa-random&rdquo; ${version}`;
@@ -20490,20 +20490,17 @@
 			});
 
 			let viewAllOpen = false;
-			let firstViewAllOpen = true;
-			let iconsPlaced = 0;
 			function openViewAll() {
+				let iconsPlaced = 0;
+
 				if (viewAllOpen) {
+					document.querySelector(".view-all-panel .help-content").innerHTML = "";
+
 					document.querySelector(".main-panel").style.display = "flex";
 					document.querySelector(".view-all-panel").style.display = "none";
+
+					sendAlert("face-relieved", "congratulations on returning, hopefully unscathed");
 				} else {
-					document.querySelector(".main-panel").style.display = "none";
-					document.querySelector(".view-all-panel").style.display = "block";
-				}
-
-				viewAllOpen = !viewAllOpen;
-
-				if (firstViewAllOpen) {
 					sendAlert("stopwatch", 'please wait, loading ALL ICONS<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d>');
 
 					setTimeout(() => {
@@ -20530,10 +20527,13 @@
 								console.log(`%cINFO:`, infoStyle, `placed all of ${family}, ${style} (${iconsPlaced} icons placed)`);
 							}
 						}
-					}, 1000);
 
-					firstViewAllOpen = false;
+						document.querySelector(".main-panel").style.display = "none";
+						document.querySelector(".view-all-panel").style.display = "block";
+					}, 1000);
 				}
+
+				viewAllOpen = !viewAllOpen;
 			}
 
 			document.querySelector("#button-view-all").addEventListener("click", () => {

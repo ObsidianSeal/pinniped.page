@@ -203,7 +203,10 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 28th", "Font Awesome 7 completely implemented, added new DANGEROUS &ldquo;view all&rdquo; feature"],
+			"updated": [
+				"July 29th",
+				"performance and visual improvements to all icons panel (prev.: Font Awesome 7 completely implemented, added new DANGEROUS &ldquo;view all&rdquo; feature)"
+			],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
