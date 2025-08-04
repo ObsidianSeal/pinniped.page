@@ -174,13 +174,23 @@
 
 			.header p {
 				position: fixed;
+			}
+
+			.header p,
+			a {
 				text-decoration: underline;
 				text-decoration-color: transparent;
 				transition: text-decoration-color 0.5s;
 			}
 
+			a {
+				color: inherit;
+			}
+
 			.header p:hover,
-			.header p:focus {
+			.header p:focus,
+			a:hover,
+			a:focus {
 				cursor: pointer;
 				text-decoration-color: var(--c3);
 				outline: none;
@@ -582,9 +592,9 @@
 			<h2>About / How to Play</h2>
 
 			<p>
-				wordlelele: it&rsquo;s Wordle, but the word can be anywhere from one to twenty letters long. And because that&rsquo;s not crazy enough, if you successfully
-				figure out what the word is, YOU get to choose the next word. Unfortunately, that means there&rsquo;s no guarantee that the word is family friendly or even a
-				word at all, so good luck!
+				wordlelele: it&rsquo;s <a href="https://www.nytimes.com/games/wordle/index.html" title="Wordle [EXTERNAL]">Wordle</a>, but the word can be anywhere from one to
+				twenty letters long. And because that&rsquo;s not crazy enough, if you successfully figure out what the word is, YOU get to choose the next word. Unfortunately,
+				that means there&rsquo;s no guarantee that the word is family friendly or even a word at all, so good luck!
 			</p>
 
 			<p>
@@ -617,7 +627,7 @@
 				<li>How do I know if I set the word?<br /><span class="grey">A confirmation message appears under the input field.</span></li>
 				<li>
 					If the target word contains a letter more than once, is that reflected by the guess highlighting?<br /><span class="grey"
-						>Yes, just like how Wordle does it.</span
+						>Yes, just like how <a href="https://www.nytimes.com/games/wordle/index.html" title="Wordle [EXTERNAL]">Wordle</a> does it.</span
 					>
 				</li>
 				<li>
@@ -638,7 +648,8 @@
 				<li>
 					Someone set the word to something offensive, and I would rather not type it in. Is there a way to report words?<br /><span class="grey"
 						>Unfortunately, no. If you don&rsquo;t want to solve the puzzle, you can always just enter random letters until you run out of guesses, at which point
-						you can change the word. Alternatively, send me a message on Discord and I&rsquo;ll delete the word from the database.</span
+						you can change the word. Alternatively, send me a message on
+						<a href="https://pinniped.page/discord" title="join Seal Squad [EXTERNAL]">Discord</a> and I&rsquo;ll delete the word from the database.</span
 					>
 				</li>
 				<li>
@@ -646,10 +657,16 @@
 						>Either the word contained a character that was not a letter, or no word was found. Hopefully this never happens.</span
 					>
 				</li>
-				<li>What font is this?<br /><span class="grey">Miller Text.</span></li>
+				<li>
+					What font is this?<br /><span class="grey"
+						><a href="https://fonts.adobe.com/fonts/miller-text" title="Adobe Fonts > Miller Text [EXTERNAL]">Miller Text</a>.</span
+					>
+				</li>
 			</ul>
 
 			<h2>Theme Editor</h2>
+
+			<p>Click or tap on each of the theme&rsquo;s six colours to use your browser&rsquo;s built-in colour picker to select new ones.</p>
 
 			<ol>
 				<li>
@@ -671,6 +688,14 @@
 					<label for="themeColour6" style="background-color: var(--c6)"><input type="color" id="themeColour6" value="#f68e56" /></label>
 				</li>
 			</ol>
+
+			<h2>Wear the wordlelele</h2>
+
+			<p>
+				<a href="https://the-pinniped-page.myspreadshop.com/wordlelele" title="shop.pinniped.page > wordlelele [EXTERNAL]"
+					>Shirts, bags, mugs, and more are available from the new merch store.</a
+				>
+			</p>
 
 			<p id="version">wordlelele — a project by Obsidian_Seal</p>
 		</div>
@@ -1301,7 +1326,7 @@
 			});
 
 			// last: version #
-			let version = "1.6.0";
+			let version = "1.6.1";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
 		</script>
