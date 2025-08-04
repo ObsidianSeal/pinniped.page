@@ -108,7 +108,26 @@
 				color: var(--c4);
 			}
 
-			ul {
+			input[type="color"] {
+				visibility: hidden;
+				width: 100px;
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			label {
+				margin: 0;
+				border: 0;
+				padding: 0;
+			}
+
+			label:hover {
+				cursor: pointer;
+			}
+
+			ul,
+			ol {
 				margin-left: 50px;
 			}
 
@@ -469,7 +488,7 @@
 			}
 
 			@media all and (max-width: 550px) {
-				input {
+				input:not(input[type="color"]) {
 					width: calc(100% - 10px);
 				}
 
@@ -629,6 +648,29 @@
 				</li>
 				<li>What font is this?<br /><span class="grey">Miller Text.</span></li>
 			</ul>
+
+			<h2>Theme Editor</h2>
+
+			<ol>
+				<li>
+					<label for="themeColour1" style="background-color: var(--c1)"><input type="color" id="themeColour1" value="#252525" /></label>
+				</li>
+				<li>
+					<label for="themeColour2" style="background-color: var(--c2)"><input type="color" id="themeColour2" value="#464646" /></label>
+				</li>
+				<li>
+					<label for="themeColour3" style="background-color: var(--c3)"><input type="color" id="themeColour3" value="#7d7d7d" /></label>
+				</li>
+				<li>
+					<label for="themeColour4" style="background-color: var(--c4)"><input type="color" id="themeColour4" value="#ffffff" /></label>
+				</li>
+				<li>
+					<label for="themeColour5" style="background-color: var(--c5)"><input type="color" id="themeColour5" value="#448ccb" /></label>
+				</li>
+				<li>
+					<label for="themeColour6" style="background-color: var(--c6)"><input type="color" id="themeColour6" value="#f68e56" /></label>
+				</li>
+			</ol>
 
 			<p id="version">wordlelele — a project by Obsidian_Seal</p>
 		</div>
@@ -1161,7 +1203,7 @@
 				if (minutes == 1) minutesWord = "minute";
 				if (seconds == 1) secondsWord = "second";
 
-				if (isNaN(seconds)) {
+				if (isNaN(seconds) || invalidWord) {
 					document.querySelector("#lastChangedDisplay").innerHTML = `???`;
 				} else {
 					document.querySelector(
@@ -1196,6 +1238,7 @@
 			}
 
 			// 9. themes!
+			let themeColours = ["252525", "464646", "7d7d7d", "ffffff", "448ccb", "f68e56"];
 			function loadThemeFromURL() {
 				const query = window.location.search;
 				const item = new URLSearchParams(query);
@@ -1218,11 +1261,43 @@
 				document.querySelector("#c5colour").innerHTML = `&nbsp;#${colours[4]}&nbsp;`;
 				document.querySelector("#c6colour").innerHTML = `&nbsp;#${colours[5]}&nbsp;`;
 				document.querySelector("#c2colour").innerHTML = `&nbsp;#${colours[1]}&nbsp;`;
+
+				themeColours[0] = colours[0];
+				themeColours[1] = colours[1];
+				themeColours[2] = colours[2];
+				themeColours[3] = colours[3];
+				themeColours[4] = colours[4];
+				themeColours[5] = colours[5];
+
+				document.querySelector("#themeColour1").value = `#${colours[0]}`;
+				document.querySelector("#themeColour2").value = `#${colours[1]}`;
+				document.querySelector("#themeColour3").value = `#${colours[2]}`;
+				document.querySelector("#themeColour4").value = `#${colours[3]}`;
+				document.querySelector("#themeColour5").value = `#${colours[4]}`;
+				document.querySelector("#themeColour6").value = `#${colours[5]}`;
 			}
 			loadThemeFromURL();
 
+			let themeIndex = 0;
+			document.querySelectorAll('input[type="color"]').forEach((input) => {
+				let thisThemeIndex = themeIndex++;
+				input.addEventListener("change", () => {
+					themeColours[thisThemeIndex] = input.value.substring(1);
+
+					document.querySelector(
+						"#theme"
+					).innerHTML = `:root {--c1: #${themeColours[0]}; --c2: #${themeColours[1]}; --c3: #${themeColours[2]}; --c4: #${themeColours[3]}; --c5: #${themeColours[4]}; --c6: #${themeColours[5]};}`;
+
+					window.history.pushState(
+						"",
+						"",
+						`?theme=${themeColours[0]}-${themeColours[1]}-${themeColours[2]}-${themeColours[3]}-${themeColours[4]}-${themeColours[5]}`
+					);
+				});
+			});
+
 			// last: version #
-			let version = "1.5.10";
+			let version = "1.6.0";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
 		</script>
