@@ -1031,7 +1031,7 @@
 						document.querySelector(".guesses").classList.remove("hide");
 					});
 					document.querySelector("#nextWordSubmit").addEventListener("click", (e) => {
-						setNextWord(document.querySelector("input").value.toLowerCase());
+						setNextWord(document.querySelector("#nextWordInput").value.toLowerCase());
 					});
 					document.querySelector("#shareButton").addEventListener("click", (e) => {
 						share();
@@ -1050,7 +1050,7 @@
 								document.activeElement == document.querySelector("#nextWordInput") ||
 								document.activeElement == document.querySelector("#nextWordSubmit")
 							) {
-								setNextWord(document.querySelector("input").value.toLowerCase());
+								setNextWord(document.querySelector("#nextWordInput").value.toLowerCase());
 							} else if (document.activeElement == document.querySelector("#shareButton")) {
 								share();
 							} else if (document.activeElement == document.querySelector("body")) {
@@ -1076,7 +1076,7 @@
 						document.querySelector(".guesses").classList.remove("hide");
 					});
 					document.querySelector("#nextWordSubmit").addEventListener("click", (e) => {
-						setNextWord(document.querySelector("input").value.toLowerCase());
+						setNextWord(document.querySelector("#nextWordInput").value.toLowerCase());
 					});
 					document.querySelector("#shareButton").addEventListener("click", (e) => {
 						share();
@@ -1095,7 +1095,7 @@
 								document.activeElement == document.querySelector("#nextWordInput") ||
 								document.activeElement == document.querySelector("#nextWordSubmit")
 							) {
-								setNextWord(document.querySelector("input").value.toLowerCase());
+								setNextWord(document.querySelector("#nextWordInput").value.toLowerCase());
 							} else if (document.activeElement == document.querySelector("#shareButton")) {
 								share();
 							} else if (document.activeElement == document.querySelector("body")) {
