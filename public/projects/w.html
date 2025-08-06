@@ -722,7 +722,7 @@
 		<script type="module">
 			// 0. fireBASED
 			import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-			import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+			import { getDatabase, ref, set, get, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 			const firebaseConfig = {
 				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
@@ -734,6 +734,7 @@
 				appId: "1:636989973689:web:6d938d9588606d803a6768",
 			};
 			const app = initializeApp(firebaseConfig);
+			const database = getDatabase();
 
 			// 1: header & other "back" buttons
 			function goBack() {
@@ -1325,10 +1326,49 @@
 				});
 			});
 
+			// 10. remove unwanted stuff from database
+			async function validation() {
+				await get(ref(database, "wordlelele"))
+					.then(async (snapshot) => {
+						let object = snapshot.val();
+						for (let key in object) {
+							if (key != "lastUpdated" && key != "word") {
+								removeFromDatabase(key);
+							} else {
+								if (key == "word" && !/^[a-zA-Z]{1,20}$/.test(object["word"])) removeFromDatabase("word");
+								if (
+									key == "lastUpdated" &&
+									(isNaN(object["lastUpdated"]) || object["lastUpdated"] < 1575090000000 || object["lastUpdated"] > Date.now() + 86400000)
+								)
+									removeFromDatabase("lastUpdated");
+							}
+						}
+						console.log("database validated successfully");
+					})
+					.catch((error) => {
+						console.log("error fetching from database");
+						console.error(error);
+					});
+			}
+			validation();
+
+			async function removeFromDatabase(key) {
+				await remove(ref(database, `wordlelele/${key}`))
+					.then((success) => {
+						console.log("deleted something");
+					})
+					.catch((error) => {
+						console.log("error removing from database");
+						console.error(error);
+					});
+			}
+
 			// last: version #
 			let version = "1.6.1";
 			document.querySelector("#version").innerHTML = `wordlelele v${version} — a project by <a href="../about.html">Obsidian_Seal</a>`;
 			console.log(`w | v${version}`);
+
+			// note to reader: yes it is a feature that you can set the word to the same word and therefore share the answer without anyone knowing
 		</script>
 	</body>
 
