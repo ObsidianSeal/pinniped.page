@@ -203,6 +203,7 @@ ul {
 
 .navbar > i {
 	padding-left: 20px;
+	width: 24px;
 }
 
 .navbar-item {
@@ -597,6 +598,7 @@ ul {
 
 .page-title i {
 	margin-left: 40px;
+	width: fit-content;
 }
 
 .subheading {
