@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en-CA">
+	<head>
+		<title>THE GAME OF NUMBERS</title>
+
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#4ecdc4" />
+
+		<link rel="icon" href="../images/icon.png" />
+
+		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
+
+		<meta property="og:url" content="https://pinniped.page/projects/tgon" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="THE GAME OF NUMBERS" />
+		<meta property="og:description" content="It&rsquo;s all a numbers game." />
+		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+
+		<meta name="description" content="It&rsquo;s all a numbers game." />
+		<meta
+			name="keywords"
+			content="pinniped.page, Obsidian_Seal, original, board, game, dice, cards, fun, random, multiplayer, online, code, join, friends, party, silly, weird"
+		/>
+
+		<style>
+			/* FONTS */
+
+			@font-face {
+				font-family: "PP Pangram Sans Rounded";
+				font-weight: 400;
+				src: url("../files/PPPangramSansRounded-Regular.woff2");
+			}
+			@font-face {
+				font-family: "PP Pangram Sans Rounded";
+				font-weight: 700;
+				src: url("../files/PPPangramSansRounded-Bold.woff2");
+			}
+
+			/* VARIABLES */
+
+			:root {
+				--background: #181818;
+				--text: #ebebeb;
+			}
+
+			/* ALL ELEMENTS */
+
+			* {
+				margin: 0;
+				border: 0;
+				padding: 0;
+
+				font-family: "PP Pangram Sans Rounded";
+				font-weight: 400;
+				font-size: 20px;
+
+				-webkit-tap-highlight-color: transparent !important;
+			}
+
+			/* ELEMENTS */
+
+			body {
+				background-color: var(--background);
+				color: var(--text);
+			}
+
+			b {
+				font-weight: 700;
+			}
+
+			/* this will be removed and [unspecific element selection] should generally be avoided */
+			b:last-child {
+				color: #8e87d4;
+			}
+
+			/* CLASSES */
+
+			.no-select {
+				-webkit-user-select: none !important;
+				-moz-user-select: none !important;
+				-ms-user-select: none !important;
+				user-select: none !important;
+			}
+
+			.hide,
+			.sr-only {
+				display: none !important;
+			}
+		</style>
+	</head>
+
+	<body></body>
+
+	<script type="module">
+		"use strict";
+
+		// --- FIREBASE ---
+
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+		import { getDatabase, ref, get, push, set, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+		const firebaseConfig = {
+			apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
+			authDomain: "the-pinniped-page.firebaseapp.com",
+			databaseURL: "https://the-pinniped-page.firebaseio.com",
+			projectId: "the-pinniped-page",
+			storageBucket: "the-pinniped-page.appspot.com",
+			messagingSenderId: "636989973689",
+			appId: "1:636989973689:web:6d938d9588606d803a6768",
+		};
+		const app = initializeApp(firebaseConfig);
+		const database = getDatabase();
+
+		// --- UTILITIES ---
+
+		const base64Characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
+
+		function toBase64(base10Number) {
+			if (base10Number <= 0) return 0;
+
+			let base64Number = "";
+			while (base10Number > 0) {
+				base64Number = base64Characters[base10Number % 64] + base64Number;
+				base10Number = Math.floor(base10Number / 64);
+			}
+			return base64Number;
+		}
+
+		function fromBase64(base64Number) {
+			let index = base64Number.length;
+			let base10Number = 0;
+			for (let character of base64Number.split("")) {
+				base10Number += base64Characters.indexOf(character) * Math.pow(64, --index);
+			}
+			return base10Number;
+		}
+
+		// --- TESTS ---
+
+		let date = new Date();
+		let now = date.getTime();
+		let playerID = toBase64(now);
+
+		set(ref(database, `game-of-numbers/${playerID}`), date.toLocaleString())
+			.then((success) => {
+				document.body.innerHTML = `<i class="fa-jelly fa-regular fa-wand-magic-sparkles"></i> logged in as <b>${playerID}</b><br />close this tab to log out<br /><br /><b>${date.toISOString()}</b>`;
+			})
+			.catch((error) => {
+				console.error(error);
+				document.body.innerHTML = `<i class="fa-jelly fa-regular fa-skull"></i> error logging in!<br />(${playerID})<br /><br /><b>${date.toISOString()}</b>`;
+			});
+
+		addEventListener("beforeunload", () => {
+			remove(ref(database, `game-of-numbers/${playerID}`))
+				.then((success) => {})
+				.catch((error) => {
+					console.error(error);
+				});
+		});
+	</script>
+
+	<script src="../files/auto-project-link-target.js" type="module"></script>
+</html>
