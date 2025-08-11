@@ -12,7 +12,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 10
+		"featured": 0
 	},
 	"BezierCurves": {
 		"basic": false,
@@ -42,7 +42,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 5
+		"featured": 0
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -57,7 +57,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 4
+		"featured": 0
 	},
 	"Chess": {
 		"basic": true,
@@ -210,7 +210,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 1
+		"featured": 0
 	},
 	"Finite Craft": {
 		"basic": false,
@@ -240,7 +240,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 3
 	},
 	"fOnT mAsHeR": {
 		"basic": false,
@@ -405,7 +405,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 3
+		"featured": 0
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -420,7 +420,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 4
 	},
 	"Playlists": {
 		"basic": false,
@@ -435,7 +435,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 6
+		"featured": 0
 	},
 	"progress": {
 		"basic": false,
@@ -540,7 +540,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 2
+		"featured": 0
 	},
 	"Think Four": {
 		"basic": false,
@@ -555,7 +555,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 5
 	},
 	"TicTacToe": {
 		"basic": false,
@@ -571,6 +571,21 @@
 			"tag": ["", ""]
 		},
 		"featured": 0
+	},
+	"Train of Thought": {
+		"basic": false,
+		"icon": "train-stop",
+		"path": "projects/tot",
+		"connected": true,
+		"description": "Transportation system memory game!",
+		"flag": "",
+		"tags": {
+			"new": ["August 11th", "made in 5 hours"],
+			"updated": ["", ""],
+			"beta": ["", ""],
+			"tag": ["", ""]
+		},
+		"featured": 1
 	},
 	"Typewriter Simulator": {
 		"basic": false,
@@ -630,7 +645,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 7
+		"featured": 2
 	},
 	"Words": {
 		"basic": false,

@@ -2,7 +2,7 @@
 
 <html lang="en-CA">
 	<head>
-		<title>~ Train of Thought ~</title>
+		<title>&lt;&lt;&lt; Train of Thought &gt;&gt;&gt;</title>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +14,7 @@
 
 		<meta property="og:url" content="https://pinniped.page/projects/tot" />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="~ Train of Thought ~" />
+		<meta property="og:title" content="&lt;&lt;&lt; Train of Thought &gt;&gt;&gt;" />
 		<meta property="og:description" content="Transportation system memory game!" />
 		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
 
@@ -25,6 +25,10 @@
 		/>
 
 		<style>
+			/* FONTS */
+
+			@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@400;700);
+
 			/* ALL ELEMENTS */
 
 			* {
@@ -32,7 +36,103 @@
 				border: 0;
 				padding: 0;
 
+				font-family: "Roboto";
+				font-weight: 400;
+				font-size: 20px;
+
 				-webkit-tap-highlight-color: transparent !important;
+			}
+
+			/* ELEMENTS */
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				font-weight: 700;
+			}
+
+			h1 {
+				font-size: 64px;
+			}
+
+			h2 {
+				font-size: 32px;
+			}
+
+			h3 {
+				font-size: 24px;
+			}
+
+			h4 {
+				font-size: 20px;
+			}
+
+			h5 {
+				font-size: 16px;
+			}
+
+			h6 {
+				font-size: 12px;
+			}
+
+			a {
+				text-decoration-skip-ink: none;
+				text-decoration-color: #aaaaaa;
+				color: black;
+			}
+
+			a:hover,
+			a:focus {
+				text-decoration-color: black;
+			}
+
+			b {
+				font-weight: 700;
+				font-size: inherit;
+			}
+
+			header,
+			footer {
+				padding: 30px;
+			}
+
+			header h4 {
+				margin-left: 80px;
+				color: #888888;
+			}
+
+			section {
+				position: relative;
+			}
+
+			section h3 {
+				margin-bottom: 3px;
+			}
+
+			section h6 {
+				margin-bottom: 10px;
+			}
+
+			i {
+				font-size: inherit;
+			}
+
+			hr {
+				border-top: 2px solid #aaaaaa;
+				margin: 30px;
+			}
+
+			input {
+				font-size: 32px;
+				width: 100%;
+				outline: none;
+			}
+
+			input::placeholder {
+				color: #888888;
 			}
 
 			/* CLASSES */
@@ -48,15 +148,864 @@
 			.sr-only {
 				display: none !important;
 			}
+
+			.system-select {
+				padding: 0 30px;
+			}
+
+			.system-option,
+			footer p {
+				width: fit-content;
+				margin-left: 30px;
+			}
+
+			.system-select .system-option i,
+			footer p i {
+				color: #888888;
+			}
+
+			.system-option:hover,
+			.system-option:focus {
+				cursor: pointer;
+				translate: 5px 0;
+			}
+
+			.system-option:hover i,
+			.system-option:focus i {
+				color: black;
+			}
+
+			.system-header {
+				padding: 0 30px;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				gap: 10px 20px;
+			}
+
+			.lines {
+				display: flex;
+				gap: 20px 50px;
+				flex-wrap: wrap;
+				padding: 30px;
+			}
+
+			.line-details i {
+				color: #aaaaaa;
+			}
+
+			.stub {
+				width: 18px;
+				height: 6px;
+				margin: 0 6px;
+			}
+
+			.station {
+				display: flex;
+				align-items: center;
+			}
+
+			.line {
+				width: 6px;
+				height: 24px;
+				margin: 0 12px;
+			}
+
+			.station-symbol {
+				width: 14px;
+				height: 14px;
+				border: 3px solid black;
+				border-radius: 8px;
+				box-sizing: border-box;
+				background-color: white;
+				position: absolute;
+				left: 8px;
+			}
+
+			.station-name {
+				font-size: 14px;
+			}
+
+			.station-name-input {
+				position: fixed;
+				right: 30px;
+				bottom: 30px;
+				border: 2px solid #aaaaaa;
+				padding: 5px 10px;
+				width: calc(100% - 60px);
+				box-sizing: border-box;
+				background-color: white;
+				z-index: 2;
+				max-width: 600px;
+				display: flex;
+				align-items: center;
+			}
+
+			.station-name-input i {
+				font-size: 32px;
+				color: #888888;
+			}
+
+			.station-name-input i:hover,
+			.station-name-input i:focus {
+				cursor: pointer;
+				color: black;
+			}
+
+			.highlight {
+				background-color: #dddddd;
+			}
+
+			.buttons {
+				display: flex;
+				gap: 10px 30px;
+				flex-wrap: wrap;
+				padding: 0 30px;
+			}
+
+			.button {
+				padding: 0 10px;
+				height: 30px;
+				display: flex;
+				align-items: center;
+				background-color: #dddddd;
+				width: fit-content;
+			}
+
+			.button:hover,
+			.button:focus {
+				background-color: #888888;
+				cursor: pointer;
+				color: white;
+			}
+
+			/* CONDITIONAL STYLES */
+
+			@media all and (max-width: 700px) {
+				header h4 {
+					margin-top: 10px;
+					margin-left: 0;
+				}
+			}
 		</style>
 	</head>
 
-	<body></body>
+	<body>
+		<header>
+			<h1><i class="fa-chisel fa-regular fa-train"></i> Train of Thought</h1>
+			<h4><i class="fa-chisel fa-regular fa-globe"></i> THE TRANSIT SYSTEM MEMORY GAME</h4>
+		</header>
+		<div class="system-select">
+			<h4><i class="fa-chisel fa-regular fa-compass"></i> SELECT A SYSTEM</h4>
+		</div>
+		<hr />
+		<div class="station-name-input hide">
+			<input type="text" placeholder="enter a station name here..." autocapitalize="off" autocomplete="off" />
+			<i class="fa-chisel fa-regular fa-arrow-up" title="click to submit station name"></i>
+		</div>
+		<div class="system-header">
+			<h2 class="system-name"></h2>
+			<h2 class="completion"></h2>
+			<h2 class="timer"></h2>
+		</div>
+		<div class="lines"></div>
+		<div class="buttons hide">
+			<div class="button" id="give-up-and-reveal-answers" tabindex="0">
+				<span><i class="fa-chisel fa-regular fa-skull"></i> GIVE UP & REVEAL ANSWERS</span>
+			</div>
+			<div class="button" id="share" tabindex="0">
+				<span><i class="fa-chisel fa-regular fa-share-nodes"></i> SHARE</span>
+			</div>
+		</div>
+
+		<hr />
+		<footer>
+			<h4><i class="fa-chisel fa-regular fa-book-open"></i> PLEASE NOTE</h4>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> STATION NAME INPUT IS CASE SENSITIVE AND YOU MUST ENTER THE STATION&rsquo;S ENTIRE NAME</p>
+			<p>
+				<i class="fa-chisel fa-regular fa-minus"></i> when typing, <b class="highlight">' (straight quote)</b> is converted to
+				<b class="highlight">’ (right fancy quote)</b> and <b class="highlight">- (dash/hyphen)</b> is converted to <b class="highlight">– (en dash)</b> (for certain
+				systems)
+			</p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> if the station name contains an accented or other special character you must still type it</p>
+			<p>
+				<i class="fa-chisel fa-regular fa-minus"></i> you can tell you entered a station name correctly if the input is cleared (it will not, however, clear if
+				you&rsquo;ve already entered that station)
+			</p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> your progress is not saved if you leave or switch between systems</p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> more systems coming soon!</p>
+			<br />
+			<h4><i class="fa-chisel fa-regular fa-pencil"></i> ATTRIBUTION</h4>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> typeface: <a href="http://fonts.google.com/specimen/Roboto" title="Google Fonts > Roboto [EXTERNAL]">Roboto</a></p>
+			<p>
+				<i class="fa-chisel fa-regular fa-minus"></i> icons:
+				<a href="https://fontawesome.com/search?f=chisel&s=regular" title="Font Awesome > Search (chisel, regular)">Font Awesome (Chisel)</a>
+			</p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> station names from various places</p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> line colours from various places (they may be inaccurate)</p>
+			<br />
+			<h4><i class="fa-chisel fa-regular fa-face-smile"></i> SEE ALSO</h4>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="bus-data.html" title="BUS DATA">BUS DATA</a></p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="brb.html" title="Bus Ride Bingo">Bus Ride Bingo</a></p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="small-subways.html" title="Bus Ride Bingo">Small Subways</a></p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="../projects+.html" title="pinniped.page — Projects+">all projects</a></p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="../about.html" title="pinniped.page — About">about THE PINNIPED PAGE</a></p>
+			<br />
+			<h4><i class="fa-chisel fa-regular fa-face-frown"></i> PROBLEMS?</h4>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="../status.html" title="pinniped.page — Status">website status</a></p>
+			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></p>
+		</footer>
+	</body>
 
 	<script>
 		"use strict";
 
-		console.log("hello");
+		const systems = {
+			"Calgary, Canada": {
+				"Red Line": {
+					colour: "#d42011",
+					stations: [
+						"Tuscany",
+						"Crowfoot",
+						"Dalhousie",
+						"Brentwood",
+						"University",
+						"Banff Trail",
+						"Lions Park",
+						"SAIT/AUArts/Jubilee",
+						"Sunnyside",
+						"8 Street Southwest",
+						"7 Street Southwest",
+						"6 Street Southwest",
+						"4 Street Southwest",
+						"3 Street Southwest",
+						"1 Street Southwest",
+						"Centre Street",
+						"City Hall",
+						"Victoria Park/Stampede",
+						"Erlton/Stampede",
+						"39 Avenue",
+						"Chinook",
+						"Heritage",
+						"Southland",
+						"Anderson",
+						"Canyon Meadows",
+						"Fish Creek–Lacombe",
+						"Shawnessy",
+						"Somerset–Bridlewood",
+					],
+				},
+				"Blue Line": {
+					colour: "#00254f",
+					stations: [
+						"69 St",
+						"Sirocco",
+						"45 St",
+						"Westbrook",
+						"Shaganappi Point",
+						"Sunalta",
+						"Downtown West–Kerby",
+						"8 Street Southwest",
+						"7 Street Southwest",
+						"6 Street Southwest",
+						"4 Street Southwest",
+						"3 Street Southwest",
+						"1 Street Southwest",
+						"Centre Street",
+						"City Hall",
+						"Bridgeland/Memorial",
+						"Zoo",
+						"Barlow/Max Bell",
+						"Franklin",
+						"Marlborough",
+						"Rundle",
+						"Whitehorn",
+						"McKnight–Westwinds",
+						"Martindale",
+						"Saddletowne",
+					],
+				},
+			},
+			"Edmonton, Canada": {
+				"Capital Line": {
+					colour: "#5c93cb",
+					stations: [
+						"Clareview",
+						"Belvedere",
+						"Coliseum",
+						"Stadium",
+						"Churchill",
+						"Central",
+						"Bay/Enterprise Square",
+						"Corona",
+						"Government Centre",
+						"University",
+						"Health Sciences/Jubilee",
+						"McKernan/Belgravia",
+						"South Campus/Fort Edmonton Park",
+						"Southgate",
+						"Century Park",
+					],
+				},
+				"Metro Line": {
+					colour: "#c93539",
+					stations: [
+						"NAIT/Blatchford Market",
+						"Kingsway/​Royal Alex",
+						"MacEwan",
+						"Churchill",
+						"Central",
+						"Bay/Enterprise Square",
+						"Corona",
+						"Government Centre",
+						"University",
+						"Health Sciences/Jubilee",
+					],
+				},
+				"Valley Line": {
+					colour: "#3c6940",
+					stations: [
+						"102 Street",
+						"Churchill",
+						"Quarters",
+						"Muttart",
+						"Strathearn",
+						"Holyrood",
+						"Bonnie Doon",
+						"Avonmore",
+						"Davies",
+						"Millbourne/Woodvale",
+						"Grey Nuns",
+						"Mill Woods",
+					],
+				},
+			},
+			"Montréal, Canada": {
+				"Line 1 - Green": {
+					colour: "#00a651",
+					stations: [
+						"Angrignon",
+						"Monk",
+						"Jolicoeur",
+						"Verdun",
+						"De l’Église",
+						"LaSalle",
+						"Charlevoix",
+						"Lionel-Groulx",
+						"Atwater",
+						"Guy-Concordia",
+						"Peel",
+						"McGill",
+						"Place-des-Arts",
+						"Saint-Laurent",
+						"Berri–UQAM",
+						"Beaudry",
+						"Papineau",
+						"Frontenac",
+						"Préfontaine",
+						"Joliette",
+						"Pie-IX",
+						"Viau",
+						"Assomption",
+						"Cadillac",
+						"Langelier",
+						"Radisson",
+						"Honoré-Beaugrand",
+					],
+				},
+				"Line 2 - Orange": {
+					colour: "#f5821f",
+					stations: [
+						"Côte-Vertu",
+						"Du Collège",
+						"De La Savane",
+						"Namur",
+						"Plamondon",
+						"Côte-Sainte-Catherine",
+						"Snowdon",
+						"Villa-Maria",
+						"Vendôme",
+						"Place-Saint-Henri",
+						"Lionel-Groulx",
+						"Georges-Vanier",
+						"Lucien-L’Allier",
+						"Bonaventure",
+						"Square-Victoria-OACI",
+						"Place-d’Armes",
+						"Champ-de-Mars",
+						"Berri–UQAM",
+						"Sherbrooke",
+						"Mont-Royal",
+						"Laurier",
+						"Rosemont",
+						"Beaubien",
+						"Jean-Talon",
+						"Jarry",
+						"Crémazie",
+						"Sauvé",
+						"Henri-Bourassa",
+						"Cartier",
+						"De La Concorde",
+						"Montmorency",
+					],
+				},
+				"Line 3 - Yellow": {
+					colour: "#ffde00",
+					stations: ["Berri–UQAM", "Jean-Drapeau", "Longueuil–Université-de-Sherbrooke"],
+				},
+				"Line 5 - Blue": {
+					colour: "#007dc6",
+					stations: [
+						"Snowdon",
+						"Côte-des-Neiges",
+						"Université-de-Montréal",
+						"Édouard-Montpetit",
+						"Outremont",
+						"Acadie",
+						"Parc",
+						"De Castelnau",
+						"Jean-Talon",
+						"Fabre",
+						"D’Iberville",
+						"Saint-Michel",
+					],
+				},
+				"REM": {
+					colour: "#82c341",
+					stations: ["Central Station", "Île-des-Sœurs", "Panama", "Du Quartier", "Brossard"],
+				},
+			},
+			"Ottawa, Canada": {
+				"Line 1 (Confederation Line)": {
+					colour: "#c22d29",
+					stations: [
+						"Tunney’s Pasture",
+						"Bayview",
+						"Pimisi",
+						"Lyon",
+						"Parliament",
+						"Rideau",
+						"uOttawa",
+						"Lees",
+						"Hurdman",
+						"Tremblay",
+						"St-Laurent",
+						"Cyrville",
+						"Blair",
+					],
+				},
+				"Line 2 (Trillium Line)": {
+					colour: "#73a044",
+					stations: ["Bayview", "Corso Italia", "Dow’s Lake", "Carleton", "Mooney’s Bay", "Walkley", "Greenboro", "South Keys", "Leitrim", "Bowesville", "Limebank"],
+				},
+				"Line 4 (Airport Link)": {
+					colour: "#4498d1",
+					stations: ["South Keys", "Uplands", "Airport"],
+				},
+			},
+			"Toronto, Canada": {
+				"Line 1 (Yonge–University)": {
+					colour: "#f6cc46",
+					stations: [
+						"Vaughan Metropolitan Centre",
+						"Highway 407",
+						"Pioneer Village",
+						"York University",
+						"Finch West",
+						"Downsview Park",
+						"Sheppard West",
+						"Wilson",
+						"Yorkdale",
+						"Lawrence West",
+						"Glencairn",
+						"Eglinton West",
+						"St. Clair West",
+						"Dupont",
+						"Spadina",
+						"St. George",
+						"Museum",
+						"Queen’s Park",
+						"St. Patrick",
+						"Osgoode",
+						"St. Andrew",
+						"Union",
+						"King",
+						"Queen",
+						"Dundas",
+						"College",
+						"Wellesley",
+						"Bloor–Yonge",
+						"Rosedale",
+						"Summerhill",
+						"St. Clair",
+						"Davisville",
+						"Eglinton",
+						"Lawrence",
+						"York Mills",
+						"Sheppard–Yonge",
+						"North York Centre",
+						"Finch",
+					],
+				},
+				"Line 2 (Bloor–Danforth)": {
+					colour: "#49a358",
+					stations: [
+						"Kipling",
+						"Islington",
+						"Royal York",
+						"Old Mill",
+						"Jane",
+						"Runnymede",
+						"High Park",
+						"Keele",
+						"Dundas West",
+						"Lansdowne",
+						"Dufferin",
+						"Ossington",
+						"Christie",
+						"Bathurst",
+						"Spadina",
+						"St. George",
+						"Bay",
+						"Bloor–Yonge",
+						"Sherbourne",
+						"Castle Frank",
+						"Broadview",
+						"Chester",
+						"Pape",
+						"Donlands",
+						"Greenwood",
+						"Coxwell",
+						"Woodbine",
+						"Main Street",
+						"Victoria Park",
+						"Warden",
+						"Kennedy",
+					],
+				},
+				"Line 3 (Scarborough)": {
+					colour: "#4499d8",
+					stations: ["Kennedy", "Lawrence East", "Ellesmere", "Midland", "Scarborough Centre", "McCowan"],
+				},
+				"Line 4 (Sheppard)": {
+					colour: "#a42171",
+					stations: ["Sheppard–Yonge", "Bayview", "Bessarion", "Leslie", "Don Mills"],
+				},
+			},
+			"Vancouver, Canada": {
+				"Expo Line": {
+					colour: "#235696",
+					stations: [
+						"Waterfront",
+						"Burrard",
+						"Granville",
+						"Stadium–Chinatown",
+						"Main Street–Science World",
+						"Commercial–Broadway",
+						"Nanaimo",
+						"29th Avenue",
+						"Joyce–Collingwood",
+						"Patterson",
+						"Metrotown",
+						"Royal Oak",
+						"Edmonds",
+						"22nd Street",
+						"New Westminster",
+						"Columbia",
+						"Scott Road",
+						"Gateway",
+						"Surrey Central",
+						"King George",
+						"Sapperton",
+						"Braid",
+						"Lougheed Town Centre",
+						"Production Way–University",
+					],
+				},
+				"Millennium Line": {
+					colour: "#f2c24f",
+					stations: [
+						"VCC–Clark",
+						"Commercial–Broadway",
+						"Renfrew",
+						"Rupert",
+						"Gilmore",
+						"Brentwood Town Centre",
+						"Holdom",
+						"Sperling–Burnaby Lake",
+						"Lake City Way",
+						"Production Way–University",
+						"Lougheed Town Centre",
+						"Burquitlam",
+						"Moody Centre",
+						"Inlet Centre",
+						"Coquitlam Central",
+						"Lincoln",
+						"Lafarge Lake–Douglas",
+					],
+				},
+				"Canada Line": {
+					colour: "#4295a5",
+					stations: [
+						"Waterfront",
+						"Vancouver City Centre",
+						"Yaletown–Roundhouse",
+						"Olympic Village",
+						"Broadway–City Hall",
+						"King Edward",
+						"Oakridge–41st Avenue",
+						"Langara–49th Avenue",
+						"Marine Drive",
+						"Bridgeport",
+						"Capstan",
+						"Aberdeen",
+						"Lansdowne",
+						"Richmond–Brighouse",
+						"Templeton",
+						"Sea Island Centre",
+						"YVR–Airport",
+					],
+				},
+			},
+			"Waterloo, Canada": {
+				"ION light rail": {
+					colour: "#006cb7",
+					stations: [
+						"Conestoga",
+						"Northfield",
+						"Research and Technology",
+						"University of Waterloo",
+						"Laurier–Waterloo Park",
+						"Waterloo Public Square",
+						"Willis Way",
+						"Allen",
+						"Grand River Hospital",
+						"Central Station",
+						"Kitchener City Hall",
+						"Victoria Park",
+						"Queen",
+						"Frederick",
+						"Kitchener Market",
+						"Borden",
+						"Mill",
+						"Block Line",
+						"Fairway",
+					],
+				},
+			},
+		};
+
+		for (let system in systems) {
+			let systemOptionElement = document.createElement("div");
+			systemOptionElement.classList.add("system-option");
+			systemOptionElement.tabIndex = "0";
+			systemOptionElement.title = `select ${system}`;
+			systemOptionElement.innerHTML = `<i class="fa-chisel fa-regular fa-arrow-right"></i> ${system}`;
+			document.querySelector(".system-select").append(systemOptionElement);
+
+			systemOptionElement.addEventListener("click", () => {
+				setLines(system);
+			});
+
+			systemOptionElement.addEventListener("keydown", (event) => {
+				if (event.key === "Enter") {
+					setLines(system);
+				}
+			});
+		}
+
+		let currentSystem = "";
+		let guessedStations = 0;
+		let totalStations = 0;
+		let time = 0;
+		let timer;
+
+		function setLines(system) {
+			document.querySelector("div.lines").innerHTML = "";
+			currentSystem = system;
+
+			totalStations = 0;
+			guessedStations = 0;
+			clearInterval(timer);
+
+			let placedStations = {};
+
+			for (let line in systems[system]) {
+				let lineContainer = document.createElement("section");
+
+				let lineNameElement = document.createElement("h3");
+				lineNameElement.innerHTML = line;
+
+				let lineDetailsElement = document.createElement("h6");
+				lineDetailsElement.classList.add("line-details");
+				lineDetailsElement.innerHTML = `${systems[system][line].colour}<i class="fa-solid fa-dot"></i>${systems[system][line].stations.length} stations`;
+
+				let lineStub1Element = document.createElement("div");
+				lineStub1Element.classList.add("stub");
+				lineStub1Element.style = `background-color: ${systems[system][line].colour}`;
+
+				lineContainer.append(lineNameElement, lineDetailsElement, lineStub1Element);
+
+				for (let station of systems[system][line].stations) {
+					let stationContainer = document.createElement("div");
+					stationContainer.classList.add("station");
+
+					let lineElement = document.createElement("div");
+					lineElement.classList.add("line");
+					lineElement.style = `background-color: ${systems[system][line].colour}`;
+
+					let stationSymbolElement = document.createElement("div");
+					stationSymbolElement.classList.add("station-symbol");
+
+					let stationNameElement = document.createElement("div");
+					stationNameElement.classList.add("station-name");
+					stationNameElement.innerHTML = "";
+
+					stationContainer.append(lineElement, stationSymbolElement, stationNameElement);
+					lineContainer.append(stationContainer);
+
+					if (station in placedStations) placedStations[station]++;
+					else {
+						placedStations[station] = 0;
+						totalStations++;
+					}
+				}
+
+				let lineStub2Element = document.createElement("div");
+				lineStub2Element.classList.add("stub");
+				lineStub2Element.style = `background-color: ${systems[system][line].colour}`;
+				lineContainer.append(lineStub2Element);
+
+				document.querySelector("div.lines").append(lineContainer);
+			}
+
+			document.querySelector(".system-name").innerHTML = `<i class="fa-chisel fa-regular fa-location-dot"></i> ${system}`;
+			document.querySelector(".completion").innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> 0/${totalStations} (0%)`;
+			document.querySelector(".timer").innerHTML = `<i class="fa-chisel fa-regular fa-stopwatch"></i> 0:00`;
+
+			time = 0;
+			timer = setInterval(() => {
+				time++;
+				document.querySelector(".timer").innerHTML = `<i class="fa-chisel fa-regular fa-stopwatch"></i> ${Math.floor(time / 60)}:${(time % 60)
+					.toString()
+					.padStart(2, "0")}`;
+			}, 1000);
+
+			document.querySelector(".buttons").classList.remove("hide");
+			document.querySelector("#give-up-and-reveal-answers").classList.remove("hide");
+			document.querySelector("#share").classList.remove("hide");
+			document.querySelector(".station-name-input").classList.remove("hide");
+			document.querySelector(".station-name-input input").focus();
+		}
+
+		function submitStationGuess(guess) {
+			if (currentSystem != "") {
+				const system = currentSystem;
+				let guessCounted = false;
+
+				let lineIndex = 0;
+				for (let line in systems[system]) {
+					let stationIndex = 0;
+					for (let station of systems[system][line].stations) {
+						if (station == guess) {
+							if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML != station) {
+								document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML = station;
+								document.querySelector(".station-name-input input").value = "";
+							}
+							if (!guessCounted) {
+								document.querySelector(
+									".completion"
+								).innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.floor(
+									(guessedStations / totalStations) * 100
+								)}%)`;
+								guessCounted = true;
+							}
+						}
+						stationIndex++;
+					}
+					lineIndex++;
+				}
+
+				if (guessedStations == totalStations) {
+					document.querySelector("#give-up-and-reveal-answers").classList.add("hide");
+					giveUpAndRevealAnswers();
+				}
+			}
+		}
+
+		document.querySelector(".station-name-input").addEventListener("keydown", (event) => {
+			if (event.key === "Enter") {
+				submitStationGuess(document.querySelector(".station-name-input input").value);
+			}
+		});
+
+		document.querySelector(".station-name-input i").addEventListener("click", () => {
+			submitStationGuess(document.querySelector(".station-name-input input").value);
+		});
+
+		document.querySelector(".station-name-input input").addEventListener("input", () => {
+			if (document.querySelector(".station-name-input input").value.substring(document.querySelector(".station-name-input input").value.length - 1) == "'")
+				document.querySelector(".station-name-input input").value =
+					document.querySelector(".station-name-input input").value.substring(0, document.querySelector(".station-name-input input").value.length - 1) + "’";
+
+			const noEnDashChange = ["Edmonton, Canada", "Montréal, Canada", "Ottawa, Canada"];
+
+			if (!noEnDashChange.includes(currentSystem)) {
+				if (document.querySelector(".station-name-input input").value.substring(document.querySelector(".station-name-input input").value.length - 1) == "-")
+					document.querySelector(".station-name-input input").value =
+						document.querySelector(".station-name-input input").value.substring(0, document.querySelector(".station-name-input input").value.length - 1) + "–";
+			}
+		});
+
+		function giveUpAndRevealAnswers() {
+			clearInterval(timer);
+			document.querySelector(".station-name-input").classList.add("hide");
+
+			if (currentSystem != "") {
+				const system = currentSystem;
+
+				let lineIndex = 0;
+				for (let line in systems[system]) {
+					let stationIndex = 0;
+					for (let station of systems[system][line].stations) {
+						if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML != station) {
+							document.querySelector(
+								`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`
+							).innerHTML = `<b class="highlight">${station}</b>`;
+						}
+						stationIndex++;
+					}
+					lineIndex++;
+				}
+			}
+		}
+
+		document.querySelector("#give-up-and-reveal-answers").addEventListener("click", () => {
+			giveUpAndRevealAnswers();
+		});
+
+		document.querySelector("#give-up-and-reveal-answers").addEventListener("keydown", (event) => {
+			if (event.key === "Enter") {
+				giveUpAndRevealAnswers();
+			}
+		});
+
+		function share() {
+			let shareText = `## 🚉 Train of Thought // ${currentSystem} 🌐\n✅ ${guessedStations}/${totalStations} (${Math.floor(
+				(guessedStations / totalStations) * 100
+			)}%) in ${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")} ⏱️\nhttps://pinniped.page/tot`;
+			navigator.clipboard.writeText(shareText);
+		}
+
+		document.querySelector("#share").addEventListener("click", () => {
+			share();
+		});
+
+		document.querySelector("#share").addEventListener("keydown", (event) => {
+			if (event.key === "Enter") {
+				share();
+			}
+		});
 	</script>
 
 	<script src="../files/auto-project-link-target.js" type="module"></script>
