@@ -343,6 +343,12 @@
 			</p>
 			<p><i class="fa-chisel fa-regular fa-minus"></i> station names from various places</p>
 			<p><i class="fa-chisel fa-regular fa-minus"></i> line colours from various places (they may be inaccurate)</p>
+			<p>
+				<i class="fa-chisel fa-regular fa-minus"></i> inspired by
+				<a href="https://www.sporcle.com/games/BillyMumphrey/torontosubwaystations" title="Sporcle > &ldquo;Toronto Subway Stations&rdquo; by BillyMumphrey [EXTERNAL]"
+					>&ldquo;Toronto Subway Stations&rdquo; by BillyMumphrey on Sporcle</a
+				>
+			</p>
 			<br />
 			<h4><i class="fa-chisel fa-regular fa-face-smile"></i> SEE ALSO</h4>
 			<p><i class="fa-chisel fa-regular fa-minus"></i> <a href="bus-data.html" title="BUS DATA">BUS DATA</a></p>
@@ -915,7 +921,7 @@
 							if (!guessCounted) {
 								document.querySelector(
 									".completion"
-								).innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.floor(
+								).innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.round(
 									(guessedStations / totalStations) * 100
 								)}%)`;
 								guessCounted = true;
@@ -991,7 +997,7 @@
 		});
 
 		function share() {
-			let shareText = `## 🚉 Train of Thought // ${currentSystem} 🌐\n✅ ${guessedStations}/${totalStations} (${Math.floor(
+			let shareText = `## 🚉 Train of Thought // ${currentSystem} 🌐\n✅ ${guessedStations}/${totalStations} (${Math.round(
 				(guessedStations / totalStations) * 100
 			)}%) in ${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")} ⏱️\nhttps://pinniped.page/tot`;
 			navigator.clipboard.writeText(shareText);
