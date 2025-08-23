@@ -103,7 +103,8 @@
 			}
 
 			h3,
-			h4 {
+			h4,
+			h5 {
 				position: absolute;
 				font-size: 30px;
 				color: var(--grey60);
@@ -112,7 +113,9 @@
 			h3:hover,
 			h3:focus,
 			h4:hover,
-			h4:focus {
+			h4:focus,
+			h5:hover,
+			h5:focus {
 				cursor: pointer;
 				color: var(--black);
 			}
@@ -123,6 +126,11 @@
 			}
 
 			h4 {
+				bottom: 50px;
+				left: 50px;
+			}
+
+			h5 {
 				right: 50px;
 				bottom: 50px;
 			}
@@ -517,10 +525,80 @@
 				text-decoration-color: var(--green2);
 			}
 
+			.puzzle-select-panel {
+				position: absolute;
+
+				width: 100%;
+
+				background-color: var(--grey10);
+			}
+
+			.puzzle-select-panel div {
+				display: grid;
+				grid-template-columns: 15% 40% 15% 15% 15%;
+
+				padding: 2px 0;
+
+				background-color: var(--grey10);
+			}
+
+			.puzzle-select-panel div:first-child {
+				position: sticky;
+				top: 0;
+			}
+
+			.puzzle-select-panel div:not(:last-child) {
+				border-bottom: 1px solid var(--grey20);
+			}
+
+			.puzzle-select-panel div:first-child span {
+				font-weight: 700;
+
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+
+			.puzzle-select-panel div span,
+			.puzzle-select-panel div span a {
+				color: black;
+
+				font-family: "Roboto Slab";
+				font-size: 20px;
+
+				text-align: center;
+			}
+
+			.puzzle-select-panel div span i {
+				color: var(--grey40);
+
+				font-size: 20px;
+			}
+
+			.puzzle-select-panel div span a:hover ~ i,
+			.puzzle-select-panel div span a:focus ~ i {
+				color: var(--blue-green);
+			}
+
+			.puzzle-select-panel div span a {
+				text-decoration-color: var(--grey40);
+				text-decoration-skip-ink: none;
+			}
+
+			.puzzle-select-panel div span a:hover,
+			.puzzle-select-panel div span a:focus {
+				text-decoration-color: var(--blue-green);
+			}
+
+			.current-selected-puzzle > :first-child {
+				font-weight: 700;
+			}
+
 			/* SELECTION */
 
 			h3,
 			h4,
+			h5,
 			.word,
 			.buttons,
 			.loading-container,
@@ -535,7 +613,8 @@
 			h1::selection,
 			h2::selection,
 			p::selection,
-			.notice-panel *::selection {
+			.notice-panel *::selection,
+			.puzzle-select-panel *::selection {
 				background-color: var(--grey20);
 			}
 
@@ -894,6 +973,11 @@
 				}
 
 				h4 {
+					bottom: 20px;
+					left: 20px;
+				}
+
+				h5 {
 					right: 20px;
 					bottom: 20px;
 				}
@@ -927,6 +1011,19 @@
 					}
 				}
 			}
+
+			/* SCROLLBAR(S) */
+
+			::-webkit-scrollbar {
+				width: 20px;
+				background-color: var(--grey10);
+			}
+			::-webkit-scrollbar-thumb {
+				background-color: var(--grey40);
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background-color: var(--blue-green);
+			}
 		</style>
 	</head>
 
@@ -950,7 +1047,14 @@
 				</div>
 			</div>
 			<h3 tabindex="0" title="return to the Projects+ page">exit</h3>
-			<h4 tabindex="0" title="Think Four information sheet (.pdf download)">help!</h4>
+			<h4 tabindex="0" title="Think Four - help!">help!</h4>
+			<h5
+				tabindex="0"
+				title="puzzle select & statistics
+(use ESCAPE to leave)"
+			>
+				PUZZLES
+			</h5>
 
 			<div class="board"></div>
 			<div class="buttons">
@@ -987,72 +1091,7 @@
 			<div class="copy-alert hide">copied!</div>
 		</div>
 
-		<!-- <div class="notice-panel-container other-font">
-			<div class="notice-panel">
-				<p>Daily <span class="game-name">Think Four</span> puzzles will (hopefully not) end on <span class="last-puzzle-notice">unknown_date</span>!</p>
-				<p>
-					If you&rsquo;d like to see Think Four continue, please send me category suggestions (and encouragement) on
-					<a href="https://pinniped.page/discord" >Discord</a>.
-				</p>
-				<p>Don&rsquo;t worry—once daily puzzles have run out, all previous puzzles will still be available.</p>
-				<p style="display: flex; justify-content: space-between">
-					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
-				</p>
-				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
-			</div>
-		</div> -->
-
-		<!-- <div class="notice-panel-container other-font">
-			<div class="notice-panel green2">
-				<p>Welcome to <span class="game-name">Think Four</span> on the <a href="../index.html">pinniped.page</a>!</p>
-				<p>Daily puzzles have been set up to <span class="last-puzzle-notice">unknown_date</span>.</p>
-				<p>
-					A big thank you to everyone who has given me word, category, and puzzle suggestions. As always, if you&rsquo;d like to see Think Four continue, please send
-					me category suggestions (and encouragement) on
-					<a href="https://pinniped.page/discord" >Discord</a>.
-				</p>
-				<p style="display: flex; justify-content: space-between">
-					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
-				</p>
-				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
-			</div>
-		</div> -->
-
-		<!-- <div class="notice-panel-container other-font">
-			<div class="notice-panel">
-				<p>The 100th and final <span class="game-name">Think Four</span> puzzle will be on <span class="last-puzzle-notice">unknown_date</span>.</p>
-				<p>
-					It&rsquo;s been fun, but I can&rsquo;t keep this up and it&rsquo;s time to move on. As always, a huge thank you to to all the people who have given me
-					word, category, or puzzle suggestions.
-				</p>
-				<p>Don&rsquo;t worry—once daily puzzles have run out, all previous puzzles will still be available.</p>
-				<p>
-					Although a date has been set for the last puzzle, not all of the puzzles up to then have been made, so I still need suggestions!
-					<a href="https://pinniped.page/discord" >Send them here.</a>
-				</p>
-				<p style="display: flex; justify-content: space-between">
-					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
-				</p>
-				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
-			</div>
-		</div> -->
-
-		<!-- <div class="notice-panel-container other-font">
-			<div class="notice-panel">
-				<p><span class="remaining-puzzles-notice">unknown_number</span> puzzles remain.</p>
-				<p>
-					The 100th and final puzzle (<span class="last-puzzle-notice">unknown_date</span>) draws near. All of the remaining puzzles have been made. This has been so
-					much fun! As always, a huge thank you to to all the people who have given me suggestions of any kind.
-				</p>
-				<p>Don&rsquo;t worry—once daily puzzles have run out, all previous puzzles will still be available.</p>
-				<p style="display: flex; justify-content: space-between">
-					<span>Thanks for playing!</span><span class="remove700" style="color: var(--grey60)">PRESS &ldquo;ESCAPE&rdquo; TO CLOSE</span>
-				</p>
-				<i class="fa-solid fa-xmark notice-panel-exit" style="width: 32px; display: flex; align-items: center; justify-content: center" tabindex="0"></i>
-			</div>
-		</div> -->
-
-		<div class="notice-panel-container other-font">
+		<div class="notice-panel-container">
 			<div class="notice-panel green2">
 				<p>Welcome to <span class="game-name">Think Four</span>!</p>
 				<p>
@@ -1079,7 +1118,11 @@
 			</div>
 		</div>
 
+		<div class="puzzle-select-panel hide"></div>
+
 		<script type="module">
+			"use strict";
+
 			// --- close notice panel if... ---
 			if (window.location.href.includes("?")) {
 				document.querySelector(".notice-panel-container").remove();
@@ -1092,7 +1135,7 @@
 
 			// --- FIREBASE (v10.9.0) ---
 			import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-			import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+			import { getDatabase, ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 
 			const firebaseConfig = {
 				apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
@@ -1132,7 +1175,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.8.3"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.9.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO:`, infoStyle, versionString);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -1230,8 +1273,10 @@
 							window.history.replaceState(null, "", "think-four");
 						}
 						date = alternateDate;
-					} catch {
-						console.log(`%cERROR:`, errorStyle, `no puzzle exists for ${alternateDate}, loading today's`);
+					} catch (error) {
+						console.error(error);
+
+						console.log(`%cWARNING:`, warningStyle, `no puzzle exists for ${alternateDate}, loading today's`);
 						if (isDeployedSite) {
 							window.history.replaceState(null, "", "think-four");
 						}
@@ -1239,8 +1284,10 @@
 						try {
 							topics = thinkFourData.puzzles[date].topics;
 							words = thinkFourData.puzzles[date].words;
-						} catch {
-							console.log(`%cERROR:`, errorStyle, `no puzzle exists for today, loading most recent`);
+						} catch (error) {
+							console.error(error);
+
+							console.log(`%cWARNING:`, warningStyle, `no puzzle exists for today, loading most recent`);
 
 							for (let puzzle in thinkFourData.puzzles) {
 								date = puzzle;
@@ -1348,12 +1395,117 @@
 					console.log("%cERROR:", errorStyle, `gameStart() error (are you trying to run locally?)`, error);
 				}
 
+				// 100% validation => add to stats
+				const db = getDatabase();
+				let object;
+				await get(ref(db, "think-four"))
+					.then(async (snapshot) => {
+						object = snapshot.val();
+
+						for (let key in object) {
+							if (key == "puzzles") {
+								for (let puzzle in object.puzzles) {
+									if (/^\d{4}-\d{2}-\d{2}$/.test(puzzle)) {
+										for (let puzzleDataPoint in object.puzzles[puzzle]) {
+											if (["rating", "ratings", "solves"].includes(puzzleDataPoint)) {
+												if (puzzleDataPoint == "rating") {
+													if (!(object.puzzles[puzzle][puzzleDataPoint] >= 0 && object.puzzles[puzzle][puzzleDataPoint] <= 5)) {
+														await set(ref(db, `think-four/puzzles/${puzzle}/${puzzleDataPoint}`), 0)
+															.then((success) => {
+																console.log("%cWARNING:", warningStyle, "reset bad data in database");
+																object.puzzles[puzzle][puzzleDataPoint] = 0;
+															})
+															.catch((error) => {
+																console.error(error);
+															});
+													}
+												} else {
+													if (!(object.puzzles[puzzle][puzzleDataPoint] >= 0)) {
+														await set(ref(db, `think-four/puzzles/${puzzle}/${puzzleDataPoint}`), 0)
+															.then((success) => {
+																console.log("%cWARNING:", warningStyle, "reset bad data in database");
+																object.puzzles[puzzle][puzzleDataPoint] = 0;
+															})
+															.catch((error) => {
+																console.error(error);
+															});
+													}
+												}
+											} else {
+												await remove(ref(db, `think-four/puzzles/${puzzle}/${puzzleDataPoint}`))
+													.then((success) => {
+														console.log("%cWARNING:", warningStyle, "removed bad data from database");
+														delete object.puzzles[puzzle][puzzleDataPoint];
+													})
+													.catch((error) => {
+														console.error(error);
+													});
+											}
+										}
+									} else {
+										await remove(ref(db, `think-four/puzzles/${puzzle}`))
+											.then((success) => {
+												console.log("%cWARNING:", warningStyle, "removed bad data from database");
+												delete object.puzzles[puzzle];
+											})
+											.catch((error) => {
+												console.error(error);
+											});
+									}
+								}
+							} else {
+								await remove(ref(db, `think-four/${key}`))
+									.then((success) => {
+										console.log("%cWARNING:", warningStyle, "removed bad data from database");
+										delete object[key];
+									})
+									.catch((error) => {
+										console.error(error);
+									});
+							}
+						}
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+
+				// --- PUZZLE SELECT & STATISTICS pt. 2 ---
+
+				document.querySelector(".puzzle-select-panel").innerHTML =
+					document.querySelector(".puzzle-select-panel").innerHTML +
+					`<div><span>PUZZLE NO.</span><span>DATE</span><span>AVG. RATING</span><span>NO. RATINGS</span><span>NO. SOLVES</span></div>`;
+
+				let i = 0;
+				for (let puzzle in thinkFourData.puzzles) {
+					if (!object.puzzles[puzzle.replaceAll("/", "-")]) {
+						object.puzzles[puzzle.replaceAll("/", "-")] = {
+							rating: 0,
+							ratings: 0,
+							solves: 0,
+						};
+					}
+
+					document.querySelector(".puzzle-select-panel").innerHTML =
+						document.querySelector(".puzzle-select-panel").innerHTML +
+						`<div><span>#${++i}</span><span><a href="?puzzle=${puzzle}">${toTextDate(puzzle)}</a> <i class="fa-solid fa-arrow-up-right"></i></span><span>${
+							object.puzzles[puzzle.replaceAll("/", "-")].rating
+						}</span><span>${object.puzzles[puzzle.replaceAll("/", "-")].ratings}</span><span>${object.puzzles[puzzle.replaceAll("/", "-")].solves}</span></div>`;
+					if (puzzle == safeDate.replaceAll("-", "/")) {
+						document.querySelector(".puzzle-select-panel div:last-child").classList.add("current-selected-puzzle");
+						document.querySelector(
+							".puzzle-select-panel div:last-child span:first-child"
+						).innerHTML = `<i class="fa-solid fa-arrow-right-long"></i> #${i} <i class="fa-solid fa-arrow-left-long"></i>`;
+					}
+				}
+
 				try {
 					placeWords(false);
 					setTitleWidth();
 					await getRating();
 					document.querySelector(".loading-container").classList.add("hide");
-				} catch {
+				} catch (error) {
+					console.error(error);
+
 					console.log("%cERROR:", errorStyle, `could not initialize board, probably because puzzle data could not be loaded`);
 				}
 			}
@@ -1640,7 +1792,9 @@
 					for (let j = 0; j < 4; j++) {
 						try {
 							mixedWords[j][i] = document.querySelector(`#w${i}-${j}`).innerHTML;
-						} catch {
+						} catch (error) {
+							console.error(error);
+
 							mixedWords[j][i] = "";
 							console.log(`%cERROR:`, errorStyle, `element #w${i}-${j} does not exist!`);
 						}
@@ -1690,7 +1844,9 @@
 							document.querySelector(".win-text span").innerHTML = ++guesses;
 							if (guesses == 8) document.querySelector(".win-text span").style = "color: var(--red)";
 						}
-					} catch {
+					} catch (error) {
+						console.error(error);
+
 						console.log("%cERROR:", errorStyle, `there is no submit element!`);
 					}
 
@@ -1709,7 +1865,9 @@
 								selectedWords = 0;
 							}
 						}
-					} catch {
+					} catch (error) {
+						console.error(error);
+
 						console.log("%cERROR:", errorStyle, `there is no clear element!`);
 					}
 
@@ -1789,11 +1947,15 @@
 					}
 
 					if (document.activeElement == document.querySelector("h4")) {
-						window.open("../download.html?x=think-four.pdf");
+						window.open("think-four/help.html");
 					}
 
 					if (document.activeElement == document.querySelector(".notice-panel-exit")) {
 						document.querySelector(".notice-panel-container").remove();
+					}
+
+					if (document.activeElement == document.querySelector("h5")) {
+						puzzleSelect();
 					}
 				}
 
@@ -1809,6 +1971,10 @@
 
 				if (e.key == "Escape" && document.querySelectorAll(".notice-panel-container").length != 0) {
 					document.querySelector(".notice-panel-container").remove();
+				}
+
+				if (e.key == "Escape" && !document.querySelector(".puzzle-select-panel").classList.contains("hide")) {
+					puzzleSelect();
 				}
 
 				if (e.key == "Backspace") {
@@ -1848,7 +2014,9 @@
 						if (e.keyCode == 38) document.activeElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.focus();
 						if (e.keyCode == 39) document.activeElement.nextElementSibling.focus();
 						if (e.keyCode == 40) document.activeElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.focus();
-					} catch {
+					} catch (error) {
+						console.error(error);
+
 						console.log("%cERROR:", errorStyle, `can't go that way!`);
 					}
 				}
@@ -2036,16 +2204,20 @@
 					numberOfSolves = 0;
 				}
 
+				document.querySelector(".puzzle-rating").title = `~${averageRating}/5`;
 				averageRating = Math.round(averageRating * 2) / 2;
 
 				for (let i = 1; i <= 5; i++) {
-					if (averageRating >= 1) {
+					if (averageRating >= 0.5) {
 						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.remove("fa-regular");
 						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.add("fa-solid");
 					}
 					if (averageRating == 0.5) {
 						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.remove("fa-star");
-						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.add("fa-star-half-stroke");
+						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.add("fa-star-half");
+					}
+					if (averageRating <= 0) {
+						document.querySelector(`.puzzle-rating i:nth-child(${i})`).classList.add("hide");
 					}
 					averageRating--;
 				}
@@ -2053,7 +2225,7 @@
 
 			// --- HELP! ---
 			document.querySelector("h4").addEventListener("click", (e) => {
-				window.open("../download.html?x=think-four.pdf");
+				window.open("think-four/help.html");
 			});
 
 			// --- notice panel exit ---
@@ -2062,6 +2234,17 @@
 					document.querySelector(".notice-panel-container").remove();
 				});
 			});
+
+			// --- PUZZLE SELECT & STATISTICS ---
+
+			document.querySelector("h5").addEventListener("click", () => {
+				puzzleSelect();
+			});
+
+			function puzzleSelect() {
+				document.querySelector(".puzzle-select-panel").classList.toggle("hide");
+				document.querySelector(".game-container").classList.toggle("hide");
+			}
 		</script>
 
 		<script src="../files/auto-project-link-target.js" type="module"></script>

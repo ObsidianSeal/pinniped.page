@@ -41,20 +41,87 @@
 			/* VARIABLES */
 
 			:root {
-				--darkest: #181818;
-				--dark: #4d4d4d;
-				--light: #cecece;
-				--lightest: #ebebeb;
+				/* colours from https://coolors.co/1e8c93-ff6952-bfda60-272727-eeeeee-a5a5a5-ae2f71-1f1f78-b10c0c-2a8733 */
 
-				--green-circle: #338637;
-				--vibrant-coral-circle: #d13737;
-				--blue-circle: #1c407f;
+				--board: #151515;
+				--square: #eeeeee;
+				--number: #a5a5a5;
+				--special: #ae2f71;
 
-				--green-card: #6ee674;
-				--vibrant-coral-card: #ff96ab;
-				--blue-card: #5f92ea;
+				--green-circle: #2a8733;
+				--vibrant-coral-circle: #b10c0c;
+				--blue-circle: #1f1f78;
 
-				/* steal the Wplace colours */
+				--green-card: #bfda60;
+				--vibrant-coral-card: #ff6952;
+				--blue-card: #1e8c93;
+
+				/* colours from Wplace; some names modified */
+
+				--colour1: #000000; /* black */
+				--colour2: #3c3c3c; /* dark grey */
+				--colour3: #787878; /* grey */
+				--colour4: #aaaaaa; /* medium grey */
+				--colour5: #d2d2d2; /* light grey */
+				--colour6: #ffffff; /* white */
+				--colour7: #600018; /* maroon */
+				--colour8: #850e1e; /* dark red */
+				--colour9: #ed1c24; /* red */
+				--colour10: #fa8072; /* light red */
+				--colour11: #e45c1a; /* dark orange */
+				--colour12: #ff7f27; /* orange */
+				--colour13: #f6aa09; /* gold */
+				--colour14: #f9dd3b; /* yellow */
+				--colour15: #fffabc; /* light yellow */
+				--colour16: #9c8431; /* dark goldenrod */
+				--colour17: #c5ad31; /* goldenrod */
+				--colour18: #e8d45f; /* light goldenrod */
+				--colour19: #4a6b3a; /* dark olive */
+				--colour20: #5a944a; /* olive */
+				--colour21: #84c573; /* light olive */
+				--colour22: #0eb968; /* green */
+				--colour23: #13e67b; /* light green */
+				--colour24: #87ff5e; /* lime */
+				--colour25: #0c816e; /* dark teal */
+				--colour26: #10aea6; /* teal */
+				--colour27: #13e1be; /* light teal */
+				--colour28: #0f799f; /* dark cyan */
+				--colour29: #60f7f2; /* cyan */
+				--colour30: #bbfaf2; /* light cyan */
+				--colour31: #28509e; /* dark blue */
+				--colour32: #4093e4; /* blue */
+				--colour33: #7dc7ff; /* light blue */
+				--colour34: #4d31b8; /* dark indigo */
+				--colour35: #6b50f6; /* indigo */
+				--colour36: #99b1fb; /* light indigo */
+				--colour37: #4a4284; /* dark lavender */
+				--colour38: #7a71c4; /* lavender */
+				--colour39: #b5aef1; /* light lavender */
+				--colour40: #780c99; /* dark purple */
+				--colour41: #aa38b9; /* purple */
+				--colour42: #e09ff9; /* light purple */
+				--colour43: #cb007a; /* dark pink */
+				--colour44: #ec1f80; /* pink */
+				--colour45: #f38da9; /* light pink */
+				--colour46: #9b5249; /* dark peach */
+				--colour47: #d18078; /* peach */
+				--colour48: #fab6a4; /* light peach */
+				--colour49: #684634; /* dark brown */
+				--colour50: #95682a; /* brown */
+				--colour51: #dba463; /* light brown */
+				--colour52: #7b6352; /* dark tan */
+				--colour53: #9c846b; /* tan */
+				--colour54: #d6b594; /* light tan */
+				--colour55: #d18051; /* dark beige */
+				--colour56: #f8b277; /* beige */
+				--colour57: #ffc5a5; /* light beige */
+				--colour58: #6d643f; /* dark stone */
+				--colour59: #948c6b; /* stone */
+				--colour60: #cdc59e; /* light stone */
+				--colour61: #333941; /* dark slate */
+				--colour62: #6d758d; /* slate */
+				--colour63: #b3b9d1; /* light slate */
+				--colour64: transparent; /* transparent */
 			}
 
 			/* ALL ELEMENTS */
@@ -72,10 +139,6 @@
 			}
 
 			/* ELEMENTS */
-
-			body {
-				background-color: var(--darkest);
-			}
 
 			b {
 				font-weight: 700;
@@ -95,22 +158,27 @@
 				display: none !important;
 			}
 
-			.game-board-panel {
+			.game-panel {
+				display: grid;
+				grid-template-columns: auto 400px;
+
 				width: 100dvw;
 				height: 100dvh;
+			}
 
+			.game-board-panel {
 				display: flex;
 				align-items: center;
 				justify-content: center;
+
+				background-color: var(--board);
 			}
 
 			.game-board {
-				max-width: 500px;
-				max-height: 500px;
+				width: 500px;
+				height: 500px;
 
 				margin: 21px;
-
-				background-color: var(--darkest);
 
 				display: flex;
 				flex-wrap: wrap-reverse;
@@ -123,26 +191,48 @@
 				height: 10%;
 				aspect-ratio: 1;
 
-				background-color: var(--light);
-				color: var(--dark);
+				background-color: var(--square);
+				color: var(--number);
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
 
 				box-sizing: border-box;
-				border: 1px solid var(--darkest);
+				border: 1px solid var(--board);
+
+				font-weight: 700;
+			}
+
+			.game-board-square-text {
+				position: absolute;
+				top: 0;
+
+				font-weight: 700;
+				font-size: 12px;
+
+				color: var(--special);
 			}
 
 			.game-board-square-circle {
 				position: absolute;
 
-				width: 42px;
-				height: 42px;
+				width: 36px;
+				height: 36px;
 				box-sizing: border-box;
 
-				border: 5px solid #401a99;
-				border-radius: 21px;
+				border: 3px solid;
+				border-radius: 18px;
+			}
+
+			.game-board-square-circle.blue {
+				border-color: var(--blue-circle);
+			}
+			.game-board-square-circle.vibrant-coral {
+				border-color: var(--vibrant-coral-circle);
+			}
+			.game-board-square-circle.green {
+				border-color: var(--green-circle);
 			}
 
 			.game-board-square-player-token-container {
@@ -160,28 +250,337 @@
 				height: 20px;
 
 				border-radius: 10px;
+			}
 
-				background-color: #65a5e6;
-				/* opacity: 75%; */
+			.game-log-panel {
+				display: flex;
+				flex-direction: column-reverse;
+
+				border-left: 2px solid var(--number);
+				padding: 20px;
+
+				background-color: var(--square);
+
+				overflow-y: auto;
+			}
+
+			.game-log-panel::-webkit-scrollbar {
+				width: 20px;
+			}
+			.game-log-panel::-webkit-scrollbar-track {
+				background-color: var(--square);
+			}
+			.game-log-panel::-webkit-scrollbar-thumb {
+				background-color: var(--number);
+				border: 5px solid var(--square);
+			}
+			.game-log-panel::-webkit-scrollbar-thumb:hover {
+				background-color: var(--board);
+				cursor: ns-resize;
+			}
+
+			.game-log-panel::selection {
+				background-color: var(--board);
+				color: var(--square);
+			}
+
+			.game-log-message-time {
+				margin-top: 10px;
+
+				font-size: 12px;
+				font-weight: 700;
+
+				text-align: right;
+			}
+
+			.game-log-message-time:last-child {
+				margin-top: 0;
+			}
+
+			.game-log-message-container {
+				display: grid;
+				grid-template-columns: 30px auto;
+				gap: 20px;
+			}
+
+			.game-log-message-icon {
+				font-size: 24px;
+			}
+
+			.game-log-message-icon.black,
+			.game-log-message-text.black b {
+				color: var(--board);
+			}
+			.game-log-message-icon.grey,
+			.game-log-message-text.grey b {
+				color: var(--number);
+			}
+			.game-log-message-icon.magenta,
+			.game-log-message-text.magenta b {
+				color: var(--special);
+			}
+
+			.game-log-message-icon.blue-dark,
+			.game-log-message-text.blue-dark b {
+				color: var(--blue-circle);
+			}
+			.game-log-message-icon.vibrant-coral-dark,
+			.game-log-message-text.vibrant-coral-dark b {
+				color: var(--vibrant-coral-circle);
+			}
+			.game-log-message-icon.green-dark,
+			.game-log-message-text.green-dark b {
+				color: var(--green-circle);
+			}
+
+			.game-log-message-icon.blue-light,
+			.game-log-message-text.blue-light b {
+				color: var(--blue-card);
+			}
+			.game-log-message-icon.vibrant-coral-light,
+			.game-log-message-text.vibrant-coral-light b {
+				color: var(--vibrant-coral-card);
+			}
+			.game-log-message-icon.green-light,
+			.game-log-message-text.green-light b {
+				color: var(--green-card);
+			}
+
+			.game-log-message-text,
+			.game-log-message-text b {
+				font-size: 16px;
+
+				color: var(--board);
+			}
+
+			.card-area {
+				position: absolute;
+				bottom: 0;
+
+				display: flex;
+
+				width: calc(100dvw - 400px);
+				height: 75px;
+				box-sizing: border-box;
+
+				padding: 0 10px;
+
+				overflow: hidden;
+			}
+
+			.card {
+				width: 100%;
+				max-width: 300px;
+				height: 75px;
+
+				translate: 0 15px;
+				transition: translate 500ms;
+
+				border: 10px solid var(--board);
+			}
+
+			.card.available:hover {
+				translate: 0 0;
+				cursor: pointer;
+			}
+
+			.card.unavailable:hover {
+				cursor: not-allowed;
+			}
+
+			.card.blue {
+				background-color: var(--blue-card);
+			}
+			.card.vibrant-coral {
+				background-color: var(--vibrant-coral-card);
+			}
+			.card.green {
+				background-color: var(--green-card);
+			}
+
+			.card-icon-container {
+				width: 50px;
+				height: 50px;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.card-icon-container i {
+				font-size: 36px;
+			}
+
+			.card.blue .card-icon-container i {
+				color: var(--blue-circle);
+			}
+			.card.vibrant-coral .card-icon-container i {
+				color: var(--vibrant-coral-circle);
+			}
+			.card.green .card-icon-container i {
+				color: var(--green-circle);
+			}
+
+			.card-text {
+				position: absolute;
+
+				width: 400px;
+
+				border: 2px solid var(--board);
+				padding: 20px;
+
+				color: var(--board);
+
+				pointer-events: none;
+			}
+
+			.card-text::selection {
+				background-color: var(--board);
+				color: var(--square);
+			}
+
+			.card-text.blue {
+				background-color: var(--blue-card);
+			}
+			.card-text.vibrant-coral {
+				background-color: var(--vibrant-coral-card);
+			}
+			.card-text.green {
+				background-color: var(--green-card);
+			}
+
+			.game-header {
+				position: absolute;
+				left: 50px;
+			}
+
+			.game-header::selection {
+				background-color: var(--square);
+				color: var(--board);
+			}
+
+			.game-title {
+				color: var(--special);
+
+				font-weight: 700;
+				font-size: 48px;
+			}
+
+			.game-code {
+				width: fit-content;
+
+				border: 1px solid var(--number);
+				padding: 0 10px;
+
+				color: var(--number);
+			}
+
+			/* ANIMATIONS */
+
+			#d1,
+			#d2,
+			#d3 {
+				opacity: 0%;
+			}
+
+			#d1 {
+				animation: d1 2.5s infinite 500ms;
+			}
+
+			#d2 {
+				animation: d2 2.5s infinite 500ms;
+			}
+
+			#d3 {
+				animation: d3 2.5s infinite 500ms;
+			}
+
+			@keyframes d1 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 100%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d2 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 100%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
+			}
+
+			@keyframes d3 {
+				0% {
+					opacity: 0%;
+				}
+				20% {
+					opacity: 0%;
+				}
+				40% {
+					opacity: 0%;
+				}
+				60% {
+					opacity: 100%;
+				}
+				80% {
+					opacity: 100%;
+				}
+				100% {
+					opacity: 0%;
+				}
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="game-board-panel">
-			<div class="game-board"></div>
+		<div class="game-panel">
+			<div class="game-board-panel no-select">
+				<div class="game-board"></div>
+			</div>
+			<div class="game-log-panel"></div>
+			<div class="card-area"></div>
+			<div class="card-text hide"></div>
+			<div class="game-header">
+				<div class="game-title">THE GAME OF NUMBERS</div>
+				<div class="game-code"><d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></div>
+			</div>
 		</div>
 	</body>
 
 	<script type="module">
 		"use strict";
 
-		// --- FIREBASE ---
+		// --- CONSTANTS ---
 
-		import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-		import { getDatabase, ref, get, push, set, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-
-		const firebaseConfig = {
+		const FIREBASE_CONFIGURATION = {
 			apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
 			authDomain: "the-pinniped-page.firebaseapp.com",
 			databaseURL: "https://the-pinniped-page.firebaseio.com",
@@ -190,24 +589,173 @@
 			messagingSenderId: "636989973689",
 			appId: "1:636989973689:web:6d938d9588606d803a6768",
 		};
-		const app = initializeApp(firebaseConfig);
+
+		const BLUE_CIRCLES = 10;
+		const VIBRANT_CORAL_CIRCLES = 15;
+		const GREEN_CIRCLES = 25;
+
+		const COLOURS = ["blue", "vibrant-coral", "green"];
+		const TOKEN_COLOURS = [
+			"black",
+			"dark grey",
+			"grey",
+			"medium grey",
+			"light grey",
+			"white",
+			"maroon",
+			"dark red",
+			"red",
+			"light red",
+			"dark orange",
+			"orange",
+			"gold",
+			"yellow",
+			"light yellow",
+			"dark goldenrod",
+			"goldenrod",
+			"light goldenrod",
+			"dark olive",
+			"olive",
+			"light olive",
+			"green",
+			"light green",
+			"lime",
+			"dark teal",
+			"teal",
+			"light teal",
+			"dark cyan",
+			"cyan",
+			"light cyan",
+			"dark blue",
+			"blue",
+			"light blue",
+			"dark indigo",
+			"indigo",
+			"light indigo",
+			"dark lavender",
+			"lavender",
+			"light lavender",
+			"dark purple",
+			"purple",
+			"light purple",
+			"dark pink",
+			"pink",
+			"light pink",
+			"dark peach",
+			"peach",
+			"light peach",
+			"dark brown",
+			"brown",
+			"light brown",
+			"dark tan",
+			"tan",
+			"light tan",
+			"dark beige",
+			"beige",
+			"light beige",
+			"dark stone",
+			"stone",
+			"light stone",
+			"dark slate",
+			"slate",
+			"light slate",
+			"transparent",
+		];
+
+		const NOTATION_CIRCLES = ["b", "vc", "g"];
+		const ORIGINAL_BOARD_NOTATION =
+			"[][][g][][][][g][][][b]/[][g][vc][][][g][][vc][g][]/[][][][g][g][][g][][vc][b]/[g][][b][][vc][vc][][vc][g][]/[][g][vc][g][][][g][][][]/[g][g][][][g][b][][vc][][g]/[][b][vc][][][][vc][g][b][]/[][vc][g][vc][][g][][g][][]/[][g][][b][g][][][][b][g]/[vc][g][b][][][b][vc][][vc][]";
+
+		const BASE_64_CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
+
+		// --- FIREBASE ---
+
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+		import { getDatabase, ref, get, push, set, remove } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+		const app = initializeApp(FIREBASE_CONFIGURATION);
 		const database = getDatabase();
 
-		// --- ELEMENT CREATION ---
+		// --- BOARD ---
 
-		function createGameBoard() {
+		function setGameBoardFromNotation(notation) {
+			let boardArray = new Array(100);
+
+			let notationArray = notation.split(/\]\[|\]\/\[/);
+			notationArray[0] = notationArray[0].substring(1);
+			notationArray[99] = notationArray[99].substring(0, notationArray[99].length - 1);
+
 			const gameBoardElement = document.querySelector(".game-board");
+			gameBoardElement.innerHTML = "";
 
-			for (let i = 1; i <= 100; i++) {
+			for (let i = 0; i < notationArray.length; i++) {
+				notationArray[i] = notationArray[i].split(",");
+
 				const gameBoardSquareElement = document.createElement("div");
 				gameBoardSquareElement.classList.add("game-board-square");
-				gameBoardSquareElement.innerHTML = i;
+				gameBoardSquareElement.innerHTML = i + 1;
 				gameBoardElement.append(gameBoardSquareElement);
 
-				if (Math.floor(Math.random() * 10) == 0) {
+				boardArray[i] = {};
+				boardArray[i].squareNumber = i + 1;
+
+				if (i == 0 || i == notationArray.length - 1) {
+					const gameBoardSquareTextElement = document.createElement("div");
+					gameBoardSquareTextElement.classList.add("game-board-square-text");
+					if (i == 0) gameBoardSquareTextElement.innerHTML = "START!";
+					else gameBoardSquareTextElement.innerHTML = "FINISH!";
+					gameBoardSquareElement.append(gameBoardSquareTextElement);
+				}
+
+				if (NOTATION_CIRCLES.includes(notationArray[i][0])) {
 					const gameBoardSquareCircleElement = document.createElement("div");
-					gameBoardSquareCircleElement.classList.add("game-board-square-circle");
-					gameBoardSquareCircleElement.style = "border-color: var(--blue-circle)";
+					gameBoardSquareCircleElement.classList.add("game-board-square-circle", COLOURS[NOTATION_CIRCLES.indexOf(notationArray[i][0])]);
+					gameBoardSquareElement.append(gameBoardSquareCircleElement);
+
+					boardArray[i].circleType = COLOURS[NOTATION_CIRCLES.indexOf(notationArray[i][0])];
+				} else boardArray[i].circleType = null;
+
+				const gameBoardSquarePlayerTokenContainer = document.createElement("div");
+				gameBoardSquarePlayerTokenContainer.classList.add("game-board-square-player-token-container");
+				gameBoardSquareElement.appendChild(gameBoardSquarePlayerTokenContainer);
+
+				boardArray[i].playerTokens = [];
+
+				for (let j = 1; j < notationArray[i].length; j++) {
+					const gameBoardSquarePlayerTokenElement = document.createElement("div");
+					gameBoardSquarePlayerTokenElement.classList.add("game-board-square-player-token");
+					gameBoardSquarePlayerTokenElement.style = `background-color: var(--colour${notationArray[i][j]})`;
+					gameBoardSquarePlayerTokenElement.id = `token${notationArray[i][j]}`;
+					gameBoardSquarePlayerTokenContainer.append(gameBoardSquarePlayerTokenElement);
+
+					boardArray[i].playerTokens[j - 1] = parseInt(notationArray[i][j]);
+				}
+			}
+
+			return boardArray;
+		}
+
+		function setGameBoardFromArray(array) {
+			const gameBoardElement = document.querySelector(".game-board");
+			gameBoardElement.innerHTML = "";
+
+			for (let i = 0; i < array.length; i++) {
+				const gameBoardSquareElement = document.createElement("div");
+				gameBoardSquareElement.classList.add("game-board-square");
+				gameBoardSquareElement.innerHTML = array[i].squareNumber;
+				gameBoardElement.append(gameBoardSquareElement);
+
+				if (i == 0 || i == array.length - 1) {
+					const gameBoardSquareTextElement = document.createElement("div");
+					gameBoardSquareTextElement.classList.add("game-board-square-text");
+					if (i == 0) gameBoardSquareTextElement.innerHTML = "START!";
+					else gameBoardSquareTextElement.innerHTML = "FINISH!";
+					gameBoardSquareElement.append(gameBoardSquareTextElement);
+				}
+
+				if (array[i].circleType) {
+					const gameBoardSquareCircleElement = document.createElement("div");
+					gameBoardSquareCircleElement.classList.add("game-board-square-circle", array[i].circleType);
 					gameBoardSquareElement.append(gameBoardSquareCircleElement);
 				}
 
@@ -215,28 +763,484 @@
 				gameBoardSquarePlayerTokenContainer.classList.add("game-board-square-player-token-container");
 				gameBoardSquareElement.appendChild(gameBoardSquarePlayerTokenContainer);
 
-				if (Math.floor(Math.random() * 5) == 0) {
-					const randomNumber = Math.floor(Math.random() * 4) + 1;
-					for (let j = 0; j < randomNumber; j++) {
-						const gameBoardSquarePlayerTokenElement = document.createElement("div");
-						gameBoardSquarePlayerTokenElement.classList.add("game-board-square-player-token");
-						gameBoardSquarePlayerTokenContainer.append(gameBoardSquarePlayerTokenElement);
-					}
+				for (let j = 0; j < array[i].playerTokens.length; j++) {
+					const gameBoardSquarePlayerTokenElement = document.createElement("div");
+					gameBoardSquarePlayerTokenElement.classList.add("game-board-square-player-token");
+					gameBoardSquarePlayerTokenElement.style = `background-color: var(--colour${array[i].playerTokens[j]})`;
+					gameBoardSquarePlayerTokenElement.id = `token${array[i].playerTokens[j]}`;
+					gameBoardSquarePlayerTokenContainer.append(gameBoardSquarePlayerTokenElement);
+				}
+			}
+
+			return array;
+		}
+
+		function getGameBoardNotation() {
+			let gameBoardString = "";
+			let count = 0;
+
+			document.querySelectorAll(".game-board-square").forEach((gameBoardSquareElement) => {
+				gameBoardString += "[";
+
+				gameBoardSquareElement.querySelectorAll(".game-board-square-circle").forEach((gameBoardSquareCircleElement) => {
+					if (gameBoardSquareCircleElement.classList.contains("blue")) gameBoardString += "b";
+					if (gameBoardSquareCircleElement.classList.contains("vibrant-coral")) gameBoardString += "vc";
+					if (gameBoardSquareCircleElement.classList.contains("green")) gameBoardString += "g";
+				});
+
+				gameBoardSquareElement.querySelectorAll(".game-board-square-player-token").forEach((gameBoardSquarePlayerTokenElement) => {
+					gameBoardString += `,${gameBoardSquarePlayerTokenElement.id.substring(
+						gameBoardSquarePlayerTokenElement.id.length - 2,
+						gameBoardSquarePlayerTokenElement.id.length - 1
+					)}`;
+				});
+
+				gameBoardString += "]";
+				if (++count % 10 == 0 && count != 100) gameBoardString += "/";
+			});
+
+			return gameBoardString;
+		}
+
+		function generateGameBoardArray() {
+			let squareArray = mixArray(fillArray(98));
+
+			let boardArray = new Array(100);
+			for (let i = 0; i < boardArray.length; i++) {
+				boardArray[i] = {};
+				boardArray[i].squareNumber = i + 1;
+				boardArray[i].circleType = null;
+				boardArray[i].playerTokens = [];
+
+				if (i > 0 && i < boardArray.length - 1) {
+					if (squareArray.indexOf(i - 1) >= 0 && squareArray.indexOf(i - 1) < BLUE_CIRCLES) boardArray[i].circleType = COLOURS[0];
+					if (squareArray.indexOf(i - 1) >= BLUE_CIRCLES && squareArray.indexOf(i - 1) < BLUE_CIRCLES + VIBRANT_CORAL_CIRCLES) boardArray[i].circleType = COLOURS[1];
+					if (
+						squareArray.indexOf(i - 1) >= BLUE_CIRCLES + VIBRANT_CORAL_CIRCLES &&
+						squareArray.indexOf(i - 1) < BLUE_CIRCLES + VIBRANT_CORAL_CIRCLES + GREEN_CIRCLES
+					)
+						boardArray[i].circleType = COLOURS[2];
+				}
+			}
+
+			return boardArray;
+		}
+
+		// --- CARDS ---
+
+		let cardData = {
+			b: [
+				{ ID: 1, icon: "crown", text: "If someone is currently on the 72 square, they teleport to 100 and win.", action: null },
+				{ ID: 2, icon: "arrow-right-arrow-left", text: "Any player on a prime number can go to 72.", action: null },
+				{ ID: 3, icon: "forward", text: "All players on a circled square must increase their position by 4.", action: null },
+				{ ID: 4, icon: "forward", text: "All players may increase their positions by their age divided by 2.", action: null },
+				{
+					ID: 5,
+					icon: "arrow-right-arrow-left",
+					text: "If today is a Monday, Wednesday, or Friday, all positions are increased by 5, otherwise they are all decreased by 5.",
+					action: null,
+				},
+				{ ID: 6, icon: "backward", text: "Anyone above 80 must go back to 80. (The square not the age.)", action: null },
+				{ ID: 7, icon: "forward", text: "The player to the right of whoever drew this card can move up one space.", action: null },
+				{ ID: 8, icon: "forward", text: "Whoever drew this card must roll the 8-sided die. All positions are increased by the roll.", action: null },
+				{
+					ID: 9,
+					icon: "arrow-right-arrow-left",
+					text: "All players roll the 10-sided die that has multiples of 10. They move to their roll. (Rolling 00 puts you at 1.)",
+					action: null,
+				},
+				{ ID: 10, icon: "forward", text: "Anyone still below 50 can move there.", action: null },
+				{
+					ID: 11,
+					icon: "arrow-right-arrow-left",
+					text: "All players may increase their positions by the first letter of the book they&rsquo;re currently reading as a number.<br />— Numbers are numbers.<br />— Non-alphanumeric start? Go back 5.<br />— Not reading a book? Go to 1.<br />Hope you appreciate this forced book club.",
+					action: null,
+				},
+				{ ID: 12, icon: "forward", text: "Every player&rsquo;s position is increased by the current month as a number.", action: null },
+				{ ID: 13, icon: "backward", text: "All players on a circled square must decrease their position by 6.", action: null },
+				{ ID: 14, icon: "backward", text: "All positions are divided by 2.", action: null },
+				{ ID: 15, icon: "backward", text: "All players must subtract the number of VIBRANT CORAL cards in their hand from their position.", action: null },
+				{ ID: 16, icon: "forward", text: "All players on an even number may move one space diagonally towards 100. If you cannot, you cannot.", action: null },
+			],
+			vc: [
+				{
+					ID: 1,
+					icon: "backward",
+					text: "The youngest player must decrease their position by the number of years they&rsquo;ve been alive. (Maybe don&rsquo;t play if that&rsquo;s you...?)",
+					action: null,
+				},
+				{ ID: 2, icon: "arrows-rotate", text: "The player closest to 100 swaps with the farthest person.", action: null },
+				{ ID: 3, icon: "backward", text: "Choose a player to have their position decreased by 1.", action: null },
+				{ ID: 4, icon: "skull", text: "This card doesn&rsquo;t do anything. It&rsquo;s a great gift to other players!", action: null },
+				{
+					ID: 5,
+					icon: "forward-step",
+					text: "Increase someone&rsquo;s position by 5, but you can pick two	cards from the top of the VIBRANT CORAL card pile.",
+					action: null,
+				},
+				{ ID: 6, icon: "backward", text: "Choose a player to have their position decreased by 2.", action: null },
+				{ ID: 7, icon: "backward", text: "Choose a player to have their position decreased by 5.", action: null },
+				{ ID: 8, icon: "backward", text: "The player with the yellow piece must decrease their position by 8.", action: null },
+				{
+					ID: 9,
+					icon: "arrow-right-arrow-left",
+					text: "Pick a player to pay rock, paper, scissors with. If you win, they decrease their position by 5 and you increase yours by 5. The opposite happens if they win, and nothing happens if the game results in a tie.",
+					action: null,
+				},
+				{
+					ID: 10,
+					icon: "backward",
+					text: "Roll the 4-sided die. If the player that many places counterclockwise from you (could include you!) is on a circled square, decrease their position by 7.",
+					action: null,
+				},
+				{ ID: 11, icon: "bolt", text: "Skip the next 2 people&rsquo;s turns. (If there are fewer than 3 people, that includes yours!)", action: null },
+				{ ID: 12, icon: "backward", text: "Choose a player to have their position decreased by 7.", action: null },
+				{ ID: 13, icon: "backward", text: "Choose a player to have their position decreased by 6.", action: null },
+				{
+					ID: 14,
+					icon: "bomb",
+					text: "Ask everyone if they would rather play a different game. Anyone who says yes can have their position increased OR decreased by 10 depending on if you want to appease or punish them.",
+					action: null,
+				},
+				{ ID: 15, icon: "backward", text: "The player with the red piece must decrease their position by 8.", action: null },
+				{ ID: 16, icon: "backward", text: "Choose a player to have their position divided by 2.", action: null },
+				{
+					ID: 17,
+					icon: "trash",
+					text: "The next two people must discard a card to the bottom of its pile. (If there are fewer than 3 people, that includes you!	)",
+					action: null,
+				},
+				{ ID: 18, icon: "backward", text: "Choose a player to have their position decreased by the roll of the 6-sided die.", action: null },
+				{ ID: 19, icon: "backward", text: "Choose a player to have their position decreased by 3.", action: null },
+				{ ID: 20, icon: "bolt", text: "Skip the next 3 people&rsquo;s turns. (If there are fewer than 4 people, that includes you!)", action: null },
+				{
+					ID: 21,
+					icon: "backward-step",
+					text: "Think of a number and choose someone to try to guess it. If they can&rsquo;t guess it in 3 tries, decrease their position by 8.",
+					action: null,
+				},
+				{
+					ID: 22,
+					icon: "bolt",
+					text: "Force a player to go outside, skipping their next turn. If they refuse, decrease their position by 15 and they still don&rsquo;t get a turn.",
+					action: null,
+				},
+				{
+					ID: 23,
+					icon: "backward-step",
+					text: "Choose a player! Roll the 4- and 8-sided dice. If the 4-sided die gave a 4, the player&rsquo;s position is increased by the roll of the 8-sided die, and vice versa. (Rolls of 1, 2, and 3 on the 4-sided die decrease their position by the 8-sided roll.)",
+					action: null,
+				},
+				{ ID: 24, icon: "bolt", text: "Skip the next person&rsquo;s turn.", action: null },
+				{ ID: 25, icon: "backward", text: "The player with the green piece must decrease their position by 8.", action: null },
+				{
+					ID: 26,
+					icon: "trash",
+					text: "The next three people must discard a card to the bottom of its pile. (If there are fewer than 4 people, that includes you!)",
+					action: null,
+				},
+				{ ID: 27, icon: "backward", text: "Choose a player to have their position decreased by 4.", action: null },
+				{ ID: 28, icon: "backward", text: "Choose a player to have their position decreased by 10.", action: null },
+				{ ID: 29, icon: "backward", text: "Choose a player to have their position decreased by 9.", action: null },
+				{ ID: 30, icon: "backward", text: "Choose a player to have their position decreased by the roll of the regular 10-sided die.", action: null },
+				{ ID: 31, icon: "backward", text: "Choose a player to have their position decreased by 8.", action: null },
+				{
+					ID: 32,
+					icon: "backward-step",
+					text: "Choose a player to have their position decreased by the roll of the 20-sided die...but if they roll a 20, you have to have your position decreased by 20 instead.",
+					action: null,
+				},
+				{ ID: 33, icon: "backward", text: "Choose a player to have their position decreased by the roll of the 8-sided die.", action: null },
+				{ ID: 34, icon: "backward", text: "Choose a player to have their position decreased by the roll of the 4-sided die.", action: null },
+				{ ID: 35, icon: "face-smile", text: "Everyone must give you a card of their choosing.", action: null },
+				{
+					ID: 36,
+					icon: "backward",
+					text: "The oldest player must decrease their position by the number of decades they&rsquo;ve been alive. (Maybe don&rsquo;t play if that&rsquo;s you!)",
+					action: null,
+				},
+			],
+			g: [
+				{ ID: 1, icon: "forward", text: "Multiply your position by 2. [Your space must be < 50]", action: null },
+				{
+					ID: 2,
+					icon: "forward-step",
+					text: "Tell another player to pick a number from 1 to 10. You get 3 chances to guess the number, and if you guess it you can increase your position by 10.",
+					action: null,
+				},
+				{ ID: 3, icon: "forward", text: "Increase your position by the number of VIBRANT CORAL cards held by the player to your right.", action: null },
+				{ ID: 4, icon: "forward", text: "Increase your position by the digit in the &lsquo;tens column&rsquo; of your current position.", action: null },
+				{ ID: 5, icon: "forward", text: "Increase your position by a roll of the regular 10-sided die.", action: null },
+				{
+					ID: 6,
+					icon: "forward-step",
+					text: "Roll the 20-sided die. If you roll an even number, increase your position by that number. If you roll an odd number, decrease your position by that number.",
+					action: null,
+				},
+				{ ID: 7, icon: "forward", text: "Increase your position by the digit in the &lsquo;tens column&rsquo; of the minutes on the clock.", action: null },
+				{
+					ID: 8,
+					icon: "arrows-rotate",
+					text: "Swap places with the farthest (closest to 100) player. So obviously don&rsquo;t play this card if that&rsquo;s you.",
+					action: null,
+				},
+				{ ID: 9, icon: "sparkles", text: "Start an event by drawing a BLUE card.", action: null },
+				{ ID: 10, icon: "arrow-rotate-right", text: "Take another turn.", action: null },
+				{
+					ID: 11,
+					icon: "arrow-right-arrow-left",
+					text: "Roll the 4-sided die and move up to 3 squares depending on the roll:<br />1. North<br />2. East<br />3. South<br />4. West",
+					action: null,
+				},
+				{ ID: 12, icon: "forward", text: "Increase your position by 3.", action: null },
+				{ ID: 13, icon: "forward", text: "Increase your position by 8.", action: null },
+				{ ID: 14, icon: "forward", text: "Increase your position by 7.", action: null },
+				{ ID: 15, icon: "forward", text: "Increase your position by 5.", action: null },
+				{ ID: 16, icon: "forward", text: "Increase your position by the length of your first name.", action: null },
+				{ ID: 17, icon: "arrows-rotate", text: "Swap places with the player next (on your right) to you. (Positions not seats.)", action: null },
+				{ ID: 18, icon: "forward", text: "Increase your position by the digit in the &lsquo;ones column&rsquo; of your current position.", action: null },
+				{ ID: 19, icon: "forward", text: "Increase your position by a roll of the 4-sided die.", action: null },
+				{ ID: 20, icon: "forward", text: "Increase your position by a roll of the 6-sided die.", action: null },
+				{ ID: 21, icon: "face-smile", text: "Take a card from another player. No, you don&rsquo;t get to see them.", action: null },
+				{ ID: 22, icon: "face-smile", text: "A player of your choosing must give you a card of their choosing.", action: null },
+				{ ID: 23, icon: "arrow-right-arrow-left", text: "If everyone is on the same row, move one row up and make everyone else move one row down.", action: null },
+				{ ID: 24, icon: "forward", text: "Increase your position by 4.", action: null },
+				{ ID: 25, icon: "forward-step", text: "Roll the 4-sided die. If you roll an even number, increase your roll by 5.", action: null },
+				{ ID: 26, icon: "forward", text: "Increase your position by a roll of the 8-sided die.", action: null },
+				{
+					ID: 27,
+					icon: "forward-step",
+					text: "Increase your position by a roll of the 20-sided die...unless you roll an 8, in which case you go back to 8.",
+					action: null,
+				},
+				{ ID: 28, icon: "forward", text: "If playing this card leaves you with only one card, increase your position by 12. (Make sure to say UNO!)", action: null },
+				{ ID: 29, icon: "layer-group", text: "Shuffle everyone&rsquo;s cards together and re-deal them. (Like UNO shuffle hands.)", action: null },
+				{
+					ID: 30,
+					icon: "forward-step",
+					text: "Change your position by the temperature outside, divided by 2. (Maybe don&rsquo;t play this card if it&rsquo;s below 0 outside....)",
+					action: null,
+				},
+				{ ID: 31, icon: "forward", text: "Increase your position by the number of BLUE spaces ahead of you.", action: null },
+				{ ID: 32, icon: "forward", text: "Increase your position by 9.", action: null },
+				{ ID: 33, icon: "forward", text: "Increase your position by the date of the month.", action: null },
+				{ ID: 34, icon: "forward", text: "Increase your position by the number of GREEN cards in your hand, including this one.", action: null },
+				{ ID: 35, icon: "forward", text: "Increase your position by 6.", action: null },
+				{
+					ID: 36,
+					icon: "arrow-right-arrow-left",
+					text: "Roll the 4-sided die and move, from your perspective, depending on the roll.<br />1. Away from you.<br />2. Right.<br />3. Towards you.<br />4. Left.",
+					action: null,
+				},
+				{
+					ID: 37,
+					icon: "forward-step",
+					text: "Increase your position by 10. If another player was closer to 100 in your previous position, move them up by 5.",
+					action: null,
+				},
+				{ ID: 38, icon: "forward", text: "Increase your position by 2.", action: null },
+				{ ID: 39, icon: "forward", text: "Increase your position by the length of your last name.", action: null },
+				{ ID: 40, icon: "forward", text: "Increase your position by 10.", action: null },
+			],
+		};
+
+		function addCard(playerID, cardType) {
+			if (cardPiles[cardType].length > 0) {
+				let cardReceived = cardPiles[cardType].pop();
+				players[playerID].cards[cardType].push(cardReceived);
+
+				let totalCardsNowHeld = players[playerID].cards.b.length + players[playerID].cards.vc.length + players[playerID].cards.g.length;
+				let totalCardsNowHeldPlural = "";
+				if (totalCardsNowHeld != 1) totalCardsNowHeldPlural = "s";
+
+				log(
+					formatTime(new Date()),
+					`${COLOURS[NOTATION_CIRCLES.indexOf(cardType)]}-dark`,
+					"cart-shopping",
+					`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>picked up</b> a <b>${COLOURS[NOTATION_CIRCLES.indexOf(cardType)].replace(
+						"-",
+						" "
+					)}</b> card. They now have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`
+				);
+				return cardReceived;
+			} else {
+				let totalCardsNowHeld = players[playerID].cards.b.length + players[playerID].cards.vc.length + players[playerID].cards.g.length;
+				let totalCardsNowHeldPlural = "";
+				if (totalCardsNowHeld != 1) totalCardsNowHeldPlural = "s";
+
+				log(
+					formatTime(new Date()),
+					`${COLOURS[NOTATION_CIRCLES.indexOf(cardType)]}-dark`,
+					"skull",
+					`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>tried</b> to get a card from the <b>${COLOURS[
+						NOTATION_CIRCLES.indexOf(cardType)
+					].replace("-", " ")}</b> pile, but it was empty. They still have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`
+				);
+				return -1;
+			}
+		}
+
+		function removeCard(playerID, cardType, cardID) {
+			players[playerID].cards[cardType].splice(players[playerID].cards[cardType].indexOf(cardID), 1);
+			cardPiles[cardType].unshift(cardID);
+
+			let totalCardsNowHeld = players[playerID].cards.b.length + players[playerID].cards.vc.length + players[playerID].cards.g.length;
+			let totalCardsNowHeldPlural = "";
+			if (totalCardsNowHeld != 1) totalCardsNowHeldPlural = "s";
+
+			log(
+				formatTime(new Date()),
+				`${COLOURS[NOTATION_CIRCLES.indexOf(cardType)]}-dark`,
+				"trash",
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>returned</b> a <b>${COLOURS[NOTATION_CIRCLES.indexOf(cardType)].replace(
+					"-",
+					" "
+				)}</b> card to the bottom of its pile. They now have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`
+			);
+		}
+
+		function setCards(playerID) {
+			document.querySelector(".card-area").innerHTML = "";
+
+			for (let cardType in players[playerID].cards) {
+				for (let card of players[playerID].cards[cardType]) {
+					const cardElement = document.createElement("div");
+					cardElement.classList.add("card", COLOURS[NOTATION_CIRCLES.indexOf(cardType)], "available");
+					document.querySelector(".card-area").append(cardElement);
+
+					const cardIconContainer = document.createElement("div");
+					cardIconContainer.classList.add("card-icon-container");
+					cardElement.append(cardIconContainer);
+
+					const cardIconElement = document.createElement("i");
+					cardIconElement.classList.add("fa-jelly", "fa-regular", `fa-${cardData[cardType][card].icon}`);
+					cardIconContainer.append(cardIconElement);
+
+					const cardTextElement = document.querySelector(".card-text");
+
+					cardElement.addEventListener("mouseover", (event) => {
+						cardTextElement.classList.replace("hide", COLOURS[NOTATION_CIRCLES.indexOf(cardType)]);
+						cardTextElement.innerHTML = cardData[cardType][card].text;
+					});
+					cardElement.addEventListener("mouseout", () => {
+						cardTextElement.classList.replace(COLOURS[NOTATION_CIRCLES.indexOf(cardType)], "hide");
+					});
 				}
 			}
 		}
-		createGameBoard();
+
+		// --- PLAYERS ---
+
+		function addPlayer(playerID, tokenID) {
+			players[playerID] = {};
+			players[playerID].tokenID = tokenID;
+			players[playerID].position = 0;
+			players[playerID].cards = { b: [], vc: [], g: [] };
+
+			log(formatTime(new Date()), "magenta", "face-grin", `${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} has <b>joined</b> the game! Welcome.`);
+		}
+
+		// --- DICE ---
+
+		async function rollDie(playerID, sides) {
+			log(
+				formatTime(new Date()),
+				"blue-light",
+				"hand",
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} is <b>rolling</b> the <b>${sides}-sided die</b>....`
+			);
+
+			let roll = Math.floor(Math.random() * sides) + 1;
+
+			await sleep(Math.floor(Math.random() * 5 + 1) * 1000);
+
+			log(
+				formatTime(new Date()),
+				"blue-light",
+				"list-ol",
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>rolled</b> ${getNumberArticle(roll)} <b>${roll}</b>.`
+			);
+
+			return roll;
+		}
+
+		async function rollSpecialDie(playerID) {
+			log(
+				formatTime(new Date()),
+				"blue-light",
+				"hand",
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} is <b>rolling</b> the <b>special 10-sided die</b>....`
+			);
+
+			let roll = Math.floor(Math.random() * 10) * 10;
+
+			await sleep(Math.floor(Math.random() * 5 + 1) * 1000);
+
+			log(
+				formatTime(new Date()),
+				"blue-light",
+				"list-ol",
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>rolled</b> ${getNumberArticle(roll)} <b>${roll.toString().padStart(2, "0")}</b>.`
+			);
+
+			return roll;
+		}
+
+		// --- LOG ---
+
+		function log(time, colour, icon, text) {
+			const gameLogPanel = document.querySelector(".game-log-panel");
+
+			const gameLogMessageTime = document.createElement("div");
+			gameLogMessageTime.classList.add("game-log-message-time");
+			gameLogMessageTime.innerHTML = time;
+			gameLogPanel.prepend(gameLogMessageTime);
+
+			const gameLogMessageContainer = document.createElement("div");
+			gameLogMessageContainer.classList.add("game-log-message-container");
+			gameLogPanel.prepend(gameLogMessageContainer);
+
+			const gameLogMessageIcon = document.createElement("i");
+			gameLogMessageIcon.classList.add("game-log-message-icon", "fa-jelly", "fa-regular", `fa-${icon}`, colour);
+			gameLogMessageContainer.append(gameLogMessageIcon);
+
+			const gameLogMessageText = document.createElement("div");
+			gameLogMessageText.classList.add("game-log-message-text", colour);
+			gameLogMessageText.innerHTML = text;
+			gameLogMessageContainer.append(gameLogMessageText);
+		}
+
+		// --- GAME CODE ---
+
+		function setGameCode(code) {
+			document.querySelector(".game-code").innerHTML = code;
+
+			window.history.replaceState("", "", `?game=${code}`);
+
+			if (!window.location.href.includes("://localhost:")) {
+				navigator.clipboard.writeText(
+					`## 🎲 THE GAME OF NUMBERS 🎱\n📎 Follow the link below or use code \`${code}\` to join. 🖥️\nhttps://pinniped.page/tgon?game=${code}`
+				);
+			}
+
+			log(
+				formatTime(new Date()),
+				"grey",
+				"wand-magic-sparkles",
+				`A new game has been created. You can get other people to join by giving them the game code (<b>${code}</b>) or the link that has been copied to your clipboard.`
+			);
+
+			return code;
+		}
 
 		// --- UTILITIES ---
-
-		const base64Characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
 
 		function toBase64(base10Number) {
 			if (base10Number <= 0) return 0;
 
 			let base64Number = "";
 			while (base10Number > 0) {
-				base64Number = base64Characters[base10Number % 64] + base64Number;
+				base64Number = BASE_64_CHARACTERS[base10Number % 64] + base64Number;
 				base10Number = Math.floor(base10Number / 64);
 			}
 			return base64Number;
@@ -246,10 +1250,57 @@
 			let index = base64Number.length;
 			let base10Number = 0;
 			for (let character of base64Number.split("")) {
-				base10Number += base64Characters.indexOf(character) * Math.pow(64, --index);
+				base10Number += BASE_64_CHARACTERS.indexOf(character) * Math.pow(64, --index);
 			}
 			return base10Number;
 		}
+
+		function formatTime(date) {
+			return `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`;
+		}
+
+		function mixArray(array) {
+			for (let i = 0; i < array.length; i++) {
+				let randomIndex = Math.floor(Math.random() * (array.length - i)) + i;
+				[array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+			}
+			return array;
+		}
+
+		function fillArray(length) {
+			let array = new Array(length);
+			for (let i = 0; i < length; i++) array[i] = i;
+			return array;
+		}
+
+		function sleep(duration) {
+			return new Promise((resolve) => setTimeout(resolve, duration)); // https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
+		}
+
+		function getNumberArticle(number) {
+			if (number == 11 || number == 18 || number.toString()[0] == "8") return "an";
+			else return "a";
+		}
+
+		// --- GLOBAL LISTENERS ---
+
+		let mouseX, mouseY;
+		addEventListener("mousemove", (event) => {
+			mouseX = event.pageX;
+			mouseY = event.pageY;
+
+			document.querySelector(".card-text").style = `top: ${mouseY - document.querySelector(".card-text").getBoundingClientRect().height - 20}px; left: ${Math.min(
+				mouseX,
+				window.innerWidth - 444
+			)}px`;
+		});
+
+		// --- CREATE GAME ---
+
+		let gameCode = setGameCode(toBase64(new Date().getTime()));
+		let gameArray = setGameBoardFromArray(generateGameBoardArray());
+		let cardPiles = { b: mixArray(fillArray(cardData.b.length)), vc: mixArray(fillArray(cardData.vc.length)), g: mixArray(fillArray(cardData.g.length)) };
+		let players = {};
 
 		// --- TESTS ---
 

@@ -4,11 +4,15 @@ function menu() {
 	var icon2 = document.getElementById("menu-close");
 
 	if (x.style.display == "block") {
+		document.querySelector("body").style = "";
+
 		x.style.display = "none";
 
 		icon1.style.display = "block";
 		icon2.style.display = "none";
 	} else {
+		document.querySelector("body").style.overflow = "hidden";
+
 		x.style.display = "block";
 
 		icon1.style.display = "none";
