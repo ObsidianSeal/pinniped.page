@@ -601,6 +601,11 @@
 				color: var(--green);
 			}
 
+			.puzzle-select-panel div span a ~ i:not(.fa-location-dot),
+			.puzzle-select-panel div span a ~ i:not(.fa-location-dot) {
+				color: transparent;
+			}
+
 			.puzzle-select-panel div span a:hover ~ i,
 			.puzzle-select-panel div span a:focus ~ i {
 				color: var(--blue-green);
@@ -608,7 +613,7 @@
 
 			.puzzle-select-panel div span a:hover ~ i:not(.fa-location-dot),
 			.puzzle-select-panel div span a:focus ~ i:not(.fa-location-dot) {
-				translate: 2px -2px;
+				translate: 3px;
 			}
 
 			.puzzle-select-panel div span a {
@@ -1542,14 +1547,16 @@
 						document.querySelector(".puzzle-select-panel").innerHTML +
 						`<div><span>#${++i}</span><span><a href="?puzzle=${puzzle}">${toTextDate(
 							puzzle
-						)}</a><i class="fa-solid fa-arrow-up-right"></i></span><span title="~${ratingValue}/5">${ratingString}</span><span>${
+						)}</a><i class="fa-solid fa-arrow-right-long"></i></span><span title="~${ratingValue}/5">${ratingString}</span><span>${
 							object.puzzles[puzzle.replaceAll("/", "-")].ratings
 						}</span><span>${object.puzzles[puzzle.replaceAll("/", "-")].solves}</span></div>`;
 					if (puzzle == safeDate.replaceAll("-", "/")) {
 						document.querySelector(".puzzle-select-panel div:last-child").classList.add("current-selected-puzzle");
 						document.querySelector(".puzzle-select-panel div:last-child span:first-child").innerHTML = `#${i} <i class="fa-solid fa-arrow-left-long"></i>`;
 
-						document.querySelector(".puzzle-select-panel div:last-child span:nth-child(2) :last-child").classList.replace("fa-arrow-up-right", "fa-location-dot");
+						document
+							.querySelector(".puzzle-select-panel div:last-child span:nth-child(2) :last-child")
+							.classList.replace("fa-arrow-right-long", "fa-location-dot");
 					}
 				}
 
