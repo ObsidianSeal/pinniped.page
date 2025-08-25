@@ -529,13 +529,16 @@
 				position: absolute;
 
 				width: 100%;
+				box-sizing: border-box;
+
+				padding: 0 10px 10px 10px;
 
 				background-color: var(--grey10);
 			}
 
 			.puzzle-select-panel div {
 				display: grid;
-				grid-template-columns: 15% 40% 15% 15% 15%;
+				grid-template-columns: 200px 400px 200px 200px auto;
 
 				padding: 2px 0;
 
@@ -545,6 +548,12 @@
 			.puzzle-select-panel div:first-child {
 				position: sticky;
 				top: 0;
+
+				padding-top: 10px;
+			}
+
+			.puzzle-select-panel div:not(:first-child):hover {
+				background: repeating-linear-gradient(-45deg, var(--grey10) 0 4px, var(--grey20) 4px 5px);
 			}
 
 			.puzzle-select-panel div:not(:last-child) {
@@ -565,8 +574,6 @@
 
 				font-family: "Roboto Slab";
 				font-size: 20px;
-
-				text-align: center;
 			}
 
 			.puzzle-select-panel div span i {
@@ -575,9 +582,33 @@
 				font-size: 20px;
 			}
 
+			.puzzle-select-panel div span:nth-child(2) i {
+				margin-left: 10px;
+
+				transition: translate 500ms;
+			}
+
+			.puzzle-select-panel div span:nth-child(3):has(:nth-child(2)) i {
+				color: var(--red);
+			}
+			.puzzle-select-panel div span:nth-child(3):has(:nth-child(3)) i {
+				color: var(--orange);
+			}
+			.puzzle-select-panel div span:nth-child(3):has(:nth-child(4)) i {
+				color: var(--yellow);
+			}
+			.puzzle-select-panel div span:nth-child(3):has(:nth-child(5)) i {
+				color: var(--green);
+			}
+
 			.puzzle-select-panel div span a:hover ~ i,
 			.puzzle-select-panel div span a:focus ~ i {
 				color: var(--blue-green);
+			}
+
+			.puzzle-select-panel div span a:hover ~ i:not(.fa-location-dot),
+			.puzzle-select-panel div span a:focus ~ i:not(.fa-location-dot) {
+				translate: 2px -2px;
 			}
 
 			.puzzle-select-panel div span a {
@@ -756,6 +787,12 @@
 
 			/* MEDIA QUERIES */
 
+			@media all and (max-width: 1150px) {
+				.puzzle-select-panel div {
+					grid-template-columns: 15% 40% 15% 15% 15%;
+				}
+			}
+
 			@media all and (max-width: 700px) {
 				:root {
 					--board-width: 430px;
@@ -802,7 +839,8 @@
 
 				.remove700,
 				.clear span,
-				.submit span {
+				.submit span,
+				.results span {
 					display: none;
 				}
 
@@ -872,6 +910,11 @@
 				}
 
 				h4 {
+					bottom: 30px;
+					left: 30px;
+				}
+
+				h5 {
 					right: 30px;
 					bottom: 30px;
 				}
@@ -1175,7 +1218,7 @@
 			});
 
 			// --- LOADING PANEL ---
-			const versionString = "Think Four v1.9.0"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
+			const versionString = "Think Four v1.9.1"; // CHANGE THIS IF YOU MAKE ANY CHANGES (come conditions apply)
 			console.log(`%cINFO:`, infoStyle, versionString);
 			document.querySelector(".version").innerHTML = versionString;
 
@@ -1485,16 +1528,28 @@
 						};
 					}
 
+					let ratingValue = parseFloat(object.puzzles[puzzle.replaceAll("/", "-")].rating);
+					let ratingValueCopy = ratingValue;
+					let ratingString = "";
+
+					for (let i = 1; i <= 5; i++) {
+						if (ratingValueCopy > 0.5) ratingString += '<i class="fa-solid fa-star"></i>';
+						else if (ratingValueCopy > 0) ratingString += '<i class="fa-solid fa-star-half"></i>';
+						ratingValueCopy--;
+					}
+
 					document.querySelector(".puzzle-select-panel").innerHTML =
 						document.querySelector(".puzzle-select-panel").innerHTML +
-						`<div><span>#${++i}</span><span><a href="?puzzle=${puzzle}">${toTextDate(puzzle)}</a> <i class="fa-solid fa-arrow-up-right"></i></span><span>${
-							object.puzzles[puzzle.replaceAll("/", "-")].rating
-						}</span><span>${object.puzzles[puzzle.replaceAll("/", "-")].ratings}</span><span>${object.puzzles[puzzle.replaceAll("/", "-")].solves}</span></div>`;
+						`<div><span>#${++i}</span><span><a href="?puzzle=${puzzle}">${toTextDate(
+							puzzle
+						)}</a><i class="fa-solid fa-arrow-up-right"></i></span><span title="~${ratingValue}/5">${ratingString}</span><span>${
+							object.puzzles[puzzle.replaceAll("/", "-")].ratings
+						}</span><span>${object.puzzles[puzzle.replaceAll("/", "-")].solves}</span></div>`;
 					if (puzzle == safeDate.replaceAll("-", "/")) {
 						document.querySelector(".puzzle-select-panel div:last-child").classList.add("current-selected-puzzle");
-						document.querySelector(
-							".puzzle-select-panel div:last-child span:first-child"
-						).innerHTML = `<i class="fa-solid fa-arrow-right-long"></i> #${i} <i class="fa-solid fa-arrow-left-long"></i>`;
+						document.querySelector(".puzzle-select-panel div:last-child span:first-child").innerHTML = `#${i} <i class="fa-solid fa-arrow-left-long"></i>`;
+
+						document.querySelector(".puzzle-select-panel div:last-child span:nth-child(2) :last-child").classList.replace("fa-arrow-up-right", "fa-location-dot");
 					}
 				}
 
