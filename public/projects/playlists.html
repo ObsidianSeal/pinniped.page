@@ -1370,6 +1370,37 @@
 						["mary poppins", "bbno$", "mary poppins"],
 					],
 				},
+				"🎵 - September 2025": {
+					link: "PLTKwBiSgGBsh-Qxv1gOi89vM2YnycGut-",
+					length: [20, "1:03:32"],
+					updated: "2025/08/28",
+					tracks: [
+						[
+							"What Have They Done To Us (from the series Arcane League of Legends)",
+							"Mako",
+							"Arcane League of Legends: Season 2 (Soundtrack from the Animated Series)",
+						],
+						["Enemy with JID (Opening Title Version)", "Imagine Dragons & JID", "Arcane League of Legends: Season 2 (Soundtrack from the Animated Series)"],
+						["The Subway", "Chappell Roan", "The Subway"],
+						["Brutus", "Em Beihold", "Brutus"],
+						["Dirty", "grandson", "Death Of An Optimist"],
+						["Running From an Angel", "Hootie & The Blowfish", "Cracked Rear View"],
+						["The Muffin Song (asdfmovie)", "The Gregory Brothers & TomSka", "The Muffin Song (asdfmovie)"],
+						["Yougotmefeeling", "Parcels", "Yougotmefeeling"],
+						["My Love", "Maroon 5", "Love Is Like"],
+						["You Can&rsquo;t Stop This", "Alex Warren", "You&rsquo;ll Be Alright, Kid"],
+						["Riptide", "Vance Joy", "Dream Your Life Away (Deluxe Edition)"],
+						["Higher", "Tom Grennan", "Everywhere I Went, Let Me to Where I Didn&rsquo;t Want to Be"],
+						["be ok", "Scrawny", "be ok"],
+						["Actor", "Conan Gray", "Wishbone"],
+						["Summer Night City", "ABBA", "Voulez-Vous"],
+						["back to friends", "sombr", "back to friends"],
+						["12 to 12", "sombr", "12 to 12"],
+						["undressed", "sombr", "undressed"],
+						["Eyes Wide", "Alfie Jukes", "Eyes Wide"],
+						["Doggy (feat. Love Spells & Truly Young)", "Geezer & Kevin Abstract & Dominic Fike", "Doggy"],
+					],
+				},
 				"oops all Conan Gray": {
 					link: "PLTKwBiSgGBshXGSJkOXHcANOab62BsPRG",
 					length: [31, "1:38:19"],
@@ -1710,6 +1741,7 @@
 				"🎵 - June 2025",
 				"🎵 - July 2025",
 				"🎵 - August 2025",
+				"🎵 - September 2025",
 			];
 
 			let otherPlaylistNames = [
@@ -1786,8 +1818,10 @@
 			}
 
 			for (let title in playlists) {
-				addPlaylist(title, playlists[title].link, playlists[title].length[0], playlists[title].length[1], playlists[title].updated);
-				addTracks(title);
+				if (monthlyPlaylistNames.includes(title) || otherPlaylistNames.includes(title)) {
+					addPlaylist(title, playlists[title].link, playlists[title].length[0], playlists[title].length[1], playlists[title].updated);
+					addTracks(title);
+				}
 			}
 
 			// expand
@@ -2225,11 +2259,11 @@
 				}
 				// "most recently added"
 				if (dataIndex == 12) {
-					showDataWithPlaylistLink(datum, formatDate("2025/07/30"), "🎵 - August 2025");
+					showDataWithPlaylistLink(datum, formatDate("2025/08/28"), "🎵 - September 2025");
 				}
 				// "most recently updated"
 				if (dataIndex == 13) {
-					showDataWithPlaylistLink(datum, formatDate("2025/08/24"), "oops all bbno$");
+					showDataWithPlaylistLink(datum, formatDate("2025/08/28"), "🎵 - September 2025");
 				}
 
 				dataIndex++;
