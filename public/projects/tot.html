@@ -950,17 +950,21 @@
 		});
 
 		document.querySelector(".station-name-input input").addEventListener("input", () => {
-			if (document.querySelector(".station-name-input input").value.substring(document.querySelector(".station-name-input input").value.length - 1) == "'")
-				document.querySelector(".station-name-input input").value =
-					document.querySelector(".station-name-input input").value.substring(0, document.querySelector(".station-name-input input").value.length - 1) + "’";
+			let cursorPosition = document.querySelector(".station-name-input input").selectionStart;
+
+			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll("'", "’");
+
+			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll(" '", " ‘");
+			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll("' ", "’ ");
 
 			const noEnDashChange = ["Edmonton, Canada", "Montréal, Canada", "Ottawa, Canada"];
 
 			if (!noEnDashChange.includes(currentSystem)) {
-				if (document.querySelector(".station-name-input input").value.substring(document.querySelector(".station-name-input input").value.length - 1) == "-")
-					document.querySelector(".station-name-input input").value =
-						document.querySelector(".station-name-input input").value.substring(0, document.querySelector(".station-name-input input").value.length - 1) + "–";
+				document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll("-", "–");
 			}
+
+			document.querySelector(".station-name-input input").selectionStart = cursorPosition;
+			document.querySelector(".station-name-input input").selectionEnd = cursorPosition;
 		});
 
 		function giveUpAndRevealAnswers() {
