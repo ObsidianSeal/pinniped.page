@@ -324,8 +324,8 @@
 			<p><i class="fa-chisel fa-regular fa-minus"></i> STATION NAME INPUT IS CASE SENSITIVE AND YOU MUST ENTER THE STATION&rsquo;S ENTIRE NAME</p>
 			<p>
 				<i class="fa-chisel fa-regular fa-minus"></i> when typing, <b class="highlight">' (straight quote)</b> is converted to
-				<b class="highlight">’ (right fancy quote)</b> and <b class="highlight">- (dash/hyphen)</b> is converted to <b class="highlight">– (en dash)</b> (for certain
-				systems)
+				<b class="highlight">‘ (left fancy quote)</b> or <b class="highlight">’ (right fancy quote)</b> and <b class="highlight">- (dash/hyphen)</b> is converted to
+				<b class="highlight">– (en dash)</b> (for certain systems)
 			</p>
 			<p><i class="fa-chisel fa-regular fa-minus"></i> if the station name contains an accented or other special character you must still type it</p>
 			<p>
@@ -956,6 +956,9 @@
 
 			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll(" '", " ‘");
 			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll("' ", "’ ");
+
+			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll(" ’", " ‘");
+			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll("‘ ", "’ ");
 
 			const noEnDashChange = ["Edmonton, Canada", "Montréal, Canada", "Ottawa, Canada"];
 
