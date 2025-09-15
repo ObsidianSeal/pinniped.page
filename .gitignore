@@ -1,7 +1,7 @@
-# folders to ignore
+# FOLDERS
 .firebase/
 .vscode/
 
-# files to ignore
+# FILES
 .firebase-debug.log
 pglite-debug.log
