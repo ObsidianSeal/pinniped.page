@@ -179,6 +179,14 @@
 			if (query.includes("?")) project = query.substring(0, query.indexOf("?"));
 			else if (query.includes("#")) project = query.substring(0, query.indexOf("#"));
 
+			// Discord, sandbox (temporary), ttt (temporary)
+			if (query == "discord" || query == "sandbox" || query.startsWith("ttt")) {
+				redirected = true;
+				if (query == "discord") window.location.href = "https://discord.gg/yswDu7kywv";
+				if (query == "sandbox") window.location.href = "https://www.itecanada.org/students/student-chapters/university-of-waterloo/sandbox/";
+				if (query.startsWith("ttt")) window.location.href = "https://pinniped.page/yikes?s=410";
+			}
+
 			// detour: "yikes"
 			if (Object.keys(codes).includes(query)) {
 				redirected = true;
