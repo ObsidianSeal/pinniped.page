@@ -251,7 +251,8 @@
 				if (e.key === "Backspace" && !locationSelected) pageLocation = "files/";
 
 				if (e.key === "Enter" && pageName != "") {
-					let ending = ".html"; // default file extension
+					let ending = ""; // default file extension (.html)
+					if (window.location.href.includes("://localhost:")) ending = ".html";
 					if (pageName.indexOf("\\") != -1 || pageName.indexOf(".") != -1) ending = ""; // contains '\' (special - no extension) or '.' (for other extensions) -- use string as is
 					pageName = pageName.replace("\\", ""); // remove special '\' character
 
