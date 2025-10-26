@@ -44,6 +44,6 @@ Thanks for visiting!
 
 Check out my other domains&rsquo; GitHub repositories:
 
--    [ite.fyi](https://github.com/ObsidianSeal/ite.fyi)
+-    [ite.fyi](https://github.com/ObsidianSeal/ite-fyi)
 -    [bmg.engineer](https://github.com/ObsidianSeal/bmg-engineer)
 -    [barkingseal.design](https://github.com/ObsidianSeal/barking-seal-design)
