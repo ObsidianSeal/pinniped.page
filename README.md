@@ -34,7 +34,7 @@ Feel free to open issues or start discussions.
 
 Thanks for visiting.
 
-— Obsidian_Seal
+**— Obsidian_Seal**
 
 ---
 
