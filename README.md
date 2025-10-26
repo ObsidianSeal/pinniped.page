@@ -28,11 +28,11 @@ All other main pages are listed on [the About page](https://pinniped.page/about)
 
 ---
 
-I'm not really open to contributions, but you&rsquo;re welcome to suggest additions anyway.
+I&rsquo;m not really open to contributions, but you&rsquo;re welcome to suggest additions anyway.
 
-Feel free to open issues or start discussions.
+And feel free to open issues or start discussions.
 
-Thanks for visiting.
+Thanks for visiting!
 
 **— Obsidian_Seal**
 
