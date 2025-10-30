@@ -57,7 +57,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 3
+		"featured": 0
 	},
 	"Chess": {
 		"basic": true,
@@ -240,7 +240,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 4
+		"featured": 0
 	},
 	"fOnT mAsHeR": {
 		"basic": false,
@@ -326,11 +326,11 @@
 		"flag": "download",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["October 29th", "3 mods updated to their latest versions"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 1
 	},
 	"Minecraft & Motion": {
 		"basic": false,
@@ -420,7 +420,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 5
+		"featured": 0
 	},
 	"Playlists": {
 		"basic": false,
@@ -570,7 +570,7 @@
 			"beta": ["August 22nd", "page exists"],
 			"tag": ["", ""]
 		},
-		"featured": 6
+		"featured": 0
 	},
 	"TicTacToe": {
 		"basic": false,
@@ -600,7 +600,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 1
+		"featured": 0
 	},
 	"Typewriter Simulator": {
 		"basic": false,
@@ -660,7 +660,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 2
+		"featured": 0
 	},
 	"Words": {
 		"basic": false,
