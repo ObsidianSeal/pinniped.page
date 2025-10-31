@@ -57,7 +57,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 1
 	},
 	"Chess": {
 		"basic": true,
@@ -177,7 +177,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 2
 	},
 	"Deathrun+": {
 		"basic": true,
@@ -315,22 +315,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
-	},
-	"Lethal Company Mods": {
-		"basic": false,
-		"icon": "radio",
-		"path": "files/LethalCompanyMods.zip",
-		"connected": true,
-		"description": "Lethal Company modpack.",
-		"flag": "download",
-		"tags": {
-			"new": ["", ""],
-			"updated": ["October 29th", "3 mods updated to their latest versions"],
-			"beta": ["", ""],
-			"tag": ["", ""]
-		},
-		"featured": 1
+		"featured": 3
 	},
 	"Minecraft & Motion": {
 		"basic": false,
@@ -405,7 +390,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 4
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -540,7 +525,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 5
 	},
 	"Think Four": {
 		"basic": false,
@@ -600,7 +585,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 6
 	},
 	"Typewriter Simulator": {
 		"basic": false,
