@@ -402,6 +402,18 @@
 				text-align: right;
 			}
 
+			.cover {
+				position: fixed;
+				top: 0;
+				left: 0;
+
+				width: 200px;
+
+				border: 2px solid black;
+
+				pointer-events: none;
+			}
+
 			#to_top_button {
 				width: 50px;
 				height: 50px;
@@ -1641,8 +1653,8 @@
 				},
 				"⚡ Epic Music": {
 					link: "PLTKwBiSgGBsis3h4-sIFejNSZWdkGpnF6",
-					length: [36, "1:48:40"],
-					updated: "2025/07/05",
+					length: [38, "2:00:45"],
+					updated: "2025/11/14",
 					tracks: [
 						["Andor (Main Title Theme) - Episode 1", "Nicholas", "Andor: Vol. 1 (Episodes 1-4) (Original Score)"],
 						["Challengers", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
@@ -1680,6 +1692,7 @@
 						["Scholastic Sanctuary", "Lorne Balfe", "The Musical Anthology of His Dark Materials (Music From The Television Series)"],
 						["Quicksand, Pt. 3", "Karl Flodin & Erik Lyding", "Haste: Broken Worlds (Original Video Game Soundtrack)"],
 						["The Manadalorian", "Ludwig Göransson", " The Mandalorian: Chapter 1 (Original Score)"],
+						["Probably Ancient Evil", "Lena Raine", "Chicory: A Colorful Tale (Original Soundtrack)"],
 						["The Order", "Jed Kurzel", "The Order (Official Motion Picture Soundtrack)"],
 						["Sun Mother", "Melodysheep", "The Arrow of Time: Soundtrack to &ldquo;Timelapse of the Future&rdquo;"],
 						["Across the Spider-Verse (Start a Band)", "Daniel Pemberton", "Spider-Man: Across the Spider-Verse (Original Score)"],
@@ -1692,6 +1705,7 @@
 						["Challengers: Match Point", "Trent Reznor & Atticus Ross", "Challengers (Original Score)"],
 						["Indiana Jones Theme", "Unknown Artist", "Cine Gold, Vol. 3"],
 						["BBC Sherlock&rsquo;s Theme Melody", "BBCSherlockMusic", '<span class="red">YouTube video</span>'],
+						["Summit (No More Running Mix)", "Kuraine", "Celeste B-Sides (Original Game Soundtrack)"],
 					],
 				},
 				"LETHAL COMPANY": {
@@ -1900,9 +1914,21 @@
 						)}`;
 				}
 				if (title != "guess the song from the first second")
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../images/playlists/${title
+						.replaceAll("🎵 - ", "")
+						.replaceAll("⚡ ", "")
+						.replaceAll(
+							" ",
+							"-"
+						)}.png" class="cover" style="display: none" /></h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
 				else
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;</h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../images/playlists/${title
+						.replaceAll("🎵 - ", "")
+						.replaceAll("⚡ ", "")
+						.replaceAll(
+							" ",
+							"-"
+						)}.png" class="cover" style="display: none" /></h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — ${lastUpdated}</div></div>`;
 				document.querySelector(".playlists").appendChild(playlistContainer);
 			}
 
@@ -2387,6 +2413,16 @@
 				});
 				bar.addEventListener("mouseout", () => {
 					bar.style = originalStyle;
+				});
+			});
+
+			// hover for cover
+			document.querySelectorAll(".playlist-title h2").forEach((tooltipZone) => {
+				tooltipZone.addEventListener("mousemove", (event) => {
+					tooltipZone.querySelector("img").style = `display: block; top: ${event.clientY + 20}px; left: ${event.clientX + 20}px`;
+				});
+				tooltipZone.addEventListener("mouseout", (event) => {
+					tooltipZone.querySelector("img").style = "display: none";
 				});
 			});
 
