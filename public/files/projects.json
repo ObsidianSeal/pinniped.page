@@ -42,7 +42,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 2
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -57,7 +57,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 1
+		"featured": 0
 	},
 	"Chess": {
 		"basic": true,
@@ -177,7 +177,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 2
+		"featured": 0
 	},
 	"Deathrun+": {
 		"basic": true,
@@ -315,7 +315,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 3
+		"featured": 0
 	},
 	"Minecraft & Motion": {
 		"basic": false,
@@ -390,7 +390,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 4
+		"featured": 3
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -416,11 +416,11 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 25th", "bbno$"],
+			"updated": ["November 25th", "2 playlists updated, percentages forced 2 decimal places, group playlist text moved out of json, control expands all"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 0
+		"featured": 1
 	},
 	"progress": {
 		"basic": false,
@@ -525,7 +525,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 5
+		"featured": 4
 	},
 	"Think Four": {
 		"basic": false,
@@ -585,7 +585,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"featured": 6
+		"featured": 5
 	},
 	"Typewriter Simulator": {
 		"basic": false,
