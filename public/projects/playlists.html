@@ -679,7 +679,13 @@
 			<b id="top-artists"><i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists; must have at least three)</b>
 			<p></p>
 			<br />
+			<b><i class="fa-solid fa-microphone-stand fa-fw"></i> artists present more than once</b>
+			<p></p>
+			<br />
 			<b id="top-albums"><i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists; must have at least three)</b>
+			<p></p>
+			<br />
+			<b><i class="fa-solid fa-album-collection fa-fw"></i> albums present more than once</b>
 			<p></p>
 			<br />
 			<b class="highlight c5">PART 2: THE OTHER PLAYLISTS</b>
@@ -795,6 +801,33 @@
 
 			// PLAYLIST DATA
 			const playlists = {
+				"🎵 - December 2025": {
+					link: "PLTKwBiSgGBshT6q0ZA8iSgQ8csvtoKl8C",
+					length: [20, "1:09:41"],
+					updated: "2025/11/29",
+					tracks: [
+						["WHERE IS MY HUSBAND!", "RAYE", "WHERE IS MY HUSBAND!"],
+						["Summerland", "half·alive", "Conditions Of A Punk"],
+						["Underwater", "BENEE", "Underwater"],
+						["Scared of the Dark", "Em Beihold", "Scared of the Dark"],
+						["Rubber Band Man (with Hozier)", "Mumford &amp; Sons & Hozier", "Rubber Band Man (with Hozier)"],
+						["I Will Wait", "Mumford &amp; Sons", "Babel (Deluxe Version)"],
+						["Hopeless Wanderer", "Mumford &amp; Sons", "Babel (Deluxe Version)"],
+						["The Hudson", "The Favors & FINNEAS & Ashe", "The Dream"],
+						["M.I.A (VALORANT Game Changers Version)", "KATSEYE & VALORANT", "M.I.A (VALORANT Game Changers Version)"],
+						["BREAKFAST", "half·alive", "Now, Not Yet"],
+						["FEAR", "NF", "FEAR"],
+						["WASHED UP", "NF", "FEAR"],
+						["Sandman", "Dominic Fike", "Rocket"],
+						["Another Year Has Gone By", "Céline Dion", "These are Special Times"],
+						["Pay & Display", "Lovejoy", "One Simple Trick"],
+						["Baby Goodbye", "Alle Farben", "Baby Goodbye"],
+						["Only Time", "Enya", "A Day Without Rain"],
+						["Fatal", "Lovejoy", "One Simple Trick"],
+						["like this like that", "bbno$", "bbno$"],
+						["bag TF up", "bbno$", "bbno$"],
+					],
+				},
 				"🎵 - November 2025": {
 					link: "PLTKwBiSgGBsgGRDyvJXa4nCkUiJLS9PkM",
 					length: [20, "1:20:57"],
@@ -1842,6 +1875,7 @@
 			};
 
 			let monthlyPlaylistNames = [
+				"🎵 - December 2025",
 				"🎵 - November 2025",
 				"🎵 - October 2025",
 				"🎵 - September 2025",
@@ -1884,9 +1918,9 @@
 			];
 
 			// shhhh
-			let secretNumber = 2;
+			let secretNumber = 3;
 			if (window.location.href.includes("?")) {
-				secretNumber = 0;
+				secretNumber = 1;
 				document.querySelector("#top-artists").innerHTML = '<i class="fa-solid fa-microphone-stand fa-fw"></i> top artists (by number of songs in the playlists)';
 				document.querySelector("#top-albums").innerHTML = '<i class="fa-solid fa-album-collection fa-fw"></i> top albums (by number of songs in the playlists)';
 			}
@@ -2238,6 +2272,8 @@
 
 			// DATA
 			let dataIndex = 0;
+			let repeatArtists = [0, 0];
+			let repeatAlbums = [0, 0];
 			document.querySelectorAll("b + p").forEach((datum) => {
 				// 1. MONTHLY
 
@@ -2281,14 +2317,19 @@
 					for (let playlist of monthlyPlaylistNames) {
 						for (let track in playlists[playlist].tracks) {
 							for (let artist of playlists[playlist].tracks[track][1].split(" & ")) {
-								if (artist in artistNumbers) artistNumbers[artist][0]++;
-								else artistNumbers[artist] = [1, artist];
+								if (artist in artistNumbers) {
+									if (artistNumbers[artist][0] == 1) repeatArtists[0]++;
+									artistNumbers[artist][0]++;
+								} else {
+									artistNumbers[artist] = [1, artist];
+									repeatArtists[1]++;
+								}
 							}
 						}
 					}
 
 					for (let artist in artistNumbers) {
-						if (artistNumbers[artist][0] <= secretNumber) delete artistNumbers[artist];
+						if (artistNumbers[artist][0] < secretNumber) delete artistNumbers[artist];
 					}
 					delete artistNumbers["GenesisFan64YT"]; // the only YouTube video by someone other than the original artist (presumably) (in the monthly playlists)
 
@@ -2308,20 +2349,29 @@
 							}% - 10px)" title="${artistName} — ${value}">${artistName} — ${value}</span><br />`;
 					}
 				}
-				// "top albums (by number of songs in the playlists)"
+				// "repeat artists"
 				if (dataIndex == 4) {
+					datum.innerHTML = `${(Math.round((repeatArtists[0] / repeatArtists[1]) * 10000) / 100).toString().padEnd(5, "0")}%`;
+				}
+				// "top albums (by number of songs in the playlists)"
+				if (dataIndex == 5) {
 					let albumNumbers = {};
 
 					for (let playlist of monthlyPlaylistNames) {
 						for (let track in playlists[playlist].tracks) {
 							let album = playlists[playlist].tracks[track][2];
-							if (album in albumNumbers) albumNumbers[album][0]++;
-							else albumNumbers[album] = [1, album];
+							if (album in albumNumbers) {
+								if (albumNumbers[album][0] == 1) repeatAlbums[0]++;
+								albumNumbers[album][0]++;
+							} else {
+								albumNumbers[album] = [1, album];
+								repeatAlbums[1]++;
+							}
 						}
 					}
 
 					for (let album in albumNumbers) {
-						if (albumNumbers[album][0] <= secretNumber) delete albumNumbers[album];
+						if (albumNumbers[album][0] < secretNumber) delete albumNumbers[album];
 					}
 					delete albumNumbers['<span class="red">YouTube video</span>'];
 
@@ -2340,11 +2390,15 @@
 							}% - 10px)" title="${albumName} — ${value}">${albumName} — ${value}</span><br />`;
 					}
 				}
+				// "repeat albums"
+				if (dataIndex == 6) {
+					datum.innerHTML = `${(Math.round((repeatAlbums[0] / repeatAlbums[1]) * 10000) / 100).toString().padEnd(5, "0")}%`;
+				}
 
 				// 2. OTHER
 
 				// "average length (runtime)"
-				if (dataIndex == 5) {
+				if (dataIndex == 7) {
 					let sum = 0;
 					for (let playlist of otherPlaylistNames) {
 						sum += toSeconds(playlists[playlist].length[1]);
@@ -2353,7 +2407,7 @@
 					datum.innerHTML = `~${formatSeconds(average)}`;
 				}
 				// "longest length (runtime)"
-				if (dataIndex == 6) {
+				if (dataIndex == 8) {
 					let maxiumum = 0;
 					let maxiumumName = "";
 					for (let playlist of otherPlaylistNames) {
@@ -2365,7 +2419,7 @@
 					showDataWithPlaylistLink(datum, formatSeconds(maxiumum), maxiumumName);
 				}
 				// "shortest length (runtime)"
-				if (dataIndex == 7) {
+				if (dataIndex == 9) {
 					let minimum = Infinity;
 					let minimumName = "";
 					for (let playlist of otherPlaylistNames) {
@@ -2377,7 +2431,7 @@
 					showDataWithPlaylistLink(datum, formatSeconds(minimum), minimumName);
 				}
 				// "average number of tracks"
-				if (dataIndex == 8) {
+				if (dataIndex == 10) {
 					let sum = 0;
 					for (let playlist of otherPlaylistNames) {
 						sum += playlists[playlist].length[0];
@@ -2385,7 +2439,7 @@
 					datum.innerHTML = `~${Math.round(sum / otherPlaylistNames.length)}`;
 				}
 				// "greatest number of tracks"
-				if (dataIndex == 9) {
+				if (dataIndex == 11) {
 					let maxiumum = 0;
 					let maxiumumName = "";
 					for (let playlist of otherPlaylistNames) {
@@ -2397,7 +2451,7 @@
 					showDataWithPlaylistLink(datum, maxiumum, maxiumumName);
 				}
 				// "least number of tracks"
-				if (dataIndex == 10) {
+				if (dataIndex == 12) {
 					let minimum = Infinity;
 					let minimumName = "";
 					for (let playlist of otherPlaylistNames) {
@@ -2412,15 +2466,15 @@
 				// 3. GENERAL
 
 				// "number of playlists"
-				if (dataIndex == 11) {
+				if (dataIndex == 13) {
 					datum.innerHTML = Object.keys(playlists).length;
 				}
 				// "most recently added"
-				if (dataIndex == 12) {
-					showDataWithPlaylistLink(datum, formatDate("2025/10/29"), "NUMBERS");
+				if (dataIndex == 14) {
+					showDataWithPlaylistLink(datum, formatDate("2025/11/29"), "🎵 - December 2025");
 				}
 				// "most recently updated"
-				if (dataIndex == 13) {
+				if (dataIndex == 15) {
 					showDataWithPlaylistLink(datum, formatDate("2025/11/25"), "⚡ Epic Music");
 				}
 
@@ -2454,7 +2508,7 @@
 			/*
 			 * also to do when adding a playlist
 			 * put it in 'all'
-			 * check for conflicts
+			 * check for conflicts!!
 			 */
 		</script>
 
