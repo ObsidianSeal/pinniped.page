@@ -8,7 +8,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 25th", "I think I fixed the textarea size on URL load issue"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -23,7 +23,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["May 29th", "a couple more buttons"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -38,7 +38,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["June 29th", "option to only show articulated buses on map, etc. (v1.1.0)"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -52,8 +52,8 @@
 		"description": "Play bus-related bingo with friends while on the bus.",
 		"flag": "",
 		"tags": {
-			"new": ["June 9th", "v2.0.0"],
-			"updated": ["June 25th", "version validation"],
+			"new": ["", ""],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -83,7 +83,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 25th", "icons are now duotone regular"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -158,7 +158,7 @@
 		"flag": "triangle-exclamation",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 23rd", "IMPORTANT: new screen size requirement: at least 1000 CSS pixels wide"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -172,7 +172,7 @@
 		"description": "The opposite of a countdown, made to be embedded.",
 		"flag": "",
 		"tags": {
-			"new": ["July 10th", "yes"],
+			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
@@ -203,10 +203,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": [
-				"July 29th",
-				"performance and visual improvements to all icons panel (prev.: Font Awesome 7 completely implemented, added new DANGEROUS &ldquo;view all&rdquo; feature)"
-			],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -221,7 +218,7 @@
 		"flag": "triangle-exclamation",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 23rd", "IMPORTANT: new screen size requirement: at least 1150 CSS pixels wide"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -281,7 +278,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 13th", "1 font removed, 1 font added (v1.0.6)"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -310,7 +307,7 @@
 		"description": "Determine JavaScript keyCodes.",
 		"flag": "",
 		"tags": {
-			"new": ["July 12th", "&ldquo;Type&rdquo; has been renamed to KC; see the Status page for more details."],
+			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
@@ -385,7 +382,7 @@
 		"description": "Obsidian_Seal’s personal Discord bot!",
 		"flag": "",
 		"tags": {
-			"new": ["July 4th", "epic documentation is complete"],
+			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
@@ -520,7 +517,7 @@
 		"description": "Interactive LEGO map; watch the YouTube video first.",
 		"flag": "",
 		"tags": {
-			"new": ["July 15th", "now with population data!"],
+			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
@@ -536,7 +533,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["August 23rd", "PUZZLE SELECT (v1.9.0) (also includes visual change to ratings)"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
@@ -580,7 +577,7 @@
 		"description": "Transportation system memory game!",
 		"flag": "",
 		"tags": {
-			"new": ["August 11th", "made in 5 hours"],
+			"new": ["", ""],
 			"updated": ["September 6th", "I think I fixed automatic fancy quotes and en dash behaviour"],
 			"beta": ["", ""],
 			"tag": ["", ""]
@@ -641,7 +638,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["August 3rd", "THEME EDITOR!! (v1.6.0)"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
