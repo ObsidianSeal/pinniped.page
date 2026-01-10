@@ -12,6 +12,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"BezierCurves": {
@@ -27,6 +28,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"BUS DATA": {
@@ -42,6 +44,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.1.0",
 		"featured": 2
 	},
 	"Bus Ride Bingo": {
@@ -57,6 +60,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "2.3.3",
 		"featured": 0
 	},
 	"Chess": {
@@ -72,6 +76,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Chess — FEN preview": {
@@ -87,6 +92,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.1.0",
 		"featured": 0
 	},
 	"Clock": {
@@ -102,6 +108,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"countdown": {
@@ -117,6 +124,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"crossword": {
@@ -132,6 +140,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"crossword2": {
@@ -147,6 +156,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"crosswords": {
@@ -162,6 +172,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.6.0",
 		"featured": 0
 	},
 	"Days Since": {
@@ -177,6 +188,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Deathrun+": {
@@ -192,6 +204,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.2.4",
 		"featured": 0
 	},
 	"fa-random": {
@@ -207,6 +220,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "2.1.2",
 		"featured": 0
 	},
 	"Finite Craft": {
@@ -222,6 +236,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.6.0",
 		"featured": 0
 	},
 	"Finite Craft - help!": {
@@ -237,6 +252,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"fOnT mAsHeR": {
@@ -252,6 +268,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Graph Theory EXPLAINED": {
@@ -267,6 +284,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Guess the Font": {
@@ -282,6 +300,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.0.6",
 		"featured": 0
 	},
 	"Hues+Cues": {
@@ -297,6 +316,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"KC": {
@@ -312,6 +332,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Minecraft & Motion": {
@@ -327,6 +348,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Mjölnir": {
@@ -342,6 +364,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "2.1.0",
 		"featured": 0
 	},
 	"MouseMaze": {
@@ -357,6 +380,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"numbers": {
@@ -372,6 +396,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Omega Seal": {
@@ -387,6 +412,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.4.3",
 		"featured": 3
 	},
 	"PlainPlanes": {
@@ -402,6 +428,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "6",
 		"featured": 0
 	},
 	"Playlists": {
@@ -417,6 +444,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 1
 	},
 	"progress": {
@@ -432,6 +460,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Rubik’s Cube Scrambler": {
@@ -447,6 +476,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Shrink to Fit": {
@@ -462,6 +492,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.0.0",
 		"featured": 0
 	},
 	"Small Subways": {
@@ -477,6 +508,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "4",
 		"featured": 0
 	},
 	"Subject/Course Colour Graphs": {
@@ -492,6 +524,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"text": {
@@ -507,6 +540,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"The Square": {
@@ -522,6 +556,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 4
 	},
 	"Think Four": {
@@ -537,6 +572,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.9.1",
 		"featured": 0
 	},
 	"Think Four - help!": {
@@ -552,6 +588,7 @@
 			"beta": ["August 22nd", "page exists"],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"TicTacToe": {
@@ -567,6 +604,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"Train of Thought": {
@@ -582,6 +620,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 5
 	},
 	"Typewriter Simulator": {
@@ -597,6 +636,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"v": {
@@ -612,6 +652,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "2.4.4",
 		"featured": 0
 	},
 	"WandStuff": {
@@ -627,6 +668,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	},
 	"wordlelele": {
@@ -642,6 +684,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "1.6.1",
 		"featured": 0
 	},
 	"Words": {
@@ -657,6 +700,7 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
+		"version": "",
 		"featured": 0
 	}
 }
