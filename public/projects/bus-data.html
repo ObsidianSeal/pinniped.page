@@ -3005,7 +3005,7 @@
 			async function fetchData() {
 				try {
 					// make the request, receive the data
-					const requestURL = "https://corsproxy.io/?url=http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json";
+					const requestURL = "https://corsproxy.pinniped.page/";
 					const request = new Request(requestURL);
 					const response = await fetch(request);
 					const responseJSON = await response.json();
@@ -3531,7 +3531,7 @@
 
 			// show "to-top-button" on scroll
 			document.addEventListener("scroll", (e) => {
-				if (window.scrollY > 300) document.querySelector("#to-top-button").style = "display: flex";
+				if (window.scrollY > 0) document.querySelector("#to-top-button").style = "display: flex";
 				else document.querySelector("#to-top-button").style = "display: none";
 			});
 
@@ -4223,7 +4223,11 @@
 						>LTC realtime</a
 					>&rdquo;
 				</li>
-				<li>CORS proxy through <a href="https://corsproxy.io/" title="CorsProxy [EXTERNAL]">CorsProxy</a></li>
+				<li>
+					<a href="https://developers.cloudflare.com/workers/examples/cors-header-proxy/" title="Cloudflare Docs > Workers > CORS header proxy [EXTERNAL]"
+						>CORS proxy powered by Cloudflare Workers</a
+					>
+				</li>
 				<li>
 					<a href="https://fonts.adobe.com/fonts/degular" title="Adobe Fonts > Degular [EXTERNAL]">Degular (typeface)</a> by
 					<a href="https://ohnotype.co/" title="OH no Type Co. [EXTERNAL]">OH no Type Co.</a> on
