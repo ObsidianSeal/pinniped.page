@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -346,8 +346,12 @@
 				.setAttribute(
 					"href",
 					`projects+.html?search=%5E${encodeURIComponent(
-						projectNames[Math.floor(Math.random() * projectNames.length)].replace(/\//g, "\\/").replace(/\+/g, "\\+").replace(/\-/g, "\\-").replace(/&/g, "&amp;")
-					)}%24&r=t`
+						projectNames[Math.floor(Math.random() * projectNames.length)]
+							.replace(/\//g, "\\/")
+							.replace(/\+/g, "\\+")
+							.replace(/\-/g, "\\-")
+							.replace(/&/g, "&amp;"),
+					)}%24&r=t`,
 				);
 		}
 

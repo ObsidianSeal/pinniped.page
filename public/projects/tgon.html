@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -791,7 +791,7 @@
 				gameBoardSquareElement.querySelectorAll(".game-board-square-player-token").forEach((gameBoardSquarePlayerTokenElement) => {
 					gameBoardString += `,${gameBoardSquarePlayerTokenElement.id.substring(
 						gameBoardSquarePlayerTokenElement.id.length - 2,
-						gameBoardSquarePlayerTokenElement.id.length - 1
+						gameBoardSquarePlayerTokenElement.id.length - 1,
 					)}`;
 				});
 
@@ -1059,8 +1059,8 @@
 					"cart-shopping",
 					`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>picked up</b> a <b>${COLOURS[NOTATION_CIRCLES.indexOf(cardType)].replace(
 						"-",
-						" "
-					)}</b> card. They now have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`
+						" ",
+					)}</b> card. They now have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`,
 				);
 				return cardReceived;
 			} else {
@@ -1074,7 +1074,7 @@
 					"skull",
 					`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>tried</b> to get a card from the <b>${COLOURS[
 						NOTATION_CIRCLES.indexOf(cardType)
-					].replace("-", " ")}</b> pile, but it was empty. They still have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`
+					].replace("-", " ")}</b> pile, but it was empty. They still have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`,
 				);
 				return -1;
 			}
@@ -1094,8 +1094,8 @@
 				"trash",
 				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>returned</b> a <b>${COLOURS[NOTATION_CIRCLES.indexOf(cardType)].replace(
 					"-",
-					" "
-				)}</b> card to the bottom of its pile. They now have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`
+					" ",
+				)}</b> card to the bottom of its pile. They now have <b>${totalCardsNowHeld}</b> card${totalCardsNowHeldPlural}.`,
 			);
 		}
 
@@ -1147,7 +1147,7 @@
 				formatTime(new Date()),
 				"blue-light",
 				"hand",
-				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} is <b>rolling</b> the <b>${sides}-sided die</b>....`
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} is <b>rolling</b> the <b>${sides}-sided die</b>....`,
 			);
 
 			let roll = Math.floor(Math.random() * sides) + 1;
@@ -1158,7 +1158,7 @@
 				formatTime(new Date()),
 				"blue-light",
 				"list-ol",
-				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>rolled</b> ${getNumberArticle(roll)} <b>${roll}</b>.`
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>rolled</b> ${getNumberArticle(roll)} <b>${roll}</b>.`,
 			);
 
 			return roll;
@@ -1169,7 +1169,7 @@
 				formatTime(new Date()),
 				"blue-light",
 				"hand",
-				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} is <b>rolling</b> the <b>special 10-sided die</b>....`
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} is <b>rolling</b> the <b>special 10-sided die</b>....`,
 			);
 
 			let roll = Math.floor(Math.random() * 10) * 10;
@@ -1180,7 +1180,7 @@
 				formatTime(new Date()),
 				"blue-light",
 				"list-ol",
-				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>rolled</b> ${getNumberArticle(roll)} <b>${roll.toString().padStart(2, "0")}</b>.`
+				`${TOKEN_COLOURS[players[playerID].tokenID - 1].toUpperCase()} <b>rolled</b> ${getNumberArticle(roll)} <b>${roll.toString().padStart(2, "0")}</b>.`,
 			);
 
 			return roll;
@@ -1219,7 +1219,7 @@
 
 			if (!window.location.href.includes("://localhost:")) {
 				navigator.clipboard.writeText(
-					`## 🎲 THE GAME OF NUMBERS 🎱\n📎 Follow the link below or use code \`${code}\` to join. 🖥️\nhttps://pinniped.page/tgon?game=${code}`
+					`## 🎲 THE GAME OF NUMBERS 🎱\n📎 Follow the link below or use code \`${code}\` to join. 🖥️\nhttps://pinniped.page/tgon?game=${code}`,
 				);
 			}
 
@@ -1227,7 +1227,7 @@
 				formatTime(new Date()),
 				"grey",
 				"wand-magic-sparkles",
-				`A new game has been created. You can get other people to join by giving them the game code (<b>${code}</b>) or the link that has been copied to your clipboard.`
+				`A new game has been created. You can get other people to join by giving them the game code (<b>${code}</b>) or the link that has been copied to your clipboard.`,
 			);
 
 			return code;
@@ -1291,7 +1291,7 @@
 
 			document.querySelector(".card-text").style = `top: ${mouseY - document.querySelector(".card-text").getBoundingClientRect().height - 20}px; left: ${Math.min(
 				mouseX,
-				window.innerWidth - 444
+				window.innerWidth - 444,
 			)}px`;
 		});
 

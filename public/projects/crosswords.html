@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -143,11 +143,19 @@
 			}
 
 			.material-symbols-outlined {
-				font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+				font-variation-settings:
+					"FILL" 0,
+					"wght" 400,
+					"GRAD" 0,
+					"opsz" 24;
 			}
 
 			.filled {
-				font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+				font-variation-settings:
+					"FILL" 1,
+					"wght" 400,
+					"GRAD" 0,
+					"opsz" 24;
 			}
 
 			h1 .material-symbols-outlined:not(.circle, .x) {
@@ -2194,7 +2202,7 @@
 
 			function share() {
 				navigator.clipboard.writeText(
-					`☑️ I solved “[${crosswords[crosswordNumber][0]}](https://pinniped.page/crosswords?puzzle=${crosswordNumber})” by ${crosswords[crosswordNumber][1]} in **${minutes}:${pad}${seconds}**!`
+					`☑️ I solved “[${crosswords[crosswordNumber][0]}](https://pinniped.page/crosswords?puzzle=${crosswordNumber})” by ${crosswords[crosswordNumber][1]} in **${minutes}:${pad}${seconds}**!`,
 				);
 
 				let savedHTML = shareButtonElement.innerHTML;

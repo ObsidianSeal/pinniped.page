@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -1995,7 +1995,8 @@
 				if (drag) {
 					drag = false; // stop dragging
 
-					if (e.pageX > window.innerWidth - storageAreaWidth) dragElement.remove(); // remove if within "storage area"
+					if (e.pageX > window.innerWidth - storageAreaWidth)
+						dragElement.remove(); // remove if within "storage area"
 					else if (e.pageX != fromX && e.pageY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
 
 					// if the element never moved, but was in the storage/discoveries area, place a copy somewhere on the screen
@@ -2011,7 +2012,8 @@
 				if (drag) {
 					drag = false; // stop dragging
 
-					if (toX > window.innerWidth - storageAreaWidth) dragElement.remove(); // remove if within "storage area"
+					if (toX > window.innerWidth - storageAreaWidth)
+						dragElement.remove(); // remove if within "storage area"
 					else if (toX != fromX && toY != fromY) checkForOverlap(); // check for overlap --> craft! (unless element never moved)
 
 					// for some reason, 'mouseup' handles spawnItemAtRandomPosition(); (test on an actual touchscreen device!)
@@ -2285,7 +2287,7 @@
 					tan,
 					brown,
 					lightGrey,
-					darkGrey
+					darkGrey,
 				);
 
 				showSortedItems();

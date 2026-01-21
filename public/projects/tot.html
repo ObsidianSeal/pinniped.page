@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -972,11 +972,10 @@
 								document.querySelector(".station-name-input input").value = "";
 							}
 							if (!guessCounted) {
-								document.querySelector(
-									".completion"
-								).innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.round(
-									(guessedStations / totalStations) * 100
-								)}%)`;
+								document.querySelector(".completion").innerHTML =
+									`<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.round(
+										(guessedStations / totalStations) * 100,
+									)}%)`;
 								guessCounted = true;
 							}
 						}
@@ -1035,9 +1034,8 @@
 					let stationIndex = 0;
 					for (let station of systems[system][line].stations) {
 						if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML != station) {
-							document.querySelector(
-								`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`
-							).innerHTML = `<b class="highlight">${station}</b>`;
+							document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML =
+								`<b class="highlight">${station}</b>`;
 						}
 						stationIndex++;
 					}
@@ -1058,7 +1056,7 @@
 
 		function share() {
 			let shareText = `## 🚉 Train of Thought // ${currentSystem} 🌐\n✅ ${guessedStations}/${totalStations} (${Math.round(
-				(guessedStations / totalStations) * 100
+				(guessedStations / totalStations) * 100,
 			)}%) in ${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")} ⏱️\nhttps://pinniped.page/tot`;
 			navigator.clipboard.writeText(shareText);
 		}

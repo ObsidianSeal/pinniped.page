@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -637,9 +637,8 @@
 
 		setInterval(() => {
 			if (Math.floor(Math.random() * 2) == 0) {
-				document.querySelectorAll("#background-text h1")[
-					Math.floor(Math.random() * document.querySelectorAll("#background-text h1").length)
-				].style = `transform: translateX(${(Math.floor(Math.random() * 21) - 10) * 10}px)`;
+				document.querySelectorAll("#background-text h1")[Math.floor(Math.random() * document.querySelectorAll("#background-text h1").length)].style =
+					`transform: translateX(${(Math.floor(Math.random() * 21) - 10) * 10}px)`;
 			}
 		}, 10000);
 
@@ -690,9 +689,8 @@
 									else if (seconds == 1) relative = `1 second ago`;
 									else if (seconds == 0) relative = `now`;
 
-									document.querySelector(
-										"#bot-status"
-									).innerHTML = `<i class="fa-sharp fa-solid fa-circle green"></i> <b>online</b> — since ${year}/${month}/${day} @ ${hour}:${minute} ${half} (${relative})`;
+									document.querySelector("#bot-status").innerHTML =
+										`<i class="fa-sharp fa-solid fa-circle green"></i> <b>online</b> — since ${year}/${month}/${day} @ ${hour}:${minute} ${half} (${relative})`;
 								}
 							})
 							.catch((error) => {

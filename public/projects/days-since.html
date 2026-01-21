@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -114,7 +114,7 @@
 
 					if (decimal != null)
 						document.querySelector("h1").innerHTML = Intl.NumberFormat("en-CA", { style: "decimal", minimumFractionDigits: 2 }).format(
-							Math.floor(((now - then) / divisor) * 100) / 100
+							Math.floor(((now - then) / divisor) * 100) / 100,
 						);
 					else document.querySelector("h1").innerHTML = Intl.NumberFormat("en-CA", { style: "decimal" }).format(Math.floor((now - then) / divisor));
 				} else {

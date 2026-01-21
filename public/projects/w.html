@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -1232,9 +1232,8 @@
 				if (isNaN(seconds) || invalidWord) {
 					document.querySelector("#lastChangedDisplay").innerHTML = `???`;
 				} else {
-					document.querySelector(
-						"#lastChangedDisplay"
-					).innerHTML = `<span class="inline-block">${days} ${daysWord}</span> <span class="inline-block">${hours} ${hoursWord}</span> <span class="inline-block">${minutes} ${minutesWord}</span> <span class="inline-block">${seconds} ${secondsWord}</span>`;
+					document.querySelector("#lastChangedDisplay").innerHTML =
+						`<span class="inline-block">${days} ${daysWord}</span> <span class="inline-block">${hours} ${hoursWord}</span> <span class="inline-block">${minutes} ${minutesWord}</span> <span class="inline-block">${seconds} ${secondsWord}</span>`;
 				}
 			}, 1000);
 
@@ -1274,15 +1273,14 @@
 					theme == null ||
 					theme == "" ||
 					!/^[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}-[0123456789abcdefABCDEF]{6}$/.test(
-						theme
+						theme,
 					)
 				)
 					return;
 
 				const colours = theme.split("-");
-				document.querySelector(
-					"#theme"
-				).innerHTML = `:root {--c1: #${colours[0]}; --c2: #${colours[1]}; --c3: #${colours[2]}; --c4: #${colours[3]}; --c5: #${colours[4]}; --c6: #${colours[5]};}`;
+				document.querySelector("#theme").innerHTML =
+					`:root {--c1: #${colours[0]}; --c2: #${colours[1]}; --c3: #${colours[2]}; --c4: #${colours[3]}; --c5: #${colours[4]}; --c6: #${colours[5]};}`;
 
 				document.querySelector("#c5colour").innerHTML = `&nbsp;#${colours[4]}&nbsp;`;
 				document.querySelector("#c6colour").innerHTML = `&nbsp;#${colours[5]}&nbsp;`;
@@ -1310,14 +1308,13 @@
 				input.addEventListener("change", () => {
 					themeColours[thisThemeIndex] = input.value.substring(1);
 
-					document.querySelector(
-						"#theme"
-					).innerHTML = `:root {--c1: #${themeColours[0]}; --c2: #${themeColours[1]}; --c3: #${themeColours[2]}; --c4: #${themeColours[3]}; --c5: #${themeColours[4]}; --c6: #${themeColours[5]};}`;
+					document.querySelector("#theme").innerHTML =
+						`:root {--c1: #${themeColours[0]}; --c2: #${themeColours[1]}; --c3: #${themeColours[2]}; --c4: #${themeColours[3]}; --c5: #${themeColours[4]}; --c6: #${themeColours[5]};}`;
 
 					window.history.pushState(
 						"",
 						"",
-						`?theme=${themeColours[0]}-${themeColours[1]}-${themeColours[2]}-${themeColours[3]}-${themeColours[4]}-${themeColours[5]}`
+						`?theme=${themeColours[0]}-${themeColours[1]}-${themeColours[2]}-${themeColours[3]}-${themeColours[4]}-${themeColours[5]}`,
 					);
 
 					document.querySelector("#c5colour").innerHTML = `&nbsp;#${themeColours[4]}&nbsp;`;

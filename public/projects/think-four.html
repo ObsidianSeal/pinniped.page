@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -169,7 +169,9 @@
 
 				border-radius: 5px;
 
-				transition: top 1s, left 1s;
+				transition:
+					top 1s,
+					left 1s;
 			}
 
 			.word:not(.disabled):hover {
@@ -1545,7 +1547,7 @@
 					document.querySelector(".puzzle-select-panel").innerHTML =
 						document.querySelector(".puzzle-select-panel").innerHTML +
 						`<div><span>#${++i}</span><span><a href="?puzzle=${puzzle}">${toTextDate(
-							puzzle
+							puzzle,
 						)}</a><i class="fa-solid fa-arrow-right-long"></i></span><span title="~${ratingValue}/5">${ratingString}</span><span>${
 							object.puzzles[puzzle.replaceAll("/", "-")].ratings
 						}</span><span>${object.puzzles[puzzle.replaceAll("/", "-")].solves}</span></div>`;

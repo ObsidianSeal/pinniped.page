@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -2000,13 +2000,13 @@
 								.replaceAll(/&lsquo;/g, "‘")
 								.replaceAll(/&rsquo;/g, "’")
 								.replaceAll(/&ldquo;/g, "“")
-								.replaceAll(/&rdquo;/g, "”")
+								.replaceAll(/&rdquo;/g, "”"),
 						)}%20-%20${encodeURIComponent(
 							playlists[title].tracks[i][0]
 								.replaceAll(/&lsquo;/g, "‘")
 								.replaceAll(/&rsquo;/g, "’")
 								.replaceAll(/&ldquo;/g, "“")
-								.replaceAll(/&rdquo;/g, "”")
+								.replaceAll(/&rdquo;/g, "”"),
 						)}`;
 				}
 
@@ -2017,9 +2017,9 @@
 						.replaceAll("⚡ ", "")
 						.replaceAll(
 							" ",
-							"-"
+							"-",
 						)}.png" class="cover" style="display: none" /></h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — <span title="${formatDate(
-						lastUpdated
+						lastUpdated,
 					)}">${lastUpdated}</span></div></div>`;
 				// add " — group playlist"
 				else if (title == "LETHAL COMPANY")
@@ -2028,9 +2028,9 @@
 						.replaceAll("⚡ ", "")
 						.replaceAll(
 							" ",
-							"-"
+							"-",
 						)}.png" class="cover" style="display: none" /></h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — <span title="${formatDate(
-						lastUpdated
+						lastUpdated,
 					)}">${lastUpdated}</span> — group playlist</div></div>`;
 				// the rest of 'em
 				else
@@ -2039,9 +2039,9 @@
 						.replaceAll("⚡ ", "")
 						.replaceAll(
 							" ",
-							"-"
+							"-",
 						)}.png" class="cover" style="display: none" /></h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — <span title="${formatDate(
-						lastUpdated
+						lastUpdated,
 					)}">${lastUpdated}</span></div></div>`;
 
 				document.querySelector(".playlists").appendChild(playlistContainer);

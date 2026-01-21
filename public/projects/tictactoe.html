@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-CA">
 	<head>
@@ -190,11 +190,19 @@
 
 			.big-icon .material-symbols-outlined {
 				font-size: 48px;
-				font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
+				font-variation-settings:
+					"FILL" 0,
+					"wght" 600,
+					"GRAD" 0,
+					"opsz" 48;
 			}
 
 			.small-icon {
-				font-variation-settings: "FILL" 1, "wght" 600, "GRAD" 0, "opsz" 24;
+				font-variation-settings:
+					"FILL" 1,
+					"wght" 600,
+					"GRAD" 0,
+					"opsz" 24;
 				translate: 0 3px;
 				user-select: none;
 			}
@@ -373,7 +381,11 @@
 			}
 
 			#data-refresh {
-				font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 24;
+				font-variation-settings:
+					"FILL" 0,
+					"wght" 600,
+					"GRAD" 0,
+					"opsz" 24;
 				font-size: 48px;
 				user-select: none;
 				transition: color 0.5s;
@@ -1575,12 +1587,12 @@
 
 			// 19.
 			document.querySelector("#data-move-first-null").innerHTML = `${moveNames[firstMovesTie.indexOf(Math.max(...firstMovesTie))]} <span>(${Math.max(
-				...firstMovesTie
+				...firstMovesTie,
 			)})</span>`;
 
 			// 20.
 			document.querySelector("#data-move-last-null").innerHTML = `${moveNames[lastMovesTie.indexOf(Math.max(...lastMovesTie))]} <span>(${Math.max(
-				...lastMovesTie
+				...lastMovesTie,
 			)})</span>`;
 		}
 
