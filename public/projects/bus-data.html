@@ -102,6 +102,11 @@
 				font-size: 40px;
 			}
 
+			b a {
+				font-weight: 400;
+				font-size: 20px;
+			}
+
 			a,
 			#map-open,
 			#to-top-text {
@@ -3200,7 +3205,7 @@
 						row.id = `bus-${bus}`;
 						let icon = "xmark";
 						if (fleetObject[bus][0] == "D60LFR" || fleetObject[bus][0] == "XD60") icon = "check";
-						row.innerHTML = `<td><a href="${fleetObject[bus][2]}"  title="CPTDB wiki > London Transit Commission > ${bus} [GENERATED LINK; EXTERNAL]">${bus}</a></td><td><a href="${fleetObject[bus][1]}"  title="CPTDB wiki > ${fleetObject[bus][0]} [GENERATED LINK; EXTERNAL]">${fleetObject[bus][0]}</a></td><td><i class="fa-sharp fa-solid fa-${icon}"></i></td><td>???</td><td>???</td>`;
+						row.innerHTML = `<td><a href="${fleetObject[bus][2]}" target="_blank" title="CPTDB wiki > London Transit Commission > ${bus} [GENERATED LINK; EXTERNAL]">${bus}</a></td><td><a href="${fleetObject[bus][1]}" target="_blank" title="CPTDB wiki > ${fleetObject[bus][0]} [GENERATED LINK; EXTERNAL]">${fleetObject[bus][0]}</a></td><td><i class="fa-sharp fa-solid fa-${icon}"></i></td><td>???</td><td>???</td>`;
 						document.querySelector("tbody").appendChild(row);
 					}
 
@@ -3356,7 +3361,7 @@
 							row.children[3].innerHTML = simpleBusData[bus][0].toString().padStart(2, "0");
 							row.children[4].innerHTML = `<a href="https://www.google.ca/maps/search/${simpleBusData[bus][1]},${
 								simpleBusData[bus][2]
-							}"  title="Google Maps > ${simpleBusData[bus][1]}, ${simpleBusData[bus][2]} [GENERATED LINK; EXTERNAL]">${simpleBusData[bus][1]
+							}" target="_blank" title="Google Maps > ${simpleBusData[bus][1]}, ${simpleBusData[bus][2]} [GENERATED LINK; EXTERNAL]">${simpleBusData[bus][1]
 								.toString()
 								.padEnd(8, "0")}, ${simpleBusData[bus][2].toString().padEnd(9, "0")}</a>`;
 						} else {
@@ -3799,7 +3804,7 @@
 
 			<br />
 
-			<p>v1.1.0 — September 8th, 2025 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.1.1 — January 21st, 2026 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3807,7 +3812,7 @@
 
 			<br />
 
-			<b>QUICK LINKS</b>
+			<b id="QUICK-LINKS">QUICK LINKS <a href="#QUICK-LINKS" title="click to move to &ldquo;QUICK LINKS&rdquo;">#</a></b>
 			<ul>
 				<li>
 					<a
@@ -3838,8 +3843,10 @@
 			<br />
 			<br />
 
-			<b>ON THIS PAGE</b>
+			<b id="ON-THIS-PAGE">ON THIS PAGE <a href="#ON-THIS-PAGE" title="click to move to &ldquo;ON THIS PAGE&rdquo;">#</a></b>
 			<ul>
+				<li><a href="#QUICK-LINKS" title="click to move to &ldquo;QUICK LINKS&rdquo;">QUICK LINKS</a></li>
+				<li><a href="#ON-THIS-PAGE" title="click to move to &ldquo;ON THIS PAGE&rdquo;">ON THIS PAGE</a></li>
 				<li><a href="#THE-DATA" title="click to move to &ldquo;THE DATA&rdquo;">THE DATA</a></li>
 				<li><a href="#BUS-TOTALS" title="click to move to &ldquo;BUS TOTALS&rdquo;">BUS TOTALS</a></li>
 				<li><a href="#BUS-DISTRIBUTION" title="click to move to &ldquo;BUS DISTRIBUTION&rdquo;">BUS DISTRIBUTION</a></li>
@@ -3858,7 +3865,7 @@
 			<br />
 			<br />
 
-			<b id="THE-DATA">THE DATA</b>
+			<b id="THE-DATA">THE DATA <a href="#THE-DATA" title="click to move to &ldquo;THE DATA&rdquo;">#</a></b>
 			<h2>
 				<a href="http://gtfs.ltconline.ca/Vehicle/VehiclePositions.json" title="LTC Open Data > VehiclePositions.json [FILE; EXTERNAL]">VehiclePositions.json</a>
 				from
@@ -3868,7 +3875,7 @@
 
 			<br />
 
-			<b id="BUS-TOTALS">BUS TOTALS</b>
+			<b id="BUS-TOTALS">BUS TOTALS <a href="#BUS-TOTALS" title="click to move to &ldquo;BUS TOTALS&rdquo;">#</a></b>
 			<h2 id="total-info">
 				There <span class="grammar" id="total-grammar-1">are</span> <span id="bus-total">#</span> <span class="grammar" id="total-grammar-2">buses</span> in service,
 				making up <span id="bus-total-percent">%</span> of London Transit&rsquo;s fleet.
@@ -3888,7 +3895,7 @@
 
 			<br />
 
-			<b id="BUS-DISTRIBUTION">BUS DISTRIBUTION</b>
+			<b id="BUS-DISTRIBUTION">BUS DISTRIBUTION <a href="#BUS-DISTRIBUTION" title="click to move to &ldquo;BUS DISTRIBUTION&rdquo;">#</a></b>
 			<p>
 				The number of buses running on each of London Transit&rsquo;s <span id="route-total" class="bold">#</span>
 				<a href="https://www.londontransit.ca/plan-a-trip/schedules/" title="London Transit > Routes & Schedules [EXTERNAL]">routes</a>, shown as a bar graph.
@@ -3913,7 +3920,7 @@
 
 			<br />
 
-			<b id="BUS-POSITIONS-AND-MODELS">BUS POSITIONS & MODELS</b>
+			<b id="BUS-POSITIONS-AND-MODELS">BUS POSITIONS & MODELS <a href="#BUS-POSITIONS-AND-MODELS" title="click to move to &ldquo;BUS POSITIONS & MODELS&rdquo;">#</a></b>
 			<p>
 				Below is a table of all <span id="fleet-total" class="bold">#</span> buses in
 				<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission#Fleet_roster" title="CPTDB wiki > London Transit Commission (Fleet roster) [EXTERNAL]"
@@ -3954,7 +3961,7 @@
 
 			<br />
 
-			<b id="BUS-MAP">BUS MAP</b>
+			<b id="BUS-MAP">BUS MAP <a href="#BUS-MAP" title="click to move to &ldquo;BUS MAP&rdquo;">#</a></b>
 			<h2 id="map-open" title="click to open the map (keyboard shortcut: &ldquo;ESCAPE&rdquo;)">CLICK TO OPEN THE MAP</h2>
 			<p class="grey">or press &ldquo;ESCAPE&rdquo; to open/close the map</p>
 
@@ -3964,7 +3971,7 @@
 			<br />
 			<br />
 
-			<b id="ROUTE-MAPS">ROUTE MAPS</b>
+			<b id="ROUTE-MAPS">ROUTE MAPS <a href="#ROUTE-MAPS" title="click to move to &ldquo;ROUTE MAPS&rdquo;">#</a></b>
 			<p>
 				For ease of navigation, these maps simplify the routes into straight lines. This makes it very clear where certain routes diverge into lettered branches, have
 				different termini at certain times, or exhibit other quirks, making it easy to identify your destination and see the stops that lead up to it. Each direction
@@ -4163,7 +4170,7 @@
 			<br />
 			<br />
 
-			<b id="DISCLAIMER">DISCLAIMER</b>
+			<b id="DISCLAIMER">DISCLAIMER <a href="#DISCLAIMER" title="click to move to &ldquo;DISCLAIMER&rdquo;">#</a></b>
 			<ul>
 				<li>
 					the information provided on this page should not be used as a substitute for official information provided by the
@@ -4177,7 +4184,7 @@
 
 			<br />
 
-			<b id="LIMITATIONS">LIMITATIONS</b>
+			<b id="LIMITATIONS">LIMITATIONS <a href="#LIMITATIONS" title="click to move to &ldquo;LIMITATIONS&rdquo;">#</a></b>
 			<ul>
 				<li>
 					some data is entered manually, so be sure to check the date that this page was last updated (it&rsquo;s shown at the
@@ -4203,7 +4210,7 @@
 
 			<br />
 
-			<b id="ATTRIBUTION">ATTRIBUTION</b>
+			<b id="ATTRIBUTION">ATTRIBUTION <a href="#ATTRIBUTION" title="click to move to &ldquo;ATTRIBUTION&rdquo;">#</a></b>
 			<ul>
 				<li>
 					bus data from &ldquo;<a href="https://www.londontransit.ca/open-data/" title="LTC Open Data [EXTERNAL]">Open Data — London Transit Commission</a>&rdquo;
@@ -4233,7 +4240,7 @@
 
 			<br />
 
-			<b id="HELP">HELP!</b>
+			<b id="HELP">HELP! <a href="#HELP" title="click to move to &ldquo;HELP!&rdquo;">#</a></b>
 			<ul>
 				<li><a href="../status.html#BUS-DATA" title="pinniped.page — Status">website status</a></li>
 				<li><a href="../contact.html" title="pinniped.page — Contact">report a problem or suggest a feature</a></li>
@@ -4408,7 +4415,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.1.0</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.1.1</span>
 				</p>
 				<br />
 				<p>
