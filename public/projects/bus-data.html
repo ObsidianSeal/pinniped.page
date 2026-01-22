@@ -999,7 +999,11 @@
 
 			document.querySelector("#fleet-total").innerHTML = fleet;
 			document.querySelector("#articulated-total").innerHTML = fleetArticulated;
-			document.querySelector("#articulated-percentage").innerHTML = Math.round((fleetArticulated / fleet) * 10000) / 100 + "%";
+			document.querySelector("#articulated-percentage").innerHTML = new Intl.NumberFormat("en-CA", {
+				style: "percent",
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).format(fleetArticulated / fleet);
 
 			// colours
 			const officialColours = {
