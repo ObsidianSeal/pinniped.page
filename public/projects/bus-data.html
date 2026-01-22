@@ -734,13 +734,13 @@
 			/*
 			 * KEEP UPDATED:
 			 * ----------
-			 * fleetObject (list of buses)
+			 * fleetObject (list of buses) > > > # of unique models
 			 * officialColours (list of colours)
 			 * stops (list of stops)
 			 * busDistribution (list of routes)
 			 * articulatedDistribution (same as above)
 			 * ----------
-			 * updated as of 2026/01/21
+			 * updated as of 2026/01/22
 			 */
 
 			// big and important variables
@@ -999,6 +999,7 @@
 
 			document.querySelector("#fleet-total").innerHTML = fleet;
 			document.querySelector("#articulated-total").innerHTML = fleetArticulated;
+			document.querySelector("#articulated-percentage").innerHTML = Math.round((fleetArticulated / fleet) * 10000) / 100 + "%";
 
 			// colours
 			const officialColours = {
@@ -3804,7 +3805,7 @@
 
 			<br />
 
-			<p>v1.1.1 — January 21st, 2026 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.1.2 — January 22nd, 2026 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3928,16 +3929,17 @@
 				>.
 			</p>
 			<p>
-				Every bus has a unique ID. If it seems like some IDs are missing, that&rsquo;s because the bus with that ID has been retired. Click on each ID for more
-				information about the bus.
+				Every vehicle has a unique fleet number. If a number is not present in the table, that almost certainly means that the bus with that number has been retired.
+				Click on each fleet number for more information about that bus.
 			</p>
 			<p>
-				London Transit currently operates five unique bus models, all of which are produced in Canada by
+				London Transit now operates only two bus models, both of which are produced in Canada by
 				<a href="https://www.newflyer.com/" title="New Flyer [EXTERNAL]">New Flyer</a>. Click on a model to learn more.
 			</p>
 			<p>
 				<span id="articulated-total" class="bold">#</span> of London Transit&rsquo;s buses are
-				<a href="https://en.wikipedia.org/wiki/Articulated_bus" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>.
+				<a href="https://en.wikipedia.org/wiki/Articulated_bus" title="Wikipedia > Articulated bus [EXTERNAL]">articulated</a>, or
+				<span id="articulated-percentage" class="bold">%</span> of the fleet.
 			</p>
 			<p>
 				For buses that are currently running, their route and position (latitude and longitude) are given. Click on a position to view it on
@@ -3948,7 +3950,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th>fleet number</th>
 							<th>model</th>
 							<th>articulated?</th>
 							<th>route</th>
@@ -3978,8 +3980,9 @@
 				has its own map, so please pay attention to the file names.
 			</p>
 			<p>
-				These maps are made manually in <a href="https://affinity.serif.com/designer/" title="Affinity Designer [EXTERNAL]">Affinity Designer</a>, so they will be
-				added/updated very slowly.
+				These maps are made manually in
+				<a href="https://en.wikipedia.org/wiki/Affinity_Designer" title="Wikipedia > Affinity Designer [EXTERNAL]">Affinity Designer</a>, so they will be added/updated
+				very slowly.
 			</p>
 			<p>Please report any inaccuracies!</p>
 			<br />
@@ -4419,7 +4422,7 @@
 				<h1>LOADING<d id="d1">.</d><d id="d2">.</d><d id="d3">.</d></h1>
 				<br />
 				<p>
-					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.1.1</span>
+					<span><a href="" title="this page (click to refresh)">BUS DATA</a> v1.1.2</span>
 				</p>
 				<br />
 				<p>
