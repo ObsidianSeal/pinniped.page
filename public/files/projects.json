@@ -40,12 +40,12 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["January 21st/22nd", "heading snap, wording/clarification, switch to in-house proxy, other fixes and updates"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"version": "1.1.0",
-		"featured": 2
+		"version": "1.1.2",
+		"featured": 3
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -237,7 +237,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.6.0",
-		"featured": 0
+		"featured": 2
 	},
 	"Finite Craft - help!": {
 		"basic": true,
@@ -412,8 +412,8 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"version": "1.4.3",
-		"featured": 3
+		"version": "1.4.4",
+		"featured": 5
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -445,7 +445,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 1
+		"featured": 4
 	},
 	"progress": {
 		"basic": false,
@@ -557,7 +557,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 4
+		"featured": 6
 	},
 	"Think Four": {
 		"basic": false,
@@ -621,7 +621,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 5
+		"featured": 7
 	},
 	"Typewriter Simulator": {
 		"basic": false,
@@ -639,21 +639,21 @@
 		"version": "",
 		"featured": 0
 	},
-	"v": {
+	"VALORANT Points calculator": {
 		"basic": false,
 		"icon": "dollar-sign",
 		"path": "projects/v",
 		"connected": true,
-		"description": "VALORANT Points calculator: spend as little as possible.",
+		"description": "Buy things in VALORANT for as low as possible.",
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["January 23rd", "finally given a complete name AND MUCH MORE!!!"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"version": "2.4.4",
-		"featured": 0
+		"version": "2.5.0",
+		"featured": 1
 	},
 	"WandStuff": {
 		"basic": false,

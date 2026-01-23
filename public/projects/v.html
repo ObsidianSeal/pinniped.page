@@ -104,7 +104,8 @@
 				background-color: var(--c5);
 			}
 
-			[style="color: #00000064"]::selection {
+			[style="color: #00000064"]::selection,
+			b::selection {
 				background-color: #00000064;
 			}
 
@@ -235,7 +236,7 @@
 
 			/* BUTTONS */
 
-			.button-container span:not(.currency) {
+			.button-container span:not(.currency, .warning) {
 				margin: 0 20px 20px 0;
 				border: 2px solid black;
 				border-radius: 20px;
@@ -249,22 +250,22 @@
 				transition: background-color 0.25s;
 			}
 
-			.button-container span:not(.currency):nth-child(1) {
+			.button-container span:not(.currency, .warning):nth-child(1) {
 				width: 270px;
 			}
 
-			.button-container span:not(.currency):nth-child(2),
-			.button-container span:not(.currency):nth-child(3) {
+			.button-container span:not(.currency, .warning):nth-child(2),
+			.button-container span:not(.currency, .warning):nth-child(3) {
 				width: 130px;
 			}
 
-			.button-container span:not(.currency):hover,
-			.button-container span:not(.currency):focus {
+			.button-container span:not(.currency, .warning):hover,
+			.button-container span:not(.currency, .warning):focus {
 				background-color: var(--c5h);
 				cursor: pointer;
 			}
 
-			.button-container span:not(.currency) i,
+			.button-container span:not(.currency, .warning) i,
 			#region-select-menu div i {
 				margin-right: 10px;
 			}
@@ -409,7 +410,8 @@
 				translate: -52px 0;
 			}
 
-			#calc-alert {
+			#calc-alert,
+			.warning {
 				color: var(--c1);
 			}
 
@@ -443,31 +445,19 @@
 
 	<body class="fa-width-auto">
 		<h1 class="c1">VALORANT Points calculator</h1>
-		<p class="m5">a project by <a href="../about.html" class="u1" title="about Obsidian_Seal">Obsidian_Seal</a> •</p>
+		<p class="m5">a project by <a href="../about.html" class="u1" title="about Obsidian_Seal">Obsidian_Seal</a> • v2.5.0 • 2026/01/23</p>
 
 		<div class="h50"></div>
 
 		<div class="button-container">
 			<span tabindex="0" id="region-select-button"><i class="fa-solid fa-location-dot"></i>select country/region</span
 			><span tabindex="0" id="back-button"><i class="fa-solid fa-arrow-turn-up"></i>go back</span
-			><span tabindex="0" id="reset-all-button"><i class="fa-solid fa-eraser"></i>reset all</span>
+			><span tabindex="0" id="reset-all-button"><i class="fa-solid fa-eraser"></i>reset all</span
+			><span tabindex="0" id="help-button"><i class="fa-regular fa-truck-tow"></i>help</span>
 		</div>
 
 		<div id="region-select-menu">
 			<div tabindex="0" id="region-select-menu-default"><i class="fa-solid fa-location-dot"></i>select country/region</div>
-			<div tabindex="0" id="region1">Argentina <span class="currency">(ARS)</span></div>
-			<div tabindex="0" id="region2">Australia <span class="currency">(A$)</span></div>
-			<div tabindex="0" id="region3">Brazil <span class="currency">(R$)</span></div>
-			<div tabindex="0" id="region4">Canada <span class="currency">(CA$)</span></div>
-			<div tabindex="0" id="region5">European Union <span class="currency">(€)</span></div>
-			<div tabindex="0" id="region6">Hungary <span class="currency">(HUF)</span></div>
-			<div tabindex="0" id="region7">Mexico <span class="currency">(MX$)</span></div>
-			<div tabindex="0" id="region8">New Zealand <span class="currency">(NZ$)</span></div>
-			<div tabindex="0" id="region9">Russia <span class="currency">(RUB)</span></div>
-			<div tabindex="0" id="region10">Türkiye <span class="currency">(TRY)</span></div>
-			<div tabindex="0" id="region11">Ukraine <span class="currency">(UAH)</span></div>
-			<div tabindex="0" id="region12">United Kingdom <span class="currency">(£)</span></div>
-			<div tabindex="0" id="region13">United States <span class="currency">($)</span></div>
 		</div>
 
 		<div style="height: 30px"></div>
@@ -475,9 +465,9 @@
 		<h3 class="c4">#1 — points to price</h3>
 		<p class="m5">
 			enter the number of
-			<a href="https://valorant.fandom.com/wiki/VALORANT_Points" class="u4" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
-			<a href="https://valorant.fandom.com/wiki/Store" class="u4" title="some things that can be purchased with VALORANT Points">something</a> costs to calculate how to
-			get it for the lowest price
+			<a href="https://breezewiki.com/valorant/wiki/VALORANT_Points" class="u4" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
+			<a href="https://breezewiki.com/valorant/wiki/Store" class="u4" title="some things that can be purchased with VALORANT Points">something</a> costs to calculate how
+			to get it for the lowest price
 		</p>
 
 		<div class="h50"></div>
@@ -505,7 +495,7 @@
 		<h3 class="c4">#2 — compare points & prices</h3>
 		<p class="m5">
 			compare the prices and total points received from different combinations of
-			<a href="https://valorant.fandom.com/wiki/VALORANT_Points" class="u4" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
+			<a href="https://breezewiki.com/valorant/wiki/VALORANT_Points" class="u4" title="VALORANT Points on the VALORANT wiki">VALORANT Points</a>
 		</p>
 
 		<div class="h50"></div>
@@ -661,36 +651,44 @@
 
 		<div class="h50"></div>
 
-		<p style="color: #00000064">please note: taxes and/or fees may apply</p>
+		<p style="color: #00000064">
+			<b>please note:</b><br />- taxes and/or fees may apply<br />- this page only performs calculations with each region&rsquo;s debit/credit card prices<br />- some
+			regions (marked with an asterisk) may have outdated prices
+		</p>
 
 		<script>
-			// version
-			const version = ` v${2}.${4}.${4}\n\n`;
-			console.log("v  | " + version);
-			document.querySelector("p").innerHTML = document.querySelector("p").innerHTML + version;
+			"use strict";
 
 			// global variables
 			const regionSelectButton = document.querySelector("#region-select-button");
 			const regionSelectMenu = document.querySelector("#region-select-menu");
 			const inputElement = document.querySelector("input");
 
-			var regionNumber = "";
-			var points = [0, 0, 0, 0, 0, 0];
-			var prices = [0, 0, 0, 0, 0, 0];
-			var amounts = [
+			let regionNumber = -1;
+			let points = [0, 0, 0, 0, 0, 0];
+			let prices = [0, 0, 0, 0, 0, 0];
+			let amounts = [
 				[0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0],
 			];
 
-			// get body padding
-			var bodyPadding = 50;
+			// get/update body padding
+			let bodyPadding = 50;
 			if (window.innerWidth <= 600) bodyPadding = 20;
+			window.addEventListener("resize", () => {
+				if (window.innerWidth <= 600) bodyPadding = 20;
+				else bodyPadding = 50;
+			});
 
-			// VALORANT Points object - currency codes from https://www.techonthenet.com/js/currency_codes.php
-			const pointsData = {
-				// Argentina
-				region1: {
+			/*
+			 * VALORANT Points array
+			 * locales from https://i18ns.com/languagecode.html
+			 * currency codes from https://www.techonthenet.com/js/currency_codes.php
+			 */
+			const pointsData = [
+				{
+					country: "Argentina",
 					prices: [
 						[250, 3.99],
 						[525, 7.99],
@@ -699,22 +697,24 @@
 						[5750, 79.99],
 						[7625, 100],
 					],
+					locale: "es-AR",
 					currency: "ARS",
 				},
-				// Australia
-				region2: {
+				{
+					country: "Australia",
 					prices: [
-						[525, 7.99],
-						[1025, 14.99],
-						[2175, 30.99],
-						[3975, 55.99],
-						[5800, 79.99],
-						[9750, 129.99],
+						[475, 7.25],
+						[1000, 14.75],
+						[2050, 30],
+						[3650, 52],
+						[5350, 74],
+						[11000, 148],
 					],
+					locale: "en-AU",
 					currency: "AUD",
 				},
-				// Brazil
-				region3: {
+				{
+					country: "Brazil*",
 					prices: [
 						[475, 16.9],
 						[1200, 39.9],
@@ -723,10 +723,11 @@
 						[5500, 169.9],
 						[11500, 349.9],
 					],
+					locale: "pt-BR",
 					currency: "BRL",
 				},
-				// Canada
-				region4: {
+				{
+					country: "Canada",
 					prices: [
 						[475, 6.99],
 						[1000, 13.99],
@@ -735,10 +736,24 @@
 						[5350, 69.99],
 						[11000, 139.99],
 					],
+					locale: "en-CA",
 					currency: "CAD",
 				},
-				// European Union
-				region5: {
+				{
+					country: "Ecuador",
+					prices: [
+						[0, 0],
+						[500, 3.99],
+						[1050, 7.99],
+						[2175, 15.99],
+						[5550, 39.99],
+						[11500, 79.99],
+					],
+					locale: "es-EC",
+					currency: "USD",
+				},
+				{
+					country: "Eurozone",
 					prices: [
 						[475, 5],
 						[1000, 10],
@@ -747,10 +762,11 @@
 						[5350, 50],
 						[11000, 100],
 					],
+					locale: "en-150",
 					currency: "EUR",
 				},
-				// Hungary
-				region6: {
+				{
+					country: "Hungary*",
 					prices: [
 						[500, 1790],
 						[1000, 3490],
@@ -759,10 +775,37 @@
 						[5350, 17790],
 						[11000, 34990],
 					],
+					locale: "hu-HU",
 					currency: "HUF",
 				},
-				// Mexico
-				region7: {
+				{
+					country: "India*",
+					prices: [
+						[475, 415],
+						[1000, 830],
+						[2050, 1660],
+						[3650, 2900],
+						[5350, 4150],
+						[11000, 8330],
+					],
+					locale: "en-IN",
+					currency: "INR",
+				},
+				{
+					country: "Malaysia*",
+					prices: [
+						[375, 13.9],
+						[600, 19.9],
+						[1250, 39.9],
+						[1900, 59.9],
+						[3400, 104.9],
+						[6750, 199.9],
+					],
+					locale: "ms-MY",
+					currency: "MYR",
+				},
+				{
+					country: "Mexico",
 					prices: [
 						[550, 99],
 						[1150, 199],
@@ -771,58 +814,102 @@
 						[6300, 1029],
 						[12400, 1999],
 					],
+					locale: "ex-MX",
 					currency: "MXN",
 				},
-				// New Zealand
-				region8: {
+				{
+					country: "New Zealand",
 					prices: [
-						[599, 8.99],
+						[525, 8.99],
 						[1025, 16.99],
 						[2175, 34.99],
 						[3975, 62.99],
 						[5800, 89.99],
 						[9750, 144.99],
 					],
+					locale: "en-NZ",
 					currency: "NZD",
 				},
-				// Russia
-				region9: {
+				{
+					country: "Poland",
 					prices: [
-						[575, 379],
-						[1050, 649],
-						[2200, 1290],
-						[3650, 2090],
-						[5500, 3090],
-						[11000, 5990],
+						[475, 21.49],
+						[1000, 42.99],
+						[2050, 85.49],
+						[3650, 149.99],
+						[5350, 213.99],
+						[11000, 427.99],
 					],
+					locale: "pl-PL",
+					currency: "PLN",
+				},
+				{
+					country: "Romania*",
+					prices: [
+						[575, 24.99],
+						[1000, 49.99],
+						[2050, 99.99],
+						[3650, 174.49],
+						[5350, 248.99],
+						[11000, 497.99],
+					],
+					locale: "ro-RO",
+					currency: "RON",
+				},
+				{
+					country: "Russia",
+					prices: [
+						[475, 490],
+						[1000, 980],
+						[2050, 1975],
+						[3650, 3450],
+						[5350, 4950],
+						[11000, 9900],
+					],
+					locale: "ru-RU",
 					currency: "RUB",
 				},
-				// Türkiye
-				region10: {
+				{
+					country: "Singapore",
 					prices: [
-						[115, 17],
-						[485, 70],
-						[925, 130],
-						[1850, 250],
-						[3400, 450],
-						[5550, 700],
+						[575, 6.98],
+						[975, 12.98],
+						[1975, 25.98],
+						[3550, 45.98],
+						[7000, 88.98],
+						[10500, 128.98],
 					],
+					locale: "zh-SG",
+					currency: "SGD",
+				},
+				{
+					country: "Türkiye",
+					prices: [
+						[475, 155],
+						[1000, 310],
+						[2050, 620],
+						[3650, 1085],
+						[5350, 1550],
+						[11000, 3100],
+					],
+					locale: "tr-TR",
 					currency: "TRY",
 				},
-				// Ukraine
-				region11: {
+				{
+					country: "Ukraine",
 					prices: [
 						[420, 80],
-						[880, 160],
-						[1825, 320],
-						[3225, 560],
-						[4650, 800],
-						[9650, 1600],
+						[920, 160],
+						[1970, 320],
+						[3510, 560],
+						[5100, 800],
+						[10900, 1600],
 					],
+					locale: "uk-UA",
 					currency: "UAH",
 				},
-				// United Kingdom
-				region12: {
+				{
+					country: "United Kingdom",
 					prices: [
 						[500, 4.5],
 						[1050, 9],
@@ -831,10 +918,11 @@
 						[5500, 45],
 						[11500, 90],
 					],
+					locale: "en-GB",
 					currency: "GBP",
 				},
-				// United States
-				region13: {
+				{
+					country: "United States",
 					prices: [
 						[475, 4.99],
 						[1000, 9.99],
@@ -843,24 +931,49 @@
 						[5350, 49.99],
 						[11000, 99.99],
 					],
+					locale: "en-US",
 					currency: "USD",
 				},
-			};
+				{
+					country: "Vietnam",
+					prices: [
+						[255, 50000],
+						[535, 100000],
+						[1090, 200000],
+						[2860, 500000],
+						[6160, 1000000],
+						[12660, 2000000],
+					],
+					locale: "vi-VN",
+					currency: "VND",
+				},
+			];
+
+			// stolen straight from https://stackoverflow.com/questions/50650503/get-the-currency-symbol-for-a-locale
+			const getCurrencySymbol = (locale, currency) =>
+				(0).toLocaleString(locale, { style: "currency", currency, minimumFractionDigits: 0, maximumFractionDigits: 0 }).replace(/\d/g, "").trim();
+
+			// automatically add regions to list
+			for (let i = 0; i < pointsData.length; i++) {
+				let regionEntry = document.createElement("div");
+				regionEntry.tabIndex = 0;
+				regionEntry.id = `region${i}`;
+				regionEntry.innerHTML = `${pointsData[i].country.replace("*", `<span class="warning">*</span>`)} <span class="currency">(${getCurrencySymbol(pointsData[i].locale, pointsData[i].currency)})</span>`;
+				regionSelectMenu.appendChild(regionEntry);
+			}
 
 			// set total (compare)
 			function setCompareTotalPoints(element, total) {
-				element.innerHTML = total + " VP";
+				element.innerHTML = `${total} VP`;
 			}
 			function setCompareTotalPrice(element, total) {
-				element.innerHTML = `(${total.toLocaleString("en-CA", {
-					style: "currency",
-					currency: pointsData[regionNumber].currency,
-				})})`;
+				if (regionNumber < 0 || regionNumber > pointsData.length - 1) return;
+				element.innerHTML = `(${new Intl.NumberFormat(pointsData[regionNumber].locale, { style: "currency", currency: pointsData[regionNumber].currency }).format(total)})`;
 			}
 
 			// update compare
 			function updateCompare(compareNumber) {
-				if (regionNumber == "") return;
+				if (regionNumber < 0 || regionNumber > pointsData.length - 1) return;
 
 				let totalPoints = 0;
 				let totalPrice = 0;
@@ -897,12 +1010,15 @@
 			function resetAllButton() {
 				window.location.reload();
 			}
+			function helpButton() {
+				window.location.href = "../contact.html";
+			}
 			function setRegion(regionID) {
 				regionNumber = regionID;
 				closeMenu();
 
-				regionSelectButton.innerHTML = '<i class="fa-solid fa-location-dot"></i>' + document.querySelector(`#${regionNumber}`).innerHTML;
-				window.history.pushState({}, "", `?x=${regionNumber}`);
+				regionSelectButton.innerHTML = '<i class="fa-solid fa-location-dot"></i>' + document.querySelector(`#region${regionNumber}`).innerHTML;
+				window.history.pushState({}, "", `?region=${regionNumber}`);
 
 				for (let i = 0; i < 6; i++) {
 					points[i] = pointsData[regionNumber].prices[i][0];
@@ -989,11 +1105,9 @@
 				let timesPointsReduced = Math.floor(inputPoints / pointsData[regionNumber].prices[5][0]);
 				let reducedPoints = inputPoints % pointsData[regionNumber].prices[5][0];
 
-				//console.log("inputPoints:", inputPoints, "timesPointsReduced:", timesPointsReduced, "reducedPoints:", reducedPoints);
-
-				var bestAmounts = [0, 0, 0, 0, 0, 0];
-				var bestPoints = 0;
-				var bestPrice = Infinity;
+				let bestAmounts = [0, 0, 0, 0, 0, 0];
+				let bestPoints = 0;
+				let bestPrice = Infinity;
 
 				for (let a = 0; a <= 3; a++) {
 					for (let b = 0; b <= 3; b++) {
@@ -1024,8 +1138,6 @@
 												bestAmounts = [a, b, c, d, e, f];
 												bestPoints = allPoints;
 												bestPrice = allPrice;
-
-												//console.log("bestAmounts:", bestAmounts, "bestPoints:", bestPoints, "bestPrice:", bestPrice);
 											}
 										}
 									}
@@ -1045,6 +1157,8 @@
 				setCompareTotalPrice(document.querySelector("#calc-price"), bestPrice);
 			}
 			function handleCalcXmark() {
+				if (regionNumber < 0 || regionNumber > pointsData.length - 1) return;
+
 				inputElement.value = "";
 				document.querySelector("#calc-alert").innerHTML = "";
 
@@ -1074,11 +1188,14 @@
 			document.querySelector("#reset-all-button").addEventListener("click", (e) => {
 				resetAllButton();
 			});
+			document.querySelector("#help-button").addEventListener("click", (e) => {
+				helpButton();
+			});
 
 			// regions (click or tap)
 			document.querySelectorAll("#region-select-menu div:not(#region-select-menu div:has(i))").forEach((element) => {
 				element.addEventListener("click", (e) => {
-					setRegion(element.id);
+					setRegion(element.id.substring(6));
 					document.querySelector("#calc-input").focus();
 				});
 			});
@@ -1134,10 +1251,13 @@
 					if (document.activeElement == document.querySelector("#reset-all-button")) {
 						resetAllButton();
 					}
+					if (document.activeElement == document.querySelector("#help-button")) {
+						helpButton();
+					}
 
 					document.querySelectorAll("#region-select-menu div:not(#region-select-menu div:has(i))").forEach((element) => {
 						if (element == document.activeElement) {
-							setRegion(document.activeElement.id);
+							setRegion(document.activeElement.id.substring(6));
 							document.querySelector("#calc-input").focus();
 						}
 					});
@@ -1176,11 +1296,12 @@
 			// get URL data
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
-			const region = item.get("x");
+			const region = parseInt(item.get("region"));
 
-			if (/^region([123456789]|1[0123])$/.test(region)) {
-				// must be updated if more regions are added
-				setRegion(region);
+			if (!isNaN(region)) {
+				if (region >= 0 && region < pointsData.length) {
+					setRegion(region);
+				}
 			}
 		</script>
 
