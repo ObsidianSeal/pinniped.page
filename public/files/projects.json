@@ -648,11 +648,11 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["January 23rd", "finally given a complete name AND MUCH MORE!!!"],
+			"updated": ["February 2nd", "v2.5.1 > > > Singapore issue mention, Romania fix, maximum manual quantity upped to 100"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"version": "2.5.0",
+		"version": "2.5.1",
 		"featured": 1
 	},
 	"WandStuff": {

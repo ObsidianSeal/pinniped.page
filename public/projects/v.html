@@ -442,7 +442,7 @@
 
 	<body class="fa-width-auto">
 		<h1 class="c1">VALORANT Points calculator</h1>
-		<p class="m5">a project by <a href="../about.html" class="u1" title="about Obsidian_Seal">Obsidian_Seal</a> • v2.5.0 • 2026/01/23</p>
+		<p class="m5">a project by <a href="../about.html" class="u1" title="about Obsidian_Seal">Obsidian_Seal</a> • v2.5.1 • 2026/02/02</p>
 
 		<div class="h50"></div>
 
@@ -650,7 +650,7 @@
 
 		<p style="color: #00000064">
 			<b>please note:</b><br />- taxes and/or fees may apply<br />- this page only performs calculations with each region&rsquo;s debit/credit card prices<br />- some
-			regions (marked with an asterisk) may have outdated prices
+			regions (marked with an asterisk) may have outdated prices<br />- do not use the automatic calculator for Singapore, the pricing scheme is unusual
 		</p>
 
 		<script>
@@ -843,7 +843,7 @@
 				{
 					country: "Romania*",
 					prices: [
-						[575, 24.99],
+						[475, 24.99],
 						[1000, 49.99],
 						[2050, 99.99],
 						[3650, 174.49],
@@ -1042,8 +1042,12 @@
 				});
 				setCompareTotalPrice(document.querySelector("#calc-price"), 0);
 
+				console.log(`POINTS PER UNIT CURRENCY\n> > > ${pointsData[regionNumber].country}`);
+
 				for (let i = 0; i < 6; i++) {
 					prices[i] = pointsData[regionNumber].prices[i][1];
+
+					console.log(`${i} | ${points[i] / prices[i]}`);
 				}
 
 				for (let i = 0; i < 3; i++) {
@@ -1081,7 +1085,7 @@
 				let compareNumber = element.id.substring(4, 5) - 1;
 				let amountNumber = element.id.substring(5) - 1;
 
-				if (amounts[compareNumber][amountNumber] < 10) {
+				if (amounts[compareNumber][amountNumber] < 100) {
 					amounts[compareNumber][amountNumber]++;
 				}
 
