@@ -33,8 +33,8 @@ a.link,
 a.link-2,
 a.link-3 {
 	transition:
-		text-decoration-color 0.5s,
-		background-color 0.5s;
+		text-decoration-color 500ms,
+		background-color 500ms;
 	text-decoration: underline;
 	text-decoration-thickness: 3px;
 }
@@ -330,7 +330,7 @@ ul {
 }
 
 .hoverable-title {
-	transition: background-position 1s;
+	transition: background-position 500ms;
 }
 
 .hoverable-title:hover,
@@ -804,7 +804,7 @@ ul {
 	border-top: 3px solid transparent;
 	border-bottom: 3px solid transparent;
 
-	transition: border-bottom-color 0.5s;
+	transition: border-bottom-color 500ms;
 }
 
 .new-button:hover > div,
@@ -875,7 +875,7 @@ ul {
 
 	background-color: #292f367f;
 	transition:
-		background-color 0.5s,
+		background-color 500ms,
 		opacity 250ms;
 }
 
@@ -1284,7 +1284,7 @@ ul {
 }
 
 #loading-dot-1 {
-	animation: loading-dot-1 2.5s infinite 0.5s;
+	animation: loading-dot-1 2500ms infinite 500ms;
 }
 
 @keyframes loading-dot-1 {
@@ -1309,7 +1309,7 @@ ul {
 }
 
 #loading-dot-2 {
-	animation: loading-dot-2 2.5s infinite 0.5s;
+	animation: loading-dot-2 2500ms infinite 500ms;
 }
 
 @keyframes loading-dot-2 {
@@ -1334,7 +1334,7 @@ ul {
 }
 
 #loading-dot-3 {
-	animation: loading-dot-3 2.5s infinite 0.5s;
+	animation: loading-dot-3 2500ms infinite 500ms;
 }
 
 @keyframes loading-dot-3 {
