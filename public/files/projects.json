@@ -237,7 +237,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.6.0",
-		"featured": 2
+		"featured": 0
 	},
 	"Finite Craft - help!": {
 		"basic": true,
@@ -573,7 +573,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.9.1",
-		"featured": 0
+		"featured": 2
 	},
 	"Think Four - help!": {
 		"basic": true,

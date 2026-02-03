@@ -32,8 +32,11 @@ a {
 a.link,
 a.link-2,
 a.link-3 {
-	transition: text-decoration-color 0.5s, background-color 0.5s;
+	transition:
+		text-decoration-color 0.5s,
+		background-color 0.5s;
 	text-decoration: underline;
+	text-decoration-thickness: 3px;
 }
 
 a.link:hover,
@@ -871,7 +874,9 @@ ul {
 	font-size: 24px;
 
 	background-color: #292f367f;
-	transition: background-color 0.5s, opacity 250ms;
+	transition:
+		background-color 0.5s,
+		opacity 250ms;
 }
 
 #to_top_button:hover {
@@ -894,7 +899,10 @@ ul {
 	margin: 20px 0;
 	border: 2px solid #292f367f;
 	border-radius: 0;
-	transition: border-color 250ms, --contact-form-scrollbar-border-colour 250ms, --contact-form-scrollbar-thumb-colour 250ms;
+	transition:
+		border-color 250ms,
+		--contact-form-scrollbar-border-colour 250ms,
+		--contact-form-scrollbar-thumb-colour 250ms;
 	padding: 5px;
 
 	background-color: #ffffee;
