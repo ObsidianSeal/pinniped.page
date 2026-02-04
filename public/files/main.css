@@ -26,17 +26,15 @@ body {
 a {
 	color: #292f36;
 	text-decoration: none;
-	text-decoration-skip-ink: none;
 }
 
 a.link,
 a.link-2,
 a.link-3 {
-	transition:
-		text-decoration-color 500ms,
-		background-color 500ms;
-	text-decoration: underline;
-	text-decoration-thickness: 3px;
+	background-position: 0 1.2em;
+	background-repeat: repeat-x;
+	display: inline;
+	transition: background-position 500ms;
 }
 
 a.link:hover,
@@ -45,34 +43,19 @@ a.link-3:hover,
 a.link:focus,
 a.link-2:focus,
 a.link-3:focus {
-	text-decoration-color: transparent;
+	background-position: 0 0em;
 }
 
 a.link {
-	text-decoration-color: #4ecdc47f;
-}
-
-a.link:hover,
-a.link:focus {
-	background-color: #4ecdc47f;
+	background-image: linear-gradient(90deg, #4ecdc47f, #4ecdc47f);
 }
 
 a.link-2 {
-	text-decoration-color: #ff6b6b7f;
-}
-
-a.link-2:hover,
-a.link-2:focus {
-	background-color: #ff6b6b7f;
+	background-image: linear-gradient(90deg, #ff6b6b7f, #ff6b6b7f);
 }
 
 a.link-3 {
-	text-decoration-color: #ffe66d7f;
-}
-
-a.link-3:hover,
-a.link-3:focus {
-	background-color: #ffe66d7f;
+	background-image: linear-gradient(90deg, #ffe66d7f, #ffe66d7f);
 }
 
 h1,
@@ -734,48 +717,23 @@ ul {
 }
 
 .light-grey a {
-	text-decoration-color: #ffffee;
+	background-image: linear-gradient(90deg, #ffffee, #ffffee);
 }
 
 .dark-grey a {
-	text-decoration-color: #d7d8cb;
+	background-image: linear-gradient(90deg, #d7d8cb, #d7d8cb);
 }
 
 .red a {
-	text-decoration-color: #ff6b6b;
+	background-image: linear-gradient(90deg, #ff6b6b, #ff6b6b);
 }
 
 .yellow a {
-	text-decoration-color: #ffe66d;
+	background-image: linear-gradient(90deg, #ffe66d, #ffe66d);
 }
 
 .blue a {
-	text-decoration-color: #4ecdc4;
-}
-
-.light-grey a:hover,
-.light-grey a:focus {
-	background-color: #ffffee;
-}
-
-.dark-grey a:hover,
-.dark-grey a:focus {
-	background-color: #d7d8cb;
-}
-
-.red a:hover,
-.red a:focus {
-	background-color: #ff6b6b;
-}
-
-.yellow a:hover,
-.yellow a:focus {
-	background-color: #ffe66d;
-}
-
-.blue a:hover,
-.blue a:focus {
-	background-color: #4ecdc4;
+	background-image: linear-gradient(90deg, #4ecdc4, #4ecdc4);
 }
 
 .dark-grey-underline {
