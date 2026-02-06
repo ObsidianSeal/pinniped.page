@@ -3,6 +3,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700");
 
+/* VARIABLES */
+
+:root {
+	--blog-archive-list-marker-width: 60px;
+}
+
 /* MAIN STYLES */
 
 body {
@@ -80,7 +86,8 @@ h2 {
 }
 
 h3,
-.box a {
+.box a,
+.on-this-page b {
 	font-size: 48px;
 }
 
@@ -441,7 +448,7 @@ ul {
 .blog-archive:not(.blog-archive *) {
 	margin-top: 10px;
 	display: grid;
-	grid-template-columns: 60px auto;
+	grid-template-columns: var(--blog-archive-list-marker-width) auto;
 }
 
 .blog-archive span:not(.blog-archive-list-item, .blog-archive-list-marker, .new, .updated, .beta, .tag, .tooltip),
@@ -794,6 +801,11 @@ ul {
 	word-wrap: break-word;
 }
 
+.on-this-page {
+	border: 2px solid #292f367f;
+	padding: 10px 20px 20px;
+}
+
 #navbar-mobile {
 	width: 100%;
 	height: calc(100vh - 60px);
@@ -933,7 +945,8 @@ ul {
 	}
 
 	h3,
-	.box a {
+	.box a,
+	.on-this-page b {
 		font-size: 32px;
 	}
 
@@ -1083,6 +1096,10 @@ ul {
 }
 
 @media all and (max-width: 400px) {
+	:root {
+		--blog-archive-list-marker-width: 40px;
+	}
+
 	p,
 	b,
 	ol,
@@ -1105,7 +1122,7 @@ ul {
 	}
 
 	.blog-archive:not(.blog-archive *) {
-		grid-template-columns: 40px auto;
+		grid-template-columns: var(--blog-archive-list-marker-width) auto;
 	}
 
 	.project-top-link:not(.project-top-link *) {
