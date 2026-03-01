@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="files/scrollbar.css" />
 		<link rel="icon" href="images/icon.png" />
 
+		<script src="files/console-styles.js"></script>
 		<script src="files/menu.js"></script>
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
@@ -251,9 +252,12 @@
 					</div>
 
 					<div class="highlighted-box light-grey">
-						<i class="fa-solid fa-feather-pointed"></i>
+						<i class="fa-solid fa-triangle-person-digging"></i>
 
-						<p class="text"><b>December 14th, 2025 @ 19:52</b><br />new <a href="about.html" class="link">About page</a> section coming soon</p>
+						<p class="text">
+							<b>March 1st, 2026 @ 01:35</b><br />updates to the
+							<a href="about.html#how-it-s-made" class="link">About page&rsquo;s &ldquo;how it&rsquo;s made&rdquo; section</a> are coming soon
+						</p>
 					</div>
 
 					<div class="status-box">
@@ -292,6 +296,12 @@
 							<div></div>
 							<i class="fa-sharp fa-solid fa-triangle"></i>
 						</div>
+					</div>
+
+					<div class="highlighted-box blue">
+						<i class="fa-solid fa-train-tram"></i>
+
+						<p class="text"><b>March 1st, 2026 @ 01:37</b><br />fixed /ion failing to retrieve data</p>
 					</div>
 
 					<div class="highlighted-box blue">
@@ -1049,7 +1059,7 @@
 				i++;
 			});
 
-			console.log(`${workingTotal}/${statuses.length} = ~${Math.round((workingTotal / statuses.length) * 10000) / 100}%`);
+			console.log(`%cINFO:`, infoStyle, `${workingTotal}/${statuses.length} = ~${Math.round((workingTotal / statuses.length) * 10000) / 100}%`);
 
 			let percentWorking = Math.round((workingTotal / statuses.length) * 10000) / 100;
 			let percentString = `${percentWorking}`;

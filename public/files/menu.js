@@ -1,3 +1,5 @@
+"use strict";
+
 function menu() {
 	var x = document.getElementById("navbar-mobile");
 	var icon1 = document.getElementById("menu-open");

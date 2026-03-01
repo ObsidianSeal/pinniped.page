@@ -1,3 +1,5 @@
+"use strict";
+
 const toTopButton = document.createElement("div");
 toTopButton.id = "to_top_button";
 toTopButton.style = "pointer-events: none; opacity: 0";

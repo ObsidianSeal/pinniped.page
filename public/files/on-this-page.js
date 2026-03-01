@@ -1,3 +1,5 @@
+"use strict";
+
 // determine link colour (to be applied through a class)
 let linkClass = "link-3";
 if (location.href.includes("/projects/")) linkClass = "link";

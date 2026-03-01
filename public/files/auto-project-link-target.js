@@ -1,3 +1,5 @@
+"use strict";
+
 // get depth
 let depth = location.href.replaceAll(/[^\/]+/g, "").length;
 if (location.href.includes("pinniped.page")) depth -= 2;
@@ -29,7 +31,7 @@ try {
 		}
 	}
 } catch (error) {
-	console.error(error); // ruh roh
+	console.error(`%cERROR:`, errorStyle, error); // ruh roh
 }
 
 // test & modify all links

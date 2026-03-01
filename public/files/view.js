@@ -1,3 +1,5 @@
+"use strict";
+
 const firebaseConfig = {
 	apiKey: "AIzaSyAigBAgn7Uhybip_m3P508DIpybb2qdI5g",
 	authDomain: "the-pinniped-page.firebaseapp.com",
