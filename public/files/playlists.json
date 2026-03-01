@@ -1,5 +1,33 @@
 {
 	"music": {
+		"🎵 - March 2026": {
+			"link": "PLTKwBiSgGBsjYOVrXJaK07C_uDT9D6Jfu",
+			"length": [20, "1:13:07"],
+			"added": "2026/03/01",
+			"updated": "2026/03/01",
+			"tracks": [
+				["The Great Divide", "Noah Kahan", "The Great Divide", 2026],
+				["Homewrecker", "sombr", "Homewrecker", 2026],
+				["Grapejuice", "Harry Styles", "Harry&rsquo;s House", 2022],
+				["Bruise", "BETWEEN FRIENDS", "Bruise", 2023],
+				["suburban wonderland", "BETWEEN FRIENDS", "suburban wonderland", 2017],
+				["My Old Ways", "Tame Impala", "Deadbeat", 2025],
+				["Dracula", "Tame Impala", "Deadbeat", 2025],
+				["Must Be Love", "Niall Horan", "The Show", 2023],
+				["Heaven", "Niall Horan", "The Show", 2023],
+				["Sally, When The Wine Runs Out", "ROLE MODEL", "Kansas Anymore (The Longest Goodbye)", 2025],
+				["Eleven Eleven", "Conan Gray", "Wishbone", 2025],
+				["My World", "Conan Gray", "Wishbone", 2025],
+				["People Watching", "Conan Gray", "Superache", 2022],
+				["Technotude", "Levi.Sct", "Technotude", 2025],
+				["Romeo", "Conan Gray", "Wishbone", 2025],
+				["Connell", "Conan Gray", "Wishbone", 2025],
+				["Unicorn", "Em Beihold", "Tales of a Failed Shapeshifter", 2026],
+				["Messy", "Lola Young", "This Wasn&rsquo;t Meant For You Anyway", 2024],
+				["dime", "sombr", "I Barely Know Her", 2025],
+				["we never dated", "sombr", "I Barely Know Her", 2025]
+			]
+		},
 		"🎵 - February 2026": {
 			"link": "PLTKwBiSgGBsj8owsXU34hk_9VMDPGqOUx",
 			"length": [20, "1:03:24"],
@@ -1161,6 +1189,7 @@
 		}
 	},
 	"monthly": [
+		"🎵 - March 2026",
 		"🎵 - February 2026",
 		"🎵 - January 2026",
 		"🎵 - December 2025",

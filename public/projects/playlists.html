@@ -835,10 +835,10 @@
 						.replaceAll(
 							" ",
 							"-",
-						)}.png" class="cover" style="display: none" /></h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — <span title="added ${formatDate(added)} & updated ${formatDate(
+						)}.png" class="cover" style="display: none" /></h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info"><span title="added ${formatDate(added)} & updated ${formatDate(
 						lastUpdated,
-					)}">${added} & ${lastUpdated}</span></div></div>`;
-				// add " — group playlist"
+					)}">${added} → ${lastUpdated}</span> → ${totalTracks} TRACKS → ${totalTime}</div></div>`;
+				// add "group playlist"
 				else if (title == "LETHAL COMPANY")
 					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../images/playlists/${title
 						.replaceAll("🎵 - ", "")
@@ -846,9 +846,9 @@
 						.replaceAll(
 							" ",
 							"-",
-						)}.png" class="cover" style="display: none" /></h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — <span title="added ${formatDate(added)} & updated ${formatDate(
+						)}.png" class="cover" style="display: none" /></h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info"><span title="added ${formatDate(added)} & updated ${formatDate(
 						lastUpdated,
-					)}">${added} & ${lastUpdated}</span> — group playlist</div></div>`;
+					)}">${added} → ${lastUpdated}</span> (group playlist) → ${totalTracks} TRACKS → ${totalTime}</div></div>`;
 				// the rest of 'em
 				else
 					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../images/playlists/${title
@@ -857,9 +857,9 @@
 						.replaceAll(
 							" ",
 							"-",
-						)}.png" class="cover" style="display: none" /></h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info">${totalTracks} TRACKS — ${totalTime} — <span title="added ${formatDate(added)} & updated ${formatDate(
+						)}.png" class="cover" style="display: none" /></h2><div class="playlist-title-link-container"><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a><br /><a class="highlight-underline c1" href="${rateLink}"  title="rate &ldquo;${title}&rdquo; on &ldquo;10/10 would recommend&rdquo; [GENERATED LINK]">rate <i class="fa-solid fa-star fa-xs"></i></a></div></div><div class="playlist-info"><span title="added ${formatDate(added)} & updated ${formatDate(
 						lastUpdated,
-					)}">${added} & ${lastUpdated}</span></div></div>`;
+					)}">${added} → ${lastUpdated}</span> → ${totalTracks} TRACKS → ${totalTime}</div></div>`;
 
 				document.querySelector(".playlists").appendChild(playlistContainer);
 			}
@@ -1049,10 +1049,12 @@
 					if (tracksElement.classList.contains("hide") && user) expand(conflicts[i][0]);
 
 					let trackElement = tracksElement.children[conflicts[i][1]].children[1];
-					trackElement.classList.remove("highlight", "c4");
-					trackElement.classList.add("highlight", "c2");
+					if (user) {
+						trackElement.classList.remove("highlight", "c4");
+						trackElement.classList.add("highlight", "c2");
 
-					if (i == conflictIndex && user) trackElement.scrollIntoView({ behavior: "smooth", block: "center" });
+						if (i == conflictIndex) trackElement.scrollIntoView({ behavior: "smooth", block: "center" });
+					}
 				}
 				if (user) {
 					conflictIndex++;
@@ -1141,7 +1143,7 @@
 
 			// 'data with a link' utility
 			function showDataWithPlaylistLink(container, data, playlistName) {
-				container.innerHTML = `${data} — &ldquo;<a class="highlight-underline c5" tabindex="0" title="click to scroll to &ldquo;${playlistName}&rdquo;">${playlistName}</a>&rdquo;`;
+				container.innerHTML = `${data} → &ldquo;<a class="highlight-underline c5" tabindex="0" title="click to scroll to &ldquo;${playlistName}&rdquo;">${playlistName}</a>&rdquo;`;
 				container.children[0].addEventListener("click", () => {
 					document.querySelectorAll(".playlist")[Object.keys(playlists).indexOf(playlistName)].scrollIntoView({ behavior: "smooth" });
 				});
@@ -1230,7 +1232,7 @@
 							datum.innerHTML +
 							`<span class="chart-bar" style="width: calc(${(value / artistNumbersArray[0][0]) * 100}% - 10px); min-width: calc(${
 								(value / artistNumbersArray[0][0]) * 100
-							}% - 10px)" title="${artistName} — ${value}">${artistName} — ${value}</span><br />`;
+							}% - 10px)" title="${artistName} — ${value}">${artistName} → ${value}</span><br />`;
 					}
 				}
 				// "repeat artists"
@@ -1271,7 +1273,7 @@
 							datum.innerHTML +
 							`<span class="chart-bar" style="width: calc(${(value / albumNumbersArray[0][0]) * 100}% - 10px); min-width: calc(${
 								(value / albumNumbersArray[0][0]) * 100
-							}% - 10px)" title="${albumName} — ${value}">${albumName} — ${value}</span><br />`;
+							}% - 10px)" title="${albumName} — ${value}">${albumName} → ${value}</span><br />`;
 					}
 				}
 				// "repeat albums"
@@ -1391,14 +1393,14 @@
 				// "most recently added"
 				if (dataIndex == 18) {
 					let addedDateStings = [];
-					for (let playlist of Object.keys(playlists)) addedDateStings.push([playlists[playlist].added, playlist]);
+					for (let playlist of Object.keys(playlists)) if (monthlyPlaylistNames.includes(playlist)) addedDateStings.push([playlists[playlist].added, playlist]);
 					addedDateStings.sort();
 					showDataWithPlaylistLink(datum, formatDate(addedDateStings[addedDateStings.length - 1][0]), addedDateStings[addedDateStings.length - 1][1]);
 				}
 				// "most recently updated"
 				if (dataIndex == 19) {
 					let updatedDateStings = [];
-					for (let playlist of Object.keys(playlists)) updatedDateStings.push([playlists[playlist].updated, playlist]);
+					for (let playlist of Object.keys(playlists)) if (monthlyPlaylistNames.includes(playlist)) updatedDateStings.push([playlists[playlist].updated, playlist]);
 					updatedDateStings.sort();
 					showDataWithPlaylistLink(datum, formatDate(updatedDateStings[updatedDateStings.length - 1][0]), updatedDateStings[updatedDateStings.length - 1][1]);
 				}
