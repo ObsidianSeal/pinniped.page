@@ -13,7 +13,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 0
+		"featured": 7
 	},
 	"BezierCurves": {
 		"basic": false,
@@ -45,7 +45,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.1.2",
-		"featured": 3
+		"featured": 5
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -61,7 +61,7 @@
 			"tag": ["", ""]
 		},
 		"version": "2.3.3",
-		"featured": 0
+		"featured": 6
 	},
 	"Chess": {
 		"basic": true,
@@ -221,7 +221,7 @@
 			"tag": ["", ""]
 		},
 		"version": "2.1.2",
-		"featured": 0
+		"featured": 3
 	},
 	"Finite Craft": {
 		"basic": false,
@@ -412,8 +412,8 @@
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
-		"version": "1.4.4",
-		"featured": 5
+		"version": "1.5.3",
+		"featured": 8
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -445,7 +445,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 4
+		"featured": 2
 	},
 	"progress": {
 		"basic": false,
@@ -557,7 +557,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 6
+		"featured": 9
 	},
 	"Think Four": {
 		"basic": false,
@@ -573,7 +573,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.9.1",
-		"featured": 2
+		"featured": 0
 	},
 	"Think Four - help!": {
 		"basic": true,
@@ -616,12 +616,12 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["December 9th", "TTC lines 5 and 6"],
+			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 7
+		"featured": 0
 	},
 	"Typewriter Simulator": {
 		"basic": false,
@@ -653,7 +653,7 @@
 			"tag": ["", ""]
 		},
 		"version": "2.5.1",
-		"featured": 1
+		"featured": 4
 	},
 	"WandStuff": {
 		"basic": false,
@@ -685,7 +685,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.6.1",
-		"featured": 0
+		"featured": 1
 	},
 	"Words": {
 		"basic": false,
