@@ -245,18 +245,6 @@
 						<p class="text"><b>February 27th, 2026 @ 13:44</b><br />Firefox discrepancies with scrollbars and text decorations (underlines)</p>
 					</div>
 
-					<div class="highlighted-box blue">
-						<i class="fa-solid fa-arrow-u-turn-right-up"></i>
-
-						<p class="text"><b>March 1st, 2026 @ 04:24</b><br />fixed the message below (even better than I expected!)</p>
-					</div>
-
-					<div class="highlighted-box yellow">
-						<i class="fa-solid fa-up-from-dotted-line"></i>
-
-						<p class="text"><b>February 27th, 2026 @ 13:43</b><br />sometimes the automatic scroll up on load with same-page link doesn&rsquo;t work</p>
-					</div>
-
 					<div class="highlighted-box light-grey">
 						<i class="fa-solid fa-triangle-person-digging"></i>
 
@@ -305,21 +293,11 @@
 					</div>
 
 					<div class="highlighted-box blue">
-						<i class="fa-solid fa-train-tram"></i>
+						<i class="fa-solid fa-sd-card"></i>
 
-						<p class="text"><b>March 1st, 2026 @ 01:37</b><br />fixed /ion failing to retrieve data</p>
-					</div>
-
-					<div class="highlighted-box blue">
-						<i class="fa-solid fa-utility-pole-double"></i>
-
-						<p class="text"><b>December 15th, 2025 @ 12:16</b><br />fixed</p>
-					</div>
-
-					<div class="highlighted-box dark-grey">
-						<i class="fa-solid fa-phone-missed"></i>
-
-						<p class="text"><b>January 14th, 2026 @ 23:57</b><br />can&rsquo;t connect to my server for some reason; bots are offline</p>
+						<p class="text">
+							<b>March 28th, 2026 @ 16:27</b><br />All bots may go offline again at any time due to segmentation fault. For now they seem to be working.
+						</p>
 					</div>
 
 					<hr />
@@ -477,18 +455,6 @@
 						<i class="fa-solid fa-notdef"></i>
 
 						<p class="text"><b>February 27th, 2026 @ 13:43</b><br />styles without icon should be notdef (not automatic in firefox) same with info in top left</p>
-					</div>
-
-					<div class="highlighted-box blue">
-						<i class="fa-solid fa-icons"></i>
-
-						<p class="text"><b>February 27th, 2026 @ 13:41</b><br />LADIES AND GENTLEMEN<br />WE GOT &rsquo;EM<br />ALL OF THE ICONS</p>
-					</div>
-
-					<div class="highlighted-box yellow">
-						<i class="fa-solid fa-gpu"></i>
-
-						<p class="text"><b>February 21st, 2026 @ 22:13</b><br />missing some icons?<br />too many icons are marked as free?<br />check the console</p>
 					</div>
 
 					<div class="status-box">
@@ -931,54 +897,6 @@
 
 					<div class="status-box">
 						<div class="status-text">
-							<b id="exaroton-(Minecraft-server)"><a href="https://exaroton.com/">exaroton (Minecraft Server)</a></b>
-							<p class="small-text"></p>
-						</div>
-
-						<div class="status-bar">
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<i class="fa-sharp fa-solid fa-triangle"></i>
-						</div>
-					</div>
-
-					<div class="status-box">
-						<div class="status-text">
-							<b id="exaroton-API"><a href="https://developers.exaroton.com/">exaroton API</a></b>
-							<p class="small-text"></p>
-						</div>
-
-						<div class="status-bar">
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<i class="fa-sharp fa-solid fa-triangle"></i>
-						</div>
-					</div>
-
-					<div class="status-box">
-						<div class="status-text">
-							<b id="Discord-API"><a href="https://discord.com/developers">Discord API</a></b>
-							<p class="small-text"></p>
-						</div>
-
-						<div class="status-bar">
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<div></div>
-							<i class="fa-sharp fa-solid fa-triangle"></i>
-						</div>
-					</div>
-
-					<div class="status-box">
-						<div class="status-text">
 							<b id="Purelymail"><a href="https://purelymail.com/">Purelymail</a></b>
 							<p class="small-text"></p>
 						</div>
@@ -994,6 +912,18 @@
 					</div>
 
 					<hr />
+
+					<b class="small-text half-opacity">CORE WEBSITE = all pages in the root folder and anything else that affects the entire website</b>
+					<br />
+					<b class="small-text half-opacity">BASIC PAGE SYSTEM = projects not listed under &ldquo;unique projects&rdquo; and all blog posts</b>
+					<br />
+					<b class="small-text half-opacity">DISCORD BOT = Omega Seal and the services it relies on</b>
+					<br />
+					<br />
+					<b class="small-text half-opacity">*Cloudflare provides a wide array of services, this status entry represents them all</b>
+					<br />
+
+					<hr style="margin-top: 20px" />
 
 					<h3 class="subheading">
 						<div><span class="title title-3">unsatisfied?</span></div>
@@ -1038,7 +968,7 @@
 			const messages = ["PLANNED MAINTENANCE", "UNAVAILABLE", "CRITICAL ISSUES", "MINOR ISSUES", "SEEMS TO BE WORKING"];
 			const positions = [22, 102, 202, 282, 362];
 
-			const statuses = [3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4];
+			const statuses = [3, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4];
 
 			let i = 0;
 			let workingTotal = 0;
