@@ -34,24 +34,42 @@
 				background-color: #ff6b6b;
 			}
 
+			hr {
+				margin: 40px 0;
+			}
+
 			.blog-archive-list-item {
 				max-width: 1140px;
-				display: grid;
-				grid-template-columns: auto 20% 20%;
+				display: flex;
+				flex-wrap: wrap;
 			}
 
-			.blog-archive-list-item a,
-			.blog-archive-list-item span {
-				width: fit-content;
+			.blog-archive-list-item span:last-child {
+				margin-left: auto;
 			}
 
-			.blog-archive-list-item a {
-				display: inline;
-			}
-
-			.blog-archive-list-item span {
-				width: 100%;
+			.blog-archive-list-item span:last-child span {
+				display: inline-block;
+				width: 175px;
 				text-align: right;
+			}
+
+			@media all and (max-width: 470px) {
+				.blog-archive-list-item span:last-child span {
+					width: 100%;
+				}
+			}
+
+			@media all and (max-width: 400px) {
+				.blog-archive-list-item span:last-child span {
+					width: 125px;
+				}
+			}
+
+			@media all and (max-width: 350px) {
+				.blog-archive-list-item span:last-child span {
+					width: 100%;
+				}
 			}
 
 			@media all and (max-width: 270px) {
@@ -96,362 +114,317 @@
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-face-party fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link-2" href="posts/2025-11-28.html">pinniped.page — FIVE YEARS</a>
-							<span>2025/11/28</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2025-11-28.html">pinniped.page — FIVE YEARS</a></span>
+							<span class="half-opacity"><span>2025/11/28</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-globe-stand fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2025-08-06.html">hey so I have this Geoguessr code...</a>
-							<span>2025/08/06</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2025-08-06.html">hey so I have this Geoguessr code...</a></span>
+							<span class="half-opacity"><span>2025/08/06</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-code-commit fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2025-05-14.html">500 commits & BUS DATA</a>
-							<span>2025/05/14</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2025-05-14.html">500 commits & BUS DATA</a></span>
+							<span class="half-opacity"><span>2025/05/14</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-party-horn fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-11-28.html">four years of the pinniped.page</a>
-							<span>2024/11/28</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-11-28.html">four years of the pinniped.page</a></span>
+							<span class="half-opacity"><span>2024/11/28</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-font-case fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-07-16.html">I bought 780+ fonts.</a>
-							<span>2024/07/16</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-07-16.html">I bought 780+ fonts.</a></span>
+							<span class="half-opacity"><span>2024/07/16</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-chart-pie fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-07-08.html">Costs & Limitations</a>
-							<span>2024/07/08</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-07-08.html">Costs & Limitations</a></span>
+							<span class="half-opacity"><span>2024/07/08</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-trowel-bricks fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-05-12.html">some LEGO</a>
-							<span>2024/05/12</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-05-12.html">some LEGO</a></span>
+							<span class="half-opacity"><span>2024/05/12</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-magnifying-glass fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-04-28.html">Even More (Super Cool) Changes</a>
-							<span>2024/04/28</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-04-28.html">Even More (Super Cool) Changes</a></span>
+							<span class="half-opacity"><span>2024/04/28</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<hr />
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-hurricane fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-04-21.html">So. Many. Projects.</a>
-							<span>2024/04/21</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-04-21.html">So. Many. Projects.</a></span>
+							<span class="half-opacity"><span>2024/04/21</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-diagram-project fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-03-08.html">Finite Craft & NYT Games Notation</a>
-							<span>2024/03/08</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-03-08.html">Finite Craft & NYT Games Notation</a></span>
+							<span class="half-opacity"><span>2024/03/08</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-face-smile-wink fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2024-02-18.html">How could I forget about this!</a>
-							<span>2024/02/18</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2024-02-18.html">How could I forget about this!</a></span>
+							<span class="half-opacity"><span>2024/02/18</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-brain fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-12-28.html">3 years, 1 month</a>
-							<span>2023/12/28</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-12-28.html">3 years, 1 month</a></span>
+							<span class="half-opacity"><span>2023/12/28</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-hippo fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-12-21.html">changelog: Fall 2023</a>
-							<span>2023/12/21</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-12-21.html">changelog: Fall 2023</a></span>
+							<span class="half-opacity"><span>2023/12/21</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-otter fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-11-17.html">you make a good point there</a>
-							<span>2023/11/17</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-11-17.html">you make a good point there</a></span>
+							<span class="half-opacity"><span>2023/11/17</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-bus fa-fw"></i></span>
 						<span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-09-04.html">changelog: Summer 2023</a>
-							<span>2023/09/04</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-09-04.html">changelog: Summer 2023</a></span>
+							<span class="half-opacity"><span>2023/09/04</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-couch fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-08-16.html">Mid-Century Modern LEGO Furniture</a>
-							<span>2023/08/16</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-08-16.html">Mid-Century Modern LEGO Furniture</a></span>
+							<span class="half-opacity"><span>2023/08/16</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-xmark fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-04-08.html">Updates, Updates Everywhere</a>
-							<span>2023/04/08</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-04-08.html">Updates, Updates Everywhere</a></span>
+							<span class="half-opacity"><span>2023/04/08</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-chess fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-02-01.html">Major Updates + FEN viewer</a>
-							<span>2023/02/01</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-02-01.html">Major Updates + FEN viewer</a></span>
+							<span class="half-opacity"><span>2023/02/01</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-eye fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-01-21.html">Views & Transitions</a>
-							<span>2023/02/21</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-01-21.html">Views & Transitions</a></span>
+							<span class="half-opacity"><span>2023/02/21</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-star fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-01-14.html">10/10 would recommend | explained</a>
-							<span>2023/01/14</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-01-14.html">10/10 would recommend | explained</a></span>
+							<span class="half-opacity"><span>2023/01/14</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-chess-pawn fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-01-10.html">Chess</a>
-							<span>2023/01/10</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-01-10.html">Chess</a></span>
+							<span class="half-opacity"><span>2023/01/10</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-lightbulb fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-01-09.html">Please stop with the flashing lights.</a>
-							<span>2023/01/09</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-01-09.html">Please stop with the flashing lights.</a></span>
+							<span class="half-opacity"><span>2023/01/09</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-trash-can fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-01-08.html">Why is brown LEGO so bad?</a>
-							<span>2023/01/08</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-01-08.html">Why is brown LEGO so bad?</a></span>
+							<span class="half-opacity"><span>2023/01/08</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-file-video fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2023-01-07.html">Why, DaVinci Resolve, why?</a>
-							<span>2023/01/07</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2023-01-07.html">Why, DaVinci Resolve, why?</a></span>
+							<span class="half-opacity"><span>2023/01/07</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-quote-left fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-12-26.html">I learned how to use a database!</a>
-							<span>2022/12/26</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-12-26.html">I learned how to use a database!</a></span>
+							<span class="half-opacity"><span>2022/12/26</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-icons fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-12-06.html">How to use fa-random</a>
-							<span>2022/12/06</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-12-06.html">How to use fa-random</a></span>
+							<span class="half-opacity"><span>2022/12/06</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-cake-candles fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-11-28.html">2 years already?</a>
-							<span>2022/11/28</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-11-28.html">2 years already?</a></span>
+							<span class="half-opacity"><span>2022/11/28</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-arrow-pointer fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-11-14.html">MouseMaze & Projects+</a>
-							<span>2022/11/14</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-11-14.html">MouseMaze & Projects+</a></span>
+							<span class="half-opacity"><span>2022/11/14</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-wand-magic-sparkles fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-10-24.html">Updates Galore</a>
-							<span>2022/10/24</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-10-24.html">Updates Galore</a></span>
+							<span class="half-opacity"><span>2022/10/24</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-egg fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-10-08.html">Errors & Hexadecimal Numbers</a>
-							<span>2022/10/08</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-10-08.html">Errors & Hexadecimal Numbers</a></span>
+							<span class="half-opacity"><span>2022/10/08</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-skull-crossbones fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-09-05.html">Deathrun+</a>
-							<span>2022/09/05</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-09-05.html">Deathrun+</a></span>
+							<span class="half-opacity"><span>2022/09/05</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-bezier-curve fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-09-02.html">BezierCurves</a>
-							<span>2022/09/02</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-09-02.html">BezierCurves</a></span>
+							<span class="half-opacity"><span>2022/09/02</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-robot fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-07-28.html">The Square + YouTube Video</a>
-							<span>2022/07/28</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-07-28.html">The Square + YouTube Video</a></span>
+							<span class="half-opacity"><span>2022/07/28</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-box-archive fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-07-16.html">Introducing: Blog Archive</a>
-							<span>2022/07/16</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-07-16.html">Introducing: Blog Archive</a></span>
+							<span class="half-opacity"><span>2022/07/16</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-hammer fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-07-15.html">Mjölnir project page!!!</a>
-							<span>2022/07/15</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-07-15.html">Mjölnir project page!!!</a></span>
+							<span class="half-opacity"><span>2022/07/15</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-file-lines fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-07-13.html">I made a crossword.</a>
-							<span>2022/07/13</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-07-13.html">I made a crossword.</a></span>
+							<span class="half-opacity"><span>2022/07/13</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-align-left fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-06-25.html">Properly Underlined Titles</a>
-							<span>2022/06/25</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-06-25.html">Properly Underlined Titles</a></span>
+							<span class="half-opacity"><span>2022/06/25</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-cubes fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-06-11.html">Rubik&rsquo;s Cube Scrambler 2.0</a>
-							<span>2022/06/11</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-06-11.html">Rubik&rsquo;s Cube Scrambler 2.0</a></span>
+							<span class="half-opacity"><span>2022/06/11</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-cube fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-04-24.html">Rubik&rsquo;s Cube Scrambler</a>
-							<span>2022/04/24</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-04-24.html">Rubik&rsquo;s Cube Scrambler</a></span>
+							<span class="half-opacity"><span>2022/04/24</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-mobile-alt fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-02-26.html">Finally, a fully responsive website.</a>
-							<span>2022/02/26</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-02-26.html">Finally, a fully responsive website.</a></span>
+							<span class="half-opacity"><span>2022/02/26</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-pen-alt fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link link-2" href="posts/2022-02-22.html">So...what is the best pen colour?</a>
-							<span>2022/02/22</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-02-22.html">So...what is the best pen colour?</a></span>
+							<span class="half-opacity"><span>2022/02/22</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-cookie-bite fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link-2" href="posts/2022-02-21.html">Cookies = Zero (and some updates)</a>
-							<span>2022/02/21</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-02-21.html">Cookies = Zero (and some updates)</a></span>
+							<span class="half-opacity"><span>2022/02/21</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-palette fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link-2" href="posts/2022-02-19.html">Colour Coded Discord Embeds</a>
-							<span>2022/02/19</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-02-19.html">Colour Coded Discord Embeds</a></span>
+							<span class="half-opacity"><span>2022/02/19</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-list-ol fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link-2" href="posts/2022-02-18.html">Fonts of the Month (all in one)</a>
-							<span>2022/02/18</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-02-18.html">Fonts of the Month (all in one)</a></span>
+							<span class="half-opacity"><span>2022/02/18</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"><i class="fa-solid fa-laptop-code fa-fw"></i></span
 						><span class="blog-archive-list-item">
-							<a class="link-2" href="posts/2022-01-16.html">Welcome to The Pinniped Page 2.0!</a>
-							<span>2022/01/16</span>
-							<span class="view-count">0 views</span>
+							<span><a class="link-2" href="posts/2022-01-16.html">Welcome to The Pinniped Page 2.0!</a></span>
+							<span class="half-opacity"><span>2022/01/16</span><span class="view-count">0 views</span></span>
 						</span>
 					</p>
 

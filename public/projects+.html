@@ -104,17 +104,17 @@
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"></span>
-						<span class="blog-archive-list-item"> <i class="fa-solid fa-newspaper"></i> <span class="blog-archive">= basic page</span> </span>
+						<span class="blog-archive-list-item half-opacity"><i class="fa-solid fa-newspaper"></i> <span class="blog-archive"> = basic page</span></span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"></span>
-						<span class="blog-archive-list-item"> <i class="fa-solid fa-download"></i> <span class="blog-archive">= file download only</span> </span>
+						<span class="blog-archive-list-item half-opacity"><i class="fa-solid fa-download"></i> <span class="blog-archive"> = file download only</span></span>
 					</p>
 					<p class="blog-archive">
 						<span class="blog-archive-list-marker"></span>
-						<span class="blog-archive-list-item">
-							<i class="fa-solid fa-triangle-exclamation"></i> <span class="blog-archive">= has a minimum screen size</span>
-						</span>
+						<span class="blog-archive-list-item half-opacity"
+							><i class="fa-solid fa-triangle-exclamation"></i><span class="blog-archive"> = has a minimum screen size</span></span
+						>
 					</p>
 					<div id="searchable"></div>
 
@@ -146,7 +146,7 @@
 			else link = "download.html?x=" + responseJSON[project].path.substring(6);
 
 			let flag = "";
-			if (responseJSON[project].flag != "") flag = ` <i class="fa-solid fa-${responseJSON[project].flag}"></i>`;
+			if (responseJSON[project].flag != "") flag = ` <i class="fa-solid fa-${responseJSON[project].flag} half-opacity"></i>`;
 			else if (responseJSON[project].basic) flag = ` <i class="fa-solid fa-newspaper half-opacity"></i>`;
 
 			let tags = "";
@@ -157,7 +157,7 @@
 					}</span>${thing.toUpperCase()}</span>`;
 			}
 
-			projectElement.innerHTML = `<span class="blog-archive-list-marker"><i class="fa-solid fa-${responseJSON[project].icon} fa-fw"></i></span><span class="blog-archive-list-item"><a class="link" href="${link}" title="${project}">${project}</a> ${tags} <span class="blog-archive">— ${responseJSON[project].description}</span>${flag}</span>`;
+			projectElement.innerHTML = `<span class="blog-archive-list-marker"><i class="fa-solid fa-${responseJSON[project].icon} fa-fw"></i></span><span class="blog-archive-list-item"><a class="link" href="${link}" title="${project}">${project}</a> ${tags} <span class="blog-archive half-opacity">— ${responseJSON[project].description}</span>${flag}</span>`;
 			document.querySelector("#searchable").appendChild(projectElement);
 		}
 
