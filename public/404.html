@@ -180,12 +180,10 @@
 			if (query.includes("?")) project = query.substring(0, query.indexOf("?"));
 			else if (query.includes("#")) project = query.substring(0, query.indexOf("#"));
 
-			// Discord, sandbox (temporary, again), ttt (temporary)
-			if (query == "discord" || query == "sandbox" || query.startsWith("ttt")) {
+			// Discord server
+			if (query == "discord") {
 				redirected = true;
-				if (query == "discord") window.location.href = "https://discord.gg/yswDu7kywv";
-				if (query == "sandbox") window.location.href = "https://ite.fyi/sandbox";
-				if (query.startsWith("ttt")) window.location.href = "https://pinniped.page/yikes?s=410";
+				window.location.href = "https://discord.gg/yswDu7kywv";
 			}
 
 			// detour: "yikes"
@@ -194,7 +192,7 @@
 				window.location.href = "https://pinniped.page/yikes?s=" + query;
 			}
 
-			// NEW: get list of paths from .JSON file
+			// get list of paths from .JSON file
 			let paths = [];
 			try {
 				const requestURL = "https://pinniped.page/files/projects.json";

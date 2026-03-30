@@ -308,7 +308,7 @@
 				<h1>Omega Seal</h1>
 				<br />
 				<p>
-					v1.6.1 —
+					v1.7.0 —
 					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square/commits/main/" title="GitHub > ObsidianSeal/Omega-Seal-The-Square > Commits"
 						>March 29th, 2026</a
 					>
@@ -418,9 +418,8 @@
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/text-space</h2>
 				<p>
-					description: <span class="dark-grey-bg">Put a space between every character in some text.</span><br />usage:<span class="dark-grey-bg"
-						>/text-space &lt;text&gt;</span
-					><br />parameters:
+					description: <span class="dark-grey-bg">Put a space between every character in some text.</span><br />usage:
+					<span class="dark-grey-bg">/text-space &lt;text&gt;</span><br />parameters:
 				</p>
 				<ul>
 					<li>
@@ -435,9 +434,8 @@
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/embed</h2>
 				<p>
-					description: <span class="dark-grey-bg">Send a custom embed.</span><br />usage:<span class="dark-grey-bg"
-						>/embed &lt;title&gt; &lt;description&gt; [colour]</span
-					><br />parameters:
+					description: <span class="dark-grey-bg">Send a custom embed.</span><br />usage:
+					<span class="dark-grey-bg">/embed &lt;title&gt; &lt;description&gt; [colour]</span><br />parameters:
 				</p>
 				<ul>
 					<li>
@@ -463,9 +461,8 @@
 				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/metar</h2>
 				<p>
-					description: <span class="dark-grey-bg">Prepare for flight with this quick weather report.</span><br />usage:<span class="dark-grey-bg"
-						>/metar &lt;airport&gt;</span
-					><br />parameters:
+					description: <span class="dark-grey-bg">Prepare for flight with this quick weather report.</span><br />usage:
+					<span class="dark-grey-bg">/metar &lt;airport&gt;</span><br />parameters:
 				</p>
 				<ul>
 					<li>
@@ -527,6 +524,27 @@
 					description: <span class="dark-grey-bg">Get the link to Obsidian_Seal&rsquo;s latest monthly playlist.</span><br />usage:
 					<span class="dark-grey-bg">/playlist</span><br />availability: everywhere<br /><br />Sends the shortened link to
 					<a href="playlists.html" title="Playlists">Playlists</a> so people can get to my monthly playlists as fast as possible.
+				</p>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/math</h2>
+				<p>
+					description: <span class="dark-grey-bg">Convert text (LaTeX) into math.</span><br />usage: <span class="dark-grey-bg">/math &lt;latex&gt;</span
+					><br />parameters:
+				</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">latex</b><br />description: <span class="dark-grey-bg">The code you want to be rendered as an image.</span><br />pattern:
+						<span class="dark-grey-bg">/^.+$/</span>
+					</li>
+				</ul>
+				<p>
+					availability: everywhere<br /><br />Renders LaTeX as a PNG with
+					<a href="https://www.npmjs.com/package/mathjax" title="npm > MathJax [EXTERNAL]">MathJax</a> and
+					<a href="https://www.npmjs.com/package/sharp" title="npm > sharp [EXTERNAL]">sharp</a>. There are many ways to learn LaTeX, such as
+					<a href="https://www.overleaf.com/learn" title="Overleaf > Learn LaTeX [EXTERNAL]">Overleaf&rsquo;s &ldquo;Learn LaTeX&rdquo; page</a>.
 				</p>
 			</div>
 
