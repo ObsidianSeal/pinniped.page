@@ -180,9 +180,10 @@
 
 			// get query, don't look past "#" or "?" when validating path
 			const URL = window.location.href;
-			let query = URL.substring(22);
-			if (query.includes("?")) query = query.substring(0, query.indexOf("?"));
-			else if (query.includes("#")) query = query.substring(0, query.indexOf("#"));
+			const query = URL.substring(22);
+			let project = query;
+			if (query.includes("?")) project = query.substring(0, query.indexOf("?"));
+			else if (query.includes("#")) project = query.substring(0, query.indexOf("#"));
 
 			// detour: "yikes"
 			if (Object.keys(codes).includes(query)) goTo("https://pinniped.page/yikes?s=");
@@ -206,7 +207,7 @@
 			}
 
 			// go to a project if path is valid
-			for (let path of paths) if (query == path) goTo("https://pinniped.page/projects/");
+			for (let path of paths) if (project == path) goTo("https://pinniped.page/projects/");
 
 			// else...404
 			if (!redirected) document.querySelector("#main-message").innerHTML = codes[404];
