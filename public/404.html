@@ -91,9 +91,6 @@
 		<script type="module">
 			"use strict";
 
-			let message = "ERROR 404 / Not Found";
-			let redirected = false;
-
 			// HTTP response status codes (from "yikes")
 			let codes = {
 				// info codes
@@ -173,24 +170,22 @@
 				777: "ERROR 777 / Website Too Cool",
 			};
 
-			// get query
-			const URL = window.location.href;
-			const query = URL.substring(22);
-			let project = query; // don't look past "#" or "?" when validating path
-			if (query.includes("?")) project = query.substring(0, query.indexOf("?"));
-			else if (query.includes("#")) project = query.substring(0, query.indexOf("#"));
+			let redirected = false; // assume true 404
 
-			// Discord server
-			if (query == "discord") {
+			// false 404, redirect
+			function goTo(destination) {
 				redirected = true;
-				window.location.href = "https://discord.gg/yswDu7kywv";
+				window.location.href = destination + query;
 			}
+
+			// get query, don't look past "#" or "?" when validating path
+			const URL = window.location.href;
+			let query = URL.substring(22);
+			if (query.includes("?")) query = query.substring(0, query.indexOf("?"));
+			else if (query.includes("#")) query = query.substring(0, query.indexOf("#"));
 
 			// detour: "yikes"
-			if (Object.keys(codes).includes(query)) {
-				redirected = true;
-				window.location.href = "https://pinniped.page/yikes?s=" + query;
-			}
+			if (Object.keys(codes).includes(query)) goTo("https://pinniped.page/yikes?s=");
 
 			// get list of paths from .JSON file
 			let paths = [];
@@ -211,15 +206,10 @@
 			}
 
 			// go to a project if path is valid
-			for (let path of paths) {
-				if (project == path) {
-					redirected = true;
-					window.location.href = "https://pinniped.page/projects/" + query;
-				}
-			}
+			for (let path of paths) if (query == path) goTo("https://pinniped.page/projects/");
 
 			// else...404
-			if (!redirected) document.querySelector("#main-message").innerHTML = message;
+			if (!redirected) document.querySelector("#main-message").innerHTML = codes[404];
 		</script>
 
 		<script src="files/auto-project-link-target.js" type="module"></script>
