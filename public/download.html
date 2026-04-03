@@ -50,7 +50,7 @@
 
 					<div class="break"></div>
 
-					<b id="download-name">Loading...</b>
+					<b id="download-name">Loading<span id="loading-dot-1">.</span><span id="loading-dot-2">.</span><span id="loading-dot-3">.</span></b>
 
 					<a class="new-button small-text" id="download-link" href="yikes.html?s=404" title="click to download the specified file" download style="margin-top: 40px">
 						<div>
@@ -74,8 +74,8 @@
 			const item = new URLSearchParams(query);
 			const download = item.get("x");
 
-			if (/^[^<>]+$/.test(download)) {
-				document.querySelector("#download-name").innerHTML = download;
+			if (download != null && /^[^<>]+$/.test(download)) {
+				document.querySelector("#download-name").innerHTML = download.substring(download.lastIndexOf("/") + 1);
 				document.querySelector("#download-link").href = `assets/${download.substring(download.lastIndexOf(".") + 1)}/${download}`;
 			} else {
 				window.location.href = "yikes.html?s=406";
