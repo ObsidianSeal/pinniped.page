@@ -93,12 +93,12 @@
 
 			// HTTP response status codes (from "yikes")
 			let codes = {
-				// info codes
+				// 1XX - INFO
 				100: "INFO 100 / Continue",
 				101: "INFO 101 / Switching Protocols",
 				102: "INFO 102 / Processing",
 				103: "INFO 103 / Early Hints",
-				// success codes
+				// 2XX - SUCCESS
 				200: "SUCCESS 200 / OK",
 				201: "SUCCESS 201 / Created",
 				202: "SUCCESS 202 / Accepted",
@@ -109,7 +109,7 @@
 				207: "SUCCESS 207 / Multi-Status",
 				208: "SUCCESS 208 / Already Reported",
 				226: "SUCCESS 226 / IM Used",
-				// notice (redirect?) codes
+				// 3XX - NOTICE
 				300: "NOTICE 300 / Multiple Choices",
 				301: "NOTICE 301 / Moved Permanently",
 				302: "NOTICE 302 / Found",
@@ -119,7 +119,7 @@
 				306: "NOTICE 306 / unused",
 				307: "NOTICE 307 / Temporary Redirect",
 				308: "NOTICE 308 / Permanent Redirect",
-				// client error codes
+				// 4XX - ERROR (client)
 				400: "ERROR 400 / Bad Request",
 				401: "ERROR 401 / Unauthorized",
 				402: "ERROR 402 / Payment Required",
@@ -149,7 +149,7 @@
 				429: "ERROR 429 / Too Many Requests",
 				431: "ERROR 431 / Request Header Fields Too Large",
 				451: "ERROR 451 / Unavailable For Legal Reasons",
-				// server error codes
+				// 5XX - ERROR (server)
 				500: "ERROR 500 / Internal Server Error",
 				501: "ERROR 501 / Not Implemented",
 				502: "ERROR 502 / Bad Gateway",
@@ -161,9 +161,9 @@
 				508: "ERROR 508 / Loop Detected",
 				510: "ERROR 510 / Not Extended",
 				511: "ERROR 511 / Network Authentication Required",
-				// custom 600s
+				// 6XX - HELLO!
 				600: "HELLO 600 / Hi",
-				// custom 700s
+				// 7XX - pinniped.page
 				700: "ERROR 700 / No Results",
 				701: "ERROR 701 / Screen Too Small",
 				702: "ERROR 702 / Minecraft Server IP",
