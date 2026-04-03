@@ -17,7 +17,7 @@ for (let i = 0; i < depth - 1; i++) backLinkString += "../";
 let projectsJSON = {};
 let paths = [];
 try {
-	const requestURL = backLinkString + "files/projects.json";
+	const requestURL = backLinkString + "assets/json/projects.json";
 	const request = new Request(requestURL);
 	const response = await fetch(request);
 	const responseJSON = await response.json();

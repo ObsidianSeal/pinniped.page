@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#4ecdc4" />
 
-		<link rel="icon" href="../images/icon.png" />
+		<link rel="icon" href="../assets/png/icon.png" />
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
@@ -16,7 +16,7 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="The Square" />
 		<meta property="og:description" content="Interactive LEGO map; watch the YouTube video first." />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+		<meta property="og:image" content="https://pinniped.page/assets/png/icon.png" />
 
 		<meta name="description" content="Interactive LEGO map; watch the YouTube video first." />
 		<meta name="keywords" content="obsidian_seal, pinniped.page, interactive, LEGO, map, YouTube, video, Discord, bot, fun" />
@@ -27,17 +27,17 @@
 			@font-face {
 				font-family: "PP Right Slab";
 				font-weight: 300;
-				src: url(../files/PPRightSlab-Light.woff2);
+				src: url(../assets/woff2/PPRightSlab-Light.woff2);
 			}
 			@font-face {
 				font-family: "PP Right Slab";
 				font-weight: 500;
-				src: url(../files/PPRightSlab-Medium.woff2);
+				src: url(../assets/woff2/PPRightSlab-Medium.woff2);
 			}
 			@font-face {
 				font-family: "PP Right Slab";
 				font-weight: 700;
-				src: url(../files/PPRightSlab-Bold.woff2);
+				src: url(../assets/woff2/PPRightSlab-Bold.woff2);
 			}
 
 			/* SELECTION */
@@ -83,7 +83,7 @@
 				width: 100dvw;
 				height: 100dvh;
 
-				background-image: url(../images/space.png);
+				background-image: url(../assets/png/space.png);
 				background-position: center;
 				background-size: cover;
 
@@ -318,7 +318,7 @@
 		<div class="space">
 			<div class="square-container">
 				<div class="square-container-inner">
-					<img src="../images/the-square.png" alt="the square" title="the square" id="the-square" />
+					<img src="../assets/png/the-square.png" alt="the square" title="the square" id="the-square" />
 					<div class="region-arrow hide"><i class="fa-sharp fa-solid fa-arrow-down-left"></i></div>
 				</div>
 			</div>
@@ -387,26 +387,31 @@
 					<br />
 					<h6>SOME PHOTOS OF THE REAL THING</h6>
 					<img
-						src="../images/the-square-real-01.jpg"
+						src="../assets/jpg/the-square-real-01.jpg"
 						alt="the real square, without any minifigures"
 						title="the real square, without any minifigures"
 						class="photo"
 					/>
-					<img src="../images/the-square-real-02.jpg" alt="the real square" title="the real square" class="photo" />
-					<img src="../images/the-square-real-03.jpg" alt="the real square, front left focus" title="the real square, front left focus" class="photo" />
-					<img src="../images/the-square-real-04.jpg" alt="the real square, back right focus" title="the real square, back right focus" class="photo" />
-					<img src="../images/the-square-real-05.jpg" alt="the real square, front right focus" title="the real square, front right focus" class="photo" />
+					<img src="../assets/jpg/the-square-real-02.jpg" alt="the real square" title="the real square" class="photo" />
+					<img src="../assets/jpg/the-square-real-03.jpg" alt="the real square, front left focus" title="the real square, front left focus" class="photo" />
+					<img src="../assets/jpg/the-square-real-04.jpg" alt="the real square, back right focus" title="the real square, back right focus" class="photo" />
+					<img src="../assets/jpg/the-square-real-05.jpg" alt="the real square, front right focus" title="the real square, front right focus" class="photo" />
 					<img
-						src="../images/the-square-real-06.jpg"
+						src="../assets/jpg/the-square-real-06.jpg"
 						alt="the real square, closer back right focus"
 						title="the real square, closer back right focus"
 						class="photo"
 					/>
-					<img src="../images/the-square-real-07.jpg" alt="the real square, middle focus" title="the real square, middle focus" class="photo" />
-					<img src="../images/the-square-real-08.jpg" alt="the real square, lower middle focus" title="the real square, lower middle focus" class="photo" />
-					<img src="../images/the-square-real-09.jpg" alt="the real square, lower back right focus" title="the real square, lower back right focus" class="photo" />
+					<img src="../assets/jpg/the-square-real-07.jpg" alt="the real square, middle focus" title="the real square, middle focus" class="photo" />
+					<img src="../assets/jpg/the-square-real-08.jpg" alt="the real square, lower middle focus" title="the real square, lower middle focus" class="photo" />
 					<img
-						src="../images/the-square-real-10.jpg"
+						src="../assets/jpg/the-square-real-09.jpg"
+						alt="the real square, lower back right focus"
+						title="the real square, lower back right focus"
+						class="photo"
+					/>
+					<img
+						src="../assets/jpg/the-square-real-10.jpg"
 						alt="the real square, very close middle focus"
 						title="the real square, very close middle focus"
 						class="photo"
@@ -727,7 +732,7 @@
 					regions[region][4] / 100,
 				)} sq. studs</p><br /><h6>POPULATION</h6><p id="population">${regions[region][7].toLocaleString("en-CA")}</p><br /><h6>DESCRIPTION</h6><p>${
 					regions[region][6]
-				}</p><br /><h6>LEADER</h6><img src="../images/the-square-leader-${region}.jpg" alt="the leader of ${regions[region][0]}" title="the leader of ${
+				}</p><br /><h6>LEADER</h6><img src="../assets/jpg/the-square-leader-${region}.jpg" alt="the leader of ${regions[region][0]}" title="the leader of ${
 					regions[region][0]
 				}" class="photo" /><br /><h6>JOIN COMMAND</h6><p>/join ${region}</p><br /><hr /><br /><p>Please note that commands related to The Square can only be used in <a href="https://ite.fyi/ss" title="join Seal Squad [EXTERNAL]">Seal Squad</a>. For more information and to make sure the bot is online, visit <a href="omega-seal.html" title="Omega Seal">the Omega Seal page</a>.</p>`;
 
@@ -815,6 +820,6 @@
 				});
 		</script>
 
-		<script src="../files/auto-project-link-target.js" type="module"></script>
+		<script src="../assets/js/auto-project-link-target.js" type="module"></script>
 	</body>
 </html>

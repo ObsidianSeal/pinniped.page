@@ -38,12 +38,12 @@ Thanks for visiting!
 
 ---
 
-[![Icons](https://pinniped.page/images/icons.png)](https://pinniped.page/images/icons.png)
+[![Icons](https://pinniped.page/assets/png/icons.png)](https://pinniped.page/assets/png/icons.png)
 
 ---
 
 Check out my other domains&rsquo; GitHub repositories:
 
--    [ite.fyi](https://github.com/ObsidianSeal/ite-fyi)
--    [bmg.engineer](https://github.com/ObsidianSeal/bmg-engineer)
--    [barkingseal.design](https://github.com/ObsidianSeal/barking-seal-design)
+- [ite.fyi](https://github.com/ObsidianSeal/ite-fyi)
+- [bmg.engineer](https://github.com/ObsidianSeal/bmg-engineer)
+- [barkingseal.design](https://github.com/ObsidianSeal/barking-seal-design)

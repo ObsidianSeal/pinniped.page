@@ -98,7 +98,7 @@
 	"Clock": {
 		"basic": false,
 		"icon": "clock",
-		"path": "files/Clock.jar",
+		"path": "assets/jar/Clock.jar",
 		"connected": true,
 		"description": "Tells the time.",
 		"flag": "download",
@@ -130,7 +130,7 @@
 	"crossword": {
 		"basic": false,
 		"icon": "table-cells",
-		"path": "files/crossword.pdf",
+		"path": "assets/pdf/crossword.pdf",
 		"connected": true,
 		"description": "With over seventy carefully connected words.",
 		"flag": "download",
@@ -146,7 +146,7 @@
 	"crossword2": {
 		"basic": false,
 		"icon": "table-cells-large",
-		"path": "files/crossword2.pdf",
+		"path": "assets/pdf/crossword2.pdf",
 		"connected": true,
 		"description": "Bigger and better than the first one!",
 		"flag": "download",
@@ -338,7 +338,7 @@
 	"Minecraft & Motion": {
 		"basic": false,
 		"icon": "chart-line",
-		"path": "files/Motion.jar",
+		"path": "assets/jar/Motion.jar",
 		"connected": true,
 		"description": "Plugin; record Minecraft motion and export to Desmos lists.",
 		"flag": "download",
@@ -658,7 +658,7 @@
 	"WandStuff": {
 		"basic": false,
 		"icon": "wand-magic-sparkles",
-		"path": "files/WandStuff_2023-02-04.jar",
+		"path": "assets/jar/WandStuff_2023-02-04.jar",
 		"connected": true,
 		"description": "Really bad Minecraft plugin?",
 		"flag": "download",
@@ -690,7 +690,7 @@
 	"Words": {
 		"basic": false,
 		"icon": "spell-check",
-		"path": "files/Words.jar",
+		"path": "assets/jar/Words.jar",
 		"connected": true,
 		"description": "Offline Java Wordle with some weird differences.",
 		"flag": "download",

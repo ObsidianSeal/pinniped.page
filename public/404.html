@@ -8,10 +8,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#292F36" />
 
-		<link rel="icon" href="https://pinniped.page/images/icon.png" />
-		<link rel="stylesheet" href="https://pinniped.page/files/main.css" />
+		<link rel="icon" href="https://pinniped.page/assets/png/icon.png" />
+		<link rel="stylesheet" href="https://pinniped.page/assets/css/main.css" />
 
-		<script src="https://pinniped.page/files/menu.js"></script>
+		<script src="https://pinniped.page/assets/js/menu.js"></script>
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
@@ -19,7 +19,7 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="???" />
 		<meta property="og:description" content="Don&rsquo;t bother clicking on this link. There is nothing here." />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+		<meta property="og:image" content="https://pinniped.page/assets/png/icon.png" />
 
 		<style>
 			.h60 {
@@ -43,7 +43,7 @@
 
 	<body class="fa-width-auto">
 		<div class="navbar">
-			<a class="invert navbar-item" href="https://pinniped.page/"><img class="navbar-icon" src="https://pinniped.page/images/icon.png" alt="pinniped.page logo" /></a>
+			<a class="invert navbar-item" href="https://pinniped.page/"><img class="navbar-icon" src="https://pinniped.page/assets/png/icon.png" alt="pinniped.page logo" /></a>
 			<a class="invert navbar-item item1" href="https://pinniped.page/projects"><p>Projects</p></a>
 			<a class="invert navbar-item item2" href="https://pinniped.page/blog"><p>Blog</p></a>
 			<a class="invert navbar-item item3" href="https://pinniped.page/about"><p>About</p></a>
@@ -191,12 +191,12 @@
 			// get list of paths from .JSON file
 			let paths = [];
 			try {
-				const requestURL = "https://pinniped.page/files/projects.json";
+				const requestURL = "https://pinniped.page/assets/json/projects.json";
 				const request = new Request(requestURL);
 				const response = await fetch(request);
 				const responseJSON = await response.json();
 
-				// ignore "files/"
+				// ignore downloads
 				for (let project in responseJSON) {
 					let path = responseJSON[project].path;
 					if (path.startsWith("projects/")) paths.push(path.substring(9));
@@ -213,6 +213,6 @@
 			if (!redirected) document.querySelector("#main-message").innerHTML = codes[404];
 		</script>
 
-		<script src="files/auto-project-link-target.js" type="module"></script>
+		<script src="assets/js/auto-project-link-target.js" type="module"></script>
 	</body>
 </html>

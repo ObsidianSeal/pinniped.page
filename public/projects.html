@@ -8,12 +8,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#4ecdc4" />
 
-		<link rel="icon" href="images/icon.png" />
-		<link rel="stylesheet" href="files/main.css" />
-		<link rel="stylesheet" href="files/scrollbar.css" />
+		<link rel="icon" href="assets/png/icon.png" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/scrollbar.css" />
 
-		<script src="files/console-styles.js"></script>
-		<script src="files/menu.js"></script>
+		<script src="assets/js/console-styles.js"></script>
+		<script src="assets/js/menu.js"></script>
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
@@ -21,7 +21,7 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="pinniped.page — Projects" />
 		<meta property="og:description" content="Games, tools, downloads, and more!" />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+		<meta property="og:image" content="https://pinniped.page/assets/png/icon.png" />
 
 		<meta name="description" content="Games, tools, downloads, and more!" />
 		<meta name="keywords" content="pinniped, page, obsidian_seal, seal, minecraft, plugins, discord, code, programming, projects, fun, puzzles, games, tools" />
@@ -64,7 +64,7 @@
 
 	<body class="fa-width-auto">
 		<div class="navbar">
-			<a class="invert navbar-item" href="index.html"><img class="navbar-icon" src="images/icon.png" alt="pinniped.page logo" /></a>
+			<a class="invert navbar-item" href="index.html"><img class="navbar-icon" src="assets/png/icon.png" alt="pinniped.page logo" /></a>
 			<a class="invert navbar-item item1" href="projects+.html"><p>Projects+</p></a>
 			<a class="invert navbar-item item2" href="blog.html"><p>Blog</p></a>
 			<a class="invert navbar-item item3" href="about.html"><p>About</p></a>
@@ -152,7 +152,7 @@
 			 * no I will not be improving it
 			 */
 
-			const requestURL = "files/projects.json";
+			const requestURL = "assets/json/projects.json";
 			const request = new Request(requestURL);
 			const response = await fetch(request);
 			const responseJSON = await response.json();
@@ -175,7 +175,7 @@
 
 				let link = "";
 				if (project.path.startsWith("projects/")) link = project.path + ".html";
-				else link = "download.html?x=" + project.path.substring(6);
+				else link = "download.html?x=" + project.path.substring(project.path.lastIndexOf("/") + 1);
 
 				let flag = "";
 				if (project.flag != "") flag = ` <i class="fa-solid fa-${project.flag} half-opacity"></i>`;
@@ -306,6 +306,6 @@
 			});
 		</script>
 
-		<script src="files/auto-project-link-target.js" type="module"></script>
+		<script src="assets/js/auto-project-link-target.js" type="module"></script>
 	</body>
 </html>

@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#4ecdc4" />
 
-		<link rel="icon" href="../images/icon.png" />
+		<link rel="icon" href="../assets/png/icon.png" />
 
-		<script src="../files/console-styles.js"></script>
+		<script src="../assets/js/console-styles.js"></script>
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
@@ -18,7 +18,7 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="Playlists" />
 		<meta property="og:description" content="Music, yum!" />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+		<meta property="og:image" content="https://pinniped.page/assets/png/icon.png" />
 
 		<meta name="description" content="Music, yum!" />
 		<meta name="keywords" content="playlists, music, obsidian_seal" />
@@ -29,17 +29,17 @@
 			@font-face {
 				font-family: "PP Neue Montreal";
 				font-weight: normal;
-				src: url("../files/PPNeueMontreal-Regular.woff2");
+				src: url("../assets/woff2/PPNeueMontreal-Regular.woff2");
 			}
 			@font-face {
 				font-family: "PP Neue Montreal";
 				font-weight: bold;
-				src: url("../files/PPNeueMontreal-Bold.woff2");
+				src: url("../assets/woff2/PPNeueMontreal-Bold.woff2");
 			}
 
 			@font-face {
 				font-family: "PP Editorial Old";
-				src: url("../files/PPEditorialOld-Bold.woff2");
+				src: url("../assets/woff2/PPEditorialOld-Bold.woff2");
 			}
 
 			/* VARIABLES */
@@ -780,7 +780,7 @@
 			let badges = [];
 
 			try {
-				const requestURL = "../files/playlists.json";
+				const requestURL = "../assets/json/playlists.json";
 				const request = new Request(requestURL);
 				const response = await fetch(request);
 				const responseJSON = await response.json();
@@ -829,7 +829,7 @@
 
 				// no "rate" link
 				if (title == "guess the song from the first second")
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" style="pointer-events: none; color: transparent"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../images/playlists/${title
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" style="pointer-events: none; color: transparent"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../assets/png/playlists/${title
 						.replaceAll("🎵 - ", "")
 						.replaceAll("⚡ ", "")
 						.replaceAll(
@@ -840,7 +840,7 @@
 					)}">${added} → ${lastUpdated}</span> → ${totalTracks} TRACKS → ${totalTime}</div></div>`;
 				// add "group playlist"
 				else if (title == "LETHAL COMPANY")
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../images/playlists/${title
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../assets/png/playlists/${title
 						.replaceAll("🎵 - ", "")
 						.replaceAll("⚡ ", "")
 						.replaceAll(
@@ -851,7 +851,7 @@
 					)}">${added} → ${lastUpdated}</span> (group playlist) → ${totalTracks} TRACKS → ${totalTime}</div></div>`;
 				// the rest of 'em
 				else
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../images/playlists/${title
+					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../assets/png/playlists/${title
 						.replaceAll("🎵 - ", "")
 						.replaceAll("⚡ ", "")
 						.replaceAll(
@@ -1467,6 +1467,6 @@
 			});
 		</script>
 
-		<script src="../files/auto-project-link-target.js" type="module"></script>
+		<script src="../assets/js/auto-project-link-target.js" type="module"></script>
 	</body>
 </html>

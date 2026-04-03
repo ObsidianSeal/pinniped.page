@@ -8,11 +8,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#ffffee" />
 
-		<link rel="icon" href="images/icon.png" />
-		<link rel="stylesheet" href="files/main.css" />
+		<link rel="icon" href="assets/png/icon.png" />
+		<link rel="stylesheet" href="assets/css/main.css" />
 
-		<script src="files/console-styles.js"></script>
-		<script src="files/menu.js"></script>
+		<script src="assets/js/console-styles.js"></script>
+		<script src="assets/js/menu.js"></script>
 
 		<script src="https://kit.fontawesome.com/c6ef7d4818.js" crossorigin="anonymous"></script>
 
@@ -20,12 +20,12 @@
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="Download?" />
 		<meta property="og:description" content="This link will take you to the download confirmation page for the specified file." />
-		<meta property="og:image" content="https://pinniped.page/images/icon.png" />
+		<meta property="og:image" content="https://pinniped.page/assets/png/icon.png" />
 	</head>
 
 	<body class="fa-width-auto">
 		<div class="navbar">
-			<a class="invert navbar-item" href="index.html"><img class="navbar-icon" src="images/icon.png" alt="pinniped.page logo" /></a>
+			<a class="invert navbar-item" href="index.html"><img class="navbar-icon" src="assets/png/icon.png" alt="pinniped.page logo" /></a>
 			<a class="invert navbar-item item1" href="projects.html"><p>Projects</p></a>
 			<a class="invert navbar-item item2" href="blog.html"><p>Blog</p></a>
 			<a class="invert navbar-item item3" href="about.html"><p>About</p></a>
@@ -50,7 +50,7 @@
 
 					<div class="break"></div>
 
-					<p class="bold" id="download-name">Loading...</p>
+					<b id="download-name">Loading...</b>
 
 					<a class="new-button small-text" id="download-link" href="yikes.html?s=404" title="click to download the specified file" download style="margin-top: 40px">
 						<div>
@@ -74,14 +74,14 @@
 			const item = new URLSearchParams(query);
 			const download = item.get("x");
 
-			if (download == null || download == "" || download.indexOf(">") > -1 || download.indexOf("<") > -1 || download.indexOf(">") > -1 || download.indexOf("<") > -1) {
-				window.location.href = "yikes.html?s=406";
+			if (/^[^<>]+$/.test(download)) {
+				document.querySelector("#download-name").innerHTML = download;
+				document.querySelector("#download-link").href = `assets/${download.substring(download.lastIndexOf(".") + 1)}/${download}`;
 			} else {
-				document.getElementById("download-name").innerHTML = `${download}`;
-				document.getElementById("download-link").href = `files/${download}`;
+				window.location.href = "yikes.html?s=406";
 			}
 		</script>
 
-		<script src="files/auto-project-link-target.js" type="module"></script>
+		<script src="assets/js/auto-project-link-target.js" type="module"></script>
 	</body>
 </html>
