@@ -203,7 +203,8 @@
 				}
 			} catch (error) {
 				console.error(error);
-				message = "ERROR: could not fetch project paths";
+				redirected = true;
+				document.querySelector("#main-message").innerHTML = "ERROR: could not fetch project paths";
 			}
 
 			// go to a project if path is valid
