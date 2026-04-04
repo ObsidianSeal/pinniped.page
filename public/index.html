@@ -261,24 +261,18 @@
 				if (e.key === "Backspace" && !locationSelected) pageLocation = "assets/";
 
 				if (e.key === "Enter" && pageName != "") {
-					let ending = ""; // default file extension (.html)
-					if (window.location.href.includes("://localhost:")) ending = ".html";
-					if (pageName.indexOf("\\") != -1 || pageName.indexOf(".") != -1) ending = ""; // contains '\' (special - no extension) or '.' (for other extensions) -- use string as is
-					pageName = pageName.replace("\\", ""); // remove special '\' character
-
-					if (pageName.indexOf("?") == -1 && pageName.indexOf("#") == -1)
-						window.location.href = pageLocation + pageName + ending; // no '?' or '#' -- navigate, regular
-					else {
-						// contains either '?', '#', or BOTH:
-						if (pageName.indexOf("?") != -1 && pageName.indexOf("#") != -1) {
+					if (/^http:\/\/localhost:5500\/public\/index\.html/.test(window.location.href)) {
+						if (pageName.includes("?") && pageName.includes("#")) {
 							if (pageName.indexOf("?") < pageName.indexOf("#"))
-								window.location.href = pageLocation + pageName.replace("?", ending + "?"); // contains '?' first -- navigate, place ending before '?'
-							else window.location.href = pageLocation + pageName.replace("#", ending + "#"); // contains '#' first -- navigate, place ending before '#'
-						} else if (pageName.indexOf("?") != -1) {
-							window.location.href = pageLocation + pageName.replace("?", ending + "?"); // contains '?' first -- navigate, place ending before '?'
-						} else {
-							window.location.href = pageLocation + pageName.replace("#", ending + "#"); // contains '#' first -- navigate, place ending before '#'
+								window.location.href = pageLocation + pageName.replace("?", ".html?"); // contains '?' first: navigate, place '.html' before '?'
+							else window.location.href = pageLocation + pageName.replace("#", ".html#"); // contains '#' first: navigate, place '.html' before '#'
+						} else if (pageName.includes("?")) {
+							window.location.href = pageLocation + pageName.replace("?", ".html?"); // contains '?' first: navigate, place '.html' before '?'
+						} else if (pageName.includes("#")) {
+							window.location.href = pageLocation + pageName.replace("#", ".html#"); // contains '#' first: navigate, place '.html' before '#'
 						}
+					} else {
+						window.location.href = pageLocation + pageName;
 					}
 				}
 				if (e.key === "Backspace") {
