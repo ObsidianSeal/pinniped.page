@@ -1,6 +1,6 @@
 # pinniped.page
 
-[![CodeFactor](https://www.codefactor.io/repository/github/obsidianseal/pinniped.page/badge)](https://www.codefactor.io/repository/github/obsidianseal/pinniped.page)
+[![CodeFactor](https://www.codefactor.io/repository/github/obsidianseal/pinniped.page/badge)](https://www.codefactor.io/repository/github/obsidianseal/pinniped.page) ![checks](https://badgen.net/github/checks/ObsidianSeal/pinniped.page) ![stars](https://badgen.net/github/stars/ObsidianSeal/pinniped.page) ![contributors](https://badgen.net/github/contributors/ObsidianSeal/pinniped.page) ![open-issues](https://badgen.net/github/open-issues/ObsidianSeal/pinniped.page) ![open PRs](https://badgen.net/github/open-prs/ObsidianSeal/pinniped.page) ![commits](https://badgen.net/github/commits/ObsidianSeal/pinniped.page) ![last commit](https://badgen.net/github/last-commit/ObsidianSeal/pinniped.page)
 
 [Obsidian_Seal](https://github.com/ObsidianSeal)’s personal website:
 
