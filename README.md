@@ -1,6 +1,6 @@
 # pinniped.page
 
-[![CodeFactor](https://www.codefactor.io/repository/github/obsidianseal/obsidianseal/badge)](https://www.codefactor.io/repository/github/obsidianseal/obsidianseal) [![Awesome Badges](https://img.shields.io/badge/badges-awesome-teal.svg)](https://github.com/Naereen/badges) [![Seal Squad](https://img.shields.io/discord/755782483588677653.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://ite.fyi/ss)
+[![CodeFactor](https://www.codefactor.io/repository/github/obsidianseal/pinniped.page/badge)](https://www.codefactor.io/repository/github/obsidianseal/pinniped.page) [![Awesome Badges](https://img.shields.io/badge/badges-awesome-teal.svg)](https://github.com/Naereen/badges) [![Seal Squad](https://img.shields.io/discord/755782483588677653.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://ite.fyi/ss)
 
 [Obsidian_Seal](https://github.com/ObsidianSeal)’s personal website:
 
