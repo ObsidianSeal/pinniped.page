@@ -308,9 +308,9 @@
 				<h1>Omega Seal</h1>
 				<br />
 				<p>
-					v1.8.1 —
+					v1.9.0 —
 					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square/commits/main/" title="GitHub > ObsidianSeal/Omega-Seal-The-Square > Commits"
-						>April 5th, 2026</a
+						>April 18th, 2026</a
 					>
 				</p>
 				<br />
@@ -453,7 +453,8 @@
 				</ul>
 				<p>
 					availability: everywhere<br /><br />Creates a simple embed, like those generated from links. The colour, if you include it, must be a valid
-					<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" title="Wikipedia > Web colors > Hex triplet">hex code</a>.
+					<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" title="Wikipedia > Web colors > Hex triplet">hex code</a>. A random colour will be supplied
+					if you don&rsquo;t.
 				</p>
 			</div>
 
@@ -475,10 +476,13 @@
 					availability: everywhere<br /><br />Fetches the latest <a href="https://en.wikipedia.org/wiki/METAR" title="Wikipedia > METAR [EXTERNAL]">METAR</a> report
 					for an airport of your choice. Just make sure you know the
 					<a href="https://en.wikipedia.org/wiki/ICAO_airport_code" title="Wikipedia > ICAO airport code [EXTERNAL]">ICAO airport code</a> for the airport! At this
-					time Omega Seal does not decipher the METAR data, so if you aren&rsquo;t familiar with the notation you&rsquo;ll have to use an online tool in order to
-					understand it. Thanks to the <a href="https://aviationweather.gov/" title="Aviation Weather Center [EXTERNAL]">Aviation Weather Center</a> for having a
-					free and easy to use <a href="https://aviationweather.gov/data/api/" title="Aviation Weather Center > Data API [EXTERNAL]">METAR API</a>. Also, you can
-					enter an airport code in lowercase, it will be converted into uppercase.
+					time Omega Seal does not decipher the METAR data, so if you aren&rsquo;t familiar with the notation you&rsquo;ll have to use an online tool or
+					<a href="https://www.weather.gov/media/wrh/mesowest/metar_decode_key.pdf" title="&ldquo;METAR ABBREVIATIONS - metar_decode_key.pdf&rdquo; [EXTERNAL]"
+						>reference sheet</a
+					>
+					in order to understand it. Thanks to the <a href="https://aviationweather.gov/" title="Aviation Weather Center [EXTERNAL]">Aviation Weather Center</a> for
+					having a free and easy to use <a href="https://aviationweather.gov/data/api/" title="Aviation Weather Center > Data API [EXTERNAL]">METAR API</a>. Also,
+					you can enter an airport code in lowercase, it will be converted into uppercase.
 				</p>
 			</div>
 
@@ -566,6 +570,26 @@
 
 			<div class="box">
 				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h2>/roles</h2>
+				<p>
+					description: <span class="dark-grey-bg">Roles in the server, sorted by member count.</span><br />usage: <span class="dark-grey-bg">/role [filter]</span
+					><br />parameters:
+				</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">filter</b> (string)<br />description: <span class="dark-grey-bg">Filter to specific roles by providing a hex code.</span
+						><br />pattern: <span class="dark-grey-bg">/^#?[0-9A-Fa-f]{6}$/</span>
+					</li>
+				</ul>
+				<p>
+					availability: servers<br />required permissions: <span class="dark-grey-bg">Manage Roles</span><br /><br />Similar to
+					<span class="dark-grey-bg">/populations</span>, but available in all servers. This command lists roles in a server by the number of people with each role.
+					Bots are excluded from the count, but their roles can still appear. You can filter to a set of roles by providing their hex code.
+				</p>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg">COMMAND</h5>
 				<h2>/help</h2>
 				<p>
 					description: <span class="dark-grey-bg">Send this command if you don&rsquo;t know how to use the bot or if you just want to learn more about it.</span
@@ -579,7 +603,7 @@
 				<h2>Welcome Message on Server Join</h2>
 				<p>
 					When someone joins <a href="https://ite.fyi/ss" title="join Seal Squad [EXTERNAL]">one of my servers</a>, a message is sent to welcome them and provide a
-					list of things that new members should do. The message also says how many members are in the server.
+					list of things that new members should do. The message also says how many members (excluding bots) are in the server.
 				</p>
 			</div>
 
