@@ -371,9 +371,9 @@
 		},
 		"🎵 - March 2025": {
 			"link": "PLTKwBiSgGBsjn_FMPtO5gVb3pFghBW2gA",
-			"length": [20, "1:08:58"],
+			"length": [20, "1:08:57"],
 			"added": "2025/02/27",
-			"updated": "2025/02/27",
+			"updated": "2026/04/18",
 			"tracks": [
 				["Papaoutai", "Stromae", "racine carrée", 2013],
 				["Formidable", "Stromae", "racine carrée", 2013],
@@ -384,9 +384,9 @@
 				["Hummingbird", "Jazz Emu", "Digital Spool", 2022],
 				["Redecorate", "twenty one pilots", "Scaled And Icy", 2021],
 				["Anyone For You (Tiger Lily)", "George Ezra", "Gold Rush Kid", 2022],
-				["Alors on danse (Radio Edit)", "Stromae", "Alors On Danse", 2009],
+				["Alors on danse (Radio Edit)", "Stromae", "Cheese", 2010],
 				["Sleep On The Floor", "The Lumineers", "Cleopatra", 2016],
-				["Bleed It Out", "half·alive", "Persona", 2024],
+				["Bleed It Out", "half·alive", "Persona (Extended)", 2025],
 				["Nobody", "Hozier", "Wasteland, Baby!", 2019],
 				["Hymn to Virgil", "Hozier", "Unreal Unearth: Unending", 2024],
 				["Like a Prayer", "Madonna", "Like a Prayer", 1989],
@@ -397,7 +397,7 @@
 					"Enlightenment (Main Title Theme) (from &ldquo;The White Lotus: Season 3&rdquo;)",
 					2025
 				],
-				["Unknown / Nth", "Hozier", "Unreal Unearth", 2023],
+				["Unknown / Nth", "Hozier", "Unreal Unearth: Unending", 2024],
 				["Easy For Me", "Jazz Emu", "Ego Death", 2025],
 				["Problematic", "BoyWithUke", "Lucid Dreams", 2023]
 			]
@@ -940,9 +940,9 @@
 		},
 		"oops all Hozier": {
 			"link": "PLTKwBiSgGBsj3xxMUeuZRL4pPgnkgjlGf",
-			"length": [32, "2:04:27"],
+			"length": [33, "2:07:44"],
 			"added": "2024/12/02",
-			"updated": "2025/07/11",
+			"updated": "2026/04/18",
 			"tracks": [
 				["Someone New", "Hozier", "Hozier (Expanded Edition)", 2014],
 				["Sedated", "Hozier", "Hozier (Expanded Edition)", 2014],
@@ -971,8 +971,9 @@
 				["Too Sweet", "Hozier", "Unreal Unearth: Unending", 2024],
 				["Nobody&rsquo;s Soldier", "Hozier", "Unreal Unearth: Unending", 2024],
 				["Empire Now", "Hozier", "Unreal Unearth: Unending", 2024],
-				["Hymn to Virgil", "Hozier", "Unreal Unearth: Unending", 2024],
 				["Who We Are", "Hozier", "Unreal Unearth: Unending", 2024],
+				["Hymn to Virgil", "Hozier", "Unreal Unearth: Unending", 2024],
+				["I, Carrion (Icarian)", "Hozier", "Unreal Unearth: Unending", 2024],
 				["De Selby (Part  1)", "Hozier", "Unreal Unearth: Unending", 2024],
 				["De Selby (Part  2)", "Hozier", "Unreal Unearth: Unending", 2024],
 				["Swan Upon Leda", "Hozier", "Unreal Unearth: Unending", 2024]
