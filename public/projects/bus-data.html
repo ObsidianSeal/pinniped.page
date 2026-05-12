@@ -740,7 +740,7 @@
 			 * busDistribution (list of routes)
 			 * articulatedDistribution (same as above)
 			 * ----------
-			 * updated as of 2026/03/16
+			 * updated as of 2026/05/12
 			 */
 
 			// big and important variables
@@ -1044,6 +1044,7 @@
 				102: "#75aaae",
 				104: "#a685bc",
 				106: "#d6df21",
+				111: "#c0c0c0",
 				127: "#9f93a5",
 			};
 			for (let i = 0; i < Object.keys(officialColours).length; i++) {
@@ -3101,6 +3102,7 @@
 					102: 0,
 					104: 0,
 					106: 0,
+					111: 0,
 					127: 0,
 				};
 				let articulatedDistribution = {
@@ -3141,6 +3143,7 @@
 					102: 0,
 					104: 0,
 					106: 0,
+					111: 0,
 					127: 0,
 				};
 
@@ -3154,6 +3157,7 @@
 						// create label, 100-series have an asterisk
 						let routeNumber = document.createElement("div");
 						if (route < 100) routeNumber.innerHTML = `${route.toString().padStart(2, "0")}:`;
+						else if (route == 111) routeNumber.innerHTML = `${route.toString().padStart(2, "0")}**:`;
 						else routeNumber.innerHTML = `${route}*:`;
 
 						// create bars and number
@@ -3704,6 +3708,7 @@
 					"102",
 					"104",
 					"106",
+					"111",
 					"127",
 					"ALL",
 				],
@@ -3746,7 +3751,7 @@
 						else mapOptions[4] = true;
 					}
 					if (setting == 4) {
-						if (option == 38) mapOptions[6] = true;
+						if (option == 39) mapOptions[6] = true;
 						else {
 							mapOptions[6] = false;
 							mapOptions[7] = parseInt(mapSettings[setting + 1][option]);
@@ -3770,7 +3775,7 @@
 
 			<br />
 
-			<p>v1.1.2 — March 16th, 2026 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
+			<p>v1.1.2 — May 12th, 2026 — <a href="" title="this page (click to refresh)">pinniped.page/projects/bus-data</a></p>
 			<p>
 				a project by <a href="../about.html" title="pinniped.page — About">Obsidian_Seal</a> — not affiliated with
 				<a href="https://londontransit.ca/" title="London Transit&rsquo;s website [EXTERNAL]">London Transit</a>
@@ -3784,7 +3789,7 @@
 					<a href="https://realtime.londontransit.ca/#/app/nextdepartures" title="&ldquo;INFO-Web Transit Information&rdquo; / &ldquo;LTC - Next departures&rdquo; / &ldquo;Real-Time&rdquo; [EXTERNAL]">LTC realtime</a>
 				</li>
 				<li>
-					<a href="https://www.londontransit.ca/wp-content/uploads/2024/09/LT_SystemMap_September2024_Final_Web.pdf" title="LTC > Routes & Schedules > LT_SystemMap_September2024_Final_Web.pdf [FILE; EXTERNAL]">LTC Ride Guide</a>
+					<a href="https://www.londontransit.ca/wp-content/uploads/2025/08/LT_SystemMap_SystemUpdate2025_Final_Web.pdf" title="LTC > Routes & Schedules > London Transit System Map [FILE; EXTERNAL]">LTC Ride Guide</a>
 				</li>
 				<li>
 					<a href="https://cptdb.ca/wiki/index.php/London_Transit_Commission" title="CPTDB wiki > London Transit Commission [EXTERNAL]">CPTDB wiki — London Transit Commission</a>
@@ -3868,7 +3873,10 @@
 				</div>
 			</div>
 			<br />
-			<p class="grey">*the 100-series (<a href="https://en.wikipedia.org/wiki/Short_turn" class="grey" title="Wikipedia > Short turn [EXTERNAL]">short turn</a>) routes only run from September to April (for university/college students)</p>
+			<p class="grey">
+				*routes 102, 104, 106, and 127 (the <a href="https://en.wikipedia.org/wiki/Short_turn" class="grey" title="Wikipedia > Short turn [EXTERNAL]">short turn</a> routes) only run from September to April (for university/college
+				students)<br />**route 111 is temporary and little information is available about it
+			</p>
 
 			<br />
 
@@ -4098,6 +4106,10 @@
 							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
 						</tr>
 						<tr>
+							<td>111</td>
+							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
+						</tr>
+						<tr>
 							<td>127</td>
 							<td colspan="3"><i class="fa-sharp fa-solid fa-triangle-exclamation"></i>these maps have not yet been made</td>
 						</tr>
@@ -4265,7 +4277,8 @@
 							><span class="settings-option">30</span><span class="settings-option">31</span><span class="settings-option">33</span><span class="settings-option">34</span><span class="settings-option">35</span
 							><span class="settings-option">36</span><span class="settings-option">37</span><span class="settings-option">38</span><span class="settings-option">90</span><span class="settings-option">91</span
 							><span class="settings-option">92</span><span class="settings-option">93</span><span class="settings-option">94</span><span class="settings-option">95</span><span class="settings-option">102</span
-							><span class="settings-option">104</span><span class="settings-option">106</span><span class="settings-option">127</span><span class="settings-option selected-setting">ALL</span></span
+							><span class="settings-option">104</span><span class="settings-option">106</span><span class="settings-option">111</span><span class="settings-option">127</span
+							><span class="settings-option selected-setting">ALL</span></span
 						>
 					</p>
 				</div>
