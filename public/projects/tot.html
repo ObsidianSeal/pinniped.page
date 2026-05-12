@@ -481,109 +481,37 @@
 						"West Harbour",
 						"Confederation",
 						"St. Catharines",
-						"Niagara Falls"
-					]
+						"Niagara Falls",
+					],
 				},
 				"MI | Milton": {
 					colour: "#f58220",
-					stations: [
-						"Union",
-						"Kipling",
-						"Dixie",
-						"Cooksville",
-						"Erindale",
-						"Streetsville",
-						"Meadowvale",
-						"Lisgar",
-						"Milton"
-					]
-				}, 
+					stations: ["Union", "Kipling", "Dixie", "Cooksville", "Erindale", "Streetsville", "Meadowvale", "Lisgar", "Milton"],
+				},
 				"UP | Union Pearson Express": {
 					colour: "#2c8ac9",
-					stations: [
-						"Union",
-						"Bloor",
-						"Mount Dennis",
-						"Weston",
-						"Pearson Airport"
-					]
+					stations: ["Union", "Bloor", "Mount Dennis", "Weston", "Pearson Airport"],
 				},
 				"KT | Kitchener": {
 					colour: "#00843d",
-					stations: [
-						"Union",
-						"Bloor",
-						"Mount Dennis",
-						"Weston",
-						"Etobicoke North",
-						"Malton",
-						"Bramalea",
-						"Brampton Innovation District",
-						"Mount Pleasant", 
-						"Georgetown", 
-						"Acton",
-						"Guelph Central",
-						"Kitchener"
-					]
+					stations: ["Union", "Bloor", "Mount Dennis", "Weston", "Etobicoke North", "Malton", "Bramalea", "Brampton Innovation District", "Mount Pleasant", "Georgetown", "Acton", "Guelph Central", "Kitchener"],
 				},
 				"BR | Barrie": {
 					colour: "#005f9e",
-					stations: [
-						"Union",
-						"Downsview Park", 
-						"Rutherford",
-						"Maple",
-						"King City",
-						"Aurora",
-						"Newmarket",
-						"East Gwillimbury",
-						"Bradford",
-						"Barrie South",
-						"Allandale Waterfront"
-					]
+					stations: ["Union", "Downsview Park", "Rutherford", "Maple", "King City", "Aurora", "Newmarket", "East Gwillimbury", "Bradford", "Barrie South", "Allandale Waterfront"],
 				},
 				"RH | Richmond Hill": {
 					colour: "#00aae6",
-					stations: [
-						"Union",
-						"Oriole",
-						"Old Cummer",
-						"Langstaff",
-						"Richmond Hill",
-						"Gormley", 
-						"Bloomington"
-					]
+					stations: ["Union", "Oriole", "Old Cummer", "Langstaff", "Richmond Hill", "Gormley", "Bloomington"],
 				},
 				"ST | Stouffville": {
 					colour: "#7c4c0e",
-					stations: [
-						"Union",
-						"Kennedy",
-						"Agincourt",
-						"Milliken",
-						"Unionville",
-						"Centennial",
-						"Markham",
-						"Mount Joy",
-						"Stouffville",
-						"Old Elm"
-					]
+					stations: ["Union", "Kennedy", "Agincourt", "Milliken", "Unionville", "Centennial", "Markham", "Mount Joy", "Stouffville", "Old Elm"],
 				},
 				"LE | Lakeshore East": {
 					colour: "#ee3223",
-					stations: [
-						"Union",
-						"Danforth", 
-						"Scarborough",
-						"Eglinton",
-						"Guildwood",
-						"Rouge Hill",
-						"Pickering",
-						"Ajax", 
-						"Whitby", 
-						"Durham College Oshawa"
-					]
-				}
+					stations: ["Union", "Danforth", "Scarborough", "Eglinton", "Guildwood", "Rouge Hill", "Pickering", "Ajax", "Whitby", "Durham College Oshawa"],
+				},
 			},
 			"ION — Waterloo, Ontario, Canada": {
 				"301 ION": {
@@ -725,10 +653,10 @@
 						"Île-Bigras",
 						"Sainte-Dorothée",
 						"Grand-Moulin",
-						"Deux-Montagnes"
-					]
-				}
-			},			
+						"Deux-Montagnes",
+					],
+				},
+			},
 			"SkyTrain — Vancouver, British Columbia, Canada": {
 				"Expo Line": {
 					colour: "#235696",
@@ -1101,7 +1029,7 @@
 			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll(" ’", " ‘");
 			document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll("‘ ", "’ ");
 
-			const noEnDashChange = ["Edmonton, Canada", "Montréal, Canada", "Ottawa, Canada"];
+			const noEnDashChange = ["Edmonton LRT — Edmonton, Alberta, Canada", "Métro de Montréal — Montréal, Quebec, Canada", "O-Train — Ottawa, Ontario, Canada", "REM — Montréal, Quebec, Canada"];
 
 			if (!noEnDashChange.includes(currentSystem)) {
 				document.querySelector(".station-name-input input").value = document.querySelector(".station-name-input input").value.replaceAll("-", "–");
