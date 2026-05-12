@@ -620,7 +620,7 @@
 			"O-Train — Ottawa, Ontario, Canada": {
 				"Line 1 (Confederation Line)": {
 					colour: "#c22d29",
-					stations: ["Tunney’s Pasture", "Bayview", "Pimisi", "Lyon", "Parliament", "Rideau", "uOttawa", "Lees", "Hurdman", "Tremblay", "St-Laurent", "Cyrville", "Blair"],
+					stations: ["Tunney’s Pasture", "Bayview", "Pimisi", "Lyon", "Parliament | Parlement", "Rideau", "uOttawa", "Lees", "Hurdman", "Tremblay", "St-Laurent", "Cyrville", "Blair"],
 				},
 				"Line 2 (Trillium Line)": {
 					colour: "#73a044",
@@ -978,33 +978,27 @@
 		}
 
 		function submitStationGuess(guess) {
-			if (currentSystem != "") {
-				const system = currentSystem;
-				let guessCounted = false;
+			let lineIndex = 0;
+			for (let line in systems[currentSystem]) {
+				let stationIndex = 0;
+				for (let station of systems[currentSystem][line].stations) {
+					if (station == guess) {
+						if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).textContent != station) {
+							document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML = station;
+							document.querySelector(".station-name-input input").value = "";
+							document.querySelector(".completion").innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.round((guessedStations / totalStations) * 100)}%)`;
 
-				let lineIndex = 0;
-				for (let line in systems[system]) {
-					let stationIndex = 0;
-					for (let station of systems[system][line].stations) {
-						if (station == guess) {
-							if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML != station) {
-								document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML = station;
-								document.querySelector(".station-name-input input").value = "";
+							if (guessedStations == totalStations) {
+								document.querySelector("#give-up-and-reveal-answers").classList.add("hide");
+								giveUpAndRevealAnswers();
 							}
-							if (!guessCounted) {
-								document.querySelector(".completion").innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.round((guessedStations / totalStations) * 100)}%)`;
-								guessCounted = true;
-							}
+
+							return;
 						}
-						stationIndex++;
 					}
-					lineIndex++;
+					stationIndex++;
 				}
-
-				if (guessedStations == totalStations) {
-					document.querySelector("#give-up-and-reveal-answers").classList.add("hide");
-					giveUpAndRevealAnswers();
-				}
+				lineIndex++;
 			}
 		}
 
@@ -1050,7 +1044,7 @@
 				for (let line in systems[system]) {
 					let stationIndex = 0;
 					for (let station of systems[system][line].stations) {
-						if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML != station) {
+						if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).textContent != station) {
 							document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML = `<b class="highlight">${station}</b>`;
 						}
 						stationIndex++;
