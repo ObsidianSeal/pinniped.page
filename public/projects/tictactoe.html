@@ -1076,8 +1076,8 @@
 		// show the code and put it in the URL and title
 		function setCode(code) {
 			window.history.pushState({}, "", `?o=${origin}&c=${code}`);
-			document.querySelector("title").innerHTML = "TicTacToe | " + code;
-			document.querySelector("#code").innerHTML = code;
+			document.querySelector("title").textContent = "TicTacToe | " + code;
+			document.querySelector("#code").textContent = code;
 		}
 
 		// create a new game
@@ -1148,7 +1148,7 @@
 				createLink();
 				document.querySelector("#code").innerHTML = "copied!";
 				setTimeout(() => {
-					document.querySelector("#code").innerHTML = code;
+					document.querySelector("#code").textContent = code;
 				}, 3000);
 			} else {
 				window.location.href = `https://pinniped.page/projects/tictactoe?o=${origin}&n=${code}`;
