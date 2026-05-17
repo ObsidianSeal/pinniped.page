@@ -111,7 +111,7 @@
 						} else {
 							result = number + result;
 						}
-						document.getElementById("result1").innerHTML = `>>> ${result}`;
+						document.getElementById("result1").textContent = `>>> ${result}`;
 					} else if (number < 0) {
 						document.getElementById("result1").innerHTML = `>>> ERROR: number too small`;
 					} else {
@@ -262,7 +262,7 @@
 					}
 				}
 
-				outputElement.innerHTML = ">>> " + output;
+				outputElement.textContent = ">>> " + output;
 			}
 		</script>
 	</head>

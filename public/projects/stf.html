@@ -167,8 +167,8 @@
 
 			// copy text from input to output, shrinkToFit();
 			input.addEventListener("input", (e) => {
-				if (input.value != "") output.innerHTML = input.value;
-				else output.innerHTML = "!?";
+				if (input.value != "") output.textContent = input.value;
+				else output.textContent = "!?";
 
 				shrinkToFit();
 			});
