@@ -116,34 +116,41 @@ b {
 	font-weight: 700;
 }
 
+ul,
 ol {
-	font-family: "Roboto Slab";
-	font-size: 24px;
+	max-width: 1160px;
+
 	margin-top: 0;
 	margin-bottom: 0;
-}
 
-ul {
 	font-family: "Roboto Slab";
 	font-size: 24px;
-	margin-top: 0;
-	margin-bottom: 0;
 }
 
-ul li::marker {
-	color: #292f367f;
+ul.has-element-before,
+ol.has-element-before {
+	margin-top: 5px;
+}
+
+ul.has-element-after,
+ol.has-element-after {
+	margin-bottom: 5px;
 }
 
 li {
 	word-wrap: break-word;
 }
 
-li:not(.no-li-margin) {
-	margin-bottom: 5px;
-}
-
 li::marker {
 	font-weight: 700;
+}
+
+ul li::marker {
+	color: #292f367f;
+}
+
+li:not(ul.tight li, ol.tight li, li:first-child) {
+	margin-top: 5px;
 }
 
 hr {
@@ -151,11 +158,6 @@ hr {
 	border: 0;
 	border-top: 2px solid #292f367f;
 	max-width: 1200px;
-}
-
-ol,
-ul {
-	max-width: 1160px;
 }
 
 .invert {
