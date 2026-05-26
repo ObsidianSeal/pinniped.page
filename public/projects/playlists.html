@@ -813,19 +813,8 @@
 						)}`;
 				}
 
-				// no "rate" link
-				if (title == "guess the song from the first second")
-					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" style="pointer-events: none; color: transparent"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../assets/png/playlists/${title
-						.replaceAll("🎵 - ", "")
-						.replaceAll("⚡ ", "")
-						.replaceAll(
-							" ",
-							"-",
-						)}.png" class="cover" style="display: none" /></h2><a class="highlight-underline c1" href="https://music.youtube.com/playlist?list=${link}"  title="YouTube Music / &ldquo;${title}&rdquo; [GENERATED LINK; EXTERNAL]">listen <i class="fa-solid fa-arrow-up-right"></i></a></div><div class="playlist-info"><span title="added ${formatDate(added)} & updated ${formatDate(
-						lastUpdated,
-					)}">${added} → ${lastUpdated}</span> → ${totalTracks} TRACKS → ${totalTime}</div></div>`;
 				// add "group playlist"
-				else if (title == "LETHAL COMPANY")
+				if (title == "LETHAL COMPANY")
 					playlistContainer.innerHTML = `<i class="fa-solid fa-angle-right expand-button" tabindex="0" title="click to expand playlist"></i><div><div class="playlist-title"><h2>&ldquo;<span class="highlight-underline c5">${title}</span>&rdquo;<img src="../assets/png/playlists/${title
 						.replaceAll("🎵 - ", "")
 						.replaceAll("⚡ ", "")
@@ -1098,10 +1087,12 @@
 				container.innerHTML = `${data} → &ldquo;<a class="highlight-underline c5" tabindex="0" title="click to scroll to &ldquo;${playlistName}&rdquo;">${playlistName}</a>&rdquo;`;
 				container.children[0].addEventListener("click", () => {
 					document.querySelectorAll(".playlist")[Object.keys(playlists).indexOf(playlistName)].scrollIntoView({ behavior: "smooth" });
+					window.history.replaceState("", "", `#${playlistName}`);
 				});
 				container.children[0].addEventListener("keydown", (e) => {
 					if (e.key === "Enter") {
 						document.querySelectorAll(".playlist")[Object.keys(playlists).indexOf(playlistName)].scrollIntoView({ behavior: "smooth" });
+						window.history.replaceState("", "", `#${playlistName}`);
 					}
 				});
 			}
@@ -1344,14 +1335,14 @@
 				// "most recently added"
 				if (dataIndex == 18) {
 					let addedDateStings = [];
-					for (let playlist of Object.keys(playlists)) if (monthlyPlaylistNames.includes(playlist)) addedDateStings.push([playlists[playlist].added, playlist]);
+					for (let playlist of Object.keys(playlists)) addedDateStings.push([playlists[playlist].added, playlist]);
 					addedDateStings.sort();
 					showDataWithPlaylistLink(datum, formatDate(addedDateStings[addedDateStings.length - 1][0]), addedDateStings[addedDateStings.length - 1][1]);
 				}
 				// "most recently updated"
 				if (dataIndex == 19) {
 					let updatedDateStings = [];
-					for (let playlist of Object.keys(playlists)) if (monthlyPlaylistNames.includes(playlist)) updatedDateStings.push([playlists[playlist].updated, playlist]);
+					for (let playlist of Object.keys(playlists)) updatedDateStings.push([playlists[playlist].updated, playlist]);
 					updatedDateStings.sort();
 					showDataWithPlaylistLink(datum, formatDate(updatedDateStings[updatedDateStings.length - 1][0]), updatedDateStings[updatedDateStings.length - 1][1]);
 				}

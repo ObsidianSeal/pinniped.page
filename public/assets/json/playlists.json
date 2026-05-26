@@ -1106,61 +1106,34 @@
 				["Overture", "Andrew Lloyd Webber", "The Phantom of the Opera (Original Motion Picture Soundtrack)", 2004]
 			]
 		},
-		"guess the song from the first second": {
-			"link": "PLTKwBiSgGBshltUP89mVEE74hLAZyMFRP",
-			"length": [400, "24:14:02"],
-			"added": "2024/12/02",
-			"updated": "2025/07/07",
-			"tracks": []
-		},
-		"songs I&rsquo;ve sung over large bodies of water": {
-			"link": "PLTKwBiSgGBsj0hF0ndtnFz0cu7AENVHjj",
-			"length": [2, "0:06:58"],
-			"added": "2025/04/21",
-			"updated": "2025/04/21",
+		"CELESTIAL MOTIVATION": {
+			"link": "PLTKwBiSgGBsjC7zHk1Pn1cWHLUeBsKN9f",
+			"length": [22, "1:13:37"],
+			"added": "2026/05/26",
+			"updated": "2026/05/26",
 			"tracks": [
-				["Geronimo", "Sheppard", "Bombs Away", 2014],
-				["Deep Water", "American Authors", "Seasons", 2019]
-			]
-		},
-		"doubles": {
-			"link": "PLTKwBiSgGBsjofbKCHYoTG-RcvDDeG4vr",
-			"length": [6, "0:19:36"],
-			"added": "2025/04/28",
-			"updated": "2025/04/28",
-			"tracks": [
-				["Automatic", "half·alive", "Automatic", 2024],
-				["Automatic", "Roosevelt", "Automatic", 2024],
-				["Overture", "AJR", "Living Room", 2015],
-				["Overture", "AJR", "The Click", 2017],
-				["The Other Side", "Conan Gray", "The Other Side", 2019],
-				["The Other Side", "Hugh Jackman & Zac Efron", "The Greatest Showman (Original Motion Picture Soundtrack)", 2017]
-			]
-		},
-		"NUMBERS": {
-			"link": "PLTKwBiSgGBsjgLwcdFmKzpaCwn4ztXS7a",
-			"length": [18, "0:59:05"],
-			"added": "2025/10/29",
-			"updated": "2026/02/21",
-			"tracks": [
-				["2085", "AJR", "The Maybe Man", 2023],
-				["Little One", "The Happy Fits", "Under The Shade of Green", 2022],
-				[">one (greater than one)", "VALORANT & ericdoa", ">one (greater than one)", 2023],
-				["Let It All Out (10:05)", "COIN", "Dreamland", 2020],
-				["30/90", "Andrew Garfield & Joshua Henry & Vanessa Hudgens & Robin de Jesús & Alexandra Shipp & Mj Rodriguez", "tick, tick... BOOM! (Soundtrack from the Netflix Film)", 2021],
-				["Takes One To Know One", "The Beaches", "Takes One To Know One", 2024],
-				["3 O&rsquo;clock Things", "AJR", "OK Orchestra", 2021],
-				["2WORLDS", "Madge & VALORANT", "2WORLDS", 2024],
-				["Ping! 2", "Exyl", "Ping! 2", 2022],
-				["One Of Us", "ABBA", "The Visitors (Deluxe Edition)", 1981],
-				["15 Minutes", "Sabrina Carpenter", "Short n&rsquo; Sweet (Deluxe)", 2025],
-				["two", "bbno$", "two", 2024],
-				["Like 1999", "Valley", "Last Birthday", 2021],
-				["1800 (feat. Ironmouse)", "bbno$", "1800", 2025],
-				["12 to 12", "sombr", "12 to 12", 2025],
-				["korg M1", "Synthet", "synthette", 2025],
-				["2 Be Loved (Am I Ready)", "Lizzo", "Special", 2022],
-				["505", "Arctic Monkeys", "Favourite Worst Nightmare", 2007]
+				["12 to 12", "sombr", "I Barely Know Her", 2025],
+				["be ok", "Scrawny", "be ok", 2022],
+				["robert patekson", "bbno$", "bag or die", 2022],
+				["OIIA OIIA (Spinning Cat)", "W&amp;W", "OIIA OIIA (Spinning Cat)", 2025],
+				["Shadow Of A Man", "Lady Gaga", "MAYHEM", 2025],
+				["Baby Steps", "Olivia Dean", "The Art of Loving", 2025],
+				["The Hardest Part", "Olivia Dean", "Messy", 2023],
+				["Up & Away We Go", "Saint Motel", "Afterglow", 2025],
+				["I Will Wait", "Mumford &amp; Sons", "Babel (Deluxe Version)", 2012],
+				["The Hudson", "The Favors & FINNEAS & Ashe", "The Dream", 2025],
+				["Telephone Busy", "5 Seconds of Summer", "EVERYONE&rsquo;S A STAR! (Fully Evolved)", 2025],
+				["It&rsquo;s Hard To Care About Everything", "COIN", "I&rsquo;m Not Afraid Of Music Anymore", 2024],
+				["i like the way you kiss me", "Artemas", "i like the way you kiss me", 2024],
+				["Bitter", "FLETCHER & Kito", "Bitter", 2020],
+				["Dead Man Walking", "Grant & Ellis", "Dead Man Walking", 2022],
+				["Self Destruction Mode", "The Chainsmokers & bludnymph", "Self Destruction Mode", 2023],
+				["High Hopes", "Panic! At The Disco", "Pray for the Wicked", 2018],
+				["Bruise", "BETWEEN FRIENDS", "Bruise", 2023],
+				["Technotude", "Levi.Sct", "Technotude", 2025],
+				["Downtown (feat. Eric Nally, Grandmaster Caz, Kool Moe Dee & Melle Mel)", "Macklemore & Ryan Lewis", "This Unruly Mess I&rsquo;ve Made", 2016],
+				["Life Boat.", "RAYE", "THIS MUSIC MAY CONTAIN HOPE.", 2026],
+				["Doors", "Noah Kahan", "The Great Divide: The Last Of The Bugs", 2026]
 			]
 		}
 	},
@@ -1195,20 +1168,7 @@
 		"🎵 - February 2024",
 		"🎵 - January 2024"
 	],
-	"other": [
-		"oops all bbno$",
-		"oops all Conan Gray",
-		"oops all Exyl",
-		"oops all Hozier",
-		"oops all Jazz Emu",
-		"oops all Noah Kahan",
-		"⚡ Epic Music",
-		"LETHAL COMPANY",
-		"guess the song from the first second",
-		"songs I&rsquo;ve sung over large bodies of water",
-		"doubles",
-		"NUMBERS"
-	],
+	"other": ["oops all bbno$", "oops all Conan Gray", "oops all Exyl", "oops all Hozier", "oops all Jazz Emu", "oops all Noah Kahan", "⚡ Epic Music", "LETHAL COMPANY", "CELESTIAL MOTIVATION"],
 	"badges": [
 		["April 2026", "Harry Styles", "0.10%"],
 		["March 2026", "Harry Styles", "0.05%"],
