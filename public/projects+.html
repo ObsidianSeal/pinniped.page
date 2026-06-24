@@ -155,49 +155,63 @@
 			const query = window.location.search;
 			const item = new URLSearchParams(query);
 			const tag = item.get("tag");
-			const search = item.get("search");
 			const regexBoolean = item.get("r");
+
+			let search = item.get("search");
 
 			// function to remove elements from list
 			function refine(type, whatToKeep) {
 				if (type == "tag") {
 					// by tag
 					if (whatToKeep != null) {
-						searchable.querySelectorAll(`p.blog-archive:not(p:has(.${whatToKeep}))`).forEach((element) => {
-							element.remove();
-						});
+						document
+							.querySelector("#searchable")
+							.querySelectorAll(`p.blog-archive:not(p:has(.${whatToKeep}))`)
+							.forEach((element) => {
+								element.remove();
+							});
 					} else {
-						searchable.querySelectorAll(`p.blog-archive:not(p:has(.new, .updated, .beta, .tag))`).forEach((element) => {
-							element.remove();
-						});
+						document
+							.querySelector("#searchable")
+							.querySelectorAll(`p.blog-archive:not(p:has(.new, .updated, .beta, .tag))`)
+							.forEach((element) => {
+								element.remove();
+							});
 					}
 				} else {
 					// or by text (in title)
-					searchable.querySelectorAll(`p.blog-archive`).forEach((element) => {
-						if (regexBoolean == "t") {
-							var regexString = new RegExp(whatToKeep);
-							if (!regexString.test(element.children[1].children[0].innerHTML)) {
-								element.remove();
+					document
+						.querySelector("#searchable")
+						.querySelectorAll(`p.blog-archive`)
+						.forEach((element) => {
+							if (regexBoolean == "t") {
+								var regexString = new RegExp(whatToKeep);
+								if (!regexString.test(element.children[1].children[0].innerHTML)) {
+									element.remove();
+								}
+							} else {
+								var foundSearch = false;
+
+								// within title?
+								if (element.children[1].children[0].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) foundSearch = true;
+
+								// within description?
+								if (element.children[1].children[element.children[1].children.length - 1].innerHTML.substring(2).toLowerCase().includes(whatToKeep.toLowerCase())) foundSearch = true;
+
+								// within tooltip?
+								element.querySelectorAll(".tooltip").forEach((tooltip) => {
+									if (
+										tooltip.innerHTML
+											.substring(tooltip.innerHTML.indexOf("—") + 2)
+											.toLowerCase()
+											.includes(whatToKeep.toLowerCase())
+									)
+										foundSearch = true;
+								});
+
+								if (!foundSearch) element.remove();
 							}
-						} else {
-							var foundSearch = false;
-
-							// within title?
-							if (element.children[1].children[0].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) foundSearch = true;
-
-							// within description?
-							if (element.children[1].children[element.children[1].children.length - 1].innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) {
-								foundSearch = true;
-							}
-
-							// within tooltip?
-							element.querySelectorAll(".tooltip").forEach((tooltip) => {
-								if (tooltip.innerHTML.toLowerCase().includes(whatToKeep.toLowerCase())) foundSearch = true;
-							});
-
-							if (!foundSearch) element.remove();
-						}
-					});
+						});
 				}
 			}
 
@@ -209,12 +223,6 @@
 					} else {
 						refine("tag", "null");
 					}
-					// ⬆️ this should allow for 'no results' if the tag is invalid or the selector is a number
-					// if (tag == "new" || tag == "updated" || tag == "beta" || tag == "tag") {
-					// 	refine("tag", tag);
-					// } else {
-					// 	console.log("tag is a string, but not a known tag");
-					// }
 				} else {
 					refine("tag", null);
 				}
@@ -222,26 +230,29 @@
 
 			// use search?
 			if (search != null && search != "") {
-				refine("search", search.replace("'", "’")); // because I use &rsquo; now
+				console.log("%cINFO:", infoStyle, `search = ${search}`);
+
+				// "SMART TYPOGRAPHY" --- QUOTES --- ADAPTED FROM "Train of Thought"
+
+				search = search.replace(/'/g, "’"); // all straight quotes should become right fancy quotes...
+				search = search.replace(/^’/, "‘"); // ...unless the quote is at the beginning
+
+				search = search.replace(/ '/g, " ‘"); // all straight quotes with characters on their right should become left fancy quotes
+				search = search.replace(/ ’/g, " ‘"); // error correction
+				search = search.replace(/' /g, "’ "); // all straight quotes with characters on their left should become right fancy quotes
+				search = search.replace(/‘ /g, "’ "); // error correction
+
+				// "SMART TYPOGRAPHY" --- DASHES --- ADAPTED FROM "Train of Thought"
+
+				search = search.replace(/---/g, "—"); // all triple-hyphens should become em dashes
+				search = search.replace(/--/g, "–"); // all double-hyphens should become en dashes
+
+				console.log("%cINFO:", infoStyle, `search = ${search}`);
+				refine("search", search); // because I use &rsquo; now
 			}
 
 			// no results?
-			if (searchable.querySelectorAll(".blog-archive").length == 0) {
-				// let string = "";
-
-				// if (tag == null) {
-				// 	string = `Your search of <span class="special-box">&nbsp;tag=<b>null</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b style="display: inline-block"><a class="link" href="projects+.html">CLEAR SEARCH?</a></b>`;
-				// } else if (tag == "") {
-				// 	string = `Your search of <span class="special-box">&nbsp;tag=<b>any</b>&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b style="display: inline-block"><a class="link" href="projects+.html">CLEAR SEARCH?</a></b>`;
-				// } else {
-				// 	string = `Your search of <span class="special-box">&nbsp;tag=<b>${tag}&nbsp;</b></span> and <span class="special-box">&nbsp;search=<b>${search}</b>&nbsp;</span> returned no results. <b style="display: inline-block"><a class="link" href="projects+.html">CLEAR SEARCH?</a></b>`;
-				// }
-
-				// let pElement = document.createElement("p");
-				// pElement.innerHTML = string;
-				// pElement.classList.add("search-no-results");
-
-				// document.querySelector(".content-end").before(pElement);
+			if (document.querySelector("#searchable").querySelectorAll(".blog-archive").length == 0) {
 				window.location.href = "yikes.html?s=700";
 			}
 		} catch {
