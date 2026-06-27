@@ -251,6 +251,8 @@
 							window.location.href = pageLocation + pageName.replace("?", ".html?"); // contains '?' first: navigate, place '.html' before '?'
 						} else if (pageName.includes("#")) {
 							window.location.href = pageLocation + pageName.replace("#", ".html#"); // contains '#' first: navigate, place '.html' before '#'
+						} else {
+							window.location.href = `${pageLocation}${pageName}.html`;
 						}
 					} else {
 						window.location.href = pageLocation + pageName;
