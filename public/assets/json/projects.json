@@ -45,7 +45,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.1.2",
-		"featured": 0
+		"featured": 4
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -61,7 +61,7 @@
 			"tag": ["", ""]
 		},
 		"version": "2.3.3",
-		"featured": 3
+		"featured": 5
 	},
 	"Chess": {
 		"basic": true,
@@ -216,12 +216,12 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["June 28th", "v2.1.3: help cursor, 5 new icon packs, more icons added to others"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
 		"version": "2.1.2",
-		"featured": 7
+		"featured": 2
 	},
 	"Finite Craft": {
 		"basic": false,
@@ -237,7 +237,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.6.0",
-		"featured": 0
+		"featured": 8
 	},
 	"Finite Craft — help!": {
 		"basic": true,
@@ -333,7 +333,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 2
+		"featured": 1
 	},
 	"KC": {
 		"basic": false,
@@ -349,7 +349,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 0
+		"featured": 6
 	},
 	"Minecraft & Motion": {
 		"basic": false,
@@ -429,7 +429,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 4
+		"featured": 0
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -461,7 +461,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 6
+		"featured": 0
 	},
 	"progress": {
 		"basic": false,
@@ -573,7 +573,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 5
+		"featured": 0
 	},
 	"Think Four": {
 		"basic": false,
@@ -637,7 +637,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 1
+		"featured": 3
 	},
 	"Typewriter Simulator": {
 		"basic": false,
@@ -653,7 +653,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 0
+		"featured": 7
 	},
 	"VALORANT Points calculator": {
 		"basic": false,

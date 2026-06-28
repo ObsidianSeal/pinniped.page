@@ -583,6 +583,10 @@
 				font-size: 30px;
 			}
 
+			.all-of-style-container i:hover {
+				cursor: help;
+			}
+
 			.sr-only {
 				display: none !important;
 			}
@@ -668,6 +672,10 @@
 
 			img {
 				width: 100%;
+			}
+
+			img:hover {
+				cursor: help;
 			}
 
 			@media all and (max-width: 900px) {
@@ -1037,6 +1045,13 @@
 					</div>
 
 					<div class="style-section">
+						<span>mosaic</span>
+						<div class="style-option" title="set &ldquo;mosaic, solid&rdquo; as the style to show new icons in" tabindex="0" id="mosaic.solid">
+							<i class="fa-mosaic fa-solid fa-notdef"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
 						<span>notdog</span>
 						<div class="style-option" title="set &ldquo;notdog, solid&rdquo; as the style to show new icons in" tabindex="0" id="notdog.solid">
 							<i class="fa-notdog fa-solid fa-notdef"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
@@ -1051,6 +1066,13 @@
 					</div>
 
 					<div class="style-section">
+						<span>pixel</span>
+						<div class="style-option" title="set &ldquo;pixel, regular&rdquo; as the style to show new icons in" tabindex="0" id="pixel.regular">
+							<i class="fa-pixel fa-regular fa-notdef"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
 						<span>slab</span>
 						<div class="style-option" title="set &ldquo;slab, regular&rdquo; as the style to show new icons in" tabindex="0" id="slab.regular">
 							<i class="fa-slab fa-regular fa-notdef"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
@@ -1058,9 +1080,23 @@
 					</div>
 
 					<div class="style-section">
+						<span>slab-duo</span>
+						<div class="style-option" title="set &ldquo;slab-duo, regular&rdquo; as the style to show new icons in" tabindex="0" id="slab-duo.regular">
+							<i class="fa-slab-duo fa-regular fa-notdef"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
 						<span>slab-press</span>
 						<div class="style-option" title="set &ldquo;slab-press, regular&rdquo; as the style to show new icons in" tabindex="0" id="slab-press.regular">
 							<i class="fa-slab-press fa-regular fa-notdef"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
+						<span>slab-press-duo</span>
+						<div class="style-option" title="set &ldquo;slab-press-duo, regular&rdquo; as the style to show new icons in" tabindex="0" id="slab-press-duo.regular">
+							<i class="fa-slab-press-duo fa-regular fa-notdef"></i>regular<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
 					</div>
 
@@ -1089,6 +1125,13 @@
 						<span>utility-fill</span>
 						<div class="style-option" title="set &ldquo;utility-fill, semibold&rdquo; as the style to show new icons in" tabindex="0" id="utility-fill.semibold">
 							<i class="fa-utility-fill fa-semibold fa-notdef"></i>semibold<i class="fa-solid fa-check selected-style-check"></i>
+						</div>
+					</div>
+
+					<div class="style-section">
+						<span>vellum</span>
+						<div class="style-option" title="set &ldquo;vellum, solid&rdquo; as the style to show new icons in" tabindex="0" id="vellum.solid">
+							<i class="fa-vellum fa-solid fa-notdef"></i>solid<i class="fa-solid fa-check selected-style-check"></i>
 						</div>
 					</div>
 
@@ -1145,8 +1188,8 @@
 			const errorStyle = "background: #e76f51; color: black; padding: 0 5px; border-radius: 10px";
 
 			// versions
-			const version = "v2.1.2 (2026/02/27)";
-			const fontAwesomeVersion = "Font Awesome Pro+ v7.2.0";
+			const version = "v2.1.3 (2026/06/28)";
+			const fontAwesomeVersion = "Font Awesome Pro+ v7.3.0";
 
 			// everything has been moved to ../assets/json/icons.json
 			let icons; // icon object (FA 7.2.0)
