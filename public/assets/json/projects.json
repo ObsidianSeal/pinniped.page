@@ -237,7 +237,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.6.0",
-		"featured": 8
+		"featured": 0
 	},
 	"Finite Craft — help!": {
 		"basic": true,
@@ -456,12 +456,12 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["July 1st", "mentioned Last.fm, removed announcement"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 0
+		"featured": 8
 	},
 	"progress": {
 		"basic": false,
