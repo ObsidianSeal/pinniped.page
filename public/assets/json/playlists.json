@@ -1,5 +1,33 @@
 {
 	"music": {
+		"🎵 - July 2026": {
+			"link": "PLTKwBiSgGBsg7HjKq6i6uDd8xYCv7z3Gj",
+			"length": [20, "1:05:00"],
+			"added": "2026/06/30",
+			"updated": "2026/06/30",
+			"tracks": [
+				["skinny dip", "almost monday", "skinny dip", 2026],
+				["I Lied, I&rsquo;m Sorry", "Chloe Qisha", "Chloe Qisha", 2024],
+				["Self Aware", "Temper City", "Self Aware", 2026],
+				["Play Your Guitar", "Electric Guest", "10K (Deluxe)", 2026],
+				["Camouflage", "aespa", "LEMONADE - The 2nd Album", 2026],
+				["Amaze Amaze Amaze (Life on Erid)", "Daniel Pemberton", "Project Hail Mary (Original Motion Picture Score)", 2026],
+				["the cure", "Olivia Rodrigo", "you seem pretty sad for a girl so in love", 2026],
+				["Love Somebody", "Maroon 5", "Overexposed", 2012],
+				["Sugar", "Maroon 5", "V", 2014],
+				["Moves Like Jagger (Studio Recording From &ldquo;The Voice&rdquo; Performance) (feat. Christina Aguilera)", "Maroon 5", "Hands All Over (Deluxe)", 2010],
+				["This Love", "Maroon 5", "Songs About Jane", 2002],
+				["Why", "Dominic Fike", "What Could Possibly Go Wrong", 2020],
+				["Bummerland", "AJR", "OK ORCHESTRA", 2021],
+				["Feel It Still", "Portugal. The Man", "Woodstock (Deluxe Edition)", 2017],
+				["Rich", "Bea", "Bea and her Business (2023-2025)", 2026],
+				["Stay the Night", "Jukebox The Ghost", "Stay the Night", 2017],
+				["Little Lion Man", "Mumford & Sons", "Sigh No More", 2009],
+				["SOS", "George Alice", "SOS", 2025],
+				["IT MIGHT BE LOVE", "Stephen Sanchez", "LOVE, LOVE, LOVE", 2026],
+				["Stranger", "Jukebox The Ghost", "Phantasmagorical Vol. 1", 2025]
+			]
+		},
 		"🎵 - June 2026": {
 			"link": "PLTKwBiSgGBsjBqAu6c0HA9sBjepx9A_ez",
 			"length": [20, "1:10:01"],
@@ -1199,6 +1227,7 @@
 		}
 	},
 	"monthly": [
+		"🎵 - July 2026",
 		"🎵 - June 2026",
 		"🎵 - May 2026",
 		"🎵 - April 2026",
