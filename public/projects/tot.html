@@ -978,6 +978,7 @@
 		}
 
 		function submitStationGuess(guess) {
+			let correct = false;
 			let lineIndex = 0;
 			for (let line in systems[currentSystem]) {
 				let stationIndex = 0;
@@ -986,14 +987,15 @@
 						if (document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).textContent != station) {
 							document.querySelector(`.lines :nth-child(${lineIndex + 1}) :nth-child(${stationIndex + 4}) .station-name`).innerHTML = station;
 							document.querySelector(".station-name-input input").value = "";
-							document.querySelector(".completion").innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.round((guessedStations / totalStations) * 100)}%)`;
+							if (!correct) {
+								document.querySelector(".completion").innerHTML = `<i class="fa-chisel fa-regular fa-gauge"></i> ${++guessedStations}/${totalStations} (${Math.round((guessedStations / totalStations) * 100)}%)`;
+								correct = true;
+							}
 
 							if (guessedStations == totalStations) {
 								document.querySelector("#give-up-and-reveal-answers").classList.add("hide");
 								giveUpAndRevealAnswers();
 							}
-
-							return;
 						}
 					}
 					stationIndex++;
