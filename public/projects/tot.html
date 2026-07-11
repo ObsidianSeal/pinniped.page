@@ -1000,7 +1000,7 @@
 				lineIndex++;
 			}
 
-			if (guessedStations == totalStations) {
+			if (correct && guessedStations == totalStations) {
 				document.querySelector("#give-up-and-reveal-answers").classList.add("hide");
 				giveUpAndRevealAnswers();
 			}
