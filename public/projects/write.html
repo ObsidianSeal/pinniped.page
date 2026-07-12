@@ -288,6 +288,31 @@
 		textArea.addEventListener("input", function () {
 			this.style.height = "0px";
 			this.style.height = `calc(${this.scrollHeight}px - 1in)`;
+
+			// "SMART TYPOGRAPHY" --- QUOTES --- ADAPTED FROM "Train of Thought"
+
+			this.value = this.value.replace(/'/g, "’"); // all straight quotes should become right fancy quotes...
+			this.value = this.value.replace(/^’/, "‘"); // ...unless the quote is at the beginning
+
+			this.value = this.value.replace(/ '/g, " ‘"); // all straight quotes with characters on their right should become left fancy quotes
+			this.value = this.value.replace(/ ’/g, " ‘"); // error correction
+			this.value = this.value.replace(/' /g, "’ "); // all straight quotes with characters on their left should become right fancy quotes
+			this.value = this.value.replace(/‘ /g, "’ "); // error correction
+
+			// copy for double quotes
+
+			this.value = this.value.replace(/"/g, "”"); // all straight quotes should become right fancy quotes...
+			this.value = this.value.replace(/^”/, "“"); // ...unless the quote is at the beginning
+
+			this.value = this.value.replace(/ "/g, " “"); // all straight quotes with characters on their right should become left fancy quotes
+			this.value = this.value.replace(/ ”/g, " “"); // error correction
+			this.value = this.value.replace(/" /g, "” "); // all straight quotes with characters on their left should become right fancy quotes
+			this.value = this.value.replace(/“ /g, "” "); // error correction
+
+			// "SMART TYPOGRAPHY" --- DASHES --- ADAPTED FROM "Train of Thought"
+
+			this.value = this.value.replace(/–-/g, "—"); // all triple-hyphens should become em dashes
+			this.value = this.value.replace(/--/g, "–"); // all double-hyphens should become en dashes
 		});
 	</script>
 
