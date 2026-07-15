@@ -289,6 +289,8 @@
 			this.style.height = "0px";
 			this.style.height = `calc(${this.scrollHeight}px - 1in)`;
 
+			let cursorPosition = this.selectionStart;
+
 			// "SMART TYPOGRAPHY" --- QUOTES --- ADAPTED FROM "Train of Thought"
 
 			this.value = this.value.replace(/'/g, "’"); // all straight quotes should become right fancy quotes...
@@ -313,6 +315,9 @@
 
 			this.value = this.value.replace(/–-/g, "—"); // all triple-hyphens should become em dashes
 			this.value = this.value.replace(/--/g, "–"); // all double-hyphens should become en dashes
+
+			this.selectionStart = cursorPosition;
+			this.selectionEnd = cursorPosition;
 		});
 	</script>
 

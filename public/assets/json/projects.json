@@ -648,7 +648,7 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["July 12th", "smart typography! (should work)"],
+			"updated": ["July 15th", "fixed adding quotes within text sends cursor to end"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
