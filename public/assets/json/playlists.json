@@ -1,5 +1,33 @@
 {
 	"music": {
+		"🎵 - August 2026": {
+			"link": "PLTKwBiSgGBsiE47RVQUWUvloaS3S3G51y",
+			"length": [20, "1:05:18"],
+			"added": "2026/07/31",
+			"updated": "2026/07/31",
+			"tracks": [
+				["Cheerleader", "Porter Robinson", "SMILE! :D", 2024],
+				["Home", "Good Neighbours", "Blue Sky Mentality", 2025],
+				["stupid song", "Olivia Rodrigo", "you seem pretty sad for a girl so in love", 2026],
+				["Money, Money, Money", "ABBA", "Arrival", 1976],
+				["Keep Driving", "Harry Styles", "Harry&rsquo;s House", 2022],
+				["6 Feet Under", "Carter Vail", "Coydog", 2025],
+				["Run Together", "Mumford &amp; Sons", "Prizefighter (Extended Edition)", 2026],
+				["Alphabet (Wasted Summer)", "Lovejoy", "Second to One", 2026],
+				["PASSENGER", "Alex Warren", "PASSENGER", 2026],
+				["NIGHTS LIKE THESE", "Benson Boone", "Walk Me Home...", 2022],
+				["Hooked", "Why Don&rsquo;t We", "8 Letters", 2018],
+				["Don&rsquo;t Wake Me Up", "Why Don&rsquo;t We", "Don&rsquo;t Wake Me Up", 2022],
+				["Better", "nimino & Manta", "Better", 2025],
+				["Talk", "Why Don&rsquo;t We", "8 Letters", 2018],
+				["Ants In My Room", "Carter Vail", "Ants In My Room", 2026],
+				["Starry Eyed", "Good Neighbours", "Blue Sky Mentality", 2025],
+				["Staying Still", "Noah Kahan", "The Great Divide: The Last Of The Bugs", 2026],
+				["Just Two", "Rose Gray", "A Little Louder, Please (Deluxe)", 2025],
+				["burger", "bbno$", "burger", 2026],
+				["...Baby One More Time", "Britney Spears", "...Baby One More Time (Digital Deluxe Version)", 1999]
+			]
+		},
 		"🎵 - July 2026": {
 			"link": "PLTKwBiSgGBsg7HjKq6i6uDd8xYCv7z3Gj",
 			"length": [20, "1:05:00"],
@@ -1227,6 +1255,7 @@
 		}
 	},
 	"monthly": [
+		"🎵 - August 2026",
 		"🎵 - July 2026",
 		"🎵 - June 2026",
 		"🎵 - May 2026",
