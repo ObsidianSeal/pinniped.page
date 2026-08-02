@@ -733,6 +733,8 @@ hr {
 
 	background-color: #292f36;
 	color: #ffffee;
+
+	max-width: calc(100% - 80px); /* I have no idea why 80px is the correct dimension */
 }
 
 .new-button > div {
@@ -743,6 +745,14 @@ hr {
 	border-bottom: 3px solid transparent;
 
 	transition: border-bottom-color 500ms;
+
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.new-button > div > span:first-child {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .new-button:hover > div,
