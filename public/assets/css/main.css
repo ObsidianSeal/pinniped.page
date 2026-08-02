@@ -734,7 +734,7 @@ hr {
 	background-color: #292f36;
 	color: #ffffee;
 
-	max-width: calc(100% - 80px); /* I have no idea why 80px is the correct dimension */
+	max-width: calc(100% - 80px);
 }
 
 .new-button > div {
