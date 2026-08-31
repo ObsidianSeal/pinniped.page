@@ -243,7 +243,7 @@
 				if (e.key === "Backspace" && !locationSelected) pageLocation = "assets/";
 
 				if (e.key === "Enter" && pageName != "") {
-					if (/^http:\/\/localhost:5500\/public\/index\.html/.test(window.location.href)) {
+					if (/^http:\/\/localhost:5500\/public\//.test(window.location.href)) {
 						if (pageName.includes("?") && pageName.includes("#")) {
 							if (pageName.indexOf("?") < pageName.indexOf("#"))
 								window.location.href = pageLocation + pageName.replace("?", ".html?"); // contains '?' first: navigate, place '.html' before '?'

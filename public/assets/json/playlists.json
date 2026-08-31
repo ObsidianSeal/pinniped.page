@@ -1,5 +1,33 @@
 {
 	"music": {
+		"🎵 - September 2026": {
+			"link": "PLTKwBiSgGBsgTwvqgfBrKCnINH7DRCwD4",
+			"length": [20, "1:03:36"],
+			"added": "2026/08/31",
+			"updated": "2026/08/31",
+			"tracks": [
+				["maggots for brains", "Olivia Rodrigo", "you seem pretty sad for a girl so in love", 2026],
+				["White Keys", "Dominic Fike", "White Keys", 2025],
+				["Humpty Dumpty", "AJR", "OK ORCHESTRA", 2021],
+				["The Trick", "AJR", "OK ORCHESTRA", 2021],
+				["Hey Look Ma, I Made It", "Panic! At The Disco", "Pray for the Wicked", 2018],
+				["Stereo Hearts (feat. Adam Levine)", "Gym Class Heroes", "The Papercut Chronicles II", 2011],
+				["[1:11am] Antemma", "aksfx", "Radio: Underground (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["Pineapple Kryptonite", "ATARASHII GAKKO!", "SNACKTIME", 2021],
+				["The World Is A Marble Heart", "AJR", "Living Room", 2015],
+				["The Green And The Town", "AJR", "Living Room", 2015],
+				["Stop The Wedding!", "Ashe", "Stop The Wedding!", 2026],
+				["Drive By", "Train", "California 37", 2012],
+				["Wish You Were Sober", "Conan Gray", "Kid Krow", 2020],
+				["Heaven", "Fitz and The Tantrums", "Let Yourself Free", 2022],
+				["My Man on Willpower", "Sabrina Carpenter", "Man&rsquo;s Best Friend", 2025],
+				["victim", "ericdoa", "things with wings", 2022],
+				["lastjune", "ericdoa", "DOA", 2024],
+				["Summertime in the Loo", "AJDIDIT", "Summertime in the Loo", 2026],
+				["Finest Girl in the 519", "AJDIDIT", "Finest Girl in the 519", 2026],
+				["Fool", "Fitz and The Tantrums", "Fitz and The Tantrums (Deluxe Edition)", 2016]
+			]
+		},
 		"🎵 - August 2026": {
 			"link": "PLTKwBiSgGBsiE47RVQUWUvloaS3S3G51y",
 			"length": [20, "1:05:18"],
@@ -1256,6 +1284,7 @@
 		}
 	},
 	"monthly": [
+		"🎵 - September 2026",
 		"🎵 - August 2026",
 		"🎵 - July 2026",
 		"🎵 - June 2026",
