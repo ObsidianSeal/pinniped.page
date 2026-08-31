@@ -26,10 +26,6 @@ All other main pages are listed on [the About page](https://pinniped.page/about)
 
 ---
 
-I&rsquo;m not really open to contributions, but you&rsquo;re welcome to suggest additions anyway.
-
-And feel free to open issues or start discussions.
-
 Thanks for visiting!
 
 **— Obsidian_Seal**
