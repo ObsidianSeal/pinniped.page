@@ -424,12 +424,12 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["", ""],
+			"updated": ["September 15th", "commands in alphabetical order, preparing for v1.10.xs"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 0
+		"featured": 9
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -601,7 +601,7 @@
 		"tags": {
 			"new": ["", ""],
 			"updated": ["", ""],
-			"beta": ["August 22nd", "page exists"],
+			"beta": ["August 22nd (2025)", "page exists"],
 			"tag": ["", ""]
 		},
 		"version": "",
