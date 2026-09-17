@@ -45,7 +45,7 @@
 			"tag": ["", ""]
 		},
 		"version": "1.1.2",
-		"featured": 4
+		"featured": 0
 	},
 	"Bus Ride Bingo": {
 		"basic": false,
@@ -61,7 +61,7 @@
 			"tag": ["", ""]
 		},
 		"version": "2.3.3",
-		"featured": 5
+		"featured": 0
 	},
 	"Chess": {
 		"basic": true,
@@ -221,7 +221,7 @@
 			"tag": ["", ""]
 		},
 		"version": "2.1.2",
-		"featured": 2
+		"featured": 0
 	},
 	"Finite Craft": {
 		"basic": false,
@@ -327,13 +327,13 @@
 		"description": "Know when the gates will lower with this Wear OS complication.",
 		"flag": "",
 		"tags": {
-			"new": ["May 2nd", "new page"],
+			"new": ["", ""],
 			"updated": ["", ""],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 1
+		"featured": 0
 	},
 	"KC": {
 		"basic": false,
@@ -349,7 +349,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 6
+		"featured": 0
 	},
 	"Minecraft & Motion": {
 		"basic": false,
@@ -424,12 +424,12 @@
 		"flag": "",
 		"tags": {
 			"new": ["", ""],
-			"updated": ["September 15th", "commands in alphabetical order, preparing for v1.10.xs"],
+			"updated": ["September 17th", "Omega Seal v1.10.0 done, /text-space renamed to /explode, the 3 /tag, /text clarification"],
 			"beta": ["", ""],
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 9
+		"featured": 2
 	},
 	"PlainPlanes": {
 		"basic": true,
@@ -461,7 +461,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 8
+		"featured": 3
 	},
 	"progress": {
 		"basic": false,
@@ -637,7 +637,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 3
+		"featured": 0
 	},
 	"Typewriter Simulator": {
 		"basic": false,
@@ -653,7 +653,7 @@
 			"tag": ["", ""]
 		},
 		"version": "",
-		"featured": 7
+		"featured": 1
 	},
 	"VALORANT Points calculator": {
 		"basic": false,

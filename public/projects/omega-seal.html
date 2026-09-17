@@ -309,14 +309,14 @@
 				<br />
 				<p>
 					v1.10.0 —
-					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square/commits/main/" title="GitHub > ObsidianSeal/Omega-Seal-The-Square > Commits">September 15th, 2026</a>
+					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square/commits/main/" title="GitHub > ObsidianSeal/Omega-Seal-The-Square > Commits">September 17th, 2026</a>
 				</p>
 				<br />
 				<p id="bot-status">?</p>
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="embed">COMMAND</h5>
 				<h2>/embed</h2>
 				<p>description: <span class="dark-grey-bg">Send a custom embed.</span><br />usage: <span class="dark-grey-bg">/embed &lt;title&gt; &lt;description&gt; [colour]</span><br />parameters:</p>
 				<ul>
@@ -340,7 +340,20 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="explode">COMMAND</h5>
+				<h2>/explode</h2>
+				<p>description: <span class="dark-grey-bg">Put a space between every character in some text.</span><br />usage: <span class="dark-grey-bg">/explode &lt;text&gt;</span><br />parameters:</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">text</b> (string)<br />description: <span class="dark-grey-bg">The text you want to add spaces to.</span><br />pattern:
+						<span class="dark-grey-bg">/^.+$/</span>
+					</li>
+				</ul>
+				<p>availability: everywhere<br /><br />Very simple automation tool.</p>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg" id="help">COMMAND</h5>
 				<h2>/help</h2>
 				<p>
 					description: <span class="dark-grey-bg">Send this command if you don&rsquo;t know how to use the bot or if you just want to learn more about it.</span><br />usage: <span class="dark-grey-bg">/help</span><br />availability:
@@ -349,7 +362,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="ion">COMMAND</h5>
 				<h2>/ion</h2>
 				<p>
 					description: <span class="dark-grey-bg">See when the next ION trains are coming to University of Waterloo Station.</span><br />usage: <span class="dark-grey-bg">/ion</span><br />availability: everywhere<br /><br />Provides
@@ -364,7 +377,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="join">COMMAND</h5>
 				<h2>/join</h2>
 				<p>description: <span class="dark-grey-bg">Join one of The Square&rsquo;s regions and change the colour of your name.</span><br />usage: <span class="dark-grey-bg">/join &lt;region&gt;</span><br />parameters:</p>
 				<ul>
@@ -403,7 +416,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="leave">COMMAND</h5>
 				<h2>/leave</h2>
 				<p>
 					description: <span class="dark-grey-bg">Leave The Square and reset the colour of your name.</span><br />usage: <span class="dark-grey-bg">/leave</span><br />availability:
@@ -413,7 +426,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="math">COMMAND</h5>
 				<h2>/math</h2>
 				<p>description: <span class="dark-grey-bg">Convert text (LaTeX) into math.</span><br />usage: <span class="dark-grey-bg">/math &lt;latex&gt;</span><br />parameters:</p>
 				<ul>
@@ -430,7 +443,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="metar">COMMAND</h5>
 				<h2>/metar</h2>
 				<p>description: <span class="dark-grey-bg">Prepare for flight with this quick weather report.</span><br />usage: <span class="dark-grey-bg">/metar &lt;airport&gt;</span><br />parameters:</p>
 				<ul>
@@ -450,7 +463,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="music">COMMAND</h5>
 				<h2>/music</h2>
 				<p>
 					description: <span class="dark-grey-bg">Get a random track from one of Obsidian_Seal&rsquo;s monthly playlists.</span><br />usage: <span class="dark-grey-bg">/music</span><br />availability: everywhere<br /><br />Sends an
@@ -462,7 +475,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="ping">COMMAND</h5>
 				<h2>/ping</h2>
 				<p>
 					description: <span class="dark-grey-bg">Latency and network speed details.</span><br />usage: <span class="dark-grey-bg">/ping</span><br />availability: everywhere<br /><br />The quintessential Discord bot command, now
@@ -471,7 +484,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="playlist">COMMAND</h5>
 				<h2>/playlist</h2>
 				<p>
 					description: <span class="dark-grey-bg">Get the link to Obsidian_Seal&rsquo;s latest monthly playlist.</span><br />usage: <span class="dark-grey-bg">/playlist</span><br />availability: everywhere<br /><br />Sends the
@@ -480,7 +493,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="populations">COMMAND</h5>
 				<h2>/populations</h2>
 				<p>
 					description: <span class="dark-grey-bg">Check the population of each of The Square&rsquo;s regions.</span><br />usage: <span class="dark-grey-bg">/populations</span><br />availability:
@@ -491,7 +504,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="role">COMMAND</h5>
 				<h2>/role</h2>
 				<p>description: <span class="dark-grey-bg">Get some role information.</span><br />usage: <span class="dark-grey-bg">/role &lt;role&gt;</span><br />parameters:</p>
 				<ul>
@@ -501,7 +514,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="roles">COMMAND</h5>
 				<h2>/roles</h2>
 				<p>description: <span class="dark-grey-bg">Roles in the server, sorted by member count.</span><br />usage: <span class="dark-grey-bg">/role [filter]</span><br />parameters:</p>
 				<ul>
@@ -514,9 +527,44 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
+				<h5 class="type-tag teal-bg" id="tag">COMMAND</h5>
+				<p>
+					<br />Three very useful tools under one command. Great for quickly updating or querying the tags applied to a guild forum post while ensuring communication consistency and clarity. Due to limitations in Discord&rsquo;s
+					permissions system (e.g. the lack of an exclusive permission for modifying post tags), these commands are disabled by default on a per-forum basis. Contact me to have your forum(s) added to the list. Keep in mind that in
+					forums with these commands available, any user with access to Omega Seal&rsquo;s commands can edit each post&rsquo;s applied tags.<br /><br />
+				</p>
+				<h2>/tag add</h2>
+				<p>description: <span class="dark-grey-bg">Add a tag to this forum post.</span><br />usage: <span class="dark-grey-bg">/tag add &lt;tag&gt;</span><br />parameters:</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">tag</b> (string)<br />description: <span class="dark-grey-bg">The name of an existing tag.</span><br />pattern:
+						<span class="dark-grey-bg">/^.+$/</span>
+					</li>
+				</ul>
+				<p>availability: a set list of forum channels<br /><br />Unfortunately, Discord forum posts cannot have more than five tags.<br /><br /></p>
+				<h2>/tag list</h2>
+				<p>
+					description: <span class="dark-grey-bg">List all the tags applicable to this forum post and see which have been applied.</span><br />usage: <span class="dark-grey-bg">/tag list</span><br />availability: a set list of forum
+					channels<br /><br />Works with custom emojis! Dynamic grammar! I thought of it all. Probably.<br /><br />
+				</p>
+				<h2>/tag remove</h2>
+				<p>description: <span class="dark-grey-bg">Remove a tag from this forum post.</span><br />usage: <span class="dark-grey-bg">/tag remove &lt;tag&gt;</span><br />parameters:</p>
+				<ul>
+					<li>
+						<b class="dark-grey-bg">tag</b> (string)<br />description: <span class="dark-grey-bg">The name of one of the tags on this post.</span><br />pattern:
+						<span class="dark-grey-bg">/^.+$/</span>
+					</li>
+				</ul>
+				<p>
+					availability: a set list of forum channels<br /><br />If &ldquo;Require people to select tags when posting&rdquo; is checked and there is only one tag applied to a post, it cannot be removed. You can add another and then
+					remove the one you wanted to remove.
+				</p>
+			</div>
+
+			<div class="box">
+				<h5 class="type-tag teal-bg" id="text">COMMAND</h5>
 				<h2>/text</h2>
-				<p>description: <span class="dark-grey-bg">Send a message on my website&rsquo;s chat page.</span><br />usage: <span class="dark-grey-bg">/text &lt;message&gt;</span><br />parameters:</p>
+				<p>description: <span class="dark-grey-bg">Send a message on pinniped.page/text.</span><br />usage: <span class="dark-grey-bg">/text &lt;message&gt;</span><br />parameters:</p>
 				<ul>
 					<li>
 						<b class="dark-grey-bg">message</b> (string)<br />description: <span class="dark-grey-bg">The text you want to send.</span><br />pattern:
@@ -524,26 +572,13 @@
 					</li>
 				</ul>
 				<p>
-					availability: everywhere<br /><br />Sends a message of up to 120 characters to <a href="text.html" title="text">my website&rsquo;s chat page</a>, anonymously and publicly. Keep in mind, however, that if you use the command in
-					a server it will probably be pretty clear it was you. Messages are deleted after 30 minutes. Please review the privacy policy at the bottom of this page before using this command.
+					availability: everywhere<br /><br />Sends a message of up to 120 characters to <a href="text.html" title="text">pinniped.page/text</a>, anonymously and publicly. Keep in mind, however, that if you use the command in a server
+					it will probably be pretty clear it was you. Messages are deleted after 30 minutes. Please review the privacy policy at the bottom of this page before using this command.
 				</p>
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag teal-bg">COMMAND</h5>
-				<h2>/text-space</h2>
-				<p>description: <span class="dark-grey-bg">Put a space between every character in some text.</span><br />usage: <span class="dark-grey-bg">/text-space &lt;text&gt;</span><br />parameters:</p>
-				<ul>
-					<li>
-						<b class="dark-grey-bg">text</b> (string)<br />description: <span class="dark-grey-bg">The text you want to add spaces to.</span><br />pattern:
-						<span class="dark-grey-bg">/^.+$/</span>
-					</li>
-				</ul>
-				<p>availability: everywhere<br /><br />Very simple automation tool.</p>
-			</div>
-
-			<div class="box">
-				<h5 class="type-tag orange-bg">FEATURE</h5>
+				<h5 class="type-tag orange-bg" id="welcome-message-on-server-join">FEATURE</h5>
 				<h2>Welcome Message on Server Join</h2>
 				<p>
 					When someone joins <a href="https://ite.fyi/ss" title="join Seal Squad [EXTERNAL]">one of my servers</a>, a message is sent to welcome them and provide a list of things that new members should do. The message also says how
@@ -552,7 +587,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag orange-bg">FEATURE</h5>
+				<h5 class="type-tag orange-bg" id="random-responses">FEATURE</h5>
 				<h2>Random Responses</h2>
 				<p>
 					When someone mentions the bot it responds with a random message. These messages are selected from a list, based on nothing, and can be ignored. I (Obsidian_Seal) am not responsible for coincidentally inappropriate responses.
@@ -561,7 +596,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag orange-bg">FEATURE</h5>
+				<h5 class="type-tag orange-bg" id="wordlelele-update-messages">FEATURE</h5>
 				<h2>wordlelele Update Message</h2>
 				<p>
 					When someone sets the <a href="w.html" title="wordlelele">wordlelele</a>, the bot will notify a channel of my choosing. It will not notify if it has already done so within the last half hour. The message contains a link to
@@ -570,7 +605,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag magenta-bg">EXTRAS</h5>
+				<h5 class="type-tag magenta-bg" id="privacy-policy">EXTRAS</h5>
 				<h2>Privacy Policy</h2>
 				<p>When a command is executed, the following is logged:</p>
 				<ul>
@@ -595,7 +630,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag magenta-bg">EXTRAS</h5>
+				<h5 class="type-tag magenta-bg" id="attribution">EXTRAS</h5>
 				<h2>Attribution</h2>
 				<ul>
 					<li>typeface: <a href="https://www.jetbrains.com/lp/mono/" title="JetBrains Mono [EXTERNAL]">JetBrains Mono</a></li>
@@ -616,7 +651,7 @@
 			</div>
 
 			<div class="box">
-				<h5 class="type-tag magenta-bg">EXTRAS</h5>
+				<h5 class="type-tag magenta-bg" id="other-links">EXTRAS</h5>
 				<h2>Other Links</h2>
 				<ul>
 					<li>
