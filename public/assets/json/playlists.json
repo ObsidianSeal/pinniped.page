@@ -1281,6 +1281,40 @@
 				["Life Boat.", "RAYE", "THIS MUSIC MAY CONTAIN HOPE.", 2026],
 				["Doors", "Noah Kahan", "The Great Divide: The Last Of The Bugs", 2026]
 			]
+		},
+		"THE BIGGEST WALK": {
+			"link": "PLSjqinKBm-S4",
+			"length": [26, "1:49:14"],
+			"added": "2026/10/01",
+			"updated": "2026/10/01",
+			"tracks": [
+				["Big Walk Theme (Jumping Voices)", "aksfx", "Big Walk Theme (Jumping Voices)", 2026],
+				["Mic Select", "aksfx", "B-Sides (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["Menu Music", "aksfx", "B-Sides (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["Credits", "aksfx", "B-Sides (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[5:23am] Alba", "aksfx", "Radio: Blueprint (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[11:42am] Midi", "aksfx", "Radio: Blueprint (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[4:40pm] Terra", "aksfx", "Radio: Blueprint (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[10:51pm] Glomo", "aksfx", "Radio: Blueprint (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[4:48am] Andante (Original Music from the Game &ldquo;Big Walk&rdquo;)", "aksfx", "Radio: Breathwork (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[10:08am] Sleigh Bells (Original Music from the Game &ldquo;Big Walk&rdquo;)", "aksfx", "Radio: Breathwork (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[10:15pm] Vox Humana (Original Music from the Game &ldquo;Big Walk&rdquo;)", "aksfx", "Radio: Breathwork (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[2:50am] Dawn", "aksfx", "Radio: Fourth Space (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[5:41pm] Dusk", "aksfx", "Radio: Fourth Space (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[4:21am] Bounce", "aksfx", "Radio: Journey Beat (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[9:31am] Whistler", "aksfx", "Radio: Journey Beat (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[1:20pm] Journey Beat", "aksfx", "Radio: Journey Beat (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[7:33pm] Holy Beat", "aksfx", "Radio: Journey Beat (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[7:12am] Leitmotif (Original Music from the Game &ldquo;Big Walk&rdquo;)", "aksfx", "Radio: Lobby (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[3:56am] Phase i", "aksfx", "Radio: Mallets (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[10:09am] Phase ii", "aksfx", "Radio: Mallets (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[8:09pm] Phase iii", "aksfx", "Radio: Mallets (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[1:11am] Antemma", "aksfx", "Radio: Underground (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[7:01am] Suns", "aksfx", "Radio: Underground (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[10:45am] Flashes", "aksfx", "Radio: Underground (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[3:53pm] Yuhyuh", "aksfx", "Radio: Underground (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026],
+				["[8:58pm] Electr", "aksfx", "Radio: Underground (Original Music from the Game &ldquo;Big Walk&rdquo;)", 2026]
+			]
 		}
 	},
 	"monthly": [
@@ -1318,7 +1352,7 @@
 		"🎵 - February 2024",
 		"🎵 - January 2024"
 	],
-	"other": ["oops all bbno$", "oops all Conan Gray", "oops all Exyl", "oops all Hozier", "oops all Jazz Emu", "oops all Noah Kahan", "⚡ Epic Music", "LETHAL COMPANY", "CELESTIAL MOTIVATION"],
+	"other": ["oops all bbno$", "oops all Conan Gray", "oops all Exyl", "oops all Hozier", "oops all Jazz Emu", "oops all Noah Kahan", "⚡ Epic Music", "LETHAL COMPANY", "CELESTIAL MOTIVATION", "THE BIGGEST WALK"],
 	"badges": [
 		["August 2026", "AJR", "0.05%"],
 		["July 2026", "Hozier", "0.25%"],
