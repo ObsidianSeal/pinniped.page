@@ -1,5 +1,33 @@
 {
 	"music": {
+		"🎵 - October 2026": {
+			"link": "PLTKwBiSgGBsj4IAiH3d3lhmAb7Lgx3cK2",
+			"length": [20, "1:05:16"],
+			"added": "2026/10/04",
+			"updated": "2026/10/04",
+			"tracks": [
+				["all-american b****", "Olivia Rodrigo", "GUTS", 2023],
+				["u + me = &lt;3", "Olivia Rodrigo", "you seem pretty sad for a girl so in love", 2026],
+				["Love&rsquo;s a Gun", "Daniel Seavey", "Dream Crusher", 2026],
+				["On Top Of The World", "Imagine Dragons", "Night Visions", 2012],
+				["serena joy", "Olivia Rodrigo", "serena joy", 2026],
+				["San Francisco", "The Mowgli&rsquo;s", "Waiting For The Dawn", 2013],
+				["superprism", "almost monday", "THANK GOD IT&rsquo;S ALMOST MONDAY", 2026],
+				["Pleasure delayer", "BETWEEN FRIENDS", "Eyes on my baby", 2024],
+				["Just Friends", "Why Don&rsquo;t We", "Just Friends", 2022],
+				["In My Victoria&rsquo;s Secret", "flowerovlove", "MINI SKIRT WARRIOR", 2026],
+				["french kids", "almost monday", "THANK GOD IT&rsquo;S ALMOST MONDAY", 2026],
+				["CSIRAC", "Ninajirachi", "I Love My Computer", 2025],
+				["Lights Up", "Harry Styles", "Fine Line", 2019],
+				["Fine Line", "Harry Styles", "Fine Line", 2019],
+				["main squeeze", "bbno$", "bbno$", 2025],
+				["Bad Omens", "5 Seconds of Summer", "5SOS5", 2022],
+				["ブレインロット - Brain Rot", "Tokyo Manaka", "Brain Rot", 2026],
+				["Blink Twice", "Rose Gray", "Blink Twice", 2026],
+				["Draw You Out (From The Hunger Games: Sunrise on the Reaping - The Album)", "Noah Kahan & The Hunger Games", "Draw You Out (From The Hunger Games: Sunrise on the Reaping - The Album)", 2026],
+				["WannaCry", "Ninajirachi & Porter Robinson", "WannaCry", 2026]
+			]
+		},
 		"🎵 - September 2026": {
 			"link": "PLTKwBiSgGBsgTwvqgfBrKCnINH7DRCwD4",
 			"length": [20, "1:03:36"],
@@ -1318,6 +1346,7 @@
 		}
 	},
 	"monthly": [
+		"🎵 - October 2026",
 		"🎵 - September 2026",
 		"🎵 - August 2026",
 		"🎵 - July 2026",
@@ -1354,6 +1383,7 @@
 	],
 	"other": ["oops all bbno$", "oops all Conan Gray", "oops all Exyl", "oops all Hozier", "oops all Jazz Emu", "oops all Noah Kahan", "⚡ Epic Music", "LETHAL COMPANY", "CELESTIAL MOTIVATION", "THE BIGGEST WALK"],
 	"badges": [
+		["September 2026", "Harry Styles", "0.25%"],
 		["August 2026", "AJR", "0.05%"],
 		["July 2026", "Hozier", "0.25%"],
 		["June 2026", "Maroon 5", "0.08%"],
