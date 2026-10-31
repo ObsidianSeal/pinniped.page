@@ -1,5 +1,38 @@
 {
 	"music": {
+		"🎵 - November 2026": {
+			"link": "PLTKwBiSgGBsiMrneiqrqD67DhZn3zLMBM",
+			"length": [20, "1:08:12"],
+			"added": "2026/10/31",
+			"updated": "2026/10/31",
+			"tracks": [
+				["JAM DE NOCHE", "Levi.sct", "JAM DE NOCHE", 2026],
+				["Get Away", "George Ezra", "Staying at Tamara&rsquo;s", 2018],
+				["iPod Touch", "Ninajirachi", "I Love My Computer", 2025],
+				["No One to Kill in The Sky", "Seb Lowe", "No One to Kill in The Sky", 2026],
+				["My Body Isn&rsquo;t Ready", "sombr", "My Body Isn&rsquo;t Ready", 2026],
+				["Sleeping With The Lights On", "Daniel Seavey", "Second Wind", 2025],
+				[
+					"Flower In A Hurricane [from GTAVI] (feat. King Gizzard &amp; the Lizard Wizard)",
+					"Justice & Tame Impala & SZA & Grand Theft Auto VI",
+					"Flower In A Hurricane (feat. Tame Impala, SZA, King Gizzard &amp; the Lizard Wizard) [from GTAVI]",
+					2026
+				],
+				["Don&rsquo;t Bring Me Down", "Electric Light Orchestra", "Discovery", 1979],
+				["End of August", "Noah Kahan", "The Great Divide: The Last Of The Bugs", 2026],
+				["Writing&rsquo;s On The Wall", "ROLE MODEL", "Kansas Anymore (The Longest Goodbye)", 2025],
+				["Service Receipt", "ROLE MODEL", "Chuck Timely &amp; The Hourglass", 2026],
+				["Soup", "Remi Wolf", "Big Ideas", 2024],
+				["Water the Flowers, Pray for a Garden", "Valley", "Water the Flowers, Pray for a Garden", 2024],
+				["10x Stronger", "Dominic Fike", "What Could Possibly Go Wrong", 2020],
+				["Adore You", "Harry Styles", "Fine Line", 2019],
+				["delicate", "almost monday", "THANK GOD IT&rsquo;S ALMOST MONDAY", 2026],
+				["Till The Morning", "Electric Guest", "10K (Deluxe)", 2026],
+				["Creator", "Electric Guest", "10K (Deluxe)", 2026],
+				["The Highest View", "Electric Guest", "10K (Deluxe)", 2026],
+				["no more regrets", "almost monday", "THANK GOD IT&rsquo;S ALMOST MONDAY", 2026]
+			]
+		},
 		"🎵 - October 2026": {
 			"link": "PLTKwBiSgGBsj4IAiH3d3lhmAb7Lgx3cK2",
 			"length": [20, "1:05:16"],
@@ -32,10 +65,10 @@
 			"link": "PLTKwBiSgGBsgTwvqgfBrKCnINH7DRCwD4",
 			"length": [20, "1:03:36"],
 			"added": "2026/08/31",
-			"updated": "2026/08/31",
+			"updated": "2026/10/30",
 			"tracks": [
 				["maggots for brains", "Olivia Rodrigo", "you seem pretty sad for a girl so in love", 2026],
-				["White Keys", "Dominic Fike", "White Keys", 2025],
+				["WHITE KEYS", "Dominic Fike", "HOW TO QUIT SMOKING", 2026],
 				["Humpty Dumpty", "AJR", "OK ORCHESTRA", 2021],
 				["The Trick", "AJR", "OK ORCHESTRA", 2021],
 				["Hey Look Ma, I Made It", "Panic! At The Disco", "Pray for the Wicked", 2018],
@@ -86,13 +119,13 @@
 		},
 		"🎵 - July 2026": {
 			"link": "PLTKwBiSgGBsg7HjKq6i6uDd8xYCv7z3Gj",
-			"length": [20, "1:05:00"],
+			"length": [20, "1:05:44"],
 			"added": "2026/06/30",
-			"updated": "2026/06/30",
+			"updated": "2026/10/30",
 			"tracks": [
-				["skinny dip", "almost monday", "skinny dip", 2026],
+				["skinny dip", "almost monday", "THANK GOD IT&rsquo;S ALMOST MONDAY", 2026],
 				["I Lied, I&rsquo;m Sorry", "Chloe Qisha", "Chloe Qisha", 2024],
-				["Self Aware", "Temper City", "Self Aware", 2026],
+				["The Love On High", "Electric Guest", "10K (Deluxe)", 2026],
 				["Play Your Guitar", "Electric Guest", "10K (Deluxe)", 2026],
 				["Camouflage", "aespa", "LEMONADE - The 2nd Album", 2026],
 				["Amaze Amaze Amaze (Life on Erid)", "Daniel Pemberton", "Project Hail Mary (Original Motion Picture Score)", 2026],
@@ -1348,6 +1381,7 @@
 		}
 	},
 	"monthly": [
+		"🎵 - November 2026",
 		"🎵 - October 2026",
 		"🎵 - September 2026",
 		"🎵 - August 2026",
