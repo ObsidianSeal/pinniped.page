@@ -205,6 +205,7 @@
 			a {
 				color: inherit;
 				text-decoration-color: #909090;
+				text-decoration-skip-ink: none;
 			}
 
 			a:hover,
@@ -321,21 +322,21 @@
 				<p>description: <span class="dark-grey-bg">Send a custom embed.</span><br />usage: <span class="dark-grey-bg">/embed &lt;title&gt; &lt;description&gt; [colour]</span><br />parameters:</p>
 				<ul>
 					<li>
-						<b class="dark-grey-bg">title</b> (string)<br />description: <span class="dark-grey-bg">The embed&rsquo;s title.</span><br />pattern:
+						<b class="dark-grey-bg">title</b> (string)<br />description: <span class="dark-grey-bg">The embed's title.</span><br />pattern:
 						<span class="dark-grey-bg">/^.+$/</span>
 					</li>
 					<li>
-						<b class="dark-grey-bg">description</b> (string)<br />description: <span class="dark-grey-bg">The embed&rsquo;s description.</span><br />pattern:
+						<b class="dark-grey-bg">description</b> (string)<br />description: <span class="dark-grey-bg">The embed's description.</span><br />pattern:
 						<span class="dark-grey-bg">/^.+$/</span>
 					</li>
 					<li>
-						<b class="dark-grey-bg">colour</b> (string)<br />description: <span class="dark-grey-bg">The embed&rsquo;s accent colour.</span><br />pattern:
+						<b class="dark-grey-bg">colour</b> (string)<br />description: <span class="dark-grey-bg">The embed's accent colour.</span><br />pattern:
 						<span class="dark-grey-bg">/^#?[0-9A-Fa-f]{6}$/</span>
 					</li>
 				</ul>
 				<p>
 					availability: everywhere<br /><br />Creates a simple embed, like those generated from links. The colour, if you include it, must be a valid
-					<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" title="Wikipedia > Web colors > Hex triplet">hex code</a>. A random colour will be supplied if you don&rsquo;t.
+					<a href="https://en.wikipedia.org/wiki/Web_colors#Hex_triplet" title="Wikipedia > Web colors > Hex triplet">hex code</a>. A random colour will be supplied if you don't.
 				</p>
 			</div>
 
@@ -356,8 +357,8 @@
 				<h5 class="type-tag teal-bg" id="help">COMMAND</h5>
 				<h2>/help</h2>
 				<p>
-					description: <span class="dark-grey-bg">Send this command if you don&rsquo;t know how to use the bot or if you just want to learn more about it.</span><br />usage: <span class="dark-grey-bg">/help</span><br />availability:
-					everywhere<br /><br />Provides some useful links. Perhaps that&rsquo;s how you got here?
+					description: <span class="dark-grey-bg">Send this command if you don't know how to use the bot or if you just want to learn more about it.</span><br />usage: <span class="dark-grey-bg">/help</span><br />availability:
+					everywhere<br /><br />Provides some useful links. Perhaps that's how you got here?
 				</p>
 			</div>
 
@@ -366,20 +367,20 @@
 				<h2>/ion</h2>
 				<p>
 					description: <span class="dark-grey-bg">See when the next ION trains are coming to University of Waterloo Station.</span><br />usage: <span class="dark-grey-bg">/ion</span><br />availability: everywhere<br /><br />Provides
-					the relative arrival times of the next southbound and northbound ION trains, respectively, to University of Waterloo Station, as well as a rough estimate of when the &ldquo;Transit Plaza&rdquo; grade crossing will activate
-					next. I am very grateful that the Region of Waterloo has
-					<a href="https://webapps.regionofwaterloo.ca/api/grt-routes/" title="Region of Waterloo > &ldquo;GRT GTFS Real-time Publishing Tool [EXTERNAL&rdquo;">publicly available transit data</a>
-					and that there&rsquo;s a &ldquo;<a href="https://www.npmjs.com/package/gtfs-realtime-bindings" title="npm > gtfs-realtime-bindings [EXTERNAL]">JavaScript GTFS-realtime Language Bindings</a>&rdquo; npm package. Also check out
-					the <a href="https://gtfs.org/" title="General Transit Feed Specification [EXTERNAL]">GTFS documentation</a> and
-					<a href="https://transit.braydenpetersen.com/?station=stn-uwaterloo" title="Live Departures > University of Waterloo Station [EXTERNAL]">Brayden Petersen&rsquo;s &ldquo;Live Departures&rdquo;</a>
-					— the latter of which inspired this command. Sometimes it doesn&rsquo;t work, but it&rsquo;s almost always not my fault.
+					the relative arrival times of the next southbound and northbound ION trains, respectively, to University of Waterloo Station, as well as a rough estimate of when the "Transit Plaza" grade crossing will activate next. I am
+					very grateful that the Region of Waterloo has
+					<a href="https://webapps.regionofwaterloo.ca/api/grt-routes/" title="Region of Waterloo > &ldquo;GRT GTFS Real-time Publishing Tool&rdquo; [EXTERNAL]">publicly available transit data</a>
+					and that there's a "<a href="https://www.npmjs.com/package/gtfs-realtime-bindings" title="npm > gtfs-realtime-bindings [EXTERNAL]">JavaScript GTFS-realtime Language Bindings</a>" npm package. Also check out the
+					<a href="https://gtfs.org/" title="General Transit Feed Specification [EXTERNAL]">GTFS documentation</a> and
+					<a href="https://transit.braydenpetersen.com/?station=stn-uwaterloo" title="Live Departures > University of Waterloo Station [EXTERNAL]">Brayden Petersen's "Live Departures"</a>
+					— the latter of which inspired this command. Sometimes it doesn't work, but it's almost always not my fault.
 				</p>
 			</div>
 
 			<div class="box">
 				<h5 class="type-tag teal-bg" id="join">COMMAND</h5>
 				<h2>/join</h2>
-				<p>description: <span class="dark-grey-bg">Join one of The Square&rsquo;s regions and change the colour of your name.</span><br />usage: <span class="dark-grey-bg">/join &lt;region&gt;</span><br />parameters:</p>
+				<p>description: <span class="dark-grey-bg">Join one of The Square's regions and change the colour of your name.</span><br />usage: <span class="dark-grey-bg">/join &lt;region&gt;</span><br />parameters:</p>
 				<ul>
 					<li>
 						<b class="dark-grey-bg">region</b> (string)<br />description: <span class="dark-grey-bg">The region you want to move to and the colour you want your name to be.</span><br />options:<br />
@@ -421,7 +422,7 @@
 				<p>
 					description: <span class="dark-grey-bg">Leave The Square and reset the colour of your name.</span><br />usage: <span class="dark-grey-bg">/leave</span><br />availability:
 					<a href="https://ite.fyi/ss" title="join Seal Squad [EXTERNAL]">Seal Squad</a><br /><br />Removes your region role — if you have one — effectively removing you from <a href="the-square.html" title="The Square">The Square</a>.
-					Remember, you don&rsquo;t have to do this if you want to change regions! The <span class="dark-grey-bg">/join</span> command automatically removes your existing region role.
+					Remember, you don't have to do this if you want to change regions! The <span class="dark-grey-bg">/join</span> command automatically removes your existing region role.
 				</p>
 			</div>
 
@@ -438,7 +439,7 @@
 				<p>
 					availability: everywhere<br /><br />Renders LaTeX as a PNG with <a href="https://www.npmjs.com/package/mathjax" title="npm > MathJax [EXTERNAL]">MathJax</a> and
 					<a href="https://www.npmjs.com/package/sharp" title="npm > sharp [EXTERNAL]">sharp</a>. There are many ways to learn LaTeX, such as
-					<a href="https://www.overleaf.com/learn" title="Overleaf > Learn LaTeX [EXTERNAL]">Overleaf&rsquo;s &ldquo;Learn LaTeX&rdquo; page</a>.
+					<a href="https://www.overleaf.com/learn" title="Overleaf > Learn LaTeX [EXTERNAL]">Overleaf's "Learn LaTeX" page</a>.
 				</p>
 			</div>
 
@@ -454,8 +455,8 @@
 				</ul>
 				<p>
 					availability: everywhere<br /><br />Fetches the latest <a href="https://en.wikipedia.org/wiki/METAR" title="Wikipedia > METAR [EXTERNAL]">METAR</a> report for an airport of your choice. Just make sure you know the
-					<a href="https://en.wikipedia.org/wiki/ICAO_airport_code" title="Wikipedia > ICAO airport code [EXTERNAL]">ICAO airport code</a> for the airport! At this time Omega Seal does not decipher the METAR data, so if you
-					aren&rsquo;t familiar with the notation you&rsquo;ll have to use an online tool or
+					<a href="https://en.wikipedia.org/wiki/ICAO_airport_code" title="Wikipedia > ICAO airport code [EXTERNAL]">ICAO airport code</a> for the airport! At this time Omega Seal does not decipher the METAR data, so if you aren't
+					familiar with the notation you'll have to use an online tool or
 					<a href="https://www.weather.gov/media/wrh/mesowest/metar_decode_key.pdf" title="&ldquo;METAR ABBREVIATIONS - metar_decode_key.pdf&rdquo; [EXTERNAL]">reference sheet</a>
 					in order to understand it. Thanks to the <a href="https://aviationweather.gov/" title="Aviation Weather Center [EXTERNAL]">Aviation Weather Center</a> for having a free and easy to use
 					<a href="https://aviationweather.gov/data/api/" title="Aviation Weather Center > Data API [EXTERNAL]">METAR API</a>. Also, you can enter an airport code in lowercase, it will be converted into uppercase.
@@ -466,10 +467,10 @@
 				<h5 class="type-tag teal-bg" id="music">COMMAND</h5>
 				<h2>/music</h2>
 				<p>
-					description: <span class="dark-grey-bg">Get a random track from one of Obsidian_Seal&rsquo;s monthly playlists.</span><br />usage: <span class="dark-grey-bg">/music</span><br />availability: everywhere<br /><br />Sends an
-					embed with plenty of juicy music information: a random track and its associated artist, album, and release year. The information is a bit different if it&rsquo;s for a YouTube video, of which there are a few. Below that is
-					the playlist from which the track was sourced (with a link to listen on <a href="https://music.youtube.com/" title="YouTube Music [EXTERNAL]">YouTube Music</a>) as well as when said playlist was added and updated on
-					<a href="playlists.html" title="Playlists">Playlists</a>, linked as well. The embed&rsquo;s accent colour is randomly generated and its hex code is provided at the bottom left of the embed. So is the total number of monthly
+					description: <span class="dark-grey-bg">Get a random track from one of Obsidian_Seal's monthly playlists.</span><br />usage: <span class="dark-grey-bg">/music</span><br />availability: everywhere<br /><br />Sends an embed
+					with plenty of juicy music information: a random track and its associated artist, album, and release year. The information is a bit different if it's for a YouTube video, of which there are a few. Below that is the playlist
+					from which the track was sourced (with a link to listen on <a href="https://music.youtube.com/" title="YouTube Music [EXTERNAL]">YouTube Music</a>) as well as when said playlist was added and updated on
+					<a href="playlists.html" title="Playlists">Playlists</a>, linked as well. The embed's accent colour is randomly generated and its hex code is provided at the bottom left of the embed. So is the total number of monthly
 					playlists and the total tracks contained within — one of which was provided.
 				</p>
 			</div>
@@ -487,8 +488,8 @@
 				<h5 class="type-tag teal-bg" id="playlist">COMMAND</h5>
 				<h2>/playlist</h2>
 				<p>
-					description: <span class="dark-grey-bg">Get the link to Obsidian_Seal&rsquo;s latest monthly playlist.</span><br />usage: <span class="dark-grey-bg">/playlist</span><br />availability: everywhere<br /><br />Sends the
-					shortened link to <a href="playlists.html" title="Playlists">Playlists</a> so people can get to my monthly playlists as fast as possible.
+					description: <span class="dark-grey-bg">Get the link to Obsidian_Seal's latest monthly playlist.</span><br />usage: <span class="dark-grey-bg">/playlist</span><br />availability: everywhere<br /><br />Sends the shortened link
+					to <a href="playlists.html" title="Playlists">Playlists</a> so people can get to my monthly playlists as fast as possible.
 				</p>
 			</div>
 
@@ -496,10 +497,10 @@
 				<h5 class="type-tag teal-bg" id="populations">COMMAND</h5>
 				<h2>/populations</h2>
 				<p>
-					description: <span class="dark-grey-bg">Check the population of each of The Square&rsquo;s regions.</span><br />usage: <span class="dark-grey-bg">/populations</span><br />availability:
+					description: <span class="dark-grey-bg">Check the population of each of The Square's regions.</span><br />usage: <span class="dark-grey-bg">/populations</span><br />availability:
 					<a href="https://ite.fyi/ss" title="join Seal Squad [EXTERNAL]">Seal Squad</a><br /><br />Provides what is essentially a leaderboard of how many people have joined each region of
-					<a href="the-square.html" title="The Square">The Square</a>. It just counts how many people have each of the &ldquo;Citizen of ...&rdquo; roles and sorts them from most to least popular. It also tells you the total number of
-					people who have joined <a href="the-square.html" title="The Square">The Square</a>.
+					<a href="the-square.html" title="The Square">The Square</a>. It just counts how many people have each of the "Citizen of ..." roles and sorts them from most to least popular. It also tells you the total number of people who
+					have joined <a href="the-square.html" title="The Square">The Square</a>.
 				</p>
 			</div>
 
@@ -529,9 +530,9 @@
 			<div class="box">
 				<h5 class="type-tag teal-bg" id="tag">COMMAND</h5>
 				<p>
-					<br />Three very useful tools under one command. Great for quickly updating or querying the tags applied to a guild forum post while ensuring communication consistency and clarity. Due to limitations in Discord&rsquo;s
-					permissions system (e.g. the lack of an exclusive permission for modifying post tags), these commands are disabled by default on a per-forum basis. Contact me to have your forum(s) added to the list. Keep in mind that in
-					forums with these commands available, any user with access to Omega Seal&rsquo;s commands can edit each post&rsquo;s applied tags.<br /><br />
+					<br />Three very useful tools under one command. Great for quickly updating or querying the tags applied to a guild forum post while ensuring communication consistency and clarity. Due to limitations in Discord's permissions
+					system (e.g. the lack of an exclusive permission for modifying post tags), these commands are disabled by default on a per-forum basis. Contact me to have your forum(s) added to the list. Keep in mind that in forums with
+					these commands available, any user with access to Omega Seal's commands can edit each post's applied tags.<br /><br />
 				</p>
 				<h2>/tag add</h2>
 				<p>description: <span class="dark-grey-bg">Add a tag to this forum post.</span><br />usage: <span class="dark-grey-bg">/tag add &lt;tag&gt;</span><br />parameters:</p>
@@ -559,8 +560,8 @@
 					</li>
 				</ul>
 				<p>
-					availability: a set list of forum channels<br /><br />If &ldquo;Require people to select tags when posting&rdquo; is checked and there is only one tag applied to a post, it cannot be removed. You can add another and then
-					remove the one you wanted to remove. And again, type the exact name of the tag, without the emoji, in upper or lowercase.
+					availability: a set list of forum channels<br /><br />If "Require people to select tags when posting" is checked and there is only one tag applied to a post, it cannot be removed. You can add another and then remove the one
+					you wanted to remove. And again, type the exact name of the tag, without the emoji, in upper or lowercase.
 				</p>
 			</div>
 
@@ -612,7 +613,7 @@
 				<h2>Formal Tag Update Messages</h2>
 				<p>
 					Exact same output as the <b class="dark-grey-bg">/tag</b> commands. Makes it so a formal message is sent regardless of the method used to update the tags. These messages include who made the edit, whether it was an addition
-					or removal, each tag&rsquo;s name and emoji, how many tags are now applied, and how many tags are available. As with <b class="dark-grey-bg">/tag</b> there are certain limitations on where this can be enabled.
+					or removal, each tag's name and emoji, how many tags are now applied, and how many tags are available. As with <b class="dark-grey-bg">/tag</b> there are certain limitations on where this can be enabled.
 				</p>
 			</div>
 
@@ -636,7 +637,7 @@
 					<a href="https://support.discord.com/hc/en-us/articles/7933951485975-Visibility-of-Bot-Data-Access" title="Discord Support > Visibility of Bot Data Access [EXTERNAL]">the information available to all Discord bots</a
 					>.<br /><br />
 					For features that connect to my website, please review
-					<a href="../about.html" title="pinniped.page — About">my website&rsquo;s privacy policy</a>.<br /><br />If you&rsquo;re still concerned, just go look at
+					<a href="../about.html" title="pinniped.page — About">my website's privacy policy</a>.<br /><br />If you're still concerned, just go look at
 					<a href="https://github.com/ObsidianSeal/Omega-Seal-The-Square" title="GitHub > ObsidianSeal/Omega-Seal-The-Square [EXTERNAL]">the source code</a>!
 				</p>
 			</div>
